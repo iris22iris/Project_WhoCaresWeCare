@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Table(name = "Reservation")
 public class ReservationBean implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(columnDefinition = "INT(8) ZEROFILL")
@@ -30,7 +30,7 @@ public class ReservationBean implements Serializable {
 	private Integer waitType;
 	@Column(columnDefinition = "datetime")
 	private Timestamp reserveDate;
-	
+
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "RESERVE_PRODID_FK")
 	private RentProductBean rentProductBean;
@@ -113,6 +113,14 @@ public class ReservationBean implements Serializable {
 
 	public void setReserveDate(Timestamp reserveDate) {
 		this.reserveDate = reserveDate;
+	}
+
+	public RentProductBean getRentProductBean() {
+		return rentProductBean;
+	}
+
+	public void setRentProductBean(RentProductBean rentProductBean) {
+		this.rentProductBean = rentProductBean;
 	}
 
 	public CustomerBean getCustomerBean() {

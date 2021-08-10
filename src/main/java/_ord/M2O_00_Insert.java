@@ -37,15 +37,23 @@ public class M2O_00_Insert {
 			Set<CommentBean> comments = new LinkedHashSet<>(Arrays.asList(commentBean1));
 			
 			CustomerBean customerBean = new CustomerBean(null, "account", null, null, null, null, null, null, null, null, null, null, null, null, null, orders, reservations, comments);
-			RentProductBean rentProductBean = new RentProductBean(null, null, null, null, null, null, null, null, null, null, rentItems, reservations, comments);
+			RentProductBean rentProduct1 = new RentProductBean(null, null, null, null, null, null, null, null, null, null, rentItems, reservations, comments);
+			Set<RentProductBean> rentProducts = new LinkedHashSet<>(Arrays.asList(rentProduct1));
 			
+			PromotionBean promotionBean = new PromotionBean(null, null, null, null, null, null, null, null, rentItems, rentProducts);
 			rentItem1.setOrdBean(ordBean);
 			rentItem2.setOrdBean(ordBean);
+			rentItem1.setPromotionBean(promotionBean);
+			rentItem2.setPromotionBean(promotionBean);
+			rentItem1.setRentProductBean(rentProduct1);
+			rentItem2.setRentProductBean(rentProduct1);
 			
 			commentBean1.setCustomerBean(customerBean);
-			commentBean1.setRentProductBean(rentProductBean);
+			commentBean1.setRentProductBean(rentProduct1);
+			rentProduct1.setPromotionBean(promotionBean);
 			
 			ordBean.setCustomerBean(customerBean);
+			reservation1.setRentProductBean(rentProduct1);
 			reservation1.setCustomerBean(customerBean);
 			
 			session.persist(customerBean);
