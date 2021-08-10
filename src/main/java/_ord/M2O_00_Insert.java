@@ -65,8 +65,6 @@ public class M2O_00_Insert {
 				System.out.println(e.getMessage());
 			}
 		}
-		System.out.println("test");
-		System.out.println("test2");
 }
 	}
 			
