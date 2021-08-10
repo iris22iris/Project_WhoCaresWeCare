@@ -40,9 +40,9 @@ public class BuyItemBean implements Serializable {
 //	@JoinColumn(name = "BUYTITEM_PROMOTEID_FK")
 //	private PromotionBean promotionBean;
 	
-//	@ManyToOne(cascade = CascadeType.PERSIST)
-//	@JoinColumn(name = "BUYTITEM_PRODID_FK")
-//	private BuyProductBean buyProductBean;	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "BUYTITEM_PRODID_FK")
+	private ProductBean productBean;	
 		
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "BUYTITEM_DISCOUNTCODE_FK")
