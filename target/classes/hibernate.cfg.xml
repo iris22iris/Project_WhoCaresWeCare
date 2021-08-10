@@ -6,9 +6,9 @@
 	<session-factory>
 		<!-- 1. SQL方言與提供連結資料庫所需資訊(透過JDBC API來連結)之設定方式 -->
 		<property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-		<property name="connection.username">java01603</property>
-		<property name="connection.password">milk7607</property>
-		<property name="connection.url">jdbc:mysql://localhost:3306/whocaresdb?useUnicode=yes&amp;characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=Asia/Taipei&amp;allowPublicKeyRetrieval=true</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password">0000</property>
+		<property name="connection.url">jdbc:mysql://localhost:3305/whocaresdb?useUnicode=yes&amp;characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=Asia/Taipei&amp;allowPublicKeyRetrieval=true</property>
 		<!-- 2. 其他與資料存取有關的設定 -->
 		<!-- SQL方言，設定是MySQL8Dialect -->
 		<property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
@@ -36,6 +36,7 @@
 		<mapping class="_ord.RentProductBean" />
 		<mapping class="_ord.CommentBean" />
 		<mapping class="_ord.ProblemBean" />
+		<mapping class="_ord.ProductBean" />
 
 	</session-factory>
 </hibernate-configuration>
