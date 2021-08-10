@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,15 +21,19 @@ public class RentItemBean implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer serialNumber;
+	@Column(columnDefinition = "int(8)")
+	private Integer prodSerialNum;
 	private String category;
 	private String promoteId;
 	private String productType;
-	private String prodId;
+	private Integer prodId;
+	private String serialNumber;
 	private Integer rentPeriod;
 	private Integer prodQty;
 	private BigDecimal discountCode;
+	@Column(columnDefinition = "datetime")
 	private Timestamp startDate;
+	@Column(columnDefinition = "datetime")
 	private Timestamp returnDate;
 	private BigDecimal discount;
 	private BigDecimal ordTot;
@@ -37,15 +42,16 @@ public class RentItemBean implements Serializable {
 	@JoinColumn(name = "FK_OrdBean_OrdId")
 	private OrdBean ordBean;
 
-	public RentItemBean(Integer serialNumber, String category, String promoteId, String productType, String prodId,
-			Integer rentPeriod, Integer prodQty, BigDecimal discountCode, Timestamp startDate, Timestamp returnDate,
-			BigDecimal discount, BigDecimal ordTot) {
+	public RentItemBean(Integer prodSerialNum, String category, String promoteId, String productType, Integer prodId,
+			String serialNumber, Integer rentPeriod, Integer prodQty, BigDecimal discountCode, Timestamp startDate,
+			Timestamp returnDate, BigDecimal discount, BigDecimal ordTot) {
 		super();
-		this.serialNumber = serialNumber;
+		this.prodSerialNum = prodSerialNum;
 		this.category = category;
 		this.promoteId = promoteId;
 		this.productType = productType;
 		this.prodId = prodId;
+		this.serialNumber = serialNumber;
 		this.rentPeriod = rentPeriod;
 		this.prodQty = prodQty;
 		this.discountCode = discountCode;
@@ -55,12 +61,20 @@ public class RentItemBean implements Serializable {
 		this.ordTot = ordTot;
 	}
 
-	public Integer getSerialNumber() {
-		return serialNumber;
+	public Integer getProdSerialNum() {
+		return prodSerialNum;
 	}
 
-	public void setSerialNumber(Integer serialNumber) {
-		this.serialNumber = serialNumber;
+	public void setProdSerialNum(Integer prodSerialNum) {
+		this.prodSerialNum = prodSerialNum;
+	}
+
+	public OrdBean getOrdBean() {
+		return ordBean;
+	}
+
+	public void setOrdBean(OrdBean ordBean) {
+		this.ordBean = ordBean;
 	}
 
 	public String getCategory() {
@@ -87,12 +101,20 @@ public class RentItemBean implements Serializable {
 		this.productType = productType;
 	}
 
-	public String getProdId() {
+	public Integer getProdId() {
 		return prodId;
 	}
 
-	public void setProdId(String prodId) {
+	public void setProdId(Integer prodId) {
 		this.prodId = prodId;
+	}
+
+	public String getSerialNumber() {
+		return serialNumber;
+	}
+
+	public void setSerialNumber(String serialNumber) {
+		this.serialNumber = serialNumber;
 	}
 
 	public Integer getRentPeriod() {
@@ -149,14 +171,6 @@ public class RentItemBean implements Serializable {
 
 	public void setOrdTot(BigDecimal ordTot) {
 		this.ordTot = ordTot;
-	}
-
-	public OrdBean getOrdBean() {
-		return ordBean;
-	}
-
-	public void setOrdBean(OrdBean ordBean) {
-		this.ordBean = ordBean;
 	}
 
 }

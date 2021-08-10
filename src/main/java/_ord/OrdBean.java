@@ -2,15 +2,19 @@ package _ord;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.Clob;
 import java.sql.Timestamp;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,8 +27,8 @@ public class OrdBean implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer ordId;
 	private String category;
+	@Column(columnDefinition = "datetime")
 	private Timestamp orderDate;
-	private String custId;
 	private String reciName;
 	private String reciCity;
 	private String reciAddress;
@@ -34,20 +38,24 @@ public class OrdBean implements Serializable {
 	private String payment;
 	private String carriage;
 	private String discountId;
+	@Column(columnDefinition = "datetime")
 	private Timestamp shipDate;
-//	private Clob orderMark;
-
+	private Clob orderMark;
+	
 	@OneToMany(mappedBy = "ordBean", cascade = CascadeType.ALL)
 	Set<RentItemBean> rentItems = new LinkedHashSet<>();
+	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "FK_customerBean_custId")
+	private CustomerBean customerBean;
 
-	public OrdBean(Integer ordId, String category, Timestamp orderDate, String custId, String reciName, String reciCity,
+	public OrdBean(Integer ordId, String category, Timestamp orderDate, String reciName, String reciCity,
 			String reciAddress, String reciPhone, BigDecimal ordTot, String discountType, String payment,
-			String carriage, String discountId, Timestamp shipDate, Set<RentItemBean> rentItems) {
+			String carriage, String discountId, Timestamp shipDate, Clob orderMark, Set<RentItemBean> rentItems) {
 		super();
 		this.ordId = ordId;
 		this.category = category;
 		this.orderDate = orderDate;
-		this.custId = custId;
 		this.reciName = reciName;
 		this.reciCity = reciCity;
 		this.reciAddress = reciAddress;
@@ -58,6 +66,7 @@ public class OrdBean implements Serializable {
 		this.carriage = carriage;
 		this.discountId = discountId;
 		this.shipDate = shipDate;
+		this.orderMark = orderMark;
 		this.rentItems = rentItems;
 	}
 
@@ -83,14 +92,6 @@ public class OrdBean implements Serializable {
 
 	public void setOrderDate(Timestamp orderDate) {
 		this.orderDate = orderDate;
-	}
-
-	public String getCustId() {
-		return custId;
-	}
-
-	public void setCustId(String custId) {
-		this.custId = custId;
 	}
 
 	public String getReciName() {
@@ -173,6 +174,14 @@ public class OrdBean implements Serializable {
 		this.shipDate = shipDate;
 	}
 
+	public Clob getOrderMark() {
+		return orderMark;
+	}
+
+	public void setOrderMark(Clob orderMark) {
+		this.orderMark = orderMark;
+	}
+
 	public Set<RentItemBean> getRentItems() {
 		return rentItems;
 	}
@@ -180,5 +189,13 @@ public class OrdBean implements Serializable {
 	public void setRentItems(Set<RentItemBean> rentItems) {
 		this.rentItems = rentItems;
 	}
+	
+	public CustomerBean getCustomerBean() {
+		return customerBean;
+	}
 
+	public void setCustomerBean(CustomerBean customerBean) {
+		this.customerBean = customerBean;
+	}
+	
 }

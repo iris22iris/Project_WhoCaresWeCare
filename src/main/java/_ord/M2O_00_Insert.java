@@ -18,21 +18,29 @@ public class M2O_00_Insert {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			RentItemBean rentItemBean1 = new RentItemBean(null, "R", "50004", "E", "1", 1, 3, BigDecimal.valueOf(1.0), 
+			RentItemBean rentItem1 = new RentItemBean(null, "R", "50004", "E", 1, "555", 1, 3, BigDecimal.valueOf(1.0), 
 					Timestamp.valueOf("2021-07-01 00:35:31"), Timestamp.valueOf("2021-07-07 21:34:28"), BigDecimal.valueOf(1.0), BigDecimal.valueOf(540.0));
 			
-			RentItemBean rentItemBean2 = new RentItemBean(null, "R", "50004", "E", "1", 1, 3, BigDecimal.valueOf(1.0),
+			RentItemBean rentItem2 = new RentItemBean(null, "R", "50004", "E", 2, "555", 1, 3, BigDecimal.valueOf(1.0),
 					Timestamp.valueOf("2021-07-01 00:35:31"), Timestamp.valueOf("2021-07-07 21:34:28"), BigDecimal.valueOf(1.0), BigDecimal.valueOf(540.0));
 			
-			Set<RentItemBean> rentItems = new LinkedHashSet<>(Arrays.asList(rentItemBean1, rentItemBean2));
+			ReservationBean reservation1 = new ReservationBean(null, null, null, null, null, null, null, null);
 			
-			OrdBean ordBean = new OrdBean(null, "B", Timestamp.valueOf("2021-07-01 00:35:31"), "103", "史馬遷", "台北", "台北市新莊區化成路10號",
-					"0986547214", BigDecimal.valueOf(13000.0), "\\N", "線上刷卡", "宅配", "\\N", Timestamp.valueOf("2021-07-07 21:34:28"), rentItems);
+			Set<RentItemBean> rentItems = new LinkedHashSet<>(Arrays.asList(rentItem1, rentItem2));
+			OrdBean ordBean = new OrdBean(null, "B", Timestamp.valueOf("2021-07-01 00:35:31"), "史馬遷", "台北", "台北市新莊區化成路10號",
+					"0986547214", BigDecimal.valueOf(13000.0), "\\N", "線上刷卡", "宅配", "\\N", Timestamp.valueOf("2021-07-07 21:34:28"), null, rentItems);
 			
-			rentItemBean1.setOrdBean(ordBean);
-			rentItemBean2.setOrdBean(ordBean);
+			Set<OrdBean> orders = new LinkedHashSet<>(Arrays.asList(ordBean));
+			Set<ReservationBean> reservations = new LinkedHashSet<>(Arrays.asList(reservation1));
+			CustomerBean customerBean = new CustomerBean(null, "account", null, null, null, null, null, null, null, null, null, null, null, null, null, orders, reservations);
 			
-			session.persist(ordBean);
+			
+			rentItem1.setOrdBean(ordBean);
+			rentItem2.setOrdBean(ordBean);
+			
+			ordBean.setCustomerBean(customerBean);
+			reservation1.setCustomerBean(customerBean);
+			session.persist(customerBean);
 
 			tx.commit();
 		} catch (Exception e) {
