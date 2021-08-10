@@ -28,6 +28,8 @@ public class M2O_00_Insert {
 			
 			CommentBean commentBean1 = new CommentBean(null, null, null, null, null, null);
 			
+			ProblemBean problemBeam1 = new ProblemBean(null, 00000000001, "historymylove@yahoo.com.tw", "0996325841", "RENT", "請問租借也可以貨到付款嗎?", null, null, null, null, null);
+			
 			Set<RentItemBean> rentItems = new LinkedHashSet<>(Arrays.asList(rentItem1, rentItem2));
 			OrdBean ordBean = new OrdBean(null, "B", Timestamp.valueOf("2021-07-01 00:35:31"), "史馬遷", "台北", "台北市新莊區化成路10號",
 					"0986547214", BigDecimal.valueOf(13000.0), "\\N", "線上刷卡", "宅配", "\\N", Timestamp.valueOf("2021-07-07 21:34:28"), null, rentItems);
@@ -36,7 +38,8 @@ public class M2O_00_Insert {
 			Set<ReservationBean> reservations = new LinkedHashSet<>(Arrays.asList(reservation1));
 			Set<CommentBean> comments = new LinkedHashSet<>(Arrays.asList(commentBean1));
 			
-			CustomerBean customerBean = new CustomerBean(null, "account", null, null, null, null, null, null, null, null, null, null, null, null, null, orders, reservations, comments);
+			Set<ProblemBean> problem = new LinkedHashSet<>(Arrays.asList(problemBeam1));
+			CustomerBean customerBean = new CustomerBean(null, "account", null, null, null, null, null, null, null, null, null, null, null, null, null, orders, reservations, comments, problem);
 			RentProductBean rentProduct1 = new RentProductBean(null, null, null, null, null, null, null, null, null, null, rentItems, reservations, comments);
 			Set<RentProductBean> rentProducts = new LinkedHashSet<>(Arrays.asList(rentProduct1));
 			
@@ -49,13 +52,11 @@ public class M2O_00_Insert {
 			rentItem2.setRentProductBean(rentProduct1);
 			
 			commentBean1.setCustomerBean(customerBean);
-			commentBean1.setRentProductBean(rentProduct1);
-			rentProduct1.setPromotionBean(promotionBean);
 			
 			ordBean.setCustomerBean(customerBean);
 			reservation1.setRentProductBean(rentProduct1);
 			reservation1.setCustomerBean(customerBean);
-			
+			problemBeam1.setCustomerBean(customerBean);
 			session.persist(customerBean);
 
 			tx.commit();

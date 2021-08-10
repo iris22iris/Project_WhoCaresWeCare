@@ -25,7 +25,7 @@
         <property name="java-output-path" value="/WebAppLab01/target/classes"/>
                         
         
-        <property name="context-java01603" value="Whocares"/>
+        <property name="context-root" value="Whocares"/>
         <property name="context-root" value="Whocares"/>
                             
     

@@ -3,6 +3,7 @@ package _ord;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -46,11 +47,13 @@ public class CustomerBean implements Serializable {
 	Set<ReservationBean> reservations = new LinkedHashSet<>();
 	@OneToMany(mappedBy = "customerBean", cascade = CascadeType.ALL)
 	Set<CommentBean> comments = new LinkedHashSet<>();
-
+	@OneToMany(mappedBy = "customerBean", cascade = CascadeType.ALL )
+	Set<ProblemBean> problem = new HashSet<>();
+	
 	public CustomerBean(Integer custId, String account, String password, String custName, String nickName,
 			String gender, String idNumber, Timestamp birthday, String phone, String city, String address, String email,
 			Blob customerImage, String fileName, String mineType, Set<OrdBean> orders,
-			Set<ReservationBean> reservations, Set<CommentBean> comments) {
+			Set<ReservationBean> reservations, Set<CommentBean> comments, Set<ProblemBean> problem) {
 		super();
 		this.custId = custId;
 		this.account = account;
@@ -70,6 +73,7 @@ public class CustomerBean implements Serializable {
 		this.orders = orders;
 		this.reservations = reservations;
 		this.comments = comments;
+		this.problem = problem;
 	}
 
 	public Integer getCustId() {
@@ -214,6 +218,59 @@ public class CustomerBean implements Serializable {
 
 	public void setComments(Set<CommentBean> comments) {
 		this.comments = comments;
+	}
+
+	public Set<ProblemBean> getProblem() {
+		return problem;
+	}
+
+	public void setProblem(Set<ProblemBean> problem) {
+		this.problem = problem;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("CustomerBean [custId=");
+		builder.append(custId);
+		builder.append(", account=");
+		builder.append(account);
+		builder.append(", password=");
+		builder.append(password);
+		builder.append(", custName=");
+		builder.append(custName);
+		builder.append(", nickName=");
+		builder.append(nickName);
+		builder.append(", gender=");
+		builder.append(gender);
+		builder.append(", idNumber=");
+		builder.append(idNumber);
+		builder.append(", birthday=");
+		builder.append(birthday);
+		builder.append(", phone=");
+		builder.append(phone);
+		builder.append(", city=");
+		builder.append(city);
+		builder.append(", address=");
+		builder.append(address);
+		builder.append(", email=");
+		builder.append(email);
+		builder.append(", customerImage=");
+		builder.append(customerImage);
+		builder.append(", fileName=");
+		builder.append(fileName);
+		builder.append(", mineType=");
+		builder.append(mineType);
+		builder.append(", orders=");
+		builder.append(orders);
+		builder.append(", reservations=");
+		builder.append(reservations);
+		builder.append(", comments=");
+		builder.append(comments);
+		builder.append(", problem=");
+		builder.append(problem);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

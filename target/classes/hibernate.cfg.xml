@@ -35,6 +35,7 @@
 		<mapping class="_ord.PromotionBean" />
 		<mapping class="_ord.RentProductBean" />
 		<mapping class="_ord.CommentBean" />
+		<mapping class="_ord.ProblemBean" />
 
 	</session-factory>
 </hibernate-configuration>
