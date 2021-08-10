@@ -20,6 +20,7 @@ public class ReservationBean implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(columnDefinition = "INT(8) ZEROFILL")
 	private Integer reservationId;
 	private String category;
 	private Integer waitNum;
@@ -29,9 +30,12 @@ public class ReservationBean implements Serializable {
 	private Integer waitType;
 	@Column(columnDefinition = "datetime")
 	private Timestamp reserveDate;
-
+	
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "FK_customerBean_custId")
+	@JoinColumn(name = "RESERVE_PRODID_FK")
+	private RentProductBean rentProductBean;
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "RESERVE_CUSTID_FK")
 	private CustomerBean customerBean;
 
 	public ReservationBean(Integer reservationId, String category, Integer waitNum, String classify, Integer prodId,

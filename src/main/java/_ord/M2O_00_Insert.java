@@ -26,20 +26,28 @@ public class M2O_00_Insert {
 			
 			ReservationBean reservation1 = new ReservationBean(null, null, null, null, null, null, null, null);
 			
+			CommentBean commentBean1 = new CommentBean(null, null, null, null, null, null);
+			
 			Set<RentItemBean> rentItems = new LinkedHashSet<>(Arrays.asList(rentItem1, rentItem2));
 			OrdBean ordBean = new OrdBean(null, "B", Timestamp.valueOf("2021-07-01 00:35:31"), "史馬遷", "台北", "台北市新莊區化成路10號",
 					"0986547214", BigDecimal.valueOf(13000.0), "\\N", "線上刷卡", "宅配", "\\N", Timestamp.valueOf("2021-07-07 21:34:28"), null, rentItems);
 			
 			Set<OrdBean> orders = new LinkedHashSet<>(Arrays.asList(ordBean));
 			Set<ReservationBean> reservations = new LinkedHashSet<>(Arrays.asList(reservation1));
-			CustomerBean customerBean = new CustomerBean(null, "account", null, null, null, null, null, null, null, null, null, null, null, null, null, orders, reservations);
+			Set<CommentBean> comments = new LinkedHashSet<>(Arrays.asList(commentBean1));
 			
+			CustomerBean customerBean = new CustomerBean(null, "account", null, null, null, null, null, null, null, null, null, null, null, null, null, orders, reservations, comments);
+			RentProductBean rentProductBean = new RentProductBean(null, null, null, null, null, null, null, null, null, null, rentItems, reservations, comments);
 			
 			rentItem1.setOrdBean(ordBean);
 			rentItem2.setOrdBean(ordBean);
 			
+			commentBean1.setCustomerBean(customerBean);
+			commentBean1.setRentProductBean(rentProductBean);
+			
 			ordBean.setCustomerBean(customerBean);
 			reservation1.setCustomerBean(customerBean);
+			
 			session.persist(customerBean);
 
 			tx.commit();

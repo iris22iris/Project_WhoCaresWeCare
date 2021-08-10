@@ -25,6 +25,7 @@ public class OrdBean implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(columnDefinition = "INT(8) ZEROFILL")
 	private Integer ordId;
 	private String category;
 	@Column(columnDefinition = "datetime")
@@ -46,7 +47,7 @@ public class OrdBean implements Serializable {
 	Set<RentItemBean> rentItems = new LinkedHashSet<>();
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "FK_customerBean_custId")
+	@JoinColumn(name = "ORD_CUSTID_FK")
 	private CustomerBean customerBean;
 
 	public OrdBean(Integer ordId, String category, Timestamp orderDate, String reciName, String reciCity,

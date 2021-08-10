@@ -22,6 +22,7 @@ public class CustomerBean implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(columnDefinition = "INT(8) ZEROFILL")
 	Integer custId; // 會員編號
 	String account; // 會員帳號
 	String password; // 會員密碼
@@ -43,12 +44,13 @@ public class CustomerBean implements Serializable {
 	Set<OrdBean> orders = new LinkedHashSet<>();
 	@OneToMany(mappedBy = "customerBean", cascade = CascadeType.ALL)
 	Set<ReservationBean> reservations = new LinkedHashSet<>();
-
+	@OneToMany(mappedBy = "customerBean", cascade = CascadeType.ALL)
+	Set<CommentBean> comments = new LinkedHashSet<>();
 
 	public CustomerBean(Integer custId, String account, String password, String custName, String nickName,
 			String gender, String idNumber, Timestamp birthday, String phone, String city, String address, String email,
 			Blob customerImage, String fileName, String mineType, Set<OrdBean> orders,
-			Set<ReservationBean> reservations) {
+			Set<ReservationBean> reservations, Set<CommentBean> comments) {
 		super();
 		this.custId = custId;
 		this.account = account;
@@ -67,6 +69,7 @@ public class CustomerBean implements Serializable {
 		this.mineType = mineType;
 		this.orders = orders;
 		this.reservations = reservations;
+		this.comments = comments;
 	}
 
 	public Integer getCustId() {
@@ -203,6 +206,14 @@ public class CustomerBean implements Serializable {
 
 	public void setReservations(Set<ReservationBean> reservations) {
 		this.reservations = reservations;
+	}
+
+	public Set<CommentBean> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<CommentBean> comments) {
+		this.comments = comments;
 	}
 
 }

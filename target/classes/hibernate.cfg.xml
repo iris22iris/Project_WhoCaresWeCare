@@ -32,6 +32,9 @@
 		<mapping class="_ord.OrdBean" />
 		<mapping class="_ord.RentItemBean" />
 		<mapping class="_ord.ReservationBean" />
+		<mapping class="_ord.PromotionBean" />
+		<mapping class="_ord.RentProductBean" />
+		<mapping class="_ord.CommentBean" />
 
 	</session-factory>
 </hibernate-configuration>
