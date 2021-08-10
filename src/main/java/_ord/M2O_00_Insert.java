@@ -34,6 +34,7 @@ public class M2O_00_Insert {
 					"RENT", "請問租借也可以貨到付款嗎?", null, null, null, null, null);
 
 			ProductBean productBean1 = new ProductBean(null, null, "可愛的輪椅", null, null, null, 5, null, null, null);
+			
 			Set<ProblemBean> problem = new LinkedHashSet<>(Arrays.asList(problemBean1));
 			Set<RentItemBean> rentItems = new LinkedHashSet<>(Arrays.asList(rentItem1, rentItem2));
 			Set<ProductBean> product = new LinkedHashSet<>(Arrays.asList(productBean1));

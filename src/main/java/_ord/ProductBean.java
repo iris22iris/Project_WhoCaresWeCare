@@ -14,13 +14,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ProductBean")
+@Table(name = "Product")
 public class ProductBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String classify;// 租買分類
 	private Integer prodId;// 商品編號
+	private String classify;// 租買分類
 	private String prodName;// 商品名稱
 	private BigDecimal price;// 商品售價
 	private Blob coverImage;// 圖片
