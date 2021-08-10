@@ -49,7 +49,7 @@ public class ReservationBean implements Serializable {
 		this.serialNumber = serialNumber;
 		this.waitType = waitType;
 		this.reserveDate = reserveDate;
-	}
+	}	
 
 	public Integer getReservationId() {
 		return reservationId;
