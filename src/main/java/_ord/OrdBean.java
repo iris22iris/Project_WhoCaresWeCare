@@ -49,10 +49,14 @@ public class OrdBean implements Serializable {
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "ORD_CUSTID_FK")
 	private CustomerBean customerBean;
+	
+	@OneToMany(mappedBy = "ordBean", cascade = CascadeType.ALL )
+	Set<ProblemBean> problem = new LinkedHashSet<>();
 
 	public OrdBean(Integer ordId, String category, Timestamp orderDate, String reciName, String reciCity,
 			String reciAddress, String reciPhone, BigDecimal ordTot, String discountType, String payment,
-			String carriage, String discountId, Timestamp shipDate, Clob orderMark, Set<RentItemBean> rentItems) {
+			String carriage, String discountId, Timestamp shipDate, Clob orderMark, Set<RentItemBean> rentItems,
+			Set<ProblemBean> problem) {
 		super();
 		this.ordId = ordId;
 		this.category = category;
@@ -69,6 +73,7 @@ public class OrdBean implements Serializable {
 		this.shipDate = shipDate;
 		this.orderMark = orderMark;
 		this.rentItems = rentItems;
+		this.problem = problem;
 	}
 
 	public Integer getOrdId() {
@@ -198,5 +203,15 @@ public class OrdBean implements Serializable {
 	public void setCustomerBean(CustomerBean customerBean) {
 		this.customerBean = customerBean;
 	}
+
+	public Set<ProblemBean> getProblem() {
+		return problem;
+	}
+
+	public void setProblem(Set<ProblemBean> problem) {
+		this.problem = problem;
+	}
+	
+	
 	
 }

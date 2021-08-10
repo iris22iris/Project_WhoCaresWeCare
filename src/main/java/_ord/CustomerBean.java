@@ -48,7 +48,7 @@ public class CustomerBean implements Serializable {
 	@OneToMany(mappedBy = "customerBean", cascade = CascadeType.ALL)
 	Set<CommentBean> comments = new LinkedHashSet<>();
 	@OneToMany(mappedBy = "customerBean", cascade = CascadeType.ALL )
-	Set<ProblemBean> problem = new HashSet<>();
+	Set<ProblemBean> problem = new LinkedHashSet<>();
 	
 	public CustomerBean(Integer custId, String account, String password, String custName, String nickName,
 			String gender, String idNumber, Timestamp birthday, String phone, String city, String address, String email,

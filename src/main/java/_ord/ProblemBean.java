@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name = "Problem")
 public class ProblemBean implements Serializable {
@@ -37,7 +38,11 @@ public class ProblemBean implements Serializable {
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "PROBLE_CUSTID_FK")
-	private CustomerBean customerBean;
+    CustomerBean customerBean;
+	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "PROBLE_ORDID_FK")
+	OrdBean ordBean;
 
 	public ProblemBean(Integer custId, Integer ordId, String email, String phone, String problemType, String content,
 			Timestamp formDate, String processState, Timestamp replyDate, String replyContent, Blob attachFile) {
@@ -154,4 +159,12 @@ public class ProblemBean implements Serializable {
 		this.customerBean = customerBean;
 	}
 
+	public OrdBean getOrdBean() {
+		return ordBean;
+	}
+
+	public void setOrdBean(OrdBean ordBean) {
+		this.ordBean = ordBean;
+	}
+	
 }
