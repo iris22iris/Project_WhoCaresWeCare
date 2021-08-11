@@ -37,11 +37,11 @@ public class ProblemBean implements Serializable {
 	private Blob attachFile;
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "PROBLE_CUSTID_FK")
+	@JoinColumn(name = "PROBLEM_CUSTID_FK")
     CustomerBean customerBean;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "PROBLE_ORDID_FK")
+	@JoinColumn(name = "PROBLEM_ORDID_FK")
 	OrdBean ordBean;
 
 	public ProblemBean(Integer custId, Integer ordId, String email, String phone, String problemType, String content,
