@@ -1,4 +1,4 @@
-package _ord;
+package main;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -9,6 +9,18 @@ import java.util.Set;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+
+import _01_init.util.HibernateUtils;
+import _02_customerService.model.CommentBean;
+import _02_customerService.model.ProblemBean;
+import _02_customerService.model.PromotionBean;
+import _03_rent.model.RentProductBean;
+import _03_rent.model.ReservationBean;
+import _04_shop.model.BuyItemBean;
+import _04_shop.model.ProductBean;
+import _04_shop.model.RentItemBean;
+import _05_customer.model.CustomerBean;
+import _06_order.model.OrdBean;
 
 public class M2O_00_Insert {
 

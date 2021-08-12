@@ -7,7 +7,7 @@
 		<!-- 1. SQL方言與提供連結資料庫所需資訊(透過JDBC API來連結)之設定方式 -->
 		<property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
 		<property name="connection.username">java01603</property>
-		<property name="connection.password">0000</property>
+		<property name="connection.password">milk7607</property>
 		<property name="connection.url">jdbc:mysql://localhost:3306/whocaresdb?useUnicode=yes&amp;characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=Asia/Taipei&amp;allowPublicKeyRetrieval=true</property>
 		<!-- 2. 其他與資料存取有關的設定 -->
 		<!-- SQL方言，設定是MySQL8Dialect -->
@@ -28,16 +28,16 @@
 		
 
 		<!-- 3. 宣告程式使用的永續類別 -->
-		<mapping class="_ord.CustomerBean" />
-		<mapping class="_ord.OrdBean" />
-		<mapping class="_ord.RentItemBean" />
-		<mapping class="_ord.BuyItemBean" />
-		<mapping class="_ord.ReservationBean" />
-		<mapping class="_ord.PromotionBean" />
-		<mapping class="_ord.RentProductBean" />
-		<mapping class="_ord.CommentBean" />
-		<mapping class="_ord.ProblemBean" />
-		<mapping class="_ord.ProductBean" />
+		<mapping class="_02_customerService.model.CommentBean" />
+		<mapping class="_02_customerService.model.ProblemBean" />
+		<mapping class="_02_customerService.model.PromotionBean" />
+		<mapping class="_03_rent.model.RentProductBean" />
+		<mapping class="_03_rent.model.ReservationBean" />
+		<mapping class="_04_shop.model.RentItemBean" />
+		<mapping class="_04_shop.model.BuyItemBean" />
+		<mapping class="_04_shop.model.ProductBean" />
+		<mapping class="_05_customer.model.CustomerBean" />
+		<mapping class="_06_order.model.OrdBean" />
 
 	</session-factory>
 </hibernate-configuration>

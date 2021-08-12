@@ -1,4 +1,4 @@
-package _ord;
+package _03_rent.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import _05_customer.model.CustomerBean;
 
 @Entity
 @Table(name = "Reservation")

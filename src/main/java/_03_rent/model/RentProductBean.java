@@ -1,4 +1,4 @@
-package _ord;
+package _03_rent.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -16,6 +16,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import _02_customerService.model.CommentBean;
+import _02_customerService.model.PromotionBean;
+import _04_shop.model.RentItemBean;
 
 @Entity
 @Table(name = "RentProduct")

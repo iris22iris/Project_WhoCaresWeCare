@@ -1,4 +1,4 @@
-package _ord;
+package _04_shop.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -16,6 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import _02_customerService.model.PromotionBean;
 
 @Entity
 @Table(name = "Product")

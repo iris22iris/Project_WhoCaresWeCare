@@ -1,4 +1,4 @@
-package _ord;
+package _05_customer.model;
 
 import java.io.Serializable;
 import java.sql.Blob;
@@ -14,6 +14,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import _02_customerService.model.CommentBean;
+import _02_customerService.model.ProblemBean;
+import _03_rent.model.ReservationBean;
+import _06_order.model.OrdBean;
 
 @Entity
 @Table(name = "Customer")

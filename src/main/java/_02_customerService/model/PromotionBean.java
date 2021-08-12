@@ -1,4 +1,4 @@
-package _ord;
+package _02_customerService.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -13,6 +13,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import _03_rent.model.RentProductBean;
+import _04_shop.model.BuyItemBean;
+import _04_shop.model.ProductBean;
+import _04_shop.model.RentItemBean;
 
 @Entity
 @Table(name = "Promotion")

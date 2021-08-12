@@ -1,4 +1,4 @@
-package _ord;
+package _02_customerService.model;
 
 import java.io.Serializable;
 import java.sql.Blob;
@@ -13,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import _05_customer.model.CustomerBean;
+import _06_order.model.OrdBean;
 
 
 @Entity

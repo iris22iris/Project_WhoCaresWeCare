@@ -28,16 +28,16 @@
 		
 
 		<!-- 3. 宣告程式使用的永續類別 -->
-		<mapping class="_ord.CustomerBean" />
-		<mapping class="_ord.OrdBean" />
-		<mapping class="_ord.RentItemBean" />
-		<mapping class="_ord.BuyItemBean" />
-		<mapping class="_ord.ReservationBean" />
-		<mapping class="_ord.PromotionBean" />
-		<mapping class="_ord.RentProductBean" />
-		<mapping class="_ord.CommentBean" />
-		<mapping class="_ord.ProblemBean" />
-		<mapping class="_ord.ProductBean" />
+		<mapping class="_02_customerService.model.CommentBean" />
+		<mapping class="_02_customerService.model.ProblemBean" />
+		<mapping class="_02_customerService.model.PromotionBean" />
+		<mapping class="_03_rent.model.RentProductBean" />
+		<mapping class="_03_rent.model.ReservationBean" />
+		<mapping class="_04_shop.model.RentItemBean" />
+		<mapping class="_04_shop.model.BuyItemBean" />
+		<mapping class="_04_shop.model.ProductBean" />
+		<mapping class="_05_customer.model.CustomerBean" />
+		<mapping class="_06_order.model.OrdBean" />
 
 	</session-factory>
 </hibernate-configuration>
