@@ -46,6 +46,7 @@ public class RentProductBean implements Serializable {
 	Set<ReservationBean> reservations = new LinkedHashSet<>();
 	@OneToMany(mappedBy = "rentProductBean", cascade = CascadeType.ALL)
 	Set<CommentBean> comments = new LinkedHashSet<>();
+	
 
 	public RentProductBean(Integer prodId, String classify, String serialNumber, String prodName, BigDecimal price,
 			Blob coverImage, String mineType, Integer stock, String prodType, String fileName,

@@ -31,6 +31,7 @@
 		<mapping class="_ord.CustomerBean" />
 		<mapping class="_ord.OrdBean" />
 		<mapping class="_ord.RentItemBean" />
+		<mapping class="_ord.BuyItemBean" />
 		<mapping class="_ord.ReservationBean" />
 		<mapping class="_ord.PromotionBean" />
 		<mapping class="_ord.RentProductBean" />
