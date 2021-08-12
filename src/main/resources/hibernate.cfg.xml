@@ -7,13 +7,8 @@
 		<!-- 1. SQL方言與提供連結資料庫所需資訊(透過JDBC API來連結)之設定方式 -->
 		<property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
 		<property name="connection.username">java01603</property>
-<<<<<<< HEAD
 		<property name="connection.password">su77767</property>
 		<property name="connection.url">jdbc:mysql://localhost:3305/whocaresdb?useUnicode=yes&amp;characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=Asia/Taipei&amp;allowPublicKeyRetrieval=true</property>
-=======
-		<property name="connection.password">0000</property>
-		<property name="connection.url">jdbc:mysql://localhost:3306/whocaresdb?useUnicode=yes&amp;characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=Asia/Taipei&amp;allowPublicKeyRetrieval=true</property>
->>>>>>> 591e2571eeb47fe34fe34f3fcd66d9d4bacf2b8c
 		<!-- 2. 其他與資料存取有關的設定 -->
 		<!-- SQL方言，設定是MySQL8Dialect -->
 		<property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
