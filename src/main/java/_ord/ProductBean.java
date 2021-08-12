@@ -37,7 +37,7 @@ public class ProductBean implements Serializable {
 	@JoinColumn(name = "PRODUCT_PROMOTEID_FK")
 	PromotionBean promotionBean;
 	
-	@OneToMany(mappedBy = "ProductBean", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "productBean", cascade = CascadeType.ALL)
 	Set<BuyItemBean> buyItems = new LinkedHashSet<>();
 
 	public ProductBean(String classify, Integer prodId, String prodName, BigDecimal price, Blob coverImage,
