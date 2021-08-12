@@ -3,6 +3,8 @@ package _ord;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Blob;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -33,9 +36,12 @@ public class ProductBean implements Serializable {
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "PRODUCT_PROMOTEID_FK")
 	PromotionBean promotionBean;
+	
+	@OneToMany(mappedBy = "ProductBean", cascade = CascadeType.ALL)
+	Set<BuyItemBean> buyItems = new LinkedHashSet<>();
 
 	public ProductBean(String classify, Integer prodId, String prodName, BigDecimal price, Blob coverImage,
-			String mineType, Integer stock, String prodType, String fileName, Integer promoteId) {
+			String mineType, Integer stock, String prodType, String fileName, Integer promoteId,Set<BuyItemBean> buyItems) {
 		this.classify = classify;
 		this.prodId = prodId;
 		this.prodName = prodName;
@@ -46,6 +52,7 @@ public class ProductBean implements Serializable {
 		this.prodType = prodType;
 		this.fileName = fileName;
 		this.promoteId = promoteId;
+		this.buyItems = buyItems;
 	}
 
 	public String getClassify() {
@@ -134,6 +141,14 @@ public class ProductBean implements Serializable {
 
 	public void setPromotionBean(PromotionBean promotionBean) {
 		this.promotionBean = promotionBean;
+	}
+
+	public Set<BuyItemBean> getBuyItems() {
+		return buyItems;
+	}
+
+	public void setBuyItems(Set<BuyItemBean> buyItems) {
+		this.buyItems = buyItems;
 	}
 
 }
