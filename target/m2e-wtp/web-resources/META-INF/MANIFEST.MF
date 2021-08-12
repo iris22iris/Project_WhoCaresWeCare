@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: 林妏純
+=======
+Built-By: User
+>>>>>>> 591e2571eeb47fe34fe34f3fcd66d9d4bacf2b8c
 Build-Jdk: 11.0.9.1
 Created-By: Maven Integration for Eclipse
 
