@@ -23,7 +23,6 @@ public class RentItemBean implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer prodSerialNum;
 	private String category;
-	private String promoteId;
 	private String productType;
 	private Integer prodId;
 	private String serialNumber;
@@ -47,13 +46,12 @@ public class RentItemBean implements Serializable {
 	@JoinColumn(name = "RENTITEM_PRODID_FK")
 	private RentProductBean rentProductBean;
 
-	public RentItemBean(Integer prodSerialNum, String category, String promoteId, String productType, Integer prodId,
-			String serialNumber, Integer rentPeriod, Integer prodQty, BigDecimal discountCode, Timestamp startDate,
-			Timestamp returnDate, BigDecimal discount, BigDecimal ordTot) {
+	public RentItemBean(Integer prodSerialNum, String category, String productType, Integer prodId, String serialNumber,
+			Integer rentPeriod, Integer prodQty, BigDecimal discountCode, Timestamp startDate, Timestamp returnDate,
+			BigDecimal discount, BigDecimal ordTot) {
 		super();
 		this.prodSerialNum = prodSerialNum;
 		this.category = category;
-		this.promoteId = promoteId;
 		this.productType = productType;
 		this.prodId = prodId;
 		this.serialNumber = serialNumber;
@@ -80,14 +78,6 @@ public class RentItemBean implements Serializable {
 
 	public void setCategory(String category) {
 		this.category = category;
-	}
-
-	public String getPromoteId() {
-		return promoteId;
-	}
-
-	public void setPromoteId(String promoteId) {
-		this.promoteId = promoteId;
 	}
 
 	public String getProductType() {
