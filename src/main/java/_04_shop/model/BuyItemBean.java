@@ -5,10 +5,12 @@ import java.math.BigDecimal;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -39,17 +41,16 @@ public class BuyItemBean implements Serializable {
 	@JoinColumn(name = "BUYITEM_ORDID_FK")
 	private OrdBean ordBean;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "BUYTITEM_PROMOTEID_FK")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumns({
+			@JoinColumn(name="BUYTITEM_PROMOTEID_FK", referencedColumnName="promoteId"),
+			@JoinColumn(name="BUYTITEM_DISCOUNTCODE_FK", referencedColumnName="discountCode")
+	 			})
 	private PromotionBean promotionBean;
-	
+
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "BUYTITEM_PRODID_FK")
 	private ProductBean productBean;
-	
-//	@ManyToOne(cascade = CascadeType.PERSIST)
-//	@JoinColumn(name = "BUYTITEM_DISCOUNTCODE_FK")
-//	private PromotionBean promotionBean;
 	
 	public BuyItemBean(Integer prodSerialNum, String category, String prodType, Integer prodQTY, BigDecimal itemSum,
 			BigDecimal discount, BigDecimal ordTotal) {
@@ -61,10 +62,6 @@ public class BuyItemBean implements Serializable {
 		this.itemSum = itemSum;
 		this.discount = discount;
 		this.ordTotal = ordTotal;
-//		this.ordBean = ordBean;
-//		this.promotionBean = promotionBean;
-//		this.productBean = productBean;
-		
 	}
 
 	public Integer getProdSerialNum() {
