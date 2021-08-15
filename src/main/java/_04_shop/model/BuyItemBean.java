@@ -38,7 +38,10 @@ public class BuyItemBean implements Serializable {
 
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "BUYITEM_ORDID_FK")
+	@JoinColumns({
+		@JoinColumn(name = "BUYTITEM_ORDCID_FK"),
+		@JoinColumn(name = "BUYTITEM_ORDID_FK"),
+		})
 	private OrdBean ordBean;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

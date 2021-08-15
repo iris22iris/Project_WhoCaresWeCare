@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -44,8 +45,11 @@ public class ProblemBean implements Serializable {
     CustomerBean customerBean;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "PROBLEM_ORDID_FK")
-	OrdBean ordBean;
+	@JoinColumns({
+		@JoinColumn(name = "PROBLEM_ORDCID_FK"),
+		@JoinColumn(name = "PROBLEM_ORDID_FK"),
+		})
+	private OrdBean ordBean;
 
 	public ProblemBean(Integer custId, Integer ordId, String email, String phone, String problemType, String content,
 			Timestamp formDate, String processState, Timestamp replyDate, String replyContent, Blob attachFile) {

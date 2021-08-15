@@ -19,7 +19,6 @@ import javax.persistence.Table;
 
 import _02_customerService.model.CommentBean;
 import _02_customerService.model.PromotionBean;
-import _04_shop.model.RentItemBean;
 
 @Entity
 @Table(name = "RentProduct")

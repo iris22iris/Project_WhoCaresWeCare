@@ -14,10 +14,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import _03_rent.model.RentItemBean;
 import _03_rent.model.RentProductBean;
 import _04_shop.model.BuyItemBean;
 import _04_shop.model.ProductBean;
-import _04_shop.model.RentItemBean;
 
 @Entity
 @Table(name = "Promotion")

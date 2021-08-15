@@ -14,11 +14,11 @@ import _01_init.util.HibernateUtils;
 import _02_customerService.model.CommentBean;
 import _02_customerService.model.ProblemBean;
 import _02_customerService.model.PromotionBean;
+import _03_rent.model.RentItemBean;
 import _03_rent.model.RentProductBean;
 import _03_rent.model.ReservationBean;
 import _04_shop.model.BuyItemBean;
 import _04_shop.model.ProductBean;
-import _04_shop.model.RentItemBean;
 import _05_customer.model.CustomerBean;
 import _06_order.model.OrdBean;
 
@@ -30,11 +30,11 @@ public class M2O_00_Insert {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			RentItemBean rentItem1 = new RentItemBean(null, "R", "E", 1, "555", 1, 3, BigDecimal.valueOf(1.0),
+			RentItemBean rentItem1 = new RentItemBean(null, "E", 1, "555", 1, 3, BigDecimal.valueOf(1.0),
 					Timestamp.valueOf("2021-07-01 00:35:31"), Timestamp.valueOf("2021-07-07 21:34:28"),
 					BigDecimal.valueOf(1.0), BigDecimal.valueOf(1540.0));
 
-			RentItemBean rentItem2 = new RentItemBean(null, "R", "E", 2, "555", 1, 3, BigDecimal.valueOf(1.0),
+			RentItemBean rentItem2 = new RentItemBean(null, "E", 2, "555", 1, 3, BigDecimal.valueOf(1.0),
 					Timestamp.valueOf("2021-07-01 00:35:31"), Timestamp.valueOf("2021-07-07 21:34:28"),
 					BigDecimal.valueOf(1.0), BigDecimal.valueOf(540.0));
 
@@ -55,7 +55,7 @@ public class M2O_00_Insert {
 			Set<ProblemBean> problem = new LinkedHashSet<>(Arrays.asList(problemBean1));
 			Set<RentItemBean> rentItems = new LinkedHashSet<>(Arrays.asList(rentItem1, rentItem2));
 			Set<ProductBean> product = new LinkedHashSet<>(Arrays.asList(productBean1));
-			OrdBean ordBean = new OrdBean(null, "B", Timestamp.valueOf("2021-07-01 00:35:31"), "史馬遷", "台北",
+			OrdBean ordBean = new OrdBean("B", 1, Timestamp.valueOf("2021-07-01 00:35:31"), "史馬遷", "台北",
 					"台北市新莊區化成路10號", "0986547214", BigDecimal.valueOf(13000.0), "\\N", "線上刷卡", "宅配", "\\N",
 					Timestamp.valueOf("2021-07-07 21:34:28"), null, rentItems, problem, buyItems);
 
