@@ -69,7 +69,7 @@ public class M2O_00_Insert {
 					null, rentItems, reservations, comments);
 			Set<RentProductBean> rentProducts = new LinkedHashSet<>(Arrays.asList(rentProduct1));
 
-			PromotionBean promotionBean = new PromotionBean(null, null, null, null, null, null, "D07", null, rentItems,
+			PromotionBean promotionBean = new PromotionBean(null, null, null, null, null, null, "D07",rentItems,
 					rentProducts, product, buyItems);
 			rentItem1.setOrdBean(ordBean);
 			rentItem2.setOrdBean(ordBean);
