@@ -34,12 +34,18 @@ public class ProductTypeBean implements Serializable {
 	@OneToMany(mappedBy="productTypeBean", cascade={CascadeType.ALL}) 
 	private Set<ProductBean> products = new LinkedHashSet<>();
 	
-	public ProductTypeBean(String prodType, String prodName) {
+		
+	public ProductTypeBean(String prodType, String prodName, Set<RentItemBean> rentitems,
+			Set<RentProductBean> rentproducts, Set<BuyItemBean> buyitems, Set<ProductBean> products) {
 		super();
-		this.prodType = prodType; //商品分類代碼 A~H商品種類
-		this.prodName = prodName; //分類名稱
-
+		this.prodType = prodType;
+		this.prodName = prodName;
+		this.rentitems = rentitems;
+		this.rentproducts = rentproducts;
+		this.buyitems = buyitems;
+		this.products = products;
 	}
+
 	public String getProdType() {
 		return prodType;
 	}
@@ -51,6 +57,30 @@ public class ProductTypeBean implements Serializable {
 	}
 	public void setProdName(String prodName) {
 		this.prodName = prodName;
+	}
+	public Set<RentItemBean> getRentitems() {
+		return rentitems;
+	}
+	public void setRentitems(Set<RentItemBean> rentitems) {
+		this.rentitems = rentitems;
+	}
+	public Set<RentProductBean> getRentproducts() {
+		return rentproducts;
+	}
+	public void setRentproducts(Set<RentProductBean> rentproducts) {
+		this.rentproducts = rentproducts;
+	}
+	public Set<BuyItemBean> getBuyitems() {
+		return buyitems;
+	}
+	public void setBuyitems(Set<BuyItemBean> buyitems) {
+		this.buyitems = buyitems;
+	}
+	public Set<ProductBean> getProducts() {
+		return products;
+	}
+	public void setProducts(Set<ProductBean> products) {
+		this.products = products;
 	}
 	
 }
