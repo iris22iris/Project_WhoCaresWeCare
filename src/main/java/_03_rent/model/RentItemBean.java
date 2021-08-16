@@ -17,6 +17,7 @@ import javax.persistence.Table;
 
 import _02_customerService.model.PromotionBean;
 import _06_order.model.OrdBean;
+import _07_productType.model.ProductTypeBean;
 
 @Entity
 @Table(name = "RentItem")
@@ -38,7 +39,11 @@ public class RentItemBean implements Serializable {
 	private Timestamp returnDate;
 	private BigDecimal discount;
 	private BigDecimal ordTot;
-
+	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "RENTITEM_PRODTYPE_FK")
+	private ProductTypeBean productTypeBean;
+	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumns({
 		@JoinColumn(name = "RENTITEM_ORDCID_FK"),

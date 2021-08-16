@@ -19,6 +19,7 @@ import javax.persistence.Table;
 
 import _02_customerService.model.CommentBean;
 import _02_customerService.model.PromotionBean;
+import _07_productType.model.ProductTypeBean;
 
 @Entity
 @Table(name = "RentProduct")
@@ -42,7 +43,11 @@ public class RentProductBean implements Serializable {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "RENTPROD_PROMOTEID_FK")
 	private PromotionBean promotionBean;
-
+	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "RENTPROD_PRODTYPE_FK")
+	private ProductTypeBean productTypeBean;
+	
 	@OneToMany(mappedBy = "rentProductBean", cascade = CascadeType.ALL)
 	Set<RentItemBean> rentItems = new LinkedHashSet<>();
 	@OneToMany(mappedBy = "rentProductBean", cascade = CascadeType.ALL)

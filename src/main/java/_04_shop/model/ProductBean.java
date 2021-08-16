@@ -18,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import _02_customerService.model.PromotionBean;
+import _07_productType.model.ProductTypeBean;
 
 @Entity
 @Table(name = "Product")
@@ -36,10 +37,14 @@ public class ProductBean implements Serializable {
 	private String prodType;// 商品分類代碼
 	private String fileName;// 圖片名稱
 	private Integer promoteId;// 活動編號
-
+	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "PRODUCT_PRODTYPE_FK")
+	private ProductTypeBean productTypeBean;
+	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "PRODUCT_PROMOTEID_FK")
-	PromotionBean promotionBean;
+	PromotionBean promotionBean;  
 	
 	@OneToMany(mappedBy = "productBean", cascade = CascadeType.ALL)
 	Set<BuyItemBean> buyItems = new LinkedHashSet<>();

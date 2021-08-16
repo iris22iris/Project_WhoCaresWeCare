@@ -16,6 +16,7 @@ import javax.persistence.Table;
 
 import _02_customerService.model.PromotionBean;
 import _06_order.model.OrdBean;
+import _07_productType.model.ProductTypeBean;
 
 
 
@@ -35,7 +36,9 @@ public class BuyItemBean implements Serializable {
 	private BigDecimal  	discount;		//折扣金額
 	private BigDecimal		ordTotal;		//訂單總金額
 	
-
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "BUYTITEM_PRODTYPE_FK")
+	private ProductTypeBean productTypeBean;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumns({

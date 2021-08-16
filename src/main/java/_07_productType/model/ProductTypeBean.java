@@ -21,8 +21,8 @@ import _04_shop.model.ProductBean;
 public class ProductTypeBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
-	private String prodType;
-	private String prodName;
+	private String prodType; //商品分類代碼 A~H商品種類
+	private String prodName; //分類名稱
 	
 	//雙向一對多
 	@OneToMany(mappedBy="productTypeBean", cascade={CascadeType.ALL}) 
