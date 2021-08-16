@@ -43,8 +43,6 @@ public class OrdBean implements Serializable {
 	private BigDecimal ordTot;
 	private String discountType;
 	private String payment;
-	private String carriage;
-	private String discountId;
 	@Column(columnDefinition = "datetime")
 	private Timestamp shipDate;
 	private Clob orderMark;
@@ -64,7 +62,7 @@ public class OrdBean implements Serializable {
 
 	public OrdBean(String category, Integer ordId, Timestamp orderDate, String reciName, String reciCity,
 			String reciAddress, String reciPhone, BigDecimal ordTot, String discountType, String payment,
-			String carriage, String discountId, Timestamp shipDate, Clob orderMark, Set<RentItemBean> rentItems,
+			Timestamp shipDate, Clob orderMark, Set<RentItemBean> rentItems,
 			Set<ProblemBean> problem, Set<BuyItemBean> buyItems) {
 		this.category = category;
 		this.ordId = ordId;
@@ -76,8 +74,6 @@ public class OrdBean implements Serializable {
 		this.ordTot = ordTot;
 		this.discountType = discountType;
 		this.payment = payment;
-		this.carriage = carriage;
-		this.discountId = discountId;
 		this.shipDate = shipDate;
 		this.orderMark = orderMark;
 		this.rentItems = rentItems;
@@ -165,22 +161,6 @@ public class OrdBean implements Serializable {
 		this.payment = payment;
 	}
 
-	public String getCarriage() {
-		return carriage;
-	}
-
-	public void setCarriage(String carriage) {
-		this.carriage = carriage;
-	}
-
-	public String getDiscountId() {
-		return discountId;
-	}
-
-	public void setDiscountId(String discountId) {
-		this.discountId = discountId;
-	}
-
 	public Timestamp getShipDate() {
 		return shipDate;
 	}
@@ -234,10 +214,8 @@ public class OrdBean implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((buyItems == null) ? 0 : buyItems.hashCode());
-		result = prime * result + ((carriage == null) ? 0 : carriage.hashCode());
 		result = prime * result + ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((customerBean == null) ? 0 : customerBean.hashCode());
-		result = prime * result + ((discountId == null) ? 0 : discountId.hashCode());
 		result = prime * result + ((discountType == null) ? 0 : discountType.hashCode());
 		result = prime * result + ((ordId == null) ? 0 : ordId.hashCode());
 		result = prime * result + ((ordTot == null) ? 0 : ordTot.hashCode());
@@ -268,11 +246,7 @@ public class OrdBean implements Serializable {
 				return false;
 		} else if (!buyItems.equals(other.buyItems))
 			return false;
-		if (carriage == null) {
-			if (other.carriage != null)
-				return false;
-		} else if (!carriage.equals(other.carriage))
-			return false;
+
 		if (category == null) {
 			if (other.category != null)
 				return false;
@@ -283,11 +257,7 @@ public class OrdBean implements Serializable {
 				return false;
 		} else if (!customerBean.equals(other.customerBean))
 			return false;
-		if (discountId == null) {
-			if (other.discountId != null)
-				return false;
-		} else if (!discountId.equals(other.discountId))
-			return false;
+	
 		if (discountType == null) {
 			if (other.discountType != null)
 				return false;

@@ -56,7 +56,7 @@ public class M2O_00_Insert {
 			Set<RentItemBean> rentItems = new LinkedHashSet<>(Arrays.asList(rentItem1, rentItem2));
 			Set<ProductBean> product = new LinkedHashSet<>(Arrays.asList(productBean1));
 			OrdBean ordBean = new OrdBean("B", 1, Timestamp.valueOf("2021-07-01 00:35:31"), "史馬遷", "台北",
-					"台北市新莊區化成路10號", "0986547214", BigDecimal.valueOf(13000.0), "\\N", "線上刷卡", "宅配", "\\N",
+					"台北市新莊區化成路10號", "0986547214", BigDecimal.valueOf(13000.0), "\\N", "線上刷卡",
 					Timestamp.valueOf("2021-07-07 21:34:28"), null, rentItems, problem, buyItems);
 
 			Set<OrdBean> orders = new LinkedHashSet<>(Arrays.asList(ordBean));
