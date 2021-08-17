@@ -38,6 +38,8 @@
 		<mapping class="_04_shop.model.ProductBean" />
 		<mapping class="_05_customer.model.CustomerBean" />
 		<mapping class="_06_order.model.OrdBean" />
+		<mapping class="_07_productType.model.ProductTypeBean" />
+		
 
 	</session-factory>
 </hibernate-configuration>
