@@ -161,6 +161,16 @@ public class RentItemBean implements Serializable {
 		this.ordTot = ordTot;
 	}
 
+//	雙向多對一productTypeBean之getter、setter 開始
+	public ProductTypeBean getProductTypeBean() {
+		return productTypeBean;
+	}
+
+	public void setProductTypeBean(ProductTypeBean productTypeBean) {
+		this.productTypeBean = productTypeBean;
+	}
+//	雙向多對一productTypeBean之getter、setter 結束
+	
 	public OrdBean getOrdBean() {
 		return ordBean;
 	}
