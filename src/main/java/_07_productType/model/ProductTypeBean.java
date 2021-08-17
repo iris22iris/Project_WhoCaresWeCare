@@ -32,18 +32,18 @@ public class ProductTypeBean implements Serializable {
 	@OneToMany(mappedBy="productTypeBean", cascade={CascadeType.ALL}) 
 	private Set<BuyItemBean> buyItems = new LinkedHashSet<>();
 	@OneToMany(mappedBy="productTypeBean", cascade={CascadeType.ALL}) 
-	private Set<ProductBean> products = new LinkedHashSet<>();
+	private Set<ProductBean> product = new LinkedHashSet<>();
 	
 		
 	public ProductTypeBean(String prodType, String prodName, Set<RentItemBean> rentItems,
-			Set<RentProductBean> rentProducts, Set<BuyItemBean> buyItems, Set<ProductBean> products) {
+			Set<RentProductBean> rentProducts, Set<BuyItemBean> buyItems, Set<ProductBean> product) {
 		super();
 		this.prodType = prodType;
 		this.prodName = prodName;
 		this.rentItems = rentItems;
 		this.rentProducts = rentProducts;
 		this.buyItems = buyItems;
-		this.products = products;
+		this.product = product;
 	}
 
 	public String getProdType() {
@@ -77,10 +77,10 @@ public class ProductTypeBean implements Serializable {
 		this.buyItems = buyitems;
 	}
 	public Set<ProductBean> getProducts() {
-		return products;
+		return product;
 	}
 	public void setProducts(Set<ProductBean> products) {
-		this.products = products;
+		this.product = products;
 	}
 	
 }
