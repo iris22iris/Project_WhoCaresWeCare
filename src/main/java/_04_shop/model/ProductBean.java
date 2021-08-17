@@ -26,7 +26,6 @@ public class ProductBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(columnDefinition = "INT(8) ZEROFILL")
 	private Integer prodId;// 商品編號
 	private String classify;// 租買分類
 	private String prodName;// 商品名稱

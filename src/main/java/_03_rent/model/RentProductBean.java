@@ -28,7 +28,6 @@ public class RentProductBean implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(columnDefinition = "INT(8) ZEROFILL")
 	private Integer prodId;
 	private String classify;
 	private String serialNumber;
