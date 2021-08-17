@@ -26,23 +26,23 @@ public class ProductTypeBean implements Serializable {
 	
 	//雙向一對多
 	@OneToMany(mappedBy="productTypeBean", cascade={CascadeType.ALL}) 
-	private Set<RentItemBean> rentitems = new LinkedHashSet<>();
+	private Set<RentItemBean> rentItems = new LinkedHashSet<>();
 	@OneToMany(mappedBy="productTypeBean", cascade={CascadeType.ALL}) 
-	private Set<RentProductBean> rentproducts = new LinkedHashSet<>();
+	private Set<RentProductBean> rentProducts = new LinkedHashSet<>();
 	@OneToMany(mappedBy="productTypeBean", cascade={CascadeType.ALL}) 
-	private Set<BuyItemBean> buyitems = new LinkedHashSet<>();
+	private Set<BuyItemBean> buyItems = new LinkedHashSet<>();
 	@OneToMany(mappedBy="productTypeBean", cascade={CascadeType.ALL}) 
 	private Set<ProductBean> products = new LinkedHashSet<>();
 	
 		
-	public ProductTypeBean(String prodType, String prodName, Set<RentItemBean> rentitems,
-			Set<RentProductBean> rentproducts, Set<BuyItemBean> buyitems, Set<ProductBean> products) {
+	public ProductTypeBean(String prodType, String prodName, Set<RentItemBean> rentItems,
+			Set<RentProductBean> rentProducts, Set<BuyItemBean> buyItems, Set<ProductBean> products) {
 		super();
 		this.prodType = prodType;
 		this.prodName = prodName;
-		this.rentitems = rentitems;
-		this.rentproducts = rentproducts;
-		this.buyitems = buyitems;
+		this.rentItems = rentItems;
+		this.rentProducts = rentProducts;
+		this.buyItems = buyItems;
 		this.products = products;
 	}
 
@@ -59,22 +59,22 @@ public class ProductTypeBean implements Serializable {
 		this.prodName = prodName;
 	}
 	public Set<RentItemBean> getRentitems() {
-		return rentitems;
+		return rentItems;
 	}
 	public void setRentitems(Set<RentItemBean> rentitems) {
-		this.rentitems = rentitems;
+		this.rentItems = rentitems;
 	}
 	public Set<RentProductBean> getRentproducts() {
-		return rentproducts;
+		return rentProducts;
 	}
 	public void setRentproducts(Set<RentProductBean> rentproducts) {
-		this.rentproducts = rentproducts;
+		this.rentProducts = rentproducts;
 	}
 	public Set<BuyItemBean> getBuyitems() {
-		return buyitems;
+		return buyItems;
 	}
 	public void setBuyitems(Set<BuyItemBean> buyitems) {
-		this.buyitems = buyitems;
+		this.buyItems = buyitems;
 	}
 	public Set<ProductBean> getProducts() {
 		return products;
