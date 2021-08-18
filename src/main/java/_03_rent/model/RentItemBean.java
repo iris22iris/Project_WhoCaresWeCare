@@ -27,7 +27,7 @@ public class RentItemBean implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer prodSerialNum;
-	private String productType;
+//	private String productType; ProductTypeBean取代此建構子
 	private Integer prodId;
 	private String serialNumber;
 	private Integer rentPeriod;
@@ -61,7 +61,7 @@ public class RentItemBean implements Serializable {
 			Integer rentPeriod, Integer prodQty, BigDecimal discountCode, Timestamp startDate, Timestamp returnDate,
 			BigDecimal discount, BigDecimal ordTot) {
 		this.prodSerialNum = prodSerialNum;
-		this.productType = productType;
+//		this.productType = productType;   ProductTypeBean取代此建構子
 		this.prodId = prodId;
 		this.serialNumber = serialNumber;
 		this.rentPeriod = rentPeriod;
@@ -81,13 +81,13 @@ public class RentItemBean implements Serializable {
 		this.prodSerialNum = prodSerialNum;
 	}
 
-	public String getProductType() {
-		return productType;
-	}
+//	public String getProductType() {  ProductTypeBean取代此建構子
+//		return productType;
+//	}
 
-	public void setProductType(String productType) {
-		this.productType = productType;
-	}
+//	public void setProductType(String productType) {  ProductTypeBean取代此建構子
+//		this.productType = productType;
+//	}
 
 	public Integer getProdId() {
 		return prodId;

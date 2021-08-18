@@ -30,7 +30,7 @@ public class BuyItemBean implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer			prodSerialNum;	//商品項次
 	private String  		category;       //訂單類別
-	private String      	prodType;		//商品分類代碼
+//	private String      	prodType;		//商品分類代碼  --ProductTypeBean取代此建構子--
 	private Integer     	prodQTY;		//商品數量
 	private BigDecimal  	itemSum;		//單項總額
 	private BigDecimal  	discount;		//折扣金額
@@ -63,7 +63,7 @@ public class BuyItemBean implements Serializable {
 		super();
 		this.prodSerialNum = prodSerialNum;
 		this.category = category;
-		this.prodType = prodType;
+//		this.prodType = prodType; --ProductTypeBean取代此建構子--
 		this.prodQTY = prodQTY;
 		this.itemSum = itemSum;
 		this.discount = discount;
@@ -86,13 +86,13 @@ public class BuyItemBean implements Serializable {
 		this.category = category;
 	}
 
-	public String getProdType() {
-		return prodType;
-	}
-
-	public void setProdType(String prodType) {
-		this.prodType = prodType;
-	}
+//	public String getProdType() { --ProductTypeBean取代此建構子--
+//		return prodType;
+//	}
+//
+//	public void setProdType(String prodType) {
+//		this.prodType = prodType;
+//	}
 
 	public Integer getProdQTY() {
 		return prodQTY;

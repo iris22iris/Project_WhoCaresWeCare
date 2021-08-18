@@ -33,7 +33,7 @@ public class ProductBean implements Serializable {
 	private Blob coverImage;// 圖片
 	private String mineType;// 圖片類型
 	private Integer stock;// 庫存數量
-	private String prodType;// 商品分類代碼
+//	private String prodType;// 商品分類代碼 --ProductTypeBean取代此建構子--
 	private String fileName;// 圖片名稱
 	private Integer promoteId;// 活動編號
 	
@@ -57,7 +57,7 @@ public class ProductBean implements Serializable {
 		this.coverImage = coverImage;
 		this.mineType = mineType;
 		this.stock = stock;
-		this.prodType = prodType;
+//		this.prodType = prodType; --ProductTypeBean取代此建構子--
 		this.fileName = fileName;
 		this.promoteId = promoteId;
 		this.buyItems = buyItems;
@@ -119,13 +119,13 @@ public class ProductBean implements Serializable {
 		this.stock = stock;
 	}
 
-	public String getProdType() {
-		return prodType;
-	}
-
-	public void setProdType(String prodType) {
-		this.prodType = prodType;
-	}
+//	public String getProdType() {           --ProductTypeBean取代此建構子--
+//		return prodType;
+//	}
+//
+//	public void setProdType(String prodType) {
+//		this.prodType = prodType;
+//	}
 
 	public String getFileName() {
 		return fileName;

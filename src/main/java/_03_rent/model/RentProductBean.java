@@ -36,7 +36,7 @@ public class RentProductBean implements Serializable {
 	private Blob coverImage;
 	private String mineType;
 	private Integer stock;
-	private String prodType;
+//	private String prodType;  ProductTypeBean取代此建構子
 	private String fileName;
 
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -67,7 +67,7 @@ public class RentProductBean implements Serializable {
 		this.coverImage = coverImage;
 		this.mineType = mineType;
 		this.stock = stock;
-		this.prodType = prodType;
+//		this.prodType = prodType;  ProductTypeBean取代此建構子
 		this.fileName = fileName;
 		this.rentItems = rentItems;
 		this.reservations = reservations;
@@ -138,13 +138,13 @@ public class RentProductBean implements Serializable {
 		this.stock = stock;
 	}
 
-	public String getProdType() {
-		return prodType;
-	}
-
-	public void setProdType(String prodType) {
-		this.prodType = prodType;
-	}
+//	public String getProdType() {  --ProductTypeBean取代此建構子--
+//		return prodType;
+//	}
+//
+//	public void setProdType(String prodType) {
+//		this.prodType = prodType;
+//	}
 
 	public String getFileName() {
 		return fileName;
