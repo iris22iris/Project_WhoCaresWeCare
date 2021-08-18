@@ -31,7 +31,7 @@ public class ProductBean implements Serializable {
 	private String prodName;// 商品名稱
 	private BigDecimal price;// 商品售價
 	private Blob coverImage;// 圖片
-	private String mineType;// 圖片類型
+	private String mimeType;// 圖片類型
 	private Integer stock;// 庫存數量
 //	private String prodType;// 商品分類代碼 --ProductTypeBean取代此建構子--
 	private String fileName;// 圖片名稱
@@ -49,13 +49,13 @@ public class ProductBean implements Serializable {
 	Set<BuyItemBean> buyItems = new LinkedHashSet<>();
 
 	public ProductBean(String classify, Integer prodId, String prodName, BigDecimal price, Blob coverImage,
-			String mineType, Integer stock, String prodType, String fileName, Integer promoteId,Set<BuyItemBean> buyItems) {
+			String mimeType, Integer stock, String prodType, String fileName, Integer promoteId,Set<BuyItemBean> buyItems) {
 		this.classify = classify;
 		this.prodId = prodId;
 		this.prodName = prodName;
 		this.price = price;
 		this.coverImage = coverImage;
-		this.mineType = mineType;
+		this.mimeType = mimeType;
 		this.stock = stock;
 //		this.prodType = prodType; --ProductTypeBean取代此建構子--
 		this.fileName = fileName;
@@ -103,12 +103,12 @@ public class ProductBean implements Serializable {
 		this.coverImage = coverImage;
 	}
 
-	public String getMineType() {
-		return mineType;
+	public String getMimeType() {
+		return mimeType;
 	}
 
-	public void setMineType(String mineType) {
-		this.mineType = mineType;
+	public void setMimeType(String mimeType) {
+		this.mimeType = mimeType;
 	}
 
 	public Integer getStock() {

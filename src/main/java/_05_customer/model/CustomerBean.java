@@ -43,7 +43,7 @@ public class CustomerBean implements Serializable {
 	String email; // 電子信箱
 	Blob customerImage; // 會員圖片
 	String fileName; // 圖片名稱
-	String mineType; // 圖片類型
+	String mimeType; // 圖片類型
 
 	@OneToMany(mappedBy = "customerBean", cascade = CascadeType.ALL)
 	Set<OrdBean> orders = new LinkedHashSet<>();
@@ -56,7 +56,7 @@ public class CustomerBean implements Serializable {
 	
 	public CustomerBean(Integer custId, String account, String password, String custName, String nickName,
 			String gender, String idNumber, Timestamp birthday, String phone, String city, String address, String email,
-			Blob customerImage, String fileName, String mineType, Set<OrdBean> orders,
+			Blob customerImage, String fileName, String mimeType, Set<OrdBean> orders,
 			Set<ReservationBean> reservations, Set<CommentBean> comments, Set<ProblemBean> problem) {
 		super();
 		this.custId = custId;
@@ -73,7 +73,7 @@ public class CustomerBean implements Serializable {
 		this.email = email;
 		this.customerImage = customerImage;
 		this.fileName = fileName;
-		this.mineType = mineType;
+		this.mimeType = mimeType;
 		this.orders = orders;
 		this.reservations = reservations;
 		this.comments = comments;
@@ -192,12 +192,12 @@ public class CustomerBean implements Serializable {
 		this.fileName = fileName;
 	}
 
-	public String getMineType() {
-		return mineType;
+	public String getMimeType() {
+		return mimeType;
 	}
 
-	public void setMineType(String mineType) {
-		this.mineType = mineType;
+	public void setMimeType(String mimeType) {
+		this.mimeType = mimeType;
 	}
 
 	public Set<OrdBean> getOrders() {
@@ -263,8 +263,8 @@ public class CustomerBean implements Serializable {
 		builder.append(customerImage);
 		builder.append(", fileName=");
 		builder.append(fileName);
-		builder.append(", mineType=");
-		builder.append(mineType);
+		builder.append(", mimeType=");
+		builder.append(mimeType);
 		builder.append(", orders=");
 		builder.append(orders);
 		builder.append(", reservations=");

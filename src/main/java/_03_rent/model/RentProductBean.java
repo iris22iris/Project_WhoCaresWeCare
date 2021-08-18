@@ -118,7 +118,7 @@ public class RentProductBean implements Serializable {
 		this.coverImage = coverImage;
 	}
 
-	public String getMineType() {
+	public String getMimeType() {
 		return mimeType;
 	}
 
