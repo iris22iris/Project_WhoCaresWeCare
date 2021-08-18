@@ -54,7 +54,10 @@ public class RentItemBean implements Serializable {
 	@JoinColumn(name = "RENTITEM_PROMOTEID_FK")
 	private PromotionBean promotionBean;
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "RENTITEM_PRODID_FK")
+	@JoinColumns({
+		@JoinColumn(name = "RENTITEM_PRODCID_FK"),
+		@JoinColumn(name = "RENTITEM_PRODID_FK"),
+		})
 	private RentProductBean rentProductBean;
 
 	public RentItemBean(Integer prodSerialNum, String productType, Integer prodId, String serialNumber,

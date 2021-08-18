@@ -65,7 +65,7 @@ public class M2O_00_Insert {
 
 			CustomerBean customerBean = new CustomerBean(null, "account", null, null, null, null, null, null, null,
 					null, null, null, null, null, null, orders, reservations, comments, problem);
-			RentProductBean rentProduct1 = new RentProductBean(null, null, null, null, null, null, null, null, null,
+			RentProductBean rentProduct1 = new RentProductBean("B", 1, null, null, null, null, null, null, null,
 					null, rentItems, reservations, comments);
 			Set<RentProductBean> rentProducts = new LinkedHashSet<>(Arrays.asList(rentProduct1));
 
@@ -83,6 +83,7 @@ public class M2O_00_Insert {
 			buyItem1.setPromotionBean(promotionBean);
 
 			commentBean1.setCustomerBean(customerBean);
+			commentBean1.setRentProductBean(rentProduct1);;
 
 			ordBean.setCustomerBean(customerBean);
 			reservation1.setRentProductBean(rentProduct1);
