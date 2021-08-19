@@ -22,6 +22,7 @@ import _02_customerService.model.PromotionBean;
 import _04_shop.model.ProductBean;
 import _05_customer.model.CustomerBean;
 import _06_order.model.OrdBean;
+import _07_productType.model.ProductTypeBean;
 
 public class EDMTableResetHibernate {
 	public static final String UTF8_BOM = "\uFEFF"; // 定義 UTF-8的BOM字元
@@ -139,7 +140,7 @@ public class EDMTableResetHibernate {
 			}
 
 			// 4. promotion表格
-			// 由"data/promotiondat"逐筆讀入promotion表格內的初始資料，
+			// 由"data/promotion.dat"逐筆讀入promotion表格內的初始資料，
 			// 然後依序新增到promotion表格中
 			count = 0;
 			try (FileInputStream fis = new FileInputStream("data/promotion.dat");
@@ -164,6 +165,27 @@ public class EDMTableResetHibernate {
 				session.flush();
 				System.out.println("promotion表格資料新增成功");
 			}
+			
+			// 4. promotion表格
+						// 由"data/protype.dat"逐筆讀入protype表格內的初始資料，
+						// 然後依序新增到protype表格中
+						count = 0;
+						try (FileInputStream fis = new FileInputStream("data/protype.dat");
+								InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
+								BufferedReader br = new BufferedReader(isr0);) {
+							while ((line = br.readLine()) != null) {
+
+								String[] token = line.split("\\|");
+								ProductTypeBean ptypeb = new ProductTypeBean();
+								ptypeb.setProdType(token[0]);
+								ptypeb.setProdName(token[1]);
+								session.save(ptypeb);
+								count++;
+								System.out.println("新增protype紀錄成功，共新增" + count + "筆記錄:" + token[1]);
+							}
+							session.flush();
+							System.out.println("protype表格資料新增成功");
+						}
 
 			tx.commit();
 		} catch (Exception e) {
