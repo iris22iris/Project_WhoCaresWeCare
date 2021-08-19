@@ -126,10 +126,8 @@ public class EDMTableResetHibernate {
 					pb.setMimeType(token[4]);
 					pb.setPrice(new BigDecimal(token[5]));
 					pb.setProdName(token[6]);
-					pb.setProductTypeBean(null);
 					pb.setPromoteId(null);
-					pb.setStock(Integer.parseInt(token[9]));
-					pb.setPromotionBean(null);
+					pb.setStock(Integer.parseInt(token[8]));
 
 					session.save(pb);
 					count++;

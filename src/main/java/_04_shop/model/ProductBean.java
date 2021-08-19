@@ -25,7 +25,7 @@ import _07_productType.model.ProductTypeBean;
 public class ProductBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer prodId;// 商品編號
 	private String classify;// 租買分類
 	private String prodName;// 商品名稱
