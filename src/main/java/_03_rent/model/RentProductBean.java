@@ -88,7 +88,7 @@ public class RentProductBean implements Serializable {
 	public void setSerialNumber(String serialNumber) {
 		this.serialNumber = serialNumber;
 	}
-
+	
 	public String getClassify() {
 		return classify;
 	}

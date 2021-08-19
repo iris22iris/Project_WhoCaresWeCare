@@ -64,32 +64,33 @@ public class M2O_00_Insert {
 
 			CustomerBean customerBean = new CustomerBean(null, "account", null, null, null, null, null, null, null,
 					null, null, null, null, null, null, orders, reservations, comments, problem);
-			RentProductBean rentProduct1 = new RentProductBean("B", 1, null, null, null, null, null, null, null,
+			RentProductBean rentProduct1 = new RentProductBean(1, "1", null, null, null, null, null, null, null,
 					null, rentItems, reservations, comments);
 			Set<RentProductBean> rentProducts = new LinkedHashSet<>(Arrays.asList(rentProduct1));
 
 			PromotionBean promotionBean = new PromotionBean(null, null, null, null, null, null, "D07",rentItems,
 					rentProducts, product, buyItems);
-//			rentItem1.setOrdBean(ordBean);
-//			rentItem2.setOrdBean(ordBean);
-//			rentItem1.setPromotionBean(promotionBean);
-//			rentItem2.setPromotionBean(promotionBean);
-//			rentItem1.setRentProductBean(rentProduct1);
-//			rentItem2.setRentProductBean(rentProduct1);
-//
-//			buyItem1.setOrdBean(ordBean);
-//			buyItem1.setProductBean(productBean1);
-//			buyItem1.setPromotionBean(promotionBean);
-//
-//			commentBean1.setCustomerBean(customerBean);
-//
-//			ordBean.setCustomerBean(customerBean);
-//			reservation1.setRentProductBean(rentProduct1);
-//			reservation1.setCustomerBean(customerBean);
-//			problemBean1.setCustomerBean(customerBean);
-//			problemBean1.setOrdBean(ordBean);
-//			productBean1.setPromotionBean(promotionBean);
-//			session.persist(customerBean);
+			rentItem1.setOrdBean(ordBean);
+			rentItem2.setOrdBean(ordBean);
+			rentItem1.setPromotionBean(promotionBean);
+			rentItem2.setPromotionBean(promotionBean);
+			rentItem1.setRentProductBean(rentProduct1);
+			rentItem2.setRentProductBean(rentProduct1);
+
+			buyItem1.setOrdBean(ordBean);
+			buyItem1.setProductBean(productBean1);
+			buyItem1.setPromotionBean(promotionBean);
+
+			commentBean1.setCustomerBean(customerBean);
+
+			ordBean.setCustomerBean(customerBean);
+			reservation1.setRentProductBean(rentProduct1);
+			reservation1.setCustomerBean(customerBean);
+			problemBean1.setCustomerBean(customerBean);
+			problemBean1.setOrdBean(ordBean);
+			rentProduct1.setPromotionBean(promotionBean);
+			productBean1.setPromotionBean(promotionBean);
+			session.persist(customerBean);
 
 			tx.commit();
 		} catch (Exception e) {
