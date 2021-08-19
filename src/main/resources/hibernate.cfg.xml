@@ -11,7 +11,7 @@
 		<property name="connection.url">jdbc:mysql://localhost:3306/whocaresdb?useUnicode=yes&amp;characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=Asia/Taipei&amp;allowPublicKeyRetrieval=true</property>
 		<!-- 2. 其他與資料存取有關的設定 -->
 		<!-- SQL方言，設定是MySQL8Dialect -->
-		<property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
+		<property name="dialect">org.hibernate.dialect.MySQL57InnoDBDialect</property>
 		<!-- 自動產生資料庫的Schema -->
 		<property name="hbm2ddl.auto">update</property>
 		<!-- 顯示實際操作資料庫時的SQL -->
@@ -28,17 +28,17 @@
 		
 
 		<!-- 3. 宣告程式使用的永續類別 -->
-		<mapping class="_02_customerService.model.CommentBean" />
-		<mapping class="_02_customerService.model.ProblemBean" />
-		<mapping class="_02_customerService.model.PromotionBean" />
-		<mapping class="_03_rent.model.RentProductBean" />
-		<mapping class="_03_rent.model.ReservationBean" />
-		<mapping class="_03_rent.model.RentItemBean" />
-		<mapping class="_04_shop.model.BuyItemBean" />
-		<mapping class="_04_shop.model.ProductBean" />
-		<mapping class="_05_customer.model.CustomerBean" />
-		<mapping class="_06_order.model.OrdBean" />
-		<mapping class="_07_productType.model.ProductTypeBean" />
+		<mapping class="com.web.store.model._02_customerService.CommentBean" />
+		<mapping class="com.web.store.model._02_customerService.ProblemBean" />
+		<mapping class="com.web.store.model._02_customerService.PromotionBean" />
+		<mapping class="com.web.store.model._03_rent.RentItemBean" />
+		<mapping class="com.web.store.model._03_rent.RentProductBean" />
+		<mapping class="com.web.store.model._03_rent.ReservationBean" />
+		<mapping class="com.web.store.model._04_shop.BuyItemBean" />
+		<mapping class="com.web.store.model._04_shop.ProductBean" />
+		<mapping class="com.web.store.model._05_customer.CustomerBean" />
+		<mapping class="com.web.store.model._06_order.OrdBean" />
+		<mapping class="com.web.store.model._07_productType.ProductTypeBean" />
 		
 
 	</session-factory>

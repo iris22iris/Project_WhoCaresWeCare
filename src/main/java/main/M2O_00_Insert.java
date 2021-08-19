@@ -10,17 +10,18 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import com.web.store.model._02_customerService.CommentBean;
+import com.web.store.model._02_customerService.ProblemBean;
+import com.web.store.model._02_customerService.PromotionBean;
+import com.web.store.model._03_rent.RentItemBean;
+import com.web.store.model._03_rent.RentProductBean;
+import com.web.store.model._03_rent.ReservationBean;
+import com.web.store.model._04_shop.BuyItemBean;
+import com.web.store.model._04_shop.ProductBean;
+import com.web.store.model._05_customer.CustomerBean;
+import com.web.store.model._06_order.OrdBean;
+
 import _01_init.util.HibernateUtils;
-import _02_customerService.model.CommentBean;
-import _02_customerService.model.ProblemBean;
-import _02_customerService.model.PromotionBean;
-import _03_rent.model.RentItemBean;
-import _03_rent.model.RentProductBean;
-import _03_rent.model.ReservationBean;
-import _04_shop.model.BuyItemBean;
-import _04_shop.model.ProductBean;
-import _05_customer.model.CustomerBean;
-import _06_order.model.OrdBean;
 
 public class M2O_00_Insert {
 

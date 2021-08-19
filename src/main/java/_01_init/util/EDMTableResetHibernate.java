@@ -17,12 +17,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import _02_customerService.model.PromotionBean;
-import _03_rent.model.RentProductBean;
-import _04_shop.model.ProductBean;
-import _05_customer.model.CustomerBean;
-import _06_order.model.OrdBean;
-import _07_productType.model.ProductTypeBean;
+import com.web.store.model._02_customerService.PromotionBean;
+import com.web.store.model._03_rent.RentProductBean;
+import com.web.store.model._04_shop.ProductBean;
+import com.web.store.model._05_customer.CustomerBean;
+import com.web.store.model._06_order.OrdBean;
+import com.web.store.model._07_productType.ProductTypeBean;
+
 
 public class EDMTableResetHibernate {
 	public static final String UTF8_BOM = "\uFEFF"; // 定義 UTF-8的BOM字元
