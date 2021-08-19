@@ -2,6 +2,7 @@ package _05_customer.model;
 
 import java.io.Serializable;
 import java.sql.Blob;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -36,14 +37,14 @@ public class CustomerBean implements Serializable {
 	String gender; // 性別
 	String idNumber; // 會員身份證字號
 	@Column(columnDefinition = "datetime")
-	Timestamp birthday; // 出生日期
+	Date birthday; // 出生日期
 	String phone; // 連絡電話
 	String city; // 通訊城市
 	String address; // 通訊地址
 	String email; // 電子信箱
 	Blob customerImage; // 會員圖片
 	String fileName; // 圖片名稱
-	String mineType; // 圖片類型
+	String mimeType; // 圖片類型
 
 	@OneToMany(mappedBy = "customerBean", cascade = CascadeType.ALL)
 	Set<OrdBean> orders = new LinkedHashSet<>();
@@ -54,9 +55,35 @@ public class CustomerBean implements Serializable {
 	@OneToMany(mappedBy = "customerBean", cascade = CascadeType.ALL )
 	Set<ProblemBean> problem = new LinkedHashSet<>();
 	
+	
+	
+	public CustomerBean() {
+	}
+
 	public CustomerBean(Integer custId, String account, String password, String custName, String nickName,
-			String gender, String idNumber, Timestamp birthday, String phone, String city, String address, String email,
-			Blob customerImage, String fileName, String mineType, Set<OrdBean> orders,
+			String gender, String idNumber, Date birthday, String phone, String city, String address, String email,
+			Blob customerImage, String fileName, String mimeType) {
+		super();
+		this.custId = custId;
+		this.account = account;
+		this.password = password;
+		this.custName = custName;
+		this.nickName = nickName;
+		this.gender = gender;
+		this.idNumber = idNumber;
+		this.birthday = birthday;
+		this.phone = phone;
+		this.city = city;
+		this.address = address;
+		this.email = email;
+		this.customerImage = customerImage;
+		this.fileName = fileName;
+		this.mimeType = mimeType;
+	}
+
+	public CustomerBean(Integer custId, String account, String password, String custName, String nickName,
+			String gender, String idNumber, Date birthday, String phone, String city, String address, String email,
+			Blob customerImage, String fileName, String mimeType, Set<OrdBean> orders,
 			Set<ReservationBean> reservations, Set<CommentBean> comments, Set<ProblemBean> problem) {
 		super();
 		this.custId = custId;
@@ -73,7 +100,7 @@ public class CustomerBean implements Serializable {
 		this.email = email;
 		this.customerImage = customerImage;
 		this.fileName = fileName;
-		this.mineType = mineType;
+		this.mimeType = mimeType;
 		this.orders = orders;
 		this.reservations = reservations;
 		this.comments = comments;
@@ -136,11 +163,11 @@ public class CustomerBean implements Serializable {
 		this.idNumber = idNumber;
 	}
 
-	public Timestamp getBirthday() {
+	public Date getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(Timestamp birthday) {
+	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
 
@@ -192,12 +219,12 @@ public class CustomerBean implements Serializable {
 		this.fileName = fileName;
 	}
 
-	public String getMineType() {
-		return mineType;
+	public String getmimeType() {
+		return mimeType;
 	}
 
-	public void setMineType(String mineType) {
-		this.mineType = mineType;
+	public void setMimeType(String mimeType) {
+		this.mimeType = mimeType;
 	}
 
 	public Set<OrdBean> getOrders() {
@@ -263,8 +290,8 @@ public class CustomerBean implements Serializable {
 		builder.append(customerImage);
 		builder.append(", fileName=");
 		builder.append(fileName);
-		builder.append(", mineType=");
-		builder.append(mineType);
+		builder.append(", mimeType=");
+		builder.append(mimeType);
 		builder.append(", orders=");
 		builder.append(orders);
 		builder.append(", reservations=");
