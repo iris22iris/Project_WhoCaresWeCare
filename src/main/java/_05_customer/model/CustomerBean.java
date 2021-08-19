@@ -219,6 +219,7 @@ public class CustomerBean implements Serializable {
 		this.fileName = fileName;
 	}
 
+	public String getMimeType() {
 	public String getmimeType() {
 		return mimeType;
 	}

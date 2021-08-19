@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -34,7 +35,10 @@ public class ReservationBean implements Serializable {
 	private Timestamp reserveDate;
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "RESERVE_PRODID_FK")
+	@JoinColumns({
+		@JoinColumn(name = "RESERVE_PRODCID_FK"),
+		@JoinColumn(name = "RESERVE_PRODID_FK"),
+		})
 	private RentProductBean rentProductBean;
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "RESERVE_CUSTID_FK")

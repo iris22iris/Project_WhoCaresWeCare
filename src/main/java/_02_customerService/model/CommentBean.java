@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -34,7 +35,10 @@ public class CommentBean implements Serializable {
 	private Clob comment;
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "RENTPRODUCT_PRODID_FK")
+	@JoinColumns({
+		@JoinColumn(name = "RENTPRODUCT_PRODCID_FK"),
+		@JoinColumn(name = "RENTPRODUCT_PRODID_FK"),
+		})
 	private RentProductBean rentProductBean;
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "COMMENT_CUSTID_FK")
