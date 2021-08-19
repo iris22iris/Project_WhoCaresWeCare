@@ -12,10 +12,13 @@ import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import _02_customerService.model.PromotionBean;
 import _04_shop.model.ProductBean;
 import _05_customer.model.CustomerBean;
 import _06_order.model.OrdBean;
@@ -133,6 +136,33 @@ public class EDMTableResetHibernate {
 				}
 				session.flush();
 				System.out.println("product表格資料新增成功");
+			}
+
+			// 4. promotion表格
+			// 由"data/promotiondat"逐筆讀入promotion表格內的初始資料，
+			// 然後依序新增到promotion表格中
+			count = 0;
+			try (FileInputStream fis = new FileInputStream("data/promotion.dat");
+					InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
+					BufferedReader br = new BufferedReader(isr0);) {
+				while ((line = br.readLine()) != null) {
+
+					String[] token = line.split("\\|");
+					PromotionBean ptb = new PromotionBean();
+					ptb.setPromoteId(Integer.parseInt(token[0]));
+					ptb.setDiscountCode(token[1]);
+					ptb.setPromoContent(token[2]);
+					ptb.setPromoEndDate(Timestamp.valueOf(token[3]));
+					ptb.setPromoStartDate(Timestamp.valueOf(token[4]));
+					ptb.setPromoTag(token[5]);
+					ptb.setPromotion(token[6]);
+
+					session.save(ptb);
+					count++;
+					System.out.println("新增promotion紀錄成功，共新增" + count + "筆記錄:" + token[1]);
+				}
+				session.flush();
+				System.out.println("promotion表格資料新增成功");
 			}
 
 			tx.commit();

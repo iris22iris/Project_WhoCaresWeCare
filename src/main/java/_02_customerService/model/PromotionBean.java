@@ -46,9 +46,12 @@ public class PromotionBean implements Serializable {
 	@OneToMany(mappedBy = "promotionBean", cascade = CascadeType.ALL)
 	Set<BuyItemBean> buyItems = new LinkedHashSet<>();
 
+	public PromotionBean() {
+	}
+
 	public PromotionBean(Integer promoteId, String promotion, String promoContent, String promoTag,
-			Timestamp promoStartDate, Timestamp promoEndDate, String discountCode,
-			Set<RentItemBean> rentItems, Set<RentProductBean> rentProducts, Set<ProductBean> product,Set<BuyItemBean> buyItems) {
+			Timestamp promoStartDate, Timestamp promoEndDate, String discountCode, Set<RentItemBean> rentItems,
+			Set<RentProductBean> rentProducts, Set<ProductBean> product, Set<BuyItemBean> buyItems) {
 		super();
 		this.promoteId = promoteId;
 		this.promotion = promotion;
@@ -117,8 +120,6 @@ public class PromotionBean implements Serializable {
 	public void setDiscountCode(String discountCode) {
 		this.discountCode = discountCode;
 	}
-
-
 
 	public Set<RentItemBean> getRentItems() {
 		return rentItems;
