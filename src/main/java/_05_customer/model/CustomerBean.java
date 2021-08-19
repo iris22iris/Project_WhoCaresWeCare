@@ -220,7 +220,6 @@ public class CustomerBean implements Serializable {
 	}
 
 	public String getMimeType() {
-	public String getmimeType() {
 		return mimeType;
 	}
 

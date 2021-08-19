@@ -9,11 +9,14 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.sql.Date;
+import java.sql.Timestamp;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import _05_customer.model.CustomerBean;
+import _06_order.model.OrdBean;
 
 public class EDMTableResetHibernate {
 	public static final String UTF8_BOM = "\uFEFF"; // 定義 UTF-8的BOM字元
@@ -60,13 +63,45 @@ public class EDMTableResetHibernate {
 					cb.setPhone(token[13].trim());// 連絡電話
 					session.save(cb);
 					count++;
-					System.out.println("新增一筆Customer紀錄成功，共新增" + count + "筆紀錄");
+					System.out.println("新增Customer紀錄成功，共新增" + count + "筆紀錄");
 				}
 				// 印出資料新增成功的訊息
 				session.flush();
 				System.out.println("Customer資料新增成功");
 			}
 
+			// 2. Ord表格
+			// 由"data/Ord.txt"逐筆讀入Ord表格內的初始資料，
+			// 然後依序新增到Ord表格中
+			count = 0;
+			try (FileInputStream fis = new FileInputStream("data/Ord.dat");
+					InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
+					BufferedReader br = new BufferedReader(isr0);) {
+				while ((line = br.readLine()) != null) {
+					
+					String[] token = line.split("\\|");
+					OrdBean ob = new OrdBean();
+					ob.setCategory(token[0]);
+					ob.setOrdId(Integer.parseInt(token[1]));
+					ob.setDelivery(token[2]);
+					ob.setOrdTot(new BigDecimal(token[3]));
+					ob.setOrderDate(Timestamp.valueOf(token[4]));
+					ob.setOrderMark(null);
+					ob.setPayment(token[6]);
+					ob.setReciAddress(token[7]);
+					ob.setReciCity(token[8]);
+					ob.setReciName(token[9]);
+					ob.setReciPhone(token[10]);
+					ob.setShipDate(Timestamp.valueOf(token[11]));
+
+					session.save(ob);
+					count++;
+					System.out.println("新增Ord紀錄成功，共新增" + count + "筆記錄:" + token[1]);
+				}
+				session.flush();
+				System.out.println("Ord表格資料新增成功");
+			}
+			
 			tx.commit();
 		} catch (Exception e) {
 			System.err.println("新建表格時發生例外: " + e.getMessage());

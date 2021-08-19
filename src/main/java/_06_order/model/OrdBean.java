@@ -59,6 +59,32 @@ public class OrdBean implements Serializable {
 
 	@OneToMany(mappedBy = "ordBean", cascade = CascadeType.ALL)
 	Set<BuyItemBean> buyItems = new LinkedHashSet<>();
+	
+	
+
+	public OrdBean() {
+	}
+	
+	
+
+	public OrdBean(String category, Integer ordId, Timestamp orderDate, String reciName, String reciCity,
+			String reciAddress, String reciPhone, BigDecimal ordTot, String delivery, String payment,
+			Timestamp shipDate, Clob orderMark) {
+		this.category = category;
+		this.ordId = ordId;
+		this.orderDate = orderDate;
+		this.reciName = reciName;
+		this.reciCity = reciCity;
+		this.reciAddress = reciAddress;
+		this.reciPhone = reciPhone;
+		this.ordTot = ordTot;
+		this.delivery = delivery;
+		this.payment = payment;
+		this.shipDate = shipDate;
+		this.orderMark = orderMark;
+	}
+
+
 
 	public OrdBean(String category, Integer ordId, Timestamp orderDate, String reciName, String reciCity,
 			String reciAddress, String reciPhone, BigDecimal ordTot, String delivery, String payment,
