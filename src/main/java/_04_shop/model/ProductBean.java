@@ -36,20 +36,24 @@ public class ProductBean implements Serializable {
 //	private String prodType;// 商品分類代碼 --ProductTypeBean取代此建構子--
 	private String fileName;// 圖片名稱
 	private Integer promoteId;// 活動編號
-	
+
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "PRODUCT_PRODTYPE_FK")
 	private ProductTypeBean productTypeBean;
-	
+
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "PRODUCT_PROMOTEID_FK")
-	PromotionBean promotionBean;  
-	
+	PromotionBean promotionBean;
+
 	@OneToMany(mappedBy = "productBean", cascade = CascadeType.ALL)
 	Set<BuyItemBean> buyItems = new LinkedHashSet<>();
 
+	public ProductBean() {
+	}
+
 	public ProductBean(String classify, Integer prodId, String prodName, BigDecimal price, Blob coverImage,
-			String mimeType, Integer stock, String prodType, String fileName, Integer promoteId,Set<BuyItemBean> buyItems) {
+			String mimeType, Integer stock, String fileName, Integer promoteId,
+			Set<BuyItemBean> buyItems) {
 		this.classify = classify;
 		this.prodId = prodId;
 		this.prodName = prodName;
@@ -143,10 +147,10 @@ public class ProductBean implements Serializable {
 		this.promoteId = promoteId;
 	}
 
-
 	public PromotionBean getPromotionBean() {
 		return promotionBean;
 	}
+
 //	雙向多對一productTypeBean之getter、setter 開始
 	public ProductTypeBean getProductTypeBean() {
 		return productTypeBean;
@@ -156,11 +160,11 @@ public class ProductBean implements Serializable {
 		this.productTypeBean = productTypeBean;
 	}
 //	雙向多對一productTypeBean之getter、setter 結束
-	
+
 	public void setPromotionBean(PromotionBean promotionBean) {
 		this.promotionBean = promotionBean;
 	}
-	
+
 	public Set<BuyItemBean> getBuyItems() {
 		return buyItems;
 	}
