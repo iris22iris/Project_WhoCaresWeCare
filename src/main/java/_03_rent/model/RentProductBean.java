@@ -27,10 +27,10 @@ public class RentProductBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private String classify;
-	@Id
 	private Integer prodId;
+	@Id
 	private String serialNumber;
+	private String classify;
 	private String prodName;
 	private BigDecimal price;
 	private Blob coverImage;
@@ -56,12 +56,12 @@ public class RentProductBean implements Serializable {
 	public RentProductBean() {
 	}
 
-	public RentProductBean(String classify, Integer prodId, String serialNumber, String prodName, BigDecimal price,
+	public RentProductBean(Integer prodId, String serialNumber, String classify, String prodName, BigDecimal price,
 			Blob coverImage, String mimeType, Integer stock, String prodType, String fileName,
 			Set<RentItemBean> rentItems, Set<ReservationBean> reservations, Set<CommentBean> comments) {
-		this.classify = classify;
 		this.prodId = prodId;
 		this.serialNumber = serialNumber;
+		this.classify = classify;
 		this.prodName = prodName;
 		this.price = price;
 		this.coverImage = coverImage;
@@ -71,14 +71,6 @@ public class RentProductBean implements Serializable {
 		this.rentItems = rentItems;
 		this.reservations = reservations;
 		this.comments = comments;
-	}
-
-	public String getClassify() {
-		return classify;
-	}
-
-	public void setClassify(String classify) {
-		this.classify = classify;
 	}
 
 	public Integer getProdId() {
@@ -95,6 +87,14 @@ public class RentProductBean implements Serializable {
 
 	public void setSerialNumber(String serialNumber) {
 		this.serialNumber = serialNumber;
+	}
+
+	public String getClassify() {
+		return classify;
+	}
+
+	public void setClassify(String classify) {
+		this.classify = classify;
 	}
 
 	public String getProdName() {

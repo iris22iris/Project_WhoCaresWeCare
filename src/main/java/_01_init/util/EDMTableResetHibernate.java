@@ -12,7 +12,6 @@ import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -191,33 +190,33 @@ public class EDMTableResetHibernate {
 			// 6. rentproduct表格
 			// 由"data/rentproduct.dat"逐筆讀入rentproduct表格內的初始資料，
 			// 然後依序新增到rentproduct表格中
-//			count = 0;
-//			try (FileInputStream fis = new FileInputStream("data/rentproduct.dat");
-//					InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
-//					BufferedReader br = new BufferedReader(isr0);) {
-//				while ((line = br.readLine()) != null) {
-//
-//					String[] token = line.split("\\|");
-//					RentProductBean rpb = new RentProductBean();
-//					rpb.setProdId(Integer.parseInt(token[0]));
-//					rpb.setClassify(token[1]);
-//					rpb.setCoverImage(null);
-//					rpb.setFileName(token[3]);
-//					rpb.setMimeType(token[4]);
-//					rpb.setPrice(new BigDecimal(token[5]));
-//					rpb.setProdName(token[6]);
-//					rpb.setProductTypeBean(null);
-//					rpb.setSerialNumber(token[8]);
-//					rpb.setStock(Integer.parseInt(token[9]));
-//					
-//					
-//					session.save(rpb);
-//					count++;
-//					System.out.println("新增rentproduct紀錄成功，共新增" + count + "筆記錄:" + token[1]);
-//				}
-//				session.flush();
-//				System.out.println("rentproduct表格資料新增成功");
-//		}
+			count = 0;
+			try (FileInputStream fis = new FileInputStream("data/rentproduct.dat");
+					InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
+					BufferedReader br = new BufferedReader(isr0);) {
+				while ((line = br.readLine()) != null) {
+
+					String[] token = line.split("\\|");
+					RentProductBean rpb = new RentProductBean();
+					rpb.setProdId(Integer.parseInt(token[0]));
+					rpb.setClassify(token[1]);
+					rpb.setCoverImage(null);
+					rpb.setFileName(token[3]);
+					rpb.setMimeType(token[4]);
+					rpb.setPrice(new BigDecimal(token[5]));
+					rpb.setProdName(token[6]);
+					rpb.setProductTypeBean(null);
+					rpb.setSerialNumber(token[8]);
+					rpb.setStock(Integer.parseInt(token[9]));
+					
+					
+					session.save(rpb);
+					count++;
+					System.out.println("新增rentproduct紀錄成功，共新增" + count + "筆記錄:" + token[1]);
+				}
+				session.flush();
+				System.out.println("rentproduct表格資料新增成功");
+		}
 			 catch (Exception ex) {
 				ex.printStackTrace();
 			}
