@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8"> 
 <link rel="stylesheet" href="<c:url value='./css/_05memberProfile.css' />"
 	type="text/css">
 <!-- bootstrap -->
@@ -43,7 +43,7 @@
                 <div class="col-12  d-flex justify-content-center align-items-center ">
                    <a href="#"> <img
 								src="<c:url value='./images/product/A0001.jpg' />"
-								class="cuspic"> alt='cuspic'>
+								class="cuspic" alt='cuspic'>
 					</a>
                 </div>
             <!--  圖片end  圖片end -->
