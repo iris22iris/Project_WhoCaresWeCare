@@ -14,16 +14,16 @@
 }
 @font-face {
     font-family: mainfont-light;
-    src: url(../fonts/GenSenMaruGothicTW-Light.ttf);
+    src: url(./fonts/GenSenMaruGothicTW-Light.ttf);
 }
 @font-face {
     font-family: mainfont-regular;
-    src: url(../fonts/GenSenMaruGothicTW-Regular.ttf);
+    src: url(/GenSenMaruGothicTW-Regular.ttf);
 }
 
 #body{
     background: rgb(250, 246, 243);
-    background-image: url(./images/background5.jpg);
+    background-image: url(images/background5.jpg);
     background-attachment: fixed;
 }
 
