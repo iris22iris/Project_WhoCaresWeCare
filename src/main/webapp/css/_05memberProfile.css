@@ -1,6 +1,7 @@
 /* @charset "UTF-8"; */
+
  /* --------全域設定------ */
-*{
+ *{
     margin: 0 ;
     padding: 0;
     list-style: none;
@@ -24,124 +25,39 @@
 
 #body{
     background: rgb(250, 246, 243);
-    background-image: url(../image/background5.jpg);
+    background-image: url(../image/background.jpg);
     background-attachment: fixed;
 }
 
-
-
-
-
-/* ------main-header------- */
-
-#logo{
-    width:85%;
+.main{
+    /* margin: 0 auto; */
+    width: 100%;
     display: flex;
-    justify-content: flex-start;
-}
-.navbar{
-    background: #412e11;
-    height: 100px;    
+    color: rgb(115,99,87);
 }
 
+   
 
-.textSize{
-    font-size: 18px;
-    display: inline-block;
-
-}
-.navbar-nav{
-    display: flex;
-    justify-content:space-around;
-    flex-wrap: wrap;
-}
-.left-menu{
-    display: flex;
-    justify-content:space-around;
-    align-items: center;
+.button{
+    margin-right: 50px;
     
 }
 
-.nav-item{
-    padding: auto 0px;
+.changmtitle{
+
+    font-size: 30px;
+    margin-left: 30px;
+    color: rgb(117,76,36);
+    
 }
 
-
-
-/* ------news and product-------- */
-
-.newsAndProduct{
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: center;
-}
-
-/* --------news------ */
-.newsAndProduct-Head{
-    padding-top: 50px;
-    font-family: mainfont-medium;
-    color: white;
-    border-bottom: ridge 5px white;
+.container{
+   
+    border:black solid ;
+   /* background-color: #474747;*/
+   border-radius: 30px;
    
 }
-
-.news {
-  width: 30%;
-  flex-wrap: nowrap;
-  align-content: center;
-  color: white;
-}
-
-.line{
-    color:rgb(247, 229, 214);
-}
-
-#newsHead{
-    font-size: 25px;
-    padding: 5px 15px;
-}
-
-#newsContent{
-    font-size: 20px;
-    letter-spacing: 1px;
-    font-family: mainfont-light;
-    align-items: center;
-    padding: 10px 15px;
-    padding-bottom: 20px;
-    background-color: seashell;
-    color: sienna;
-    border-radius: 10px;
-}
-
-
-
-
-/* --------Product------ */
-
-.product-card {
-  width: 70%;
-  color: rgb(117,76,36);
-}
-
-.card-title{
-    letter-spacing: 0.5px;
-}
-
-
-.card-body p{
-    font-size: 20px;
-    font-family: mainfont-regular;
-    color:crimson;
-    letter-spacing: 0.8px;    
-}
-
-.row-3{
-    display: flex;
-    justify-content:space-between;
-}
-
-
 
 
 
