@@ -7,9 +7,9 @@
     <meta charset="UTF-8">
    
     <title>線上DM瀏覽</title>
-    <link rel="stylesheet" href="<c:url value='./css/_02onlinedm.css' />"
+    <link rel="stylesheet" href="<c:url value='/css/_02onlinedm.css' />"
     type="text/css">
-    <link rel="stylesheet" href="<c:url value='./css/commonStyle.css' />"
+    <link rel="stylesheet" href="<c:url value='/css/commonStyle.css' />"
 	type="text/css">
     <!-- bootstrap -->
     <link
@@ -23,10 +23,7 @@
 	
 </head>
 
-
-<body id="body">
-
-    
+<body id="body">    
     <!-- midlecontent start -->
     <div class="midlecontent d-flex ">
         
@@ -34,10 +31,10 @@
         <nav class="side-menu col-2 ">
             <div class="sideSpace"></div>
             <div class="button d-flex justify-content-center align-items-center ">
-                <a href="" class="sideBtn">最新消息</a>
+                <a href="<c:url value=''/>" class="sideBtn">最新消息</a>
             </div>
             <div class="button d-flex justify-content-center align-items-center ">
-                <a href=""class="sideBtn">線上DM</a>
+                <a href="<c:url value=''/>"class="sideBtn">線上DM</a>
             </div>
             <div></div>
         </nav>
@@ -54,7 +51,7 @@
             
             <!-- dmImage start -->
             <div id="image" class="dmImage pt-3 d-flex justify-content-center">
-                    <img id="myimage" src="/image/DM/DM1.jpg"  alt="dm">         
+                    <img id="myimage" src="<c:url value='/images/DM/DM1.jpg'/>"  alt="dm">         
             </div>
             <!-- dmImage end -->
 
@@ -82,11 +79,12 @@
 	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
 
 
-    <!-- bootstrap -->
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>   
-   
-   <!--  -->
-   <script src="../WhoCaresWeCare!/_02onlinedm.js"></script> 
+	<!-- bootstrap -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js">
+	</script>
+	
+   <script src="/js/_02onlinedm.js"></script> 
     
 </body>
 </html>
