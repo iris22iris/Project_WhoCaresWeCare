@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-  pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%-- <link href="<c:url value='/css/eDM.css' />" rel="stylesheet" --%>
-<!--   type="text/css" /> -->
-<%-- <script src="<c:url value='/javascript/jquery-1.9.1.js' />"></script> --%>
-<!--   type="text/css" /> -->
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
+
+<link rel="stylesheet" href="<c:url value='./css/commonStyle.css' />"
+	type="text/css">
  <link rel="stylesheet" href="<c:url value='./css/index.css' />" type="text/css">
 <!-- footer Start! -->
     <div class="footer container-fluid">

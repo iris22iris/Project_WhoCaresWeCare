@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%-- <link href="<c:url value='/css/eDM.css' />" rel="stylesheet" --%>
-<!--   type="text/css" /> -->
-<%-- <script src="<c:url value='/javascript/jquery-1.9.1.js' />"></script> --%>
-<%-- <link href="<c:url value='/javascript/eDM.js' />" rel="stylesheet" --%>
 <!--   type="text/css" /> -->
 <link rel="stylesheet" href="<c:url value='./css/index.css' />"
+	type="text/css">
+<link rel="stylesheet" href="<c:url value='./css/commonStyle.css' />"
 	type="text/css">
 
 <!-- Main-header Start! -->
@@ -43,17 +41,17 @@
 					href="_05member_management.html" style="color: white;"> 會員中心</a></li>
 			</ul>
 			<!-- right menu -->
-			<ul>
-				<li class="nav-item"><a class="nav-link" href="#"
+			
+				<div class="nav-item"><a class="nav-link" href="#"
 					style="padding: 0px;"> <!-- 選擇租賃設備清單/購物車清單 --> <img
-						src="<c:url value='./images/cartIcon.png' />" alt="購物車"></a></li>
-			</ul>
-			<ul>
+						src="<c:url value='./images/cartIcon.png' />" alt="購物車"></a></div>
+		
+			
 				<!-- 可以寫登入後換成會員圖片的功能 -->
-				<li class="nav-item"><a class="nav-link" href="_05login.html"
+				<div class="nav-item"><a class="nav-link" href="_05login.html"
 					style="padding: 0px;"> <img
-						src="<c:url value='./images/memberIcon.png' />" alt="會員"></a></li>
-			</ul>
+						src="<c:url value='./images/memberIcon.png' />" alt="會員"></a></div>
+			
 
 			<!-- Search -->
 			<form class="d-flex">

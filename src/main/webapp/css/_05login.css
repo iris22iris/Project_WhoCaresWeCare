@@ -8,21 +8,7 @@
         list-style: none;
         /* font-family: mainfont-medium; */
     }
-    
-    @font-face {
-        font-family: mainfont-medium;
-        src: url(../fonts/GenSenMaruGothicTW-Medium.ttf);
-    }
-    
-    @font-face {
-        font-family: mainfont-light;
-        src: url(../fonts/GenSenMaruGothicTW-Light.ttf);
-    }
-    
-    @font-face {
-        font-family: mainfont-regular;
-        src: url(../fonts/GenSenMaruGothicTW-Regular.ttf);
-    }
+   
     /* Generic */
     /* 強改bootstrap寬度 */
     body .container {
@@ -388,51 +374,7 @@
 
 
 
-    /* --------footer------ */
-        .footer{
-        background:rgb(115,99,87);
-        width: 100%;
-        color:white;
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    #left-footer{
-        width: 50%;
-        
-    }
-
-    #right-footer{
-        width: 50%;
-        
-    }
-        
-    .list-inline-item{
-        font-size: 30px;
-    }
-
-    .copyright{
-        color: white;
-        font-size: 16px;
-        display: flex;
-        justify-content: flex-start;
-        align-items: flex-start;
-        padding-bottom: 10px;
-    }
-
-    .row dt{
-        font-family: mainfont-regular;
-        letter-spacing: 1.5px;
-    }
-
-    .row dd{
-        font-family: mainfont-light;
-        letter-spacing: 0.5px;
-        }
-
-        .modal-content{
-            height: 530px;   
-        }
+   
    
         /* 生日CSS */
         .btn {

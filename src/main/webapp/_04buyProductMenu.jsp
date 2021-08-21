@@ -4,12 +4,13 @@
 
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="UTF-8">
 
 <link rel="stylesheet"
 	href="<c:url value='/css/_04buyProductMenu.css' />">
+<link rel="stylesheet" href="<c:url value='./css/commonStyle.css' />"
+	type="text/css">
 <title>購物商城</title>
 <!-- bootstrap -->
 <link

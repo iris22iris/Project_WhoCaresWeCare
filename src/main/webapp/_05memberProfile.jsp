@@ -6,6 +6,8 @@
 <meta charset="UTF-8"> 
 <link rel="stylesheet" href="<c:url value='./css/_05memberProfile.css' />"
 	type="text/css">
+<link rel="stylesheet" href="<c:url value='./css/commonStyle.css' />"
+	type="text/css">
 <!-- bootstrap -->
 <link
 	 href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
