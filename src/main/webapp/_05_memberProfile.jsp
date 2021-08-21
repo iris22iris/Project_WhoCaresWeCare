@@ -23,7 +23,7 @@
 <!-- 引入共同的頁首 -->
 	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 
-<title>Who Cares? We Care!</title>
+<title>會員資料修改</title>
 </head>
 <body id="body">
 <!-- changmtitle star  會員修改資料標題star -->
