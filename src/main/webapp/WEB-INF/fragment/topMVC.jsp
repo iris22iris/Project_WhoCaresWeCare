@@ -2,8 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!--   type="text/css" /> -->
-<link rel="stylesheet" href="<c:url value='./css/index.css' />"
-	type="text/css">
 <link rel="stylesheet" href="<c:url value='./css/commonStyle.css' />"
 	type="text/css">
 

@@ -7,45 +7,6 @@
 }
 
 
-
-
-
-/* ------main-header------- */
-
-#logo{
-    width:85%;
-    display: flex;
-    justify-content: flex-start;
-}
-.navbar{
-    background: #412e11;
-    height: 100px;    
-}
-
-
-.textSize{
-    font-size: 18px;
-    display: inline-block;
-
-}
-.navbar-nav{
-    display: flex;
-    justify-content:space-around;
-    flex-wrap: wrap;
-}
-.left-menu{
-    display: flex;
-    justify-content:space-around;
-    align-items: center;
-    
-}
-
-.nav-item{
-    padding: auto 0px;
-}
-
-
-
 /* ------news and product-------- */
 
 .newsAndProduct{

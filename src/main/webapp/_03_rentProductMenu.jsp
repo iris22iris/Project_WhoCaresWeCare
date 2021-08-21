@@ -9,8 +9,9 @@
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="<c:url value='/css/_03rentProductMenu.css' />">
-<link rel="stylesheet" href="<c:url value='./css/commonStyle.css' />"
+<link rel="stylesheet" href="<c:url value='/css/commonStyle.css' />"
 	type="text/css">
+	
 <title>租賃設備</title>
 
 <!-- bootstrap -->

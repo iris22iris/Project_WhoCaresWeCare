@@ -4,7 +4,6 @@
 
 <link rel="stylesheet" href="<c:url value='./css/commonStyle.css' />"
 	type="text/css">
- <link rel="stylesheet" href="<c:url value='./css/index.css' />" type="text/css">
 <!-- footer Start! -->
     <div class="footer container-fluid">
       <!-- left-footer -->
