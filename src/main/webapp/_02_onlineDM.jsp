@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,6 +24,13 @@
     
     <!-- 引入共同的頁首 -->
 	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+	
+		<!-- bootstrap -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js">
+	</script>
+	
+  
 	
 </head>
 
@@ -80,14 +88,6 @@
     
     <!-- 引入共同的頁尾 -->
 	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
-
-
-	<!-- bootstrap -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js">
-	</script>
-	
-   <script src="/js/_02onlinedm.js"></script> 
-    
+ <script type="text/javascript" src="./js/_02onlinedm.js"></script> 
 </body>
 </html>

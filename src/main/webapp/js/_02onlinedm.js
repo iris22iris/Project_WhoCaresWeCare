@@ -1,3 +1,4 @@
+
 document.querySelector('#image').addEventListener('mouseenter', enterHandler)
 document.querySelector('#image').addEventListener('mousemove', moveHandler)
 document.querySelector('#image').addEventListener('mouseleave', leaveHandler)
