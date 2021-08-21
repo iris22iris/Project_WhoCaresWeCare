@@ -69,7 +69,7 @@ public class RootAppConfig {
 
 	private Properties additionalProperties() { 
 		Properties properties = new Properties();
-		properties.put("hibernate.dialect", org.hibernate.dialect.MySQL57Dialect.class);
+		properties.put("hibernate.dialect", org.hibernate.dialect.MySQL8Dialect.class);
 		properties.put("hibernate.show_sql", Boolean.TRUE);
 		properties.put("hibernate.format_sql", Boolean.TRUE);
 		properties.put("default_batch_fetch_size", 10);

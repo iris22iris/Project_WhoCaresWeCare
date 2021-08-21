@@ -13,8 +13,7 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
@@ -24,7 +23,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 //@ComponentScan({"com.web.store"})
 @ComponentScan({ "com.web.store.controller", "com.web.store.model", "com.web.store.service.impl",
 		"com.web.store.dao.impl", "com.web.store.config" })
-public class WebAppConfig extends WebMvcConfigurerAdapter {
+public class WebAppConfig implements WebMvcConfigurer {
 
 	@Bean
 	public ViewResolver resolver() {

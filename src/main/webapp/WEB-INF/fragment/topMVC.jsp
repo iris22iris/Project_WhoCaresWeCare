@@ -31,8 +31,10 @@
 				<li class="nav-item "><a class="nav-link textSize "
 					href="_01aboutus.html" style="color: white;"> 關於我們</a></li>
 				<li class="nav-item"><a class="nav-link textSize "
-					href="_03rentProductMenu.html" style="color: white;"> 租賃設備</a></li>
-				<li class="nav-item"><a class="nav-link textSize " href="#"
+					href="<c:url value='/_03rentProductMenu.jsp' />"
+					style="color: white;"> 租賃設備</a></li>
+				<li class="nav-item"><a class="nav-link textSize "
+					href="<c:url value='/_04buyProductMenu.jsp' />"
 					style="color: white;"> 購物商城</a></li>
 				<li class="nav-item"><a class="nav-link textSize "
 					href="_02q_a.html" style="color: white;"> 客服中心</a></li>

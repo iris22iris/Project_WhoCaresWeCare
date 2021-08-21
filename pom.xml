@@ -9,8 +9,9 @@
 	<properties>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
-		<hibernate.version>5.2.10.Final</hibernate.version>
-		<spring.version>4.3.14.RELEASE</spring.version>
+		<hibernate.version>5.4.10.Final</hibernate.version>
+		<spring.version>5.2.10.RELEASE</spring.version>
+		<!-- <spring.version>4.3.14.RELEASE</spring.version> -->
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 	</properties>
 	<build>
@@ -56,7 +57,7 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -119,7 +120,7 @@
 			<artifactId>activation</artifactId>
 			<version>1.1.1</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
