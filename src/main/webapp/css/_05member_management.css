@@ -30,7 +30,7 @@
 
 #body{
     background: rgb(250, 246, 243);
-    background-image: url(../image/background.jpg);
+    background-image: url(./images/background.jpg);
     background-attachment: fixed;
 }
 
