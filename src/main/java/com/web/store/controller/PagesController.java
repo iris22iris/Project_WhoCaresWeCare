@@ -14,9 +14,14 @@ public class PagesController {
 		return "index"; // \WEB-INF\views\index.jsp
 	}
 	
-	@GetMapping("/_02_contackUs")
+	@GetMapping("/_02_q_a")
+	public String q_a(Model model) {
+		return "_02_q_a";
+	}
+	
+	@GetMapping("/_02_contactUs")
 	public String contackUs(Model model) {
-		return "_02_contackUs";
+		return "_02_contactUs";
 	}
 	
 	@GetMapping("/_02_onlineDM")
@@ -29,9 +34,14 @@ public class PagesController {
 	return "_03_rentProductMenu";
 	}
 	
+	@GetMapping("/_03_rentItemList")
+	public String rentItemList(Model model) {
+	return "_03_rentItemList";
+	}
+	
 	@GetMapping("/_04_buyProductMenu")
 	public String buyProductMenu(Model model) {
-	return "_04_rentProductMenu";
+	return "_04_buyProductMenu";
 	}
 	
 	@GetMapping("/_05_login")

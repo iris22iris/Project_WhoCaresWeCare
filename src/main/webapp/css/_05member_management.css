@@ -1,33 +1,11 @@
 @charset "UTF-8";
 
-    /* div背景設定 */
+/* div背景設定 */
 
 .bcglightgray{
     background: lightgray;
 }
 /* --------全域設定------ */
-*{
-    margin: 0 ;
-    padding: 0;
-    list-style: none;
-    font-family: mainfont-medium;
-       
-}
-
-/* 源泉圓體字型命名!! */
-@font-face {
-    font-family: mainfont-medium;
-    src: url(../fonts/GenSenMaruGothicTW-Medium.ttf);
-}
-@font-face {
-    font-family: mainfont-light;
-    src: url(../fonts/GenSenMaruGothicTW-Light.ttf);
-}
-@font-face {
-    font-family: mainfont-regular;
-    src: url(../fonts/GenSenMaruGothicTW-Regular.ttf);
-}
-
 #body{
     background: rgb(250, 246, 243);
     background-image: url(./images/background.jpg);
@@ -46,48 +24,4 @@
     height: 300px;
     width: 300px;
 }
-
-   
-
-/* --------footer------ */
-.footer{
-    background:rgb(115,99,87);
-    width: 100%;
-    color:white;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-#left-footer{
-    width: 50%;
-    
-}
-
-#right-footer{
-    width: 50%;
-    
-}
-
-.list-inline-item{
-    font-size: 30px;
-}
-
-.copyright{
-    color: white;
-    font-size: 16px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding-bottom: 10px;
-}
-
-.row dt{
-    font-family: mainfont-regular;
-    letter-spacing: 1.5px;
-}
-
-.row dd{
-    font-family: mainfont-light;
-    letter-spacing: 0.5px;
-    }
 

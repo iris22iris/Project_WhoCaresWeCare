@@ -1,30 +1,9 @@
  /* --------全域設定------ */
- *{
-    margin: 0 ;
-    padding: 0;
-    list-style: none;
-    font-family: mainfont-medium;
-       
-}
-
-/* 源泉圓體字型命名!! */
-@font-face {
-    font-family: mainfont-medium;
-    src: url(../fonts/GenSenMaruGothicTW-Medium.ttf);
-}
-@font-face {
-    font-family: mainfont-light;
-    src: url(../fonts/GenSenMaruGothicTW-Light.ttf);
-}
-@font-face {
-    font-family: mainfont-regular;
-    src: url(../fonts/GenSenMaruGothicTW-Regular.ttf);
-}
-
+ 
 #body{
     /* background:white; */
     /* background-image: url(../image/background4.jpg); */
-    background-image: url(../image/background.jpg);
+    background-image: url(../images/background.jpg);
     background-attachment: fixed;
 }
 
@@ -70,7 +49,7 @@ div>img{
     width: 100%;
 }
 
-li>a{
+.itemNameLink{
     text-decoration: none;
     border-bottom: 2px dotted;
     color: rgb(66, 58, 53);
@@ -151,7 +130,7 @@ button>a{
 
 /* ------- Count ------- */
 .count{
-    height: 30vh;
+    height: 200px;
     /* border: 1px solid red; */
     display: flex;
     flex-wrap: wrap;
@@ -173,7 +152,7 @@ div>h5{
 /* -----bottom-right----- */
 .bottom-right{
     /* background:steelblue; */
-    width: 40%;
+    width: 30%;
 }
 
 .count-row{
@@ -182,9 +161,10 @@ div>h5{
     /* border: 1px yellow solid; */
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: flex-end;
     font-size: 20px;
 }
+
 
 .count-header{
    /* background:rgb(66, 58, 53); */
@@ -201,45 +181,3 @@ div>h5{
     align-items: center;
 }
 
-
-/* --------footer------ */
-.footer{
-    background:rgb(115,99,87);
-    width: 100%;
-    color:white;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-#left-footer{
-    width: 50%;
-    
-}
-
-#right-footer{
-    width: 50%;
-    
-}
-
-.list-inline-item{
-    font-size: 30px;
-}
-
-.copyright{
-    color: white;
-    font-size: 16px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding-bottom: 10px;
-}
-
-.row dt{
-    font-family: mainfont-regular;
-    letter-spacing: 1.5px;
-}
-
-.row dd{
-    font-family: mainfont-light;
-    letter-spacing: 0.5px;
-    }
