@@ -10,7 +10,9 @@
 </head> -->
 
 <!-- <body> -->
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
 
@@ -18,7 +20,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
     <meta charset="utf-8">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="_05login.css">
+    <link rel="stylesheet" href="./css/_05login.css">
     <link rel="stylesheet" href="<c:url value='./css/commonStyle.css' />"
 	type="text/css">
     <!-- icon -->
@@ -125,9 +127,9 @@
 	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
 
     <!-- 註冊登入js參考網站:https://webdesignerwall.com/wdw-snippet/login-form-4 -->
-    <script src="_05login.js"></script>
+    <script type="text/javascript" src="./js/_05login.js"></script>
     <!-- 彈跳視窗js參考網站:https://www.youtube.com/watch?v=c7kIL-bV8ac -->
-    <script src="_05login_ven.js"></script>
+    <script type="text/javascript" src="./js/_05login_ven.js"></script>
 </body>
 
 </html>

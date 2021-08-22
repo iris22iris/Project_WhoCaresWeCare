@@ -88,6 +88,6 @@
     
     <!-- 引入共同的頁尾 -->
 	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
- <script type="text/javascript" src="/js/_02onlinedm.js"></script> 
+ <script type="text/javascript" src="./js/_02onlinedm.js"></script> 
 </body>
 </html>
