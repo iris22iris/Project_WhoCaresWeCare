@@ -8,8 +8,8 @@
 <!-- Main-header Start! -->
 <nav class="navbar navbar-expand-lg navbar-light">
 	<div class="container-fluid">
-		<a class="navbar-brand w-25" href="/index"> <img
-			src="<c:url value='./images/whiteLogo.png' />" alt="回到首頁" id="logo">
+		<a class="navbar-brand w-25" href="<c:url value='/index' />"> <img
+			src="<c:url value='/images/whiteLogo.png' />" alt="回到首頁" id="logo">
 		</a>
 
 		<!-- rwd toggler start -->
@@ -52,7 +52,7 @@
 			
 				<!-- 可以寫登入後換成會員圖片的功能 -->
 				<div class="nav-item"><a class="nav-link" 
-					href="<c:url value='/_05_login' />"
+					href="<c:url value='s/_05_login' />"
 					style="padding: 0px;"> <img
 						src="<c:url value='./images/memberIcon.png' />" alt="會員">
 						</a></div>

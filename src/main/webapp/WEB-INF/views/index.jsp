@@ -30,17 +30,17 @@
 		data-bs-ride="carousel">
 		<div class="carousel-inner">
 			<div class="carousel-item active" data-bs-interval="5000">
-				<img src="<c:url value='./images/indexAd1.jpg' />"
+				<img src="<c:url value='/images/indexAd1.jpg' />"
 					class="d-block w-100" alt="ad1">
 
 			</div>
 			<div class="carousel-item" data-bs-interval="5000">
-				<img src="<c:url value='./images/indexAd2.jpg' />"
+				<img src="<c:url value='/images/indexAd2.jpg' />"
 					class="d-block w-100" alt="ad2">
 
 			</div>
 			<div class="carousel-item">
-				<img src="<c:url value='./images/indexAd3.jpg' />"
+				<img src="<c:url value='/images/indexAd3.jpg' />"
 					class="d-block w-100" alt="ad3">
 			</div>
 		</div>
