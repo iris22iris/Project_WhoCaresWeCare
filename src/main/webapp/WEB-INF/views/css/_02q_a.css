@@ -1,0 +1,120 @@
+
+/* --------全域設定------ */
+*{
+    margin: 0 ;
+    padding: 0;
+    list-style: none;
+    font-family: mainfont-medium;
+       
+}
+
+/* 源泉圓體字型命名!! */
+@font-face {
+    font-family: mainfont-medium;
+    src: url(../fonts/GenSenMaruGothicTW-Medium.ttf);
+}
+@font-face {
+    font-family: mainfont-light;
+    src: url(../fonts/GenSenMaruGothicTW-Light.ttf);
+}
+@font-face {
+    font-family: mainfont-regular;
+    src: url(../fonts/GenSenMaruGothicTW-Regular.ttf);
+}
+
+#body{
+    background: rgb(250, 246, 243);
+    /* background-image: url(../image/background.jpg); */
+    background-attachment: fixed;
+}
+
+
+.main{
+    /* margin: 0 auto; */
+    width: 100%;
+    display: flex;
+   
+}
+
+/* ------side-menu------- */
+
+.side-menu{
+    /* border-right: black dotted ; */
+    border-width: 0.25rem;
+}
+.side-menu .button{
+    height: 4rem;
+    background-color: snow;
+    margin: 0px 30px;
+    border: 0.5px #ccc solid;
+    font-size: large;
+}
+
+.button{
+    border: none;
+}
+
+.sideBtn{
+    text-decoration: none;
+    color:saddlebrown;
+    border-radius: 10px;
+}
+
+.sideSpace{
+    height: 15%;
+}
+/* ------title------- */
+.title{
+    color:  rgb(117,76,36);
+    border-bottom: rgb(117,76,36) solid 2px;
+  
+}
+/* ------mainborder------- */
+
+
+/* q_a .accordionwidth setting */
+.accordionwidth{
+    width: 70vh;
+}
+
+/* --------footer------ */
+.footer{
+    background:rgb(115,99,87);
+    width: 100%;
+    color:white;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#left-footer{
+    width: 50%;
+    
+}
+
+#right-footer{
+    width: 50%;
+    
+}
+
+.list-inline-item{
+    font-size: 30px;
+}
+
+.copyright{
+    color: white;
+    font-size: 16px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-bottom: 10px;
+}
+
+.row dt{
+    font-family: mainfont-regular;
+    letter-spacing: 1.5px;
+}
+
+.row dd{
+    font-family: mainfont-light;
+    letter-spacing: 0.5px;
+    }

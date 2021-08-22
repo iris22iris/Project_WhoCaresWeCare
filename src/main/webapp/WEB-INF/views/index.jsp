@@ -1,12 +1,13 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="<c:url value='./css/index.css' />"
+<link rel="stylesheet" href="<c:url value='/css/index.css' />"
 	type="text/css">
-<link rel="stylesheet" href="<c:url value='./css/commonStyle.css' />"
+<link rel="stylesheet" href="<c:url value='/css/commonStyle.css' />"
 	type="text/css">
     <!-- bootstrap -->
     <link
@@ -283,6 +284,9 @@
 	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
 
 
-
+<!-- bootstrap -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js">
+	</script>
 </body>
 </html>

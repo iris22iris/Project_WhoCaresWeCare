@@ -13,6 +13,7 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -71,12 +72,14 @@ public class WebAppConfig implements WebMvcConfigurer {
 		configurer.enable();
 	}
 
-//	@Override
-//	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//		registry.addResourceHandler("/css/**")
-//				.addResourceLocations("/WEB-INF/views/css/");
-//		registry.addResourceHandler("/image/**")
-//				.addResourceLocations("/WEB-INF/views/images/");
-//	}
+	@Override
+	// 為了處理靜態檔案必須加入下列敘述：只要是 /css/開頭的任何請求，都轉到/WEB-INF/views/css/去尋找
+	// 為了處理靜態檔案必須加入下列敘述：只要是 /image/開頭的任何請求，都轉到/WEB-INF/views/images/去尋找
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/css/**")
+				.addResourceLocations("/WEB-INF/views/css/");
+		registry.addResourceHandler("/image/**")
+				.addResourceLocations("/WEB-INF/views/images/");
+	}
 
 }

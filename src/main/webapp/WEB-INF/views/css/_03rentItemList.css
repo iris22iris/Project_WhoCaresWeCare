@@ -1,0 +1,245 @@
+ /* --------全域設定------ */
+ *{
+    margin: 0 ;
+    padding: 0;
+    list-style: none;
+    font-family: mainfont-medium;
+       
+}
+
+/* 源泉圓體字型命名!! */
+@font-face {
+    font-family: mainfont-medium;
+    src: url(../fonts/GenSenMaruGothicTW-Medium.ttf);
+}
+@font-face {
+    font-family: mainfont-light;
+    src: url(../fonts/GenSenMaruGothicTW-Light.ttf);
+}
+@font-face {
+    font-family: mainfont-regular;
+    src: url(../fonts/GenSenMaruGothicTW-Regular.ttf);
+}
+
+#body{
+    /* background:white; */
+    /* background-image: url(../image/background4.jpg); */
+    background-image: url(../image/background.jpg);
+    background-attachment: fixed;
+}
+
+/* ------- title ------- */
+.title{
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    font-size: 40px;
+    color: rgb(117,76,36);
+    letter-spacing: 0.7px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border-bottom: rgb(117,76,36) solid 1px;
+}
+
+
+
+/* ------- List ------- */
+.list{
+    border-left: 0.5px solid silver;
+    border-right: 0.5px solid silver;
+}
+
+/* ------- List-head 購買清單標題------- */
+
+#deleteIcon{
+    font-size: 20px;
+}
+
+.list-head{
+    background: rgb(117,76,36);
+    display: flex;
+    flex-wrap: wrap;
+    height: 50px;
+    color: white;
+    font-size: 18px;
+}
+
+
+/* ------- List-content 商品資料------- */
+div>img{
+    width: 100%;
+}
+
+li>a{
+    text-decoration: none;
+    border-bottom: 2px dotted;
+    color: rgb(66, 58, 53);
+}
+
+.col {
+    /* border: 1px solid blue; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.col-2{    
+    /* border: 1px solid blue; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.list-item{
+    height: 150px;
+    border-bottom: 1px silver solid;
+    color: rgb(66, 58, 53);
+    font-size: 18px;
+    background-color: white;
+}
+
+.productName{
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.productId{
+    font-size: small;
+}
+
+.productPrice{
+    display: flex;
+    justify-content: center;
+}
+.promoteTag{
+    font-size: small;
+    padding: 3px;
+    color: white;
+    background-color: orange;
+    
+}
+/* <!-- 沒有折扣的時候不用刪除線 --> */
+.total{
+    text-decoration:line-through;
+}
+
+.discountTotal{
+    color: rgb(163, 7, 38);
+}
+
+.recommandBtn{
+    color: white;
+    background-color: tomato;
+    padding: 5px 6px;
+    margin-top: 2px;
+    border-radius: 15px;
+    border: 0px;
+    font-size: 14px;
+}
+
+dl{
+    margin-top: 1rem;
+}
+
+button>a{
+    text-decoration: none;
+    color: rgb(66, 58, 53);;
+}
+
+
+
+/* ------- Count ------- */
+.count{
+    height: 30vh;
+    /* border: 1px solid red; */
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+    background-color:tan
+}
+
+
+/* -----bottom-left----- */
+.bottom-left{
+    /* background:tomato; */
+    width: 60%; 
+}
+div>h5{
+    margin-top: 10px;
+}
+
+
+/* -----bottom-right----- */
+.bottom-right{
+    /* background:steelblue; */
+    width: 40%;
+}
+
+.count-row{
+    height: 25%;
+    /* background-color: red; */
+    /* border: 1px yellow solid; */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 20px;
+}
+
+.count-header{
+   /* background:rgb(66, 58, 53); */
+   display: flex;
+   justify-content:flex-end;
+   font-size: 20px;
+}
+
+/* ----checkout btn---- */
+.col-12{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content:center;
+    align-items: center;
+}
+
+
+/* --------footer------ */
+.footer{
+    background:rgb(115,99,87);
+    width: 100%;
+    color:white;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#left-footer{
+    width: 50%;
+    
+}
+
+#right-footer{
+    width: 50%;
+    
+}
+
+.list-inline-item{
+    font-size: 30px;
+}
+
+.copyright{
+    color: white;
+    font-size: 16px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-bottom: 10px;
+}
+
+.row dt{
+    font-family: mainfont-regular;
+    letter-spacing: 1.5px;
+}
+
+.row dd{
+    font-family: mainfont-light;
+    letter-spacing: 0.5px;
+    }

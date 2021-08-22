@@ -8,7 +8,7 @@
 <!-- Main-header Start! -->
 <nav class="navbar navbar-expand-lg navbar-light">
 	<div class="container-fluid">
-		<a class="navbar-brand w-25" href="index.html"> <img
+		<a class="navbar-brand w-25" href="/index"> <img
 			src="<c:url value='./images/whiteLogo.png' />" alt="回到首頁" id="logo">
 		</a>
 
@@ -28,21 +28,20 @@
 					href="<c:url value='' />" 
 					style="color: white;"> 關於我們</a></li>
 				<li class="nav-item"><a class="nav-link textSize "
-					href="<c:url value='/_03_rentProductMenu.jsp' />"
+					href="<c:url value='/_03_rentProductMenu' />"
 					style="color: white;"> 租賃設備</a></li>
 				<li class="nav-item"><a class="nav-link textSize "
-					href="<c:url value='/_04_buyProductMenu.jsp' />"
+					href="<c:url value='/_04_buyProductMenu' />"
 					style="color: white;"> 購物商城</a></li>
 				<li class="nav-item"><a class="nav-link textSize "
 					href="<c:url value='' />" 
 					style="color: white;"> 客服中心</a></li>
 				<!-- 可以增加功能為登入才會顯示會員中心這個連結 -->
 				<li class="nav-item"><a class="nav-link textSize"
-					href="_05_member_management.html" 
+					href="/_05_member_management" 
 					style="color: white;"> 會員中心</a></li>
 			</ul>
 			<!-- right menu -->
-			
 				<div class="nav-item"><a class="nav-link" 
 					href="<c:url value='#購物車' />"
 					style="padding: 0px;"> <!-- 選擇租賃設備清單/購物車清單 --> 
@@ -53,7 +52,7 @@
 			
 				<!-- 可以寫登入後換成會員圖片的功能 -->
 				<div class="nav-item"><a class="nav-link" 
-					href="<c:url value='/_05_login.jsp' />"
+					href="<c:url value='/_05_login' />"
 					style="padding: 0px;"> <img
 						src="<c:url value='./images/memberIcon.png' />" alt="會員">
 						</a></div>

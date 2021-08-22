@@ -40,9 +40,9 @@
 
 <body id="body">
 
-    <!-- header start! -->
-    <iframe src="index.html" frameborder="0" width="100%" height="100px" scrolling="no"></iframe>
-    <!-- header End! -->
+	<!-- 引入共同的頁首 -->
+	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+
 
     <!-- main start! -->
     <div class="main">
@@ -121,53 +121,9 @@
     </div>
     <!--拼圖認證+彈跳 End!-->
 
+	<!-- 引入共同的頁尾 -->
+	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
 
-      <!-- footer Start! -->
-      <div class="footer container-fluid">
-        <!-- left-footer -->
-        <div id="left-footer">
-          <dl class="row pt-4 pb-2 ps-4">
-            <dt class="col-sm-3 d-flex justify-content-end">
-              <i class="fas fa-map-marker-alt pe-1"></i>
-              公司地址:
-            </dt>
-            <dd class="col-sm-9">
-              台北市大安區忠孝東路三段1號
-            </dd>      
-            <dt class="col-sm-3 d-flex justify-content-end">
-              <i class="fas fa-phone pe-1"></i>
-              連絡電話:
-            </dt>
-            <dd class="col-sm-9">
-              (02) 2211-3344
-            </dd>       
-            <dt class="col-sm-3 d-flex justify-content-end">
-              <i class="far fa-smile pe-1"></i>
-              服務時段:
-            </dt>
-            <dd class="col-sm-9">
-              週一至週五(例假日除外) 9:00AM - 17:30PM
-            </dd>
-        </div>
-        <!-- right-footer -->
-        <div id="right-footer">
-          <ul class="list-inline pt-4 d-flex justify-content-start align-items-end">
-            <li class="list-inline-item px-4">
-              <i class="fab fa-facebook-square"></i>
-            </li>
-            <li class="list-inline-item px-4">
-              <i class="fab fa-instagram"></i>
-            </li>
-            <li class="list-inline-item px-4">
-              <i class="fab fa-line"></i>
-            </li>
-          </ul>
-          <div class="copyright">
-           &nbsp;&nbsp; All Content Copyright &copy; 2021
-          </div>
-        </div>
-      </div>
-    <!-- footer End! -->
     <!-- 註冊登入js參考網站:https://webdesignerwall.com/wdw-snippet/login-form-4 -->
     <script src="_05login.js"></script>
     <!-- 彈跳視窗js參考網站:https://www.youtube.com/watch?v=c7kIL-bV8ac -->
