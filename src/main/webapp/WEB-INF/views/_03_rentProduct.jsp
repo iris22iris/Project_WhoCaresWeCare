@@ -40,7 +40,8 @@
 <link rel="stylesheet" href="_03rentProduct.css">
 </head>
 
-<body id="body">
+<body>
+	<div id="body">  
 	<!-- header start -->
 	<!-- 引入共同的頁首 -->
 	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
@@ -265,7 +266,7 @@
 
 				<!-- 留言板 end -->
 			</div>
-
+		</div>
 		</div>
 
 	</div>

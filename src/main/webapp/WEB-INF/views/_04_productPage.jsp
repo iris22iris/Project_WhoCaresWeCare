@@ -33,7 +33,8 @@
 
 </head>
 
-<body id="body">
+<body>
+	<div id="body">  
 	<!-- 引入index的menu start -->
 	<!-- 引入共同的頁首 -->
 	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
@@ -257,7 +258,7 @@
 			</div>
 
 		</div>
-
+	</div>
 	</div>
 
 	<!-- footer Start! -->
