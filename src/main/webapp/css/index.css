@@ -1,9 +1,11 @@
  /* --------全域設定------ */
 
-#body{
-    background: rgb(250, 246, 243);
-    background-image: url(../images/background5.jpg);
-    background-attachment: fixed;
+ #body {
+	/*background: rgb(250, 246, 243);*/
+	background-image: url(../images/background7.png); 
+	background-size: cover;
+	background-attachment: fixed;
+	
 }
 
 
@@ -20,7 +22,7 @@
 .newsAndProduct-Head{
     padding-top: 50px;
     font-family: mainfont-medium;
-    color: white;
+    color:  rgb(117,76,36);
     border-bottom: ridge 5px white;
    
 }
@@ -29,7 +31,7 @@
   width: 30%;
   flex-wrap: nowrap;
   align-content: center;
-  color: white;
+  color: rgb(117,76,36);
 }
 
 .line{
@@ -48,7 +50,7 @@
     align-items: center;
     padding: 10px 15px;
     padding-bottom: 20px;
-    background-color: seashell;
+    background-color: white;
     color: sienna;
     border-radius: 10px;
 }

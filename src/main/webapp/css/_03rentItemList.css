@@ -1,10 +1,12 @@
  /* --------全域設定------ */
- 
-#body{
-    /* background:white; */
-    /* background-image: url(../image/background4.jpg); */
-    background-image: url(../images/background.jpg);
-    background-attachment: fixed;
+
+
+ #body {
+	/*background: rgb(250, 246, 243);*/
+	background-image: url(../images/background7.png); 
+	background-size: cover;
+	background-attachment: fixed;
+	
 }
 
 /* ------- title ------- */

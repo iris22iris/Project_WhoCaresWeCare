@@ -22,18 +22,18 @@
     src: url(../fonts/GenSenMaruGothicTW-Regular.ttf);
 }
 
-#body{
-    background: rgb(250, 246, 243);
+/* #body{ */
+    /* background: rgb(250, 246, 243); */
     /* background-image: url(../image/background.jpg); */
-    background-attachment: fixed;
-}
+    /* background-attachment: fixed; */
+/* }； */
 
 
 .main{
     /* margin: 0 auto; */
     width: 100%;
     display: flex;
-   
+    /* flex-grow: 1; */
 }
 
 /* ------side-menu------- */
