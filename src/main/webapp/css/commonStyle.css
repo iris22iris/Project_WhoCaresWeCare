@@ -7,6 +7,14 @@
      
 }
 
+ #body {
+	/*background: rgb(250, 246, 243);*/
+	background-image: url(../images/background7.png); 
+	background-size: contain;
+	background-attachment: fixed;
+	background-repeat:no-repeat;
+}
+
 /* 源泉圓體字型命名!! */
 @font-face {
   font-family: mainfont-medium;
@@ -58,12 +66,21 @@
 
 
 /* --------footer------ */
+.end{
+    display: flex;
+    align-items: flex-end;
+    height: 30%;
+}
+
+
 .footer{
   background:rgb(115,99,87);
   width: 100%;
   color:white;
   display: flex;
   flex-wrap: wrap;
+
+  height: 160px;
 }
 
 #left-footer{

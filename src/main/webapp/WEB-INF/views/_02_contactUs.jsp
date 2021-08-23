@@ -34,7 +34,7 @@
         <nav class="side-menu col-2 ">
           <div class="sideSpace"></div>
           <div class="button   d-flex justify-content-center align-items-center ">
-              <a href="" class="sideBtn">客服Q&A</a>
+              <a href="" class="sideBtn">客服Q＆A</a>
           </div>
           <div class="button d-flex justify-content-center align-items-center ">
              <a href="" class="sideBtn">聯絡我們</a>
@@ -129,7 +129,7 @@
 	 <!-- 引入共同的頁尾 -->
 	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
     <!-- bootstrap -->
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>   
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" ></script>   
   <script>
     function track() {
     Swal.fire({

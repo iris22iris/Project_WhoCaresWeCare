@@ -53,12 +53,7 @@ public class PagesController {
 	public String productPage(Model model) {
 	return "_04_productPage";
 	}
-	
-	@GetMapping("/_05_login")
-	public String login(Model model) {
-	return "_05_login";
-	}
-	
+
 	@GetMapping("/_05_loginPopup")
 	public String loginPopup(Model model) {
 	return "_05_loginPopup";

@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="<c:url value='./css/commonStyle.css' />"
 	type="text/css">
 <!-- footer Start! -->
+<div class="end">
     <div class="footer container-fluid">
       <!-- left-footer -->
       <div id="left-footer">
@@ -50,4 +51,5 @@
         </div>
       </div>
     </div>
+  </div>
   <!-- footer End! -->
