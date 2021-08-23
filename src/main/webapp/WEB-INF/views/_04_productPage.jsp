@@ -4,108 +4,116 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
 
-<link rel="stylesheet"
-	href="<c:url value='/css/_04buyProductMenu.css' />">
-<link rel="stylesheet" href="<c:url value='./css/commonStyle.css' />"
-	type="text/css">
-<title>購物商城</title>
+<head>
+<title>商品明細</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <!-- bootstrap -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet">
+
+<!-- jquery cnd -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- css -->
+<link rel="stylesheet" href="_04productPage.css">
+
 <!-- icon -->
 <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-<!-- sweetAlert -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+	integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!-- 圖片切換 -->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+	crossorigin="anonymous"></script>
+
+<!-- 引入script -->
+<script src="<c:url value='/js/_04productPage.js' />"></script>
+
 </head>
 
 <body id="body">
+	<!-- 引入index的menu start -->
 	<!-- 引入共同的頁首 -->
 	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+	<!-- 引入index的menu end -->
 
-	<!-- Main Start -->
 
-	<!-- Slider-img Start -->
-	<div class="container-fluid d-flex justify-content-center">
-		<div id="carouselExampleInterval" class="carousel slide col-11"
-			data-bs-ride="carousel">
-			<div class="carousel-inner">
-				<div class="carousel-item active" data-bs-interval="5000">
-					<img src="<c:url value='/images/indexAd1.jpg' />"
-						class="d-block w-100" alt="ad1">
-				</div>
-				<div class="carousel-item" data-bs-interval="5000">
-					<img src="<c:url value='/images/indexAd2.jpg' />"
-						class="d-block w-100" alt="ad2">
-				</div>
-				<div class="carousel-item">
-					<img src="<c:url value='/images/indexAd3.jpg' />"
-						class="d-block w-100" alt="ad3">
-				</div>
+
+
+	<!-- menu下面的標題顯示 start -->
+	<div class="menuTwo">
+		<div class="row row-cols-auto align-items-center">
+			<div class="col">
+				<!-- <img src="../image/whiteLogo.png" width="250px" height="100px"> -->
+				<img class="imgTop" src="../image/whiteLogo.png">
 			</div>
-			<button class="carousel-control-prev" type="button"
-				data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Previous</span>
-			</button>
-			<button class="carousel-control-next" type="button"
-				data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Next</span>
-			</button>
+
+			<div class="col">
+				<a href="http://127.0.0.1:5500/WhoCaresWeCare!/index.html"
+					style="text-decoration: none;">首頁</a>
+			</div>
+			<span id="span1"></span>
+			<div class="col">
+				<span id="text1"></span>
+			</div>
+			<span id="span2"></span>
+			<div class="col">
+				<span id="text2"></span>
+			</div>
 		</div>
 	</div>
-
-	<!-- Slider-img End -->
-
-
+	<hr class="hr1" />
+	<!-- menu下面的標題顯示 end -->
 
 
-	<div class="row">
-		<!-- Side-List Start -->
-		<div class="col-2 ms-4" style="margin-top: 3cm;">
-			<div class="text-center">
-				<div class="d-flex flex-wrap justify-content-center my-3"
-					style="background-color: white;">
-					<div class="sideList-title mt-3">
-						<h2 class="my-2">
-							<i class="fas fa-hand-holding-medical"></i> 輔具類
-						</h2>
-					</div>
-					<div class="sideList">
-						<a href="#" style="color: #622d18; text-decoration: none;">拐杖-110cm</a><br>
-						<a href="#" style="color: #622d18; text-decoration: none;">拐杖-120cm</a><br>
-						<a href="#" style="color: #622d18; text-decoration: none;">拐杖-130cm</a><br>
-						<a href="#" style="color: #622d18; text-decoration: none;">可折疊輪椅</a><br>
-						<a href="#" style="color: #622d18; text-decoration: none;">不可折疊輪椅</a><br>
-					</div>
-					<div class="sideList-title">
-						<h2 class="my-2">
-							<i class="fas fa-shield-alt"></i> 護具類
-						</h2>
-					</div>
-					<div class="sideList">
-						<a href="#" style="color: #622d18; text-decoration: none;">護膝</a><br>
-						<a href="#" style="color: #622d18; text-decoration: none;">護腰</a><br>
-					</div>
-					<div class="sideList-title">
-						<h2 class="my-2">
-							<i class="fas fa-clinic-medical"></i> 居家保健
-						</h2>
-					</div>
-					<div class="sideList rounded-bottom">
-						<a href="#" style="color: #622d18; text-decoration: none;">照護病床</a><br>
-					</div>
+	<div class="allPage">
+		<!-- 左邊的選單 start -->
+		<div class="sideMenu">
+			<div class="d-flex flex-wrap justify-content-center my-3">
+				<div class="sideList-title mt-3">
+					<h2 class="my-2">
+						<i class="fas fa-hand-holding-medical"></i>輔具類
+					</h2>
+				</div>
+				<div class="sideList">
+					<li class="sideLi"><a href="#"
+						style="color: #622d18; text-decoration: none;">拐杖-110cm</a></li>
+					<li class="sideLi"><a href="#"
+						style="color: #622d18; text-decoration: none;">拐杖-120cm</a></li>
+					<li class="sideLi"><a href="#"
+						style="color: #622d18; text-decoration: none;">拐杖-130cm</a></li>
+					<li class="sideLi"><a href="#"
+						style="color: #622d18; text-decoration: none;">可折疊輪椅</a></li>
+					<li class="sideLi"><a href="#"
+						style="color: #622d18; text-decoration: none;">不可折疊輪椅</a></li>
+				</div>
+				<div class="sideList-title">
+					<h2 class="my-2">
+						<i class="fas fa-shield-alt"></i> 護具類
+					</h2>
+				</div>
+				<div class="sideList">
+					<li><a href="#" style="color: #622d18; text-decoration: none;">護膝</a></li>
+					<li><a href="#" style="color: #622d18; text-decoration: none;">護腰</a></li>
+				</div>
+				<div class="sideList-title">
+					<h2 class="my-2">
+						<i class="fas fa-clinic-medical"></i> 居家保健
+					</h2>
+				</div>
+				<div class="sideList rounded-bottom">
+					<li><a href="#" style="color: #622d18; text-decoration: none;">照護病床</a></li>
 				</div>
 			</div>
 
 			<div class="text-center">
-				<div class="d-flex flex-wrap justify-content-center my-3"
-					style="background-color: white;">
+				<div class="d-flex flex-wrap justify-content-center my-3">
 					<div class="sideList-title mt-3"
 						style="background-color: chocolate;">
 						<h2 class="my-2">
@@ -113,261 +121,158 @@
 						</h2>
 					</div>
 					<div class="sideList rounded-bottom">
-						<a href="#" style="color: #622d18; text-decoration: none;">福利品9折</a><br>
-						<a href="#" style="color: #622d18; text-decoration: none;">父親節滿888元打8折</a><br>
+						<li><a href="#"
+							style="color: #622d18; text-decoration: none;">福利品9折</a></li>
+						<li><a href="#"
+							style="color: #622d18; text-decoration: none;">父親節滿888元打8折</a></li>
 					</div>
 				</div>
+			</div>
+		</div>
+		<!-- 左邊的選單 end -->
+
+		<div class="productPage">
+
+			<div class="productShell">
+
+				<div class="productPicture">
+					<div id="carouselExampleDark" class="carousel carousel-dark slide"
+						data-bs-ride="carousel">
+						<!-- 商品大圖片 start -->
+
+						<div class="carousel-inner" style="border-radius: 10px">
+							<div class="carousel-item active" data-bs-interval="10000">
+								<img src="../image/product/A0001.jpg" class="img1" alt="...">
+								<div class="carousel-caption d-none d-md-block"></div>
+							</div>
+							<div class="carousel-item" data-bs-interval="2000">
+								<img src="../image/product/A0002.jpg" class="img2" alt="...">
+								<div class="carousel-caption d-none d-md-block"></div>
+							</div>
+							<div class="carousel-item">
+								<img src="../image/product/A0003.jpg" class="img3" alt="...">
+								<div class="carousel-caption d-none d-md-block"></div>
+							</div>
+						</div>
+						<!-- 商品大圖片 end -->
+					</div>
+					<!-- 商品小圖片 start -->
+					<input type="image" data-bs-target="#carouselExampleDark"
+						data-bs-slide-to="0" name="submit_Btn" id="submit_Btn" img
+						src="../image/product/A0001.jpg" style="border-radius: 10px">
+
+					<input type="image" data-bs-target="#carouselExampleDark"
+						data-bs-slide-to="1" name="submit_Btn" id="submit_Btn" img
+						src="../image/product/A0002.jpg" style="border-radius: 10px">
+
+					<input type="image" data-bs-target="#carouselExampleDark"
+						data-bs-slide-to="2" name="submit_Btn" id="submit_Btn" img
+						src="../image/product/A0003.jpg" style="border-radius: 10px">
+				</div>
+				<!-- 商品小圖片 end -->
+
+				<!-- 商品狀態 start -->
+				<div class="productInfo">
+					<form id="form1" name="form1" method="GET" action="">
+						<label for="fname" class="eee">商品編號</label><br>
+						<h2>商品名稱:</h2>
+						<h1 id="commodityname"></h1>
+						<br> <label for="fname">衛部醫器製壹字第000936號</label><br> <label
+							for="fname">價格: </label><br> <label for="fname">數量</label> :
+						&nbsp; <input type="number" name="" min="0" max="10" value="1"
+							style="border-radius: 6px"><br>
+						<!-- <label for="fname">租賃數量</label> : &nbsp; <input type="number" name="" min="0" max="10" value="1"><br> -->
+						<label for="fname">商品規格</label> :<br> <label for="fname">運送方式</label>
+						: <input type="checkbox"
+							style="height: 15px; margin-right: -15px;">物流宅配<input
+							type="checkbox" style="height: 15px; margin-right: -15px;">店到店<br>
+						<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<button class="btn btn-outline-secondary">直接購買</button>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<button class="btn btn-outline-secondary">加入購物車</button>
+					</form>
+				</div>
+				<!-- 商品狀態 end -->
+
+			</div>
+			<hr class="hr2">
+
+			<!-- 商品詳情 start -->
+			<div class="productDet">
+				<div>
+					<div class="col ml-4 mt-2">
+						<h3 class="fw-bold">商品詳情</h3>
+					</div>
+					<p>1. 此產品符合長照2.0/身心障礙者輔具補助項目【EC02輪椅-B款(輕量化
+						量產型)、EC04輪椅附加功能-A款(具利於移位功能)】 2. 如欲了解長照2.0補助申請資訊，請撥打1966長照服務專線諮詢。
+						介護+自推：能透過介護者推送，或由使用者自行推送。 ● 6 種座寬可選 (臀部寬度)：36cm / 39cm / 42cm /
+						45cm / 48cm / 51cm ● 4 式座高可調 (小腿長度)：42cm / 45cm / 48cm / 51cm ● 2
+						段座深可調 (大腿長度)：41cm / 44cm ● 3 種仰角可調 (軀幹角度)：0度 / 3度 / 6度 產品規格</p>
+					<p>座寬 : 36cm / 39cm / 42cm / 45cm / 48cm / 51cm (可選) 座深 : 41cm
+						/ 44cm (可調) 背高 : 37cm 前座高 : 42cm / 45cm / 48cm / 51cm (可調) 座仰角 :
+						0度 / 3度 / 6度 (可調) 車體全寬 : 座寬 + 21cm 車體全長 : 103cm 車體全高 : 89cm / 92cm
+						/ 95cm / 98cm (根據不同座高) 收合尺寸 : 84cm x 36cm x 68cm (折背、拆腳、拆後輪) 全車重 :
+						19.7kg (以座寬45cm為量測基準) 車體重 : 12.2kg (以座寬45cm為量測基準 / 不含腳架、後輪) 最大荷重 :
+						150kg 網路販售第一等級醫療器材揭載事項 中文品名："NOVA" 輪椅(未滅菌) 衛字核可字號：衛署醫器製壹字第000936號
+						(到期日：115/01/10) 藥商名稱：光星骨科復健器材股份有限公司 製造廠：光星骨科復健器材股份有限公司二廠
+						製造廠址：臺中市神岡區豐洲路1096、1102號 販賣藥商名稱：樂齡生活事業股份有限公司 販賣藥商登記地址：台北市大安路一段179號
+						販賣業藥商許可執照：北市衛藥販(安)字第620102V969號 諮詢專線：(02)2577-5025</p>
+				</div>
+			</div>
+			<!-- 商品詳情 end -->
+
+
+
+			<div class="productEva">
+				<!-- 評價顯示 start -->
+				<div>
+					<img class="imgMid" src="../image/2.jpg" alt="">
+				</div>
+				<div>
+					<h2>商品評價</h2>
+				</div>
+
+				<div class="score" style="margin-left: 54%; float: right;">評分4.4/30人評價</div>
+				<!-- 評價顯示 end -->
+			</div>
+
+			<hr class="hr2">
+
+			<div style="display: flex;">
+				<!-- 留言板頭像 start -->
+				<div style="margin-left: 50px;">
+					<a href="#未登入先導至singin_singup"> <img
+						src="../image/memberIcon.png" alt="會員"
+						style="color: rgb(0, 68, 255);">
+					</a>
+				</div>
+				<!-- 留言板頭像 end -->
+
+				<!-- 留言板 start -->
+				<div id="parent">
+					<div id="box">
+						<em>將 顯示留言内容……暫時</em>
+					</div>
+					<input type="text" id="text" style="margin-left: 0px;"><br />
+					<input id="btn" type="button" onclick="fnsubmit()" value="送出留言" />
+				</div>
+
+				<!-- 留言板 end -->
 			</div>
 
 		</div>
-		<!-- Side-List End -->
 
-
-		<!-- Product Start -->
-		<div class="buyProduct col-9">
-			<div class="buyProductMenu-title">
-				<h2>
-					<i class="fas fa-th-large px-3"></i>商品列表
-				</h2>
-			</div>
-			<div class="container-fluid d-flex justify-content-end">
-				<select name="buyProductSort">
-					<option value="傳送值">價格由低至高</option>
-					<option value="傳送值">數量由低至高</option>
-				</select>
-
-			</div>
-			<div class="container-fluid d-flex flex-wrap justify-content-center">
-				<div class="row">
-					<div class="col-3 mt-3">
-						<div class="card text-center">
-							<a href="#"><img
-								src="<c:url value='/images/product/A0001.jpg' />"
-								class="card-img-top" alt="..."></a>
-							<div class="card-body">
-								<h5 class="card-title d-flex justify-content-around">
-									產品名稱1<i class="far fa-heart" onclick="track(this)"></i>
-								</h5>
-								<div class="card-text mb-2">價格: 15000元</div>
-								<div class="row-3 pt-2">
-									<select class="form-select" style="width: 45%;"
-										aria-label="Default select example">
-										<option selected>數量</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-									</select> <a href="#" class="btn btn-warning">加入購物車</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-3 mt-3">
-						<div class="card text-center">
-							<a href="#"><img
-								src="<c:url value='/images/product/A0002.jpg' />"
-								class="card-img-top" alt="..."></a>
-							<div class="card-body">
-								<h5 class="card-title d-flex justify-content-around">
-									產品名稱2<i class="far fa-heart" onclick="track(this)"></i>
-								</h5>
-								<div class="card-text mb-2">價格: 12000元</div>
-								<div class="row-3 pt-2">
-									<select class="form-select" style="width: 45%;"
-										aria-label="Default select example">
-										<option selected>數量</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-									</select> <a href="#" class="btn btn-warning">加入購物車</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-3 mt-3">
-						<div class="card text-center">
-							<a href="#"><img
-								src="<c:url value='/images/product/A0003.jpg' />"
-								class="card-img-top" alt="..."></a>
-							<div class="card-body">
-								<h5 class="card-title d-flex justify-content-around">
-									產品名稱3<i class="far fa-heart" onclick="track(this)"></i>
-								</h5>
-								<div class="card-text mb-2">價格: 6000元</div>
-								<div class="row-3 pt-2">
-									<select class="form-select" style="width: 45%;"
-										aria-label="Default select example">
-										<option selected>數量</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-									</select> <a href="#" class="btn btn-warning">加入購物車</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-3 mt-3">
-						<div class="card text-center">
-							<a href="#"><img
-								src="<c:url value='/images/product/A0004.jpg' />"
-								class="card-img-top" alt="..."></a>
-							<div class="card-body">
-								<h5 class="card-title d-flex justify-content-around">
-									產品名稱4<i class="far fa-heart" onclick="track(this)"></i>
-								</h5>
-								<div class="card-text mb-2">價格: 10000元</div>
-								<div class="row-3 pt-2">
-									<select class="form-select" style="width: 45%;"
-										aria-label="Default select example">
-										<option selected>數量</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-									</select> <a href="#" class="btn btn-warning">加入購物車</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-3 mt-3">
-						<div class="card text-center">
-							<a href="#"><img
-								src="<c:url value='/images/product/A0005.jpg' />"
-								class="card-img-top" alt="..."></a>
-							<div class="card-body">
-								<h5 class="card-title d-flex justify-content-around">
-									產品名稱4<i class="far fa-heart" onclick="track(this)"></i>
-								</h5>
-								<div class="card-text mb-2">價格: 10000元</div>
-								<div class="row-3 pt-2">
-									<select class="form-select" style="width: 45%;"
-										aria-label="Default select example">
-										<option selected>數量</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-									</select> <a href="#" class="btn btn-warning">加入購物車</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-3 mt-3">
-						<div class="card text-center">
-							<a href="#"><img
-								src="<c:url value='/images/product/A0005.jpg' />"
-								class="card-img-top" alt="..."></a>
-							<div class="card-body">
-								<h5 class="card-title d-flex justify-content-around">
-									產品名稱5<i class="far fa-heart" onclick="track(this)"></i>
-								</h5>
-								<div class="card-text mb-2">價格: 5000元</div>
-								<div class="row-3 pt-2">
-									<select class="form-select" style="width: 45%;"
-										aria-label="Default select example">
-										<option selected>數量</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-									</select> <a href="#" class="btn btn-warning">加入購物車</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-3 mt-3">
-						<div class="card text-center">
-							<a href="#"><img
-								src="<c:url value='/images/product/A0005.jpg' />"
-								class="card-img-top" alt="..."></a>
-							<div class="card-body">
-								<h5 class="card-title d-flex justify-content-around">
-									產品名稱6<i class="far fa-heart" onclick="track(this)"></i>
-								</h5>
-								<div class="card-text mb-2">價格: 3000元</div>
-								<div class="row-3 pt-2">
-									<select class="form-select" style="width: 45%;"
-										aria-label="Default select example">
-										<option selected>數量</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-									</select> <a href="#" class="btn btn-warning">加入購物車</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-3 mt-3">
-						<div class="card text-center">
-							<a href="#"><img
-								src="<c:url value='/images/product/A0005.jpg' />"
-								class="card-img-top" alt="..."></a>
-							<div class="card-body">
-								<h5 class="card-title d-flex justify-content-around">
-									產品名稱6<i class="far fa-heart" onclick="track(this)"></i>
-								</h5>
-								<div class="card-text mb-2">價格: 2000元</div>
-								<div class="row-3 pt-2">
-									<select class="form-select" style="width: 45%;"
-										aria-label="Default select example">
-										<option selected>數量</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-									</select> <a href="#" class="btn btn-warning">加入購物車</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="mt-3">
-				<nav aria-label="Page navigation">
-					<ul class="pagination justify-content-center">
-						<li class="page-item disabled"><a class="page-link" href="#"
-							tabindex="-1" aria-disabled="true">上一頁</a></li>
-						<li class="page-item active"><a class="page-link">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">下一頁</a></li>
-					</ul>
-				</nav>
-			</div>
-		</div>
 	</div>
-	<!-- Product End -->
-	<!-- Main End -->
+
+	<!-- footer Start! -->
 
 	<!-- 引入共同的頁尾 -->
 	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
 
-	<script>
-		function track(heart) {
-			if (heart.className == "far fa-heart") {
-				heart.className = "fas fa-heart";
-				Swal.fire({
-					position : 'center',
-					icon : 'success',
-					title : '商品已加入追蹤清單',
-					showConfirmButton : false,
-					timer : 1000
-				})
-			} else {
-				heart.className = "far fa-heart";
-				Swal.fire({
-					position : 'center',
-					icon : 'error',
-					title : '商品已取消追蹤',
-					showConfirmButton : false,
-					timer : 1000
-				})
-			}
-		}
-	</script>
-	<!-- bootstrap -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js">
-		
-	</script>
+	<!-- footer End! -->
+
+
 </body>
 
 </html>
