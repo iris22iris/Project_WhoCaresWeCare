@@ -25,7 +25,8 @@
 
 <title>會員資料修改</title>
 </head>
-<body id="body">
+<body>
+	<div id="body">
 <!-- changmtitle star  會員修改資料標題star -->
  <div class="changmtitle col-3 text-center p-3  ">
             <li>
@@ -218,7 +219,7 @@
     </div>  
 <!-- main container end  修改會員資料的表單end -->
     </div> 
-
+    </div> 
 <!-- footer End! -->
            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 

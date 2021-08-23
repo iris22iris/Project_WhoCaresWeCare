@@ -22,8 +22,8 @@
 	
 	<title>Who Cares? We Care!</title>
 </head>
-<body id="body">
-
+<body >
+	<div id="body">
 	<!-- 廣告圖片大小&button顏色 還須調整 -->
 	<!-- Slider-img Start! -->
 	<div id="carouselExampleInterval" class="carousel slide"
@@ -275,7 +275,7 @@
 		</div>
 		<!-- Product-card End -->
 	</div>
-
+</div>
 
 
 

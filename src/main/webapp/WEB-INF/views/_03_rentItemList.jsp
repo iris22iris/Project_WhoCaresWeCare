@@ -22,8 +22,8 @@
 	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
     <title>租賃設備清單</title>
 </head>
-<body id="body">
-
+<body>
+<div id="body">
 <!-- title start! -->
 <div class="title container">
   <i class="fas fa-shopping-cart pe-2"></i>租賃設備清單
@@ -206,7 +206,7 @@
     </div>
 </div>
 <!-- count end! -->
-
+</div>
   <!-- 引入共同的頁尾 -->
 	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
 	

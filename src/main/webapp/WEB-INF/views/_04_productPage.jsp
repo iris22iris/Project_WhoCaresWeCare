@@ -22,22 +22,19 @@
 
 <!-- icon -->
 <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-	integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
-	crossorigin="anonymous" referrerpolicy="no-referrer" />
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 
 <!-- 圖片切換 -->
 <script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-	crossorigin="anonymous"></script>
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- 引入script -->
 <script src="<c:url value='/js/_04productPage.js' />"></script>
 
 </head>
 
-<body id="body">
+<body>
+	<div id="body">
 	<!-- 引入index的menu start -->
 	<!-- 引入共同的頁首 -->
 	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
@@ -74,46 +71,45 @@
 
 	<div class="allPage">
 		<!-- 左邊的選單 start -->
-		<div class="sideMenu">
-			<div class="d-flex flex-wrap justify-content-center my-3">
-				<div class="sideList-title mt-3">
-					<h2 class="my-2">
-						<i class="fas fa-hand-holding-medical"></i>輔具類
-					</h2>
-				</div>
-				<div class="sideList">
-					<li class="sideLi"><a href="#"
-						style="color: #622d18; text-decoration: none;">拐杖-110cm</a></li>
-					<li class="sideLi"><a href="#"
-						style="color: #622d18; text-decoration: none;">拐杖-120cm</a></li>
-					<li class="sideLi"><a href="#"
-						style="color: #622d18; text-decoration: none;">拐杖-130cm</a></li>
-					<li class="sideLi"><a href="#"
-						style="color: #622d18; text-decoration: none;">可折疊輪椅</a></li>
-					<li class="sideLi"><a href="#"
-						style="color: #622d18; text-decoration: none;">不可折疊輪椅</a></li>
-				</div>
-				<div class="sideList-title">
-					<h2 class="my-2">
-						<i class="fas fa-shield-alt"></i> 護具類
-					</h2>
-				</div>
-				<div class="sideList">
-					<li><a href="#" style="color: #622d18; text-decoration: none;">護膝</a></li>
-					<li><a href="#" style="color: #622d18; text-decoration: none;">護腰</a></li>
-				</div>
-				<div class="sideList-title">
-					<h2 class="my-2">
-						<i class="fas fa-clinic-medical"></i> 居家保健
-					</h2>
-				</div>
-				<div class="sideList rounded-bottom">
-					<li><a href="#" style="color: #622d18; text-decoration: none;">照護病床</a></li>
+		<div class="col-2 ms-4" style="margin-top: 3cm;">
+			<div class="text-center">
+				<div class="d-flex flex-wrap justify-content-center my-3"
+					style="background-color: white;">
+					<div class="sideList-title mt-3">
+						<h2 class="my-2">
+							<i class="fas fa-hand-holding-medical"></i> 輔具類
+						</h2>
+					</div>
+					<div class="sideList">
+						<a href="#" style="color: #622d18; text-decoration: none;">拐杖-110cm</a><br>
+						<a href="#" style="color: #622d18; text-decoration: none;">拐杖-120cm</a><br>
+						<a href="#" style="color: #622d18; text-decoration: none;">拐杖-130cm</a><br>
+						<a href="#" style="color: #622d18; text-decoration: none;">可折疊輪椅</a><br>
+						<a href="#" style="color: #622d18; text-decoration: none;">不可折疊輪椅</a><br>
+					</div>
+					<div class="sideList-title">
+						<h2 class="my-2">
+							<i class="fas fa-shield-alt"></i> 護具類
+						</h2>
+					</div>
+					<div class="sideList">
+						<a href="#" style="color: #622d18; text-decoration: none;">護膝</a><br>
+						<a href="#" style="color: #622d18; text-decoration: none;">護腰</a><br>
+					</div>
+					<div class="sideList-title">
+						<h2 class="my-2">
+							<i class="fas fa-clinic-medical"></i> 居家保健
+						</h2>
+					</div>
+					<div class="sideList rounded-bottom">
+						<a href="#" style="color: #622d18; text-decoration: none;">照護病床</a><br>
+					</div>
 				</div>
 			</div>
 
 			<div class="text-center">
-				<div class="d-flex flex-wrap justify-content-center my-3">
+				<div class="d-flex flex-wrap justify-content-center my-3"
+					style="background-color: white;">
 					<div class="sideList-title mt-3"
 						style="background-color: chocolate;">
 						<h2 class="my-2">
@@ -121,14 +117,13 @@
 						</h2>
 					</div>
 					<div class="sideList rounded-bottom">
-						<li><a href="#"
-							style="color: #622d18; text-decoration: none;">福利品9折</a></li>
-						<li><a href="#"
-							style="color: #622d18; text-decoration: none;">父親節滿888元打8折</a></li>
-					</div>
+						<a href="#" style="color: #622d18; text-decoration: none;">特價專區</a><br>
+						</div>
 				</div>
 			</div>
+			
 		</div>
+		<!-- Side-List End -->
 		<!-- 左邊的選單 end -->
 
 		<div class="productPage">
@@ -158,15 +153,15 @@
 					</div>
 					<!-- 商品小圖片 start -->
 					<input type="image" data-bs-target="#carouselExampleDark"
-						data-bs-slide-to="0" name="submit_Btn" id="submit_Btn" img
+						data-bs-slide-to="0" name="submit_Btn" id="submit_Btn" 
 						src="../image/product/A0001.jpg" style="border-radius: 10px">
 
 					<input type="image" data-bs-target="#carouselExampleDark"
-						data-bs-slide-to="1" name="submit_Btn" id="submit_Btn" img
+						data-bs-slide-to="1" name="submit_Btn" id="submit_Btn"
 						src="../image/product/A0002.jpg" style="border-radius: 10px">
 
 					<input type="image" data-bs-target="#carouselExampleDark"
-						data-bs-slide-to="2" name="submit_Btn" id="submit_Btn" img
+						data-bs-slide-to="2" name="submit_Btn" id="submit_Btn"
 						src="../image/product/A0003.jpg" style="border-radius: 10px">
 				</div>
 				<!-- 商品小圖片 end -->
@@ -263,8 +258,8 @@
 
 		</div>
 
+		</div>
 	</div>
-
 	<!-- footer Start! -->
 
 	<!-- 引入共同的頁尾 -->

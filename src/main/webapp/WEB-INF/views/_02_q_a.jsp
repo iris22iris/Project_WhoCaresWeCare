@@ -24,8 +24,8 @@
 </head>
 
 
-<body id="body">
-
+<body>
+	<div id="body">
     <!-- main start -->
     
     <div class="main d-flex">
@@ -129,7 +129,7 @@
         
     </div>
     <!-- main end -->
-
+</div>
 	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
 	
     <!-- bootstrap -->

@@ -40,8 +40,8 @@
 
 </head>
 
-<body id="body">
-
+<body>
+	<div id="body">
 	<!-- 引入共同的頁首 -->
 	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 
@@ -122,7 +122,7 @@
         </div>
     </div>
     <!--拼圖認證+彈跳 End!-->
-
+    </div>
 	<!-- 引入共同的頁尾 -->
 	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
 

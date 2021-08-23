@@ -3,12 +3,6 @@
  /* --------全域設定------ */
 
 
-#body{
-    background: rgb(250, 246, 243);
-    background-image: url(./images/background.jpg);
-    background-attachment: fixed;
-}
-
 .main{
     /* margin: 0 auto; */
     width: 100%;

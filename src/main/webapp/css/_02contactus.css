@@ -1,12 +1,4 @@
 
-/* --------全域設定------ */
-
-#body{
-    background: rgb(250, 246, 243);
-    /* background-image: url(../image/background.jpg); */
-    background-attachment: fixed;
-}
-
 /* ------main-header------- */
 .main{
     /* margin: 0 auto; */

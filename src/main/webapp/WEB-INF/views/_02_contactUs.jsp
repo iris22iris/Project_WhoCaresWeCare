@@ -25,8 +25,8 @@
     <title>聯絡我們</title>
       
 </head>
-<body id="body">
-
+<body>
+	<div id="body">
     <!-- main start -->
     <div class="main">
 
@@ -124,6 +124,7 @@
             <!-- form end -->           
         </div> 
          <!-- Main Form start-->
+    </div>
     </div>
      <!-- main end-->      
 	 <!-- 引入共同的頁尾 -->

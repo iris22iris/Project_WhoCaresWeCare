@@ -23,7 +23,8 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 
-<body id="body">
+<body>
+	<div id="body">
 	<!-- 引入共同的頁首 -->
 	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 
@@ -335,6 +336,7 @@
 		</div>
 	</div>
 	<!-- Product End -->
+	</div>
 	<!-- Main End -->
 
 	<!-- 引入共同的頁尾 -->

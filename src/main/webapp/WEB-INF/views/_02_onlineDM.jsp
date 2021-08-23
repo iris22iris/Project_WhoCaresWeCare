@@ -34,7 +34,8 @@
 	
 </head>
 
-<body id="body">    
+<body>
+	<div id="body">  
     <!-- midlecontent start -->
     <div class="midlecontent d-flex ">
         
@@ -52,7 +53,7 @@
         <!-- side-menu end -->
 
         <!-- dmcontainer start -->
-        <content class="dmcontainer col-10 ">
+        <div class="dmcontainer col-10 ">
             
             <!-- title start -->
             <div class="title">
@@ -80,10 +81,10 @@
             </div>
             <!-- filebuttoncontainer end -->
 
-        </content>
+        </div>
         <!-- dmcontainer end -->
-
     </div>
+   </div>
     <!-- midlecontent end -->
     
     <!-- 引入共同的頁尾 -->

@@ -24,6 +24,7 @@
 </head>
 
 <body id="body">
+	<div id="body">
 	<!-- 引入共同的頁首 -->
 	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 
@@ -264,7 +265,7 @@
 	</div>
 	<!-- Product End -->
 	<!-- Main End -->
-
+</div>
 	<!-- 引入共同的頁尾 -->
 	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
 

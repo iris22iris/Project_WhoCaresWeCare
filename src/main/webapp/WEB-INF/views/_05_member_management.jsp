@@ -21,7 +21,8 @@
 
 <title>會員專區</title>
 </head>
-<body id="body">
+<body>
+	<div id="body">
 <!-- main start -->
     <div class="main col-12 m-5 d-flex justify-content-center  p-3 rounded">
         
@@ -84,7 +85,7 @@
         </div>
         <!-- customer service reply end -->
 
-
+    </div>
     <!-- main end -->
     </div>
 

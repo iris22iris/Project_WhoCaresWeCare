@@ -1,14 +1,9 @@
 
-/* --------全域設定------ */
-#body{
-    background: rgb(250, 246, 243);
-    /* background-image: url(../image/background.jpg); */
-    background-attachment: fixed;
-}
 
 /* ------midlecontent------- */
 .midlecontent{
     margin: 0 auto;
+   
 }
 /* ------side-menu------- */
 .side-menu{

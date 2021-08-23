@@ -1,12 +1,4 @@
-/* --------全域設定------ */
 
-#body {
-	/*background: rgb(250, 246, 243);*/
-	background-image: url(../images/background7.png); 
-	background-size: cover;
-	background-attachment: fixed;
-	
-}
 
 /* --------product-title------ */
 .rentProductMenu-title {
