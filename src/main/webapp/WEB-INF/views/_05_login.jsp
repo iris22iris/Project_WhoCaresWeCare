@@ -56,7 +56,7 @@
                 <input class="form__input" type="password" name="password" id="password" placeholder="密碼">
                 <div class="form__group">
                     <label>
-                         <input type="checkbox" name="remember" > 記住帳密  
+                         <input type="checkbox" name="rememberMe" > 記住帳密  
                         </label>
                 </div>
                 <button type="button" class="form__button button" id="button" data-toggle="modal" data-target="#exampleModalCenter">

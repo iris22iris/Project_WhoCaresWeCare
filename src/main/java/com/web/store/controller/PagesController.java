@@ -73,5 +73,4 @@ public class PagesController {
 	public String memberProfile(Model model) {
 	return "_05_memberProfile";
 	}
-	
 }

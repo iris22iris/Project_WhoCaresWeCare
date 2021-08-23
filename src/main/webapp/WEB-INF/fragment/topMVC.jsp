@@ -28,17 +28,17 @@
 					href="<c:url value='' />" 
 					style="color: white;"> 關於我們</a></li>
 				<li class="nav-item"><a class="nav-link textSize "
-					href="<c:url value='/_03_rentProductMenu' />"
+					href="<c:url value='_03_rentProductMenu' />"
 					style="color: white;"> 租賃設備</a></li>
 				<li class="nav-item"><a class="nav-link textSize "
-					href="<c:url value='/_04_buyProductMenu' />"
+					href="<c:url value='_04_buyProductMenu' />"
 					style="color: white;"> 購物商城</a></li>
 				<li class="nav-item"><a class="nav-link textSize "
 					href="<c:url value='' />" 
 					style="color: white;"> 客服中心</a></li>
 				<!-- 可以增加功能為登入才會顯示會員中心這個連結 -->
 				<li class="nav-item"><a class="nav-link textSize"
-					href="/_05_member_management" 
+					href="_05_member_management" 
 					style="color: white;"> 會員中心</a></li>
 			</ul>
 			<!-- right menu -->
@@ -52,10 +52,11 @@
 			
 				<!-- 可以寫登入後換成會員圖片的功能 -->
 				<div class="nav-item"><a class="nav-link" 
-					href="<c:url value='s/_05_login' />"
+					href="<c:url value='_05_login' />"
 					style="padding: 0px;"> <img
 						src="<c:url value='./images/memberIcon.png' />" alt="會員">
-						</a></div>
+						</a>
+						</div>
 			
 
 			<!-- Search -->

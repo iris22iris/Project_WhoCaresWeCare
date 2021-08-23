@@ -21,9 +21,9 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 @Configuration
 @EnableWebMvc
-//@ComponentScan({"com.web.store"})
-@ComponentScan({ "com.web.store.controller", "com.web.store.model", "com.web.store.service.impl",
-		"com.web.store.dao.impl", "com.web.store.config" })
+@ComponentScan({"com.web.store"})
+//@ComponentScan({ "com.web.store.controller", "com.web.store.model", "com.web.store.service.impl",
+//		"com.web.store.dao.impl", "com.web.store.config" })
 public class WebAppConfig implements WebMvcConfigurer {
 
 	@Bean
