@@ -1,0 +1,267 @@
+/* --------全域設定------ */
+* {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-family: mainfont-medium;
+}
+
+/* 源泉圓體字型命名!! */
+@font-face {
+	font-family: mainfont-medium;
+	src: url(../fonts/GenSenMaruGothicTW-Medium.ttf);
+}
+@font-face {
+	font-family: mainfont-light;
+	src: url(../fonts/GenSenMaruGothicTW-Light.ttf);
+}
+@font-face {
+	font-family: mainfont-regular;
+	src: url(../fonts/GenSenMaruGothicTW-Regular.ttf);
+}
+
+
+.html {
+    height: 100%;
+}
+
+#body {
+    background: rgb(250, 246, 243);
+    /* background-image: url(../image/background.jpg); */
+    background-attachment: fixed;
+}
+
+.menuTwo {
+    height: 80px;
+    /* background-color: red; */
+    width: 100%;
+}
+
+.hr1 {
+    border: solid #C98B18;
+    width: 67%;
+    margin: auto auto 60px 340px;
+}
+
+.hr2 {
+    border: solid #C98B18;
+    width: 88%;
+    margin: 20px auto 10px auto;
+}
+
+.allPage {
+    width: 100%;
+    /* background-color: royalblue; */
+    display: flex;
+    margin-left: 20px;
+}
+
+.sideMenu {
+    margin-top: -35px;
+    width: 13%;
+    /* background-color: springgreen; */
+}
+
+/* --------sideList-title------ */
+
+.sideList-title {
+    width: 90%;
+    background-color: saddlebrown;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --------sideList------ */
+
+.sideList {
+    padding: 10px;
+    font-size: larger;
+}
+
+.productPage {
+    /* display: flex; */
+    /* height: 100%; */
+    width: 80%;
+    /* margin-right: 200px; */
+    /* background-color: seagreen; */
+}
+
+.productShell {
+    display: flex;
+}
+
+/* 商品圖片外框 */
+
+.productPicture {
+    width: 35%;
+    margin-left: 100px;
+    /* background-color: tomato;  */
+}
+
+/* 商品圖片 */
+
+.img1, .img2, .img3 {
+    height: 300px;
+    width: 350px;
+}
+
+/* 商品狀態 */
+
+.productInfo {
+    margin-left: 100px;
+    width: 75%;
+    /* background-color: yellow; */
+}
+
+/* 數量調整 */
+
+input[type="number"] {
+    width: 80px;
+    height: 20px;
+    background-color: turquoise;
+    text-align: right;
+}
+
+/* 商品狀態 label */
+
+label {
+    margin-bottom: 2px;
+}
+
+/* 小圖片 */
+input {
+    width: 60px;
+    height: 60px;
+    margin: 13px 20px 30px 30px;
+}
+
+/* 商品詳情 */
+.productDet {
+    width: 80%;
+    margin-left: 100px;
+    border: 1px solid rgb(60%, 60%, 60%);
+    margin-bottom: 50px;
+    margin-top: 50px;
+    /* background-color: #e9c46a; */
+}
+
+/*大頭照 */
+.imgTop {
+    margin-left: 20px;
+    width: 250px;
+    height: 100px;
+}
+
+.imgMid {
+    /* margin: 40px auto auto 70px; */
+    margin: -5px 10px auto 100px;
+    width: 50px;
+    height: 50px;
+}
+
+/* 評價顯示 */
+.productEva {
+    display: flex;
+    width: 100%;
+}
+
+.word {
+    word-break: break-all;
+    font-size: 1.3rem;
+}
+
+/* --------footer------ */
+.footer {
+    background: rgb(115, 99, 87);
+    width: 100%;
+    color: white;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#left-footer {
+    width: 50%;
+}
+
+#right-footer {
+    width: 50%;
+}
+
+.list-inline-item {
+    font-size: 30px;
+}
+
+.copyright {
+    color: white;
+    font-size: 16px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-bottom: 10px;
+}
+
+.row dt {
+    font-family: mainfont-regular;
+    letter-spacing: 1.5px;
+}
+
+.row dd {
+    font-family: mainfont-light;
+    letter-spacing: 0.5px;
+}
+
+/* 留言板start */
+li {
+    list-style: none;
+}
+
+#parent {
+    margin-top: 25px;
+}
+
+h4 {
+    line-height: 40px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #333;
+    color: #FF3300
+}
+
+p {
+    width: 100%;
+    background: #f1f1f1;
+    position: relative;
+    margin-bottom: 25px;
+}
+
+#box {
+    width: 580px;
+    padding: 25px 10px 0;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+span {
+    position: absolute;
+    top: -20px;
+    right: 0px;
+}
+
+em {
+    position: relative;
+    top: -13px;
+}
+
+#text {
+    width: 100%;
+    height: 90px;
+    overflow: auto;
+}
+
+#btn {
+    width: 15%;
+    height: 25px;
+}
+/* 留言板end */
