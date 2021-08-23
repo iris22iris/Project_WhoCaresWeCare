@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
   
-    <title>客服Q&A</title>
+    <title>客服Q＆A</title>
     <link rel="stylesheet" href="<c:url value='/css/_02q_a.css' />">
     <link rel="stylesheet" href="<c:url value='/css/commonStyle.css' />"
 	type="text/css">
@@ -33,7 +33,7 @@
         <nav class="side-menu col-2 ">
             <div class="sideSpace"></div>
             <div class="button   d-flex justify-content-center align-items-center ">
-                <a href="/_02_q_a" class="sideBtn">客服Q&A</a>
+                <a href="/_02_q_a" class="sideBtn">客服Q＆A</a>
             </div>
             <div class="button d-flex justify-content-center align-items-center ">
                <a href="/_02_contactUs" class="sideBtn">聯絡我們</a>
@@ -45,7 +45,7 @@
         <div class=" col-10 p-3">
             <!--  title start-->
             <div class="title col-8 ">
-               <h1><i class="fas fa-th-large px-3"></i>客服Q&A</h1>
+               <h1><i class="fas fa-th-large px-3"></i>客服Q＆A</h1>
             </div>
             <!--  title end -->
             
@@ -133,7 +133,7 @@
 	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
 	
     <!-- bootstrap -->
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>   
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" ></script>   
 </body>
 
 </html>
