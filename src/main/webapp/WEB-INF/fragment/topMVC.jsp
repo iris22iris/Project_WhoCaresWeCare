@@ -25,39 +25,41 @@
 			<!-- left Menu -->
 			<ul class="navbar-nav  me-auto mb-lg-0 left-menu">
 				<li class="nav-item "><a class="nav-link textSize "
-					href="<c:url value='' />" 
-					style="color: white;"> 關於我們</a></li>
+					href="<c:url value='' />" style="color: white;"> 關於我們</a></li>
 				<li class="nav-item"><a class="nav-link textSize "
-					href="<c:url value='rentMenu' />"
-					style="color: white;"> 租賃設備</a></li>
+					href="<c:url value='rentMenu' />" style="color: white;"> 租賃設備</a></li>
 				<li class="nav-item"><a class="nav-link textSize "
-					href="<c:url value='buyMenu' />"
-					style="color: white;"> 購物商城</a></li>
+					href="<c:url value='buyMenu' />" style="color: white;"> 購物商城</a></li>
 				<li class="nav-item"><a class="nav-link textSize "
-					href="<c:url value='' />" 
-					style="color: white;"> 客服中心</a></li>
+					href="<c:url value='' />" style="color: white;"> 客服中心</a></li>
 				<!-- 可以增加功能為登入才會顯示會員中心這個連結 -->
 				<li class="nav-item"><a class="nav-link textSize"
-					href="_05_member_management" 
-					style="color: white;"> 會員中心</a></li>
+					href="_05_member_management" style="color: white;"> 會員中心</a></li>
 			</ul>
 			<!-- right menu -->
-				<div class="nav-item"><a class="nav-link" 
-					href="<c:url value='#購物車' />"
-					style="padding: 0px;"> <!-- 選擇租賃設備清單/購物車清單 --> 
-					<img
-						src="<c:url value='./images/cartIcon.png' />" alt="購物車">
-				</a></div>
-		
-			
-				<!-- 可以寫登入後換成會員圖片的功能 -->
-				<div class="nav-item"><a class="nav-link" 
-					href="<c:url value='_05_login' />"
+			<div class="nav-item">
+				<a class="nav-link" href="<c:url value='#購物車' />"
+					style="padding: 0px;"> <!-- 選擇租賃設備清單/購物車清單 --> <img
+					src="<c:url value='./images/cartIcon.png' />" alt="購物車">
+				</a>
+			</div>
+
+
+			<!-- 可以寫登入後換成會員圖片的功能 -->
+			<div class="nav-item">
+				<a class="nav-link" href="<c:url value='_05_login' />"
 					style="padding: 0px;"> <img
-						src="<c:url value='./images/memberIcon.png' />" alt="會員">
-						</a>
-						</div>
+					src="<c:url value='./images/memberIcon.png' />" alt="會員">
+				</a>
+			</div>
 			
+			<div class="nav-item">
+			<c:if test="${! empty LoginOK}">
+				<a class="nav-link" href="<c:url value='logout' />"
+					style="padding: 0px;"> <img
+					src="<c:url value='./images/logout.jpg' />" alt="登出"></a>
+			</c:if>
+			</div>
 
 			<!-- Search -->
 			<form class="d-flex">

@@ -22,7 +22,7 @@ import com.web.store.model._06_order.OrdBean;
 
 
 @Entity
-@Table(name = "Customer")
+@Table(name = "customer")
 public class CustomerBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -259,49 +259,49 @@ public class CustomerBean implements Serializable {
 		this.problem = problem;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("CustomerBean [custId=");
-		builder.append(custId);
-		builder.append(", account=");
-		builder.append(account);
-		builder.append(", password=");
-		builder.append(password);
-		builder.append(", custName=");
-		builder.append(custName);
-		builder.append(", nickName=");
-		builder.append(nickName);
-		builder.append(", gender=");
-		builder.append(gender);
-		builder.append(", idNumber=");
-		builder.append(idNumber);
-		builder.append(", birthday=");
-		builder.append(birthday);
-		builder.append(", phone=");
-		builder.append(phone);
-		builder.append(", city=");
-		builder.append(city);
-		builder.append(", address=");
-		builder.append(address);
-		builder.append(", email=");
-		builder.append(email);
-		builder.append(", customerImage=");
-		builder.append(customerImage);
-		builder.append(", fileName=");
-		builder.append(fileName);
-		builder.append(", mimeType=");
-		builder.append(mimeType);
-		builder.append(", orders=");
-		builder.append(orders);
-		builder.append(", reservations=");
-		builder.append(reservations);
-		builder.append(", comments=");
-		builder.append(comments);
-		builder.append(", problem=");
-		builder.append(problem);
-		builder.append("]");
-		return builder.toString();
-	}
+//	@Override
+//	public String toString() {
+//		StringBuilder builder = new StringBuilder();
+//		builder.append("CustomerBean [custId=");
+//		builder.append(custId);
+//		builder.append(", account=");
+//		builder.append(account);
+//		builder.append(", password=");
+//		builder.append(password);
+//		builder.append(", custName=");
+//		builder.append(custName);
+//		builder.append(", nickName=");
+//		builder.append(nickName);
+//		builder.append(", gender=");
+//		builder.append(gender);
+//		builder.append(", idNumber=");
+//		builder.append(idNumber);
+//		builder.append(", birthday=");
+//		builder.append(birthday);
+//		builder.append(", phone=");
+//		builder.append(phone);
+//		builder.append(", city=");
+//		builder.append(city);
+//		builder.append(", address=");
+//		builder.append(address);
+//		builder.append(", email=");
+//		builder.append(email);
+//		builder.append(", customerImage=");
+//		builder.append(customerImage);
+//		builder.append(", fileName=");
+//		builder.append(fileName);
+//		builder.append(", mimeType=");
+//		builder.append(mimeType);
+//		builder.append(", orders=");
+//		builder.append(orders);
+//		builder.append(", reservations=");
+//		builder.append(reservations);
+//		builder.append(", comments=");
+//		builder.append(comments);
+//		builder.append(", problem=");
+//		builder.append(problem);
+//		builder.append("]");
+//		return builder.toString();
+//	}
 
 }

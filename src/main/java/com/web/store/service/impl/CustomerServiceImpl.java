@@ -2,6 +2,7 @@ package com.web.store.service.impl;
 
 import java.util.List;
 
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,5 +47,16 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public void deleteCustomerByPrimaryKey(int key) {
 		custDao.deleteCustomerByPrimaryKey(key);
+	}
+
+	@Override
+	public CustomerBean checkIDPassword(String custId, String password) {
+		return custDao.checkIDPassword(custId, password);
+
+	}
+
+	@Override
+	public boolean idExists(String id) {
+		return custDao.idExists(id);
 	}
 }

@@ -1,93 +1,120 @@
 package com.web.store.controller;
 
-import java.net.URLEncoder;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.service.CustomerService;
 
-
 @Controller
 public class CustomerController {
-
+	@Autowired
+	HttpServletRequest request;
+	@Autowired
+	HttpServletResponse response;
 	@Autowired
 	ServletContext context;
-
 	@Autowired
-	CustomerService service;
-	
-	
-//	@GetMapping("/ShowCustomers")
-//	public String getCustomers(Model model) {
-//	return "ShowCustomers";
-//	}
-	
+	CustomerService customerService;
 
+	private static final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%!^'\"]).{8,})";
+	private Pattern pattern = null;
+	private Matcher matcher = null;
 
-//	@GetMapping("/ShowCustomers")
-//	public String getCustomers(Model model) {
-//		List<CustomerBean> beans = service.getCustomers();
-//		model.addAttribute(beans);      
-//		// 若屬性物件為CustomerBean型別的物件，則預設的識別字串 ==> customerBean
-//		// 若屬性物件為List<CustomerBean>型別的物件，則預設的識別字串 ==> customerBeanList
-//		return "ShowCustomers";
-//	}
-	
-	
-//	@GetMapping("/modifyCustomer/{id}")
-//	public String editCustomerForm(Model model, @PathVariable Integer id) {
-//		CustomerBean bean = service.getCustomerById(id);
-//		bean.setPassword((bean.getPassword()));
-//		model.addAttribute("customerBean", bean);
-//		
-//		
-//		
-//		
-//		return "_01_customer/EditCustomerForm";
-//	}
+	@GetMapping("/_05_login")
+	public String toLogin(Model model) {
+		return "_05_login";
+	}
 
-	
+	@PostMapping("/login")
+	public String login(Model model) {
 
-	
-//	@DeleteMapping(value="/modifyCustomer/{id}")
-//	public String deleteCustomerData(@PathVariable Integer id) {
-//		System.out.println(11122233);
-//		service.deleteCustomerByPrimaryKey(id);	
-//		return "redirect:../customers";
-//	}
-	
-//	@InitBinder
-//	public void initBinder(WebDataBinder binder, WebRequest request) {
-//		// java.util.Date
-//		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS");
-//		dateFormat.setLenient(false);
-//		CustomDateEditor ce = new CustomDateEditor(dateFormat, true); 
-//		binder.registerCustomEditor(Date.class, ce);
-//		// java.sql.Date		
-//		DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
-//		dateFormat2.setLenient(false);
-//		CustomDateEditor ce2 = new CustomDateEditor(dateFormat2, true); 
-//		binder.registerCustomEditor(java.sql.Date.class, ce2);
-//	}
-//	@RequestMapping("/index")
-//	public String home() {
-//		return "_01_customer/index";
-//	}
+		String account = request.getParameter("account");
+		String password = request.getParameter("password");
+		String rememberMe = request.getParameter("rememberMe");
+		Map<String, String> errorMsgMap = new HashMap<String, String>();
+		try {
+			CustomerBean customerBean = customerService.checkIDPassword(account, password);
+
+			if (account == null || account.trim().length() == 0) {
+				errorMsgMap.put("accountError", "帳號與密碼欄必須輸入，密碼長度不能小於八個字元");
+			} else if (password == null || password.trim().length() == 0 || password.length() < 8) {
+				errorMsgMap.put("accountError", "帳號與密碼欄必須輸入，密碼長度不能小於八個字元");
+			} else if (customerBean != null) {
+				model.addAttribute("LoginOK", customerBean);
+			} else {
+				errorMsgMap.put("Error", "帳號或密碼有誤，密碼至少含有一個大寫字母、小寫字母、數字與!@#$%!^'\"");
+			}
+		} catch (RuntimeException e) {
+			errorMsgMap.put("LoginErrorMsg", e.getMessage());
+		}
+
+		if (!errorMsgMap.isEmpty()) {
+			model.addAttribute("ErrorMsgKey", errorMsgMap);
+			return "_05_login";
+		}
+
+		errorMsgMap.put("noError", "index");
+
+		// **********Remember Me****************************
+		Cookie cookieUser = null;
+		Cookie cookiePassword = null;
+		Cookie cookieRememberMe = null;
+		// rm存放瀏覽器送來之RememberMe的選項，如果使用者對RememberMe打勾，rm就不會是null
+		if (rememberMe != null) {
+			cookieUser = new Cookie("user", account);
+			cookieUser.setMaxAge(7 * 24 * 60 * 60); // Cookie的存活期: 七天
+			cookieUser.setPath(request.getContextPath());
+
+			cookiePassword = new Cookie("password", password);
+			cookiePassword.setMaxAge(7 * 24 * 60 * 60);
+			cookiePassword.setPath(request.getContextPath());
+
+			cookieRememberMe = new Cookie("rm", "true");
+			cookieRememberMe.setMaxAge(7 * 24 * 60 * 60);
+			cookieRememberMe.setPath(request.getContextPath());
+		} else { // 使用者沒有對 RememberMe 打勾
+			cookieUser = new Cookie("user", account);
+			cookieUser.setMaxAge(0); // MaxAge==0 表示要請瀏覽器刪除此Cookie
+			cookieUser.setPath(request.getContextPath());
+
+			cookiePassword = new Cookie("password", password);
+			cookiePassword.setMaxAge(0);// 代表瀏覽器關掉及刪掉
+			cookiePassword.setPath(request.getContextPath());// 告訴主機要刪的Path
+
+			cookieRememberMe = new Cookie("rm", "false");
+			cookieRememberMe.setMaxAge(7 * 24 * 60 * 60);
+			cookieRememberMe.setPath(request.getContextPath());
+		}
+		response.addCookie(cookieUser);
+		response.addCookie(cookiePassword);
+		response.addCookie(cookieRememberMe);
+
+		// ********************************************
+		return "index";
+	}
+
+	@RequestMapping("/logout")
+	public String loginout() {
+		return "logout";
+	}
+
 }
