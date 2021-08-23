@@ -25,7 +25,6 @@ import com.web.store.service.CustomerService;
 
 
 @Controller
-@RequestMapping("/_01_customer")
 public class CustomerController {
 
 	@Autowired
@@ -33,54 +32,62 @@ public class CustomerController {
 
 	@Autowired
 	CustomerService service;
-
-	@GetMapping("/customers")
-	public String getCustomers(Model model) {
-		List<CustomerBean> beans = service.getCustomers();
-		model.addAttribute(beans);      
-		// 若屬性物件為CustomerBean型別的物件，則預設的識別字串 ==> customerBean
-		// 若屬性物件為List<CustomerBean>型別的物件，則預設的識別字串 ==> customerBeanList
-		return "_01_customer/ShowCustomers";
-	}
 	
 	
-	@GetMapping("/modifyCustomer/{id}")
-	public String editCustomerForm(Model model, @PathVariable Integer id) {
-		CustomerBean bean = service.getCustomerById(id);
-		bean.setPassword((bean.getPassword()));
-		model.addAttribute("customerBean", bean);
-		
-		
-		
-		
-		return "_01_customer/EditCustomerForm";
-	}
-
+//	@GetMapping("/ShowCustomers")
+//	public String getCustomers(Model model) {
+//	return "ShowCustomers";
+//	}
 	
 
+
+//	@GetMapping("/ShowCustomers")
+//	public String getCustomers(Model model) {
+//		List<CustomerBean> beans = service.getCustomers();
+//		model.addAttribute(beans);      
+//		// 若屬性物件為CustomerBean型別的物件，則預設的識別字串 ==> customerBean
+//		// 若屬性物件為List<CustomerBean>型別的物件，則預設的識別字串 ==> customerBeanList
+//		return "ShowCustomers";
+//	}
 	
-	@DeleteMapping(value="/modifyCustomer/{id}")
-	public String deleteCustomerData(@PathVariable Integer id) {
-		System.out.println(11122233);
-		service.deleteCustomerByPrimaryKey(id);	
-		return "redirect:../customers";
-	}
 	
-	@InitBinder
-	public void initBinder(WebDataBinder binder, WebRequest request) {
-		// java.util.Date
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS");
-		dateFormat.setLenient(false);
-		CustomDateEditor ce = new CustomDateEditor(dateFormat, true); 
-		binder.registerCustomEditor(Date.class, ce);
-		// java.sql.Date		
-		DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
-		dateFormat2.setLenient(false);
-		CustomDateEditor ce2 = new CustomDateEditor(dateFormat2, true); 
-		binder.registerCustomEditor(java.sql.Date.class, ce2);
-	}
-	@RequestMapping("/index")
-	public String home() {
-		return "_01_customer/index";
-	}
+//	@GetMapping("/modifyCustomer/{id}")
+//	public String editCustomerForm(Model model, @PathVariable Integer id) {
+//		CustomerBean bean = service.getCustomerById(id);
+//		bean.setPassword((bean.getPassword()));
+//		model.addAttribute("customerBean", bean);
+//		
+//		
+//		
+//		
+//		return "_01_customer/EditCustomerForm";
+//	}
+
+	
+
+	
+//	@DeleteMapping(value="/modifyCustomer/{id}")
+//	public String deleteCustomerData(@PathVariable Integer id) {
+//		System.out.println(11122233);
+//		service.deleteCustomerByPrimaryKey(id);	
+//		return "redirect:../customers";
+//	}
+	
+//	@InitBinder
+//	public void initBinder(WebDataBinder binder, WebRequest request) {
+//		// java.util.Date
+//		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS");
+//		dateFormat.setLenient(false);
+//		CustomDateEditor ce = new CustomDateEditor(dateFormat, true); 
+//		binder.registerCustomEditor(Date.class, ce);
+//		// java.sql.Date		
+//		DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+//		dateFormat2.setLenient(false);
+//		CustomDateEditor ce2 = new CustomDateEditor(dateFormat2, true); 
+//		binder.registerCustomEditor(java.sql.Date.class, ce2);
+//	}
+//	@RequestMapping("/index")
+//	public String home() {
+//		return "_01_customer/index";
+//	}
 }

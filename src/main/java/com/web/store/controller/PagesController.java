@@ -44,10 +44,7 @@ public class PagesController {
 	return "_04_buyProductMenu";
 	}
 	
-	@GetMapping("/_05_login")
-	public String login(Model model) {
-	return "_05_login";
-	}
+	
 	
 	@GetMapping("/_05_loginPopup")
 	public String loginPopup(Model model) {
@@ -63,5 +60,4 @@ public class PagesController {
 	public String memberProfile(Model model) {
 	return "_05_memberProfile";
 	}
-	
 }
