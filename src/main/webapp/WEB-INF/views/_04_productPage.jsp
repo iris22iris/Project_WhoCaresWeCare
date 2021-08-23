@@ -33,8 +33,7 @@
 
 </head>
 
-<body>
-	<div id="body">
+<body id="body">
 	<!-- 引入index的menu start -->
 	<!-- 引入共同的頁首 -->
 	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
@@ -71,6 +70,7 @@
 
 	<div class="allPage">
 		<!-- 左邊的選單 start -->
+		<!-- Side-List Start -->
 		<div class="col-2 ms-4" style="margin-top: 3cm;">
 			<div class="text-center">
 				<div class="d-flex flex-wrap justify-content-center my-3"
@@ -118,10 +118,10 @@
 					</div>
 					<div class="sideList rounded-bottom">
 						<a href="#" style="color: #622d18; text-decoration: none;">特價專區</a><br>
-						</div>
+					</div>
 				</div>
 			</div>
-			
+
 		</div>
 		<!-- Side-List End -->
 		<!-- 左邊的選單 end -->
@@ -157,11 +157,11 @@
 						src="../image/product/A0001.jpg" style="border-radius: 10px">
 
 					<input type="image" data-bs-target="#carouselExampleDark"
-						data-bs-slide-to="1" name="submit_Btn" id="submit_Btn"
+						data-bs-slide-to="1" name="submit_Btn" id="submit_Btn" 
 						src="../image/product/A0002.jpg" style="border-radius: 10px">
 
 					<input type="image" data-bs-target="#carouselExampleDark"
-						data-bs-slide-to="2" name="submit_Btn" id="submit_Btn"
+						data-bs-slide-to="2" name="submit_Btn" id="submit_Btn" 
 						src="../image/product/A0003.jpg" style="border-radius: 10px">
 				</div>
 				<!-- 商品小圖片 end -->
@@ -258,8 +258,8 @@
 
 		</div>
 
-		</div>
 	</div>
+
 	<!-- footer Start! -->
 
 	<!-- 引入共同的頁尾 -->

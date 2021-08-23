@@ -29,11 +29,6 @@ public class PagesController {
 		return "_02_onlineDM";
 	}
 	
-	@GetMapping("/_03_rentProductMenu")
-	public String rentProductMenu(Model model) {
-	return "_03_rentProductMenu";
-	}
-	
 	@GetMapping("/_03_rentProduct")
 	public String rentProduct(Model model) {
 	return "_03_rentProduct";
@@ -44,7 +39,7 @@ public class PagesController {
 	return "_03_rentItemList";
 	}
 	
-	@GetMapping("/_04_buyProductMenu")
+	@GetMapping("/buyMenu")
 	public String buyProductMenu(Model model) {
 	return "_04_buyProductMenu";
 	}

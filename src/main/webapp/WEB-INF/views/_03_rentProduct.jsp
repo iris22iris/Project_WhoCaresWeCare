@@ -40,8 +40,7 @@
 <link rel="stylesheet" href="_03rentProduct.css">
 </head>
 
-<body>
-<div id="body">
+<body id="body">
 	<!-- header start -->
 	<!-- 引入共同的頁首 -->
 	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
@@ -163,17 +162,18 @@
 					<!-- 商品小圖片 start -->
 					<input type="image" data-bs-target="#carouselExampleDark"
 						data-bs-slide-to="0" name="submit_Btn" id="submit_Btn" 
-						src="../image/product/A0001.jpg" 
+							src="../image/product/A0001.jpg" 
 						style="border-radius: 10px">
 
 					<input type="image" data-bs-target="#carouselExampleDark"
 						data-bs-slide-to="1" name="submit_Btn" id="submit_Btn"
-						 src="../image/product/A0002.jpg"  
+						  src="../image/product/A0002.jpg"  
 						style="border-radius: 10px">
 
 					<input type="image" data-bs-target="#carouselExampleDark"
 						data-bs-slide-to="2" name="submit_Btn" id="submit_Btn"
-						 src="<c:url value='/images/product/A0003.jpg' />" 
+						
+						  src="<c:url value='/images/product/A0003.jpg' />" 
 						 style="border-radius: 10px">
 						 
 						 
@@ -265,8 +265,9 @@
 
 				<!-- 留言板 end -->
 			</div>
-			</div>
+
 		</div>
+
 	</div>
 
 	<!-- footer Start! -->

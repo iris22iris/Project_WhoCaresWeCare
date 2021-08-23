@@ -11,7 +11,7 @@
 	href="<c:url value='/css/_03rentProductMenu.css' />">
 <link rel="stylesheet" href="<c:url value='/css/commonStyle.css' />"
 	type="text/css">
-	
+
 <title>租賃設備</title>
 
 <!-- bootstrap -->
@@ -36,15 +36,16 @@
 			data-bs-ride="carousel">
 			<div class="carousel-inner">
 				<div class="carousel-item active" data-bs-interval="5000">
-					<img src="<c:url value='/images/menuAd.png' />"
+
+					<img src="<c:url value='/images/indexAd1.jpg' />"
 						class="d-block w-100" alt="ad1">
 				</div>
 				<div class="carousel-item" data-bs-interval="5000">
-					<img src="<c:url value='/images/menuAd.png' />"
-						class="d-block w-100 " alt="ad2">
+					<img src="<c:url value='/images/indexAd2.jpg' />"
+						class="d-block w-100" alt="ad2">
 				</div>
 				<div class="carousel-item">
-					<img src="<c:url value='/images/menuAd.png' />"
+					<img src="<c:url value='/images/indexAd3.jpg' />"
 						class="d-block w-100" alt="ad3">
 				</div>
 			</div>
@@ -111,7 +112,8 @@
 						</h2>
 					</div>
 					<div class="sideList rounded-bottom">
-						<a href="#" style="color: #622d18; text-decoration: none;">特價專區</a><br>
+						<a href="/rentMenu/I"
+							style="color: #622d18; text-decoration: none;">特價專區</a><br>
 					</div>
 				</div>
 			</div>
@@ -134,118 +136,27 @@
 				</select>
 
 			</div>
+
 			<div class="container-fluid d-flex flex-wrap justify-content-center">
 				<div class="row">
-					<div class="col-3 mt-3">
-						<div class="card text-center">
 
-							<%-- 							<a href="#"><img src="${pageContext.request.contextPath}/images/product/A0001.jpg" --%>
-							<!-- 								class="card-img-top" alt="..."></a> -->
-							<a href="#"><img
-								src="<c:url value='/images/product/A0001.jpg' />"
-								class="card-img-top" alt="..."></a>
-							<div class="card-body">
-								<h5 class="card-title">產品名稱1</h5>
-								<div class="card-text mb-2">
-									租金: 150元/日<br> 庫存: 1個
+					<c:forEach var='rentProduct' items='${rentProductBeans}'>
+						<div class="col-3 mt-3">
+							<div class="card text-center">
+								<a href="#"><img
+									src="<c:url value='${rentProduct.coverImage}' />"
+									class="card-img-top" alt="..."></a>
+								<div class="card-body">
+									<h5 class="card-title">${rentProduct.prodName}</h5>
+									<div class="card-text mb-2">
+										租金: ${rentProduct.price}元/日<br> 庫存: ${rentProduct.stock}個
+									</div>
+									<a href="#" class="btn btn-primary">前往租賃</a>
 								</div>
-								<a href="#" class="btn btn-primary">前往租賃</a>
 							</div>
 						</div>
-					</div>
-					<div class="col-3 mt-3">
-						<div class="card text-center">
-							<a href="#"><img src="<c:url value='/images/product/A0002.jpg' />"
-								class="card-img-top" alt="..."></a>
-							<div class="card-body">
-								<h5 class="card-title">產品名稱2</h5>
-								<div class="card-text mb-2">
-									租金: 120元/日<br> 庫存: 3個
-								</div>
-								<a href="#" class="btn btn-primary">前往租賃</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-3 mt-3">
-						<div class="card text-center">
-							<a href="#"><img src="<c:url value='/images/product/A0003.jpg' />"
-								class="card-img-top" alt="..."></a>
-							<div class="card-body">
-								<h5 class="card-title">產品名稱3</h5>
-								<div class="card-text mb-2">
-									租金: 60元/日<br> 庫存: 4個
-								</div>
-								<a href="#" class="btn btn-primary">前往租賃</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-3 mt-3">
-						<div class="card text-center">
-							<a href="#"><img src="<c:url value='/images/product/A0004.jpg' />"
-								class="card-img-top" alt="..."></a>
-							<div class="card-body">
-								<h5 class="card-title">產品名稱4</h5>
-								<div class="card-text mb-2">
-									租金: 100元/日<br> 庫存: 2個
-								</div>
-								<a href="#" class="btn btn-primary">前往租賃</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-3 mt-3">
-						<div class="card text-center">
-							<a href="#"><img src="<c:url value='/images/product/A0005.jpg' />"
-								class="card-img-top" alt="..."></a>
-							<div class="card-body">
-								<h5 class="card-title">產品名稱4</h5>
-								<div class="card-text mb-2">
-									租金: 100元/日<br> 庫存: 5個
-								</div>
-								<a href="#" class="btn btn-primary">前往租賃</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-3 mt-3">
-						<div class="card text-center">
-							<a href="#"><img src="<c:url value='/images/product/A0005.jpg' />"
-								class="card-img-top" alt="..."></a>
-							<div class="card-body">
-								<h5 class="card-title">產品名稱5</h5>
-								<div class="card-text mb-2">
-									租金: 50元/日<br> 庫存: 3個
-								</div>
-								<a href="#" class="btn btn-primary">前往租賃</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-3 mt-3">
-						<div class="card text-center">
-							<a href="#"><img src="<c:url value='/images/product/A0005.jpg' />"
-								class="card-img-top" alt="..."></a>
-							<div class="card-body">
-								<h5 class="card-title">產品名稱6</h5>
-								<div class="card-text mb-2">
-									租金: 30元/日<br> 庫存: 1個
-								</div>
-								<a href="#" class="btn btn-primary">前往租賃</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-3 mt-3">
-						<div class="card text-center">
-							<a href="#"><img src="<c:url value='/images/product/A0005.jpg' />"
-								class="card-img-top" alt="..."></a>
-							<div class="card-body">
-								<h5>產品名稱6</h5>
-								<div class="card-text mb-2">
-									租金: 20元/日<br> 庫存: 2個
-								</div>
-								<a href="#" class="btn btn-primary">前往租賃</a>
-							</div>
-						</div>
-					</div>
+					</c:forEach>
+
 				</div>
 			</div>
 
@@ -272,6 +183,7 @@
 	<!-- bootstrap -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js">
+		
 	</script>
 </body>
 
