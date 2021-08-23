@@ -53,43 +53,33 @@
 
 	<!-- header end -->
 
-	<!-- Main Start -->
-
-	<!-- Slider-img Start -->
-	<div class="container-fluid d-flex justify-content-center">
-		<div id="carouselExampleInterval" class="carousel slide col-11"
-			data-bs-ride="carousel">
-			<div class="carousel-inner">
-				<div class="carousel-item active" data-bs-interval="5000">
-
-					<img src="<c:url value='/images/indexAd1.jpg' />"
-						class="d-block w-100" alt="ad1">
-				</div>
-				<div class="carousel-item" data-bs-interval="5000">
-					<img src="<c:url value='/images/indexAd2.jpg' />"
-						class="d-block w-100" alt="ad2">
-				</div>
-				<div class="carousel-item">
-					<img src="<c:url value='/images/indexAd3.jpg' />"
-						class="d-block w-100" alt="ad3">
-				</div>
+	<!-- menu下面的標題顯示 start -->
+	<div class="menuTwo">
+		<div class="row row-cols-auto align-items-center">
+			<div class="col">
+				<!-- <img src="../image/whiteLogo.png" width="250px" height="100px"> -->
+				<img class="imgTop" src="../image/whiteLogo.png">
 			</div>
-			<button class="carousel-control-prev" type="button"
-				data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Previous</span>
-			</button>
-			<button class="carousel-control-next" type="button"
-				data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Next</span>
-			</button>
+
+			<div class="col">
+				<a href="http://127.0.0.1:5500/WhoCaresWeCare!/index.html"
+					style="text-decoration: none;">首頁</a>
+			</div>
+			<span id="span1"></span>
+			<div class="col">
+				<span id="text1"></span>
+			</div>
+			<span id="span2"></span>
+			<div class="col">
+				<span id="text2"></span>
+			</div>
 		</div>
 	</div>
+	<hr class="hr1" />
+	<!-- menu下面的標題顯示 end -->
 
-	<!-- Slider-img End -->
 
-	<div class="row">
+	<div class="allPage">
 		<!-- Side-List Start -->
 		<div class="col-2 ms-4" style="margin-top: 3cm;">
 			<div class="text-center">
@@ -145,7 +135,6 @@
 		</div>
 		<!-- Side-List End -->
 
-
 		<div class="productPage">
 
 			<div class="productShell">
@@ -157,15 +146,20 @@
 
 						<div class="carousel-inner" style="border-radius: 10px">
 							<div class="carousel-item active" data-bs-interval="10000">
-								<img src="../image/product/A0001.jpg" class="img1" alt="...">
+								<img src="<c:url value='/images/product/A0001.jpg' />"
+								 class="img1" alt="...">
 								<div class="carousel-caption d-none d-md-block"></div>
 							</div>
+							
 							<div class="carousel-item" data-bs-interval="2000">
-								<img src="../image/product/A0002.jpg" class="img2" alt="...">
+								<img src="<c:url value='/images/product/A0002.jpg' />"
+								class="img2" alt="...">
 								<div class="carousel-caption d-none d-md-block"></div>
 							</div>
+							
 							<div class="carousel-item">
-								<img src="../image/product/A0003.jpg" class="img3" alt="...">
+								<img src="<c:url value='/images/product/A0003.jpg' />"
+								class="img3" alt="...">
 								<div class="carousel-caption d-none d-md-block"></div>
 							</div>
 						</div>
@@ -173,25 +167,23 @@
 					</div>
 					<!-- 商品小圖片 start -->
 					<input type="image" data-bs-target="#carouselExampleDark"
-						data-bs-slide-to="0" name="submit_Btn" id="submit_Btn" img
-						src="<c:url value='/images/product/A0005.jpg' />"
-						 style="border-radius: 10px">
-
-					<img src="<c:url value='/images/product/A0005.jpg' />"
-					
-					
-						class="card-img-top" alt="..."> <input type="image"
-						data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
-						name="submit_Btn" id="submit_Btn" 
-						img	src="<c:url value='/images/product/A0005.jpg' />" 
+						data-bs-slide-to="0" name="submit_Btn" id="submit_Btn" 
+						img	src="../image/product/A0001.jpg" 
 						style="border-radius: 10px">
 
 					<input type="image" data-bs-target="#carouselExampleDark"
-						data-bs-slide-to="2" name="submit_Btn" id="submit_Btn" 
-						img <c:url value='/images/product/A0005.jpg' /> 
+						data-bs-slide-to="1" name="submit_Btn" id="submit_Btn"
+						 img src="../image/product/A0002.jpg"  
 						style="border-radius: 10px">
+
+					<input type="image" data-bs-target="#carouselExampleDark"
+						data-bs-slide-to="2" name="submit_Btn" id="submit_Btn"
 						
-						
+						 img src="<c:url value='/images/product/A0003.jpg' />" 
+						 style="border-radius: 10px">
+						 
+						 
+				</div>
 				<!-- 商品小圖片 end -->
 
 				<!-- 商品狀態 start -->
