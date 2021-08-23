@@ -193,8 +193,8 @@ public class RentProductBean implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((classify == null) ? 0 : classify.hashCode());
-		result = prime * result + ((comments == null) ? 0 : comments.hashCode());
-		result = prime * result + ((coverImage == null) ? 0 : coverImage.hashCode());
+//		result = prime * result + ((comments == null) ? 0 : comments.hashCode());
+//		result = prime * result + ((coverImage == null) ? 0 : coverImage.hashCode());
 		result = prime * result + ((fileName == null) ? 0 : fileName.hashCode());
 		result = prime * result + ((mimeType == null) ? 0 : mimeType.hashCode());
 		result = prime * result + ((price == null) ? 0 : price.hashCode());
@@ -202,8 +202,8 @@ public class RentProductBean implements Serializable {
 		result = prime * result + ((prodName == null) ? 0 : prodName.hashCode());
 		result = prime * result + ((productTypeBean == null) ? 0 : productTypeBean.hashCode());
 		result = prime * result + ((promotionBean == null) ? 0 : promotionBean.hashCode());
-		result = prime * result + ((rentItems == null) ? 0 : rentItems.hashCode());
-		result = prime * result + ((reservations == null) ? 0 : reservations.hashCode());
+//		result = prime * result + ((rentItems == null) ? 0 : rentItems.hashCode());
+//		result = prime * result + ((reservations == null) ? 0 : reservations.hashCode());
 		result = prime * result + ((serialNumber == null) ? 0 : serialNumber.hashCode());
 		result = prime * result + ((stock == null) ? 0 : stock.hashCode());
 		return result;
@@ -223,16 +223,16 @@ public class RentProductBean implements Serializable {
 				return false;
 		} else if (!classify.equals(other.classify))
 			return false;
-		if (comments == null) {
-			if (other.comments != null)
-				return false;
-		} else if (!comments.equals(other.comments))
-			return false;
-		if (coverImage == null) {
-			if (other.coverImage != null)
-				return false;
-		} else if (!coverImage.equals(other.coverImage))
-			return false;
+//		if (comments == null) {
+//			if (other.comments != null)
+//				return false;
+//		} else if (!comments.equals(other.comments))
+//			return false;
+//		if (coverImage == null) {
+//			if (other.coverImage != null)
+//				return false;
+//		} else if (!coverImage.equals(other.coverImage))
+//			return false;
 		if (fileName == null) {
 			if (other.fileName != null)
 				return false;
@@ -268,16 +268,16 @@ public class RentProductBean implements Serializable {
 				return false;
 		} else if (!promotionBean.equals(other.promotionBean))
 			return false;
-		if (rentItems == null) {
-			if (other.rentItems != null)
-				return false;
-		} else if (!rentItems.equals(other.rentItems))
-			return false;
-		if (reservations == null) {
-			if (other.reservations != null)
-				return false;
-		} else if (!reservations.equals(other.reservations))
-			return false;
+//		if (rentItems == null) {
+//			if (other.rentItems != null)
+//				return false;
+//		} else if (!rentItems.equals(other.rentItems))
+//			return false;
+//		if (reservations == null) {
+//			if (other.reservations != null)
+//				return false;
+//		} else if (!reservations.equals(other.reservations))
+//			return false;
 		if (serialNumber == null) {
 			if (other.serialNumber != null)
 				return false;

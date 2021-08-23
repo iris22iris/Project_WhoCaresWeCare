@@ -28,10 +28,10 @@
 					href="<c:url value='' />" 
 					style="color: white;"> 關於我們</a></li>
 				<li class="nav-item"><a class="nav-link textSize "
-					href="<c:url value='_03_rentProductMenu' />"
+					href="<c:url value='rentMenu' />"
 					style="color: white;"> 租賃設備</a></li>
 				<li class="nav-item"><a class="nav-link textSize "
-					href="<c:url value='_04_buyProductMenu' />"
+					href="<c:url value='buyMenu' />"
 					style="color: white;"> 購物商城</a></li>
 				<li class="nav-item"><a class="nav-link textSize "
 					href="<c:url value='' />" 
