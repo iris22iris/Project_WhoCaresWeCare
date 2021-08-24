@@ -98,7 +98,7 @@
 							<div class="col-3 mt-3">
 								<div class="card text-center">
 									<a href="#"><img
-										src="<c:url value='${rentProduct.coverImage}' />"
+										src="<c:url value='/images/product/${rentProduct.fileName}' />"
 										class="card-img-top" alt="..."></a>
 									<div class="card-body">
 										<h5 class="card-title">${rentProduct.prodName}</h5>
