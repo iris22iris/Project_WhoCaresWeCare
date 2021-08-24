@@ -48,84 +48,63 @@
 
 		<!-- header end -->
 
-		<!-- menu下面的標題顯示 start -->
-		<div class="menuTwo">
-			<div class="row row-cols-auto align-items-center">
-				<div class="col-3"></div>
-				<div class="col-9">
-					<div class="rentProduct-title-catalog">
-						<h2>
-							<i class="fas fa-th-large px-3"></i>商品分類
-						</h2>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- menu下面的標題顯示 end -->
-
-
-		<div class="allPage">
-			<!-- Side-List Start -->
-			<div class="col-3 ms-4" style="margin-top: 3cm;">
+		<!-- main start -->
+		<div class="container-fluid d-flex">
+			 <!-- Side-List Start -->
+			 <div class="col-2 ms-4" >
+				<div style="height: 60px;"></div>
 				<div class="text-center">
-					<div class="d-flex flex-wrap justify-content-center my-3"
-						style="background-color: white;">
-						<div class="sideList-title mt-3">
-							<h2 class="my-2">
-								<i class="fas fa-hand-holding-medical"></i> 輔具類
-							</h2>
-						</div>
-						<div class="sideList">
-							<a href="#" style="color: #622d18; text-decoration: none;">拐杖-110cm</a><br>
-							<a href="#" style="color: #622d18; text-decoration: none;">拐杖-120cm</a><br>
-							<a href="#" style="color: #622d18; text-decoration: none;">拐杖-130cm</a><br>
-							<a href="#" style="color: #622d18; text-decoration: none;">可折疊輪椅</a><br>
-							<a href="#" style="color: #622d18; text-decoration: none;">不可折疊輪椅</a><br>
-						</div>
-						<div class="sideList-title">
-							<h2 class="my-2">
-								<i class="fas fa-shield-alt"></i> 護具類
-							</h2>
-						</div>
-						<div class="sideList">
-							<a href="#" style="color: #622d18; text-decoration: none;">護膝</a><br>
-							<a href="#" style="color: #622d18; text-decoration: none;">護腰</a><br>
-						</div>
-						<div class="sideList-title">
-							<h2 class="my-2">
-								<i class="fas fa-clinic-medical"></i> 居家保健
-							</h2>
-						</div>
-						<div class="sideList rounded-bottom">
-							<a href="#" style="color: #622d18; text-decoration: none;">照護病床</a><br>
-						</div>
+					<div class="sideList-title">
+					  輔具類
+					</div>
+					<div class="sideList">
+					  <a href="#">拐杖-110cm</a><br>
+					  <a href="#">拐杖-120cm</a><br>
+					  <a href="#">拐杖-130cm</a><br>
+					  <a href="#">可折疊輪椅</a><br>
+					  <a href="#">不可折疊輪椅</a><br>
+					</div>
+					<div class="sideList-title">
+					  護具類
+					</div>
+					<div class="sideList">
+					  <a href="#">護膝</a><br>
+					  <a href="#">護腰</a><br>
+					</div>
+					<div class="sideList-title">
+					  居家保健
+					</div>
+					<div class="sideList rounded-bottom">
+					  <a href="#">照護病床</a><br>
 					</div>
 				</div>
-
+		  
 				<div class="text-center">
-					<div class="d-flex flex-wrap justify-content-center my-3"
-						style="background-color: white;">
-						<div class="sideList-title mt-3"
-							style="background-color: chocolate;">
-							<h2 class="my-2">
-								<i class="fab fa-shopify"></i> 優惠活動
-							</h2>
-						</div>
-						<div class="sideList rounded-bottom">
-							<a href="#" style="color: #622d18; text-decoration: none;">特價專區</a><br>
-						</div>
+					<div class="sideList-title mt-4 discount-title">
+					  優惠活動
+					</div>
+					<div class="sideList">
+					  <a href="#">特價專區</a><br>
 					</div>
 				</div>
+		  
+			  </div>
+			  <!-- Side-List End -->
 
-			</div>
-			<!-- Side-List End -->
-
+			<!-- main-right-side start -->
 			<div class="productPage col-9 ">
-
-				<div class="productShell col-12">
-					<div class="pictureandinfo d-flex col-12">
-						<div class="productPicture col-6">
+				<div class="catagory col-11">
+					<i class="fas fa-th-large px-2"></i>
+					<a href="#大分類">商品大分類</a>
+					<i class="fas fa-angle-right"></i>
+					<a href="#小分類">商品小分類</a>
+					<hr>
+				</div>
+				
+				<!-- 商品圖片&名稱 start -->
+				<div class="productShell col-11">
+					<div class="pictureandinfo d-flex">
+						<div class="productPicture col-4">
 							<div id="carouselExampleDark"
 								class="carousel carousel-dark slide" data-bs-ride="carousel">
 								<!-- 商品大圖片 start -->
@@ -152,7 +131,9 @@
 								<!-- 商品大圖片 end -->
 							</div>
 							<!-- 商品小圖片 start -->
-							<input type="image" data-bs-target="#carouselExampleDark"
+							<div  class="smallImage">
+								<div>
+								<input type="image" data-bs-target="#carouselExampleDark"
 								data-bs-slide-to="0" name="submit_Btn" id="submit_Btn"
 								src="<c:url value='/images/product/A0001.jpg' />"
 								style="border-radius: 10px"> <input type="image"
@@ -164,13 +145,13 @@
 								name="submit_Btn" id="submit_Btn"
 								src="<c:url value='/images/product/A0003.jpg' />"
 								style="border-radius: 10px">
-
-
+								</div>
+							</div>
+							<!-- 商品小圖片 end -->
 						</div>
-						<!-- 商品小圖片 end -->
 
 						<!-- 商品狀態 start -->
-						<div class="productInfo col-6">
+						<div class="productInfo col-8">
 							<form id="form1" name="form1" method="GET" action="">
 								<label for="fname" class="eee">商品編號</label><br>
 								<h2>商品名稱:</h2>
@@ -190,9 +171,11 @@
 						<!-- 商品狀態 end -->
 					</div>
 				</div>
+				<!-- 商品圖片&名稱 end -->
+
 
 				<!-- 商品詳情 start -->
-				<div class="productDet col-12">
+				<div class="productDet col-11">
 					<div>
 						<div class="col ml-4 mt-2">
 							<h3 class="fw-bold">商品詳情</h3>
@@ -218,7 +201,7 @@
 
 
 
-				<div class="row d-flex col-12">
+				<div class="row d-flex col-11">
 					<!-- 評價顯示 start -->
 					<div class="row">
 					</div>
@@ -258,8 +241,9 @@
 					<!-- 留言板 end -->
 				</div>
 			</div>
+			<!-- main-right-side start -->
 		</div>
-
+		<!-- main end -->
 	</div>
 
 	<!-- footer Start! -->

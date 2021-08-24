@@ -71,7 +71,7 @@
 				活動當天提供100盒與中衛獨家聯名的口罩，給前一百名捐款的善心人士。活動資訊…</div>
 			<div id="newsBotton" class="d-md-flex justify-content-md-end">
 				<!-- 按鈕顏色需調整 -->
-				<button type="button" class="btn btn-outline-light mt-3" href="#">
+				<button type="button" class="btn btn-secondary mt-3" href="#">
 					看更多...</button>
 			</div>
 		</div>
