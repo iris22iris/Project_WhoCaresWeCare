@@ -4,22 +4,21 @@
 }
 
 .menuTwo {
-    height: 80px;
+    height: 100px;
     /* background-color: red; */
     width: 100%;
 }
 
-.hr1 {
-    border: solid #C98B18;
-    width: 67%;
-    margin: auto auto 60px 340px;
+/* --------product-title------ */
+.rentProduct-title-catalog {
+	margin-top: 30px;
+	font-family: mainfont-medium;
+	color: rgb(117, 76, 36);
+	border-bottom: inset 5px rgb(216, 196, 176);
+	margin-bottom: 10px;
 }
 
-.hr2 {
-    border: solid #C98B18;
-    width: 88%;
-    margin: 20px auto 10px auto;
-}
+
 
 .allPage {
     width: 100%;
@@ -60,9 +59,13 @@
     /* margin-right: 200px; */
     /* background-color: seagreen; */
 }
-
+.pictureandinfo{
+	 border-bottom: inset 5px rgb(216, 196, 176);
+	margin-bottom: 10px;
+}
 .productShell {
     display: flex;
+   
 }
 
 /* 商品圖片外框 */
@@ -112,12 +115,14 @@ input {
 
 /* 商品詳情 */
 .productDet {
-    width: 80%;
-    margin-left: 100px;
+  
+    margin-left: 10px;
     border: 1px solid rgb(60%, 60%, 60%);
-    margin-bottom: 50px;
-    margin-top: 50px;
-    /* background-color: #e9c46a; */
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border-bottom: inset 5px rgb(216, 196, 176);
+	margin-bottom: 10px;
+
 }
 
 /*大頭照 */
@@ -135,11 +140,22 @@ input {
 }
 
 /* 評價顯示 */
-.productEva {
-    display: flex;
-    width: 100%;
-}
 
+.product-rate-title{
+	 
+  margin-top: 30px;
+	font-family: mainfont-medium;
+	color: rgb(117, 76, 36);
+	border-bottom: inset 5px rgb(216, 196, 176);
+	margin-bottom: 10px;
+}
+.score{
+	margin-top: 30px;
+	font-family: mainfont-medium;
+	color: rgb(117, 76, 36);
+	border-bottom: inset 5px rgb(216, 196, 176);
+	margin-bottom: 10px;
+}
 .word {
     word-break: break-all;
     font-size: 1.3rem;
