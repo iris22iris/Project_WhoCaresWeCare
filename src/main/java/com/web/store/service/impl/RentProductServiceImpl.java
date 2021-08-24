@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import org.springframework.transaction.annotation.Transactional;
 
 import com.web.store.dao.RentProductDao;
 import com.web.store.model._03_rent.RentProductBean;
+import com.web.store.model._07_productType.ProductTypeBean;
 import com.web.store.service.RentProductService;
 
 @Transactional
@@ -33,8 +33,8 @@ public class RentProductServiceImpl implements RentProductService {
 	}
 
 	@Override
-	public List<String> getAllCategories() {
-		return rentProductDao.getAllCategories();
+	public List<ProductTypeBean> getAllProdTypes() {
+		return rentProductDao.getAllProdTypes();
 	}
 
 	@Override

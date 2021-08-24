@@ -3,6 +3,7 @@ package com.web.store.dao;
 import java.util.List;
 
 import com.web.store.model._03_rent.RentProductBean;
+import com.web.store.model._07_productType.ProductTypeBean;
 
 public interface RentProductDao {
 
@@ -10,7 +11,7 @@ public interface RentProductDao {
 
 	List<RentProductBean> getProductsByProdType(String prodtype);
 
-	List<String> getAllCategories();
+	List<ProductTypeBean> getAllProdTypes();
 
 	void updateStock(int productId, int newQuantity);
 
