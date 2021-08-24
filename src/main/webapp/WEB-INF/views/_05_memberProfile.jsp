@@ -11,7 +11,7 @@
 <!-- bootstrap -->
 <link
 	 href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
-	 rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	 rel="stylesheet" data-integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" data-crossorigin="anonymous">
 
 <!-- icon -->
 <link rel="stylesheet"
@@ -29,10 +29,10 @@
 	<div id="body">
 <!-- changmtitle star  會員修改資料標題star -->
  <div class="changmtitle col-3 text-center p-3  ">
-            <li>
+           <ol> <li>
              <i class="fas fa-th-large" aria-hidden="true"></i>會員資料修改
              </li>
-            
+            </ol>
         </div>
 
 <!-- changmtitle 會員修改資料標題end -->
@@ -56,7 +56,7 @@
           
                    <div class="col-6">
                         
-                        <input type="file" id="input" multiple="true" onchange="handleFiles(this.files)">
+                        <input type="file" id="input" data-multiple="true" onchange="handleFiles(this.files)">
                     </div>   
 <div class="col-12">
                        <div class="col-12 p-3">  
@@ -163,12 +163,12 @@
                     </div>
                     
                     <div class="col-3">
-                        <label for="inputbirthday" class="form-label" type="date" name="birthday" >出生(西元):</label>
+                        <label for="inputbirthday" class="form-label" data-type="date" data-name="birthday" >出生(西元):</label>
 
                       
                     </div>
                     <div class="col-3">
-                      <label><input for="inputbirthday" class="form-label"  type="date" name="birthday" ></label> 
+                      <label><input data-for="inputbirthday" class="form-label"  type="date" name="birthday" ></label> 
                     </div>
                 </form>
 <!-- 輸入資料區表格end -->          
@@ -221,7 +221,7 @@
     </div> 
     </div> 
 <!-- footer End! -->
-           <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+           <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" data-integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" data-crossorigin="anonymous"></script>
 
 
 <!-- 引入共同的頁尾 -->
