@@ -31,11 +31,11 @@ public class M2O_00_Insert {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			RentItemBean rentItem1 = new RentItemBean(null, "E", 1, "555", 1, 3, BigDecimal.valueOf(1.0),
+			RentItemBean rentItem1 = new RentItemBean(null, "E", 1, "555", 1, 3, "",
 					Timestamp.valueOf("2021-07-01 00:35:31"), Timestamp.valueOf("2021-07-07 21:34:28"),
 					BigDecimal.valueOf(1.0), BigDecimal.valueOf(1540.0));
 
-			RentItemBean rentItem2 = new RentItemBean(null, "E", 2, "555", 1, 3, BigDecimal.valueOf(1.0),
+			RentItemBean rentItem2 = new RentItemBean(null, "E", 2, "555", 1, 3, "",
 					Timestamp.valueOf("2021-07-01 00:35:31"), Timestamp.valueOf("2021-07-07 21:34:28"),
 					BigDecimal.valueOf(1.0), BigDecimal.valueOf(540.0));
 

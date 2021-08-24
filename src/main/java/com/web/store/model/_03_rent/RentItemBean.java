@@ -33,13 +33,13 @@ public class RentItemBean implements Serializable {
 	private String serialNumber;
 	private Integer rentPeriod;
 	private Integer prodQty;
-	private BigDecimal discountCode;
+	private String discountCode;
 	@Column(columnDefinition = "datetime")
 	private Timestamp startDate;
 	@Column(columnDefinition = "datetime")
 	private Timestamp returnDate;
 	private BigDecimal discount;
-	private BigDecimal ordTot;
+	private BigDecimal ordTotal;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "RENTITEM_PRODTYPE_FK")
@@ -62,8 +62,8 @@ public class RentItemBean implements Serializable {
 	private RentProductBean rentProductBean;
 
 	public RentItemBean(Integer prodSerialNum, String productType, Integer prodId, String serialNumber,
-			Integer rentPeriod, Integer prodQty, BigDecimal discountCode, Timestamp startDate, Timestamp returnDate,
-			BigDecimal discount, BigDecimal ordTot) {
+			Integer rentPeriod, Integer prodQty, String discountCode, Timestamp startDate, Timestamp returnDate,
+			BigDecimal discount, BigDecimal ordTotal) {
 		this.prodSerialNum = prodSerialNum;
 //		this.productType = productType;   ProductTypeBean取代此建構子
 		this.prodId = prodId;
@@ -74,7 +74,7 @@ public class RentItemBean implements Serializable {
 		this.startDate = startDate;
 		this.returnDate = returnDate;
 		this.discount = discount;
-		this.ordTot = ordTot;
+		this.ordTotal = ordTotal;
 	}
 
 	public Integer getProdSerialNum() {
@@ -125,11 +125,11 @@ public class RentItemBean implements Serializable {
 		this.prodQty = prodQty;
 	}
 
-	public BigDecimal getDiscountCode() {
+	public String getDiscountCode() {
 		return discountCode;
 	}
 
-	public void setDiscountCode(BigDecimal discountCode) {
+	public void setDiscountCode(String discountCode) {
 		this.discountCode = discountCode;
 	}
 
@@ -157,12 +157,12 @@ public class RentItemBean implements Serializable {
 		this.discount = discount;
 	}
 
-	public BigDecimal getOrdTot() {
-		return ordTot;
+	public BigDecimal getOrdTotal() {
+		return ordTotal;
 	}
 
-	public void setOrdTot(BigDecimal ordTot) {
-		this.ordTot = ordTot;
+	public void setOrdTotal(BigDecimal ordTotal) {
+		this.ordTotal = ordTotal;
 	}
 
 //	雙向多對一productTypeBean之getter、setter 開始

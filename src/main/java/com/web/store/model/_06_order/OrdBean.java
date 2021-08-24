@@ -41,7 +41,7 @@ public class OrdBean implements Serializable {
 	private String reciCity;
 	private String reciAddress;
 	private String reciPhone;
-	private BigDecimal ordTot;
+	private BigDecimal ordTotal;
 	private String delivery;
 	private String payment;
 	@Column(columnDefinition = "datetime")
@@ -68,27 +68,27 @@ public class OrdBean implements Serializable {
 	
 	
 
-	public OrdBean(String category, Integer ordId, Timestamp orderDate, String reciName, String reciCity,
-			String reciAddress, String reciPhone, BigDecimal ordTot, String delivery, String payment,
-			Timestamp shipDate, Clob orderMark) {
-		this.category = category;
-		this.ordId = ordId;
-		this.orderDate = orderDate;
-		this.reciName = reciName;
-		this.reciCity = reciCity;
-		this.reciAddress = reciAddress;
-		this.reciPhone = reciPhone;
-		this.ordTot = ordTot;
-		this.delivery = delivery;
-		this.payment = payment;
-		this.shipDate = shipDate;
-		this.orderMark = orderMark;
-	}
+//	public OrdBean(String category, Integer ordId, Timestamp orderDate, String reciName, String reciCity,
+//			String reciAddress, String reciPhone, BigDecimal ordTotal, String delivery, String payment,
+//			Timestamp shipDate, Clob orderMark) {
+//		this.category = category;
+//		this.ordId = ordId;
+//		this.orderDate = orderDate;
+//		this.reciName = reciName;
+//		this.reciCity = reciCity;
+//		this.reciAddress = reciAddress;
+//		this.reciPhone = reciPhone;
+//		this.ordTotal = ordTotal;
+//		this.delivery = delivery;
+//		this.payment = payment;
+//		this.shipDate = shipDate;
+//		this.orderMark = orderMark;
+//	}
 
 
 
 	public OrdBean(String category, Integer ordId, Timestamp orderDate, String reciName, String reciCity,
-			String reciAddress, String reciPhone, BigDecimal ordTot, String delivery, String payment,
+			String reciAddress, String reciPhone, BigDecimal ordTotal, String delivery, String payment,
 			Timestamp shipDate, Clob orderMark, Set<RentItemBean> rentItems,
 			Set<ProblemBean> problem, Set<BuyItemBean> buyItems) {
 		this.category = category;
@@ -98,7 +98,7 @@ public class OrdBean implements Serializable {
 		this.reciCity = reciCity;
 		this.reciAddress = reciAddress;
 		this.reciPhone = reciPhone;
-		this.ordTot = ordTot;
+		this.ordTotal = ordTotal;
 		this.delivery = delivery;
 		this.payment = payment;
 		this.shipDate = shipDate;
@@ -164,12 +164,12 @@ public class OrdBean implements Serializable {
 		this.reciPhone = reciPhone;
 	}
 
-	public BigDecimal getOrdTot() {
-		return ordTot;
+	public BigDecimal getOrdTotal() {
+		return ordTotal;
 	}
 
-	public void setOrdTot(BigDecimal ordTot) {
-		this.ordTot = ordTot;
+	public void setOrdTotal(BigDecimal ordTotal) {
+		this.ordTotal = ordTotal;
 	}
 
 	public String getDelivery() {
@@ -245,7 +245,7 @@ public class OrdBean implements Serializable {
 		result = prime * result + ((customerBean == null) ? 0 : customerBean.hashCode());
 		result = prime * result + ((delivery == null) ? 0 : delivery.hashCode());
 		result = prime * result + ((ordId == null) ? 0 : ordId.hashCode());
-		result = prime * result + ((ordTot == null) ? 0 : ordTot.hashCode());
+		result = prime * result + ((ordTotal == null) ? 0 : ordTotal.hashCode());
 		result = prime * result + ((orderDate == null) ? 0 : orderDate.hashCode());
 		result = prime * result + ((orderMark == null) ? 0 : orderMark.hashCode());
 		result = prime * result + ((payment == null) ? 0 : payment.hashCode());
@@ -295,10 +295,10 @@ public class OrdBean implements Serializable {
 				return false;
 		} else if (!ordId.equals(other.ordId))
 			return false;
-		if (ordTot == null) {
-			if (other.ordTot != null)
+		if (ordTotal == null) {
+			if (other.ordTotal != null)
 				return false;
-		} else if (!ordTot.equals(other.ordTot))
+		} else if (!ordTotal.equals(other.ordTotal))
 			return false;
 		if (orderDate == null) {
 			if (other.orderDate != null)

@@ -91,7 +91,7 @@ public class EDMTableResetHibernate {
 					ob.setCategory(token[0]);
 					ob.setOrdId(Integer.parseInt(token[1]));
 					ob.setDelivery(token[2]);
-					ob.setOrdTot(new BigDecimal(token[3]));
+					ob.setOrdTotal(new BigDecimal(token[3]));
 					ob.setOrderDate(Timestamp.valueOf(token[4]));
 					ob.setOrderMark(null);
 					ob.setPayment(token[6]);
