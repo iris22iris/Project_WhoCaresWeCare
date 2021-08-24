@@ -1,29 +1,91 @@
+#body {
+	/* background: rgb(250, 246, 243); */
+	background-image: url(../image/background7.png);
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-repeat: repeat-y;
+}
 
+/* ---------title------ */
+.menuAd {
+	margin-bottom: 30px;
+}
 
-/* --------product-title------ */
 .rentProductMenu-title {
-	margin-top: 30px;
+	/* margin-top: 30px; */
 	font-family: mainfont-medium;
 	color: rgb(117, 76, 36);
 	border-bottom: inset 5px rgb(216, 196, 176);
-	margin-bottom: 10px;
-}
-
-/* --------sideList-title------ */
-.sideList-title {
-	width: 80%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-color: rgb(117, 76, 36);
-	color: white;
-	border-radius: 10px;
+	/* margin-bottom: 10px; */
+	width: 95%;
+	margin: 10px auto;
 }
 
 /* --------sideList------ */
+.sideList-title {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/* border: 0.5px solid #ccc; */
+	background-color: rgb(219, 149, 117);
+	color: white;
+	font-size: 24px;
+	letter-spacing: 2px;
+	padding: 8px 0px;
+}
+
+.discount-title {
+	background-color: rgb(206, 42, 42);
+}
+
 .sideList {
 	padding: 10px;
-	font-size: larger;
+	font-size: medium;
 	background-color: white;
 }
 
+.sideList>a {
+	font-family: mainfont-regular;
+	text-decoration: none;
+	font-size: 18px;
+	color: saddlebrown;
+}
+
+.text-center {
+	background-color: white;
+}
+
+.imageAd {
+	width: 70%;
+	margin-top: 10px;
+}
+
+/* -------product-------- */
+select {
+	color: sienna;
+	font-size: larger;
+	padding: 12px;
+	border: none;
+}
+
+.card-body {
+	border-top: 4px dotted #ccc;
+}
+
+.card-title {
+	color: sienna;
+}
+
+.card-text {
+	color: rgb(115, 99, 87);
+	font-size: larger;
+}
+
+.pageLink {
+	background-color: yellow;
+}
+
+#pages {
+	background-color: teal;
+}

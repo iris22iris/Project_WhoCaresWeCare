@@ -25,158 +25,119 @@
 
 <body id="body">
 	<div id="body">
-	<!-- 引入共同的頁首 -->
-	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+		<!-- 引入共同的頁首 -->
+		<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 
-	<!-- Main Start -->
+		<!-- Main Start -->
 
-	<!-- Slider-img Start -->
-	<div class="container-fluid d-flex justify-content-center">
-		<div id="carouselExampleInterval" class="carousel slide col-11"
-			data-bs-ride="carousel">
-			<div class="carousel-inner">
-				<div class="carousel-item active" data-bs-interval="5000">
-
-					<img src="<c:url value='/images/indexAd1.jpg' />"
-						class="d-block w-100" alt="ad1">
-				</div>
-				<div class="carousel-item" data-bs-interval="5000">
-					<img src="<c:url value='/images/indexAd2.jpg' />"
-						class="d-block w-100" alt="ad2">
-				</div>
-				<div class="carousel-item">
-					<img src="<c:url value='/images/indexAd3.jpg' />"
-						class="d-block w-100" alt="ad3">
-				</div>
-			</div>
-			<button class="carousel-control-prev" type="button"
-				data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Previous</span>
-			</button>
-			<button class="carousel-control-next" type="button"
-				data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Next</span>
-			</button>
+		<!-- imgAd Start -->
+		<div class="menuAd d-flex justify-content-center">
+			<img src="/images/menuAd.png" class="imageAd" alt="ad3">
 		</div>
-	</div>
+		<!-- imgAd End -->
 
-	<!-- Slider-img End -->
-
-	<div class="row">
-		<!-- Side-List Start -->
-		<div class="col-2 ms-4" style="margin-top: 3cm;">
-			<div class="text-center">
-				<div class="d-flex flex-wrap justify-content-center my-3"
-					style="background-color: white;">
-					<div class="sideList-title mt-3">
-						<h2 class="my-2">
-							<i class="fas fa-hand-holding-medical"></i> 輔具類
-						</h2>
-					</div>
-					<div class="sideList">
-						<a href="#" style="color: #622d18; text-decoration: none;">拐杖-110cm</a><br>
-						<a href="#" style="color: #622d18; text-decoration: none;">拐杖-120cm</a><br>
-						<a href="#" style="color: #622d18; text-decoration: none;">拐杖-130cm</a><br>
-						<a href="#" style="color: #622d18; text-decoration: none;">可折疊輪椅</a><br>
-						<a href="#" style="color: #622d18; text-decoration: none;">不可折疊輪椅</a><br>
-					</div>
-					<div class="sideList-title">
-						<h2 class="my-2">
-							<i class="fas fa-shield-alt"></i> 護具類
-						</h2>
-					</div>
-					<div class="sideList">
-						<a href="#" style="color: #622d18; text-decoration: none;">護膝</a><br>
-						<a href="#" style="color: #622d18; text-decoration: none;">護腰</a><br>
-					</div>
-					<div class="sideList-title">
-						<h2 class="my-2">
-							<i class="fas fa-clinic-medical"></i> 居家保健
-						</h2>
-					</div>
-					<div class="sideList rounded-bottom">
-						<a href="#" style="color: #622d18; text-decoration: none;">照護病床</a><br>
-					</div>
-				</div>
-			</div>
-
-			<div class="text-center">
-				<div class="d-flex flex-wrap justify-content-center my-3"
-					style="background-color: white;">
-					<div class="sideList-title mt-3"
-						style="background-color: chocolate;">
-						<h2 class="my-2">
-							<i class="fab fa-shopify"></i> 優惠活動
-						</h2>
-					</div>
-					<div class="sideList rounded-bottom">
-						<a href="/rentMenu/I"
-							style="color: #622d18; text-decoration: none;">特價專區</a><br>
-					</div>
-				</div>
-			</div>
-
+		<!-- 商品列表start -->
+		<div class="rentProductMenu-title">
+			<h2>
+				<i class="fas fa-th-large px-3"></i>商品列表
+			</h2>
 		</div>
-		<!-- Side-List End -->
+		<!-- 商品列表end -->
 
+		<div class="row">
+			<!-- Side-List Start -->
+			<div class="col-2 ms-4">
+				<div style="height: 60px;"></div>
+				<div class="text-center">
+					<c:forEach var="productType" items="${productTypes}" varStatus="vs">
+						<c:choose>
+							<c:when test="${productType.prodType.length() == 1}">
+								<c:choose>
+									<c:when test="${vs.first}">
+										<div class="sideList-title">${productType.prodName}類</div>
+									</c:when>
+									<c:otherwise>
+										<div class="sideList-title">${productType.prodName}類</div>
+									</c:otherwise>
+								</c:choose>
+							</c:when>
+							<c:otherwise>
+								<div class="sideList">
+									<a href="<c:url value='/rentMenu/${productType.prodType}' />">${productType.prodName}</a><br>
+								</div>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+				</div>
 
-		<!-- Product Start -->
-		<div class="rentProduct col-9">
-			<div class="rentProductMenu-title">
-				<h2>
-					<i class="fas fa-th-large px-3"></i>商品列表
-				</h2>
+				<div class="text-center">
+					<div class="sideList-title mt-4 discount-title">優惠活動</div>
+					<div class="sideList">
+						<a href="#">特價專區</a><br>
+					</div>
+				</div>
 			</div>
-			<div class="container-fluid d-flex justify-content-end">
-				<select name="rentProductSort">
-					<option value="傳送值">價格由低至高</option>
-					<option value="傳送值">數量由低至高</option>
-				</select>
 
-			</div>
+			<!-- Side-List End -->
 
-			<div class="container-fluid d-flex flex-wrap justify-content-center">
-				<div class="row">
 
-					<c:forEach var='rentProduct' items='${rentProductBeans}'>
-						<div class="col-3 mt-3">
-							<div class="card text-center">
-								<a href="#"><img
-									src="<c:url value='${rentProduct.coverImage}' />"
-									class="card-img-top" alt="..."></a>
-								<div class="card-body">
-									<h5 class="card-title">${rentProduct.prodName}</h5>
-									<div class="card-text mb-2">
-										租金: ${rentProduct.price}元/日<br> 庫存: ${rentProduct.stock}個
+			<!-- Product Start -->
+			<div class="rentProduct col-9">
+				<div class="container-fluid d-flex justify-content-end">
+					<select name="rentProductSort">
+						<option value="">請選擇排序條件</option>
+						<option value="asc">價格由高至低</option>
+						<option value="desc">價格由低至高</option>
+					</select>
+				</div>
+
+				<div class="container-fluid d-flex flex-wrap justify-content-center">
+					<div class="row">
+
+						<c:forEach var='rentProduct' items='${rentProducts}'>
+							<div class="col-3 mt-3">
+								<div class="card text-center">
+									<a href="#"><img
+										src="<c:url value='${rentProduct.coverImage}' />"
+										class="card-img-top" alt="..."></a>
+									<div class="card-body">
+										<h5 class="card-title">${rentProduct.prodName}</h5>
+										<div class="card-text mb-2">
+											租金: ${rentProduct.price}元/日<br>
+										</div>
+										<c:choose>
+											<c:when test="${rentProduct.stock > 0}">
+												<a href="#" class="btn btn-warning">前往租賃</a>
+											</c:when>
+											<c:otherwise>
+												<a href="#" class="btn btn-warning">前往預約</a>
+											</c:otherwise>
+										</c:choose>
 									</div>
-									<a href="#" class="btn btn-primary">前往租賃</a>
 								</div>
 							</div>
-						</div>
-					</c:forEach>
+						</c:forEach>
 
+					</div>
+				</div>
+
+				<div class="mt-3">
+					<nav aria-label="Page navigation">
+						<ul class="pagination justify-content-center">
+							<li class="page-item disabled"><a class="page-link" href="#"
+								tabindex="-1" aria-disabled="true">上一頁</a></li>
+							<li class="page-item active"><a class="page-link">1</a></li>
+							<li class="page-item"><a class="page-link" href="#">2</a></li>
+							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							<li class="page-item"><a class="page-link" href="#">下一頁</a></li>
+						</ul>
+					</nav>
 				</div>
 			</div>
-
-			<div class="mt-3">
-				<nav aria-label="Page navigation">
-					<ul class="pagination justify-content-center">
-						<li class="page-item disabled"><a class="page-link" href="#"
-							tabindex="-1" aria-disabled="true">上一頁</a></li>
-						<li class="page-item active"><a class="page-link">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">下一頁</a></li>
-					</ul>
-				</nav>
-			</div>
 		</div>
+		<!-- Product End -->
 	</div>
-	<!-- Product End -->
 	<!-- Main End -->
-</div>
 	<!-- 引入共同的頁尾 -->
 	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
 

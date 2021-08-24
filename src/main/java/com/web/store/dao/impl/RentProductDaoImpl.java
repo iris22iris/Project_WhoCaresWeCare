@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.web.store.dao.RentProductDao;
 import com.web.store.model._03_rent.RentProductBean;
+import com.web.store.model._07_productType.ProductTypeBean;
 
 @Repository
 public class RentProductDaoImpl implements RentProductDao {
@@ -23,23 +24,24 @@ public class RentProductDaoImpl implements RentProductDao {
 	@Override
 	public List<RentProductBean> getAllProducts() {
 		Session session = factory.getCurrentSession();
-		String hql = " FROM RentProductBean";
+		String hql = " FROM RentProductBean rp ";
 		return session.createQuery(hql, RentProductBean.class)
-					  .getResultList();
+				      .getResultList();
 	}
 
 	@Override
 	public List<RentProductBean> getProductsByProdType(String prodtype) {
 		Session session = factory.getCurrentSession();
-		String hql = " FROM RentProductBean rp WHERE rp.classify = :pt";
-		return session.createQuery(hql, RentProductBean.class).setParameter("pt", prodtype).getResultList();
+		String hql = " FROM RentProductBean rp WHERE rp.productTypeBean = :pt";
+		List<RentProductBean> list = session.createQuery(hql, RentProductBean.class).setParameter("pt", prodtype).getResultList();
+		return list;
 	}
 
 	@Override
-	public List<String> getAllCategories() {
+	public List<ProductTypeBean> getAllProdTypes() {
 		Session session = factory.getCurrentSession();
-		String hql = "SELECT DISTINCT pt.prodName FROM ProductTypeBean pt";
-		return session.createQuery(hql, String.class).getResultList();
+		String hql = "FROM ProductTypeBean";
+		return session.createQuery(hql, ProductTypeBean.class).getResultList();
 	}
 
 	@Override
