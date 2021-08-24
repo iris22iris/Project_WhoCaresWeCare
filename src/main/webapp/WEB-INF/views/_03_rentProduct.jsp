@@ -124,8 +124,8 @@
 			<div class="productPage col-9 ">
 
 				<div class="productShell col-12">
-					<div class="pictureandinfo d-flex">
-						<div class="productPicture">
+					<div class="pictureandinfo d-flex col-12">
+						<div class="productPicture col-6">
 							<div id="carouselExampleDark"
 								class="carousel carousel-dark slide" data-bs-ride="carousel">
 								<!-- 商品大圖片 start -->
@@ -170,7 +170,7 @@
 						<!-- 商品小圖片 end -->
 
 						<!-- 商品狀態 start -->
-						<div class="productInfo">
+						<div class="productInfo col-6">
 							<form id="form1" name="form1" method="GET" action="">
 								<label for="fname" class="eee">商品編號</label><br>
 								<h2>商品名稱:</h2>

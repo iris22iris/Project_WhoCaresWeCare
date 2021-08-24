@@ -72,7 +72,7 @@
 
 .productPicture {
     width: 35%;
-    margin-left: 100px;
+    margin-left: 10px;
     /* background-color: tomato;  */
 }
 
@@ -86,7 +86,7 @@
 /* 商品狀態 */
 
 .productInfo {
-    margin-left: 100px;
+    margin-left: 10px;
     width: 75%;
     /* background-color: yellow; */
 }
@@ -110,7 +110,7 @@ label {
 input {
     width: 60px;
     height: 60px;
-    margin: 13px 20px 30px 30px;
+    margin: 10px;
 }
 
 /* 商品詳情 */
