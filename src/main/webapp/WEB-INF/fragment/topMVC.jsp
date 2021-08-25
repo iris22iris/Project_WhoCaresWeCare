@@ -44,22 +44,49 @@
 				</a>
 			</div>
 
-
 			<!-- 可以寫登入後換成會員圖片的功能 -->
-			<div class="nav-item">
-				<a class="nav-link" href="<c:url value='_05_login' />"
-					style="padding: 0px;"> <img
-					src="<c:url value='./images/memberIcon.png' />" alt="會員">
-				</a>
-			</div>
+			<div class="dropdown">
+              <ul class="nav-item  navbar-nav  me-auto mb-lg-0 left-menu  dropdown-toggle" id="dropdownMenu2"data-bs-toggle="dropdown" aria-expanded="false" >
+                <a class="nav-link " href=""  style="padding: 0px;">
+                  <img src="<c:url value='./images/memberIcon.png' />" alt="會員"></a>
+                </ul>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+			<li class="nav-item">
+                  <a class="nav-link textSize" href="<c:url value='_05_login' />" style="color:rgb(34, 4, 4);">
+                    登入</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link textSize" href="_05member_management.html" style="color:rgb(34, 4, 4);">
+                    會員中心</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link textSize" href="_05member_management.html" style="color:rgb(34, 4, 4);">
+                    訂單查詢</a>
+                </li>
+                <div class="nav-item">
+                <c:if test="${! empty LoginOK}">
+                <a class="nav-link textSize" href="<c:url value='logout'/>" style="color:rgb(34, 4, 4);">
+                    登出</a>
+                </c:if>
+                </div>
+              </ul>
+            </div>
+            </dd>
+
+<!-- 			<div class="nav-item"> -->
+<%-- 				<a class="nav-link" href="<c:url value='_05_login' />" --%>
+<!-- 					style="padding: 0px;"> <img -->
+<%-- 					src="<c:url value='./images/memberIcon.png' />" alt="會員"> --%>
+<!-- 				</a> -->
+<!-- 			</div> -->
 			
-			<div class="nav-item">
-			<c:if test="${! empty LoginOK}">
-				<a class="nav-link" href="<c:url value='logout' />"
-					style="padding: 0px;"> <img
-					src="<c:url value='./images/logout.jpg' />" alt="登出"></a>
-			</c:if>
-			</div>
+<!-- 			<div class="nav-item"> -->
+<%-- 			<c:if test="${! empty LoginOK}"> --%>
+<%-- 				<a class="nav-link" href="<c:url value='logout' />" --%>
+<!-- 					style="padding: 0px;"> <img -->
+<%-- 					src="<c:url value='./images/logout.jpg' />" alt="登出"></a> --%>
+<%-- 			</c:if> --%>
+<!-- 			</div> -->
 
 			<!-- Search -->
 			<form class="d-flex">
