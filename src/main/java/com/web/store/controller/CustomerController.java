@@ -116,5 +116,9 @@ public class CustomerController {
 	public String loginout() {
 		return "logout";
 	}
+	
+	
+	
+	
 
 }

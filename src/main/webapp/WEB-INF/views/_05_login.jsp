@@ -49,6 +49,10 @@
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
 	rel="stylesheet">
+<script type="text/javascript">
+
+
+</script>
 <title>會員登入/註冊</title>
 
 
@@ -67,9 +71,9 @@
 				<form class="form" id="a-form" method="POST" action="login">
 					<h2 class="form_title title  px-3">登入會員</h2>
 					<input class="form__input" type="text" name="account" id="account"
-						placeholder="帳號"> <input class="form__input"
-						type="password" name="password" id="password" placeholder="密碼"
-						maxlength="8">
+						placeholder="帳號" value="${requestScope.user}">
+					<input class="form__input" type="password" name="password" id="password" 
+						placeholder="密碼" maxlength="8" value="${requestScope.password}">
 					<div class="form__group">
 
 						<label for="checkbox"> <input type="checkbox" name="rememberMe" 

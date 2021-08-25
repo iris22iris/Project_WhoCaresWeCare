@@ -23,6 +23,7 @@
 	<title>Who Cares? We Care!</title>
 </head>
 <body >
+
 	<div id="body">
 	<!-- 廣告圖片大小&button顏色 還須調整 -->
 	<!-- Slider-img Start! -->
