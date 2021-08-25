@@ -65,7 +65,7 @@
                 </li>
                 <div class="nav-item">
                 <c:if test="${! empty LoginOK}">
-                <a class="nav-link textSize" href="<c:url value='logout'/>" style="color:rgb(34, 4, 4);">
+                <a class="nav-link textSize" href="<c:url value='_05_logout'/>" style="color:rgb(34, 4, 4);">
                     登出</a>
                 </c:if>
                 </div>
@@ -82,9 +82,9 @@
 			
 <!-- 			<div class="nav-item"> -->
 <%-- 			<c:if test="${! empty LoginOK}"> --%>
-<%-- 				<a class="nav-link" href="<c:url value='logout' />" --%>
+<%-- 				<a class="nav-link" href="<c:url value='_05_logout' />" --%>
 <!-- 					style="padding: 0px;"> <img -->
-<%-- 					src="<c:url value='./images/logout.jpg' />" alt="登出"></a> --%>
+<%-- 					src="<c:url value='./images/_05_logout.jpg' />" alt="登出"></a> --%>
 <%-- 			</c:if> --%>
 <!-- 			</div> -->
 

@@ -112,9 +112,9 @@ public class CustomerController {
 		return "index";
 	}
 
-	@RequestMapping("/logout")
+	@RequestMapping("/_05_logout")
 	public String loginout() {
-		return "logout";
+		return "_05_logout";
 	}
 	
 	
