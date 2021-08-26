@@ -59,4 +59,9 @@ public class CustomerServiceImpl implements CustomerService {
 	public boolean idExists(String id) {
 		return custDao.idExists(id);
 	}
+
+	@Override
+	public CustomerBean get(Integer id) {
+		return custDao.get(id);
+	}
 }

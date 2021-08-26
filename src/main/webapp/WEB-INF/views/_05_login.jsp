@@ -12,7 +12,8 @@
 <!-- <body> -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix='c' %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
 
@@ -53,6 +54,15 @@
 
 
 </script>
+
+<style type="text/css">
+   span.error {
+	color: red;
+	display: inline-block;
+	font-size: 5pt;
+}
+</style>
+
 <title>會員登入/註冊</title>
 
 
@@ -96,19 +106,36 @@
 			</div>
 			<div class="container b-container" id="b-container">
 				<!-- register form start -->
-				<form class="form" id="b-form" method="POST" action="">
+				<form:form class="form" id="b-form" method="POST" modelAttribute="customer" enctype='multipart/form-data'>
 					<h2 class="form_title title">註冊會員</h2>
-					<input class="form__input " id="name" type="text" required
-						placeholder="姓名 "> <input class="form__input "
-						id="birthday" type="text" id="birthday" required placeholder="生日">
-					<input class="form__input " id="email" type="email" required
-						placeholder="信箱 "> <input class="form__input " id="phone"
-						type="text" required placeholder="連絡電話 "> <input
-						class="form__input " id="account" type="text" required
-						placeholder="帳號 "> <input class="form__input "
-						id="password" type="text" required placeholder="密碼 ">
+					<c:choose>
+						<c:when test='${customer.custId == null}'>
+							<form:input class="form__input" id="account" type="text" 
+								placeholder="帳號 " path='account'/>
+							<form:errors path="account" cssClass="error" />
+							<Font color='red' size="-3">${columnErrorMsg.accountError}</Font>							
+						</c:when>
+						<c:otherwise>
+							<c:if test='${customer.custId != null}'>
+								<form:hidden path='account' /> ${customer.account}<br>
+							</c:if>
+						</c:otherwise>
+					</c:choose>
+					<form:input class="form__input" id="password" type="password"  placeholder="密碼" path='password'/>
+					<form:errors path="password" cssClass="error" />
+					<form:input class="form__input" id="custName" type="text" placeholder="姓名" path='custName'/> 
+					<form:errors path="custName" cssClass="error" />
+					<form:input class="form__input" id="birthday" type="text" placeholder="生日" path='birthday'/>
+					<form:errors path="birthday" cssClass="error" />
+					<form:input class="form__input" id="email" type="text" placeholder="信箱" path='email'/> 
+					<form:errors path="email" cssClass="error" />
+					<form:input class="form__input" id="phone" type="text" placeholder="手機" maxlength="10" path='phone'/>
+					<form:errors path="phone" cssClass="error" />
+					<form:input path="Image" type='file'/>
+	   	  	 		<form:errors path="Image"  cssClass="error" />
+	   	  	 		
 					<button type="submit" class="form__button button " id="button1">註冊</button>
-				</form>
+				</form:form>
 				<!-- register form end -->
 				<!-- main end! -->
 				<!-- 動態框  -->

@@ -5,6 +5,7 @@ import java.util.List;
 import com.web.store.model._05_customer.CustomerBean;
 
 
+
 public interface CustomerService {
 	CustomerBean getCustomerById(int id);
 	List<CustomerBean> getCustomers();
@@ -13,5 +14,6 @@ public interface CustomerService {
 	void deleteCustomerByPrimaryKey(int key);
 	public CustomerBean checkIDPassword(String account,String password);
 	boolean idExists(String id);
+	CustomerBean get(Integer id);
 	
 }

@@ -14,6 +14,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.web.store.model._02_customerService.CommentBean;
 import com.web.store.model._02_customerService.ProblemBean;
@@ -45,6 +48,9 @@ public class CustomerBean implements Serializable {
 	Blob customerImage; // 會員圖片
 	String fileName; // 圖片名稱
 	String mimeType; // 圖片類型
+	
+	@Transient
+	MultipartFile Image;
 
 	@OneToMany(mappedBy = "customerBean", cascade = CascadeType.ALL)
 	Set<OrdBean> orders = new LinkedHashSet<>();
@@ -259,6 +265,16 @@ public class CustomerBean implements Serializable {
 		this.problem = problem;
 	}
 
+	public MultipartFile getImage() {
+		return Image;
+	}
+
+	public void setImage(MultipartFile image) {
+		Image = image;
+	}
+	
+	
+
 //	@Override
 //	public String toString() {
 //		StringBuilder builder = new StringBuilder();
@@ -292,14 +308,6 @@ public class CustomerBean implements Serializable {
 //		builder.append(fileName);
 //		builder.append(", mimeType=");
 //		builder.append(mimeType);
-//		builder.append(", orders=");
-//		builder.append(orders);
-//		builder.append(", reservations=");
-//		builder.append(reservations);
-//		builder.append(", comments=");
-//		builder.append(comments);
-//		builder.append(", problem=");
-//		builder.append(problem);
 //		builder.append("]");
 //		return builder.toString();
 //	}

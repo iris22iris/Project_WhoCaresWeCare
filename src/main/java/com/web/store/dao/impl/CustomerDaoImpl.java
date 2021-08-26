@@ -94,4 +94,9 @@ public class CustomerDaoImpl implements CustomerDao {
 		exist = (list.isEmpty()) ? false : true;
 		return exist;
 	}
+	
+	@Override
+	public CustomerBean get(Integer id) {
+		return factory.getCurrentSession().get(CustomerBean.class, id);
+	}
 }

@@ -12,4 +12,5 @@ public interface CustomerDao {
 	void deleteCustomerByPrimaryKey(int key);
 	public CustomerBean checkIDPassword(String account,String password);
 	boolean idExists(String id);	
+	CustomerBean get(Integer id);
 }
