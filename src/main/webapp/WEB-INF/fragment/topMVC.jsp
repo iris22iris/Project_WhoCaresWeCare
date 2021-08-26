@@ -72,9 +72,11 @@ function clicka(obj){
 						src="<c:url value='/images/memberIcon.png' />" alt="會員"></a>
 				</ul>
 				<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-					<li class="nav-item"><a class="nav-link textSize"
+					<li class="nav-item">
+					 <c:if test="${ empty LoginOK}">
+					<a class="nav-link textSize"
 						href="<c:url value='_05_login' />" style="color: rgb(34, 4, 4);">
-							登入</a></li>
+							登入</a>  </c:if></li>
 					<li class="nav-item"><a class="nav-link textSize"
 						href="_05member_management.html" style="color: rgb(34, 4, 4);">
 							會員中心</a></li>
@@ -84,7 +86,8 @@ function clicka(obj){
 					<div class="nav-item">
 						<c:if test="${! empty LoginOK}">
 							<a class="nav-link textSize" href="<c:url value='_05_logout'/>"
-								style="color: rgb(34, 4, 4);"> 登出</a>
+								style="color: rgb(34, 4, 4);"> 
+								登出</a>
 						</c:if>
 					</div>
 				</ul>
