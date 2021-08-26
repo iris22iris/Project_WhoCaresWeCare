@@ -10,8 +10,10 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -64,7 +66,9 @@ public class CustomerController {
 			} else if (password == null || password.trim().length() == 0 || password.length() < 8) {
 				errorMsgMap.put("accountError", "帳號與密碼欄必須輸入，密碼長度不能小於八個字元");
 			} else if (customerBean != null) {
-				model.addAttribute("LoginOK", customerBean);
+//				model.addAttribute("LoginOK", customerBean);
+				HttpSession session = request.getSession();
+				session.setAttribute("LoginOK", customerBean.getCustId());
 			} else {
 				errorMsgMap.put("Error", "帳號或密碼有誤，密碼至少含有一個大寫字母、小寫字母、數字與!@#$%!^'\"");
 			}
@@ -117,13 +121,13 @@ public class CustomerController {
 		return "index";
 	}
 
-	//登出
+	// 登出
 	@RequestMapping("/_05_logout")
 	public String loginout() {
 		return "_05_logout";
 	}
 
-	//進入此Controller是先啟用，載入註冊會員資料，目前為空不載入任何資料
+	// 進入此Controller是先啟用，載入註冊會員資料，目前為空不載入任何資料
 	@ModelAttribute
 	public void getMember(@PathVariable(value = "custId", required = false) Integer custId, Model model) {
 		if (custId != null) {
@@ -150,9 +154,9 @@ public class CustomerController {
 	public String insertCustomer(@ModelAttribute("customer") /* @Valid */ CustomerBean cb, BindingResult result,
 			Model model, HttpServletRequest request) {
 		String account = request.getParameter("account");
-		Map<String, String>  columnErrorMsg = new HashMap<String, String>();
-		
-		if(customerService.idExists(account)) {
+		Map<String, String> columnErrorMsg = new HashMap<String, String>();
+
+		if (customerService.idExists(account)) {
 			columnErrorMsg.put("accountError", "帳號以重複，請重新輸入");
 		}
 		if (!columnErrorMsg.isEmpty()) {
@@ -169,23 +173,23 @@ public class CustomerController {
 //				System.out.println("有錯誤：" + error);
 //			}
 			return "_05_login";
-		} 
-			MultipartFile picture = cb.getImage();
-			String originalFilename = picture.getOriginalFilename();
-			if (originalFilename.length() > 0 && originalFilename.lastIndexOf(".") > -1) {
-				cb.setFileName(originalFilename);
+		}
+		MultipartFile picture = cb.getImage();
+		String originalFilename = picture.getOriginalFilename();
+		if (originalFilename.length() > 0 && originalFilename.lastIndexOf(".") > -1) {
+			cb.setFileName(originalFilename);
+		}
+		// 建立Blob物件，交由 Hibernate 寫入資料庫
+		if (picture != null && !picture.isEmpty()) {
+			try {
+				byte[] b = picture.getBytes();
+				Blob blob = new SerialBlob(b);
+				cb.setCustomerImage(blob);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
 			}
-			// 建立Blob物件，交由 Hibernate 寫入資料庫
-			if (picture != null && !picture.isEmpty()) {
-				try {
-					byte[] b = picture.getBytes();
-					Blob blob = new SerialBlob(b);
-					cb.setCustomerImage(blob);
-				} catch (Exception e) {
-					e.printStackTrace();
-					throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
-				}
-			}
+		}
 //			// 必須要找出對應的Hobby物件
 //			Hobby hobby = hobbyService.getHobby(member.getHobby().getId());
 //			member.setHobby(hobby);
@@ -220,6 +224,16 @@ public class CustomerController {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		sdf.setLenient(false);
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
+	}
+
+	// 修改會員
+	// 當使用者需要修改時，本方法送回含有會員資料的表單，讓使用者進行修改
+	// 由這個方法送回修改記錄的表單...
+	@GetMapping("/_05_memberProfile/{id}")
+	public String modifyCustomer(@PathVariable("id") Integer id, Model model) {
+		CustomerBean modifyCust = customerService.get(id);
+		model.addAttribute("modifyCust", modifyCust);
+		return "/_05_memberProfile";
 	}
 
 }

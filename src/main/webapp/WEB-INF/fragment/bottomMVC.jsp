@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="stylesheet" href="<c:url value='./css/commonStyle.css' />"
+<link rel="stylesheet" href="<c:url value='/css/commonStyle.css' />"
 	type="text/css">
 <!-- footer Start! -->
     <div class="footer container-fluid">
