@@ -1,0 +1,53 @@
+package com.web.store.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.web.store.dao.ProductDao;
+import com.web.store.model._04_shop.ProductBean;
+import com.web.store.model._07_productType.ProductTypeBean;
+import com.web.store.service.ProductService;
+
+@Transactional
+@Service
+public class ProductServiceImpl implements ProductService {
+
+	ProductDao productDao;
+
+	@Autowired
+	public ProductServiceImpl(ProductDao productDao) {
+		this.productDao = productDao;
+	}
+
+	@Override
+	public List<ProductBean> getAllProducts() {
+		return productDao.getAllProducts();
+	}
+
+	@Override
+	public List<ProductBean> getProductsByProdType(String prodtype) {
+		return productDao.getProductsByProdType(prodtype);
+	}
+
+	@Override
+	public List<ProductTypeBean> getAllProdTypes() {
+		return productDao.getAllProdTypes();
+	}
+
+	@Override
+	public void updateStock(int productId, int newQuantity) {
+	}
+
+	@Override
+	public ProductBean getProductById(int productId) {
+		return null;
+	}
+
+	@Override
+	public void addProduct(ProductBean product) {
+	}
+
+}

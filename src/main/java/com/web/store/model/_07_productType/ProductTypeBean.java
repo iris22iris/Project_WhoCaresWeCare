@@ -48,6 +48,10 @@ public class ProductTypeBean implements Serializable {
 		this.product = product;
 	}
 
+	public ProductTypeBean(String prodType) {
+		this.prodType = prodType;
+	}
+
 	public String getProdType() {
 		return prodType;
 	}

@@ -32,7 +32,8 @@
 
 		<!-- imgAd Start -->
 		<div class="menuAd d-flex justify-content-center">
-			<img src="/images/menuAd.png" class="imageAd" alt="ad3">
+			<img src="<c:url value='/images/menuAd.png' />" class="imageAd" alt="ad3">
+			
 		</div>
 		<!-- imgAd End -->
 

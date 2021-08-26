@@ -32,11 +32,6 @@ public class PagesController {
 	return "_03_rentItemList";
 	}
 	
-	@GetMapping("/buyMenu")
-	public String buyProductMenu(Model model) {
-	return "_04_buyProductMenu";
-	}
-	
 	@GetMapping("/_04_productPage")
 	public String productPage(Model model) {
 	return "_04_productPage";
