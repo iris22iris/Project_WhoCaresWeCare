@@ -28,8 +28,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<ProductBean> getProductsByProdType(String prodtype) {
-		return productDao.getProductsByProdType(prodtype);
+	public List<ProductBean> getProductsByProdType(ProductTypeBean prodTypeBean) {
+		return productDao.getProductsByProdType(prodTypeBean);
 	}
 
 	@Override

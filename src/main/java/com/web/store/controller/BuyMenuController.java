@@ -37,7 +37,7 @@ public class BuyMenuController {
 
 	@RequestMapping("/buyMenu/{productType.prodType}")
 	public String getProductsByProdType(@PathVariable("productType.prodType") String prodtype, Model model) {
-		List<ProductBean> products = productService.getProductsByProdType(prodtype);
+		List<ProductBean> products = productService.getProductsByProdType(new ProductTypeBean(prodtype));
 		List<ProductTypeBean> productTypes = productService.getAllProdTypes();
 		model.addAttribute("products", products);
 		model.addAttribute("productTypes", productTypes);

@@ -9,7 +9,7 @@ public interface RentProductDao {
 
 	List<RentProductBean> getAllProducts();
 
-	List<RentProductBean> getProductsByProdType(String prodtype);
+	List<RentProductBean> getProductsByProdType(ProductTypeBean prodTypeBean);
 
 	List<ProductTypeBean> getAllProdTypes();
 

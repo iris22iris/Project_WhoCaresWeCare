@@ -145,19 +145,21 @@ public class ProductBean implements Serializable {
 		this.promoteId = promoteId;
 	}
 
-	public PromotionBean getPromotionBean() {
-		return promotionBean;
-	}
-
 //	雙向多對一productTypeBean之getter、setter 開始
+	
 	public ProductTypeBean getProductTypeBean() {
 		return productTypeBean;
 	}
-
+	
 	public void setProductTypeBean(ProductTypeBean productTypeBean) {
 		this.productTypeBean = productTypeBean;
 	}
+	
 //	雙向多對一productTypeBean之getter、setter 結束
+	
+	public PromotionBean getPromotionBean() {
+		return promotionBean;
+	}
 
 	public void setPromotionBean(PromotionBean promotionBean) {
 		this.promotionBean = promotionBean;

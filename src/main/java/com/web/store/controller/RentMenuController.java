@@ -38,7 +38,7 @@ public class RentMenuController {
 
 	@RequestMapping("/rentMenu/{productType.prodType}")
 	public String getProductsByProdType(@PathVariable("productType.prodType") String prodtype, Model model) {
-		List<RentProductBean> rentProducts = rentProductService.getProductsByProdType(prodtype);
+		List<RentProductBean> rentProducts = rentProductService.getProductsByProdType(new ProductTypeBean(prodtype));
 		List<ProductTypeBean> productTypes = rentProductService.getAllProdTypes();
 		model.addAttribute("rentProducts", rentProducts);
 		model.addAttribute("productTypes", productTypes);

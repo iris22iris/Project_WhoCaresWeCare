@@ -30,10 +30,10 @@ public class RentProductDaoImpl implements RentProductDao {
 	}
 
 	@Override
-	public List<RentProductBean> getProductsByProdType(String prodtype) {
+	public List<RentProductBean> getProductsByProdType(ProductTypeBean prodTypeBean) {
 		Session session = factory.getCurrentSession();
-		String hql = " FROM RentProductBean rp WHERE rp.productTypeBean = :pt";
-		List<RentProductBean> list = session.createQuery(hql, RentProductBean.class).setParameter("pt", prodtype).getResultList();
+		String hql = " FROM RentProductBean rp WHERE rp.productTypeBean = :ptb ";
+		List<RentProductBean> list = session.createQuery(hql, RentProductBean.class).setParameter("ptb", prodTypeBean).getResultList();
 		return list;
 	}
 

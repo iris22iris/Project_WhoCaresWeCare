@@ -28,8 +28,8 @@ public class RentProductServiceImpl implements RentProductService {
 	}
 
 	@Override
-	public List<RentProductBean> getProductsByProdType(String prodtype) {
-		return rentProductDao.getProductsByProdType(prodtype);
+	public List<RentProductBean> getProductsByProdType(ProductTypeBean prodTypeBean) {
+		return rentProductDao.getProductsByProdType(prodTypeBean);
 	}
 
 	@Override

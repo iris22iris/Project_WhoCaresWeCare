@@ -30,10 +30,10 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public List<ProductBean> getProductsByProdType(String prodtype) {
+	public List<ProductBean> getProductsByProdType(ProductTypeBean prodTypeBean) {
 		Session session = factory.getCurrentSession();
-		String hql = " FROM ProductBean p WHERE p.PRODUCT_PRODTYPE_FK = :pt";
-		List<ProductBean> list = session.createQuery(hql, ProductBean.class).setParameter("pt", prodtype).getResultList();
+		String hql = " FROM ProductBean p WHERE p.productTypeBean = :ptb";
+		List<ProductBean> list = session.createQuery(hql, ProductBean.class).setParameter("ptb", prodTypeBean).getResultList();
 		return list;
 	}
 
