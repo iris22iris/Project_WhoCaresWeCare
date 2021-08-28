@@ -39,30 +39,39 @@
 
 <body>
 	<div id="body">
-		<!-- 引入index的menu start -->
+		<!-- header start -->
 		<!-- 引入共同的頁首 -->
 		<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
-		<!-- 引入index的menu end -->
-<!-- menu下面的標題顯示 start -->
-		<div class="menuTwo">
-			<div class="row row-cols-auto align-items-center">
-				<div class="col-3"></div>
-				<div class="col-9">
-					<div class="rentProduct-title-catalog">
-						<h2>
-							<i class="fas fa-th-large px-3"></i>商品分類
-						</h2>
-					</div>
-				</div>
-			</div>
-		</div>
+		<!-- header end -->
 
+
+
+<!-- delete----------------------- -->
+<!-- 		<div class="menuTwo"> -->
+<!-- 			<div class="row row-cols-auto align-items-center"> -->
+<!-- 				<div class="col-3"></div> -->
+<!-- 				<div class="col-9"> -->
+<!-- 					<div class="rentProduct-title-catalog"> -->
+<!-- 						<h2> -->
+<!-- 							<i class="fas fa-th-large px-3"></i>商品分類 -->
+<!-- 						</h2> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 		<!-- menu下面的標題顯示 end -->
+<!-- delete----------------------- -->
 
 
-		<div class="allPage">
-			<!-- Side-List Start -->
-			<div class="col-3 ms-4" style="margin-top: 3cm;">
+
+		<!-- main start -->
+		<div class="container-fluid d-flex">
+<!-- 		<div class="allPage"> -->
+
+
+		<!-- Side-List Start -->
+		<%@ include file="/WEB-INF/fragment/buySideMenu.jsp" %>
+			<!-- <div class="col-3 ms-4" style="margin-top: 3cm;">
 				<div class="text-center">
 					<div class="d-flex flex-wrap justify-content-center my-3"
 						style="background-color: white;">
@@ -113,14 +122,26 @@
 					</div>
 				</div>
 
-			</div>
-			<!-- Side-List End -->
-
+			</div> -->
+		<!-- Side-List End -->
+			
+			
+			
+		
+	<!-- main-right-side start -->
 			<div class="productPage col-9 ">
+				<div class="catagory col-11">
+					<i class="fas fa-th-large px-2"></i>
+					<a href="#大分類">商品大分類</a>
+					<i class="fas fa-angle-right"></i>
+					<a href="#小分類">商品小分類</a>
+					<hr>
+				</div>
 
-				<div class="productShell col-12">
-					<div class="pictureandinfo d-flex col-12">
-						<div class="productPicture col-6">
+				<!-- 商品圖片&名稱 start -->
+				<div class="productShell col-11">
+					<div class="pictureandinfo d-flex ">
+						<div class="productPicture col-4">
 							<div id="carouselExampleDark"
 								class="carousel carousel-dark slide" data-bs-ride="carousel">
 								<!-- 商品大圖片 start -->
@@ -147,6 +168,8 @@
 								<!-- 商品大圖片 end -->
 							</div>
 							<!-- 商品小圖片 start -->
+							<div  class="smallImage">
+                                <div>
 							<input type="image" data-bs-target="#carouselExampleDark"
 								data-bs-slide-to="0" name="submit_Btn" id="submit_Btn"
 								src="<c:url value='/images/product/A0001.jpg' />"
@@ -159,13 +182,12 @@
 								name="submit_Btn" id="submit_Btn"
 								src="<c:url value='/images/product/A0003.jpg' />"
 								style="border-radius: 10px">
-
-
 						</div>
+					</div>
 						<!-- 商品小圖片 end -->
-
+				</div>
 					<!-- 商品狀態 start -->
-						<div class="productInfo col-6">
+						<div class="productInfo col-8">
 							<form id="form1" name="form1" method="GET" action="">
 								<label for="fname" class="eee">商品編號</label><br>
 								<h2>商品名稱:</h2>

@@ -22,9 +22,6 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<!-- css -->
-<link rel="stylesheet" href="_03reserve.css">
-
 <!-- icon -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
@@ -32,12 +29,9 @@
 <!-- 圖片切換 -->
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="_03rentProduct.css">
 </head>
 
 <body>
@@ -45,13 +39,13 @@
 		<!-- header start -->
 		<!-- 引入共同的頁首 -->
 		<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
-
 		<!-- header end -->
 
 		<!-- main start -->
 		<div class="container-fluid d-flex">
-			 <!-- Side-List Start -->
-			 <div class="col-2 ms-4" >
+		<!-- Side-List Start -->
+		<%@ include file="/WEB-INF/fragment/rentSideMenu.jsp" %>	 
+			 <!-- <div class="col-2 ms-4" >
 				<div style="height: 60px;"></div>
 				<div class="text-center">
 					<div class="sideList-title">
@@ -88,8 +82,8 @@
 					</div>
 				</div>
 		  
-			  </div>
-			  <!-- Side-List End -->
+			  </div> -->
+		<!-- Side-List End -->
 
 			<!-- main-right-side start -->
 			<div class="productPage col-9 ">

@@ -47,7 +47,8 @@
 
 		<div class="row">
 			<!-- Side-List Start -->
-			<div class="col-2 ms-4">
+			<jsp:include page="/WEB-INF/fragment/rentSideMenu.jsp" />
+			<!-- <div class="col-2 ms-4">
 				<div style="height: 60px;"></div>
 				<div class="text-center">
 					<c:forEach var="productType" items="${productTypes}" varStatus="vs">
@@ -77,7 +78,7 @@
 						<a href="#">特價專區</a><br>
 					</div>
 				</div>
-			</div>
+			</div> -->
 
 			<!-- Side-List End -->
 

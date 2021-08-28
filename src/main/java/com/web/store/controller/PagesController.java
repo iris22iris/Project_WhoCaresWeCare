@@ -22,20 +22,20 @@ public class PagesController {
 		return "_02_onlineDM";
 	}
 	
-	@GetMapping("/_03_rentProduct")
-	public String rentProduct(Model model) {
-	return "_03_rentProduct";
-	}
+//	@GetMapping("/_03_rentProduct")
+//	public String rentProduct(Model model) {
+//	return "_03_rentProduct";
+//	}
 	
 	@GetMapping("/_03_rentItemList")
 	public String rentItemList(Model model) {
 	return "_03_rentItemList";
 	}
 	
-	@GetMapping("/_04_productPage")
-	public String productPage(Model model) {
-	return "_04_productPage";
-	}
+//	@GetMapping("/_04_productPage")
+//	public String productPage(Model model) {
+//	return "_04_productPage";
+//	}
 
 	@GetMapping("/_05_loginPopup")
 	public String loginPopup(Model model) {
