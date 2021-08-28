@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.web.store.dao.CustomerDao;
 import com.web.store.model._05_customer.CustomerBean;
+import com.web.store.repository.CustomerDao;
 import com.web.store.service.CustomerService;
 
 

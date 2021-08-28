@@ -1,4 +1,4 @@
-package com.web.store.dao.impl;
+package com.web.store.repository.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +10,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.web.store.dao.CustomerDao;
 import com.web.store.model._05_customer.CustomerBean;
+import com.web.store.repository.CustomerDao;
 
 @Repository
 public class CustomerDaoImpl implements CustomerDao {

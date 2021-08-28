@@ -1,4 +1,4 @@
-package com.web.store.dao.impl;
+package com.web.store.repository.impl;
 
 import java.util.List;
 
@@ -7,9 +7,9 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.web.store.dao.ProductDao;
 import com.web.store.model._04_shop.ProductBean;
 import com.web.store.model._07_productType.ProductTypeBean;
+import com.web.store.repository.ProductDao;
 
 @Repository
 public class ProductDaoImpl implements ProductDao {

@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.web.store.dao.RentProductDao;
 import com.web.store.model._03_rent.RentProductBean;
 import com.web.store.model._07_productType.ProductTypeBean;
+import com.web.store.repository.RentProductDao;
 import com.web.store.service.RentProductService;
 
 @Transactional

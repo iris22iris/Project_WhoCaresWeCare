@@ -1,4 +1,4 @@
-package com.web.store.dao;
+package com.web.store.repository;
 
 import java.util.List;
 
