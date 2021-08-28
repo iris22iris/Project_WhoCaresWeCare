@@ -99,10 +99,10 @@
 					<div class="row">
 
 						<c:forEach var='product' items='${products}'>
-							<div class="col-3 mt-3">
+							<div class="col-3 mt-3 " id="cardWidth">
 								<div class="card text-center">
 									<a href="#"><img src="<c:url value='/images/product/${product.fileName}' />"
-										class="card-img-top" alt="..."></a>
+										class="card-img-top" id="productImg" alt="..."></a>
 									<div class="card-body">
 										<h5 class="card-title d-flex justify-content-around">
 											${product.prodName}<i class="far fa-heart"

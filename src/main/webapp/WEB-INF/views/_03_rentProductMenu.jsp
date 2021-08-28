@@ -96,11 +96,11 @@
 					<div class="row">
 
 						<c:forEach var='rentProduct' items='${rentProducts}'>
-							<div class="col-3 mt-3">
+							<div class="col-3 mt-3 " id="cardWidth">
 								<div class="card text-center">
 									<a href="#"><img
 										src="<c:url value='/images/product/${rentProduct.fileName}' />"
-										class="card-img-top" alt="..."></a>
+										class="card-img-top" id="productImg" alt="..."></a>
 									<div class="card-body">
 										<h5 class="card-title">${rentProduct.prodName}</h5>
 										<div class="card-text mb-2">

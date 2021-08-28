@@ -74,6 +74,7 @@ select {
 	border: none;
 }
 
+
 .card-body {
 	border-top: 4px dotted #ccc;
 }
@@ -85,6 +86,17 @@ select {
 .card-text {
 	color: rgb(115, 99, 87);
 	font-size: larger;
+}
+
+#cardWidth{
+	width: 268.5px;
+}
+
+#productImg{
+	width: 243px;
+	height: 243px;
+	overflow: hidden;
+
 }
 
 .pageLink {

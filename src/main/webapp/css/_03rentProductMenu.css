@@ -77,6 +77,17 @@ select {
 	color: sienna;
 }
 
+#cardWidth{
+	width: 268.5px;
+}
+
+#productImg{
+	width: 243px;
+	height: 243px;
+	overflow: hidden;
+
+}
+
 .card-text {
 	color: rgb(115, 99, 87);
 	font-size: larger;
