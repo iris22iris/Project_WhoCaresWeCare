@@ -1,0 +1,54 @@
+
+
+
+/* ------title------- */
+.title{
+    color:  rgb(117,76,36);
+    margin: 20px 0px;
+
+}
+
+/* -------followList------ */
+
+
+.followListTitle {
+    background: rgb(117,76,36);
+    color: white;
+    height: 50px;
+    font-size: 22px;
+}
+
+.col-1 , .col-2 , .col-3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 2px;
+}
+
+
+/* ------item------- */
+.listItem{
+    background-color: white;
+    border: 0.3px solid silver;
+    font-size: larger;
+    color: rgb(59, 52, 43);
+}
+
+.productImg{
+    width: 10rem;
+    padding: 5px 0px;
+}
+
+
+
+
+/* -------goShopBtn----- */
+.goShopBtn{
+    display: flex;
+    justify-content: center;
+    align-items:flex-end;
+}
+
+.goShop{
+    padding: 40px 0px;
+}

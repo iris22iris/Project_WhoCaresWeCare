@@ -32,10 +32,10 @@ public class PagesController {
 	return "_03_rentItemList";
 	}
 	
-//	@GetMapping("/_04_productPage")
-//	public String productPage(Model model) {
-//	return "_04_productPage";
-//	}
+	@GetMapping("/_04_favoriteList")
+	public String favoriteList(Model model) {
+	return "_04_favoriteList";
+	}
 
 	@GetMapping("/_05_loginPopup")
 	public String loginPopup(Model model) {
