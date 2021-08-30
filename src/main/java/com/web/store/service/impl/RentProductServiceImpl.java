@@ -41,9 +41,10 @@ public class RentProductServiceImpl implements RentProductService {
 	public void updateStock(int productId, int newQuantity) {
 	}
 
+	@Transactional
 	@Override
-	public RentProductBean getProductById(int productId) {
-		return null;
+	public RentProductBean getProductById(int prodId) {
+		return rentProductDao.getProductById(prodId);
 	}
 
 	@Override

@@ -6,7 +6,7 @@
 <html>
 
 <head>
-<title>商品明細</title>
+<title>商品頁面: ${product.prodName}</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
 <!-- bootstrap -->
@@ -43,26 +43,6 @@
 		<!-- 引入共同的頁首 -->
 		<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 		<!-- header end -->
-
-
-
-<!-- delete----------------------- -->
-<!-- 		<div class="menuTwo"> -->
-<!-- 			<div class="row row-cols-auto align-items-center"> -->
-<!-- 				<div class="col-3"></div> -->
-<!-- 				<div class="col-9"> -->
-<!-- 					<div class="rentProduct-title-catalog"> -->
-<!-- 						<h2> -->
-<!-- 							<i class="fas fa-th-large px-3"></i>商品分類 -->
-<!-- 						</h2> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-		<!-- menu下面的標題顯示 end -->
-<!-- delete----------------------- -->
-
-
 
 		<!-- main start -->
 		<div class="container-fluid d-flex">

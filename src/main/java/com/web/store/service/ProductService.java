@@ -15,7 +15,7 @@ public interface ProductService {
 
 	void updateStock(int productId, int newQuantity);
 
-	public ProductBean getProductById(int productId);
+	public ProductBean getProductById(int prodId);
 
 	void addProduct(ProductBean product);
 

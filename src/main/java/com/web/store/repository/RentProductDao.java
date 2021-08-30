@@ -15,7 +15,7 @@ public interface RentProductDao {
 
 	void updateStock(int productId, int newQuantity);
 
-	public RentProductBean getProductById(int productId);
+	public RentProductBean getProductById(int prodId);
 
 	void addProduct(RentProductBean product);
 

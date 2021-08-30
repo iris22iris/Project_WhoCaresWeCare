@@ -43,8 +43,8 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Transactional
 	@Override
-	public ProductBean getProductById(int productId) {
-		return productDao.getProductById(productId);
+	public ProductBean getProductById(int prodId) {
+		return productDao.getProductById(prodId);
 	}
 
 	@Override

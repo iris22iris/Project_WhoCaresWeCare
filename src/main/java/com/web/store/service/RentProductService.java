@@ -3,6 +3,7 @@ package com.web.store.service;
 import java.util.List;
 
 import com.web.store.model._03_rent.RentProductBean;
+import com.web.store.model._04_shop.ProductBean;
 import com.web.store.model._07_productType.ProductTypeBean;
 
 public interface RentProductService {
@@ -15,7 +16,7 @@ public interface RentProductService {
 
 	void updateStock(int productId, int newQuantity);
 
-	public RentProductBean getProductById(int productId);
+	public RentProductBean getProductById(int prodId);
 
 	void addProduct(RentProductBean product);
 

@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="<c:url value='/css/commonStyle.css' />"
 	type="text/css">
 
-<title>租賃設備明細</title>
+<title>租賃設備頁面: ${rentproduct.prodName} </title>
 
 <!-- bootstrap -->
 <link
