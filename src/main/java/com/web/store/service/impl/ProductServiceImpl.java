@@ -40,10 +40,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void updateStock(int productId, int newQuantity) {
 	}
-
+	
+	@Transactional
 	@Override
 	public ProductBean getProductById(int productId) {
-		return null;
+		return productDao.getProductById(productId);
 	}
 
 	@Override

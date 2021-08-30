@@ -50,7 +50,9 @@ public class ProductDaoImpl implements ProductDao {
 
 	@Override
 	public ProductBean getProductById(int productId) {
-		return null;
+		Session session = factory.getCurrentSession();
+		ProductBean pb = session.get(ProductBean.class,productId);
+		return pb;
 	}
 
 	@Override
