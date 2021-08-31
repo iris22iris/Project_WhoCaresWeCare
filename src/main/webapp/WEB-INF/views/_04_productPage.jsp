@@ -39,6 +39,8 @@
 
 <body>
 	<div id="body">
+		<div id="content">
+	
 		<!-- header start -->
 		<!-- 引入共同的頁首 -->
 		<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
@@ -51,63 +53,7 @@
 
 		<!-- Side-List Start -->
 		<%@ include file="/WEB-INF/fragment/buySideMenu.jsp" %>
-			<!-- <div class="col-3 ms-4" style="margin-top: 3cm;">
-				<div class="text-center">
-					<div class="d-flex flex-wrap justify-content-center my-3"
-						style="background-color: white;">
-						<div class="sideList-title mt-3">
-							<h2 class="my-2">
-								<i class="fas fa-hand-holding-medical"></i> 輔具類
-							</h2>
-						</div>
-						<div class="sideList">
-							<a href="#" style="color: #622d18; text-decoration: none;">拐杖-110cm</a><br>
-							<a href="#" style="color: #622d18; text-decoration: none;">拐杖-120cm</a><br>
-							<a href="#" style="color: #622d18; text-decoration: none;">拐杖-130cm</a><br>
-							<a href="#" style="color: #622d18; text-decoration: none;">可折疊輪椅</a><br>
-							<a href="#" style="color: #622d18; text-decoration: none;">不可折疊輪椅</a><br>
-						</div>
-						<div class="sideList-title">
-							<h2 class="my-2">
-								<i class="fas fa-shield-alt"></i> 護具類
-							</h2>
-						</div>
-						<div class="sideList">
-							<a href="#" style="color: #622d18; text-decoration: none;">護膝</a><br>
-							<a href="#" style="color: #622d18; text-decoration: none;">護腰</a><br>
-						</div>
-						<div class="sideList-title">
-							<h2 class="my-2">
-								<i class="fas fa-clinic-medical"></i> 居家保健
-							</h2>
-						</div>
-						<div class="sideList rounded-bottom">
-							<a href="#" style="color: #622d18; text-decoration: none;">照護病床</a><br>
-						</div>
-					</div>
-				</div>
-
-				<div class="text-center">
-					<div class="d-flex flex-wrap justify-content-center my-3"
-						style="background-color: white;">
-						<div class="sideList-title mt-3"
-							style="background-color: chocolate;">
-							<h2 class="my-2">
-								<i class="fab fa-shopify"></i> 優惠活動
-							</h2>
-						</div>
-						<div class="sideList rounded-bottom">
-							<a href="#" style="color: #622d18; text-decoration: none;">特價專區</a><br>
-						</div>
-					</div>
-				</div>
-
-			</div> -->
-		<!-- Side-List End -->
-			
-			
-			
-		
+	
 	<!-- main-right-side start -->
 			<div class="productPage col-9 ">
 				<div class="catagory col-11">
@@ -261,14 +207,14 @@
 			</div>
 		</div>
 
-	</div>
-
 		<!-- footer Start! -->
-
 		<!-- 引入共同的頁尾 -->
 		<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
-
 		<!-- footer End! -->
+
+	</div>
+
+
 </body>
 
 </html>

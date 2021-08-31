@@ -28,7 +28,7 @@
 <body>
 	<div id="body">
     <!-- main start -->
-    <div class="main">
+    <div class="mainHeader" id="content">
 
       <!-- side-menu start -->
         <nav class="side-menu col-2 ">
@@ -103,13 +103,13 @@
                         
                         <label for="inputDescription" class="form-label">問題敘述:</label>
                         <br>
-                        <textarea name="description" id="inputDescription" cols="70" rows="10"></textarea>
+                        <textarea name="description" id="inputDescription" cols="70" rows="6"></textarea>
                     </div>
                     <!-- description end -->
 
 
 
-                    <!-- submit&upload start -->
+                 <!-- submit&upload start -->
                 <div class="d-flex">
                   <button type="button" class="btn btn-warning me-2" onclick="track(this)">
                     送出表單
@@ -124,11 +124,16 @@
             <!-- form end -->           
         </div> 
          <!-- Main Form start-->
+         
     </div>
+
+ 
+    <!-- 引入共同的頁尾 -->
+	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
+         
     </div>
      <!-- main end-->      
-	 <!-- 引入共同的頁尾 -->
-	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
+
     <!-- bootstrap -->
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" ></script>   
   <script>

@@ -70,12 +70,13 @@
 
 <body>
 	<div id="body">
+		<div id="content">
 		<!-- 引入共同的頁首 -->
 		<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 
 
 		<!-- main start! -->
-		<div class="main">
+		<div class="loginMain">
 			<div class="container a-container" id="a-container">
 				<!-- login form start -->
 				<form class="form" id="a-form" method="POST" action="login">
@@ -182,9 +183,13 @@
 			</div>
 		</div>
 		<!--拼圖認證+彈跳 End!-->
-	</div>
+		
+		</div>
+		
 	<!-- 引入共同的頁尾 -->
 	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
+		
+	</div>
 
 	<!-- 註冊登入js參考網站:https://webdesignerwall.com/wdw-snippet/login-form-4 -->
 	<script type="text/javascript" src="./js/_05login.js"></script>

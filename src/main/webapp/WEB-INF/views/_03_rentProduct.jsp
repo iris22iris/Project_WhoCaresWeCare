@@ -36,6 +36,7 @@
 
 <body>
 	<div id="body">
+	 <div id="content">
 		<!-- header start -->
 		<!-- 引入共同的頁首 -->
 		<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
@@ -237,13 +238,18 @@
 			</div>
 			<!-- main-right-side start -->
 		</div>
-		<!-- main end -->
+		
+		
 	</div>
-
-	<!-- footer Start! -->
+	
 	<!-- 引入共同的頁尾 -->
 	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
-	<!-- footer End! -->
+	
+	
+	</div>
+	<!-- main end -->
+
+
 
 </body>
 

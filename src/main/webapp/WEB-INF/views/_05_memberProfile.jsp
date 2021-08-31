@@ -8,27 +8,28 @@
 	href="<c:url value='/css/_05memberProfile.css' />" type="text/css">
 <link rel="stylesheet" href="<c:url value='/css/commonStyle.css' />"
 	type="text/css">
-<!-- bootstrap -->
-<link
+	<!-- bootstrap -->
+	<link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	data-integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	data-crossorigin="anonymous">
+	rel="stylesheet"">
 
-<!-- icon -->
-<link rel="stylesheet"
+	<!-- icon -->
+	<link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- 引入共同的頁首 -->
-<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+
 
 <title>會員資料修改</title>
 </head>
 <body>
 	<div id="body">
+	<div id="content">
+		<!-- 引入共同的頁首 -->
+		<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+	
+	
 		<!-- changmtitle star  會員修改資料標題star -->
 		<div class="changmtitle col-3 text-center p-3  ">
 			<ol>
@@ -235,16 +236,13 @@
 			</div>
 			<!-- main container end  修改會員資料的表單end -->
 		</div>
-	</div>
-	<!-- footer End! -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-		data-integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-		data-crossorigin="anonymous"></script>
-
-
+		</div>
 	<!-- 引入共同的頁尾 -->
-	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
+	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />	
+		
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

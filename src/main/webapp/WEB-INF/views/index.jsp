@@ -5,9 +5,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="<c:url value='/css/index.css' />"
+	<link rel="stylesheet" href="<c:url value='/css/index.css' />"
 	type="text/css">
-<link rel="stylesheet" href="<c:url value='/css/commonStyle.css' />"
+	<link rel="stylesheet" href="<c:url value='/css/commonStyle.css' />"
 	type="text/css">
     <!-- bootstrap -->
     <link
@@ -17,14 +17,17 @@
     <link rel="stylesheet"
     href="<c:url value='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'/>" />
 
-	<!-- 引入共同的頁首 -->
-	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 	
 	<title>Who Cares? We Care!</title>
 </head>
 <body >
 
 	<div id="body">
+	<div id="content">
+	
+	<!-- 引入共同的頁首 -->
+	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+	
 	<!-- 廣告圖片大小&button顏色 還須調整 -->
 	<!-- Slider-img Start! -->
 	<div id="carouselExampleInterval" class="carousel slide"
@@ -276,16 +279,14 @@
 		</div>
 		<!-- Product-card End -->
 	</div>
-</div>
-
-
-
-
+	
+	</div>
 	<!-- 引入共同的頁尾 -->
 	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
 
-
-<!-- bootstrap -->
+	</div>
+	
+	<!-- bootstrap -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js">
 	</script>

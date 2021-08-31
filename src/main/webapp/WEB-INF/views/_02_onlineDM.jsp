@@ -35,9 +35,9 @@
 </head>
 
 <body>
-	<div id="body">  
+	<div id="body">
     <!-- midlecontent start -->
-    <div class="midlecontent d-flex ">
+    <div class="midlecontent d-flex " id="content">
         
          <!-- side-menu start -->
         <nav class="side-menu col-2 ">
@@ -84,11 +84,15 @@
         </div>
         <!-- dmcontainer end -->
     </div>
-   </div>
     <!-- midlecontent end -->
     
-    <!-- 引入共同的頁尾 -->
+     <!-- 引入共同的頁尾 -->
 	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
+    
+   </div>
+    
+    
+   
  <script type="text/javascript" src="./js/_02onlinedm.js"></script> 
 </body>
 </html>

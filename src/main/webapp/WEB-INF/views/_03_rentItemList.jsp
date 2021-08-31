@@ -18,20 +18,26 @@
     <!-- icon -->
     <link rel="stylesheet"
     href="<c:url value='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'/>" />
-     <!-- 引入共同的頁首 -->
-	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+ 
+	
+     
+     
     <title>租賃設備清單</title>
 </head>
 <body>
 <div id="body">
-<!-- title start! -->
-<div class="title container">
-  <i class="fas fa-shopping-cart pe-2"></i>租賃設備清單
-</div>
-<!-- title end! -->
+	<div id="content">
+	 <!-- 引入共同的頁首 -->
+	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 
-<!-- List start! -->
-<div class="list container">
+	<!-- title start! -->
+	<div class="title container">
+  		<i class="fas fa-shopping-cart pe-2"></i>租賃設備清單
+	</div>
+	<!-- title end! -->
+
+	<!-- List start! -->
+	<div class="list container">
     <div class="row list-head">
         <div class="col">商品圖片</div>
         <div class="col-2">商品名稱</div>
@@ -169,11 +175,11 @@
     </div>
     
 </div>
-<!-- List end! -->
+	<!-- List end! -->
 
 
-<!-- count start! -->
-<div class="count container">
+	<!-- count start! -->
+	<div class="count container">
     <!-- bottom-left -->
   <div class="bottom-left">
     <h5>已符合：</h5>
@@ -204,14 +210,21 @@
           <button type="button" class="btn btn-secondary my-2">繼續購物</button>
         </div></div>
     </div>
-</div>
-<!-- count end! -->
-</div>
-  <!-- 引入共同的頁尾 -->
+	</div>
+	<!-- count end! -->
+		
+		
+		</div>
+	
+	
+	<!-- 引入共同的頁尾 -->
 	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
+
+</div>
+  
 	
  <!-- bootstrap -->
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>   
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>   
 
 </body>
 </html>

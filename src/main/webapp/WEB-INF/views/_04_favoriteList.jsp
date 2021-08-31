@@ -23,6 +23,7 @@
 <body>
 <!-- main start -->
   <div id="body">
+  	<div id="content">
 	<!-- 引入共同的頁首 -->
 	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 
@@ -90,7 +91,7 @@
 
           </div>
           <!-- followList end -->
-         
+         </div>
      <!-- 引入共同的頁尾 -->
 	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
          

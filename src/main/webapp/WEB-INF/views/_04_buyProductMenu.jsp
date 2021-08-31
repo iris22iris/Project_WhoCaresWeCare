@@ -26,8 +26,9 @@
 <script src="<c:url value='/js/_04buyProductMenu.js' />"></script>
 </head>
 
-<body id="body">
+<body>
 	<div id="body">
+		<div id="content">
 		<!-- 引入共同的頁首 -->
 		<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 
@@ -50,42 +51,7 @@
 		<div class="row">
 			<!-- Side-List Start -->
 			<jsp:include page="/WEB-INF/fragment/buySideMenu.jsp" />
-			<!-- <div class="col-2 ms-4">
-				<div style="height: 60px;"></div>
-				<div class="text-center">
-					<c:forEach var="productType" items="${productTypes}" varStatus="vs">
-						<c:choose>
-							<c:when test="${productType.prodType.length() == 1}">
-								<c:choose>
-									<c:when test="${vs.first}">
-										<div class="sideList-title">${productType.prodName}類</div>
-									</c:when>
-									<c:otherwise>
-										<div class="sideList-title">${productType.prodName}類</div>
-									</c:otherwise>
-								</c:choose>
-							</c:when>
-							<c:otherwise>
-								<div class="sideList">
-									<a href="<c:url value='/buyMenu/${productType.prodType}' />">${productType.prodName}</a><br>
-								</div>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-				</div>
-
-				<div class="text-center">
-					<div class="sideList-title mt-4 discount-title">優惠活動</div>
-					<div class="sideList">
-						<a href="#">福利品9折</a><br>
-						<a href="#">父親節滿888元打8折</a><br>
-					</div>
-				</div>
-			</div> -->
-
-			<!-- Side-List End -->
-
-
+			
 			<!-- Product Start -->
 			<div class="buyProduct col-9">
 				<div class="container-fluid d-flex justify-content-end">
@@ -146,7 +112,7 @@
 	<!-- Main End -->
 	<!-- 引入共同的頁尾 -->
 	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
-
+</div>
 	<!-- bootstrap -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js">

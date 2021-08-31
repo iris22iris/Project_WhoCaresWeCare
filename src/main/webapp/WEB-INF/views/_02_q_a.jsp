@@ -28,7 +28,7 @@
 	<div id="body">
     <!-- main start -->
     
-    <div class="main d-flex">
+    <div class="mainQA d-flex" id="content">
         <!-- side-menu start -->
         <nav class="side-menu col-2 ">
             <div class="sideSpace"></div>
@@ -128,9 +128,11 @@
   <!-- 引入共同的頁尾 -->
         
     </div>
-    <!-- main end -->
-</div>
+    
 	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
+	
+    <!-- main end -->
+	</div>
 	
     <!-- bootstrap -->
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" ></script>   

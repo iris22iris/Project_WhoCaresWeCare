@@ -120,8 +120,8 @@
 /* 商品圖片 */
 
 .img1, .img2, .img3 {
-    /* height: 300px;
-    width: 350px; */
+    height: 300px;
+    width: 300px; 
     display: flex;
     justify-content:center ;
     padding: 15px 0px;
