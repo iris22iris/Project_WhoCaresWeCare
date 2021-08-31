@@ -47,9 +47,10 @@
 				<!--  圖片star  圖片star -->
 				<div
 					class="col-12  d-flex justify-content-center align-items-center ">
-					<a href="#"> <img
-						src="<c:url value='/images/product/A0001.jpg' />" class="cuspic"
-						alt='cuspic'>
+					<a href="#">
+<!-- 					 <img -->
+<%-- 						src="<c:url value='/images/product/A0001.jpg' />" class="cuspic" --%>
+<!-- 						alt='cuspic'> -->
 					</a>
 				</div>
 				<!--  圖片end  圖片end -->
@@ -88,7 +89,7 @@
 					
 					
 						<div class="col-9 ">
-							<input type="text" class="form-control" id="inputname" Value="${modifyCust.custName}">
+							<input type="text" class="form-control" id="inputname" value="${modifyCust.custName}">
 						</div>
 
 						<div class="col-3">
