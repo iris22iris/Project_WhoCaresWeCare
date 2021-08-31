@@ -47,15 +47,7 @@ public class RentMenuController {
 		return "_03_rentProductMenu";
 	}
 	
-	//商品頁面的sideMenu抓取資料 ----------暫時註解未來到RentProductPageController合併
-//	@RequestMapping("/_03_rentProduct")
-//	public String rentProduct(Model model) {
-//		List<RentProductBean> rentProducts = rentProductService.getAllProducts();
-//		List<ProductTypeBean> productTypes = rentProductService.getAllProdTypes();
-//		model.addAttribute("rentProducts", rentProducts);
-//		model.addAttribute("productTypes", productTypes);
-//		return "_03_rentProduct";
-//	}
+
 
 
 	

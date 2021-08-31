@@ -44,13 +44,6 @@ public class BuyMenuController {
 		return "_04_buyProductMenu";
 	}
 
-//	@RequestMapping("/_04_productPage") ---------------暫時註解未來合併到BuyProductPageController
-//	public String buyProduct(Model model) {
-//		List<ProductBean> products = productService.getAllProducts();
-//		List<ProductTypeBean> productTypes = productService.getAllProdTypes();
-//		model.addAttribute("products", products);
-//		model.addAttribute("productTypes", productTypes);
-//		return "_04_productPage";
-//	}
+
 	
 }
