@@ -19,6 +19,12 @@ public class BuyProductPageController {
 
 	@RequestMapping("/_04_productPage")
 	public String getProductById(@RequestParam("id") Integer id, Model model) {
+		
+		List<ProductBean> products = productService.getAllProducts();
+		List<ProductTypeBean> productTypes = productService.getAllProdTypes();
+		model.addAttribute("products", products);
+		model.addAttribute("productTypes", productTypes);
+		
 		model.addAttribute("product", productService.getProductById(id));
 		return "_04_productPage";
 	};

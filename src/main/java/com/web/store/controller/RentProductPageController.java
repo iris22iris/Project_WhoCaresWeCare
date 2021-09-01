@@ -1,5 +1,7 @@
 package com.web.store.controller;
 
+import java.util.List;
+
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.web.store.service.ProductService;
+import com.web.store.model._03_rent.RentProductBean;
+import com.web.store.model._07_productType.ProductTypeBean;
 import com.web.store.service.RentProductService;
 
 //import org.springframework.stereotype.Controller;
@@ -23,6 +26,11 @@ public class RentProductPageController {
 	
 	@RequestMapping("/_03_rentProduct")
 	public String getProductById(@RequestParam("id") Integer id, Model model) {
+		List<RentProductBean> rentProducts = rentProductService.getAllProducts();
+		List<ProductTypeBean> productTypes = rentProductService.getAllProdTypes();
+		model.addAttribute("rentProducts", rentProducts);
+		model.addAttribute("productTypes", productTypes);
+		
 		model.addAttribute("rentproduct", rentProductService.getProductById(id));
 		return "_03_rentProduct";
 	};
