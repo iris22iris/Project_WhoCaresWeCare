@@ -34,10 +34,10 @@
     .loginMain {
         position: relative;
         width: 1000px;
-        height: 570px;
-        padding: 25px;
-        background-color: #FDFDFD;
-        margin: 0px auto;
+        height: 560px;
+        padding: 5px;
+        background-image: url(../images/background7.png);
+        margin: 50px auto;
     }
     
     .container {
@@ -158,10 +158,10 @@
         align-items: center;
         position: absolute;
         /* tpp硬調間距   */
-        top: 8px; 
+/*         top: 8px;  */
         left: 0;
          /* height硬調間距   */
-        height: 554px; 
+        height: 556px; 
         width: 400px; 
         padding: 50px;
         z-index: 200;
@@ -339,7 +339,7 @@
         background-color: #eee;
         position: absolute;
         bottom: -50px; /*拉條上下位置*/
-        left: calc( var(--puzzle-width) * 2 * -1);
+        left: calc( var(--puzzle-width) * 2 * -0.5);
         box-shadow: inset 0px 0px 12px rgba(0, 0, 0, .2);
         border: 3px solid #ccc; 
     }
