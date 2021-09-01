@@ -68,7 +68,7 @@
 
 </head>
 
-<body>
+<body id="loginBody">
 	<div id="body">
 		<div id="content">
 		<!-- 引入共同的頁首 -->
