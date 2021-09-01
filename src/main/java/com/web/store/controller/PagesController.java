@@ -51,4 +51,10 @@ public class PagesController {
 	public String memberProfile(Model model) {
 	return "_05_memberProfile";
 	}
+	
+	@GetMapping("/_06_orderQuery")
+	public String orderQuery(Model model) {
+	return "_06_orderQuery";
+	}
+	
 }

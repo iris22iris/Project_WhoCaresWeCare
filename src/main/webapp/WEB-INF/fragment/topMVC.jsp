@@ -83,16 +83,16 @@ function clicka(obj){
 					<li class="nav-item"><a class="nav-link textSize"
 						href="_05member_management.html" style="color: rgb(34, 4, 4);">
 							訂單查詢</a></li>
-					<div class="nav-item">
+<!-- 					<div class="nav-item"> -->
 						<c:if test="${! empty LoginOK}">
 							<a class="nav-link textSize" href="<c:url value='_05_logout'/>"
 								style="color: rgb(34, 4, 4);"> 
 								登出</a>
 						</c:if>
-					</div>
+<!-- 					</div> -->
 				</ul>
 			</div>
-			</dd>
+		
 
 			<!-- 			<div class="nav-item"> -->
 			<%-- 				<a class="nav-link" href="<c:url value='_05_login' />" --%>
@@ -120,4 +120,4 @@ function clicka(obj){
 		</div>
 	</div>
 </nav>
-<!-- Main-header End -->
+	<!-- Main-header End -->

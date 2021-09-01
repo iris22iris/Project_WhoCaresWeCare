@@ -11,11 +11,12 @@
    
     /* Generic */
     /* 強改bootstrap寬度 */
-    body .container {
-        width: 600px;
+     body .container{ 
+         width: 600px; 
         
-    }
-    
+     } 
+     
+
 
     .loginBody {
         width: 100%;
@@ -372,6 +373,6 @@
    
    
         /* 生日CSS */
-        .btn {
+        /* .btn {
             margin-top: 6px;
-        }
+        } */
