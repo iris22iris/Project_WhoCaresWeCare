@@ -52,7 +52,7 @@
 
 
 		<!-- Side-List Start -->
-		<%@ include file="/WEB-INF/fragment/buySideMenu.jsp" %>
+		<jsp:include page="/WEB-INF/fragment/buySideMenu.jsp"/>
 	
 	<!-- main-right-side start -->
 			<div class="productPage col-9 ">

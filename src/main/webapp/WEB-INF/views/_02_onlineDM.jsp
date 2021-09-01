@@ -62,7 +62,7 @@
             <!-- title end -->
             
             <!-- dmImage start -->
-            <div id="image" class="dmImage pt-3 d-flex justify-content-center">
+            <div id="image" class="dmImage pt-3 ">
                     <img id="myimage" src="<c:url value='/images/DM/DM1.jpg'/>"  alt="dm">         
             </div>
             <!-- dmImage end -->

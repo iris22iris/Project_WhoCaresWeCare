@@ -45,7 +45,7 @@
 		<!-- main start -->
 		<div class="container-fluid d-flex">
 		<!-- Side-List Start -->
-		<%@ include file="/WEB-INF/fragment/rentSideMenu.jsp" %>	 
+		<jsp:include page="/WEB-INF/fragment/rentSideMenu.jsp" />	 
 			 <!-- <div class="col-2 ms-4" >
 				<div style="height: 60px;"></div>
 				<div class="text-center">
