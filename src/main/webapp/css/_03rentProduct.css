@@ -247,6 +247,13 @@ em {
     width: 15%;
     height: 25px;
 }
+
+#modal-header{
+    background-color: #ffa500;
+    
+}
+
+
 /* 留言板end */
 
 

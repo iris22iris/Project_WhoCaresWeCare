@@ -158,7 +158,7 @@
 								<!-- <label for="fname">租賃數量</label> : &nbsp; <input type="number" name="" min="0" max="10" value="1"><br> -->
 								<label for="fname">庫存數量</label> :
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<button class="btn btn-outline-secondary">預約候補</button>
+								<button class="btn btn-outline-secondary " data-bs-toggle="modal" href="#exampleModalToggle" role="button"  type="button" class="btn btn-secondary" data-bs-dismiss="modal">預約候補</button>&nbsp;&nbsp;&nbsp;&nbsp;
 								&nbsp;&nbsp;&nbsp;&nbsp;
 								<button class="btn btn-outline-secondary">加入購物車</button>
 							</form>
@@ -238,7 +238,76 @@
 			</div>
 			<!-- main-right-side start -->
 		</div>
+		<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+        <div class="modal-dialog ">
+          <div class="modal-content">
+	            <div class="modal-header">
+	                <h2 class="modal-title p-3 col-12 d-flex justify-content-evenly " id="exampleModalLabel">登記預約</h2>  
+	            </div>
+            	<div class="containerPOPUP p-3  ">
+	                <form class="row g-3 form">
+	                    <div class="col-3 justify-content-evenly p-1  d-flex align-items-center   ">
+	                        <label style=font-size:22px;  for="inputAccount" class="form-label " >商品名稱 :</label>
+	                    </div>
+	                    <div class="col-7 justify-content-evenly p-1  d-flex align-items-center ">
+	                        <label style=font-size:21px; for="inputAccount" class="form-label">反正就是很好很實用的血糖機</label>
+	                    </div>
+	                    <div class="col-5 justify-content-evenly p-1  d-flex align-items-center">
+	                        <label style=font-size:22px;  for="inputAccount" class="form-label">目前預約候補人數 :</label>
+	                    </div>
+	                    <div class="col-1 justify-content-evenly p-1  d-flex align-items-center">
+	                        <label style=font-size:22px; for="inputAccount" class="form-label">60</label>
+	                    </div>
+	                </form>
+            	</div>
+            <div class="hyperlink  col-12 d-flex justify-content-evenly align-items-center">
+                <div class="modal-footer">
+	                <button class="btn btn-warning" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">確認預約</button>
+	                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                </div>
+            </div>
+            <div class="col-12 justify-content-evenly p-1  d-flex align-items-center">
+                當商品到貨時,請於收到通知信48小時內完成預約
+            </div>
+            <div class="col-12 justify-content-evenly p-1  d-flex align-items-center">
+            	若逾期需重新預約候補
+            </div>
+          </div>
+        </div>
+    </div>
+      <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+        <div class="modal-dialog ">
+          <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title2 p-3 col-12 d-flex justify-content-evenly  " id="exampleModalLabel">成功預約通知</h1>
+                
+                </div>
+                <div class="col-12 justify-content-evenly p-1  d-flex align-items-center ">
+                    <h3 class="modal-title p-3 col-12 d-flex justify-content-evenly " id="exampleModalLabel">恭喜您成功加入預約候補!!!</h3> 
+                </div>
+                
+                <div class="col-6 justify-content-evenly p-1  d-flex align-items-center ">
+                    <label style=font-size:22px; for="inputAccount" class="form-label">您的預約序號為:</label>
+                    <label style=font-size:22px;  for="inputAccount" class="form-label ">61</label>
+                </div>
+                <div class="col-8 justify-content-evenly p-1  d-flex align-items-center ">
+                    <label style=font-size:18px; for="inputAccount" class="form-label">您的預約編號為:</label>
+                    <label style=font-size:18px; for="inputAccount" class="form-label ">A12312312311</label>
+                </div>
+                <div class="modal-footer justify-content-evenly">                           
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">繼續逛逛</button>
+                </div>
+                <div class="col-12 justify-content-evenly p-1  d-flex align-items-center">
+                    當商品到貨時,請於收到通知信48小時內完成預約
+                </div>
+                <div class="col-12 justify-content-evenly p-1  d-flex align-items-center">
+                	若逾期需重新預約候補
+                </div>
+          </div>
+        </div>
+      </div>
 		
+	</div>
 		
 	</div>
 	
