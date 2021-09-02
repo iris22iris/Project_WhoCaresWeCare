@@ -2,6 +2,9 @@ package com.web.store.model._06_order.pkClass;
 
 import java.io.Serializable;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class OrdPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 

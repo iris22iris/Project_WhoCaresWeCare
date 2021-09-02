@@ -17,7 +17,6 @@ import javax.persistence.Table;
 import com.web.store.model._02_customerService.PromotionBean;
 import com.web.store.model._07_productType.ProductTypeBean;
 
-
 @Entity
 @Table(name = "Product")
 public class ProductBean implements Serializable {

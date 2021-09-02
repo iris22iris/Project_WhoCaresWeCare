@@ -22,6 +22,7 @@ import com.web.store.model._03_rent.RentProductBean;
 import com.web.store.model._04_shop.ProductBean;
 import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.model._06_order.OrdBean;
+import com.web.store.model._06_order.pkClass.OrdPK;
 import com.web.store.model._07_productType.ProductTypeBean;
 
 
@@ -88,8 +89,7 @@ public class EDMTableResetHibernate {
 
 					String[] token = line.split("\\|");
 					OrdBean ob = new OrdBean();
-					ob.setCategory(token[0]);
-					ob.setOrdId(Integer.parseInt(token[1]));
+					ob.setOrdPK(new OrdPK(token[0], Integer.parseInt(token[1])));
 					ob.setDelivery(token[2]);
 					ob.setOrdTotal(new BigDecimal(token[3]));
 					ob.setOrderDate(Timestamp.valueOf(token[4]));

@@ -1,55 +1,40 @@
 package com.web.store.controller;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import com.web.store.service.ShoppingCartService;
+import com.web.store.model._04_shop.ProductBean;
+import com.web.store.model._04_shop.ShoppingCart;
 
 @Controller
 public class ShoppingCartController {
 	
-	HttpServletRequest request;
 	
-	HttpServletResponse response;
-			
-	ShoppingCartService shoppingCartService;
-	
-	ServletContext servletContext;
+	HttpSession httpSession;
 	
 	@Autowired
-	public ShoppingCartController(HttpServletRequest request, HttpServletResponse response,
-			ShoppingCartService shoppingCartService, ServletContext servletContext) {
-		this.request = request;
-		this.response = response;
-		this.shoppingCartService = shoppingCartService;
-		this.servletContext = servletContext;
+	public ShoppingCartController(HttpSession httpSession) {
+		this.httpSession = httpSession;
 	}
 	
-	@GetMapping("buyMenu/addCart/{product.prodId}")
+	@PostMapping("/buyMenu/addCart/{product.prodId}")
 	public String AddProductToCart(
-			@PathVariable("product.prodId") String prodId,
-			@PathVariable("amount") Integer amount
-			, Model model
-	) {
-//		HttpSession httpSession = request.getSession();
-		Map<String, Integer> cart = shoppingCartService.getContent();
-		if (cart != null) {
-			cart.put("prodId", amount);
+			@PathVariable("product.prodId") Integer prodId,
+			@ModelAttribute ProductBean productBean,
+			Model model
+	) {	
+		ShoppingCart shoppingCart = (ShoppingCart) httpSession.getAttribute("ShoppingCart");
+		if (shoppingCart == null) {
+			shoppingCart = new ShoppingCart();
+			httpSession.setAttribute("ShoppingCart", shoppingCart);
 		}
-		else {
-			cart = new LinkedHashMap<>();
-			cart.put("prodId", amount);
-		}
+		shoppingCart.addToCart(prodId, productBean);
 		
 		return "_04_buyProductMenu";
 	}
