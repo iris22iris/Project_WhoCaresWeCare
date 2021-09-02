@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.web.store.model._03_rent.RentProductBean;
-import com.web.store.model._04_shop.ProductBean;
 import com.web.store.model._07_productType.ProductTypeBean;
 import com.web.store.repository.RentProductDao;
 
@@ -25,7 +24,9 @@ public class RentProductDaoImpl implements RentProductDao {
 	@Override
 	public List<RentProductBean> getAllProducts() {
 		Session session = factory.getCurrentSession();
-		String hql = " FROM RentProductBean rp ";
+		String hql = " FROM RentProductBean rp "
+				   + " GROUP BY rp.prodId ";
+		
 		return session.createQuery(hql, RentProductBean.class)
 				      .getResultList();
 	}

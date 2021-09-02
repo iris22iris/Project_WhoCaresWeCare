@@ -53,10 +53,12 @@
 			<!-- Product Start -->
 			<div class="rentProduct col-9">
 				<div class="container-fluid d-flex justify-content-end">
-					<select name="rentProductSort">
+					<select name="sort">
 						<option value="">請選擇排序條件</option>
-						<option value="asc">價格由高至低</option>
-						<option value="desc">價格由低至高</option>
+						<option value="ascbyprice">價格由高至低</option>
+						<option value="ascbystock">數量由高至低</option>
+						<option value="descbyprice">價格由低至高</option>
+						<option value="descbystock">價格由低至高</option>
 					</select>
 				</div>
 
@@ -73,6 +75,7 @@
 										<h5 class="card-title">${rentProduct.prodName}</h5>
 										<div class="card-text mb-2">
 											租金: ${rentProduct.price}元/日<br>
+											庫存: ${rentProduct.stock}個<br>
 										</div>
 										<c:choose>
 											<c:when test="${rentProduct.stock > 0}">
