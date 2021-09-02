@@ -20,6 +20,7 @@
 	function memberProfile(obj){
 		obj.href="/Whocares/_05_memberProfile/"+'<%=session.getAttribute("LoginOK")%>';
 	}
+	
 </script>
 <title>會員專區</title>
 

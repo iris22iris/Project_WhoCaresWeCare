@@ -99,4 +99,10 @@ public class CustomerDaoImpl implements CustomerDao {
 	public CustomerBean get(Integer id) {
 		return factory.getCurrentSession().get(CustomerBean.class, id);
 	}
+
+	@Override
+	public void evictMember(CustomerBean customer) {
+		Session session = factory.getCurrentSession();
+		session.evict(customer);
+	}
 }

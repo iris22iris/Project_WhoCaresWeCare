@@ -64,4 +64,9 @@ public class CustomerServiceImpl implements CustomerService {
 	public CustomerBean get(Integer id) {
 		return custDao.get(id);
 	}
+
+	@Override
+	public void evictMember(CustomerBean customer) {
+		custDao.evictMember(customer);
+	}
 }

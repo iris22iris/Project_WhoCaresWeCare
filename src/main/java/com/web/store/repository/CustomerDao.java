@@ -4,6 +4,7 @@ import java.util.List;
 import com.web.store.model._05_customer.CustomerBean;
 
 
+
 public interface CustomerDao {
 	CustomerBean getCustomerById(int id); 	//依主鍵查詢會員編號
 	List<CustomerBean> getCustomers();		//讀取多筆會員記錄
@@ -13,5 +14,5 @@ public interface CustomerDao {
 	public CustomerBean checkIDPassword(String account,String password);	//依主鍵 檢查會員帳號密碼
 	boolean idExists(String id);				//檢查帳號是否存在
 	CustomerBean get(Integer id);				//讀取一筆會員記錄
-
+	void evictMember(CustomerBean customer);
 }

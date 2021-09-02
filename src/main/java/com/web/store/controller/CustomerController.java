@@ -22,12 +22,17 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
 import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.service.CustomerService;
 import com.web.store.validators.CustomerValidator;
+
 
 @Controller
 public class CustomerController {
@@ -225,11 +230,58 @@ public class CustomerController {
 	// 修改會員
 	// 當使用者需要修改時，本方法送回含有會員資料的表單，讓使用者進行修改
 	// 由這個方法送回修改記錄的表單...
-	@GetMapping("/_05_memberProfile/{id}")
-	public String modifyCustomer(@PathVariable("id") Integer id, Model model) {
-		CustomerBean modifyCust = customerService.get(id);
-		model.addAttribute("modifyCust", modifyCust);
-		return "/_05_memberProfile";
-	}
+//	@GetMapping("/_05_memberProfile/{id}")
+//	public String modifyCustomer(@PathVariable("id") Integer id, Model model) {
+//		CustomerBean modifyCust = customerService.get(id);
+//		model.addAttribute("modifyCust", modifyCust);
+//		return "/_05_memberProfile";
+//	}
+	
+	// 傳回能夠編輯單筆會員資料之視圖的邏輯名稱
+		@GetMapping(value = "/_05_memberProfile/{id}", produces = { "text/html" })
+		public String editMemberFindView(@PathVariable Integer id, Model model) {
+			CustomerBean customer = customerService.getCustomerById(id);
+			model.addAttribute("customer", customer);
+			model.addAttribute("id", id);
+			return "_05_memberProfile";
+		}
+		
+//		// 修改單筆會員資料 讓前端請求收到json格式
+//		@PutMapping(value = "/_05_memberProfile/{id}", produces = { "application/json" })
+//		public @ResponseBody CustomerBean updateMember(
+//				 @PathVariable Integer id) {
+//			CustomerBean customer = customerService.getCustomerById(id);
+//			customer.setOrders(null);
+//			customer.setReservations(null);
+//			customer.setComments(null);
+//			customer.setProblem(null);
+//			return customer;
+//		}
+		
+		// 修改單筆會員資料
+		@PutMapping(value = "/_05_EditmemberProfile/{key}", consumes = { "application/json" }, produces = { "application/json" })
+		public @ResponseBody Map<String, String> updateCustomer(
+				@RequestBody CustomerBean customer, @PathVariable Integer key) {
+			CustomerBean member0 = null;
+			if (key != null) {
+				member0 = customerService.getCustomerById(key);
+				if (member0 == null) {
+					throw new RuntimeException("鍵值不存在, key=" + key);
+				}
+//				customerService.evictMember(member0); 存在意義?
+			} else {
+				throw new RuntimeException("鍵值不存在, key=" + key);
+			}
+
+			Map<String, String> map = new HashMap<>();
+			try {
+				customerService.updateCustomer(customer);
+				map.put("success", "更新成功");
+			} catch (Exception e) {
+				e.printStackTrace();
+				map.put("fail", "更新失敗");
+			}
+			return map;
+		}
 
 }

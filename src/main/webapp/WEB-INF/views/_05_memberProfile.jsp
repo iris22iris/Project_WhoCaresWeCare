@@ -11,7 +11,7 @@
 	<!-- bootstrap -->
 	<link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"">
+	rel="stylesheet">
 
 	<!-- icon -->
 	<link rel="stylesheet"
@@ -19,7 +19,40 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
+<script>
+	
+// }
+// window.onload = function() {  若後端回應json 則做這段
+// 	var xhr = new XMLHttpRequest();
+// 	xhr.open("PUT", "<c:url value='/_05_memberProfile/" + ${id} + "' />", true);
+// 	xhr.send();	
+// 	var message = "";
+// 	xhr.onreadystatechange = function() {
+// 	 // 伺服器請求完成
+// 	    if (xhr.readyState == 4 && xhr.status == 200) {
+// 		   var customerBean = JSON.parse(xhr.responseText);
+// 		   $('#custName').val(customerBean.custName);
+// 	    }
+//      }
+// }
 
+function upData(){
+	var xhr1 = new XMLHttpRequest();
+		xhr1.open("PUT", "<c:url value='/_05_EditmemberProfile/' />" + ${id}, true);
+		var jsonCustomer = {
+				custId:${id},
+				custName: $('#custName').val(),	
+				passWord: $('#passWord').val(),	
+				phone: $('#phone').val(),	
+				email: $('#email').val(),
+	   		}
+	   		xhr1.setRequestHeader("Content-Type", "application/json");
+	   		xhr1.send(JSON.stringify(jsonCustomer));
+}
+
+
+
+</script>
 
 <title>會員資料修改</title>
 </head>
@@ -90,20 +123,20 @@
 					
 					
 						<div class="col-9 ">
-							<input type="text" class="form-control" id="inputname" value="${modifyCust.custName}">
+							<input type="text" class="form-control" id="custName" value="${customer.custName}">
 						</div>
 
 						<div class="col-3">
 							<label for="inputothername" class="form-label">會員暱稱:</label>
 						</div>
 						<div class="col-9">
-							<input type="text" class="form-control" id="inputothername">
+							<input type="text" class="form-control" id="othername">
 						</div>
 						<div class="col-3">
-							<label for="inputothername" class="form-label">密碼:</label>
+							<label for="othername" class="form-label">密碼:</label>
 						</div>
 						<div class="col-9">
-							<input type="text" class="form-control" id="inputothername">
+							<input type="password" class="form-control" id="passWord" value="${customer.password}">
 						</div>
 
 						<div class="col-3">
@@ -128,17 +161,17 @@
 							<label for="inputphone" class="form-label">聯絡電話:</label>
 						</div>
 						<div class="col-9">
-							<input type="text" class="form-control" id="inputphone">
+							<input type="text" class="form-control" id="phone" value="${customer.phone}">
 						</div>
 
 						<div class="col-3">
-							<label for="inputemail" class="form-label">EMAIL:</label>
+							<label for="email" class="form-label">EMAIL:</label>
 						</div>
 						<div class="col-9">
-							<input type="text" class="form-control" size="50" id="inputemail">
+							<input type="text" class="form-control" size="50" id="email" value="${customer.email}">
 						</div>
 						<div class="col-3">
-							<label for="inputcity" class="form-label">居住城市:</label>
+							<label for="city" class="form-label">居住城市:</label>
 						</div>
 						<div class="col-9">
 
@@ -217,7 +250,7 @@
 								</div>
 								<div class="modal-body">確定要保存變更資料嗎?</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-primary">確認修改</button>
+									<button type="button" class="btn btn-primary" onclick="upData()">確認修改</button>
 									<button type="button" class="btn btn-secondary"
 										data-bs-dismiss="modal">Close</button>
 								</div>
