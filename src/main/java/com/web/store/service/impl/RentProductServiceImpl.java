@@ -38,10 +38,15 @@ public class RentProductServiceImpl implements RentProductService {
 	}
 	
 	@Override
-	public List<RentProductBean> getProductsByProdType(ProductTypeBean prodTypeBean) {
-		return rentProductDao.getProductsByProdType(prodTypeBean);
+	public List<RentProductBean> getGroupedProductsByProdType(ProductTypeBean prodTypeBean) {
+		return rentProductDao.getGroupedProductsByProdType(prodTypeBean);
 	}
 
+	@Override
+	public List<Long> getGroupedStockSum(ProductTypeBean prodTypeBean) {
+		return rentProductDao.getGroupedStockSum(prodTypeBean);
+	}
+	
 	@Override
 	public List<ProductTypeBean> getAllProdTypes() {
 		return rentProductDao.getAllProdTypes();

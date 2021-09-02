@@ -50,9 +50,11 @@ public class RentMenuController {
 
 	@GetMapping("/rentMenu/{productType.prodType}")
 	public String getProductsByProdType(@PathVariable("productType.prodType") String prodtype, Model model) {
-		List<RentProductBean> rentProducts = rentProductService.getProductsByProdType(new ProductTypeBean(prodtype));
+		List<RentProductBean> rentProducts = rentProductService.getGroupedProductsByProdType(new ProductTypeBean(prodtype));
+		List<Long> productStocks = rentProductService.getGroupedStockSum(new ProductTypeBean(prodtype));
 		List<ProductTypeBean> productTypes = rentProductService.getAllProdTypes();
 		model.addAttribute("rentProducts", rentProducts);
+		model.addAttribute("productStocks", productStocks);
 		model.addAttribute("productTypes", productTypes);
 		
 		return "_03_rentProductMenu";

@@ -13,7 +13,9 @@ public interface RentProductDao {
 
 	List<Long> getAllStockSum(); // 讀取多筆租賃產品庫存總和資料
 
-	List<RentProductBean> getProductsByProdType(ProductTypeBean prodTypeBean); // 依ProdType表格主鍵 載入產品的分類
+	List<RentProductBean> getGroupedProductsByProdType(ProductTypeBean prodTypeBean); // 依ProdType表格主鍵 載入產品的分類
+
+	List<Long> getGroupedStockSum(ProductTypeBean prodTypeBean); // 依ProdType表格主鍵分類 載入產品庫存總和資料
 
 	List<ProductTypeBean> getAllProdTypes(); // 讀取全部租賃產品分類
 
