@@ -28,6 +28,16 @@ public class RentProductServiceImpl implements RentProductService {
 	}
 
 	@Override
+	public List<RentProductBean> getAllGroupedProducts() {
+		return rentProductDao.getAllGroupedProducts();
+	}
+	
+	@Override
+	public List<Long> getAllStockSum() {
+		return rentProductDao.getAllStockSum();
+	}
+	
+	@Override
 	public List<RentProductBean> getProductsByProdType(ProductTypeBean prodTypeBean) {
 		return rentProductDao.getProductsByProdType(prodTypeBean);
 	}
@@ -36,12 +46,7 @@ public class RentProductServiceImpl implements RentProductService {
 	public List<ProductTypeBean> getAllProdTypes() {
 		return rentProductDao.getAllProdTypes();
 	}
-
-	@Override
-	public void updateStock(int productId, int newQuantity) {
-	}
-
-	@Transactional
+	
 	@Override
 	public RentProductBean getProductById(int prodId) {
 		return rentProductDao.getProductById(prodId);
@@ -49,6 +54,10 @@ public class RentProductServiceImpl implements RentProductService {
 
 	@Override
 	public void addProduct(RentProductBean product) {
+	}
+	
+	@Override
+	public void updateStock(int productId, int newQuantity) {
 	}
 
 }

@@ -24,11 +24,30 @@ public class RentProductDaoImpl implements RentProductDao {
 	@Override
 	public List<RentProductBean> getAllProducts() {
 		Session session = factory.getCurrentSession();
-		String hql = " FROM RentProductBean rp "
-				   + " GROUP BY rp.prodId ";
+		String hql = " FROM RentProductBean rp ";
 		
 		return session.createQuery(hql, RentProductBean.class)
 				      .getResultList();
+	}
+
+	@Override
+	public List<RentProductBean> getAllGroupedProducts() {
+		Session session = factory.getCurrentSession();
+		String hql = " FROM RentProductBean rp "
+				+ " GROUP BY rp.prodId ";
+		
+		return session.createQuery(hql, RentProductBean.class)
+				.getResultList();
+	}
+
+	@Override
+	public List<Long> getAllStockSum() {
+		Session session = factory.getCurrentSession();
+		String hql = " SELECT SUM(stock) FROM RentProductBean rp "
+				   + " GROUP BY rp.prodId ";
+		
+		return session.createQuery(hql, Long.class)
+					  .getResultList();
 	}
 
 	@Override

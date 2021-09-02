@@ -7,16 +7,20 @@ import com.web.store.model._07_productType.ProductTypeBean;
 
 public interface RentProductDao {
 
-	List<RentProductBean> getAllProducts();		//讀取多筆租賃產品資料
+	List<RentProductBean> getAllProducts(); // 讀取多筆租賃產品資料
 
-	List<RentProductBean> getProductsByProdType(ProductTypeBean prodTypeBean);	//依ProdType表格主鍵 載入產品的分類
+	List<RentProductBean> getAllGroupedProducts(); // 讀取多筆租賃產品群組資料
 
-	List<ProductTypeBean> getAllProdTypes();	//讀取全部租賃產品分類
+	List<Long> getAllStockSum(); // 讀取多筆租賃產品庫存總和資料
 
-	void updateStock(int productId, int newQuantity);	//更新租賃產品庫存
+	List<RentProductBean> getProductsByProdType(ProductTypeBean prodTypeBean); // 依ProdType表格主鍵 載入產品的分類
 
-	public RentProductBean getProductById(int prodId);	//依主鍵讀取單筆租賃產品資料
+	List<ProductTypeBean> getAllProdTypes(); // 讀取全部租賃產品分類
 
-	void addProduct(RentProductBean product);			//新增單筆租賃產品資料
+	void updateStock(int productId, int newQuantity); // 更新租賃產品庫存
+
+	public RentProductBean getProductById(int prodId); // 依主鍵讀取單筆租賃產品資料
+
+	void addProduct(RentProductBean product); // 新增單筆租賃產品資料
 
 }
