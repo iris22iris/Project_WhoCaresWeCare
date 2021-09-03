@@ -2,6 +2,7 @@ package com.web.store.repository.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.NoResultException;
 
@@ -10,6 +11,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.web.store.model._05_customer.CitySelectBean;
 import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.repository.CustomerDao;
 
@@ -94,7 +96,7 @@ public class CustomerDaoImpl implements CustomerDao {
 		exist = (list.isEmpty()) ? false : true;
 		return exist;
 	}
-	
+
 	@Override
 	public CustomerBean get(Integer id) {
 		return factory.getCurrentSession().get(CustomerBean.class, id);
@@ -104,5 +106,23 @@ public class CustomerDaoImpl implements CustomerDao {
 	public void evictMember(CustomerBean customer) {
 		Session session = factory.getCurrentSession();
 		session.evict(customer);
+	}
+
+	@Override
+	public List<CitySelectBean> querySelect(String groupCity) {
+		String hql = "";
+		if (groupCity.indexOf(",") != -1) {
+			String[] groupCitys = groupCity.split(",");
+			groupCity = "";
+			for (String string : groupCitys) {
+				groupCity += ",'" + string + "'";
+			}
+			hql = "FROM CitySelectBean WHERE groupCity IN(" + groupCity.substring(1) + ") ORDER BY groupCity, sortCity";
+		} else {
+			hql = "FROM CitySelectBean WHERE groupCity = " + groupCity + "ORDER BY sortCity";
+		}
+		Session session = factory.getCurrentSession();
+		List<CitySelectBean> dataList = session.createQuery(hql, CitySelectBean.class).getResultList();
+		return dataList;
 	}
 }

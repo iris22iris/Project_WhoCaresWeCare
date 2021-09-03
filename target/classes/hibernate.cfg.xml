@@ -39,7 +39,7 @@
 		<mapping class="com.web.store.model._05_customer.CustomerBean" />
 		<mapping class="com.web.store.model._06_order.OrdBean" />
 		<mapping class="com.web.store.model._07_productType.ProductTypeBean" />
-		<mapping class="com.web.store.model._02_customerService.CitySelectBean" />
+		<mapping class="com.web.store.model._05_customer.CitySelectBean" />
 		
 
 	</session-factory>

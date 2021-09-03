@@ -33,7 +33,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.web.store.model._05_customer.CitySelectBean;
 import com.web.store.model._05_customer.CustomerBean;
+import com.web.store.service.CityService;
 import com.web.store.service.CustomerService;
 import com.web.store.validators.CustomerValidator;
 
@@ -49,7 +51,9 @@ public class CustomerController {
 	ServletContext context;
 	@Autowired
 	CustomerService customerService;
-
+	@Autowired
+	CityService cityService;
+	
 	// 進入登入頁
 	@GetMapping("/_05_login")
 	public String toLogin(Model model) {
@@ -292,6 +296,8 @@ public class CustomerController {
 			}
 			
 			customer.setAccount(member0.getAccount());
+//			cityService.getAllCitys(groupCity);
+			
 			
 			// 姓名檢核
 			if (custName == null || custName.trim().length() == 0) {

@@ -17,10 +17,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import com.web.store.model._02_customerService.CitySelectBean;
 import com.web.store.model._02_customerService.PromotionBean;
 import com.web.store.model._03_rent.RentProductBean;
 import com.web.store.model._04_shop.ProductBean;
+import com.web.store.model._05_customer.CitySelectBean;
 import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.model._06_order.OrdBean;
 import com.web.store.model._06_order.pkClass.OrdPK;

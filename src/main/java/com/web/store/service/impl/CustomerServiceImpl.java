@@ -1,12 +1,11 @@
 package com.web.store.service.impl;
 
 import java.util.List;
-
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.web.store.model._05_customer.CitySelectBean;
 import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.repository.CustomerDao;
 import com.web.store.service.CustomerService;
@@ -68,5 +67,10 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public void evictMember(CustomerBean customer) {
 		custDao.evictMember(customer);
+	}
+
+	@Override
+	public List<CitySelectBean> querySelect(String groupCity) {
+		return custDao.querySelect(groupCity);
 	}
 }
