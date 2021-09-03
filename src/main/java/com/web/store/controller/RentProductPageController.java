@@ -7,6 +7,8 @@ import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,19 +25,6 @@ import com.web.store.service.RentProductService;
 @Controller
 public class RentProductPageController {
 
-	
-	@RequestMapping("/_03_rentProduct")
-	public String getProductById(@RequestParam("id") Integer id, Model model) {
-		List<RentProductBean> rentProducts = rentProductService.getAllProducts();
-		List<ProductTypeBean> productTypes = rentProductService.getAllProdTypes();
-		model.addAttribute("rentProducts", rentProducts);
-		model.addAttribute("productTypes", productTypes);
-		
-		model.addAttribute("rentproduct", rentProductService.getProductById(id));
-		return "_03_rentProduct";
-	};
-	
-	
 	RentProductService rentProductService;
 	ServletContext servletContext;
 	
@@ -45,15 +34,18 @@ public class RentProductPageController {
 		
 		this.servletContext = servletContext;
 	}
-//	@RequestMapping("/_03_rentProduct")
-//		public String list(Model model) {
-//		RentProductBean rb = new RentProductBean(
-//				) ;
-//		return null;
-//	}
 	
-	
-	
+	@RequestMapping("/_03_rentProduct")
+	public String getProductById(@RequestParam("id") Integer id ,Model model) {
+		List<RentProductBean> rentProducts = rentProductService.getAllProducts();
+		List<ProductTypeBean> productTypes = rentProductService.getAllProdTypes();
+		model.addAttribute("rentProducts", rentProducts);
+		model.addAttribute("productTypes", productTypes);
+		
+		model.addAttribute("rentProduct", rentProductService.getProductById(id));
+		return "_03_rentProduct";
+	};
+
 	
 //	ProductService productService;
 //	ServletContext servletContext;
@@ -82,13 +74,6 @@ public class RentProductPageController {
 //		return "_04_buyProductMenu";
 //	}
 //
-//	@RequestMapping("/_04_productPage")
-//	public String buyProduct(Model model) {
-//		List<ProductBean> products = productService.getAllProducts();
-//		List<ProductTypeBean> productTypes = productService.getAllProdTypes();
-//		model.addAttribute("products", products);
-//		model.addAttribute("productTypes", productTypes);
-//		return "_04_productPage";
-//	}
+
 	
 }

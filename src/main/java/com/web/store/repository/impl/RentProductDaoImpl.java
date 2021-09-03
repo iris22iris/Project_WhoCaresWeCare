@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.web.store.model._03_rent.RentProductBean;
+import com.web.store.model._03_rent.pkClass.RentProductPK;
 import com.web.store.model._07_productType.ProductTypeBean;
 import com.web.store.repository.RentProductDao;
 
@@ -88,7 +89,7 @@ public class RentProductDaoImpl implements RentProductDao {
 	@Override
 	public RentProductBean getProductById(int prodId) {
 		Session session = factory.getCurrentSession();
-		RentProductBean rpb = session.get(RentProductBean.class,prodId);
+		RentProductBean rpb = session.get(RentProductBean.class, new RentProductPK(prodId,"1"));
 		return rpb;
 	}
 	
