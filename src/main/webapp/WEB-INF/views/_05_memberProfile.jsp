@@ -8,33 +8,36 @@
 	href="<c:url value='/css/_05memberProfile.css' />" type="text/css">
 <link rel="stylesheet" href="<c:url value='/css/commonStyle.css' />"
 	type="text/css">
-	<!-- bootstrap -->
-	<link
+<!-- bootstrap -->
+<link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet">
 
-	<!-- icon -->
-	<link rel="stylesheet"
+<!-- icon -->
+<link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
 window.onload = function() {  
 	$("input[type=radio][name='gender'][value='${customer.gender}']").prop("checked", true);
 	
 //  若後端回應json 則做這段	
-// 	var xhr = new XMLHttpRequest();
-// 	xhr.open("PUT", "<c:url value='/_05_memberProfile/" + ${id} + "' />", true);
-// 	xhr.send();	
-// 	var message = "";
-// 	xhr.onreadystatechange = function() {
-// 	 // 伺服器請求完成
-// 	    if (xhr.readyState == 4 && xhr.status == 200) {
-// 		   var customerBean = JSON.parse(xhr.responseText);
-// 		   $('#custName').val(customerBean.custName);
-// 	    }
-//      }
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", "<c:url value='/querySelect/A,B' />", true);
+	xhr.send();	
+	var message = "";
+	xhr.onreadystatechange = function() {
+	 // 伺服器請求完成
+	    if (xhr.readyState == 4 && xhr.status == 200) {
+		   var querySelect = JSON.parse(xhr.responseText);
+		   querySelect.forEach(function (item) {
+			   $("#city").prepend("<option value='" + item.city + "'selected='selected'>" + item.city + "</option>");
+           });
+	    }
+     }
 }
 
 function upData() {
@@ -55,6 +58,8 @@ function upData() {
 	var address = $('#address').val();
 	var birthday = $('#birthday').val();
 	var gender = $('#male').val();
+	var city = $('#city').val();
+	
 	
 	var xhr1 = new XMLHttpRequest();
 		xhr1.open("PUT", "<c:url value='/_05_EditmemberProfile/' />" + ${id}, true);
@@ -67,6 +72,7 @@ function upData() {
 				email: $('#email').val(),
 				birthday: $('#birthday').val(),
 				gender :$('input[type=radio][name="gender"]:checked').val(),
+				city : $('#city').val(),
 		   		}
 	   		xhr1.setRequestHeader("Content-Type", "application/json");
 	   		xhr1.send(JSON.stringify(jsonCustomer));
@@ -127,211 +133,221 @@ function upData() {
 </head>
 <body>
 	<div id="body">
-	<div id="content">
-		<!-- 引入共同的頁首 -->
-		<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
-	
-	
-		<!-- changmtitle star  會員修改資料標題star -->
-		<div class="changmtitle col-3 text-center p-3  ">
-			<ol>
-				<li><i class="fas fa-th-large" aria-hidden="true"></i>會員資料修改</li>
-			</ol>
-		</div>
+		<div id="content">
+			<!-- 引入共同的頁首 -->
+			<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 
-		<!-- changmtitle 會員修改資料標題end -->
 
-		<!-- main container star  修改會員資料的表單star -->
-
-		<div
-			class="main container p-3 col-12 justify-content-center text-center ">
-			<!-- main containerfile star  修改會員資料的表單圖片上傳區star -->
-			<div class=" col-3 p-3  ">
-				<!--  圖片star  圖片star -->
-				<div
-					class="col-12  d-flex justify-content-center align-items-center ">
-					<a href="#">
-<!-- 					 <img -->
-<%-- 						src="<c:url value='/images/product/A0001.jpg' />" class="cuspic" --%>
-<!-- 						alt='cuspic'> -->
-					</a>
-				</div>
-				<!--  圖片end  圖片end -->
-
-				<!--  按鈕star  按鈕star -->
-				<div class="button  col-12 p-3 ">
-
-					<div class="col-6">
-
-						<input type="file" id="input" data-multiple="true"
-							onchange="handleFiles(this.files)">
-					</div>
-					<div class="col-12">
-						<div class="col-12 p-3">
-							<button type="submit" class="btn">上傳圖片</button>
-							<button type="submit" class="btn">清除</button>
-						</div>
-
-					</div>
-				</div>
-				<!--  按鈕end  按鈕end -->
+			<!-- changmtitle star  會員修改資料標題star -->
+			<div class="changmtitle col-3 text-center p-3  ">
+				<ol>
+					<li><i class="fas fa-th-large" aria-hidden="true"></i>會員資料修改</li>
+				</ol>
 			</div>
-			<!-- main containerfile end  修改會員資料的表單圖片上傳區end -->
 
-			<!-- 輸入資料區star  輸入資料區star -->
-			<div class=" col-9 p-3">
-				<div class="col-9  p-3 d-flex justify-content-center align-items-center">
-					<!-- 輸入資料區表格star -->
-					<form class="row g-3">
-					<div  id='resultMsg' style="height:18px;display:none;"></div>
-					
-						<div class="col-3 ">
-							<label for="custName" class="form-label">會員姓名:</label>
-						</div>
-						<div class="col-9 ">
-							<input type="text" class="form-control" name="custName" id="custName" value="${customer.custName}">
-						</div><div  id='custNameResult' style="height:18px;display:none;"></div>
-						
-						
-						<div class="col-3">
-							<label for="nickName" class="form-label">會員暱稱:</label>
-						</div>
-						<div class="col-9">
-							<input type="text" class="form-control" id="nickName">
-						</div><div  id='nickNameResult' style="height:18px;display:none;"></div>
-						
-						
-						<div class="col-3">
-							<label for="passWord" class="form-label">密碼:</label>
-						</div>
-						<div class="col-9">
-							<input type="text" class="form-control" name = "passWord" id="passWord" value="${customer.password}">
-						</div><div  id='passWordResult' style="height:18px;display:none;"></div>
+			<!-- changmtitle 會員修改資料標題end -->
 
+			<!-- main container star  修改會員資料的表單star -->
 
-						<div class="col-3">
-							<label for="inputID" class="form-label">身分證字號:</label>
-						</div>
-						<div class="col-9">
-							<input type="text" class="form-control" id="inputID" value="${customer.idNumber}">
-						</div><div  id='inputIDResult' style="height:18px;display:none;"></div>
-						
-						
-						<div class="col-3">
-							<label>性別:</label>
-						</div>
-						<div class=" choco col-9 ">
-							<div class="col-4">
-								<label><input type="radio" name="gender" id="male" value="male">男</label>
-								<label><input type="radio" name="gender" id="female" value="female">女</label>
-								<label><input type="radio" name="gender" id="multiple" value="multiple">多元</label> 
-								<label><input type="radio" name="gender" id="no" value="no">無</label><br>
-							</div>
-						</div>
-						
-						
-						
-						<div class="col-3">
-							<label for="phone" class="form-label">聯絡電話:</label>
-						</div>
-						<div class="col-9">
-							<input type="text" class="form-control" id="phone" value="${customer.phone}">
-						</div>
-
-						<div class="col-3">
-							<label for="email" class="form-label">EMAIL:</label>
-						</div>
-						<div class="col-9">
-							<input type="text" class="form-control" size="50" id="email" value="${customer.email}">
-						</div>
-						
-						
-						<div class="col-3">
-							<label for="city" class="form-label">居住城市:</label>
-						</div>
-						<div class="col-9">
-
-							<select id="inputcity" class="form-select" name="city">
-								
-							</select>
-						</div>
-
-
-						<div class="col-3">
-							<label for="address" class="form-label">居住地址:</label>
-						</div>
-						<div class="col-9">
-							<input type="text" class="form-control" size="50"
-								id="address">
-						</div>
-
-						<div class="col-3">
-							<label for="birthday" class="form-label">出生(西元):</label>
-						</div>
-						<div class="col-3">
-							<label><input data-for="birthday" class="form-label"
-								type="text" id="birthday" value="${customer.birthday}"></label>
-						</div>
-						
-					</form>
-					<!-- 輸入資料區表格end -->
-				</div>
-				<!-- 輸入資料區end  輸入資料區end -->
-
-				<!-- 輸入資料區按鈕star   -->
-
-
-
-				<!-- Button trigger modal -->
-
-
-				<!-- Modal -->
-
-				<div
-					class="col-7 p-1  d-flex justify-content-center align-items-center">
-
-					<div class="col-4  ">
-						<button type="button" class="btn btn-primary"
-							data-bs-toggle="modal" data-bs-target="#exampleModal">
-							送出</button>
+			<div
+				class="main container p-3 col-12 justify-content-center text-center ">
+				<!-- main containerfile star  修改會員資料的表單圖片上傳區star -->
+				<div class=" col-3 p-3  ">
+					<!--  圖片star  圖片star -->
+					<div
+						class="col-12  d-flex justify-content-center align-items-center ">
+						<a href="#"> <!-- 					 <img --> <%-- 						src="<c:url value='/images/product/A0001.jpg' />" class="cuspic" --%>
+							<!-- 						alt='cuspic'> -->
+						</a>
 					</div>
-					<div class="modal fade" id="exampleModal" tabindex="-1"
-						aria-labelledby="exampleModalLabel" aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLabel">會員資料修改</h5>
-									<button type="button" class="btn-close" data-bs-dismiss="modal"
-										aria-label="Close"></button>
-								</div>
-								<div class="modal-body">確定要保存變更資料嗎?</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-primary" onclick="upData()">確認修改</button>
-									<button type="button" class="btn btn-secondary"
-										data-bs-dismiss="modal">Close</button>
+					<!--  圖片end  圖片end -->
+
+					<!--  按鈕star  按鈕star -->
+					<div class="button  col-12 p-3 ">
+
+						<div class="col-6">
+
+							<input type="file" id="input" data-multiple="true"
+								onchange="handleFiles(this.files)">
+						</div>
+						<div class="col-12">
+							<div class="col-12 p-3">
+								<button type="submit" class="btn">上傳圖片</button>
+								<button type="submit" class="btn">清除</button>
+							</div>
+
+						</div>
+					</div>
+					<!--  按鈕end  按鈕end -->
+				</div>
+				<!-- main containerfile end  修改會員資料的表單圖片上傳區end -->
+
+				<!-- 輸入資料區star  輸入資料區star -->
+				<div class=" col-9 p-3">
+					<div
+						class="col-9  p-3 d-flex justify-content-center align-items-center">
+						<!-- 輸入資料區表格star -->
+						<form class="row g-3">
+							<div id='resultMsg' style="height: 18px; display: none;"></div>
+
+							<div class="col-3 ">
+								<label for="custName" class="form-label">會員姓名:</label>
+							</div>
+							<div class="col-9 ">
+								<input type="text" class="form-control" name="custName"
+									id="custName" value="${customer.custName}">
+							</div>
+							<div id='custNameResult' style="height: 18px; display: none;"></div>
+
+
+							<div class="col-3">
+								<label for="nickName" class="form-label">會員暱稱:</label>
+							</div>
+							<div class="col-9">
+								<input type="text" class="form-control" id="nickName">
+							</div>
+							<div id='nickNameResult' style="height: 18px; display: none;"></div>
+
+
+							<div class="col-3">
+								<label for="passWord" class="form-label">密碼:</label>
+							</div>
+							<div class="col-9">
+								<input type="text" class="form-control" name="passWord"
+									id="passWord" value="${customer.password}">
+							</div>
+							<div id='passWordResult' style="height: 18px; display: none;"></div>
+
+
+							<div class="col-3">
+								<label for="inputID" class="form-label">身分證字號:</label>
+							</div>
+							<div class="col-9">
+								<input type="text" class="form-control" id="inputID"
+									value="${customer.idNumber}">
+							</div>
+							<div id='inputIDResult' style="height: 18px; display: none;"></div>
+
+
+							<div class="col-3">
+								<label>性別:</label>
+							</div>
+							<div class=" choco col-9 ">
+								<div class="col-4">
+									<label><input type="radio" name="gender" id="male"
+										value="male">男</label> <label><input type="radio"
+										name="gender" id="female" value="female">女</label> <label><input
+										type="radio" name="gender" id="multiple" value="multiple">多元</label>
+									<label><input type="radio" name="gender" id="no"
+										value="no">無</label><br>
 								</div>
 							</div>
-						</div>
-					</div>
 
-					<div class="col-3">
-						<a href="<c:url value='/_05_member_management' />"><button class="btn btn-primary"
-							data-bs-toggle="modal" data-bs-target="#exampleModal">取消</button></a>
+
+
+							<div class="col-3">
+								<label for="phone" class="form-label">聯絡電話:</label>
+							</div>
+							<div class="col-9">
+								<input type="text" class="form-control" id="phone"
+									value="${customer.phone}">
+							</div>
+
+							<div class="col-3">
+								<label for="email" class="form-label">EMAIL:</label>
+							</div>
+							<div class="col-9">
+								<input type="text" class="form-control" size="50" id="email"
+									value="${customer.email}">
+							</div>
+
+
+							<div class="col-3">
+								<label for="city" class="form-label">居住城市:</label>
+							</div>
+							<div class="col-9">
+								<select id="city" class="form-select" name="city">
+								</select>
+							</div>
+
+
+							<div class="col-3">
+								<label for="address" class="form-label">居住地址:</label>
+							</div>
+							<div class="col-9">
+								<input type="text" class="form-control" size="50" id="address">
+							</div>
+
+							<div class="col-3">
+								<label for="birthday" class="form-label">出生(西元):</label>
+							</div>
+							<div class="col-3">
+								<label><input data-for="birthday" class="form-label"
+									type="text" id="birthday" value="${customer.birthday}"></label>
+							</div>
+
+						</form>
+						<!-- 輸入資料區表格end -->
 					</div>
+					<!-- 輸入資料區end  輸入資料區end -->
+
+					<!-- 輸入資料區按鈕star   -->
+
+
+
+					<!-- Button trigger modal -->
+
+
+					<!-- Modal -->
+
+					<div
+						class="col-7 p-1  d-flex justify-content-center align-items-center">
+
+						<div class="col-4  ">
+							<button type="button" class="btn btn-primary"
+								data-bs-toggle="modal" data-bs-target="#exampleModal">
+								送出</button>
+						</div>
+						<div class="modal fade" id="exampleModal" tabindex="-1"
+							aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">會員資料修改</h5>
+										<button type="button" class="btn-close"
+											data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">確定要保存變更資料嗎?</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-primary"
+											onclick="upData()">確認修改</button>
+										<button type="button" class="btn btn-secondary"
+											data-bs-dismiss="modal">Close</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-3">
+							<a href="<c:url value='/_05_member_management' />"><button
+									class="btn btn-primary" data-bs-toggle="modal"
+									data-bs-target="#exampleModal">取消</button></a>
+						</div>
+
+					</div>
+					<!-- 輸入資料區按鈕end   -->
 
 				</div>
-				<!-- 輸入資料區按鈕end   -->
-
+				<!-- main container end  修改會員資料的表單end -->
 			</div>
-			<!-- main container end  修改會員資料的表單end -->
 		</div>
-		</div>
-	<!-- 引入共同的頁尾 -->
-	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />	
-		
+		<!-- 引入共同的頁尾 -->
+		<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
+
 	</div>
 
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

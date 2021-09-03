@@ -1,12 +1,14 @@
-package com.web.store.model._02_customerService;
+package com.web.store.model._05_customer;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "CitySelect")
 public class CitySelectBean {
 	Integer id;
 	String groupCity;
