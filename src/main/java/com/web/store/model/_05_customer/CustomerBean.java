@@ -3,7 +3,6 @@ package com.web.store.model._05_customer;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Date;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -13,7 +12,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -23,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.web.store.model._02_customerService.CommentBean;
 import com.web.store.model._02_customerService.ProblemBean;
 import com.web.store.model._03_rent.ReservationBean;
-import com.web.store.model._04_shop.ProductBean;
 import com.web.store.model._06_order.OrdBean;
 
 
@@ -63,8 +60,7 @@ public class CustomerBean implements Serializable {
 	Set<CommentBean> comments = new LinkedHashSet<>();
 	@OneToMany(mappedBy = "customerBean", cascade = CascadeType.ALL )
 	Set<ProblemBean> problem = new LinkedHashSet<>();
-	@ManyToMany(mappedBy = "favorite")
-	private Set<ProductBean> products = new HashSet<ProductBean>(0);
+	
 	
 	
 	
@@ -278,14 +274,7 @@ public class CustomerBean implements Serializable {
 		Image = image;
 	}
 
-	public Set<ProductBean> getProducts() {
-		return products;
-	}
-
-	public void setProducts(Set<ProductBean> products) {
-		this.products = products;
-	}
-
+	
 	
 	
 
