@@ -21,21 +21,26 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-window.onload = function() {  
+window.onload = function() { 
 	$("input[type=radio][name='gender'][value='${customer.gender}']").prop("checked", true);
 	
-//  若後端回應json 則做這段	
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", "<c:url value='/querySelect/A,B' />", true);
 	xhr.send();	
 	var message = "";
+	
 	xhr.onreadystatechange = function() {
 	 // 伺服器請求完成
+	 
 	    if (xhr.readyState == 4 && xhr.status == 200) {
 		   var querySelect = JSON.parse(xhr.responseText);
+		   
+			$("#city").append("<option value='" + 0 + "'selected='selected' disabled>" + "請選擇" + "</option>");
+// 			$("#city").append("<option value='0'>請選擇</option>"); 
 		   querySelect.forEach(function (item) {
-			   $("#city").prepend("<option value='" + item.city + "'selected='selected'>" + item.city + "</option>");
+			   $("#city").append("<option value='" + item.id + "'>" + item.city + "</option>");
            });
+		   
 	    }
      }
 }
@@ -290,14 +295,8 @@ function upData() {
 						<!-- 輸入資料區表格end -->
 					</div>
 					<!-- 輸入資料區end  輸入資料區end -->
-
 					<!-- 輸入資料區按鈕star   -->
-
-
-
 					<!-- Button trigger modal -->
-
-
 					<!-- Modal -->
 
 					<div
