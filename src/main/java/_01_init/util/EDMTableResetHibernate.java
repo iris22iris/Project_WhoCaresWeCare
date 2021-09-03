@@ -142,12 +142,15 @@ public class EDMTableResetHibernate {
 					ProductBean pb = new ProductBean();
 					pb.setProdId(Integer.parseInt(token[0]));
 					pb.setClassify(token[1]);
-					pb.setCoverImage(null);
+					pb.setCoverImage1(null);
+					pb.setCoverImage2(null);
+					pb.setCoverImage3(null);
 					pb.setFileName(token[3]);
 					pb.setMimeType(token[4]);
 					pb.setPrice(new BigDecimal(token[5]));
 					pb.setProdName(token[6]);
-					pb.setPromoteId(null);
+					pb.setDescription(null);
+//					pb.setPromoteId(null);
 					pb.setStock(Integer.parseInt(token[8]));
 					pb.setProductTypeBean(new ProductTypeBean(token[9]));
 
@@ -198,7 +201,9 @@ public class EDMTableResetHibernate {
 					RentProductBean rpb = new RentProductBean();
 					rpb.setProdId(Integer.parseInt(token[0]));
 					rpb.setClassify(token[1]);
-					rpb.setCoverImage(null);
+					rpb.setCoverImage1(null);
+					rpb.setCoverImage2(null);
+					rpb.setCoverImage3(null);
 					rpb.setFileName(token[3]);
 					rpb.setMimeType(token[4]);
 					rpb.setPrice(new BigDecimal(token[5]));
@@ -206,6 +211,7 @@ public class EDMTableResetHibernate {
 					rpb.setProductTypeBean(null);
 					rpb.setSerialNumber(token[8]);
 					rpb.setStock(Integer.parseInt(token[9]));
+					rpb.setDescription(null);
 					rpb.setProductTypeBean(new ProductTypeBean(token[10]));
 
 					session.save(rpb);

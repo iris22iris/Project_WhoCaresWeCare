@@ -60,6 +60,9 @@ public class RentItemBean implements Serializable {
 		@JoinColumn(name = "RENTITEM_PRODID_FK"),
 		})
 	private RentProductBean rentProductBean;
+	
+	public RentItemBean() {
+	}
 
 	public RentItemBean(Integer prodId, String serialNumber,Integer rentPeriod, 
 			Integer prodQty, String discountCode, Timestamp startDate,
@@ -189,4 +192,71 @@ public class RentItemBean implements Serializable {
 		this.rentProductBean = rentProductBean;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((discount == null) ? 0 : discount.hashCode());
+		result = prime * result + ((discountCode == null) ? 0 : discountCode.hashCode());
+		result = prime * result + ((prodId == null) ? 0 : prodId.hashCode());
+		result = prime * result + ((prodQty == null) ? 0 : prodQty.hashCode());
+		result = prime * result + ((prodTotal == null) ? 0 : prodTotal.hashCode());
+		result = prime * result + ((rentItemPK == null) ? 0 : rentItemPK.hashCode());
+		result = prime * result + ((rentPeriod == null) ? 0 : rentPeriod.hashCode());
+		result = prime * result + ((serialNumber == null) ? 0 : serialNumber.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		RentItemBean other = (RentItemBean) obj;
+		if (discount == null) {
+			if (other.discount != null)
+				return false;
+		} else if (!discount.equals(other.discount))
+			return false;
+		if (discountCode == null) {
+			if (other.discountCode != null)
+				return false;
+		} else if (!discountCode.equals(other.discountCode))
+			return false;
+		if (prodId == null) {
+			if (other.prodId != null)
+				return false;
+		} else if (!prodId.equals(other.prodId))
+			return false;
+		if (prodQty == null) {
+			if (other.prodQty != null)
+				return false;
+		} else if (!prodQty.equals(other.prodQty))
+			return false;
+		if (prodTotal == null) {
+			if (other.prodTotal != null)
+				return false;
+		} else if (!prodTotal.equals(other.prodTotal))
+			return false;
+		if (rentItemPK == null) {
+			if (other.rentItemPK != null)
+				return false;
+		} else if (!rentItemPK.equals(other.rentItemPK))
+			return false;
+		if (rentPeriod == null) {
+			if (other.rentPeriod != null)
+				return false;
+		} else if (!rentPeriod.equals(other.rentPeriod))
+			return false;
+		if (serialNumber == null) {
+			if (other.serialNumber != null)
+				return false;
+		} else if (!serialNumber.equals(other.serialNumber))
+			return false;
+		return true;
+	}
+	
 }

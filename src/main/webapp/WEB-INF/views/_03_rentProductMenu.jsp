@@ -56,44 +56,45 @@
 				<!-- Product Start -->
 				<div class="rentProduct col-9">
 					<div class="container-fluid d-flex justify-content-end">
-						<select name="sortType">
-							<option selected>請選擇排序條件</option>
-							<option value="pricedesc">價格由高至低</option>
-							<option value="stockdesc">數量由高至低</option>
-							<option value="priceasc">價格由低至高</option>
-							<option value="stockasc">價格由低至高</option>
-						</select>
+						<form action="<c:url value='/rentMenu' />" method="POST">
+							<select name="sortType">
+								<option selected>請選擇排序條件</option>
+								<option value="pricedesc">價格由高至低</option>
+								<option value="stockdesc">數量由高至低</option>
+								<option value="priceasc">價格由低至高</option>
+								<option value="stockasc">價格由低至高</option>
+							</select>
+						</form>
 					</div>
 
 					<div
 						class="container-fluid d-flex flex-wrap justify-content-center">
 						<div class="row">
 
-							<c:forEach var='rentProduct' items='${rentProducts}'
-								varStatus='vs'>
+							<c:forEach var='rentProductMap' items='${rentProductsMap}'>
 								<div class="col-3 mt-3 " id="cardWidth">
 									<div class="card text-center">
 										<a href="#"><img
-											src="<c:url value='/images/product/${rentProduct.fileName}' />"
+											src="<c:url value='/images/product/${rentProductMap.key.fileName}' />"
 											class="card-img-top" id="productImg" alt="..."></a>
 										<div class="card-body">
-											<h5 class="card-title">${rentProduct.prodName}</h5>
+											<h5 class="card-title">${rentProductMap.key.prodName}</h5>
 											<div class="card-text mb-2">
-												租金: ${rentProduct.price}元/日<br>
+												租金: ${rentProductMap.key.price}元/日<br>
 												<c:choose>
-													<c:when test="${productStocks[vs.index] != null}">
-													庫存: ${productStocks[vs.index]}個<br>
+													<c:when test="${rentProductMap.value != null}">
+													庫存: ${rentProductMap.value}個<br>
 													</c:when>
 													<c:otherwise>
 													庫存: ${rentProduct.stock}個<br>
 													</c:otherwise>
 												</c:choose>
 											</div>
-											
+
 											<c:choose>
-												<c:when test="${productStocks[vs.index] != null}">
+												<c:when test="${rentProductMap.value != null}">
 													<c:choose>
-														<c:when test="${productStocks[vs.index] > 0}">
+														<c:when test="${rentProductMap.value > 0}">
 															<a href="#" class="btn btn-warning">前往租賃</a>
 														</c:when>
 														<c:otherwise>
@@ -101,7 +102,7 @@
 														</c:otherwise>
 													</c:choose>
 												</c:when>
-												
+
 												<c:otherwise>
 													<c:choose>
 														<c:when test="${rentProduct.stock > 0}">

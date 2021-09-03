@@ -3,6 +3,7 @@ package com.web.store.model._04_shop;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Blob;
+import java.sql.Clob;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -27,12 +28,15 @@ public class ProductBean implements Serializable {
 	private String classify;// 租買分類
 	private String prodName;// 商品名稱
 	private BigDecimal price;// 商品售價
-	private Blob coverImage;// 圖片
+	private Blob coverImage1;// 圖片1
+	private Blob coverImage2;// 圖片2
+	private Blob coverImage3;// 圖片3
 	private String mimeType;// 圖片類型
 	private Integer stock;// 庫存數量
 //	private String prodType;// 商品分類代碼 --ProductTypeBean取代此建構子--
 	private String fileName;// 圖片名稱
-	private Integer promoteId;// 活動編號
+	private Clob description;// 商品敘述
+//	private Integer promoteId;// 活動編號
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "PRODUCT_PRODTYPE_FK")
@@ -44,26 +48,29 @@ public class ProductBean implements Serializable {
 
 	@OneToMany(mappedBy = "productBean", cascade = CascadeType.ALL)
 	Set<BuyItemBean> buyItems = new LinkedHashSet<>();
-
-	
-	
 	
 	public ProductBean() {
 	}
 
-	public ProductBean(String classify, Integer prodId, String prodName, BigDecimal price, Blob coverImage,
-			String mimeType, Integer stock, String fileName, Integer promoteId,
-			Set<BuyItemBean> buyItems) {
+	public ProductBean(Integer prodId) {
+		this.prodId = prodId;
+	}
+
+	public ProductBean(String classify, Integer prodId, String prodName, BigDecimal price, Blob coverImage1,
+			 Blob coverImage2,  Blob coverImage3, String mimeType, Integer stock, String fileName,
+			 Clob description, Set<BuyItemBean> buyItems) {
 		this.classify = classify;
 		this.prodId = prodId;
 		this.prodName = prodName;
 		this.price = price;
-		this.coverImage = coverImage;
+		this.coverImage1 = coverImage1;
+		this.coverImage2 = coverImage2;
+		this.coverImage3 = coverImage3;
 		this.mimeType = mimeType;
 		this.stock = stock;
 //		this.prodType = prodType; --ProductTypeBean取代此建構子--
 		this.fileName = fileName;
-		this.promoteId = promoteId;
+		this.description = description;
 		this.buyItems = buyItems;
 	}
 
@@ -99,12 +106,28 @@ public class ProductBean implements Serializable {
 		this.price = price;
 	}
 
-	public Blob getCoverImage() {
-		return coverImage;
+	public Blob getCoverImage1() {
+		return coverImage1;
 	}
 
-	public void setCoverImage(Blob coverImage) {
-		this.coverImage = coverImage;
+	public void setCoverImage1(Blob coverImage1) {
+		this.coverImage1 = coverImage1;
+	}
+	
+	public Blob getCoverImage2() {
+		return coverImage2;
+	}
+	
+	public void setCoverImage2(Blob coverImage2) {
+		this.coverImage2 = coverImage2;
+	}
+	
+	public Blob getCoverImage3() {
+		return coverImage3;
+	}
+	
+	public void setCoverImage3(Blob coverImage3) {
+		this.coverImage3 = coverImage3;
 	}
 
 	public String getMimeType() {
@@ -138,17 +161,25 @@ public class ProductBean implements Serializable {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-
-	public Integer getPromoteId() {
-		return promoteId;
+	
+	public Clob getDescription() {
+		return description;
 	}
 
-	public void setPromoteId(Integer promoteId) {
-		this.promoteId = promoteId;
+	public void setDescription(Clob description) {
+		this.description = description;
 	}
+	
+//	public Integer getPromoteId() {
+//		return promoteId;
+//	}
+//
+//	public void setPromoteId(Integer promoteId) {
+//		this.promoteId = promoteId;
+//	}
 
 //	雙向多對一productTypeBean之getter、setter 開始
-	
+
 	public ProductTypeBean getProductTypeBean() {
 		return productTypeBean;
 	}
@@ -174,8 +205,5 @@ public class ProductBean implements Serializable {
 	public void setBuyItems(Set<BuyItemBean> buyItems) {
 		this.buyItems = buyItems;
 	}
-
-	
-
 
 }
