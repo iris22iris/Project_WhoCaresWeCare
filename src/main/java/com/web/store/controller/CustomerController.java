@@ -4,7 +4,11 @@ import java.sql.Blob;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -32,6 +36,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.service.CustomerService;
 import com.web.store.validators.CustomerValidator;
+
 
 
 @Controller
@@ -140,7 +145,7 @@ public class CustomerController {
 //			cb.setEmail("aaa@gmail.com");
 //			cb.setBirthday(java.sql.Date.valueOf("1991-08-15"));
 //			cb.setAccount("jk951230");
-//			Hobby hobby = new Hobby();
+//			CitySelect hobby = new CitySelect();
 //			hobby.setId(2);
 //			member.setHobby(hobby);
 			model.addAttribute("customer", cb);
@@ -192,7 +197,7 @@ public class CustomerController {
 			}
 		}
 //			// 必須要找出對應的Hobby物件
-//			Hobby hobby = hobbyService.getHobby(member.getHobby().getId());
+//			CitySelect hobby = hobbyService.getHobby(member.getHobby().getId());
 //			member.setHobby(hobby);
 //			
 //			// 必須要找出對應的Category物件
@@ -261,27 +266,112 @@ public class CustomerController {
 		// 修改單筆會員資料
 		@PutMapping(value = "/_05_EditmemberProfile/{key}", consumes = { "application/json" }, produces = { "application/json" })
 		public @ResponseBody Map<String, String> updateCustomer(
-				@RequestBody CustomerBean customer, @PathVariable Integer key) {
+			   @RequestBody CustomerBean customer, 
+			   @PathVariable Integer key
+			   ) {
+			
+			Map<String, String> errorMsgColumn = new HashMap<String, String>();
+		try {
 			CustomerBean member0 = null;
+			final String CUSTNAME_PATTERN = "\\pP|\\pS|\\s+";
+			final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%!^'\"]).{8,})";
+			String custName = customer.getCustName();
+			String nickName = customer.getNickName();
+			String idNumber = customer.getIdNumber();
+			String email = customer.getEmail();
+			String account = customer.getAccount();
+			Date birthday = customer.getBirthday();
+			String password = customer.getPassword();
 			if (key != null) {
 				member0 = customerService.getCustomerById(key);
 				if (member0 == null) {
 					throw new RuntimeException("鍵值不存在, key=" + key);
 				}
-//				customerService.evictMember(member0); 存在意義?
 			} else {
 				throw new RuntimeException("鍵值不存在, key=" + key);
 			}
+			
+			customer.setAccount(member0.getAccount());
+			
+			// 姓名檢核
+			if (custName == null || custName.trim().length() == 0) {
+				errorMsgColumn.put("custNameError", "會員姓名不能為空");
+			}
+			 
 
-			Map<String, String> map = new HashMap<>();
-			try {
+//			Pattern custNameP = Pattern.compile(CUSTNAME_PATTERN);
+//			Matcher cm = custNameP.matcher(custName);
+//			if (!cm.matches() && custName.length() > 0 && !custName.contains(CUSTNAME_PATTERN)) {
+//				errorMsgColumn.put("custNameError", "不允許有特殊字元");
+//			}
+
+			// 密碼檢核
+			if (password == null || password.trim().length() == 0 || password.length() < 8) {
+				errorMsgColumn.put("passWordError", "密碼欄必須輸入，密碼長度不能小於八個字元");
+			}
+			Pattern passWordp = Pattern.compile(PASSWORD_PATTERN);
+			Matcher pm = passWordp.matcher(password);
+			if (!pm.matches() && password.length() > 0) {
+				errorMsgColumn.put("passWordError", "密碼至少含各一個大小寫字母、數字與!@#$%!^'\\\"，且長度不能小於八個字元");
+			}
+			
+			//身分證檢核
+			String checkHead = "ABCDEFGHJKLMNPQRSTUVWXYZIO"; // 字母代號對照表
+			
+			if (idNumber == null || idNumber.length() != 10) {
+				errorMsgColumn.put("idNumberError", "長度不合法");
+			}
+			
+			if (idNumber.length() == 10 && idNumber != null) {
+				char[] c = idNumber.toUpperCase().toCharArray(); // 建立 c 陣列，同時將s字串轉大寫後，轉成字元陣列放入 c 陣列
+				int[] ID = new int[c.length]; // 建立一個運算用的整數陣列，空間為 c 的字元個數
+				// 驗證首位字母是否合法 (該字元是否能在checkHead[]找到), 驗證第一位是否為 1 or 2 (1=男生, 2=女生)
+				if (checkHead.indexOf(c[0]) == -1 || (c[1] != '1' && c[1] != '2')) {
+					errorMsgColumn.put("idNumberError", "格式不合法");
+				} else {
+					int sum = 0;
+					ID[0] = checkHead.indexOf(c[0]) + 10; // 第一個英文字運算
+					sum += ID[0] / 10; // .. 將商數加總 sum += ID[0]/10
+					ID[0] %= 10; // .. 取餘數放回 ID[0] 以便之後的運算
+					for (int i = 1; i < 10; i++) { // 將身分證後9碼轉成整數型態 (ASCII碼-48)
+						ID[i] = (int) c[i] - 48;
+					}
+					for (int i = 0; i < 9; i++) { // 代入公式:
+						ID[i] *= (9 - i); // 總和 sum += (ID[0])*9 + ID[1]*8 + ID[2]*7 + ... + ID[9]*1
+						sum += ID[i];
+					}
+					// 檢查(10-sum%10)是否相等於檢查碼，且 sum%10(餘數)為0時，檢查碼為0 => (10-sum%10)%10
+					if ((10 - sum % 10) % 10 == ID[9]) {
+					} else {
+						errorMsgColumn.put("idNumberError", "不合法");
+					}
+				}
+			} 
+			
+			
+			
+			
+			
+			
+			
+			
+
+			
 				customerService.updateCustomer(customer);
-				map.put("success", "更新成功");
+				errorMsgColumn.put("success", "更新成功");
 			} catch (Exception e) {
 				e.printStackTrace();
-				map.put("fail", "更新失敗");
+				errorMsgColumn.put("fail", "更新失敗");
 			}
-			return map;
+			return errorMsgColumn;
+		}
+		
+		@ModelAttribute
+		public void commonData(Model model) {
+			Map<String, String> genderMap = new HashMap<>();
+			genderMap.put("M", "Male");
+			genderMap.put("F", "Female");
+			model.addAttribute("genderMap", genderMap);
 		}
 
 }

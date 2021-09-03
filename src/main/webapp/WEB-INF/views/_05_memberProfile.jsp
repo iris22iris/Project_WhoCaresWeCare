@@ -20,9 +20,10 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
+window.onload = function() {  
+	$("input[type=radio][name='gender'][value='${customer.gender}']").prop("checked", true);
 	
-// }
-// window.onload = function() {  若後端回應json 則做這段
+//  若後端回應json 則做這段	
 // 	var xhr = new XMLHttpRequest();
 // 	xhr.open("PUT", "<c:url value='/_05_memberProfile/" + ${id} + "' />", true);
 // 	xhr.send();	
@@ -34,20 +35,88 @@
 // 		   $('#custName').val(customerBean.custName);
 // 	    }
 //      }
-// }
+}
 
-function upData(){
+function upData() {
+	var divResult = document.getElementById('resultMsg');
+	var custNameResult = document.getElementById('custNameResult');
+	var passWordResult = document.getElementById('passWordResult');
+	var inputIDResult = document.getElementById('inputIDResult');
+	
+	
+	var custName = $('#custName').val();
+	var nickName = $('#nickName').val();
+	var password = $('#passWord').val();
+	var inputID = $('#inputID').val();
+	
+	var phone = $('#phone').val();
+	var email = $('#email').val();
+	
+	var address = $('#address').val();
+	var birthday = $('#birthday').val();
+	var gender = $('#male').val();
+	
 	var xhr1 = new XMLHttpRequest();
 		xhr1.open("PUT", "<c:url value='/_05_EditmemberProfile/' />" + ${id}, true);
 		var jsonCustomer = {
 				custId:${id},
 				custName: $('#custName').val(),	
-				passWord: $('#passWord').val(),	
+				password: $('#passWord').val(),	
+				idNumber: $('#inputID').val(),
 				phone: $('#phone').val(),	
 				email: $('#email').val(),
-	   		}
+				birthday: $('#birthday').val(),
+				gender :$('input[type=radio][name="gender"]:checked').val(),
+		   		}
 	   		xhr1.setRequestHeader("Content-Type", "application/json");
 	   		xhr1.send(JSON.stringify(jsonCustomer));
+
+
+	   		xhr1.onreadystatechange = function() {
+				// 伺服器請求完成
+   		if (xhr1.readyState == 4 && (xhr1.status == 200 || xhr1.status == 201) ) {
+      		result = JSON.parse(xhr1.responseText);
+      		if (result.fail) {
+		 		divResult.innerHTML = "<font color='red' >"
+					+ result.fail + "</font>";
+	  		} 
+
+	  		if (result.custNameError) {
+	  			custNameResult.innerHTML = "<font color='RED'>"
+					+ result.custNameError + "</font>";
+					$('#custNameResult').show();
+	 		} 
+
+	  		if (result.passWordError) {
+	  			passWordResult.innerHTML = "<font color='RED'>"
+					+ result.passWordError + "</font>";
+					$('#passWordResult').show();
+	 		} 
+
+	  		if (result.idNumberError) {
+	  			inputIDResult.innerHTML = "<font color='RED'>"
+					+ result.idNumberError + "</font>";
+					$('#inputIDResult').show();
+	 		} 
+	 		
+
+	 		
+		} 
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+	   		
 }
 
 
@@ -111,54 +180,59 @@ function upData(){
 
 			<!-- 輸入資料區star  輸入資料區star -->
 			<div class=" col-9 p-3">
-				<div
-					class="col-9  p-3 d-flex justify-content-center align-items-center">
+				<div class="col-9  p-3 d-flex justify-content-center align-items-center">
 					<!-- 輸入資料區表格star -->
 					<form class="row g-3">
-					
+					<div  id='resultMsg' style="height:18px;display:none;"></div>
 					
 						<div class="col-3 ">
-							<label for="inputname" class="form-label">會員姓名:</label>
+							<label for="custName" class="form-label">會員姓名:</label>
 						</div>
-					
-					
 						<div class="col-9 ">
-							<input type="text" class="form-control" id="custName" value="${customer.custName}">
+							<input type="text" class="form-control" name="custName" id="custName" value="${customer.custName}">
+						</div><div  id='custNameResult' style="height:18px;display:none;"></div>
+						
+						
+						<div class="col-3">
+							<label for="nickName" class="form-label">會員暱稱:</label>
 						</div>
+						<div class="col-9">
+							<input type="text" class="form-control" id="nickName">
+						</div><div  id='nickNameResult' style="height:18px;display:none;"></div>
+						
+						
+						<div class="col-3">
+							<label for="passWord" class="form-label">密碼:</label>
+						</div>
+						<div class="col-9">
+							<input type="text" class="form-control" name = "passWord" id="passWord" value="${customer.password}">
+						</div><div  id='passWordResult' style="height:18px;display:none;"></div>
 
-						<div class="col-3">
-							<label for="inputothername" class="form-label">會員暱稱:</label>
-						</div>
-						<div class="col-9">
-							<input type="text" class="form-control" id="othername">
-						</div>
-						<div class="col-3">
-							<label for="othername" class="form-label">密碼:</label>
-						</div>
-						<div class="col-9">
-							<input type="password" class="form-control" id="passWord" value="${customer.password}">
-						</div>
 
 						<div class="col-3">
 							<label for="inputID" class="form-label">身分證字號:</label>
 						</div>
 						<div class="col-9">
-							<input type="text" class="form-control" id="inputID">
-						</div>
+							<input type="text" class="form-control" id="inputID" value="${customer.idNumber}">
+						</div><div  id='inputIDResult' style="height:18px;display:none;"></div>
+						
+						
 						<div class="col-3">
 							<label>性別:</label>
 						</div>
 						<div class=" choco col-9 ">
 							<div class="col-4">
-								<label><input type="radio" name="gender" value="male">男</label>
-								<label><input type="radio" name="gender" value="female">女</label>
-								<label><input type="radio" name="gender"
-									value="multiple">多元</label> <label><input type="radio"
-									name="gender" value="no">無</label><br>
+								<label><input type="radio" name="gender" id="male" value="male">男</label>
+								<label><input type="radio" name="gender" id="female" value="female">女</label>
+								<label><input type="radio" name="gender" id="multiple" value="multiple">多元</label> 
+								<label><input type="radio" name="gender" id="no" value="no">無</label><br>
 							</div>
 						</div>
+						
+						
+						
 						<div class="col-3">
-							<label for="inputphone" class="form-label">聯絡電話:</label>
+							<label for="phone" class="form-label">聯絡電話:</label>
 						</div>
 						<div class="col-9">
 							<input type="text" class="form-control" id="phone" value="${customer.phone}">
@@ -170,53 +244,35 @@ function upData(){
 						<div class="col-9">
 							<input type="text" class="form-control" size="50" id="email" value="${customer.email}">
 						</div>
+						
+						
 						<div class="col-3">
 							<label for="city" class="form-label">居住城市:</label>
 						</div>
 						<div class="col-9">
 
 							<select id="inputcity" class="form-select" name="city">
-								<option value="請選擇">請選擇</option>
-								<option value="台北">台北</option>
-								<option value="新北">新北</option>
-								<option value="高雄">高雄</option>
-								<option value="台中">台中</option>
-								<option value="桃園">桃園</option>
-								<option value="基隆">基隆</option>
-								<option value="台南">台南</option>
-								<option value="新竹">新竹</option>
-								<option value="新竹">新竹縣</option>
-								<option value="苗栗縣">苗栗縣</option>
-								<option value="彰化縣">彰化縣</option>
-								<option value="南投縣">南投縣</option>
-								<option value="雲林縣">雲林縣</option>
-								<option value="嘉義">嘉義</option>
-								<option value="嘉義縣">嘉義縣</option>
-								<option value="屏東縣">屏東縣</option>
-								<option value="宜蘭縣">宜蘭縣</option>
-								<option value="花蓮縣">花蓮縣</option>
-								<option value="台東縣">台東縣</option>
+								
 							</select>
 						</div>
 
+
 						<div class="col-3">
-							<label for="inputaddress" class="form-label">居住地址:</label>
+							<label for="address" class="form-label">居住地址:</label>
 						</div>
 						<div class="col-9">
 							<input type="text" class="form-control" size="50"
-								id="inputaddress">
+								id="address">
 						</div>
 
 						<div class="col-3">
-							<label for="inputbirthday" class="form-label" data-type="date"
-								data-name="birthday">出生(西元):</label>
-
-
+							<label for="birthday" class="form-label">出生(西元):</label>
 						</div>
 						<div class="col-3">
-							<label><input data-for="inputbirthday" class="form-label"
-								type="date" name="birthday"></label>
+							<label><input data-for="birthday" class="form-label"
+								type="text" id="birthday" value="${customer.birthday}"></label>
 						</div>
+						
 					</form>
 					<!-- 輸入資料區表格end -->
 				</div>
