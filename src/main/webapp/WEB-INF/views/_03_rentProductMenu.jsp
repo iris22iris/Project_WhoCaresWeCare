@@ -56,12 +56,12 @@
 				<!-- Product Start -->
 				<div class="rentProduct col-9">
 					<div class="container-fluid d-flex justify-content-end">
-						<select name="sort" onselect="">
-							<option value="">請選擇排序條件</option>
-							<option value="ascbyprice">價格由高至低</option>
-							<option value="ascbystock">數量由高至低</option>
-							<option value="descbyprice">價格由低至高</option>
-							<option value="descbystock">價格由低至高</option>
+						<select name="sortType">
+							<option selected>請選擇排序條件</option>
+							<option value="pricedesc">價格由高至低</option>
+							<option value="stockdesc">數量由高至低</option>
+							<option value="priceasc">價格由低至高</option>
+							<option value="stockasc">價格由低至高</option>
 						</select>
 					</div>
 

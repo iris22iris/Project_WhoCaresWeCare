@@ -58,12 +58,12 @@
 				<div class="buyProduct col-9">
 
 					<div class="container-fluid d-flex justify-content-end">
-						<select>
-							<option value="-1">請選擇排序條件</option>
-							<option value="priceasc">價格由高至低</option>
-							<option value="stockasc">數量由高至低</option>
-							<option value="pricedesc">價格由低至高</option>
-							<option value="stockdesc">價格由低至高</option>
+						<select name="sortType">
+							<option selected>請選擇排序條件</option>
+							<option value="pricedesc">價格由高至低</option>
+							<option value="stockdesc">數量由高至低</option>
+							<option value="priceasc">價格由低至高</option>
+							<option value="stockasc">價格由低至高</option>
 						</select>
 					</div>
 
@@ -83,16 +83,21 @@
 													onclick="track(this)"></i>
 											</h5>
 											<div class="card-text mb-2">價格: ${product.price}元</div>
-											<div class="row-3 pt-2">
-												<select class="form-select" style="width: 45%;"
-													aria-label="Default select example">
-													<option value="-1">數量</option>
-													<option value="1">1</option>
-													<option value="2">2</option>
-													<option value="3">3</option>
-												</select>
-												<input type="submit" class="btn btn-warning" value="加入購物車" />
-											</div>
+<!-- 											<div class="row-3 pt-2"> -->
+
+												<form class="row-3 pt-2"
+													action="<c:url value='/buyMenu/addCart/${product.prodId}' />"
+													method="POST">
+													<select name="amount" class="form-select"
+														style="width: 45%;" aria-label="Default select example">
+														<option value="-1">數量</option>
+														<option value="1">1</option>
+														<option value="2">2</option>
+														<option value="3">3</option>
+													</select>
+													<input type="submit" class="btn btn-warning" value="加入購物車" />
+												</form>
+<!-- 											</div> -->
 										</div>
 									</div>
 								</div>

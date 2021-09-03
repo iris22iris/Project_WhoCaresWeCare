@@ -3,6 +3,7 @@ package com.web.store.model._04_shop;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -13,10 +14,10 @@ public class ShoppingCart {
 	public ShoppingCart() {
 	}
 
-//	@Autowired
-//	public ShoppingCart(Map<String, ProductBean> cart) {
-//		this.productsMap = cart;
-//	}
+	@Autowired
+	public ShoppingCart(Map<Integer, ProductBean> productsMap) {
+		this.productsMap = productsMap;
+	}
 
 	public Map<Integer, ProductBean> getContent() {
 		return productsMap;

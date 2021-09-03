@@ -5,9 +5,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.store.model._04_shop.ProductBean;
 import com.web.store.model._04_shop.ShoppingCart;
@@ -26,7 +26,7 @@ public class ShoppingCartController {
 	@PostMapping("/buyMenu/addCart/{product.prodId}")
 	public String AddProductToCart(
 			@PathVariable("product.prodId") Integer prodId,
-			@ModelAttribute ProductBean productBean,
+			@RequestParam("amount") Integer amount,
 			Model model
 	) {	
 		ShoppingCart shoppingCart = (ShoppingCart) httpSession.getAttribute("ShoppingCart");
@@ -34,9 +34,13 @@ public class ShoppingCartController {
 			shoppingCart = new ShoppingCart();
 			httpSession.setAttribute("ShoppingCart", shoppingCart);
 		}
+		
+		ProductBean productBean = new ProductBean();
+		productBean.setProdId(prodId);
+		productBean.setStock(amount);
 		shoppingCart.addToCart(prodId, productBean);
 		
-		return "_04_buyProductMenu";
+		return "redirect:/buyMenu";
 	}
 	
 }

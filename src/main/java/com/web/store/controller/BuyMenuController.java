@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.store.model._04_shop.ProductBean;
 import com.web.store.model._04_shop.ShoppingCart;
@@ -30,45 +31,47 @@ public class BuyMenuController {
 	
 	@GetMapping("/buyMenu")
 	public String buyProductMenu(Model model) {
-		List<ProductBean> products = productService.getAllProducts();
-		List<ProductTypeBean> productTypes = productService.getAllProdTypes();
-		model.addAttribute("products", products);
-		model.addAttribute("productTypes", productTypes);
-		
 		ShoppingCart shoppingCart = (ShoppingCart) httpSession.getAttribute("ShoppingCart");
 		if (shoppingCart == null) {
 			shoppingCart = new ShoppingCart();
 			httpSession.setAttribute("ShoppingCart", shoppingCart);
 		}
 		
+		List<ProductBean> products = productService.getAllProducts();
+		List<ProductTypeBean> productTypes = productService.getAllProdTypes();
+		model.addAttribute("products", products);
+		model.addAttribute("productTypes", productTypes);
+		
 		return "_04_buyProductMenu";
 	}
 	
-	
-//	@GetMapping("/buyMenu")
-//	public String buyProductMenu(
-//			@PathVariable(value = "sortby", required = false) String sort
-//			, Model model
-//	) {
+//	@GetMapping("/buyMenu/{sortType}")
+//	public String buyProductMenuSort(@PathVariable("sortType") String sortType, Model model) {
+//		ShoppingCart shoppingCart = (ShoppingCart) httpSession.getAttribute("ShoppingCart");
+//		if (shoppingCart == null) {
+//			shoppingCart = new ShoppingCart();
+//			httpSession.setAttribute("ShoppingCart", shoppingCart);
+//		}
+//
 //		List<ProductBean> products = productService.getAllProducts();
 //		List<ProductTypeBean> productTypes = productService.getAllProdTypes();
-//		if (sort != null) {
-//			if (sort.startsWith("stock")) {
-//				if (sort.endsWith("asc")) {
+//		if (sortType != null) {
+//			if (sortType.startsWith("stock")) {
+//				if (sortType.endsWith("asc")) {
 //					products.sort((ProductBean pb1, ProductBean pb2) -> pb1.getStock() - pb2.getStock());
 //					model.addAttribute("products", products);
-//				} else if (sort.endsWith("desc")) {
+//				} else if (sortType.endsWith("desc")) {
 //					products.sort((ProductBean pb1, ProductBean pb2) -> pb2.getStock() - pb1.getStock());
 //					model.addAttribute("products", products);
 //				}
-//			} else if (sort.startsWith("price")) {
-//				if (sort.endsWith("asc")) {
-//					products.sort((ProductBean pb1, ProductBean pb2) -> 
-//									pb1.getPrice().intValue() - pb2.getPrice().intValue());
+//			} else if (sortType.startsWith("price")) {
+//				if (sortType.endsWith("asc")) {
+//					products.sort((ProductBean pb1, ProductBean pb2) -> pb1.getPrice().intValue()
+//							- pb2.getPrice().intValue());
 //					model.addAttribute("products", products);
-//				} else if (sort.endsWith("desc")) {
-//					products.sort((ProductBean pb1, ProductBean pb2) -> 
-//					pb2.getPrice().intValue() - pb1.getPrice().intValue());
+//				} else if (sortType.endsWith("desc")) {
+//					products.sort((ProductBean pb1, ProductBean pb2) -> pb2.getPrice().intValue()
+//							- pb1.getPrice().intValue());
 //					model.addAttribute("products", products);
 //				}
 //			}
