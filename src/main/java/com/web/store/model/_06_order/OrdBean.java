@@ -9,9 +9,8 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -26,15 +25,12 @@ import com.web.store.model._06_order.pkClass.OrdPK;
 
 @Entity
 @Table(name = "Ord")
-@IdClass(OrdPK.class)
 public class OrdBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	private String category;
-	@Id
-	@Column(columnDefinition = "INT(8) ZEROFILL")
-	private Integer ordId;
+	@EmbeddedId
+	private OrdPK ordPK;
+	
 	@Column(columnDefinition = "datetime")
 	private Timestamp orderDate;
 	private String reciName;
@@ -65,34 +61,11 @@ public class OrdBean implements Serializable {
 
 	public OrdBean() {
 	}
-	
-	
 
-//	public OrdBean(String category, Integer ordId, Timestamp orderDate, String reciName, String reciCity,
-//			String reciAddress, String reciPhone, BigDecimal ordTotal, String delivery, String payment,
-//			Timestamp shipDate, Clob orderMark) {
-//		this.category = category;
-//		this.ordId = ordId;
-//		this.orderDate = orderDate;
-//		this.reciName = reciName;
-//		this.reciCity = reciCity;
-//		this.reciAddress = reciAddress;
-//		this.reciPhone = reciPhone;
-//		this.ordTotal = ordTotal;
-//		this.delivery = delivery;
-//		this.payment = payment;
-//		this.shipDate = shipDate;
-//		this.orderMark = orderMark;
-//	}
-
-
-
-	public OrdBean(String category, Integer ordId, Timestamp orderDate, String reciName, String reciCity,
+	public OrdBean(Timestamp orderDate, String reciName, String reciCity,
 			String reciAddress, String reciPhone, BigDecimal ordTotal, String delivery, String payment,
 			Timestamp shipDate, Clob orderMark, Set<RentItemBean> rentItems,
 			Set<ProblemBean> problem, Set<BuyItemBean> buyItems) {
-		this.category = category;
-		this.ordId = ordId;
 		this.orderDate = orderDate;
 		this.reciName = reciName;
 		this.reciCity = reciCity;
@@ -108,20 +81,12 @@ public class OrdBean implements Serializable {
 		this.buyItems = buyItems;
 	}
 
-	public String getCategory() {
-		return category;
+	public OrdPK getOrdPK() {
+		return ordPK;
 	}
 
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
-	public Integer getOrdId() {
-		return ordId;
-	}
-
-	public void setOrdId(Integer ordId) {
-		this.ordId = ordId;
+	public void setOrdPK(OrdPK ordPK) {
+		this.ordPK = ordPK;
 	}
 
 	public Timestamp getOrderDate() {
@@ -240,21 +205,16 @@ public class OrdBean implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((buyItems == null) ? 0 : buyItems.hashCode());
-		result = prime * result + ((category == null) ? 0 : category.hashCode());
-		result = prime * result + ((customerBean == null) ? 0 : customerBean.hashCode());
 		result = prime * result + ((delivery == null) ? 0 : delivery.hashCode());
-		result = prime * result + ((ordId == null) ? 0 : ordId.hashCode());
+		result = prime * result + ((ordPK == null) ? 0 : ordPK.hashCode());
 		result = prime * result + ((ordTotal == null) ? 0 : ordTotal.hashCode());
 		result = prime * result + ((orderDate == null) ? 0 : orderDate.hashCode());
-		result = prime * result + ((orderMark == null) ? 0 : orderMark.hashCode());
 		result = prime * result + ((payment == null) ? 0 : payment.hashCode());
 		result = prime * result + ((problem == null) ? 0 : problem.hashCode());
 		result = prime * result + ((reciAddress == null) ? 0 : reciAddress.hashCode());
 		result = prime * result + ((reciCity == null) ? 0 : reciCity.hashCode());
 		result = prime * result + ((reciName == null) ? 0 : reciName.hashCode());
 		result = prime * result + ((reciPhone == null) ? 0 : reciPhone.hashCode());
-		result = prime * result + ((rentItems == null) ? 0 : rentItems.hashCode());
 		result = prime * result + ((shipDate == null) ? 0 : shipDate.hashCode());
 		return result;
 	}
@@ -268,32 +228,15 @@ public class OrdBean implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		OrdBean other = (OrdBean) obj;
-		if (buyItems == null) {
-			if (other.buyItems != null)
-				return false;
-		} else if (!buyItems.equals(other.buyItems))
-			return false;
-
-		if (category == null) {
-			if (other.category != null)
-				return false;
-		} else if (!category.equals(other.category))
-			return false;
-		if (customerBean == null) {
-			if (other.customerBean != null)
-				return false;
-		} else if (!customerBean.equals(other.customerBean))
-			return false;
-	
 		if (delivery == null) {
 			if (other.delivery != null)
 				return false;
 		} else if (!delivery.equals(other.delivery))
 			return false;
-		if (ordId == null) {
-			if (other.ordId != null)
+		if (ordPK == null) {
+			if (other.ordPK != null)
 				return false;
-		} else if (!ordId.equals(other.ordId))
+		} else if (!ordPK.equals(other.ordPK))
 			return false;
 		if (ordTotal == null) {
 			if (other.ordTotal != null)
@@ -304,11 +247,6 @@ public class OrdBean implements Serializable {
 			if (other.orderDate != null)
 				return false;
 		} else if (!orderDate.equals(other.orderDate))
-			return false;
-		if (orderMark == null) {
-			if (other.orderMark != null)
-				return false;
-		} else if (!orderMark.equals(other.orderMark))
 			return false;
 		if (payment == null) {
 			if (other.payment != null)
@@ -339,11 +277,6 @@ public class OrdBean implements Serializable {
 			if (other.reciPhone != null)
 				return false;
 		} else if (!reciPhone.equals(other.reciPhone))
-			return false;
-		if (rentItems == null) {
-			if (other.rentItems != null)
-				return false;
-		} else if (!rentItems.equals(other.rentItems))
 			return false;
 		if (shipDate == null) {
 			if (other.shipDate != null)

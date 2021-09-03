@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix='form' uri="http://www.springframework.org/tags/form"%>
 
 <!DOCTYPE html>
 <html>
@@ -29,90 +30,97 @@
 <body>
 	<div id="body">
 		<div id="content">
-		<!-- 引入共同的頁首 -->
-		<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+			<!-- 引入共同的頁首 -->
+			<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 
-		<!-- Main Start -->
+			<!-- Main Start -->
 
-		<!-- imgAd Start -->
-		<div class="menuAd d-flex justify-content-center">
-			<img src="<c:url value='/images/menuAd.png' />" class="imageAd" alt="ad3">
-		</div>
-		<!-- imgAd End -->
+			<!-- imgAd Start -->
+			<div class="menuAd d-flex justify-content-center">
+				<img src="<c:url value='/images/menuAd.png' />" class="imageAd"
+					alt="ad3">
+			</div>
+			<!-- imgAd End -->
 
-		<!-- 商品列表start -->
-		<div class="buyProductMenu-title">
-			<h2>
-				<i class="fas fa-th-large px-3"></i>商品列表
-			</h2>
-		</div>
-		<!-- 商品列表end -->
+			<!-- 商品列表start -->
+			<div class="buyProductMenu-title">
+				<h2>
+					<i class="fas fa-th-large px-3"></i>商品列表
+				</h2>
+			</div>
+			<!-- 商品列表end -->
 
-		<div class="row">
-			<!-- Side-List Start -->
-			<jsp:include page="/WEB-INF/fragment/buySideMenu.jsp" />
-			
-			<!-- Product Start -->
-			<div class="buyProduct col-9">
-				<div class="container-fluid d-flex justify-content-end">
-					<select name="buyProductSort">
-						<option value="">請選擇排序條件</option>
-						<option value="asc">價格由高至低</option>
-						<option value="desc">價格由低至高</option>
-					</select>
-				</div>
+			<div class="row">
+				<!-- Side-List Start -->
+				<jsp:include page="/WEB-INF/fragment/buySideMenu.jsp" />
 
-				<div class="container-fluid d-flex flex-wrap justify-content-center">
-					<div class="row">
+				<!-- Product Start -->
+				<div class="buyProduct col-9">
 
-						<c:forEach var='product' items='${products}'>
-							<div class="col-3 mt-3 " id="cardWidth">
-								<div class="card text-center">
-									<a href="#"><img src="<c:url value='/images/product/${product.fileName}' />"
-										class="card-img-top" id="productImg" alt="..."></a>
-									<div class="card-body">
-										<h5 class="card-title d-flex justify-content-around">
-											${product.prodName}<i class="far fa-heart"
-												onclick="track(this)"></i>
-										</h5>
-										<div class="card-text mb-2">價格: ${product.price}元</div>
-										<div class="row-3 pt-2">
-											<select class="form-select" style="width: 45%;"
-												aria-label="Default select example">
-												<option selected>數量</option>
-												<option value="1">1</option>
-												<option value="2">2</option>
-												<option value="3">3</option>
-											</select> <a href="#" class="btn btn-warning">加入購物車</a>
+					<div class="container-fluid d-flex justify-content-end">
+						<select>
+							<option value="-1">請選擇排序條件</option>
+							<option value="priceasc">價格由高至低</option>
+							<option value="stockasc">數量由高至低</option>
+							<option value="pricedesc">價格由低至高</option>
+							<option value="stockdesc">價格由低至高</option>
+						</select>
+					</div>
+
+					<div
+						class="container-fluid d-flex flex-wrap justify-content-center">
+						<div class="row">
+
+							<c:forEach var='product' items='${products}'>
+								<div class="col-3 mt-3 " id="cardWidth">
+									<div class="card text-center">
+										<a href="#"><img
+											src="<c:url value='/images/product/${product.fileName}' />"
+											class="card-img-top" id="productImg" alt="..."></a>
+										<div class="card-body">
+											<h5 class="card-title d-flex justify-content-around">
+												${product.prodName}<i class="far fa-heart"
+													onclick="track(this)"></i>
+											</h5>
+											<div class="card-text mb-2">價格: ${product.price}元</div>
+											<div class="row-3 pt-2">
+												<select class="form-select" style="width: 45%;"
+													aria-label="Default select example">
+													<option value="-1">數量</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+												</select>
+												<input type="submit" class="btn btn-warning" value="加入購物車" />
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						</c:forEach>
+							</c:forEach>
 
+						</div>
+					</div>
+
+					<div class="mt-3">
+						<nav aria-label="Page navigation">
+							<ul class="pagination justify-content-center">
+								<li class="page-item disabled"><a class="page-link"
+									href="#" tabindex="-1" aria-disabled="true">上一頁</a></li>
+								<li class="page-item active"><a class="page-link">1</a></li>
+								<li class="page-item"><a class="page-link" href="#">2</a></li>
+								<li class="page-item"><a class="page-link" href="#">3</a></li>
+								<li class="page-item"><a class="page-link" href="#">下一頁</a></li>
+							</ul>
+						</nav>
 					</div>
 				</div>
-
-				<div class="mt-3">
-					<nav aria-label="Page navigation">
-						<ul class="pagination justify-content-center">
-							<li class="page-item disabled"><a class="page-link" href="#"
-								tabindex="-1" aria-disabled="true">上一頁</a></li>
-							<li class="page-item active"><a class="page-link">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#">下一頁</a></li>
-						</ul>
-					</nav>
-				</div>
 			</div>
+			<!-- Product End -->
 		</div>
-		<!-- Product End -->
+		<!-- Main End -->
+		<!-- 引入共同的頁尾 -->
+		<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
 	</div>
-	<!-- Main End -->
-	<!-- 引入共同的頁尾 -->
-	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
-</div>
 	<!-- bootstrap -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js">

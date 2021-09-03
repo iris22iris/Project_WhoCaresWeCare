@@ -24,19 +24,54 @@ public class RentProductDaoImpl implements RentProductDao {
 	@Override
 	public List<RentProductBean> getAllProducts() {
 		Session session = factory.getCurrentSession();
-		String hql = " FROM RentProductBean rp "
-				   + " GROUP BY rp.prodId ";
+		String hql = " FROM RentProductBean rp ";
 		
 		return session.createQuery(hql, RentProductBean.class)
 				      .getResultList();
 	}
 
 	@Override
-	public List<RentProductBean> getProductsByProdType(ProductTypeBean prodTypeBean) {
+	public List<RentProductBean> getAllGroupedProducts() {
 		Session session = factory.getCurrentSession();
-		String hql = " FROM RentProductBean rp WHERE rp.productTypeBean = :ptb ";
-		List<RentProductBean> list = session.createQuery(hql, RentProductBean.class).setParameter("ptb", prodTypeBean).getResultList();
-		return list;
+		String hql = " FROM RentProductBean rp "
+				+ " GROUP BY rp.prodId ";
+		
+		return session.createQuery(hql, RentProductBean.class)
+				.getResultList();
+	}
+
+	@Override
+	public List<Long> getAllStockSum() {
+		Session session = factory.getCurrentSession();
+		String hql = " SELECT SUM(rp.stock) FROM RentProductBean rp "
+				   + " GROUP BY rp.prodId ";
+		
+		return session.createQuery(hql, Long.class)
+					  .getResultList();
+	}
+
+	@Override
+	public List<RentProductBean> getGroupedProductsByProdType(ProductTypeBean prodTypeBean) {
+		Session session = factory.getCurrentSession();
+		String hql = " FROM RentProductBean rp "
+				   + " WHERE rp.productTypeBean = :ptb "
+				   + " GROUP BY rp.prodId ";
+		
+		return session.createQuery(hql, RentProductBean.class)
+					  .setParameter("ptb", prodTypeBean)
+					  .getResultList();
+	}
+	
+	@Override
+	public List<Long> getGroupedStockSum(ProductTypeBean prodTypeBean) {
+		Session session = factory.getCurrentSession();
+		String hql = " SELECT SUM(rp.stock) FROM RentProductBean rp "
+				   + " WHERE rp.productTypeBean = :ptb "
+				   + " GROUP BY rp.prodId ";
+		
+		return session.createQuery(hql, Long.class)
+					  .setParameter("ptb", prodTypeBean)
+					  .getResultList();
 	}
 
 	@Override

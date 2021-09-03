@@ -22,7 +22,6 @@ import com.web.store.model._02_customerService.PromotionBean;
 import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.model._07_productType.ProductTypeBean;
 
-
 @Entity
 @Table(name = "Product")
 public class ProductBean implements Serializable {
