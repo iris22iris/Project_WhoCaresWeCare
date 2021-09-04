@@ -162,7 +162,24 @@
 								<!-- <label for="fname">租賃數量</label> : &nbsp; <input type="number" name="" min="0" max="10" value="1"><br> -->
 								<label for="fname">庫存數量:${rentProduct.stock}個</label> 
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<button class="btn btn-outline-secondary " data-bs-toggle="modal" href="#exampleModalToggle" role="button"  type="button" class="btn btn-secondary" data-bs-dismiss="modal">預約候補</button>&nbsp;&nbsp;&nbsp;&nbsp;
+							
+						<c:choose> 
+						
+						  <c:when test="${rentProduct.stock >0 }">   
+							<a href="<c:url value='/_03_rentItemList' />">
+							<button class="btn btn-outline-secondary " 
+							 role="button" 							
+							type="button" class="btn btn-secondary" >馬上租賃</button>
+						 	</a>	
+						  </c:when> 
+						
+								
+						  <c:otherwise>   
+							<button class="btn btn-outline-secondary " data-bs-toggle="modal" href="#exampleModalToggle" role="button"  type="button" class="btn btn-secondary" data-bs-dismiss="modal">預約候補</button>
+					   	  </c:otherwise> 
+							
+						</c:choose> 
+								&nbsp;&nbsp;&nbsp;&nbsp;
 								&nbsp;&nbsp;&nbsp;&nbsp;
 								<button type="button"  class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" >加入購物車</button>
            
@@ -241,8 +258,10 @@
 					<!-- 留言板 end -->
 				</div>
 			</div>
-			<!-- main-right-side start -->
+			<!-- main-right-side end -->
 		</div>
+		
+		<!-- 預約表單畫面 start -->
 		<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
         <div class="modal-dialog ">
           <div class="modal-content">
@@ -255,13 +274,13 @@
 	                        <label style=font-size:22px;  for="inputAccount" class="form-label " >商品名稱 :</label>
 	                    </div>
 	                    <div class="col-7 justify-content-evenly p-1  d-flex align-items-center ">
-	                        <label style=font-size:21px; for="inputAccount" class="form-label">反正就是很好很實用的血糖機</label>
+	                        <label style=font-size:21px; for="inputAccount" class="form-label">抓資料庫反正就是很好很實用的血糖機</label>
 	                    </div>
 	                    <div class="col-5 justify-content-evenly p-1  d-flex align-items-center">
-	                        <label style=font-size:22px;  for="inputAccount" class="form-label">目前預約候補人數 :</label>
+	                        <label style=font-size:22px;  for="inputAccount" class="form-label">目前預約候補人數 :抓資料庫</label>
 	                    </div>
 	                    <div class="col-1 justify-content-evenly p-1  d-flex align-items-center">
-	                        <label style=font-size:22px; for="inputAccount" class="form-label">60</label>
+	                        <label style=font-size:22px; for="inputAccount" class="form-label">60抓資料庫</label>
 	                    </div>
 	                </form>
             	</div>
@@ -280,6 +299,9 @@
           </div>
         </div>
     </div>
+    <!-- 預約表單畫面 end -->
+    
+    <!-- 預約完成結果畫面 start -->
       <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
         <div class="modal-dialog ">
           <div class="modal-content">
@@ -293,11 +315,11 @@
                 
                 <div class="col-6 justify-content-evenly p-1  d-flex align-items-center ">
                     <label style=font-size:22px; for="inputAccount" class="form-label">您的預約序號為:</label>
-                    <label style=font-size:22px;  for="inputAccount" class="form-label ">61</label>
+                    <label style=font-size:22px;  for="inputAccount" class="form-label ">抓資料庫61</label>
                 </div>
                 <div class="col-8 justify-content-evenly p-1  d-flex align-items-center ">
                     <label style=font-size:18px; for="inputAccount" class="form-label">您的預約編號為:</label>
-                    <label style=font-size:18px; for="inputAccount" class="form-label ">A12312312311</label>
+                    <label style=font-size:18px; for="inputAccount" class="form-label ">抓資料庫A12312312311</label>
                 </div>
                 <div class="modal-footer justify-content-evenly">                           
                     <button type="button" class="btn btn-warning" data-bs-dismiss="modal">繼續逛逛</button>
@@ -311,7 +333,7 @@
           </div>
         </div>
       </div>
-		
+		<!-- 預約完成結果畫面 end -->
 	</div>
 		
 	
