@@ -60,7 +60,7 @@
 					<i class="fas fa-th-large px-2"></i>
 					<a href="#大分類">商品大分類</a>
 					<i class="fas fa-angle-right"></i>
-					<a href="#小分類">商品小分類</a>
+					<a href="#小分類">商品小分類:${product.productTypeBean.prodName}</a>
 					<hr>
 				</div>
 
@@ -74,19 +74,19 @@
 
 								<div class="carousel-inner" style="border-radius: 10px">
 									<div class="carousel-item active" data-bs-interval="10000">
-										<img src="<c:url value='/images/product/A0001.jpg' />"
+										<img src="<c:url value='/images/product/${product.fileName}' />"
 											class="img1" alt="...">
 										<div class="carousel-caption d-none d-md-block"></div>
 									</div>
 
 									<div class="carousel-item" data-bs-interval="2000">
-										<img src="<c:url value='/images/product/A0002.jpg' />"
+										<img src="<c:url value='/images/forProductPage_2.png' />"
 											class="img2" alt="...">
 										<div class="carousel-caption d-none d-md-block"></div>
 									</div>
 
 									<div class="carousel-item">
-										<img src="<c:url value='/images/product/A0003.jpg' />"
+										<img src="<c:url value='/images/forProductPage_3.png' />"
 											class="img3" alt="...">
 										<div class="carousel-caption d-none d-md-block"></div>
 									</div>
@@ -98,15 +98,15 @@
                                 <div>
 							<input type="image" data-bs-target="#carouselExampleDark"
 								data-bs-slide-to="0" name="submit_Btn" id="submit_Btn"
-								src="<c:url value='/images/product/A0001.jpg' />"
+								src="<c:url value='/images/product/${product.fileName}' />"
 								style="border-radius: 10px"> <input type="image"
 								data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
 								name="submit_Btn" id="submit_Btn"
-								src="<c:url value='/images/product/A0002.jpg' />"
+								src="<c:url value='/images/forProductPage_2.png' />"
 								style="border-radius: 10px"> <input type="image"
 								data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
 								name="submit_Btn" id="submit_Btn"
-								src="<c:url value='/images/product/A0003.jpg' />"
+								src="<c:url value='/images/forProductPage_3.png' />"
 								style="border-radius: 10px">
 						</div>
 					</div>
@@ -119,7 +119,7 @@
 								<h2>商品名稱:${product.prodName}</h2>
 								<h1 id="commodityname"></h1>
 								<br> <label for="fname">衛部醫器製壹字第000936號</label><br> <label
-									for="fname">價格: </label><br> <label for="fname">數量</label>
+									for="fname">價格: ${product.price}元</label><br> <label for="fname">數量</label>
 								: &nbsp; <input type="number" name="" min="0" max="10" value="1"
 									style="border-radius: 6px"><br>
 								<!-- <label for="fname">租賃數量</label> : &nbsp; <input type="number" name="" min="0" max="10" value="1"><br> -->
@@ -213,7 +213,7 @@
 
 	</div>
 
-
+</div>
 </body>
 
 </html>
