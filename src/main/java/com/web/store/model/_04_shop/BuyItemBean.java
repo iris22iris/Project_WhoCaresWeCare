@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import com.web.store.model._02_customerService.PromotionBean;
 import com.web.store.model._04_shop.pkClass.BuyItemPK;
 import com.web.store.model._06_order.OrdBean;
+import com.web.store.model._06_order.pkClass.OrdPK;
 import com.web.store.model._07_productType.ProductTypeBean;
 
 @Entity
@@ -66,8 +67,6 @@ public class BuyItemBean implements Serializable {
 		this.discount = discount;
 		this.ordTotal = ordTotal;
 	}
-	
-	
 	
 	public BuyItemPK getBuyItemPK() {
 		return buyItemPK;
@@ -205,6 +204,8 @@ public class BuyItemBean implements Serializable {
 			return false;
 		return true;
 	}
+
+
 
 
 }

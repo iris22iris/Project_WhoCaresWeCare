@@ -264,7 +264,8 @@ public class EDMTableResetHibernate {
 //
 //					String[] token = line.split("\\|");
 //					BuyItemBean bib = new BuyItemBean();
-////					bib.setBuyItemPK();
+//					bib.setBuyItemPK(new BuyItemPK(new OrdPK(token[1],Integer.parseInt(token[6]))
+//													  ,Integer.parseInt(token[0])));
 //					bib.setDiscount(new BigDecimal(token[2]));
 //					bib.setItemSum(new BigDecimal(token[3]));
 //					bib.setOrdTotal(new BigDecimal(token[4]));
