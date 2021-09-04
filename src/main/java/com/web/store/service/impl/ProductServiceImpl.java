@@ -28,8 +28,38 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	public List<ProductBean> getAllProductsByPage(int pageNo) {
+		return productDao.getAllProductsByPage(pageNo);
+	}
+	
+	@Override
+	public List<ProductBean> getAllProductsByPageSort(int pageNo, String sortType) {
+		return productDao.getAllProductsByPageSort(pageNo, sortType);
+	}
+
+	@Override
+	public int getTotalPages() {
+		return productDao.getTotalPages();
+	}
+
+	@Override
 	public List<ProductBean> getProductsByProdType(ProductTypeBean prodTypeBean) {
 		return productDao.getProductsByProdType(prodTypeBean);
+	}
+
+	@Override
+	public List<ProductBean> getProductsByProdTypeAndPage(ProductTypeBean prodTypeBean, int pageNo) {
+		return productDao.getProductsByProdTypeAndPage(prodTypeBean, pageNo);
+	}
+	
+	@Override
+	public List<ProductBean> getProductsByProdTypeAndPageSort(ProductTypeBean prodTypeBean, int pageNo, String sortType) {
+		return productDao.getProductsByProdTypeAndPageSort(prodTypeBean, pageNo, sortType);
+	}
+
+	@Override
+	public int getTotalPagesByProdType(ProductTypeBean prodTypeBean) {
+		return productDao.getTotalPagesByProdType(prodTypeBean);
 	}
 
 	@Override
@@ -40,7 +70,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void updateStock(int productId, int newQuantity) {
 	}
-	
+
 	@Transactional
 	@Override
 	public ProductBean getProductById(int prodId) {

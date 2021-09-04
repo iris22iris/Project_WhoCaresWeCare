@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.store.model._04_shop.ProductBean;
@@ -19,7 +18,7 @@ import com.web.store.service.ProductService;
 
 @Controller
 public class BuyMenuController {
-	
+
 	ProductService productService;
 	HttpSession httpSession;
 
@@ -28,27 +27,12 @@ public class BuyMenuController {
 		this.productService = productService;
 		this.httpSession = httpSession;
 	}
-	
+
 	@GetMapping("/buyMenu")
-	public String buyProductMenu(Model model) {
-		ShoppingCart shoppingCart = (ShoppingCart) httpSession.getAttribute("ShoppingCart");
-		if (shoppingCart == null) {
-			shoppingCart = new ShoppingCart();
-			httpSession.setAttribute("ShoppingCart", shoppingCart);
-		}
-		
-		List<ProductBean> products = productService.getAllProducts();
-		List<ProductTypeBean> productTypes = productService.getAllProdTypes();
-		model.addAttribute("products", products);
-		model.addAttribute("productTypes", productTypes);
-		
-		return "_04_buyProductMenu";
-	}
-	
-	@PostMapping("/buyMenu")
 	public String buyProductMenu(
-			@RequestParam("sortType") String sortType,
-									  Model model
+			@RequestParam(name = "sortType", required = false) String sortType,
+			@RequestParam(name = "pageNo", defaultValue = "1", required = false) int pageNo,
+			Model model
 	) {
 		ShoppingCart shoppingCart = (ShoppingCart) httpSession.getAttribute("ShoppingCart");
 		if (shoppingCart == null) {
@@ -56,44 +40,51 @@ public class BuyMenuController {
 			httpSession.setAttribute("ShoppingCart", shoppingCart);
 		}
 
-		List<ProductBean> products = productService.getAllProducts();
-		List<ProductTypeBean> productTypes = productService.getAllProdTypes();
+		List<ProductBean> products;
 		if (sortType != null) {
-			if (sortType.startsWith("stock")) {
-				if (sortType.endsWith("asc")) {
-					products.sort((ProductBean pb1, ProductBean pb2) -> pb1.getStock() - pb2.getStock());
-					model.addAttribute("products", products);
-				} else if (sortType.endsWith("desc")) {
-					products.sort((ProductBean pb1, ProductBean pb2) -> pb2.getStock() - pb1.getStock());
-					model.addAttribute("products", products);
-				}
-			} else if (sortType.startsWith("price")) {
-				if (sortType.endsWith("asc")) {
-					products.sort((ProductBean pb1, ProductBean pb2) -> pb1.getPrice().intValue()
-							- pb2.getPrice().intValue());
-					model.addAttribute("products", products);
-				} else if (sortType.endsWith("desc")) {
-					products.sort((ProductBean pb1, ProductBean pb2) -> pb2.getPrice().intValue()
-							- pb1.getPrice().intValue());
-					model.addAttribute("products", products);
-				}
-			}
+			products = productService.getAllProductsByPageSort(pageNo, sortType);
+			String[] token = sortType.split(" ");
+			model.addAttribute("sortType", token[0] + "+" + token[1]);
 		} else {
-			model.addAttribute("products", products);
+			products = productService.getAllProductsByPage(pageNo);
+			model.addAttribute("sortType", null);
 		}
+		List<ProductTypeBean> productTypes = productService.getAllProdTypes();
+		int totalPages = productService.getTotalPages();
+
+		model.addAttribute("products", products);
 		model.addAttribute("productTypes", productTypes);
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("totalPages", totalPages);
+
 		return "_04_buyProductMenu";
 	}
 
 	@GetMapping("/buyMenu/{productType.prodType}")
-	public String getProductsByProdType (
+	public String getProductsByProdTypeSort(
 			@PathVariable("productType.prodType") String prodtype,
+			@RequestParam(name = "sortType", required = false) String sortType,
+			@RequestParam(name = "pageNo", defaultValue = "1", required = false) int pageNo,
 			Model model
 	) {
-		List<ProductBean> products = productService.getProductsByProdType(new ProductTypeBean(prodtype));
+		List<ProductBean> products;
+		if (sortType != null) {
+			products = productService.getProductsByProdTypeAndPageSort(new ProductTypeBean(prodtype),
+																	   pageNo, sortType);
+			String[] token = sortType.split(" ");
+			model.addAttribute("sortType", token[0] + "+" + token[1]);
+		} else {
+			products = productService.getProductsByProdTypeAndPage(new ProductTypeBean(prodtype), pageNo);
+			model.addAttribute("sortType", null);
+		}
 		List<ProductTypeBean> productTypes = productService.getAllProdTypes();
+		int totalPages = productService.getTotalPagesByProdType(new ProductTypeBean(prodtype));
+
 		model.addAttribute("products", products);
 		model.addAttribute("productTypes", productTypes);
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("totalPages", totalPages);
+
 		return "_04_buyProductMenu";
 	}
 

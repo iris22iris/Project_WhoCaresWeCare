@@ -7,7 +7,10 @@ import java.sql.Blob;
 import javax.sql.rowset.serial.SerialBlob;
 
 public class SystemUtils {
-
+	
+	public static final int RECORDS_PER_PAGE = 12;
+	
+	
 	public static Blob fileToBlob(String path) {
 		Blob blob = null;
 		try(

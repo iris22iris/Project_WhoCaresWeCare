@@ -7,16 +7,40 @@ import com.web.store.model._07_productType.ProductTypeBean;
 
 public interface ProductDao {
 
-	List<ProductBean> getAllProducts();				//讀取多筆產品資料
+	// 讀取多筆產品資料
+	List<ProductBean> getAllProducts();
 
-	List<ProductBean> getProductsByProdType(ProductTypeBean prodTypeBean); //依ProdType表格主鍵 載入產品的分類 
+	// 依分頁讀取多筆產品資料
+	List<ProductBean> getAllProductsByPage(int pageNo);
 
-	List<ProductTypeBean> getAllProdTypes(); 			//讀取全部產品分類
+	// 依分頁讀取多筆產品資料並排序
+	List<ProductBean> getAllProductsByPageSort(int pageNo, String sortType);
+	
+	// 計算販售的商品總共有幾頁
+	int getTotalPages();
+	
+	// 依ProdType表格主鍵 載入產品的分類
+	List<ProductBean> getProductsByProdType(ProductTypeBean prodTypeBean);
 
-	void updateStock(int productId, int newQuantity);	//更新庫存
+	// 依ProdType表格主鍵 載入產品的分類並分頁
+	List<ProductBean> getProductsByProdTypeAndPage(ProductTypeBean prodTypeBean, int pageNo);
 
-	public ProductBean getProductById(int prodId); 		//依主鍵讀取單筆產品資料
+	// 依ProdType表格主鍵 載入產品的分類並分頁且排序
+	List<ProductBean> getProductsByProdTypeAndPageSort(ProductTypeBean prodTypeBean, int pageNo, String sortType);
+	
+	// 計算分類的商品總共有幾頁
+	int getTotalPagesByProdType(ProductTypeBean prodTypeBean);
+	
+	// 讀取全部產品分類
+	List<ProductTypeBean> getAllProdTypes();
 
-	void addProduct(ProductBean product);				//新增單筆產品資料
+	// 更新庫存
+	void updateStock(int productId, int newQuantity);
+
+	// 依主鍵讀取單筆產品資料
+	public ProductBean getProductById(int prodId);
+
+	// 新增單筆產品資料
+	void addProduct(ProductBean product);
 
 }
