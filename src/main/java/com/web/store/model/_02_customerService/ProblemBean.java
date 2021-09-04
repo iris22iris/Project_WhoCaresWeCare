@@ -67,6 +67,9 @@ public class ProblemBean implements Serializable {
 		this.attachFile = attachFile;// 附加檔案
 	}
 
+	public ProblemBean() {
+	}
+
 	public Integer getCustId() {
 		return custId;
 	}

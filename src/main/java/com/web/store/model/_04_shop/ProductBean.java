@@ -74,6 +74,7 @@ public class ProductBean implements Serializable {
 		this.buyItems = buyItems;
 	}
 
+
 	public String getClassify() {
 		return classify;
 	}

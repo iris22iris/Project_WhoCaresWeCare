@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import com.web.store.model._02_customerService.PromotionBean;
 import com.web.store.model._04_shop.pkClass.BuyItemPK;
 import com.web.store.model._06_order.OrdBean;
+import com.web.store.model._06_order.pkClass.OrdPK;
 import com.web.store.model._07_productType.ProductTypeBean;
 
 @Entity
@@ -24,13 +25,13 @@ public class BuyItemBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@EmbeddedId
-	private BuyItemPK butBuyItemPK;
+	private BuyItemPK buyItemPK;
 	
 	private Integer     	prodQTY;		//商品數量
 	private BigDecimal  	itemSum;		//單項總額
 	private String 			discountCode;	//折扣碼
 	private BigDecimal  	discount;		//折扣金額
-	private BigDecimal		ordTotal;		//訂單總金額
+
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "BUYTITEM_PRODTYPE_FK")
@@ -59,20 +60,20 @@ public class BuyItemBean implements Serializable {
 	}
 
 	public BuyItemBean(Integer prodQTY, BigDecimal itemSum, String discountCode,
-			BigDecimal discount, BigDecimal ordTotal) {
+			BigDecimal discount) {
 		this.prodQTY = prodQTY;
 		this.itemSum = itemSum;
 		this.discountCode = discountCode;
 		this.discount = discount;
-		this.ordTotal = ordTotal;
+
 	}
 	
-	public BuyItemPK getButBuyItemPK() {
-		return butBuyItemPK;
+	public BuyItemPK getBuyItemPK() {
+		return buyItemPK;
 	}
 
-	public void setButBuyItemPK(BuyItemPK butBuyItemPK) {
-		this.butBuyItemPK = butBuyItemPK;
+	public void setBuyItemPK(BuyItemPK buyItemPK) {
+		this.buyItemPK = buyItemPK;
 	}
 
 	public Integer getProdQTY() {
@@ -107,13 +108,6 @@ public class BuyItemBean implements Serializable {
 		this.discount = discount;
 	}
 
-	public BigDecimal getOrdTotal() {
-		return ordTotal;
-	}
-
-	public void setOrdTotal(BigDecimal ordTotal) {
-		this.ordTotal = ordTotal;
-	}
 
 //	雙向多對一productTypeBean之getter、setter 開始
 	public ProductTypeBean getProductTypeBean() {
@@ -153,11 +147,10 @@ public class BuyItemBean implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((butBuyItemPK == null) ? 0 : butBuyItemPK.hashCode());
+		result = prime * result + ((buyItemPK == null) ? 0 : buyItemPK.hashCode());
 		result = prime * result + ((discount == null) ? 0 : discount.hashCode());
 		result = prime * result + ((discountCode == null) ? 0 : discountCode.hashCode());
 		result = prime * result + ((itemSum == null) ? 0 : itemSum.hashCode());
-		result = prime * result + ((ordTotal == null) ? 0 : ordTotal.hashCode());
 		result = prime * result + ((prodQTY == null) ? 0 : prodQTY.hashCode());
 		return result;
 	}
@@ -171,10 +164,10 @@ public class BuyItemBean implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		BuyItemBean other = (BuyItemBean) obj;
-		if (butBuyItemPK == null) {
-			if (other.butBuyItemPK != null)
+		if (buyItemPK == null) {
+			if (other.buyItemPK != null)
 				return false;
-		} else if (!butBuyItemPK.equals(other.butBuyItemPK))
+		} else if (!buyItemPK.equals(other.buyItemPK))
 			return false;
 		if (discount == null) {
 			if (other.discount != null)
@@ -191,17 +184,15 @@ public class BuyItemBean implements Serializable {
 				return false;
 		} else if (!itemSum.equals(other.itemSum))
 			return false;
-		if (ordTotal == null) {
-			if (other.ordTotal != null)
-				return false;
-		} else if (!ordTotal.equals(other.ordTotal))
-			return false;
 		if (prodQTY == null) {
 			if (other.prodQTY != null)
 				return false;
 		} else if (!prodQTY.equals(other.prodQTY))
 			return false;
 		return true;
-	}	
-	
+	}
+
+
+
+
 }

@@ -35,6 +35,10 @@
 </head>
 
 <body>
+ <div id="contentpopup">
+            
+
+        </div>
 	<div id="body">
 	 <div id="content">
 		<!-- header start -->
@@ -160,7 +164,9 @@
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<button class="btn btn-outline-secondary " data-bs-toggle="modal" href="#exampleModalToggle" role="button"  type="button" class="btn btn-secondary" data-bs-dismiss="modal">預約候補</button>&nbsp;&nbsp;&nbsp;&nbsp;
 								&nbsp;&nbsp;&nbsp;&nbsp;
-								<button class="btn btn-outline-secondary">加入購物車</button>
+								<button type="button"  class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" >加入購物車</button>
+           
+								
 							</form>
 						</div>
 						<!-- 商品狀態 end -->
@@ -318,6 +324,7 @@
 	<!-- main end -->
 
 
+<script type="text/javascript" src="./js/_05loginPopup3.js"></script>
 
 </body>
 

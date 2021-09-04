@@ -58,6 +58,9 @@ public class ReservationBean implements Serializable {
 		this.reserveDate = reserveDate;
 	}	
 
+	public ReservationBean() {
+	}
+
 	public Integer getReservationId() {
 		return reservationId;
 	}
