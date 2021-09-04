@@ -24,7 +24,7 @@ public class BuyItemBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@EmbeddedId
-	private BuyItemPK butBuyItemPK;
+	private BuyItemPK buyItemPK;
 	
 	private Integer     	prodQTY;		//商品數量
 	private BigDecimal  	itemSum;		//單項總額
@@ -67,12 +67,14 @@ public class BuyItemBean implements Serializable {
 		this.ordTotal = ordTotal;
 	}
 	
-	public BuyItemPK getButBuyItemPK() {
-		return butBuyItemPK;
+	
+	
+	public BuyItemPK getBuyItemPK() {
+		return buyItemPK;
 	}
 
-	public void setButBuyItemPK(BuyItemPK butBuyItemPK) {
-		this.butBuyItemPK = butBuyItemPK;
+	public void setBuyItemPK(BuyItemPK buyItemPK) {
+		this.buyItemPK = buyItemPK;
 	}
 
 	public Integer getProdQTY() {
@@ -153,7 +155,7 @@ public class BuyItemBean implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((butBuyItemPK == null) ? 0 : butBuyItemPK.hashCode());
+		result = prime * result + ((buyItemPK == null) ? 0 : buyItemPK.hashCode());
 		result = prime * result + ((discount == null) ? 0 : discount.hashCode());
 		result = prime * result + ((discountCode == null) ? 0 : discountCode.hashCode());
 		result = prime * result + ((itemSum == null) ? 0 : itemSum.hashCode());
@@ -171,10 +173,10 @@ public class BuyItemBean implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		BuyItemBean other = (BuyItemBean) obj;
-		if (butBuyItemPK == null) {
-			if (other.butBuyItemPK != null)
+		if (buyItemPK == null) {
+			if (other.buyItemPK != null)
 				return false;
-		} else if (!butBuyItemPK.equals(other.butBuyItemPK))
+		} else if (!buyItemPK.equals(other.buyItemPK))
 			return false;
 		if (discount == null) {
 			if (other.discount != null)
@@ -202,6 +204,7 @@ public class BuyItemBean implements Serializable {
 		} else if (!prodQTY.equals(other.prodQTY))
 			return false;
 		return true;
-	}	
-	
+	}
+
+
 }

@@ -17,9 +17,15 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import com.web.store.model._02_customerService.CommentBean;
+import com.web.store.model._02_customerService.ProblemBean;
 import com.web.store.model._02_customerService.PromotionBean;
+import com.web.store.model._03_rent.RentItemBean;
 import com.web.store.model._03_rent.RentProductBean;
+import com.web.store.model._03_rent.ReservationBean;
+import com.web.store.model._04_shop.BuyItemBean;
 import com.web.store.model._04_shop.ProductBean;
+import com.web.store.model._04_shop.pkClass.BuyItemPK;
 import com.web.store.model._05_customer.CitySelectBean;
 import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.model._06_order.OrdBean;
@@ -223,7 +229,7 @@ public class EDMTableResetHibernate {
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
-			
+
 			// 7.cityselect表格
 			// 由"data/cityselect.dat"逐筆讀入cityselect表格內的初始資料，
 			// 然後依序新增到cityselect表格中
@@ -245,11 +251,153 @@ public class EDMTableResetHibernate {
 				}
 				session.flush();
 				System.out.println("cityselect表格資料新增成功");
-			} catch (Exception ex) {
+			}
+
+			// 8. buyitem表格
+			// 由"data/buyitem.dat"逐筆讀入buyitem表格內的初始資料，
+			// 然後依序新增到buyitem表格中
+//			count = 0;
+//			try (FileInputStream fis = new FileInputStream("data/buyitem.dat");
+//					InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
+//					BufferedReader br = new BufferedReader(isr0);) {
+//				while ((line = br.readLine()) != null) {
+//
+//					String[] token = line.split("\\|");
+//					BuyItemBean bib = new BuyItemBean();
+////					bib.setBuyItemPK();
+//					bib.setDiscount(new BigDecimal(token[2]));
+//					bib.setItemSum(new BigDecimal(token[3]));
+//					bib.setOrdTotal(new BigDecimal(token[4]));
+//					bib.setProdQTY(Integer.parseInt(token[5]));
+//
+//					session.save(bib);
+//					count++;
+//					System.out.println("新增buyitem紀錄成功，共新增" + count + "筆記錄:" + token[1]);
+//				}
+//				session.flush();
+//				System.out.println("buyitem表格資料新增成功");
+//			}
+
+			// 9. rentitem表格
+			// 由"data/rentitem.dat"逐筆讀入rentitem表格內的初始資料，
+			// 然後依序新增到rentitem表格中
+//			count = 0;
+//			try (FileInputStream fis = new FileInputStream("data/rentitem.dat");
+//					InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
+//					BufferedReader br = new BufferedReader(isr0);) {
+//				while ((line = br.readLine()) != null) {
+//
+//					String[] token = line.split("\\|");
+//					RentItemBean rib = new RentItemBean();
+//					rib.setProdSerialNum(Integer.parseInt(token[0]));
+//					rib.setDiscount(new BigDecimal(token[1]));
+//					rib.setDiscountCode(token[2]);
+//					rib.setOrdTotal(new BigDecimal(token[3]));
+//					rib.setProdId(Integer.parseInt(token[4]));
+//					rib.setProdQty(Integer.parseInt(token[5]));
+//					rib.setRentPeriod(Integer.parseInt(token[6]));
+//					rib.setReturnDate(Timestamp.valueOf(token[7]));
+//					rib.setSerialNumber(token[8]);
+//					rib.setStartDate(Timestamp.valueOf(token[9]));
+//
+//					session.save(rib);
+//					count++;
+//					System.out.println("新增rentitem紀錄成功，共新增" + count + "筆記錄");
+//				}
+//				session.flush();
+//				System.out.println("rentitem表格資料新增成功");
+//			}
+
+			// 10. reservation表格
+			// 由"data/reservation.dat"逐筆讀入reservation表格內的初始資料，
+			// 然後依序新增到reservation表格中
+			count = 0;
+			try (FileInputStream fis = new FileInputStream("data/reservation.dat");
+					InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
+					BufferedReader br = new BufferedReader(isr0);) {
+				while ((line = br.readLine()) != null) {
+
+					String[] token = line.split("\\|");
+					ReservationBean rb = new ReservationBean();
+					rb.setReservationId(Integer.parseInt(token[0]));
+					rb.setCategory(token[1]);
+					rb.setClassify(token[2]);
+					rb.setProdId(Integer.parseInt(token[3]));
+					rb.setReserveDate(Timestamp.valueOf(token[4]));
+					rb.setSerialNumber(token[5]);
+					rb.setWaitNum(Integer.parseInt(token[6]));
+					rb.setWaitType(null);
+//					rb.setCustomerBean(Integer.parseUnsignedInt(new CustomerBean(token[8])));
+
+					session.save(rb);
+					count++;
+					System.out.println("新增reservation紀錄成功，共新增" + count + "筆記錄:" + token[1]);
+				}
+				session.flush();
+				System.out.println("reservation表格資料新增成功");
+			}
+
+			// 11. comment表格
+			// 由"data/comment.dat"逐筆讀入comment表格內的初始資料，
+			// 然後依序新增到comment表格中
+			count = 0;
+			try (FileInputStream fis = new FileInputStream("data/comment.dat");
+					InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
+					BufferedReader br = new BufferedReader(isr0);) {
+				while ((line = br.readLine()) != null) {
+
+					String[] token = line.split("\\|");
+					CommentBean cb = new CommentBean();
+					cb.setCommentId(Integer.parseInt(token[0]));
+					cb.setClassify(token[1]);
+					cb.setComment(null);
+					cb.setCommentDate(Timestamp.valueOf(token[3]));
+					cb.setRate(Integer.parseInt(token[4]));
+					cb.setVisits(Integer.parseInt(token[5]));
+
+					session.save(cb);
+					count++;
+					System.out.println("新增comment紀錄成功，共新增" + count + "筆記錄");
+				}
+				session.flush();
+				System.out.println("comment表格資料新增成功");
+			}
+
+			// 12. problem表格
+			// 由"data/problem.dat"逐筆讀入problem表格內的初始資料，
+			// 然後依序新增到problem表格中
+			count = 0;
+			try (FileInputStream fis = new FileInputStream("data/problem.dat");
+					InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
+					BufferedReader br = new BufferedReader(isr0);) {
+				while ((line = br.readLine()) != null) {
+
+					String[] token = line.split("\\|");
+					ProblemBean pb = new ProblemBean();
+					pb.setCustId(Integer.parseInt(token[0]));
+					pb.setAttachFile(null);
+					pb.setContent(token[2]);
+					pb.setEmail(token[3]);
+					pb.setFormDate(Timestamp.valueOf(token[4]));
+					pb.setOrdId(Integer.parseInt(token[5]));
+					pb.setPhone(token[6]);
+					pb.setProblemType(token[7]);
+					pb.setProcessState(token[8]);
+					pb.setReplyContent(token[9]);
+					pb.setReplyDate(Timestamp.valueOf(token[10]));
+
+					session.save(pb);
+					count++;
+					System.out.println("新增problem紀錄成功，共新增" + count + "筆記錄");
+				}
+				session.flush();
+				System.out.println("problem表格資料新增成功");
+			}
+
+			catch (Exception ex) {
 				ex.printStackTrace();
 			}
-			
-			
+
 			tx.commit();
 		} catch (Exception e) {
 			System.err.println("新建表格時發生例外: " + e.getMessage());

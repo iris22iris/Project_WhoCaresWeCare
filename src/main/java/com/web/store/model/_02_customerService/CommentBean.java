@@ -30,7 +30,7 @@ public class CommentBean implements Serializable {
 	@Column(columnDefinition = "INT(8) ZEROFILL")
 	private Integer commentId;
 	private String classify;
-	private BigDecimal rate;
+	private Integer rate;
 	private Integer visits;
 	private Timestamp commentDate;
 	private Clob comment;
@@ -45,7 +45,7 @@ public class CommentBean implements Serializable {
 	@JoinColumn(name = "COMMENT_CUSTID_FK")
 	private CustomerBean customerBean;
 
-	public CommentBean(Integer commentId, String classify, BigDecimal rate, Integer visits, Timestamp commentDate,
+	public CommentBean(Integer commentId, String classify, Integer rate, Integer visits, Timestamp commentDate,
 			Clob comment) {
 		super();
 		this.commentId = commentId;
@@ -54,6 +54,9 @@ public class CommentBean implements Serializable {
 		this.visits = visits;
 		this.commentDate = commentDate;
 		this.comment = comment;
+	}
+
+	public CommentBean() {
 	}
 
 	public Integer getCommentId() {
@@ -72,11 +75,11 @@ public class CommentBean implements Serializable {
 		this.classify = classify;
 	}
 
-	public BigDecimal getRate() {
+	public Integer getRate() {
 		return rate;
 	}
 
-	public void setRate(BigDecimal rate) {
+	public void setRate(Integer rate) {
 		this.rate = rate;
 	}
 
