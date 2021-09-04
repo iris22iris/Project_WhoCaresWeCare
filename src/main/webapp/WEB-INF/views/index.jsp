@@ -21,6 +21,10 @@
 	<title>Who Cares? We Care!</title>
 </head>
 <body >
+ <div id="contentpopup">
+            
+
+        </div>
 
 	<div id="body">
 	<div id="content">
@@ -108,7 +112,8 @@
 										<option value="1">1</option>
 										<option value="2">2</option>
 										<option value="3">3</option>
-									</select> <a href="#" class="btn btn-warning">加入購物車</a>
+										
+									</select> <a href="#" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" >加入購物車</a>
 								</div>
 							</div>
 						</div>
@@ -290,5 +295,6 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js">
 	</script>
+<script type="text/javascript" src="./js/_05loginPopup3.js"></script>
 </body>
 </html>
