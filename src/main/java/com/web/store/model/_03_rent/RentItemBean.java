@@ -6,16 +6,16 @@ import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 import com.web.store.model._02_customerService.PromotionBean;
+import com.web.store.model._03_rent.pkClass.RentItemPK;
 import com.web.store.model._06_order.OrdBean;
 import com.web.store.model._07_productType.ProductTypeBean;
 
@@ -25,10 +25,9 @@ import com.web.store.model._07_productType.ProductTypeBean;
 public class RentItemBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer prodSerialNum;
-//	private String productType; ProductTypeBean取代此建構子
+	@EmbeddedId
+	private RentItemPK rentItemPK;
+	
 	private Integer prodId;
 	private String serialNumber;
 	private Integer rentPeriod;
@@ -39,16 +38,17 @@ public class RentItemBean implements Serializable {
 	@Column(columnDefinition = "datetime")
 	private Timestamp returnDate;
 	private BigDecimal discount;
-	private BigDecimal ordTotal;
+	private BigDecimal prodTotal;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "RENTITEM_PRODTYPE_FK")
 	private ProductTypeBean productTypeBean;
 	
+	@MapsId("OrdPK")
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumns({
-		@JoinColumn(name = "RENTITEM_ORDCID_FK"),
-		@JoinColumn(name = "RENTITEM_ORDID_FK"),
+		@JoinColumn(name = "category", referencedColumnName="category"),
+		@JoinColumn(name = "ordId", referencedColumnName="ordId"),
 		})
 	private OrdBean ordBean;
 	@ManyToOne(cascade = CascadeType.PERSIST)
@@ -60,12 +60,13 @@ public class RentItemBean implements Serializable {
 		@JoinColumn(name = "RENTITEM_PRODID_FK"),
 		})
 	private RentProductBean rentProductBean;
+	
+	public RentItemBean() {
+	}
 
-	public RentItemBean(Integer prodSerialNum, String productType, Integer prodId, String serialNumber,
-			Integer rentPeriod, Integer prodQty, String discountCode, Timestamp startDate, Timestamp returnDate,
-			BigDecimal discount, BigDecimal ordTotal) {
-		this.prodSerialNum = prodSerialNum;
-//		this.productType = productType;   ProductTypeBean取代此建構子
+	public RentItemBean(Integer prodId, String serialNumber,Integer rentPeriod, 
+			Integer prodQty, String discountCode, Timestamp startDate,
+			Timestamp returnDate, BigDecimal discount, BigDecimal prodTotal) {
 		this.prodId = prodId;
 		this.serialNumber = serialNumber;
 		this.rentPeriod = rentPeriod;
@@ -74,24 +75,16 @@ public class RentItemBean implements Serializable {
 		this.startDate = startDate;
 		this.returnDate = returnDate;
 		this.discount = discount;
-		this.ordTotal = ordTotal;
+		this.prodTotal = prodTotal;
 	}
 
-	public Integer getProdSerialNum() {
-		return prodSerialNum;
+	public RentItemPK getRentItemPK() {
+		return rentItemPK;
 	}
 
-	public void setProdSerialNum(Integer prodSerialNum) {
-		this.prodSerialNum = prodSerialNum;
+	public void setRentItemPK(RentItemPK rentItemPK) {
+		this.rentItemPK = rentItemPK;
 	}
-
-//	public String getProductType() {  ProductTypeBean取代此建構子
-//		return productType;
-//	}
-
-//	public void setProductType(String productType) {  ProductTypeBean取代此建構子
-//		this.productType = productType;
-//	}
 
 	public Integer getProdId() {
 		return prodId;
@@ -157,12 +150,12 @@ public class RentItemBean implements Serializable {
 		this.discount = discount;
 	}
 
-	public BigDecimal getOrdTotal() {
-		return ordTotal;
+	public BigDecimal getProdTotal() {
+		return prodTotal;
 	}
 
-	public void setOrdTotal(BigDecimal ordTotal) {
-		this.ordTotal = ordTotal;
+	public void setProdTotal(BigDecimal prodTotal) {
+		this.prodTotal = prodTotal;
 	}
 
 //	雙向多對一productTypeBean之getter、setter 開始
@@ -199,4 +192,71 @@ public class RentItemBean implements Serializable {
 		this.rentProductBean = rentProductBean;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((discount == null) ? 0 : discount.hashCode());
+		result = prime * result + ((discountCode == null) ? 0 : discountCode.hashCode());
+		result = prime * result + ((prodId == null) ? 0 : prodId.hashCode());
+		result = prime * result + ((prodQty == null) ? 0 : prodQty.hashCode());
+		result = prime * result + ((prodTotal == null) ? 0 : prodTotal.hashCode());
+		result = prime * result + ((rentItemPK == null) ? 0 : rentItemPK.hashCode());
+		result = prime * result + ((rentPeriod == null) ? 0 : rentPeriod.hashCode());
+		result = prime * result + ((serialNumber == null) ? 0 : serialNumber.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		RentItemBean other = (RentItemBean) obj;
+		if (discount == null) {
+			if (other.discount != null)
+				return false;
+		} else if (!discount.equals(other.discount))
+			return false;
+		if (discountCode == null) {
+			if (other.discountCode != null)
+				return false;
+		} else if (!discountCode.equals(other.discountCode))
+			return false;
+		if (prodId == null) {
+			if (other.prodId != null)
+				return false;
+		} else if (!prodId.equals(other.prodId))
+			return false;
+		if (prodQty == null) {
+			if (other.prodQty != null)
+				return false;
+		} else if (!prodQty.equals(other.prodQty))
+			return false;
+		if (prodTotal == null) {
+			if (other.prodTotal != null)
+				return false;
+		} else if (!prodTotal.equals(other.prodTotal))
+			return false;
+		if (rentItemPK == null) {
+			if (other.rentItemPK != null)
+				return false;
+		} else if (!rentItemPK.equals(other.rentItemPK))
+			return false;
+		if (rentPeriod == null) {
+			if (other.rentPeriod != null)
+				return false;
+		} else if (!rentPeriod.equals(other.rentPeriod))
+			return false;
+		if (serialNumber == null) {
+			if (other.serialNumber != null)
+				return false;
+		} else if (!serialNumber.equals(other.serialNumber))
+			return false;
+		return true;
+	}
+	
 }

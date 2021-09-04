@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.web.store.model._03_rent.RentProductBean;
+import com.web.store.model._03_rent.pkClass.RentProductPK;
 import com.web.store.model._07_productType.ProductTypeBean;
 import com.web.store.repository.RentProductDao;
 
@@ -24,19 +25,54 @@ public class RentProductDaoImpl implements RentProductDao {
 	@Override
 	public List<RentProductBean> getAllProducts() {
 		Session session = factory.getCurrentSession();
-		String hql = " FROM RentProductBean rp "
-				   + " GROUP BY rp.prodId ";
+		String hql = " FROM RentProductBean rp ";
 		
 		return session.createQuery(hql, RentProductBean.class)
 				      .getResultList();
 	}
 
 	@Override
-	public List<RentProductBean> getProductsByProdType(ProductTypeBean prodTypeBean) {
+	public List<RentProductBean> getAllGroupedProducts() {
 		Session session = factory.getCurrentSession();
-		String hql = " FROM RentProductBean rp WHERE rp.productTypeBean = :ptb ";
-		List<RentProductBean> list = session.createQuery(hql, RentProductBean.class).setParameter("ptb", prodTypeBean).getResultList();
-		return list;
+		String hql = " FROM RentProductBean rp "
+				+ " GROUP BY rp.prodId ";
+		
+		return session.createQuery(hql, RentProductBean.class)
+				.getResultList();
+	}
+
+	@Override
+	public List<Long> getAllStockSum() {
+		Session session = factory.getCurrentSession();
+		String hql = " SELECT SUM(rp.stock) FROM RentProductBean rp "
+				   + " GROUP BY rp.prodId ";
+		
+		return session.createQuery(hql, Long.class)
+					  .getResultList();
+	}
+
+	@Override
+	public List<RentProductBean> getGroupedProductsByProdType(ProductTypeBean prodTypeBean) {
+		Session session = factory.getCurrentSession();
+		String hql = " FROM RentProductBean rp "
+				   + " WHERE rp.productTypeBean = :ptb "
+				   + " GROUP BY rp.prodId ";
+		
+		return session.createQuery(hql, RentProductBean.class)
+					  .setParameter("ptb", prodTypeBean)
+					  .getResultList();
+	}
+	
+	@Override
+	public List<Long> getGroupedStockSum(ProductTypeBean prodTypeBean) {
+		Session session = factory.getCurrentSession();
+		String hql = " SELECT SUM(rp.stock) FROM RentProductBean rp "
+				   + " WHERE rp.productTypeBean = :ptb "
+				   + " GROUP BY rp.prodId ";
+		
+		return session.createQuery(hql, Long.class)
+					  .setParameter("ptb", prodTypeBean)
+					  .getResultList();
 	}
 
 	@Override
@@ -53,7 +89,7 @@ public class RentProductDaoImpl implements RentProductDao {
 	@Override
 	public RentProductBean getProductById(int prodId) {
 		Session session = factory.getCurrentSession();
-		RentProductBean rpb = session.get(RentProductBean.class,prodId);
+		RentProductBean rpb = session.get(RentProductBean.class, new RentProductPK(prodId,"1"));
 		return rpb;
 	}
 	

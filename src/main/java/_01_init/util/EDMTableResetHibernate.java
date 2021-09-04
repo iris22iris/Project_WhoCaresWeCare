@@ -20,10 +20,11 @@ import org.hibernate.Transaction;
 import com.web.store.model._02_customerService.PromotionBean;
 import com.web.store.model._03_rent.RentProductBean;
 import com.web.store.model._04_shop.ProductBean;
+import com.web.store.model._05_customer.CitySelectBean;
 import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.model._06_order.OrdBean;
+import com.web.store.model._06_order.pkClass.OrdPK;
 import com.web.store.model._07_productType.ProductTypeBean;
-
 
 public class EDMTableResetHibernate {
 	public static final String UTF8_BOM = "\uFEFF"; // 定義 UTF-8的BOM字元
@@ -88,8 +89,7 @@ public class EDMTableResetHibernate {
 
 					String[] token = line.split("\\|");
 					OrdBean ob = new OrdBean();
-					ob.setCategory(token[0]);
-					ob.setOrdId(Integer.parseInt(token[1]));
+					ob.setOrdPK(new OrdPK(token[0], Integer.parseInt(token[1])));
 					ob.setDelivery(token[2]);
 					ob.setOrdTotal(new BigDecimal(token[3]));
 					ob.setOrderDate(Timestamp.valueOf(token[4]));
@@ -129,7 +129,7 @@ public class EDMTableResetHibernate {
 				session.flush();
 				System.out.println("protype表格資料新增成功");
 			}
-			
+
 			// 4. product表格
 			// 由"data/product.dat"逐筆讀入product表格內的初始資料，
 			// 然後依序新增到product表格中
@@ -138,20 +138,22 @@ public class EDMTableResetHibernate {
 					InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
 					BufferedReader br = new BufferedReader(isr0);) {
 				while ((line = br.readLine()) != null) {
-
 					String[] token = line.split("\\|");
 					ProductBean pb = new ProductBean();
 					pb.setProdId(Integer.parseInt(token[0]));
 					pb.setClassify(token[1]);
-					pb.setCoverImage(null);
+					pb.setCoverImage1(null);
+					pb.setCoverImage2(null);
+					pb.setCoverImage3(null);
 					pb.setFileName(token[3]);
 					pb.setMimeType(token[4]);
 					pb.setPrice(new BigDecimal(token[5]));
 					pb.setProdName(token[6]);
-					pb.setPromoteId(null);
+					pb.setDescription(null);
+//					pb.setPromoteId(null);
 					pb.setStock(Integer.parseInt(token[8]));
 					pb.setProductTypeBean(new ProductTypeBean(token[9]));
-					
+
 					session.save(pb);
 					count++;
 					System.out.println("新增product紀錄成功，共新增" + count + "筆記錄:" + token[1]);
@@ -195,12 +197,13 @@ public class EDMTableResetHibernate {
 					InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
 					BufferedReader br = new BufferedReader(isr0);) {
 				while ((line = br.readLine()) != null) {
-
 					String[] token = line.split("\\|");
 					RentProductBean rpb = new RentProductBean();
 					rpb.setProdId(Integer.parseInt(token[0]));
 					rpb.setClassify(token[1]);
-					rpb.setCoverImage(null);
+					rpb.setCoverImage1(null);
+					rpb.setCoverImage2(null);
+					rpb.setCoverImage3(null);
 					rpb.setFileName(token[3]);
 					rpb.setMimeType(token[4]);
 					rpb.setPrice(new BigDecimal(token[5]));
@@ -208,18 +211,45 @@ public class EDMTableResetHibernate {
 					rpb.setProductTypeBean(null);
 					rpb.setSerialNumber(token[8]);
 					rpb.setStock(Integer.parseInt(token[9]));
+					rpb.setDescription(null);
 					rpb.setProductTypeBean(new ProductTypeBean(token[10]));
-					
+
 					session.save(rpb);
 					count++;
 					System.out.println("新增rentproduct紀錄成功，共新增" + count + "筆記錄:" + token[1]);
 				}
 				session.flush();
 				System.out.println("rentproduct表格資料新增成功");
-		}
-			 catch (Exception ex) {
+			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
+			
+			// 7.cityselect表格
+			// 由"data/cityselect.dat"逐筆讀入cityselect表格內的初始資料，
+			// 然後依序新增到cityselect表格中
+			count = 0;
+			try (FileInputStream fis = new FileInputStream("data/cityselect.dat");
+					InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
+					BufferedReader br = new BufferedReader(isr0);) {
+				while ((line = br.readLine()) != null) {
+					String[] token = line.split("\\|");
+					CitySelectBean cs = new CitySelectBean();
+					cs.setId(Integer.parseInt((token[0])));
+					cs.setGroupCity(token[1]);
+					cs.setSortCity(token[2]);
+					cs.setCity(token[3]);
+
+					session.save(cs);
+					count++;
+					System.out.println("新增cityselect紀錄成功，共新增" + count + "筆記錄:" + token[1]);
+				}
+				session.flush();
+				System.out.println("cityselect表格資料新增成功");
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+			
+			
 			tx.commit();
 		} catch (Exception e) {
 			System.err.println("新建表格時發生例外: " + e.getMessage());
@@ -228,5 +258,4 @@ public class EDMTableResetHibernate {
 		}
 		factory.close();
 	}
-
 }

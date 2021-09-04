@@ -4,36 +4,31 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.CascadeType;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 import com.web.store.model._02_customerService.PromotionBean;
+import com.web.store.model._04_shop.pkClass.BuyItemPK;
 import com.web.store.model._06_order.OrdBean;
 import com.web.store.model._07_productType.ProductTypeBean;
-
-
-
-
 
 @Entity
 @Table(name="BuyItem")
 public class BuyItemBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer			prodSerialNum;	//商品項次
-	private String  		category;       //訂單類別
-//	private String      	prodType;		//商品分類代碼  --ProductTypeBean取代此建構子--
+	@EmbeddedId
+	private BuyItemPK butBuyItemPK;
+	
 	private Integer     	prodQTY;		//商品數量
 	private BigDecimal  	itemSum;		//單項總額
+	private String 			discountCode;	//折扣碼
 	private BigDecimal  	discount;		//折扣金額
 	private BigDecimal		ordTotal;		//訂單總金額
 	
@@ -41,10 +36,11 @@ public class BuyItemBean implements Serializable {
 	@JoinColumn(name = "BUYTITEM_PRODTYPE_FK")
 	private ProductTypeBean productTypeBean;
 	
+	@MapsId("OrdPK")
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumns({
-		@JoinColumn(name = "BUYTITEM_ORDCID_FK"),
-		@JoinColumn(name = "BUYTITEM_ORDID_FK"),
+		@JoinColumn(name = "category", referencedColumnName="category"),
+		@JoinColumn(name = "ordId", referencedColumnName="ordId"),
 		})
 	private OrdBean ordBean;
 	
@@ -59,41 +55,25 @@ public class BuyItemBean implements Serializable {
 	@JoinColumn(name = "BUYTITEM_PRODID_FK")
 	private ProductBean productBean;
 	
-	public BuyItemBean(Integer prodSerialNum, String category, String prodType, Integer prodQTY, BigDecimal itemSum,
+	public BuyItemBean() {
+	}
+
+	public BuyItemBean(Integer prodQTY, BigDecimal itemSum, String discountCode,
 			BigDecimal discount, BigDecimal ordTotal) {
-		super();
-		this.prodSerialNum = prodSerialNum;
-		this.category = category;
-//		this.prodType = prodType; --ProductTypeBean取代此建構子--
 		this.prodQTY = prodQTY;
 		this.itemSum = itemSum;
+		this.discountCode = discountCode;
 		this.discount = discount;
 		this.ordTotal = ordTotal;
 	}
-
-	public Integer getProdSerialNum() {
-		return prodSerialNum;
+	
+	public BuyItemPK getButBuyItemPK() {
+		return butBuyItemPK;
 	}
 
-	public void setProdSerialNum(Integer prodSerialNum) {
-		this.prodSerialNum = prodSerialNum;
+	public void setButBuyItemPK(BuyItemPK butBuyItemPK) {
+		this.butBuyItemPK = butBuyItemPK;
 	}
-
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
-//	public String getProdType() { --ProductTypeBean取代此建構子--
-//		return prodType;
-//	}
-//
-//	public void setProdType(String prodType) {
-//		this.prodType = prodType;
-//	}
 
 	public Integer getProdQTY() {
 		return prodQTY;
@@ -109,6 +89,14 @@ public class BuyItemBean implements Serializable {
 
 	public void setItemSum(BigDecimal itemSum) {
 		this.itemSum = itemSum;
+	}
+	
+	public String getDiscountCode() {
+		return discountCode;
+	}
+
+	public void setDiscountCode(String discountCode) {
+		this.discountCode = discountCode;
 	}
 
 	public BigDecimal getDiscount() {
@@ -159,12 +147,61 @@ public class BuyItemBean implements Serializable {
 
 	public void setProductBean(ProductBean productBean) {
 		this.productBean = productBean;
-	}	
-		
+	}
 
-	
-	
-	
-	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((butBuyItemPK == null) ? 0 : butBuyItemPK.hashCode());
+		result = prime * result + ((discount == null) ? 0 : discount.hashCode());
+		result = prime * result + ((discountCode == null) ? 0 : discountCode.hashCode());
+		result = prime * result + ((itemSum == null) ? 0 : itemSum.hashCode());
+		result = prime * result + ((ordTotal == null) ? 0 : ordTotal.hashCode());
+		result = prime * result + ((prodQTY == null) ? 0 : prodQTY.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BuyItemBean other = (BuyItemBean) obj;
+		if (butBuyItemPK == null) {
+			if (other.butBuyItemPK != null)
+				return false;
+		} else if (!butBuyItemPK.equals(other.butBuyItemPK))
+			return false;
+		if (discount == null) {
+			if (other.discount != null)
+				return false;
+		} else if (!discount.equals(other.discount))
+			return false;
+		if (discountCode == null) {
+			if (other.discountCode != null)
+				return false;
+		} else if (!discountCode.equals(other.discountCode))
+			return false;
+		if (itemSum == null) {
+			if (other.itemSum != null)
+				return false;
+		} else if (!itemSum.equals(other.itemSum))
+			return false;
+		if (ordTotal == null) {
+			if (other.ordTotal != null)
+				return false;
+		} else if (!ordTotal.equals(other.ordTotal))
+			return false;
+		if (prodQTY == null) {
+			if (other.prodQTY != null)
+				return false;
+		} else if (!prodQTY.equals(other.prodQTY))
+			return false;
+		return true;
+	}	
 	
 }

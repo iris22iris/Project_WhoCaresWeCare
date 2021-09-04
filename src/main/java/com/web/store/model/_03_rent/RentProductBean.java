@@ -3,6 +3,7 @@ package com.web.store.model._03_rent;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Blob;
+import java.sql.Clob;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -20,7 +21,6 @@ import com.web.store.model._02_customerService.PromotionBean;
 import com.web.store.model._03_rent.pkClass.RentProductPK;
 import com.web.store.model._07_productType.ProductTypeBean;
 
-
 @Entity
 @Table(name = "RentProduct")
 @IdClass(RentProductPK.class)
@@ -34,10 +34,13 @@ public class RentProductBean implements Serializable {
 	private String classify;
 	private String prodName;
 	private BigDecimal price;
-	private Blob coverImage;
+	private Blob coverImage1;
+	private Blob coverImage2;
+	private Blob coverImage3;
 	private String mimeType;
 	private Integer stock;
 	private String fileName;
+	private Clob description;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "RENTPROD_PROMOTEID_FK")
@@ -58,17 +61,21 @@ public class RentProductBean implements Serializable {
 	}
 
 	public RentProductBean(Integer prodId, String serialNumber, String classify, String prodName, BigDecimal price,
-			Blob coverImage, String mimeType, Integer stock, String prodType, String fileName,
-			Set<RentItemBean> rentItems, Set<ReservationBean> reservations, Set<CommentBean> comments) {
+			Blob coverImage1, Blob coverImage2, Blob coverImage3, String mimeType, Integer stock, String prodType,
+			String fileName, Clob description, Set<RentItemBean> rentItems, Set<ReservationBean> reservations,
+			Set<CommentBean> comments) {
 		this.prodId = prodId;
 		this.serialNumber = serialNumber;
 		this.classify = classify;
 		this.prodName = prodName;
 		this.price = price;
-		this.coverImage = coverImage;
+		this.coverImage1 = coverImage1;
+		this.coverImage2 = coverImage2;
+		this.coverImage3 = coverImage3;
 		this.mimeType = mimeType;
 		this.stock = stock;
 		this.fileName = fileName;
+		this.description = description;
 		this.rentItems = rentItems;
 		this.reservations = reservations;
 		this.comments = comments;
@@ -89,7 +96,7 @@ public class RentProductBean implements Serializable {
 	public void setSerialNumber(String serialNumber) {
 		this.serialNumber = serialNumber;
 	}
-	
+
 	public String getClassify() {
 		return classify;
 	}
@@ -114,12 +121,28 @@ public class RentProductBean implements Serializable {
 		this.price = price;
 	}
 
-	public Blob getCoverImage() {
-		return coverImage;
+	public Blob getCoverImage1() {
+		return coverImage1;
 	}
 
-	public void setCoverImage(Blob coverImage) {
-		this.coverImage = coverImage;
+	public void setCoverImage1(Blob coverImage) {
+		this.coverImage1 = coverImage;
+	}
+
+	public Blob getCoverImage2() {
+		return coverImage2;
+	}
+
+	public void setCoverImage2(Blob coverImage) {
+		this.coverImage2 = coverImage;
+	}
+
+	public Blob getCoverImage3() {
+		return coverImage3;
+	}
+
+	public void setCoverImage3(Blob coverImage) {
+		this.coverImage3 = coverImage;
 	}
 
 	public String getMimeType() {
@@ -144,6 +167,14 @@ public class RentProductBean implements Serializable {
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+
+	public Clob getDescription() {
+		return description;
+	}
+
+	public void setDescription(Clob description) {
+		this.description = description;
 	}
 
 	public PromotionBean getPromotionBean() {
