@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="<c:url value='/css/commonStyle.css' />"
 	type="text/css">
 
-<title>租賃設備頁面: ${rentproduct.prodName} </title>
+<title>租賃設備頁面: ${rentProduct.prodName}</title>
 
 <!-- bootstrap -->
 <link
@@ -148,15 +148,15 @@
 						<!-- 商品狀態 start -->
 						<div class="productInfo col-8">
 							<form id="form1" name="form1" method="GET" action="">
-								<label for="fname" class="eee">商品編號</label><br>
-								<h2>商品名稱:</h2>
+								<label for="fname" class="eee">商品編號:  ${rentProduct.prodId} </label><br>
+								<h2>商品名稱: ${rentProduct.prodName} </h2>
 								<h1 id="commodityname"></h1>
 								<br> <label for="fname">衛部醫器製壹字第000936號</label><br> <label
-									for="fname">租賃價格: 100元/日</label><br> <label for="fname">租賃天數</label>
+									for="fname">租賃價格: ${rentProduct.price} 元/日</label><br> <label for="fname">租賃天數</label>
 								: &nbsp; <input type="number" name="" min="0" max="10" value="1"
 									style="border-radius: 6px"><br>
 								<!-- <label for="fname">租賃數量</label> : &nbsp; <input type="number" name="" min="0" max="10" value="1"><br> -->
-								<label for="fname">庫存數量</label> :
+								<label for="fname">庫存數量:${rentProduct.stock}個</label> 
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<button class="btn btn-outline-secondary " data-bs-toggle="modal" href="#exampleModalToggle" role="button"  type="button" class="btn btn-secondary" data-bs-dismiss="modal">預約候補</button>&nbsp;&nbsp;&nbsp;&nbsp;
 								&nbsp;&nbsp;&nbsp;&nbsp;
@@ -196,7 +196,7 @@
 
 
 
-				<div class="row d-flex col-11">
+				<div class="row d-flex col-12">
 					<!-- 評價顯示 start -->
 					<div class="row">
 					</div>
@@ -214,7 +214,7 @@
 
 
 
-				<div style="display: flex;">
+				<div class="col-12 d-flex" >
 					<!-- 留言板頭像 start -->
 					<div style="margin-left: 50px;">
 						<a href="#未登入先導至singin_singup"> <img
@@ -229,8 +229,7 @@
 						<div id="box">
 							<em>將 顯示留言内容……暫時</em>
 						</div>
-						<input type="text" id="text" style="margin-left: 0px;"><br />
-						<input id="btn" type="button" onclick="fnsubmit()" value="送出留言" />
+					
 					</div>
 
 					<!-- 留言板 end -->
@@ -309,7 +308,7 @@
 		
 	</div>
 		
-	</div>
+	
 	
 	<!-- 引入共同的頁尾 -->
 	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />

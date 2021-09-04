@@ -115,8 +115,8 @@
 					<!-- 商品狀態 start -->
 						<div class="productInfo col-8">
 							<form id="form1" name="form1" method="GET" action="">
-								<label for="fname" class="eee">商品編號</label><br>
-								<h2>商品名稱:</h2>
+								<label for="fname" class="eee">商品編號${product.prodId}</label><br>
+								<h2>商品名稱:${product.prodName}</h2>
 								<h1 id="commodityname"></h1>
 								<br> <label for="fname">衛部醫器製壹字第000936號</label><br> <label
 									for="fname">價格: </label><br> <label for="fname">數量</label>
@@ -183,7 +183,7 @@
 
 
 
-				<div style="display: flex;">
+				<div class="col-12 d-flex">
 					<!-- 留言板頭像 start -->
 					<div style="margin-left: 50px;">
 						<a href="#未登入先導至singin_singup"> <img
@@ -198,8 +198,7 @@
 						<div id="box">
 							<em>將 顯示留言内容……暫時</em>
 						</div>
-						<input type="text" id="text" style="margin-left: 0px;"><br />
-						<input id="btn" type="button" onclick="fnsubmit()" value="送出留言" />
+						
 					</div>
 
 					<!-- 留言板 end -->
