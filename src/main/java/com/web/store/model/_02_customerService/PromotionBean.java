@@ -66,6 +66,11 @@ public class PromotionBean implements Serializable {
 		this.product = product;
 	}
 
+	public PromotionBean(Integer promoteId, String discountCode) {
+		this.promoteId = promoteId;
+		this.discountCode = discountCode;
+	}
+
 	public Integer getPromoteId() {
 		return promoteId;
 	}

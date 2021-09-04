@@ -264,12 +264,15 @@ public class EDMTableResetHibernate {
 //
 //					String[] token = line.split("\\|");
 //					BuyItemBean bib = new BuyItemBean();
-//					bib.setBuyItemPK(new BuyItemPK(new OrdPK(token[1],Integer.parseInt(token[6]))
-//													  ,Integer.parseInt(token[0])));
-//					bib.setDiscount(new BigDecimal(token[2]));
-//					bib.setItemSum(new BigDecimal(token[3]));
-//					bib.setOrdTotal(new BigDecimal(token[4]));
-//					bib.setProdQTY(Integer.parseInt(token[5]));
+//					bib.setBuyItemPK(new BuyItemPK(new OrdPK(token[0],Integer.parseInt(token[1]))
+//													  ,Integer.parseInt(token[2])));
+//					bib.setDiscount(new BigDecimal(token[3]));
+//					bib.setDiscountCode(token[4]);
+//					bib.setItemSum(new BigDecimal(token[5]));
+//					bib.setProdQTY(Integer.parseInt(token[6]));
+//					bib.setProductBean(new ProductBean(Integer.parseInt(token[7])));
+//					bib.setProductTypeBean(new ProductTypeBean(token[8]));
+//					bib.setPromotionBean(new PromotionBean(Integer.parseInt(token[9]),token[10]));
 //
 //					session.save(bib);
 //					count++;
@@ -279,6 +282,7 @@ public class EDMTableResetHibernate {
 //				System.out.println("buyitem表格資料新增成功");
 //			}
 
+			
 			// 9. rentitem表格
 			// 由"data/rentitem.dat"逐筆讀入rentitem表格內的初始資料，
 			// 然後依序新增到rentitem表格中

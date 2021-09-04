@@ -31,7 +31,7 @@ public class BuyItemBean implements Serializable {
 	private BigDecimal  	itemSum;		//單項總額
 	private String 			discountCode;	//折扣碼
 	private BigDecimal  	discount;		//折扣金額
-	private BigDecimal		ordTotal;		//訂單總金額
+
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "BUYTITEM_PRODTYPE_FK")
@@ -60,12 +60,12 @@ public class BuyItemBean implements Serializable {
 	}
 
 	public BuyItemBean(Integer prodQTY, BigDecimal itemSum, String discountCode,
-			BigDecimal discount, BigDecimal ordTotal) {
+			BigDecimal discount) {
 		this.prodQTY = prodQTY;
 		this.itemSum = itemSum;
 		this.discountCode = discountCode;
 		this.discount = discount;
-		this.ordTotal = ordTotal;
+
 	}
 	
 	public BuyItemPK getBuyItemPK() {
@@ -108,13 +108,6 @@ public class BuyItemBean implements Serializable {
 		this.discount = discount;
 	}
 
-	public BigDecimal getOrdTotal() {
-		return ordTotal;
-	}
-
-	public void setOrdTotal(BigDecimal ordTotal) {
-		this.ordTotal = ordTotal;
-	}
 
 //	雙向多對一productTypeBean之getter、setter 開始
 	public ProductTypeBean getProductTypeBean() {
@@ -158,7 +151,6 @@ public class BuyItemBean implements Serializable {
 		result = prime * result + ((discount == null) ? 0 : discount.hashCode());
 		result = prime * result + ((discountCode == null) ? 0 : discountCode.hashCode());
 		result = prime * result + ((itemSum == null) ? 0 : itemSum.hashCode());
-		result = prime * result + ((ordTotal == null) ? 0 : ordTotal.hashCode());
 		result = prime * result + ((prodQTY == null) ? 0 : prodQTY.hashCode());
 		return result;
 	}
@@ -191,11 +183,6 @@ public class BuyItemBean implements Serializable {
 			if (other.itemSum != null)
 				return false;
 		} else if (!itemSum.equals(other.itemSum))
-			return false;
-		if (ordTotal == null) {
-			if (other.ordTotal != null)
-				return false;
-		} else if (!ordTotal.equals(other.ordTotal))
 			return false;
 		if (prodQTY == null) {
 			if (other.prodQTY != null)
