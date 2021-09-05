@@ -23,6 +23,9 @@
 <!-- icon -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+	
+<script src="<c:url value='/js/sortProducts.js' />"></script>
+
 </head>
 
 <body>
@@ -56,17 +59,13 @@
 				<!-- Product Start -->
 				<div class="rentProduct col-9">
 					<div class="container-fluid d-flex justify-content-end">
-						<form action="<c:url value='${request.getRequestURI}' />"
-							method="GET">
-							<select name="sortType">
+							<select name="sortType" onChange="sort(this)">
 								<option selected disabled>請選擇排序條件</option>
 								<option value="price desc">價格由高至低</option>
 								<option value="stock desc">數量由高至低</option>
 								<option value="price asc">價格由低至高</option>
 								<option value="stock asc">數量由低至高</option>
-							</select> <input name="pageNo" type=hidden value="${1}"> <input
-								type="submit" class="btn btn-warning" value="送出">
-						</form>
+							</select>
 					</div>
 
 					<div

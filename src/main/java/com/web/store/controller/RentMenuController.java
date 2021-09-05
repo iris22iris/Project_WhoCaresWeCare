@@ -71,12 +71,11 @@ public class RentMenuController {
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("totalPages", totalPages);
 		if (sortType != null) {
-		String[] token = sortType.split(" ");
-			model.addAttribute("sortType", token[0] + "+" + token[1]);
+			model.addAttribute("sortType", sortType);
 		} else {
 			model.addAttribute("sortType", null);
 		}
-
+		
 		return "_03_rentProductMenu";
 	}
 

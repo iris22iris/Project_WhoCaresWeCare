@@ -25,6 +25,8 @@
 <!-- sweetAlert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="<c:url value='/js/addFavorite.js' />"></script>
+<script src="<c:url value='/js/sortProducts.js' />"></script>
+
 </head>
 
 <body>
@@ -58,17 +60,13 @@
 				<div class="buyProduct col-9">
 
 					<div class="container-fluid d-flex justify-content-end">
-						<form action="<c:url value='${request.getRequestURI}' />"
-							method="GET">
-							<select name="sortType">
-								<option selected>請選擇排序條件</option>
+							<select name="sortType" onChange="sort(this)">
+								<option selected disabled>請選擇排序條件</option>
 								<option value="price desc">價格由高至低</option>
 								<option value="stock desc">數量由高至低</option>
 								<option value="price asc">價格由低至高</option>
 								<option value="stock asc">數量由低至高</option>
-							</select> <input name="pageNo" type=hidden value="${1}"> <input
-								type="submit" class="btn btn-warning" value="送出">
-						</form>
+							</select>
 					</div>
 
 					<div
@@ -93,9 +91,9 @@
 												method="POST">
 												<select name="prodQTY" class="form-select"
 													style="width: 45%;" aria-label="Default select example">
-													<option value="-1">數量</option>
+													<option selected disabled>數量</option>
 													<c:forEach var="amount" begin="1" end="${product.stock}">
-														<option value="amount">${amount}</option>
+														<option value="${amount}">${amount}</option>
 													</c:forEach>
 												</select> <input type="submit" class="btn btn-warning" value="加入購物車" />
 											</form>

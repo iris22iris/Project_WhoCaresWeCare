@@ -26,7 +26,7 @@ public class ShoppingCartController {
 	@PostMapping("/buyMenu/addCart/{prodId}")
 	public String addProductToCart(
 			@PathVariable("prodId") Integer prodId,
-			@RequestParam("prodQTY") Integer prodQTY,
+			@RequestParam(name = "prodQTY", required = false) Integer prodQTY,
 			Model model
 	) {	
 		ShoppingCart shoppingCart = (ShoppingCart) httpSession.getAttribute("ShoppingCart");
@@ -39,7 +39,6 @@ public class ShoppingCartController {
 		buyItemBean.setProductBean(new ProductBean(prodId));
 		buyItemBean.setProdQTY(prodQTY);
 		shoppingCart.addProductToCart(prodId, buyItemBean);
-		
 		return "redirect:/buyMenu";
 	}
 	

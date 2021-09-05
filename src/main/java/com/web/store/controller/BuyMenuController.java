@@ -59,8 +59,7 @@ public class BuyMenuController {
 		} else {
 			if (sortType != null) {
 				products = productService.getAllProductsByPageSort(pageNo, sortType);
-				String[] token = sortType.split(" ");
-				model.addAttribute("sortType", token[0] + "+" + token[1]);
+				model.addAttribute("sortType", sortType);
 			} else {
 				products = productService.getAllProductsByPage(pageNo);
 				model.addAttribute("sortType", null);
