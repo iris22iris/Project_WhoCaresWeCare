@@ -23,9 +23,9 @@ public class ShoppingCartController {
 		this.httpSession = httpSession;
 	}
 	
-	@PostMapping("/buyMenu/addCart/{product.prodId}")
+	@PostMapping("/buyMenu/addCart/{prodId}")
 	public String addProductToCart(
-			@PathVariable("product.prodId") Integer prodId,
+			@PathVariable("prodId") Integer prodId,
 			@RequestParam("prodQTY") Integer prodQTY,
 			Model model
 	) {	

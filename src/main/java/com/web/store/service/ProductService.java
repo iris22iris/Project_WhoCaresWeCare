@@ -19,13 +19,10 @@ public interface ProductService {
 	// 計算販售的商品總共有幾頁
 	int getTotalPages();
 
-	// 依ProdType表格主鍵 載入產品的分類
-	List<ProductBean> getProductsByProdType(ProductTypeBean prodTypeBean);
-
-	// 依ProdType表格主鍵 載入產品的分類並分頁
+	// 依ProdType表格主鍵 載入分類的產品並分頁
 	List<ProductBean> getProductsByProdTypeAndPage(ProductTypeBean prodTypeBean, int pageNo);
 
-	// 依ProdType表格主鍵 載入產品的分類並分頁且排序
+	// 依ProdType表格主鍵 載入分類的產品並分頁、排序
 	List<ProductBean> getProductsByProdTypeAndPageSort(ProductTypeBean prodTypeBean, int pageNo, String sortType);
 	
 	// 計算分類的商品總共有幾頁

@@ -7,22 +7,29 @@ import com.web.store.model._07_productType.ProductTypeBean;
 
 public interface RentProductDao {
 
-	List<RentProductBean> getAllProducts(); // 讀取多筆租賃產品資料
+	// 讀取多筆租賃產品資料
+	List<RentProductBean> getAllProducts();
 
-	List<RentProductBean> getAllGroupedProducts(); // 讀取多筆租賃產品群組資料
+	// 依ProdType表格主鍵 載入分類的群組設備並分頁、排序
+	List<RentProductBean> getGroupedProducts(ProductTypeBean prodTypeBean, int pageNo,
+			String sortType);
+	
+	// 依ProdType表格主鍵分類 載入產品庫存總和資料
+	List<Long> getGroupedStockSum(ProductTypeBean prodTypeBean, int pageNo, String sortType);
+	
+	// 計算群組設備總共有幾頁
+	int getGroupedPages(ProductTypeBean prodTypeBean);
+	
+	// 讀取全部租賃產品分類
+	List<ProductTypeBean> getAllProdTypes();
 
-	List<Long> getAllStockSum(); // 讀取多筆租賃產品庫存總和資料
+	// 更新租賃產品庫存
+	void updateStock(int productId, int newQuantity);
 
-	List<RentProductBean> getGroupedProductsByProdType(ProductTypeBean prodTypeBean); // 依ProdType表格主鍵 載入產品的分類
+	// 依主鍵讀取單筆租賃產品資料
+	public RentProductBean getProductById(int prodId);
 
-	List<Long> getGroupedStockSum(ProductTypeBean prodTypeBean); // 依ProdType表格主鍵分類 載入產品庫存總和資料
-
-	List<ProductTypeBean> getAllProdTypes(); // 讀取全部租賃產品分類
-
-	void updateStock(int productId, int newQuantity); // 更新租賃產品庫存
-
-	public RentProductBean getProductById(int prodId); // 依主鍵讀取單筆租賃產品資料
-
-	void addProduct(RentProductBean product); // 新增單筆租賃產品資料
+	// 新增單筆租賃產品資料
+	void addProduct(RentProductBean product);
 
 }
