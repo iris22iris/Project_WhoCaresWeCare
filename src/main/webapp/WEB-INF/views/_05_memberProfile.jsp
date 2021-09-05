@@ -78,6 +78,7 @@ function upData() {
 				birthday: $('#birthday').val(),
 				gender :$('input[type=radio][name="gender"]:checked').val(),
 				city : $('#city').val(),
+				nickName:$('#nickName').val()
 		   		}
 	   		xhr1.setRequestHeader("Content-Type", "application/json");
 	   		xhr1.send(JSON.stringify(jsonCustomer));
@@ -209,7 +210,8 @@ function upData() {
 								<label for="nickName" class="form-label">會員暱稱:</label>
 							</div>
 							<div class="col-9">
-								<input type="text" class="form-control" id="nickName">
+								<input type="text" class="form-control" id="nickName"
+									id="nickName" value="${customer.nickName}">
 							</div>
 							<div id='nickNameResult' style="height: 18px; display: none;"></div>
 
