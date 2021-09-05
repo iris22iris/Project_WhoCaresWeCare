@@ -24,7 +24,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 <!-- sweetAlert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<script src="<c:url value='/js/_04buyProductMenu.js' />"></script>
+<script src="<c:url value='/js/addFavorite.js' />"></script>
 </head>
 
 <body>
