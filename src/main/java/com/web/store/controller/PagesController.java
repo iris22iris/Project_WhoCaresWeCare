@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class PagesController {
 
+	@GetMapping("/_01_searchResult")
+	public String searchResult(Model model) {
+		return "_01_searchResult";
+	}
+	
 	@GetMapping("/_02_q_a")
 	public String q_a(Model model) {
 		return "_02_q_a";

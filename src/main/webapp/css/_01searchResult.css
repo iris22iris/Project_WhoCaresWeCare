@@ -1,0 +1,138 @@
+
+/* --------全域設定------ */
+*{
+    margin: 0 ;
+    padding: 0;
+    list-style: none;
+    font-family: mainfont-medium;
+       
+}
+
+/* 源泉圓體字型命名!! */
+@font-face {
+    font-family: mainfont-medium;
+    src: url(../fonts/GenSenMaruGothicTW-Medium.ttf);
+}
+@font-face {
+    font-family: mainfont-light;
+    src: url(../fonts/GenSenMaruGothicTW-Light.ttf);
+}
+@font-face {
+    font-family: mainfont-regular;
+    src: url(../fonts/GenSenMaruGothicTW-Regular.ttf);
+}
+
+#body{
+    background: rgb(250, 246, 243);
+    background-image: url(../image/background7.png);
+    background-size: cover;
+    background-attachment: fixed; 
+    min-height: 100%;
+    position: relative;
+}
+
+#content{
+    padding-bottom: 144px;
+}
+
+html, body{
+    height: 100%;
+}
+/*--------title------ */
+.searchResultTitle{
+    padding: 30px 0px;
+    color:rgb(115,99,87);
+}
+.searchResultTitle select{
+    background-color: wheat;
+    color:saddlebrown;
+    font-size: small;
+    border: none;
+    padding: 3px 0px;
+}
+
+/*--------Content------ */
+.productName {
+	display: flex;
+	justify-content:center;
+}
+
+.row-3 {
+	display: flex;
+	justify-content:space-around;
+}
+
+.searchResultContent{
+    margin-bottom: 30px;
+}
+
+
+.card-body {
+	border-top: 4px dotted #ccc;
+}
+
+.card-title {
+	color: sienna;
+}
+
+#cardWidth{
+	width: 268.5px;
+}
+
+#productImg{
+	width: 243px;
+	height: 243px;
+	overflow: hidden;
+
+}
+
+.card-text {
+	color: rgb(115, 99, 87);
+	font-size: larger;
+}
+
+
+
+/* --------footer------ */
+.footer{
+    background:rgb(115,99,87);
+    width: 100%;
+    color:white;
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    bottom: 0;
+}
+
+#left-footer{
+    width: 50%;
+    
+}
+
+#right-footer{
+    width: 50%;
+    
+}
+
+.list-inline-item{
+    font-size: 30px;
+}
+
+.copyright{
+    color: white;
+    font-size: 16px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-bottom: 10px;
+}
+
+.row dt{
+    font-family: mainfont-regular;
+    letter-spacing: 1.5px;
+}
+
+.row dd{
+    font-family: mainfont-light;
+    letter-spacing: 0.5px;
+    }
