@@ -23,6 +23,7 @@ import com.web.store.model._02_customerService.PromotionBean;
 import com.web.store.model._03_rent.RentItemBean;
 import com.web.store.model._03_rent.RentProductBean;
 import com.web.store.model._03_rent.ReservationBean;
+import com.web.store.model._03_rent.pkClass.RentItemPK;
 import com.web.store.model._04_shop.BuyItemBean;
 import com.web.store.model._04_shop.ProductBean;
 import com.web.store.model._04_shop.pkClass.BuyItemPK;
@@ -256,62 +257,62 @@ public class EDMTableResetHibernate {
 			// 8. buyitem表格
 			// 由"data/buyitem.dat"逐筆讀入buyitem表格內的初始資料，
 			// 然後依序新增到buyitem表格中
-//			count = 0;
-//			try (FileInputStream fis = new FileInputStream("data/buyitem.dat");
-//					InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
-//					BufferedReader br = new BufferedReader(isr0);) {
-//				while ((line = br.readLine()) != null) {
-//
-//					String[] token = line.split("\\|");
-//					BuyItemBean bib = new BuyItemBean();
-//					bib.setBuyItemPK(new BuyItemPK(new OrdPK(token[0],Integer.parseInt(token[1]))
-//													  ,Integer.parseInt(token[2])));
-//					bib.setDiscount(new BigDecimal(token[3]));
-//					bib.setDiscountCode(token[4]);
-//					bib.setItemSum(new BigDecimal(token[5]));
-//					bib.setProdQTY(Integer.parseInt(token[6]));
-//					bib.setProductBean(new ProductBean(Integer.parseInt(token[7])));
-//					bib.setProductTypeBean(new ProductTypeBean(token[8]));
+			count = 0;
+			try (FileInputStream fis = new FileInputStream("data/buyitem.dat");
+					InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
+					BufferedReader br = new BufferedReader(isr0);) {
+				while ((line = br.readLine()) != null) {
+
+					String[] token = line.split("\\|");
+					BuyItemBean bib = new BuyItemBean();
+					bib.setBuyItemPK(new BuyItemPK(new OrdPK(token[0],Integer.parseInt(token[1]))
+													  ,Integer.parseInt(token[2])));
+					bib.setDiscount(new BigDecimal(token[3]));
+					bib.setDiscountCode(token[4]);
+					bib.setItemSum(new BigDecimal(token[5]));
+					bib.setProdQTY(Integer.parseInt(token[6]));
+					bib.setProductBean(new ProductBean(Integer.parseInt(token[7])));
+					bib.setProductTypeBean(new ProductTypeBean(token[8]));
 //					bib.setPromotionBean(new PromotionBean(Integer.parseInt(token[9]),token[10]));
-//
-//					session.save(bib);
-//					count++;
-//					System.out.println("新增buyitem紀錄成功，共新增" + count + "筆記錄:" + token[1]);
-//				}
-//				session.flush();
-//				System.out.println("buyitem表格資料新增成功");
-//			}
+
+					session.save(bib);
+					count++;
+					System.out.println("新增buyitem紀錄成功，共新增" + count + "筆記錄:" + token[1]);
+				}
+				session.flush();
+				System.out.println("buyitem表格資料新增成功");
+			}
 
 			
 			// 9. rentitem表格
 			// 由"data/rentitem.dat"逐筆讀入rentitem表格內的初始資料，
 			// 然後依序新增到rentitem表格中
-//			count = 0;
-//			try (FileInputStream fis = new FileInputStream("data/rentitem.dat");
-//					InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
-//					BufferedReader br = new BufferedReader(isr0);) {
-//				while ((line = br.readLine()) != null) {
-//
-//					String[] token = line.split("\\|");
-//					RentItemBean rib = new RentItemBean();
-//					rib.setProdSerialNum(Integer.parseInt(token[0]));
-//					rib.setDiscount(new BigDecimal(token[1]));
-//					rib.setDiscountCode(token[2]);
+			count = 0;
+			try (FileInputStream fis = new FileInputStream("data/rentitem.dat");
+					InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
+					BufferedReader br = new BufferedReader(isr0);) {
+				while ((line = br.readLine()) != null) {
+
+					String[] token = line.split("\\|");
+					RentItemBean rib = new RentItemBean();
+					rib.setRentItemPK(new RentItemPK(new OrdPK(token[0],Integer.parseInt(token[1]))
+														,Integer.parseInt(token[2])));
+					rib.setDiscount(new BigDecimal(token[3]));
+					rib.setDiscountCode(token[4]);
 //					rib.setOrdTotal(new BigDecimal(token[3]));
-//					rib.setProdId(Integer.parseInt(token[4]));
-//					rib.setProdQty(Integer.parseInt(token[5]));
-//					rib.setRentPeriod(Integer.parseInt(token[6]));
-//					rib.setReturnDate(Timestamp.valueOf(token[7]));
-//					rib.setSerialNumber(token[8]);
-//					rib.setStartDate(Timestamp.valueOf(token[9]));
-//
-//					session.save(rib);
-//					count++;
-//					System.out.println("新增rentitem紀錄成功，共新增" + count + "筆記錄");
-//				}
-//				session.flush();
-//				System.out.println("rentitem表格資料新增成功");
-//			}
+					rib.setProdId(Integer.parseInt(token[5]));
+					rib.setProdQty(Integer.parseInt(token[6]));
+					rib.setRentPeriod(Integer.parseInt(token[7]));
+					rib.setReturnDate(Timestamp.valueOf(token[8]));
+					rib.setStartDate(Timestamp.valueOf(token[9]));
+
+					session.save(rib);
+					count++;
+					System.out.println("新增rentitem紀錄成功，共新增" + count + "筆記錄");
+				}
+				session.flush();
+				System.out.println("rentitem表格資料新增成功");
+			}
 
 			// 10. reservation表格
 			// 由"data/reservation.dat"逐筆讀入reservation表格內的初始資料，
