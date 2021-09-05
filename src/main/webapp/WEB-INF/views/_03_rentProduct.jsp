@@ -161,6 +161,8 @@
 									style="border-radius: 6px"><br>
 								<!-- <label for="fname">租賃數量</label> : &nbsp; <input type="number" name="" min="0" max="10" value="1"><br> -->
 								<label for="fname">庫存數量:${rentProduct.stock}個</label> 
+								<br>
+								<label for="fname">目前等待人數:${reservation.waitNum}位</label> 
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							
 						<c:choose> 
@@ -274,14 +276,17 @@
 	                        <label style=font-size:22px;  for="inputAccount" class="form-label " >商品名稱 :</label>
 	                    </div>
 	                    <div class="col-7 justify-content-evenly p-1  d-flex align-items-center ">
-	                        <label style=font-size:21px; for="inputAccount" class="form-label">抓資料庫反正就是很好很實用的血糖機</label>
+	                        <label style=font-size:21px; for="inputAccount" class="form-label">${rentProduct.prodName}</label>
 	                    </div>
 	                    <div class="col-5 justify-content-evenly p-1  d-flex align-items-center">
-	                        <label style=font-size:22px;  for="inputAccount" class="form-label">目前預約候補人數 :抓資料庫</label>
+	                        <label style=font-size:22px;  for="inputAccount" class="form-label">目前預約候補人數 :</label>
 	                    </div>
 	                    <div class="col-1 justify-content-evenly p-1  d-flex align-items-center">
-	                        <label style=font-size:22px; for="inputAccount" class="form-label">60抓資料庫</label>
+	                        <label style=font-size:22px; for="inputAccount" class="form-label">${reservation.waitNum}位</label>
 	                    </div>
+	                    <br>
+                   	                  
+	                    
 	                </form>
             	</div>
             <div class="hyperlink  col-12 d-flex justify-content-evenly align-items-center">
@@ -315,7 +320,7 @@
                 
                 <div class="col-6 justify-content-evenly p-1  d-flex align-items-center ">
                     <label style=font-size:22px; for="inputAccount" class="form-label">您的預約序號為:</label>
-                    <label style=font-size:22px;  for="inputAccount" class="form-label ">抓資料庫61</label>
+                    <label style=font-size:22px;  for="inputAccount" class="form-label ">${reservation.waitNum+1}位假的抓資料庫</label>
                 </div>
                 <div class="col-8 justify-content-evenly p-1  d-flex align-items-center ">
                     <label style=font-size:18px; for="inputAccount" class="form-label">您的預約編號為:</label>

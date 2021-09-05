@@ -41,8 +41,8 @@ public class RentProductPageController {
 		List<ProductTypeBean> productTypes = rentProductService.getAllProdTypes();
 		model.addAttribute("rentProducts", rentProducts);
 		model.addAttribute("productTypes", productTypes);
-		
 		model.addAttribute("rentProduct", rentProductService.getProductById(id));
+		model.addAttribute("reservation", rentProductService.getReservationBeanByprodId(id));
 		return "_03_rentProduct";
 	};
 

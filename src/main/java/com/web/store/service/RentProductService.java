@@ -3,6 +3,7 @@ package com.web.store.service;
 import java.util.List;
 
 import com.web.store.model._03_rent.RentProductBean;
+import com.web.store.model._03_rent.ReservationBean;
 import com.web.store.model._07_productType.ProductTypeBean;
 
 public interface RentProductService {
@@ -21,6 +22,8 @@ public interface RentProductService {
 
 	public RentProductBean getProductById(int prodId);	//依主鍵讀取單筆租賃產品資料
 
+	public ReservationBean getReservationBeanByprodId(int prodId); // 依porId(與serialNumber)讀取單筆預約設備資料
+	
 	void addProduct(RentProductBean product);			//新增單筆租賃產品資料
 
 	void updateStock(int productId, int newQuantity);	//更新租賃產品庫存

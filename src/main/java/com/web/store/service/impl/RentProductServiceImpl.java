@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.web.store.model._03_rent.RentProductBean;
+import com.web.store.model._03_rent.ReservationBean;
 import com.web.store.model._07_productType.ProductTypeBean;
 import com.web.store.repository.RentProductDao;
 import com.web.store.service.RentProductService;
@@ -16,7 +17,7 @@ import com.web.store.service.RentProductService;
 public class RentProductServiceImpl implements RentProductService {
 
 	RentProductDao rentProductDao;
-
+	
 	@Autowired
 	public RentProductServiceImpl(RentProductDao rentProductDao) {
 		this.rentProductDao = rentProductDao;
@@ -55,6 +56,13 @@ public class RentProductServiceImpl implements RentProductService {
 	@Override
 	public RentProductBean getProductById(int prodId) {
 		return rentProductDao.getProductById(prodId);
+	}
+
+	//抓取該商品目前預約資料
+	@Override
+	public ReservationBean getReservationBeanByprodId(int prodId) {
+		
+		return rentProductDao.getReservationBeanByprodId(prodId);
 	}
 
 	@Override
