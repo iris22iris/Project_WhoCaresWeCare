@@ -29,30 +29,26 @@ public class RentProductServiceImpl implements RentProductService {
 	}
 
 	@Override
-	public List<RentProductBean> getAllGroupedProducts() {
-		return rentProductDao.getAllGroupedProducts();
+	public List<RentProductBean> getGroupedProducts(ProductTypeBean prodTypeBean, int pageNo,
+																	 String sortType) {
+		return rentProductDao.getGroupedProducts(prodTypeBean, pageNo, sortType);
 	}
 	
 	@Override
-	public List<Long> getAllStockSum() {
-		return rentProductDao.getAllStockSum();
-	}
-	
-	@Override
-	public List<RentProductBean> getGroupedProductsByProdType(ProductTypeBean prodTypeBean) {
-		return rentProductDao.getGroupedProductsByProdType(prodTypeBean);
+	public List<Long> getGroupedStockSum(ProductTypeBean prodTypeBean, int pageNo, String sortType) {
+		return rentProductDao.getGroupedStockSum(prodTypeBean, pageNo, sortType);
 	}
 
 	@Override
-	public List<Long> getGroupedStockSum(ProductTypeBean prodTypeBean) {
-		return rentProductDao.getGroupedStockSum(prodTypeBean);
+	public int getGroupedPages(ProductTypeBean prodTypeBean) {
+		return rentProductDao.getGroupedPages(prodTypeBean);
 	}
-	
+
 	@Override
 	public List<ProductTypeBean> getAllProdTypes() {
 		return rentProductDao.getAllProdTypes();
 	}
-	
+
 	@Override
 	public RentProductBean getProductById(int prodId) {
 		return rentProductDao.getProductById(prodId);
@@ -68,7 +64,7 @@ public class RentProductServiceImpl implements RentProductService {
 	@Override
 	public void addProduct(RentProductBean product) {
 	}
-	
+
 	@Override
 	public void updateStock(int productId, int newQuantity) {
 	}

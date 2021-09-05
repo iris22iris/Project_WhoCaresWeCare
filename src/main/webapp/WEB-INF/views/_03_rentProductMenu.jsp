@@ -56,14 +56,16 @@
 				<!-- Product Start -->
 				<div class="rentProduct col-9">
 					<div class="container-fluid d-flex justify-content-end">
-						<form action="<c:url value='/rentMenu' />" method="POST">
+						<form action="<c:url value='${request.getRequestURI}' />"
+							method="GET">
 							<select name="sortType">
-								<option selected>請選擇排序條件</option>
-								<option value="pricedesc">價格由高至低</option>
-								<option value="stockdesc">數量由高至低</option>
-								<option value="priceasc">價格由低至高</option>
-								<option value="stockasc">價格由低至高</option>
-							</select>
+								<option selected disabled>請選擇排序條件</option>
+								<option value="price desc">價格由高至低</option>
+								<option value="stock desc">數量由高至低</option>
+								<option value="price asc">價格由低至高</option>
+								<option value="stock asc">數量由低至高</option>
+							</select> <input name="pageNo" type=hidden value="${1}"> <input
+								type="submit" class="btn btn-warning" value="送出">
 						</form>
 					</div>
 
@@ -126,12 +128,67 @@
 					<div class="mt-3">
 						<nav aria-label="Page navigation">
 							<ul class="pagination justify-content-center">
-								<li class="page-item disabled"><a class="page-link"
-									href="#" tabindex="-1" aria-disabled="true">上一頁</a></li>
-								<li class="page-item active"><a class="page-link">1</a></li>
-								<li class="page-item"><a class="page-link" href="#">2</a></li>
-								<li class="page-item"><a class="page-link" href="#">3</a></li>
-								<li class="page-item"><a class="page-link" href="#">下一頁</a></li>
+								<c:choose>
+									<c:when test="${pageNo == 1}">
+										<li class="page-item disabled"><a class="page-link"
+											tabindex="-1" aria-disabled="true">上一頁</a></li>
+									</c:when>
+									<c:otherwise>
+										<c:choose>
+											<c:when test="${empty sortType}">
+												<li class="page-item"><a class="page-link"
+													href="<c:url value='${request.getRequestURI}?pageNo=${pageNo - 1}' /> ">
+														上一頁 </a></li>
+											</c:when>
+											<c:otherwise>
+												<li class="page-item"><a class="page-link"
+													href="<c:url value='${request.getRequestURI}?sortType=${sortType}&pageNo=${pageNo - 1}' /> ">
+														上一頁 </a></li>
+											</c:otherwise>
+										</c:choose>
+									</c:otherwise>
+								</c:choose>
+
+								<c:forEach var="currentPage" begin="1" end="${totalPages}">
+									<c:choose>
+										<c:when test="${currentPage == pageNo}">
+											<li class="page-item active"><a class="page-link">${currentPage}</a></li>
+										</c:when>
+										<c:otherwise>
+											<c:choose>
+												<c:when test="${empty sortType}">
+													<li class="page-item"><a class="page-link"
+														href="<c:url value='${request.getRequestURI}?pageNo=${currentPage}' /> ">${currentPage}</a></li>
+												</c:when>
+												<c:otherwise>
+													<li class="page-item"><a class="page-link"
+														href="<c:url value='${request.getRequestURI}?sortType=${sortType}&pageNo=${currentPage}' /> ">${currentPage}</a></li>
+												</c:otherwise>
+											</c:choose>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+
+								<c:choose>
+									<c:when test="${pageNo == totalPages}">
+										<li class="page-item disabled"><a class="page-link"
+											tabindex="-1" aria-disabled="true">下一頁</a></li>
+									</c:when>
+									<c:otherwise>
+										<c:choose>
+											<c:when test="${empty sortType}">
+												<li class="page-item"><a class="page-link"
+													href="<c:url value='${request.getRequestURI}?pageNo=${pageNo + 1}' /> ">
+														下一頁 </a></li>
+											</c:when>
+											<c:otherwise>
+												<li class="page-item"><a class="page-link"
+													href="<c:url value='${request.getRequestURI}?sortType=${sortType}&pageNo=${pageNo + 1}' /> ">
+														下一頁 </a></li>
+											</c:otherwise>
+										</c:choose>
+									</c:otherwise>
+								</c:choose>
 							</ul>
 						</nav>
 					</div>

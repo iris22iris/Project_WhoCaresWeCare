@@ -300,7 +300,7 @@ public class EDMTableResetHibernate {
 														,Integer.parseInt(token[2])));
 					rib.setDiscount(new BigDecimal(token[3]));
 					rib.setDiscountCode(token[4]);
-//					rib.setOrdTotal(new BigDecimal(token[3]));
+					rib.setProdTotal(new BigDecimal(token[3]));
 					rib.setProdId(Integer.parseInt(token[5]));
 					rib.setProdQty(Integer.parseInt(token[6]));
 					rib.setRentPeriod(Integer.parseInt(token[7]));

@@ -59,7 +59,6 @@ public class ProductDaoImpl implements ProductDao {
 				.getResultList();
 	}
 	
-	// 計算商品總共有幾頁
 	@Override
 	public int getTotalPages() {
 		Session session = factory.getCurrentSession();
@@ -75,15 +74,15 @@ public class ProductDaoImpl implements ProductDao {
 		return totalPages;
 	}
 	
-	@Override
-	public List<ProductBean> getProductsByProdType(ProductTypeBean prodTypeBean) {
-		Session session = factory.getCurrentSession();
-		String hql = " FROM ProductBean p WHERE p.productTypeBean = :ptb ";
-		List<ProductBean> list = session.createQuery(hql, ProductBean.class)
-										.setParameter("ptb", prodTypeBean)
-										.getResultList();
-		return list;
-	}
+//	@Override
+//	public List<ProductBean> getProductsByProdType(ProductTypeBean prodTypeBean) {
+//		Session session = factory.getCurrentSession();
+//		String hql = " FROM ProductBean p WHERE p.productTypeBean = :ptb ";
+//		List<ProductBean> list = session.createQuery(hql, ProductBean.class)
+//										.setParameter("ptb", prodTypeBean)
+//										.getResultList();
+//		return list;
+//	}
 	
 	
 	@Override
@@ -115,7 +114,6 @@ public class ProductDaoImpl implements ProductDao {
 		return list;
 	}
 	
-	// 計算分類的商品總共有幾頁
 	@Override
 	public int getTotalPagesByProdType(ProductTypeBean prodTypeBean) {
 		Session session = factory.getCurrentSession();

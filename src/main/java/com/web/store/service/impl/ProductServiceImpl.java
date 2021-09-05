@@ -42,10 +42,10 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.getTotalPages();
 	}
 
-	@Override
-	public List<ProductBean> getProductsByProdType(ProductTypeBean prodTypeBean) {
-		return productDao.getProductsByProdType(prodTypeBean);
-	}
+//	@Override
+//	public List<ProductBean> getProductsByProdType(ProductTypeBean prodTypeBean) {
+//		return productDao.getProductsByProdType(prodTypeBean);
+//	}
 
 	@Override
 	public List<ProductBean> getProductsByProdTypeAndPage(ProductTypeBean prodTypeBean, int pageNo) {
