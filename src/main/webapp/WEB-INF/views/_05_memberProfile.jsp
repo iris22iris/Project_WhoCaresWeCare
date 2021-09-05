@@ -134,6 +134,23 @@ function upData() {
 
 
 
+function handleFiles(e){
+    console.info(e.target.files[0]);//圖片文件
+    var dom =$("input[id^='imgTest']")[0];
+    console.info(dom.value);//這個是文件的路徑 C:\fakepath\icon (5).png
+    console.log(e.target.value);//這個也是文件的路徑和上面的dom.value是一樣的
+    var reader = new FileReader();
+    reader.onload = (function (file) {
+        return function (e) {
+           console.info(this.result); //這個就是base64的數據了
+            var sss=$("#showImage");
+            $("#showImage")[0].src=this.result;
+        };
+    })(e.target.files[0]);
+    reader.readAsDataURL(e.target.files[0]);
+}
+
+
 </script>
 
 <title>會員資料修改</title>
@@ -174,15 +191,15 @@ function upData() {
 
 						<div class="col-6">
 
-							<input type="file" id="input" data-multiple="true"
-								onchange="handleFiles(this.files)">
+							<input type="file" id="imgTest" data-multiple="true"
+								onchange="handleFiles(event)">
 						</div>
 						<div class="col-12">
 							<div class="col-12 p-3">
 								<button type="submit" class="btn">上傳圖片</button>
 								<button type="submit" class="btn">清除</button>
 							</div>
-
+							<img src="" id="showImage" alt="" width="150" height="150">
 						</div>
 					</div>
 					<!--  按鈕end  按鈕end -->
