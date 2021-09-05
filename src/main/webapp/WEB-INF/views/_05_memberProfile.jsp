@@ -65,7 +65,7 @@ function upData() {
 	var gender = $('#male').val();
 	var city = $('#city').val();
 	
-	
+	console.log('xxx='+address);
 	var xhr1 = new XMLHttpRequest();
 		xhr1.open("PUT", "<c:url value='/_05_EditmemberProfile/' />" + ${id}, true);
 		var jsonCustomer = {
@@ -78,7 +78,8 @@ function upData() {
 				birthday: $('#birthday').val(),
 				gender :$('input[type=radio][name="gender"]:checked').val(),
 				city : $('#city').val(),
-				nickName:$('#nickName').val()
+				nickName:$('#nickName').val(),
+				address:$('#address').val()
 		   		}
 	   		xhr1.setRequestHeader("Content-Type", "application/json");
 	   		xhr1.send(JSON.stringify(jsonCustomer));
@@ -274,15 +275,17 @@ function upData() {
 							</div>
 							<div class="col-9">
 								<select id="city" class="form-select" name="city">
+								
 								</select>
 							</div>
 
-
+							
 							<div class="col-3">
 								<label for="address" class="form-label">居住地址:</label>
 							</div>
 							<div class="col-9">
-								<input type="text" class="form-control" size="50" id="address">
+								<input type="text" class="form-control" size="50" id="address"
+								 value="${customer.address}">
 							</div>
 
 							<div class="col-3">
