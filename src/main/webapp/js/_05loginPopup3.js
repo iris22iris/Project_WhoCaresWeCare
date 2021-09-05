@@ -17,7 +17,7 @@ document.getElementById("contentpopup").innerHTML =
 '                                    <label for="inputAccount" class="form-label">會員密碼 :</label>'+
 '                                </div>'+
 '                                <div class="col-9">'+
-'                                    <input type="text" class="form-control" id="inputAccount">'+
+'                                    <input type="text" class="form-control" id="inputPassword">'+
 '                                </div>'+
 '                                <div class="form__group  ">'+
 '                                    <label>'+
@@ -28,7 +28,7 @@ document.getElementById("contentpopup").innerHTML =
 '                                    <label for="inputAccount" class="form-label justify-content-evenly p-1  d-flex align-items-center">圖形驗證碼:</label>'+
 '                                </div>'+
 '                                <div class="col-6">'+
-'                                    <input type="text" class="form-control" id="inputAccount">'+
+'                                    <input type="text" class="form-control" id="inputCanvas">'+
 '                                </div>'+
 '                                <div class="input-group  " id="box2">'+
 '                                    <span><canvas id="canvas" width="180" height="65"></canvas>'+
@@ -39,8 +39,9 @@ document.getElementById("contentpopup").innerHTML =
 '                                    <div class=" ">                       '+
 '                                        <div class="button   d-flex justify-content-center align-items-center ">'+
 '                                            <input type="button" class="btn btn-primary justify-content-center " value="Login"'+
-'                                            onClick="timedMsg(this)">'+
-'                                            <button type="button" style="margin-left:50px;"  class=" btn btn-secondary d-flex justify-content-center align-items-center" data-bs-dismiss="modal">Close</button>'+
+'                                            onClick="">'+
+											'<button type="button" id="id_close" class="btn btn-secondary" data-bs-dismiss="modal" style="display:none"></button>'+
+'                                            <input type="submit" onclick="ccc()" style="margin-left:50px;"  class=" btn btn-secondary d-flex justify-content-center align-items-center" data-bs-dismiss="modal"></input>'+
 '                                        </div>'+
 '                                        <nav class="hyperlink col-12 d-flex justify-content-center ">'+
 '                                            <div class="Hyperlinkbutton    ">'+
@@ -62,6 +63,29 @@ document.getElementById("contentpopup").innerHTML =
 
                                     
                                 
+function ccc(){
+		console.log("aaaaa");
+		
+		var acc = document.getElementById("inputAccount").value;
+		var paa = document.getElementById("inputPassword").value;
+		console.log("acc=" + acc);
+		
+        $.ajax({
+            type : 'POST',
+            url : "/Whocares/login_api",
+
+            data: jQuery.param({ account: acc, password : paa }) ,
+			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+
+            success : function(data) {
+            	console.log(data);
+            	if(data !="ok"){
+            		alert("登入錯誤!");
+            	}
+					document.getElementById("id_close").click();
+            }
+        });
+}
 
 /**生成一個隨機數**/
 function randomNum(min,max){
