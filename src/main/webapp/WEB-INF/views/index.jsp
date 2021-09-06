@@ -23,7 +23,10 @@
 <body >
  <div id="contentpopup">
             
-
+account == null || account.trim().length() == 0) {}
+errorMsgMap.put("accountError", "帳號與密碼欄必須輸入，密碼長度不能小於八個字元");
+ cascade = CasccadeType.presist persit 
+ cascade = CascadeType.Principal 
         </div>
 
 	<div id="body">
