@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
    
     <title>購買商品追蹤清單</title>
-    	<!-- CSS -->
+    <!-- CSS -->
      <link rel="stylesheet" href="<c:url value='/css/_04favoritelist.css' />"
     type="text/css">
     <link rel="stylesheet" href="<c:url value='/css/commonStyle.css' />"

@@ -1,0 +1,177 @@
+/* --------title------ */
+.title{
+    color: rgb(115,99,87);
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.cart{
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+/* --------Left------ */
+.cartLeft{
+    padding-right: 20px;
+
+}
+
+.cartTitle{
+    display: flex;
+    background-color: rgb(100, 63, 36);
+    color: white;
+    letter-spacing: 20px;
+    padding: 5px 0px;
+}
+
+.cartTitle div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* ------Left CartList------ */
+.cartList{
+    display: flex;
+    background-color: #fff;
+    border-bottom: 0.1px silver solid;
+}
+
+.cartList div{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.cartList div:first-child{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* ------Left cartCotent------ */
+.productImg{
+    padding: 10px;
+    width: 150px;
+    height: 150px;
+}
+
+.cartContent{
+    padding: 10px 0px;
+    flex-direction: column;
+    color: rgb(56, 49, 43);
+}
+
+.cartContent div{
+    display: flex;
+    justify-content: flex-start;
+    padding: 2px;
+    line-height: 30px;
+}
+
+.productId{
+    color: gray;
+    font-family: mainfont-light;
+}
+
+.productName{
+    font-size: 20px;
+}
+
+.hidden{
+    height: 30px;
+}
+
+
+/* ------Left cartSum------ */
+.cartSum{
+    padding: 10px 0px;
+    display: flex;
+    flex-wrap: wrap;
+
+    color: rgb(56, 49, 43);
+}
+
+.cartSum div{
+    font-family: mainfont-light;
+    padding: 2px 0px;
+    padding-right:30px;
+    line-height: 30px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+
+
+/* ------Left delete button------ */
+.deleteBtn{
+    padding: 20px;
+}
+
+.deleteBtn button{
+    background-color: gray;
+    color: white;
+    border: none;
+    width: 50px;
+}
+
+/* --------Right------ */
+.amountTitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(100, 63, 36);
+    color: white;
+    letter-spacing: 20px;
+    height: 34px;
+}
+
+.amount{
+    line-height: 40px;
+    background-color: white;
+    padding: 10px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 20px;
+}
+
+.amountItem{
+    padding-left: 10px;
+}
+
+.price{
+    color: gray;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 10px;
+}
+
+.submitMsg{
+    color: red;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 10px;
+    font-size: 12px;
+    line-height: 20px;
+}
+.amount div input{
+    width: 180px;
+}
+
+.checkoutBtn{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.checkoutBtn button{
+    border: none;
+    font-family: mainfont-light;
+    border-radius: 10px;
+    background: rgb(235, 159, 19);
+    color:white;
+    letter-spacing: 2px;
+    width: 80px;
+    height: 40px
+}
