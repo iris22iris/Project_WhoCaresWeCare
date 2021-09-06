@@ -67,4 +67,19 @@ public class PagesController {
 	return "_06_orderQuery";
 	}
 	
+	@GetMapping("/_06_problemReply")
+	public String problemReply(Model model) {
+	return "_06_problemReply";
+	}
+	
+	@GetMapping("/_06_rentOrderQuery")
+	public String rentOrderQuery(Model model) {
+	return "_06_rentOrderQuery";
+	}
+	
+	@GetMapping("/_06_reservationQuery")
+	public String reservationQuery(Model model) {
+	return "_06_reservationQuery";
+	}
+	
 }

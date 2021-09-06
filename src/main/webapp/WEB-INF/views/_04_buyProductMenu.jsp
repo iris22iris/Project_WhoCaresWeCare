@@ -15,17 +15,17 @@
 
 <title>購物商城</title>
 
-<!-- bootstrap -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<!-- icon -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-<!-- sweetAlert -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<script src="<c:url value='/js/addFavorite.js' />"></script>
-<script src="<c:url value='/js/sortProducts.js' />"></script>
+    <!-- bootstrap -->
+    <link
+    href="<c:url value='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' />"
+    rel="stylesheet">
+    <!-- icon -->
+    <link rel="stylesheet"
+    href="<c:url value='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'/>" /><!-- sweetAlert -->
+	<!-- sweet alert -->
+	<script src="<c:url value='https://cdn.jsdelivr.net/npm/sweetalert2@9'/>"></script>
+	<script src="<c:url value='/js/addFavorite.js' />"></script>
+	<script src="<c:url value='/js/sortProducts.js' />"></script>
 
 </head>
 
