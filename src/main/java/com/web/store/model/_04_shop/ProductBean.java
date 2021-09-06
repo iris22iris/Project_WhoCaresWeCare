@@ -4,18 +4,23 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Blob;
 import java.sql.Clob;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.web.store.model._02_customerService.PromotionBean;
+import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.model._07_productType.ProductTypeBean;
 
 @Entity
@@ -48,6 +53,18 @@ public class ProductBean implements Serializable {
 
 	@OneToMany(mappedBy = "productBean", cascade = CascadeType.ALL)
 	Set<BuyItemBean> buyItems = new LinkedHashSet<>();
+	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "favorite",  
+        joinColumns = {   // 在Join Table中，儲存本類別之主鍵值的外鍵欄位名稱
+            @JoinColumn(name = "FK_Product_ID", referencedColumnName = "prodId") 
+        }, 
+        inverseJoinColumns = { // 在Join Table中，儲存對應對照類別之主鍵值的外鍵欄位名稱
+            @JoinColumn(name = "FK_Customer_ID",    referencedColumnName = "custId") 
+        }
+    )
+
+	private Set<CustomerBean> custmers = new HashSet<CustomerBean>(0);
 	
 	public ProductBean() {
 	}
@@ -205,6 +222,13 @@ public class ProductBean implements Serializable {
 
 	public void setBuyItems(Set<BuyItemBean> buyItems) {
 		this.buyItems = buyItems;
+	}
+	public Set<CustomerBean> getCustmers() {
+		return custmers;
+	}
+
+	public void setCustmers(Set<CustomerBean> custmers) {
+		this.custmers = custmers;
 	}
 
 }
