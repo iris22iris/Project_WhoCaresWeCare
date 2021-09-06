@@ -76,7 +76,7 @@ public class EDMTableResetHibernate {
 					cb.setMimeType(token[11].trim());// 圖片類型
 					cb.setNickName(token[12].trim());// 暱稱
 					cb.setPhone(token[13].trim());// 連絡電話
-					session.save(cb);
+					session.merge(cb);
 					count++;
 					System.out.println("新增Customer紀錄成功，共新增" + count + "筆紀錄");
 				}
@@ -108,7 +108,7 @@ public class EDMTableResetHibernate {
 					ob.setReciPhone(token[10]);
 					ob.setShipDate(Timestamp.valueOf(token[11]));
 
-					session.save(ob);
+					session.merge(ob);
 					count++;
 					System.out.println("新增Ord紀錄成功，共新增" + count + "筆記錄:" + token[1]);
 				}
@@ -129,7 +129,7 @@ public class EDMTableResetHibernate {
 					ProductTypeBean ptypeb = new ProductTypeBean();
 					ptypeb.setProdType(token[0]);
 					ptypeb.setProdName(token[1]);
-					session.save(ptypeb);
+					session.merge(ptypeb);
 					count++;
 					System.out.println("新增protype紀錄成功，共新增" + count + "筆記錄:" + token[1]);
 				}
@@ -161,7 +161,7 @@ public class EDMTableResetHibernate {
 					pb.setStock(Integer.parseInt(token[8]));
 					pb.setProductTypeBean(new ProductTypeBean(token[9]));
 
-					session.save(pb);
+					session.merge(pb);
 					count++;
 					System.out.println("新增product紀錄成功，共新增" + count + "筆記錄:" + token[1]);
 				}
@@ -188,7 +188,7 @@ public class EDMTableResetHibernate {
 					ptb.setPromoTag(token[5]);
 					ptb.setPromotion(token[6]);
 
-					session.save(ptb);
+					session.merge(ptb);
 					count++;
 					System.out.println("新增promotion紀錄成功，共新增" + count + "筆記錄:" + token[1]);
 				}
@@ -221,7 +221,7 @@ public class EDMTableResetHibernate {
 					rpb.setDescription(null);
 					rpb.setProductTypeBean(new ProductTypeBean(token[10]));
 
-					session.save(rpb);
+					session.merge(rpb);
 					count++;
 					System.out.println("新增rentproduct紀錄成功，共新增" + count + "筆記錄:" + token[1]);
 				}
@@ -246,7 +246,7 @@ public class EDMTableResetHibernate {
 					cs.setSortCity(token[2]);
 					cs.setCity(token[3]);
 
-					session.save(cs);
+					session.merge(cs);
 					count++;
 					System.out.println("新增cityselect紀錄成功，共新增" + count + "筆記錄:" + token[1]);
 				}
@@ -275,7 +275,7 @@ public class EDMTableResetHibernate {
 					bib.setProductTypeBean(new ProductTypeBean(token[8]));
 //					bib.setPromotionBean(new PromotionBean(Integer.parseInt(token[9]),token[10]));
 
-					session.save(bib);
+					session.merge(bib);
 					count++;
 					System.out.println("新增buyitem紀錄成功，共新增" + count + "筆記錄:" + token[1]);
 				}
@@ -306,7 +306,7 @@ public class EDMTableResetHibernate {
 					rib.setReturnDate(Timestamp.valueOf(token[8]));
 					rib.setStartDate(Timestamp.valueOf(token[9]));
 
-					session.save(rib);
+					session.merge(rib);
 					count++;
 					System.out.println("新增rentitem紀錄成功，共新增" + count + "筆記錄");
 				}
@@ -335,7 +335,7 @@ public class EDMTableResetHibernate {
 					rb.setWaitType(null);
 //					rb.setCustomerBean(Integer.parseUnsignedInt(new CustomerBean(token[8])));
 
-					session.save(rb);
+					session.merge(rb);
 					count++;
 					System.out.println("新增reservation紀錄成功，共新增" + count + "筆記錄:" + token[1]);
 				}
@@ -361,7 +361,7 @@ public class EDMTableResetHibernate {
 					cb.setRate(Integer.parseInt(token[4]));
 					cb.setVisits(Integer.parseInt(token[5]));
 
-					session.save(cb);
+					session.merge(cb);
 					count++;
 					System.out.println("新增comment紀錄成功，共新增" + count + "筆記錄");
 				}
@@ -392,7 +392,7 @@ public class EDMTableResetHibernate {
 					pb.setReplyContent(token[9]);
 					pb.setReplyDate(Timestamp.valueOf(token[10]));
 
-					session.save(pb);
+					session.merge(pb);
 					count++;
 					System.out.println("新增problem紀錄成功，共新增" + count + "筆記錄");
 				}
