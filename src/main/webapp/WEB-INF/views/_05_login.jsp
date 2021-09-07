@@ -81,7 +81,7 @@
 					<input class="form__input" type="text" name="account" id="account"
 						placeholder="帳號" value="${requestScope.user}">
 					<input class="form__input" type="password" name="password" id="password" 
-						placeholder="密碼" maxlength="8" value="${requestScope.password}">
+						placeholder="密碼" maxlength="12" value="${requestScope.password}">
 					<div class="form__group">
 
 						<label for="checkbox"> <input type="checkbox" name="rememberMe" 
