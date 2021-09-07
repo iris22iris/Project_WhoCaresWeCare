@@ -75,8 +75,7 @@ public class CustomerController {
 				errorMsgMap.put("accountError", "帳號與密碼欄必須輸入，密碼長度至少八個字元且小於十二個字元");
 			} else if (password == null || password.trim().length() == 0 || password.length() < 8) {
 				errorMsgMap.put("accountError", "帳號與密碼欄必須輸入，密碼長度大於八個字元");
-			} else if (password == null || password.trim().length() == 0 || password.length() > 8) {
-				errorMsgMap.put("accountError", "帳號與密碼欄必須輸入，密碼長度小於十二個字元");
+			
 			} else if (customerBean != null) {
 				model.addAttribute("LoginOK", customerBean);
 				HttpSession session = request.getSession();
