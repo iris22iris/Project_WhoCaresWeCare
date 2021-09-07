@@ -14,7 +14,7 @@ import com.web.store.service.CustomerService;
 
 @Component
 public class CustomerValidator implements Validator {
-	private static final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%!^'\"]).{8,})";
+	private static final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%!^'\"]).{8,12})";
 	private static final String PHONE_PATTERN = "(09)+[\\d]{8}";
 	private static final String EMAIL_PATTERN = "^\\w{1,63}@[a-zA-Z0-9]{2,63}\\.[a-zA-Z]{2,63}(\\.[a-zA-Z]{2,63})?$";
 	private Pattern pattern = null;
@@ -43,8 +43,12 @@ public class CustomerValidator implements Validator {
 
 		pattern = Pattern.compile(PASSWORD_PATTERN);
 		matcher = pattern.matcher(cb.getPassword());
-		if (!matcher.matches() && cb.getPassword().length() > 0) {
-			errors.rejectValue("password", "", "密碼至少含各一個大小寫字母、數字與!@#$%!^'\\\"，且長度不能小於八個字元");
+		if (!matcher.matches() && cb.getPassword().length() < 12) {
+			errors.rejectValue("password", "", "密碼至少含各一個大小寫字母、數字與!@#$%!^'\\\"，且長度不能小於八個");
+		}else {
+			if(!matcher.matches() && cb.getPassword().length() > 8) {
+				errors.rejectValue("password", "", "密碼至少含各一個大小寫字母、數字與!@#$%!^'\\\"，且長度不可大於十二個");
+			}
 		}
 		
 		pattern = Pattern.compile(PHONE_PATTERN);

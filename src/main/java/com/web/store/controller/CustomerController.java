@@ -141,65 +141,65 @@ public class CustomerController {
 		String password = request.getParameter("password");
 		System.out.println("555555" + account);
 		String rememberMe = request.getParameter("rememberMe");
-		Map<String, String> errorMsgMap = new HashMap<String, String>();
-		try {
-			CustomerBean customerBean = customerService.checkIDPassword(account, password);
-
-			if (account == null || account.trim().length() == 0) {
-				errorMsgMap.put("accountError", "帳號與密碼欄必須輸入，密碼長度不能小於八個字元");
-			} else if (password == null || password.trim().length() == 0 || password.length() < 8) {
-				errorMsgMap.put("accountError", "帳號與密碼欄必須輸入，密碼長度不能小於八個字元");
-			} else if (customerBean != null) {
-				model.addAttribute("LoginOK", customerBean);
-				HttpSession session = request.getSession();
-				session.setAttribute("LoginOK", customerBean.getCustId());
-			} else {
-				errorMsgMap.put("Error", "帳號或密碼有誤，密碼至少含有一個大寫字母、小寫字母、數字與!@#$%!^'\"");
-			}
-		} catch (RuntimeException e) {
-			errorMsgMap.put("LoginErrorMsg", e.getMessage());
-		}
-
-		if (!errorMsgMap.isEmpty()) {
-			model.addAttribute("ErrorMsgKey", errorMsgMap);
-			return "error";
-		}
-
-		errorMsgMap.put("noError", "index");
-
-		// **********Remember Me****************************
-		Cookie cookieUser = null;
-		Cookie cookiePassword = null;
-		Cookie cookieRememberMe = null;
-		// rm存放瀏覽器送來之RememberMe的選項，如果使用者對RememberMe打勾，rm就不會是null
-		if (rememberMe != null) {
-			cookieUser = new Cookie("user", account);
-			cookieUser.setMaxAge(7 * 24 * 60 * 60); // Cookie的存活期: 七天
-			cookieUser.setPath(request.getContextPath());
-
-			cookiePassword = new Cookie("password", password);
-			cookiePassword.setMaxAge(7 * 24 * 60 * 60);
-			cookiePassword.setPath(request.getContextPath());
-
-			cookieRememberMe = new Cookie("rm", "true");
-			cookieRememberMe.setMaxAge(7 * 24 * 60 * 60);
-			cookieRememberMe.setPath(request.getContextPath());
-		} else { // 使用者沒有對 RememberMe 打勾
-			cookieUser = new Cookie("user", account);
-			cookieUser.setMaxAge(0); // MaxAge==0 表示要請瀏覽器刪除此Cookie
-			cookieUser.setPath(request.getContextPath());
-
-			cookiePassword = new Cookie("password", password);
-			cookiePassword.setMaxAge(0);// 代表瀏覽器關掉及刪掉
-			cookiePassword.setPath(request.getContextPath());// 告訴主機要刪的Path
-
-			cookieRememberMe = new Cookie("rm", "false");
-			cookieRememberMe.setMaxAge(7 * 24 * 60 * 60);
-			cookieRememberMe.setPath(request.getContextPath());
-		}
-		response.addCookie(cookieUser);
-		response.addCookie(cookiePassword);
-		response.addCookie(cookieRememberMe);
+//		Map<String, String> errorMsgMap = new HashMap<String, String>();
+//		try {
+//			CustomerBean customerBean = customerService.checkIDPassword(account, password);
+//
+//			if (account == null || account.trim().length() == 0) {
+//				errorMsgMap.put("accountError", "帳號與密碼欄必須輸入，密碼長度不能小於八個字元");
+//			} else if (password == null || password.trim().length() == 0 || password.length() < 8) {
+//				errorMsgMap.put("accountError", "帳號與密碼欄必須輸入，密碼長度不能小於八個字元");
+//			} else if (customerBean != null) {
+//				model.addAttribute("LoginOK", customerBean);
+//				HttpSession session = request.getSession();
+//				session.setAttribute("LoginOK", customerBean.getCustId());
+//			} else {
+//				errorMsgMap.put("Error", "帳號或密碼有誤，密碼至少含有一個大寫字母、小寫字母、數字與!@#$%!^'\"");
+//			}
+//		} catch (RuntimeException e) {
+//			errorMsgMap.put("LoginErrorMsg", e.getMessage());
+//		}
+//
+//		if (!errorMsgMap.isEmpty()) {
+//			model.addAttribute("ErrorMsgKey", errorMsgMap);
+//			return "error";
+//		}
+//
+//		errorMsgMap.put("noError", "index");
+//
+//		// **********Remember Me****************************
+//		Cookie cookieUser = null;
+//		Cookie cookiePassword = null;
+//		Cookie cookieRememberMe = null;
+//		// rm存放瀏覽器送來之RememberMe的選項，如果使用者對RememberMe打勾，rm就不會是null
+//		if (rememberMe != null) {
+//			cookieUser = new Cookie("user", account);
+//			cookieUser.setMaxAge(7 * 24 * 60 * 60); // Cookie的存活期: 七天
+//			cookieUser.setPath(request.getContextPath());
+//
+//			cookiePassword = new Cookie("password", password);
+//			cookiePassword.setMaxAge(7 * 24 * 60 * 60);
+//			cookiePassword.setPath(request.getContextPath());
+//
+//			cookieRememberMe = new Cookie("rm", "true");
+//			cookieRememberMe.setMaxAge(7 * 24 * 60 * 60);
+//			cookieRememberMe.setPath(request.getContextPath());
+//		} else { // 使用者沒有對 RememberMe 打勾
+//			cookieUser = new Cookie("user", account);
+//			cookieUser.setMaxAge(0); // MaxAge==0 表示要請瀏覽器刪除此Cookie
+//			cookieUser.setPath(request.getContextPath());
+//
+//			cookiePassword = new Cookie("password", password);
+//			cookiePassword.setMaxAge(0);// 代表瀏覽器關掉及刪掉
+//			cookiePassword.setPath(request.getContextPath());// 告訴主機要刪的Path
+//
+//			cookieRememberMe = new Cookie("rm", "false");
+//			cookieRememberMe.setMaxAge(7 * 24 * 60 * 60);
+//			cookieRememberMe.setPath(request.getContextPath());
+//		}
+//		response.addCookie(cookieUser);
+//		response.addCookie(cookiePassword);
+//		response.addCookie(cookieRememberMe);
 
 		// ********************************************
 		return "error";
@@ -352,7 +352,7 @@ public class CustomerController {
 		try {
 			CustomerBean member0 = null;
 			final String CUSTNAME_PATTERN = "\\pP|\\pS|\\s+";
-			final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%!^'\"]).{8,})";
+			final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%!^'\"]).{8,12})";
 			String custName = customer.getCustName();
 			String nickName = customer.getNickName();
 			String idNumber = customer.getIdNumber();
@@ -386,22 +386,37 @@ public class CustomerController {
 //			}
 
 			// 密碼檢核
-			if (password == null || password.trim().length() == 0 || password.length() < 8) {
-				errorMsgColumn.put("passWordError", "密碼欄必須輸入，密碼長度不能小於八個字元");
+			if (password == null || password.trim().length() == 0  ) {
+				errorMsgColumn.put("passWordError", "密碼欄必須輸入");
 			}
+			
+			
 			Pattern passWordp = Pattern.compile(PASSWORD_PATTERN);
 			Matcher pm = passWordp.matcher(password);
-			if (!pm.matches() && password.length() > 0) {
-				errorMsgColumn.put("passWordError", "密碼至少含各一個大小寫字母、數字與!@#$%!^'\\\"，且長度不能小於八個字元");
+			if (!pm.matches() && password.length() > 0 && password.length() <12  ) {
+				errorMsgColumn.put("passWordError", "密碼至少含各一個大小寫字母、數字與!@#$%!^'\\\"，且長度至少等於八個字元");
+			}else {
+				if (!pm.matches() && password.length() > 0 && password.length()>8){
+					errorMsgColumn.put("passWordError", "密碼至少含各一個大小寫字母、數字與!@#$%!^'\\\"，且長度不能大於十二個字元");
+				}else {
+				if(pm.matches() ) {
+					errorMsgColumn.put("passWordError", "密碼格式正確");
+				}
+				}
+				
 			}
+			
 			
 			//身分證檢核
 			String checkHead = "ABCDEFGHJKLMNPQRSTUVWXYZIO"; // 字母代號對照表
 			
 			if (idNumber == null || idNumber.length() != 10) {
 				errorMsgColumn.put("idNumberError", "長度不合法");
+			}else {
+				if (idNumber != null || idNumber.length() >= 10) {
+					errorMsgColumn.put("idNumberError", "長度合法");
 			}
-			
+			}
 			if (idNumber.length() == 10 && idNumber != null) {
 				char[] c = idNumber.toUpperCase().toCharArray(); // 建立 c 陣列，同時將s字串轉大寫後，轉成字元陣列放入 c 陣列
 				int[] ID = new int[c.length]; // 建立一個運算用的整數陣列，空間為 c 的字元個數
@@ -426,11 +441,15 @@ public class CustomerController {
 						errorMsgColumn.put("idNumberError", "不合法");
 					}
 				}
+				
+//				
+//				}
+				
 			} 
 			
 			
 			
-			
+		
 			
 			
 			
