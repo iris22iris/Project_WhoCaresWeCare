@@ -50,44 +50,7 @@
 		<div class="container-fluid d-flex">
 		<!-- Side-List Start -->
 		<jsp:include page="/WEB-INF/fragment/rentSideMenu.jsp" />	 
-			 <!-- <div class="col-2 ms-4" >
-				<div style="height: 60px;"></div>
-				<div class="text-center">
-					<div class="sideList-title">
-					  輔具類
-					</div>
-					<div class="sideList">
-					  <a href="#">拐杖-110cm</a><br>
-					  <a href="#">拐杖-120cm</a><br>
-					  <a href="#">拐杖-130cm</a><br>
-					  <a href="#">可折疊輪椅</a><br>
-					  <a href="#">不可折疊輪椅</a><br>
-					</div>
-					<div class="sideList-title">
-					  護具類
-					</div>
-					<div class="sideList">
-					  <a href="#">護膝</a><br>
-					  <a href="#">護腰</a><br>
-					</div>
-					<div class="sideList-title">
-					  居家保健
-					</div>
-					<div class="sideList rounded-bottom">
-					  <a href="#">照護病床</a><br>
-					</div>
-				</div>
-		  
-				<div class="text-center">
-					<div class="sideList-title mt-4 discount-title">
-					  優惠活動
-					</div>
-					<div class="sideList">
-					  <a href="#">特價專區</a><br>
-					</div>
-				</div>
-		  
-			  </div> -->
+			
 		<!-- Side-List End -->
 
 			<!-- main-right-side start -->
@@ -230,7 +193,15 @@
 							<i class="fas fa-th-large px-3"></i>商品評價
 						</h2>
 					</div>
-					<div class="score col-6">評分4.4/30人評價</div>
+					<div class="score col-6">
+					評分
+					<c:set value="0" var="sum"/>
+					<c:set value="0" var="commentscount"/>            
+					<c:forEach items="${comments}" var="comment">                 
+					<c:set value="${sum+comment.rate}" var="sum"/> 
+					<c:set value="${commentscount+1}" var="commentscount"/> 
+					</c:forEach>
+					${sum/commentscount}/ ${commentscount}人評價</div>
 
 
 
@@ -250,11 +221,21 @@
 					<!-- 留言板頭像 end -->
 
 					<!-- 留言板 start -->
-					<div id="parent">
-						<div id="box">
-							<em>將 顯示留言内容……暫時</em>
-						</div>
 					
+					<div id="parent">
+					<!-- 各項區塊 start -->
+					<c:forEach items="${comments}" var="comment">
+						<div id="box">
+							<em>				  
+             <tr style="text-align: center;font-size: 10px;">
+               <td> ${comment.classify}</td>
+               <td>${comment.rate}</td>                                         
+             </tr>
+             <br>        
+			 </em>
+						</div>
+						 </c:forEach>
+					<!-- 各項區塊 end -->
 					</div>
 
 					<!-- 留言板 end -->

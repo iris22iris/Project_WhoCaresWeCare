@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.web.store.model._02_customerService.CommentBean;
 import com.web.store.model._03_rent.RentProductBean;
 import com.web.store.model._03_rent.ReservationBean;
 import com.web.store.model._03_rent.pkClass.RentProductPK;
@@ -161,8 +162,21 @@ public class RentProductDaoImpl implements RentProductDao {
 				.getSingleResult();
 	}
 
+	//抓取該商品目前租賃評論資料
+	@Override
+	public List<CommentBean> getCommentBeanByprodId(int prodId) {
+		Session session = factory.getCurrentSession();
+		String hql =" SELECT c FROM CommentBean c"
+				+" WHERE c.productBean.prodId = :pid ";
+		return session.createQuery(hql,CommentBean.class)
+					.setParameter("pid", prodId)
+					.getResultList();
+	}
+	
 	@Override
 	public void addProduct(RentProductBean product) {
 	}
+
+	
 
 }

@@ -2,6 +2,7 @@ package com.web.store.service;
 
 import java.util.List;
 
+import com.web.store.model._02_customerService.CommentBean;
 import com.web.store.model._03_rent.RentProductBean;
 import com.web.store.model._03_rent.ReservationBean;
 import com.web.store.model._07_productType.ProductTypeBean;
@@ -28,6 +29,10 @@ public interface RentProductService {
 	
 	//抓取該商品目前預約資料
 	public ReservationBean getReservationBeanByprodId(int prodId) ;
+	
+	//抓取該商品目前租賃評論資料
+	public List<CommentBean> getCommentBeanByprodId(int prodId) ;
+	
 
 	// 新增單筆租賃設備資料
 	void addProduct(RentProductBean product);

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.web.store.model._02_customerService.CommentBean;
 import com.web.store.model._03_rent.RentProductBean;
 import com.web.store.model._03_rent.ReservationBean;
 import com.web.store.model._07_productType.ProductTypeBean;
@@ -61,9 +62,19 @@ public class RentProductServiceImpl implements RentProductService {
 		return rentProductDao.getReservationBeanByprodId(prodId);
 	}
 
+	//抓取該商品目前租賃評論資料
+	@Override
+	public List<CommentBean> getCommentBeanByprodId(int prodId) {
+	
+		return rentProductDao.getCommentBeanByprodId(prodId);
+	}
+	
+	
 	@Override
 	public void addProduct(RentProductBean product) {
 	}
+
+	
 
 	@Override
 	public void updateStock(int productId, int newQuantity) {
