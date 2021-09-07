@@ -27,10 +27,10 @@ public class PagesController {
 		return "_02_onlineDM";
 	}
 	
-//	@GetMapping("/_03_rentProduct")
-//	public String rentProduct(Model model) {
-//	return "_03_rentProduct";
-//	}
+	@GetMapping("/_03_rentCheckout")
+	public String rentCheckout(Model model) {
+	return "_03_rentCheckout";
+	}
 	
 	@GetMapping("/_03_rentItemList")
 	public String rentItemList(Model model) {

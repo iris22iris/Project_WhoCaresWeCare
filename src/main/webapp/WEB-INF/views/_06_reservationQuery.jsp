@@ -124,7 +124,7 @@
     </div>
     
        <!-- 引入共同的頁尾 -->
-	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
+		<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
          
   </div>
   <!-- main end -->
