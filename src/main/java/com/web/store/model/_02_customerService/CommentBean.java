@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.web.store.model._03_rent.RentProductBean;
+import com.web.store.model._04_shop.ProductBean;
 import com.web.store.model._05_customer.CustomerBean;
 
 
@@ -44,6 +45,10 @@ public class CommentBean implements Serializable {
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "COMMENT_CUSTID_FK")
 	private CustomerBean customerBean;
+	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "PRODUCT_PRODID_FK")
+	private ProductBean productBean;
 
 	public CommentBean(Integer commentId, String classify, Integer rate, Integer visits, Timestamp commentDate,
 			Clob comment) {
@@ -113,6 +118,15 @@ public class CommentBean implements Serializable {
 
 	public void setRentProductBean(RentProductBean rentProductBean) {
 		this.rentProductBean = rentProductBean;
+	}
+
+		
+	public ProductBean getProductBean() {
+		return productBean;
+	}
+
+	public void setProductBean(ProductBean productBean) {
+		this.productBean = productBean;
 	}
 
 	public CustomerBean getCustomerBean() {

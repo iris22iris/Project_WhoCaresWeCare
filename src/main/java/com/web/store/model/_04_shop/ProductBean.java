@@ -19,6 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.web.store.model._02_customerService.CommentBean;
 import com.web.store.model._02_customerService.PromotionBean;
 import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.model._07_productType.ProductTypeBean;
@@ -54,6 +55,10 @@ public class ProductBean implements Serializable {
 	@OneToMany(mappedBy = "productBean", cascade = CascadeType.ALL)
 	Set<BuyItemBean> buyItems = new LinkedHashSet<>();
 	
+	@OneToMany(mappedBy = "productBean", cascade = CascadeType.ALL)
+	Set<CommentBean> comments = new LinkedHashSet<>();
+
+	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "favorite",  
         joinColumns = {   // 在Join Table中，儲存本類別之主鍵值的外鍵欄位名稱
@@ -75,7 +80,7 @@ public class ProductBean implements Serializable {
 
 	public ProductBean(String classify, Integer prodId, String prodName, BigDecimal price, Blob coverImage1,
 			 Blob coverImage2,  Blob coverImage3, String mimeType, Integer stock, String fileName,
-			 Clob description, Set<BuyItemBean> buyItems) {
+			 Clob description, Set<BuyItemBean> buyItems,Set<CommentBean> comments) {
 		this.classify = classify;
 		this.prodId = prodId;
 		this.prodName = prodName;
@@ -89,6 +94,7 @@ public class ProductBean implements Serializable {
 		this.fileName = fileName;
 		this.description = description;
 		this.buyItems = buyItems;
+		this.comments = comments;
 	}
 
 
@@ -223,6 +229,17 @@ public class ProductBean implements Serializable {
 	public void setBuyItems(Set<BuyItemBean> buyItems) {
 		this.buyItems = buyItems;
 	}
+	
+	
+	
+	public Set<CommentBean> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<CommentBean> comments) {
+		this.comments = comments;
+	}
+
 	public Set<CustomerBean> getCustmers() {
 		return custmers;
 	}
