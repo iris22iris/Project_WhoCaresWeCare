@@ -37,6 +37,11 @@ public class PagesController {
 	return "_03_rentItemList";
 	}
 	
+	@GetMapping("/_04_buyCheckout")
+	public String buyCheckout(Model model) {
+	return "_04_buyCheckout";
+	}
+	
 	@GetMapping("/_04_favoriteList")
 	public String favoriteList(Model model) {
 	return "_04_favoriteList";
