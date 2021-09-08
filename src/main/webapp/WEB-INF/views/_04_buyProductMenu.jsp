@@ -94,8 +94,11 @@
 				
 			}
 		} else {
-			confirm('請先登入')
-			window.location.href='_05_login'
+			if (confirm('請先登入') == true){ 
+				window.location.href='_05_login'
+			} else {
+				return false; 
+				}
 		}
 	}
 </script>
