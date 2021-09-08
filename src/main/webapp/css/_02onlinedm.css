@@ -1,9 +1,5 @@
-
-
-/* ------midlecontent------- */
-.midlecontent{
-    margin: 0 auto;
-   
+.mainContent{
+    display: flex;
 }
 /* ------side-menu------- */
 .side-menu{
@@ -32,6 +28,35 @@
     height: 13%;
 }
 
+
+
+/* -----DM sideBar---- */
+.dmDate{
+    margin: 50px 30px;
+    background-color: snow;
+    color:saddlebrown;
+}
+
+.accordion-body a{
+    text-decoration: none;
+    color:rgb(63, 56, 52);
+    padding-bottom: 3px;
+}
+
+.accordion-item h2{
+    border: 0.5px #ccc solid;
+
+}
+
+.accordion-header button{
+    background-color: snow;
+}
+
+
+.accordion-button span{
+    color:saddlebrown;
+}
+
 /* ------title------- */
 .title{
     color:  rgb(117,76,36);
@@ -50,10 +75,7 @@
 #image {
     display: flex;
     justify-content: center;
-	width:1000px;
-	height:700px;
-	/*  height: 300px; */
-    /* background-color: #000; */
+	width: inherit;
     overflow: hidden;
   }
 
