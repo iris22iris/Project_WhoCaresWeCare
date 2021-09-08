@@ -3,7 +3,7 @@
     height: 100%;
 }
 
-/* --------sideList------ */
+/* --------left sideList------ */
 .sideList-title {
 	display: flex;
 	justify-content: center;
@@ -37,14 +37,13 @@
 	background-color: white;
 }
 
-/* --------product-title------ */
+/* ------ right product-title---- */
 .catagory {
-	margin-top: 15px;
-	font-family: mainfont-medium;
+	margin-top: 30px;
     font-size: 24px;
 	color: rgb(117, 76, 36);
-	border-bottom: inset 5px rgb(216, 196, 176);
-	margin-bottom: 30px;
+	/* border-bottom: inset 5px rgb(216, 196, 176); */
+	margin-bottom: 5px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -61,40 +60,82 @@
     font-size: 26px;
 }
 
-.allPage {
-    /* width: 100%; */
-    /* background-color: royalblue; */
-    display: flex;
-}
+/* ---- right product page---- */
 
 .productPage {
-    /* display: flex; */
-    /* height: 100%; */
-    /* width: 80%; */
     margin-left: 50px;
-    /* background-color: seagreen; */
 }
+
 .pictureandinfo{
-	 border-bottom: inset 5px rgb(216, 196, 176);
+	border-bottom: inset 5px rgb(216, 196, 176);
 	margin-bottom: 10px;
-}
-.productShell {
     display: flex;
-   
+}
+/* ---- product info---- */
+.productInfo{
+    padding-left: 30px;
+}
+
+.smallStyle{
+    font-family: mainfont-light;
+    color:rgb(60%, 60%, 60%);
+}
+
+.normalStyle{
+    font-size: 22px;
+    color: rgb(56, 48, 45);
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 3px;
+}
+
+.normalStyle div:nth-child(2){
+    text-align: right;
+}
+
+.hidden{
+    height: 35px;
+}
+
+/* 商品名稱 */
+.productInfo h2{
+    color: rgb(117, 76, 36);
+}
+
+/* 活動標籤 */
+#commodityname{
+    border: 0.1px orange solid;
+    color: orange;
+}
+
+/* 數量調整 */
+input[type="number"] {
+    border-radius: 5px;
+    width: 100px;
+    height: 25px;
+    background-color: #fff;
+    color: rgb(56, 48, 45);
+    text-align: right;
+    margin-left: 5px;
+}
+
+/* 租賃候補按鈕 */
+.submitBtn{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    padding: 15px 0px;
+
 }
 
 
-
-
-/* 商品圖片外框 */
+/* ----商品輪播圖片---- */
 
 .productPicture {
-    width: 35%;
-    /* margin-left: 10px; */
+    /* width: 35%; */
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    /* background-color: tomato;  */
 }
 
 /* 商品小圖片 */
@@ -117,29 +158,6 @@
     width: 300px;
 }
 
-/* 商品狀態 */
-
-.productInfo {
-    margin-left: 10px;
-    width: 75%;
-    /* background-color: yellow; */
-}
-
-/* 數量調整 */
-
-input[type="number"] {
-    width: 80px;
-    height: 20px;
-    background-color: turquoise;
-    text-align: right;
-}
-
-/* 商品狀態 label */
-
-label {
-    margin-bottom: 2px;
-}
-
 /* 小圖片 */
 input {
     width: 60px;
@@ -147,57 +165,59 @@ input {
     margin: 10px;
 }
 
-/* 商品詳情 */
-.productDet {
-  
-    margin-left: 10px;
-    border: 1px solid rgb(60%, 60%, 60%);
-    margin-bottom: 10px;
-    margin-top: 10px;
-    border-bottom: inset 5px rgb(216, 196, 176);
-	margin-bottom: 10px;
 
+/* -------- 商品詳情 -------*/
+.productContent {
+    padding: 20px 0px;
+    border-bottom: inset 5px rgb(216, 196, 176);
 }
 
+.contentTitle{
+    font-size: 26px;
+    color: rgb(117, 76, 36);
+    margin-bottom: 20px;
+}
+
+.productContent img{
+    width:inherit;
+}
+
+/* ------comment----- */
+.product-rate-title{
+    padding: 30px 0px;
+	font-family: mainfont-medium;
+	color: rgb(117, 76, 36);
+
+}
+.score{
+    padding: 30px 0px;
+	font-family: mainfont-light;
+    color: rgb(56, 48, 45);
+    text-align: right;
+}
+
+
+
+/* .word {
+    word-break: break-all;
+    font-size: 1.3rem;
+} */
+
 /*大頭照 */
-.imgTop {
+/* .imgTop {
     margin-left: 20px;
     width: 250px;
     height: 100px;
 }
 
 .imgMid {
-    /* margin: 40px auto auto 70px; */
     margin: -5px 10px auto 100px;
     width: 50px;
     height: 50px;
-}
-
-/* 評價顯示 */
-
-.product-rate-title{
-	 
-  margin-top: 30px;
-	font-family: mainfont-medium;
-	color: rgb(117, 76, 36);
-	border-bottom: inset 5px rgb(216, 196, 176);
-	margin-bottom: 10px;
-}
-.score{
-	margin-top: 30px;
-	font-family: mainfont-medium;
-	color: rgb(117, 76, 36);
-	border-bottom: inset 5px rgb(216, 196, 176);
-	margin-bottom: 10px;
-}
-.word {
-    word-break: break-all;
-    font-size: 1.3rem;
-}
-
+} */
 
 /* 留言板start */
-li {
+/* li {
     list-style: none;
 }
 
@@ -251,7 +271,7 @@ em {
 #modal-header{
     background-color: #ffa500;
     
-}
+} */
 
 
 /* 留言板end */
