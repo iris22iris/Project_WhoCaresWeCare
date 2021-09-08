@@ -2,6 +2,7 @@ package com.web.store.repository;
 
 import java.util.List;
 
+import com.web.store.model._02_customerService.CommentBean;
 import com.web.store.model._04_shop.FavoriteBean;
 import com.web.store.model._04_shop.ProductBean;
 import com.web.store.model._07_productType.ProductTypeBean;
@@ -37,6 +38,10 @@ public interface ProductDao {
 
 	// 依主鍵讀取單筆產品資料
 	public ProductBean getProductById(int prodId);
+	
+	//抓取該商品目前租賃評論資料
+		public List<CommentBean> getCommentBeanByprodId(int prodId);
+
 
 	// 新增單筆產品資料
 	void addProduct(ProductBean product);

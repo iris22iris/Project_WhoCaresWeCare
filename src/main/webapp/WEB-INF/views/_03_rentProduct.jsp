@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
-
+<!-- 數字格式化標籤 -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 
@@ -134,7 +135,7 @@
 							<a href="<c:url value='/_03_rentItemList' />">
 							<button class="btn btn-outline-secondary " 
 							 role="button" 							
-							type="button" class="btn btn-secondary" >馬上租賃</button>
+							type="button" class="btn btn-secondary" >直接租賃</button>
 						 	</a>	
 						  </c:when> 
 						
@@ -201,10 +202,8 @@
 					<c:set value="${sum+comment.rate}" var="sum"/> 
 					<c:set value="${commentscount+1}" var="commentscount"/> 
 					</c:forEach>
-					${sum/commentscount}/ ${commentscount}人評價</div>
-
-
-
+					<fmt:formatNumber value="${sum/commentscount}" pattern=".0" type="number"/>
+					/ ${commentscount}人評價</div>
 					<!-- 評價顯示 end -->
 				</div>
 
@@ -228,8 +227,11 @@
 						<div id="box">
 							<em>				  
              <tr style="text-align: center;font-size: 10px;">
+                <td> ${comment.customerBean.custName}</td>
                <td> ${comment.classify}</td>
                <td>${comment.rate}</td>                                         
+               <td> <fmt:formatDate value="${comment.commentDate}" pattern="yyyy年MM月dd日HH点mm分ss秒" /></td>  
+                                                     
              </tr>
              <br>        
 			 </em>

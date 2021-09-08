@@ -4,6 +4,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.web.store.model._02_customerService.CommentBean;
 import com.web.store.model._04_shop.FavoriteBean;
 import com.web.store.model._04_shop.ProductBean;
 import com.web.store.model._07_productType.ProductTypeBean;
@@ -75,6 +77,14 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ProductBean getProductById(int prodId) {
 		return productDao.getProductById(prodId);
+	}
+
+	
+	//抓取該商品目前租賃評論資料
+	@Override
+	public List<CommentBean> getCommentBeanByprodId(int prodId) {
+		
+		return productDao.getCommentBeanByprodId(prodId);
 	}
 
 	@Override

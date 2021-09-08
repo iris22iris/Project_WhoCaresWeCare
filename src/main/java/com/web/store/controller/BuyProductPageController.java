@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.web.store.model._02_customerService.CommentBean;
 import com.web.store.model._04_shop.ProductBean;
 import com.web.store.model._07_productType.ProductTypeBean;
 import com.web.store.service.ProductService;
@@ -22,10 +23,11 @@ public class BuyProductPageController {
 		
 		List<ProductBean> products = productService.getAllProducts();
 		List<ProductTypeBean> productTypes = productService.getAllProdTypes();
+		List<CommentBean> comments = productService.getCommentBeanByprodId(id);
 		model.addAttribute("products", products);
 		model.addAttribute("productTypes", productTypes);
-		
 		model.addAttribute("product", productService.getProductById(id));
+		model.addAttribute("comments", comments);
 		return "_04_productPage";
 	};
 	

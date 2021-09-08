@@ -167,7 +167,8 @@ public class RentProductDaoImpl implements RentProductDao {
 	public List<CommentBean> getCommentBeanByprodId(int prodId) {
 		Session session = factory.getCurrentSession();
 		String hql =" SELECT c FROM CommentBean c"
-				+" WHERE c.productBean.prodId = :pid ";
+//				+" WHERE c.productBean.prodId = :pid ";
+				+" WHERE c.rentProductBean.prodId = :pid and c.rentProductBean.serialNumber = 1";
 		return session.createQuery(hql,CommentBean.class)
 					.setParameter("pid", prodId)
 					.getResultList();

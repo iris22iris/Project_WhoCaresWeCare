@@ -5,6 +5,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.web.store.model._02_customerService.CommentBean;
 import com.web.store.model._04_shop.FavoriteBean;
 import com.web.store.model._04_shop.ProductBean;
 import com.web.store.model._07_productType.ProductTypeBean;
@@ -145,6 +147,21 @@ public class ProductDaoImpl implements ProductDao {
 		Session session = factory.getCurrentSession();
 		ProductBean pb = session.get(ProductBean.class, prodId);
 		return pb;
+	}
+
+	
+	
+	
+	@Override
+	public List<CommentBean> getCommentBeanByprodId(int prodId) {
+		Session session = factory.getCurrentSession();
+		String hql =" SELECT c FROM CommentBean c"
+				+" WHERE c.productBean.prodId = :pid ";
+				
+		return session.createQuery(hql,CommentBean.class)
+					.setParameter("pid", prodId)
+					.getResultList();
+		
 	}
 
 	@Override

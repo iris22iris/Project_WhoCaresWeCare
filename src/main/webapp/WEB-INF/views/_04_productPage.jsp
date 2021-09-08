@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
-
+<!-- 數字格式化標籤 -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 
@@ -123,13 +124,33 @@
 								: &nbsp; <input type="number" name="" min="0" max="10" value="1"
 									style="border-radius: 6px"><br>
 								<!-- <label for="fname">租賃數量</label> : &nbsp; <input type="number" name="" min="0" max="10" value="1"><br> -->
+									<label for="fname">庫存數量:${product.stock}個</label> 
 								<label for="fname">商品規格</label> :<br> <label for="fname">運送方式</label>
 								: <input type="checkbox"
 									style="height: 15px; margin-right: -15px;">物流宅配<input
 									type="checkbox" style="height: 15px; margin-right: -15px;">店到店<br>
 								<br>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<button class="btn btn-outline-secondary">直接購買</button>
+								<c:choose> 
+						
+						  <c:when test="${product.stock >0 }">   
+							<a href="<c:url value='/_04_buyCheckout' />">
+							<button class="btn btn-outline-secondary " 
+							 role="button" 							
+							type="button" class="btn btn-secondary" >直接購買</button>
+							
+						 	</a>	
+						  </c:when> 
+						
+								
+						  <c:otherwise>   
+							<button class="btn btn-outline-secondary " data-bs-toggle="modal" href="#exampleModalToggle" role="button"  type="button" class="btn btn-secondary" data-bs-dismiss="modal">已售完</button>
+					   	  </c:otherwise> 
+							
+						</c:choose>
+								
+								
+								
 								&nbsp;&nbsp;&nbsp;&nbsp;
 								<button class="btn btn-outline-secondary">加入購物車</button>
 							</form>
@@ -174,10 +195,16 @@
 							<i class="fas fa-th-large px-3"></i>商品評價
 						</h2>
 					</div>
-					<div class="score col-6">評分4.4/30人評價</div>
-
-
-
+					<div class="score col-6">
+					評分
+					<c:set value="0" var="sum"/>
+					<c:set value="0" var="commentscount"/>            
+					<c:forEach items="${comments}" var="comment">                 
+					<c:set value="${sum+comment.rate}" var="sum"/> 
+					<c:set value="${commentscount+1}" var="commentscount"/> 
+					</c:forEach>
+					<fmt:formatNumber value="${sum/commentscount}" pattern=".0" type="number"/>
+					/ ${commentscount}人評價</div>
 					<!-- 評價顯示 end -->
 				</div>
 
@@ -185,22 +212,26 @@
 
 				<div class="col-12 d-flex">
 					<!-- 留言板頭像 start -->
-					<div style="margin-left: 50px;">
-						<a href="#未登入先導至singin_singup"> <img
-							src="<c:url value='/images/memberIcon.png' />" alt="會員"
-							style="color: rgb(0, 68, 255);">
-						</a>
-					</div>
-					<!-- 留言板頭像 end -->
-
-					<!-- 留言板 start -->
+				
 					<div id="parent">
+					<!-- 各項區塊 start -->
+					<c:forEach items="${comments}" var="comment">
 						<div id="box">
-							<em>將 顯示留言内容……暫時</em>
+							<em>				  
+             <tr style="text-align: center;font-size: 10px;">
+                <td> ${comment.customerBean.custName}</td>
+               <td> ${comment.classify}</td>
+               <td>${comment.rate}</td>                                         
+               <td> <fmt:formatDate value="${comment.commentDate}" pattern="yyyy年MM月dd日HH点mm分ss秒" /></td>  
+                                                     
+             </tr>
+             <br>        
+			 </em>
 						</div>
-						
+						 </c:forEach>
+					<!-- 各項區塊 end -->
 					</div>
-
+					
 					<!-- 留言板 end -->
 				</div>
 			</div>
