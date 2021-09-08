@@ -340,7 +340,7 @@ function handleFiles(e){
 									</div>
 									<div class="modal-body">確定要保存變更資料嗎?</div>
 									<div class="modal-footer">
-										<button type="button" class="btn btn-primary"
+										<button type="button" class="btn btn-primary" data-bs-dismiss="modal"
 											onclick="upData()">確認修改</button>
 										<button type="button" class="btn btn-secondary"
 											data-bs-dismiss="modal">Close</button>

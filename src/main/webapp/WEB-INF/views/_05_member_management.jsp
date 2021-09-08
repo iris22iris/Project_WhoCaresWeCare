@@ -115,6 +115,11 @@
 							<h1>
 								<i class="fas fa-caret-right"></i> 客服記錄查詢
 							</h1>
+							<div class="mt-5 ">
+							<h1>
+								<a style="text-decoration: none; color: black;"
+									class="fas fa-caret-right" href="_02_contactUs"><i>聯絡我們</i></a>
+							</h1>
 						</div>
 					</div>
 				</div>
