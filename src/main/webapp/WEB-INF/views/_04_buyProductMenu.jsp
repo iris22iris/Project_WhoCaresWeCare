@@ -15,17 +15,90 @@
 
 <title>購物商城</title>
 
-    <!-- bootstrap -->
-    <link
-    href="<c:url value='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' />"
-    rel="stylesheet">
-    <!-- icon -->
-    <link rel="stylesheet"
-    href="<c:url value='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'/>" /><!-- sweetAlert -->
-	<!-- sweet alert -->
-	<script src="<c:url value='https://cdn.jsdelivr.net/npm/sweetalert2@9'/>"></script>
-	<script src="<c:url value='/js/addFavorite.js' />"></script>
-	<script src="<c:url value='/js/sortProducts.js' />"></script>
+<!-- bootstrap -->
+<link
+	href="<c:url value='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' />"
+	rel="stylesheet">
+<!-- icon -->
+<link rel="stylesheet"
+	href="<c:url value='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'/>" />
+<!-- sweetAlert -->
+<!-- sweet alert -->
+<script
+	src="<c:url value='https://cdn.jsdelivr.net/npm/sweetalert2@9'/>"></script>
+<%-- 	<script src="<c:url value='/js/addFavorite.js' />"></script> --%>
+<script src="<c:url value='/js/sortProducts.js' />"></script>
+
+<script>
+	window.onload = function() {
+		$.ajax({
+			url: '/Whocares/quereyFavoriteBYCustomerID',
+			type: "POST",
+			data: {
+				FK_Customer_ID:<%=session.getAttribute("LoginOK")%>,
+				},
+			success: function(response) { 
+				response.forEach(function (item) {
+					$("#heartFavorite" + item.fk_Product_ID).attr("class","fas fa-heart");
+		           });
+			},
+			error: function() { }
+		});
+	}
+
+	function track(heart, prodId) {
+		if(<%=session.getAttribute("LoginOK")%> != null) {
+			if (heart.className == "far fa-heart") {
+				$.ajax({
+					url: '/Whocares/addFavorite',
+					type: "POST",
+					data: {
+						FK_Customer_ID:<%=session.getAttribute("LoginOK")%>,
+						FK_Product_ID:prodId,
+						},
+					success: function() { 
+						heart.className = "fas fa-heart";
+						Swal.fire({
+							position : 'center',
+							icon : 'success',
+							title : '商品已加入追蹤清單',
+							showConfirmButton : false,
+							timer : 1000
+						})
+					},
+					error: function() { }
+
+				});
+				
+			} else {
+				$.ajax({
+					url: '/Whocares/deleteFavorite',
+					type: "POST",
+					data: {
+						FK_Customer_ID:<%=session.getAttribute("LoginOK")%>,
+						FK_Product_ID:prodId,
+						},
+					success: function() { 
+						heart.className = "far fa-heart";
+						Swal.fire({
+							position : 'center',
+							icon : 'error',
+							title : '商品已取消追蹤',
+							showConfirmButton : false,
+							timer : 1000
+						})
+					},
+					error: function() { }
+
+				});
+				
+			}
+		} else {
+			confirm('請先登入')
+			window.location.href='_05_login'
+		}
+	}
+</script>
 
 </head>
 
@@ -60,13 +133,13 @@
 				<div class="buyProduct col-9">
 
 					<div class="container-fluid d-flex justify-content-end">
-							<select name="sortType" onChange="sort(this)">
-								<option selected disabled>請選擇排序條件</option>
-								<option value="price desc">價格由高至低</option>
-								<option value="stock desc">數量由高至低</option>
-								<option value="price asc">價格由低至高</option>
-								<option value="stock asc">數量由低至高</option>
-							</select>
+						<select name="sortType" onChange="sort(this)">
+							<option selected disabled>請選擇排序條件</option>
+							<option value="price desc">價格由高至低</option>
+							<option value="stock desc">數量由高至低</option>
+							<option value="price asc">價格由低至高</option>
+							<option value="stock asc">數量由低至高</option>
+						</select>
 					</div>
 
 					<div
@@ -82,7 +155,8 @@
 										<div class="card-body">
 											<h5 class="card-title d-flex justify-content-around">
 												${product.prodName}<i class="far fa-heart"
-													onclick="track(this)"></i>
+													id="heartFavorite${product.prodId}"
+													onclick="track(this,${product.prodId})"></i>
 											</h5>
 											<div class="card-text mb-2">價格: ${product.price}元</div>
 

@@ -2,6 +2,7 @@ package com.web.store.repository;
 
 import java.util.List;
 
+import com.web.store.model._04_shop.FavoriteBean;
 import com.web.store.model._04_shop.ProductBean;
 import com.web.store.model._07_productType.ProductTypeBean;
 
@@ -39,5 +40,18 @@ public interface ProductDao {
 
 	// 新增單筆產品資料
 	void addProduct(ProductBean product);
+	
+	// 新增我的最愛
+	Object addFavorite(FavoriteBean favoriteBean);
+	
+	// 讀取多筆我的最愛
+	List<FavoriteBean> queryFavorite(int productId, int newQuantity);
+
+	//刪除我的最愛
+	void deleteFavorite(FavoriteBean favoriteBean);
+
+	List<FavoriteBean> get(Integer productId);
+
+
 
 }

@@ -59,17 +59,17 @@ public class ProductBean implements Serializable {
 	Set<CommentBean> comments = new LinkedHashSet<>();
 
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "favorite",  
-        joinColumns = {   // 在Join Table中，儲存本類別之主鍵值的外鍵欄位名稱
-            @JoinColumn(name = "FK_Product_ID", referencedColumnName = "prodId") 
-        }, 
-        inverseJoinColumns = { // 在Join Table中，儲存對應對照類別之主鍵值的外鍵欄位名稱
-            @JoinColumn(name = "FK_Customer_ID",    referencedColumnName = "custId") 
-        }
-    )
+//	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinTable(name = "favorite",  
+//        joinColumns = {   // 在Join Table中，儲存本類別之主鍵值的外鍵欄位名稱
+//            @JoinColumn(name = "FK_Product_ID", referencedColumnName = "prodId") 
+//        }, 
+//        inverseJoinColumns = { // 在Join Table中，儲存對應對照類別之主鍵值的外鍵欄位名稱
+//            @JoinColumn(name = "FK_Customer_ID",    referencedColumnName = "custId") 
+//        }
+//    )
 
-	private Set<CustomerBean> custmers = new HashSet<CustomerBean>(0);
+//	private Set<CustomerBean> custmers = new HashSet<CustomerBean>(0);
 	
 	public ProductBean() {
 	}
@@ -240,12 +240,12 @@ public class ProductBean implements Serializable {
 		this.comments = comments;
 	}
 
-	public Set<CustomerBean> getCustmers() {
-		return custmers;
-	}
-
-	public void setCustmers(Set<CustomerBean> custmers) {
-		this.custmers = custmers;
-	}
+//	public Set<CustomerBean> getCustmers() {
+//		return custmers;
+//	}
+//
+//	public void setCustmers(Set<CustomerBean> custmers) {
+//		this.custmers = custmers;
+//	}
 
 }

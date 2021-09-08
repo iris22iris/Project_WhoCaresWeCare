@@ -63,8 +63,8 @@ public class CustomerBean implements Serializable {
 	Set<CommentBean> comments = new LinkedHashSet<>();
 	@OneToMany(mappedBy = "customerBean", cascade = CascadeType.ALL )
 	Set<ProblemBean> problem = new LinkedHashSet<>();
-	@ManyToMany(mappedBy = "custmers")
-	private Set<ProductBean> products = new HashSet<ProductBean>(0);
+//	@ManyToMany(mappedBy = "custmers")
+//	private Set<ProductBean> products = new HashSet<ProductBean>(0);
 	
 	
 	public CustomerBean() {
@@ -277,13 +277,13 @@ public class CustomerBean implements Serializable {
 		Image = image;
 	}
 	
-	public Set<ProductBean> getProducts() {
-		return products;
-	}
-
-	public void setProducts(Set<ProductBean> products) {
-		this.products = products;
-	}
+//	public Set<ProductBean> getProducts() {
+//		return products;
+//	}
+//
+//	public void setProducts(Set<ProductBean> products) {
+//		this.products = products;
+//	}
 
 //	@Override
 //	public String toString() {

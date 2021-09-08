@@ -25,6 +25,7 @@ import com.web.store.model._03_rent.RentProductBean;
 import com.web.store.model._03_rent.ReservationBean;
 import com.web.store.model._03_rent.pkClass.RentItemPK;
 import com.web.store.model._04_shop.BuyItemBean;
+import com.web.store.model._04_shop.FavoriteBean;
 import com.web.store.model._04_shop.ProductBean;
 import com.web.store.model._04_shop.pkClass.BuyItemPK;
 import com.web.store.model._05_customer.CitySelectBean;
@@ -265,8 +266,8 @@ public class EDMTableResetHibernate {
 
 					String[] token = line.split("\\|");
 					BuyItemBean bib = new BuyItemBean();
-					bib.setBuyItemPK(new BuyItemPK(new OrdPK(token[0],Integer.parseInt(token[1]))
-													  ,Integer.parseInt(token[2])));
+					bib.setBuyItemPK(
+							new BuyItemPK(new OrdPK(token[0], Integer.parseInt(token[1])), Integer.parseInt(token[2])));
 					bib.setDiscount(new BigDecimal(token[3]));
 					bib.setDiscountCode(token[4]);
 					bib.setItemSum(new BigDecimal(token[5]));
@@ -283,7 +284,6 @@ public class EDMTableResetHibernate {
 				System.out.println("buyitem表格資料新增成功");
 			}
 
-			
 			// 9. rentitem表格
 			// 由"data/rentitem.dat"逐筆讀入rentitem表格內的初始資料，
 			// 然後依序新增到rentitem表格中
@@ -295,8 +295,8 @@ public class EDMTableResetHibernate {
 
 					String[] token = line.split("\\|");
 					RentItemBean rib = new RentItemBean();
-					rib.setRentItemPK(new RentItemPK(new OrdPK(token[0],Integer.parseInt(token[1]))
-														,Integer.parseInt(token[2])));
+					rib.setRentItemPK(new RentItemPK(new OrdPK(token[0], Integer.parseInt(token[1])),
+							Integer.parseInt(token[2])));
 					rib.setDiscount(new BigDecimal(token[3]));
 					rib.setDiscountCode(token[4]);
 					rib.setProdTotal(new BigDecimal(token[3]));
@@ -398,6 +398,26 @@ public class EDMTableResetHibernate {
 				}
 				session.flush();
 				System.out.println("problem表格資料新增成功");
+			}
+
+			// 13. favorite表格
+			// 由"data/favorite.dat"逐筆讀入favorite表格內的初始資料，
+			// 然後依序新增到favorite表格中
+			try (FileInputStream fis = new FileInputStream("data/favorite.dat");
+					InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
+					BufferedReader br = new BufferedReader(isr0);) {
+				while ((line = br.readLine()) != null) {
+
+					String[] token = line.split("\\|");
+					FavoriteBean fb = new FavoriteBean();
+					fb.setFK_Customer_ID(Integer.parseInt(token[1]));
+					fb.setFK_Product_ID(Integer.parseInt(token[2]));
+
+					session.merge(fb);
+					count++;
+				}
+				session.flush();
+				System.out.println("favorite表格資料新增成功");
 			}
 
 			catch (Exception ex) {
