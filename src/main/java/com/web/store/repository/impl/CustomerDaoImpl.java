@@ -2,15 +2,11 @@ package com.web.store.repository.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import javax.persistence.NoResultException;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import com.web.store.model._05_customer.CitySelectBean;
 import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.repository.CustomerDao;

@@ -2,6 +2,8 @@ package com.web.store.service;
 
 import java.util.List;
 
+import org.hibernate.query.Query;
+
 import com.web.store.model._02_customerService.CommentBean;
 import com.web.store.model._04_shop.FavoriteBean;
 import com.web.store.model._04_shop.ProductBean;
@@ -54,6 +56,10 @@ public interface ProductService {
 	// 刪除我的最愛
 	void deleteFavorite(FavoriteBean favoriteBean);
 	
-	List<FavoriteBean> get(Integer FK_Customer_ID);
-
+	List<FavoriteBean> getFavorite(Integer FK_Customer_ID);
+	
+	//依追蹤清單的產品ID 搜尋產品細項
+	@SuppressWarnings("rawtypes")
+	List<Query> queryFavoriteProduct(Integer FK_Customer_ID);
+	
 }

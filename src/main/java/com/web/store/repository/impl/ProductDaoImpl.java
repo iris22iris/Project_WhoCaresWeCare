@@ -3,9 +3,9 @@ package com.web.store.repository.impl;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import com.web.store.model._02_customerService.CommentBean;
 import com.web.store.model._04_shop.FavoriteBean;
 import com.web.store.model._04_shop.ProductBean;
@@ -149,19 +149,13 @@ public class ProductDaoImpl implements ProductDao {
 		return pb;
 	}
 
-	
-	
-	
 	@Override
 	public List<CommentBean> getCommentBeanByprodId(int prodId) {
 		Session session = factory.getCurrentSession();
-		String hql =" SELECT c FROM CommentBean c"
-				+" WHERE c.productBean.prodId = :pid ";
-				
-		return session.createQuery(hql,CommentBean.class)
-					.setParameter("pid", prodId)
-					.getResultList();
-		
+		String hql = " SELECT c FROM CommentBean c" + " WHERE c.productBean.prodId = :pid ";
+
+		return session.createQuery(hql, CommentBean.class).setParameter("pid", prodId).getResultList();
+
 	}
 
 	@Override
@@ -198,12 +192,28 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public List<FavoriteBean> get(Integer FK_Customer_ID) {
+	public List<FavoriteBean> getFavorite(Integer FK_Customer_ID) {
 		Session session = getSession();
 		String hql = "FROM FavoriteBean WHERE FK_Customer_ID = :custId";
-		List<FavoriteBean> fb = session.createQuery(hql, FavoriteBean.class)
-				.setParameter("custId", FK_Customer_ID).getResultList();
+		List<FavoriteBean> fb = session.createQuery(hql, FavoriteBean.class).setParameter("custId", FK_Customer_ID)
+				.getResultList();
 		return fb;
+	}
+
+	// 查詢產品ID 名稱 及 圖片名稱
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public List<Query> queryFavoriteProduct(Integer FK_Customer_ID) {
+		List<FavoriteBean> prodId = getFavorite(FK_Customer_ID);
+		String FK_Product_ID ="";
+		for (FavoriteBean favoriteBean : prodId) {
+			FK_Product_ID += "," + favoriteBean.getFK_Product_ID() ;
+		}
+		String hql = "SELECT prodId,prodName,price,fileName FROM ProductBean WHERE prodId IN(" + FK_Product_ID.substring(1) + ") ORDER BY prodId";
+		
+		Session session = factory.getCurrentSession();
+		List<Query> dataList = session.createQuery(hql).getResultList();
+		return dataList;
 	}
 
 }
