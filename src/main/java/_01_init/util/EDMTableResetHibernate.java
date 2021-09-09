@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.sql.Blob;
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -17,6 +18,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import com.mysql.cj.jdbc.Clob;
 import com.web.store.model._02_customerService.CommentBean;
 import com.web.store.model._02_customerService.ProblemBean;
 import com.web.store.model._02_customerService.PromotionBean;
@@ -46,6 +48,7 @@ public class EDMTableResetHibernate {
 		SessionFactory factory = HibernateUtils.getSessionFactory();
 		Session session = factory.getCurrentSession();
 		Transaction tx = null;
+		
 		try {
 			tx = session.beginTransaction();
 
@@ -101,7 +104,8 @@ public class EDMTableResetHibernate {
 					ob.setDelivery(token[2]);
 					ob.setOrdTotal(new BigDecimal(token[3]));
 					ob.setOrderDate(Timestamp.valueOf(token[4]));
-					ob.setOrderMark(null);
+					java.sql.Clob clob = SystemUtils2018.fileToClob("data/orderMark.txt");
+					ob.setOrderMark(clob);
 					ob.setPayment(token[6]);
 					ob.setReciAddress(token[7]);
 					ob.setReciCity(token[8]);
@@ -150,14 +154,18 @@ public class EDMTableResetHibernate {
 					ProductBean pb = new ProductBean();
 					pb.setProdId(Integer.parseInt(token[0]));
 					pb.setClassify(token[1]);
-					pb.setCoverImage1(null);
-					pb.setCoverImage2(null);
-					pb.setCoverImage3(null);
+					Blob blob1 = SystemUtils2018.fileToBlob("data/product/"+token[3]);
+					Blob blob2 = SystemUtils2018.fileToBlob("data/product/forProductPage_2.png");
+					Blob blob3 = SystemUtils2018.fileToBlob("data/product/forProductPage_3.png");
+					pb.setCoverImage1(blob1);
+					pb.setCoverImage2(blob2);
+					pb.setCoverImage3(blob3);
 					pb.setFileName(token[3]);
 					pb.setMimeType(token[4]);
 					pb.setPrice(new BigDecimal(token[5]));
 					pb.setProdName(token[6]);
-					pb.setDescription(null);
+					java.sql.Clob clob = SystemUtils2018.fileToClob("data/productDescription.txt");
+					pb.setDescription(clob);
 //					pb.setPromoteId(null);
 					pb.setStock(Integer.parseInt(token[8]));
 					pb.setProductTypeBean(new ProductTypeBean(token[9]));
@@ -209,17 +217,20 @@ public class EDMTableResetHibernate {
 					RentProductBean rpb = new RentProductBean();
 					rpb.setProdId(Integer.parseInt(token[0]));
 					rpb.setClassify(token[1]);
-					rpb.setCoverImage1(null);
-					rpb.setCoverImage2(null);
-					rpb.setCoverImage3(null);
+					Blob blob1 = SystemUtils2018.fileToBlob("data/product/"+token[3]);
+					Blob blob2 = SystemUtils2018.fileToBlob("data/product/forProductPage_2.png");
+					Blob blob3 = SystemUtils2018.fileToBlob("data/product/forProductPage_3.png");
+					rpb.setCoverImage1(blob1);
+					rpb.setCoverImage2(blob2);
+					rpb.setCoverImage3(blob3);
 					rpb.setFileName(token[3]);
 					rpb.setMimeType(token[4]);
 					rpb.setPrice(new BigDecimal(token[5]));
 					rpb.setProdName(token[6]);
-					rpb.setProductTypeBean(null);
 					rpb.setSerialNumber(token[8]);
 					rpb.setStock(Integer.parseInt(token[9]));
-					rpb.setDescription(null);
+					java.sql.Clob clob = SystemUtils2018.fileToClob("data/productDescription.txt");
+					rpb.setDescription(clob);
 					rpb.setProductTypeBean(new ProductTypeBean(token[10]));
 
 					session.merge(rpb);
@@ -356,7 +367,8 @@ public class EDMTableResetHibernate {
 					CommentBean cb = new CommentBean();
 					cb.setCommentId(Integer.parseInt(token[0]));
 					cb.setClassify(token[1]);
-					cb.setComment(null);
+					java.sql.Clob clob = SystemUtils2018.fileToClob("data/comment.txt");
+					cb.setComment(clob);
 					cb.setCommentDate(Timestamp.valueOf(token[3]));
 					cb.setRate(Integer.parseInt(token[4]));
 					cb.setVisits(Integer.parseInt(token[5]));
@@ -386,7 +398,8 @@ public class EDMTableResetHibernate {
 					String[] token = line.split("\\|");
 					ProblemBean pb = new ProblemBean();
 					pb.setCustId(Integer.parseInt(token[0]));
-					pb.setAttachFile(null);
+					Blob blob = SystemUtils2018.fileToBlob("data/product/A0001.jpg");
+					pb.setAttachFile(blob);
 					pb.setContent(token[2]);
 					pb.setEmail(token[3]);
 					pb.setFormDate(Timestamp.valueOf(token[4]));
