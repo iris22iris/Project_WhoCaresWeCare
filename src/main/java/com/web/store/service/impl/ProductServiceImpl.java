@@ -1,6 +1,8 @@
 package com.web.store.service.impl;
 
 import java.util.List;
+
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -92,23 +94,32 @@ public class ProductServiceImpl implements ProductService {
 
 	}
 
+	// 新增追蹤項目
 	@Override
 	public Object addFavorite(FavoriteBean favoriteBean) {
 		return productDao.addFavorite(favoriteBean);
 	}
 
+	// 查詢追蹤項目
 	@Override
 	public List<FavoriteBean> queryFavorite(int productId, int newQuantity) {
 		return productDao.queryFavorite(productId, newQuantity);
 	}
 
+	// 刪除追蹤項目
 	@Override
 	public void deleteFavorite(FavoriteBean favoriteBean) {
 		productDao.deleteFavorite(favoriteBean);
 	}
 
 	@Override
-	public List<FavoriteBean> get(Integer FK_Customer_ID) {
-		return productDao.get(FK_Customer_ID);
+	public List<FavoriteBean> getFavorite(Integer FK_Customer_ID) {
+		return productDao.getFavorite(FK_Customer_ID);
 	}
+
+	@Override
+	public List<Query> queryFavoriteProduct(Integer FK_Customer_ID) {
+		return productDao.queryFavoriteProduct(FK_Customer_ID);
+	}
+	
 }

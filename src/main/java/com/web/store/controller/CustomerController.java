@@ -4,11 +4,9 @@ import java.sql.Blob;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -32,14 +30,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.web.store.model._05_customer.CitySelectBean;
 import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.service.CityService;
 import com.web.store.service.CustomerService;
 import com.web.store.validators.CustomerValidator;
-
-
 
 @Controller
 public class CustomerController {
@@ -53,7 +47,7 @@ public class CustomerController {
 	CustomerService customerService;
 	@Autowired
 	CityService cityService;
-	
+
 	// 進入登入頁
 	@GetMapping("/_05_login")
 	public String toLogin(Model model) {
@@ -75,7 +69,7 @@ public class CustomerController {
 				errorMsgMap.put("accountError", "帳號與密碼欄必須輸入，密碼長度至少八個字元且小於十二個字元");
 			} else if (password == null || password.trim().length() == 0 || password.length() < 8) {
 				errorMsgMap.put("accountError", "帳號與密碼欄必須輸入，密碼長度大於八個字元");
-			
+
 			} else if (customerBean != null) {
 				model.addAttribute("LoginOK", customerBean);
 				HttpSession session = request.getSession();
@@ -131,8 +125,7 @@ public class CustomerController {
 		// ********************************************
 		return "index";
 	}
-	
-	
+
 	// 進行登入
 	@PostMapping("/login_api")
 	@ResponseBody
@@ -237,7 +230,7 @@ public class CustomerController {
 	@PostMapping(value = "/_05_login")
 	// BindingResult 參數必須與@ModelAttribute修飾的參數連續編寫，中間不能夾其他參數
 	public String insertCustomer(@ModelAttribute("customer") /* @Valid */ CustomerBean cb, BindingResult result,
-			Model model, HttpServletRequest request,@RequestParam("account") String account) {
+			Model model, HttpServletRequest request, @RequestParam("account") String account) {
 //		String account = request.getParameter("account");
 		Map<String, String> columnErrorMsg = new HashMap<String, String>();
 
@@ -320,36 +313,24 @@ public class CustomerController {
 //		model.addAttribute("modifyCust", modifyCust);
 //		return "/_05_memberProfile";
 //	}
-	
+
 	// 傳回能夠編輯單筆會員資料之視圖的邏輯名稱
-		@GetMapping(value = "/_05_memberProfile/{id}", produces = { "text/html" })
-		public String editMemberFindView(@PathVariable Integer id, Model model) {
-			CustomerBean customer = customerService.getCustomerById(id);
-			model.addAttribute("customer", customer);
-			model.addAttribute("id", id);
-			return "_05_memberProfile";
-		}
-		
-//		// 修改單筆會員資料 讓前端請求收到json格式
-//		@PutMapping(value = "/_05_memberProfile/{id}", produces = { "application/json" })
-//		public @ResponseBody CustomerBean updateMember(
-//				 @PathVariable Integer id) {
-//			CustomerBean customer = customerService.getCustomerById(id);
-//			customer.setOrders(null);
-//			customer.setReservations(null);
-//			customer.setComments(null);
-//			customer.setProblem(null);
-//			return customer;
-//		}
-		
-		// 修改單筆會員資料
-		@PutMapping(value = "/_05_EditmemberProfile/{key}", consumes = { "application/json" }, produces = { "application/json" })
-		public @ResponseBody Map<String, String> updateCustomer(
-			   @RequestBody CustomerBean customer, 
-			   @PathVariable Integer key
-			   ) {
-			
-			Map<String, String> errorMsgColumn = new HashMap<String, String>();
+	@GetMapping(value = "/_05_memberProfile/{id}", produces = { "text/html" })
+	public String editMemberFindView(@PathVariable Integer id, Model model) {
+		CustomerBean customer = customerService.getCustomerById(id);
+		model.addAttribute("customer", customer);
+		model.addAttribute("id", id);
+		return "_05_memberProfile";
+	}
+
+
+	// 修改單筆會員資料
+	@PutMapping(value = "/_05_EditmemberProfile/{key}", consumes = { "application/json" }, produces = {
+			"application/json" })
+	public @ResponseBody Map<String, String> updateCustomer(@RequestBody CustomerBean customer,
+			@PathVariable Integer key) {
+
+		Map<String, String> errorMsgColumn = new HashMap<String, String>();
 		try {
 			CustomerBean member0 = null;
 			final String CUSTNAME_PATTERN = "\\pP|\\pS|\\s+";
@@ -369,16 +350,14 @@ public class CustomerController {
 			} else {
 				throw new RuntimeException("鍵值不存在, key=" + key);
 			}
-			
+
 			customer.setAccount(member0.getAccount());
 //			cityService.getAllCitys(groupCity);
-			
-			
+
 			// 姓名檢核
 			if (custName == null || custName.trim().length() == 0) {
 				errorMsgColumn.put("custNameError", "會員姓名不能為空");
 			}
-			 
 
 //			Pattern custNameP = Pattern.compile(CUSTNAME_PATTERN);
 //			Matcher cm = custNameP.matcher(custName);
@@ -387,36 +366,32 @@ public class CustomerController {
 //			}
 
 			// 密碼檢核
-			if (password == null || password.trim().length() == 0  ) {
+			if (password == null || password.trim().length() == 0) {
 				errorMsgColumn.put("passWordError", "密碼欄必須輸入");
 			}
-			
-			
+
 			Pattern passWordp = Pattern.compile(PASSWORD_PATTERN);
 			Matcher pm = passWordp.matcher(password);
-			if (!pm.matches() && password.length() > 0 && password.length() <12  ) {
+			if (!pm.matches() && password.length() > 0 && password.length() < 12) {
 				errorMsgColumn.put("passWordError", "密碼至少含各一個大小寫字母、數字與!@#$%!^'\\\"，且長度至少等於八個字元");
-			}else {
-				if (!pm.matches() && password.length() > 0 && password.length()>8){
+			} else {
+				if (!pm.matches() && password.length() > 0 && password.length() > 8) {
 					errorMsgColumn.put("passWordError", "密碼至少含各一個大小寫字母、數字與!@#$%!^'\\\"，且長度不能大於十二個字元");
-				}else {
-				if(pm.matches() ) {
-					errorMsgColumn.put("passWordError", "密碼格式正確");
+				} else {
+					if (pm.matches()) {
+						errorMsgColumn.put("passWordError", "密碼格式正確");
+					}
 				}
-				}
-				
 			}
-			
-			
-			//身分證檢核
+			// 身分證檢核
 			String checkHead = "ABCDEFGHJKLMNPQRSTUVWXYZIO"; // 字母代號對照表
-			
+
 			if (idNumber == null || idNumber.length() != 10) {
 				errorMsgColumn.put("idNumberError", "長度不合法");
-			}else {
+			} else {
 				if (idNumber != null || idNumber.length() >= 10) {
 					errorMsgColumn.put("idNumberError", "長度合法");
-			}
+				}
 			}
 			if (idNumber.length() == 10 && idNumber != null) {
 				char[] c = idNumber.toUpperCase().toCharArray(); // 建立 c 陣列，同時將s字串轉大寫後，轉成字元陣列放入 c 陣列
@@ -442,36 +417,22 @@ public class CustomerController {
 						errorMsgColumn.put("idNumberError", "不合法");
 					}
 				}
-				
-//				
-//				}
-				
-			} 
-			
-			
-			
-		
-			
-			
-			
-			
-
-			
-				customerService.updateCustomer(customer);
-				errorMsgColumn.put("success", "更新成功");
-			} catch (Exception e) {
-				e.printStackTrace();
-				errorMsgColumn.put("fail", "更新失敗");
 			}
-			return errorMsgColumn;
+			customerService.updateCustomer(customer);
+			errorMsgColumn.put("success", "更新成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			errorMsgColumn.put("fail", "更新失敗");
 		}
-		
-		@ModelAttribute
-		public void commonData(Model model) {
-			Map<String, String> genderMap = new HashMap<>();
-			genderMap.put("M", "Male");
-			genderMap.put("F", "Female");
-			model.addAttribute("genderMap", genderMap);
-		}
+		return errorMsgColumn;
+	}
+
+//	@ModelAttribute
+//	public void commonData(Model model) {
+//		Map<String, String> genderMap = new HashMap<>();
+//		genderMap.put("M", "Male");
+//		genderMap.put("F", "Female");
+//		model.addAttribute("genderMap", genderMap);
+//	}
 
 }
