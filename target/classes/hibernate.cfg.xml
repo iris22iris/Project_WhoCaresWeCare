@@ -28,6 +28,7 @@
 		
 
 		<!-- 3. 宣告程式使用的永續類別 -->
+		<mapping class="com.web.store.model._02_customerService.DmBean" />
 		<mapping class="com.web.store.model._02_customerService.CommentBean" />
 		<mapping class="com.web.store.model._02_customerService.ProblemBean" />
 		<mapping class="com.web.store.model._02_customerService.PromotionBean" />
