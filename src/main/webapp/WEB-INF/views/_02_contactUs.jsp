@@ -54,12 +54,12 @@
 
             <!-- form start -->
             <div class="container p-3 ">
-                <form class="row g-3 form">
+                <form class="row g-3 form" method="POST" modelAttribute="Problem" >
 <!-- 功能:登入會員會自動顯示會員帳號/email/電話，未登入的話可以自己key -->
                     <!-- account&orderno start -->
                     <div class="col-6">
                         <label for="inputAccount" class="form-label">會員帳號:</label>
-                        <input type="text" class="form-control" id="inputAccount">
+                        <input type="text" class="form-control" name='csdtId' id="custId" path='custId'>
                     </div>
                     <div class="col-6">
                         <label for="inputOrderno" class="form-label">訂單編號:</label>
@@ -67,17 +67,16 @@
                     </div>
                     <!-- account&orderno end -->
                     
-
                     <!-- email&phone start -->
                     <div class="col-6">
                         <label for="inputEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="inputEmail" >
+                        <input type="email" class="form-control" name='email' id="email" path='email' >
                     </div>
                     <div class="col-6">
                         <label for="inputPhone" class="form-label">連絡電話</label>
-                        <input type="tel" class="form-control" id="inputPhone" >
+                        <input type="tel" class="form-control" name='phone'  id="inputPhone" >
                     </div>
-                    <!-- email&phone end -->
+                    <!-- email&phone end phone-->
 
 
                     <hr>
@@ -103,7 +102,7 @@
                         
                         <label for="inputDescription" class="form-label">問題敘述:</label>
                         <br>
-                        <textarea name="description" id="inputDescription" cols="70" rows="6"></textarea>
+                        <textarea name="content" id="inputDescription" cols="70" rows="6"></textarea>
                     </div>
                     <!-- description end -->
 
@@ -111,7 +110,7 @@
 
                  <!-- submit&upload start -->
                 <div class="d-flex">
-                  <button type="button" class="btn btn-warning me-2" onclick="track(this)">
+                  <button type="submit" class="btn btn-warning me-2" onclick="track(this)" id=buttonus>
                     送出表單
                 </button>
                   <button type="submit" class="btn btn-secondary me-3">上傳檔案</button>
