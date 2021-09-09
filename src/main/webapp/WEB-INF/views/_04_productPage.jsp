@@ -236,7 +236,7 @@
 							商品評價
 						</h3>
 					</div>
-					<div class="score col-4">
+					<div class="score col-5">
 					評分
 					<c:set value="0" var="sum"/>
 					<c:set value="0" var="commentscount"/>            
@@ -246,36 +246,33 @@
 					</c:forEach>
 					<fmt:formatNumber value="${sum/commentscount}" pattern=".0" type="number"/>
 					/ ${commentscount}人評價</div>
-				
 				</div>
 
 
-
-				<div class="col-12 d-flex">
-					<!-- 留言板頭像 start -->
-				
-					<div id="parent">
-					<!-- 各項區塊 start -->
+				<!-- 評價內容start -->
+				<div class="col-11 ">
 					<c:forEach items="${comments}" var="comment">
-						<div id="box">
-						<em>				  
-             			<tr style="text-align: center;font-size: 10px;">
-             			   <td> ${comment.customerBean.custName}</td>
-             			  <td> ${comment.classify}</td>
-             			  <td>${comment.rate}</td>                                         
-             			  <td> <fmt:formatDate value="${comment.commentDate}" pattern="yyyy年MM月dd日HH点mm分ss秒" /></td>  
-             			</tr>
-             			<br>        
-			 			</em>
+						<div class="comment row">
+						  <div class="memberImg no-gutters col-2">
+						  	<img src="<c:url value='/images/member.jpg'/>" alt="...">
+<%-- 						  	<img src="<c:url value='/getMemberImg?custId=${comment.customerBean.custId}'/>" alt="..."> --%>
+						  </div>
+             			  <div class="col-1"> ${comment.customerBean.custName}</div>
+             			  <div class="col-1"> ${comment.rate}分</div>                                         
+             			  <div class="col-2">
+             			  		購買時間<br> 
+							   <fmt:formatDate value="${comment.commentDate}" 
+								pattern="yyyy年MM月dd日" />
+						 </div>
+						 <div class="col-6">
+							好用大推！！！好用大推！！！好用大推！！！好用大推！！！好用大推！！！好用大推！！！
+						 </div>
 						</div>
-						 </c:forEach>
-						</div>
-						<!-- 各項區塊 end -->
-					
-					</div>
-					<!-- 留言板 end -->
+					</c:forEach>
+				</div>
+				<!-- 評價內容end -->
+				<!-- 評價顯示 end -->
 			</div>
-			<!-- 評價顯示 end -->
 		</div>
 
 		<!-- footer Start! -->
@@ -285,7 +282,7 @@
 
 	</div>
 
-</div>
+
 </body>
 
 </html>

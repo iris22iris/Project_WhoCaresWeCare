@@ -72,7 +72,8 @@ public class EDMTableResetHibernate {
 					cb.setBirthday(Date.valueOf(token[3].toString().trim()));// 出生日期
 					cb.setCity(token[4].trim());// 通訊城市
 					cb.setCustName(token[5].trim());// 會員姓名
-					cb.setCustomerImage(null);// 會員圖片
+					Blob blob = SystemUtils2018.fileToBlob("data/member.jpg");
+					cb.setCustomerImage(blob);// 會員圖片
 					cb.setEmail(token[7].trim());// 電子信箱
 					cb.setFileName(token[8].trim());// 圖片名稱
 					cb.setGender(token[9].trim());// 性別

@@ -1,5 +1,9 @@
 package com.web.store.controller;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Blob;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -7,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.servlet.ServletException;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +20,11 @@ import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.http.CacheControl;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,6 +44,7 @@ import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.service.CityService;
 import com.web.store.service.CustomerService;
 import com.web.store.validators.CustomerValidator;
+
 
 @Controller
 public class CustomerController {
@@ -434,5 +445,8 @@ public class CustomerController {
 //		genderMap.put("F", "Female");
 //		model.addAttribute("genderMap", genderMap);
 //	}
+	
+	
+	
 
 }
