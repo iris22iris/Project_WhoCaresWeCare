@@ -58,12 +58,12 @@
 <!-- 功能:登入會員會自動顯示會員帳號/email/電話，未登入的話可以自己key -->
                     <!-- account&orderno start -->
                     <div class="col-6">
-                        <label for="inputAccount" class="form-label">會員帳號:</label>
-                        <input type="text" class="form-control" name='csdtId' id="custId" path='custId'>
+                        <label for="inputAccount" class="form-label">會員編號:</label>
+                        <input type="text" class="form-control" name="custId" id="custId" path='custId'>
                     </div>
                     <div class="col-6">
                         <label for="inputOrderno" class="form-label">訂單編號:</label>
-                        <input type="text" class="form-control" id="inputOrderno">
+                        <input type="text" class="form-control" id="inputOrderno" name="ordId">
                     </div>
                     <!-- account&orderno end -->
                     

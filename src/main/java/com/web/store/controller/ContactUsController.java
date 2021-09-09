@@ -8,10 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.web.store.model._02_customerService.ProblemBean;
 
@@ -39,14 +38,26 @@ public class ContactUsController {
 	
 	
 		@PostMapping(value ="/_02_contactUs")
-		public String insertContactUs(@ModelAttribute("Problem") /* @Valid */ ProblemBean pb, BindingResult result,
+		public
+		String insertContactUs(@ModelAttribute("Problem") /* @Valid */ @RequestBody  ProblemBean pb, BindingResult result,
 				Model model,HttpServletRequest request) {
-			String phone = request.getParameter("phone");
-			String email = request.getParameter("email");
-			String content = request.getParameter("content");
+			
+			Integer custId = pb.getCustId();
+			Integer ordId = pb.getOrdId();
+			String phone = pb.getPhone();
+			String email = pb.getEmail();
+			String content = pb.getContent();
+			
+			
+//			String phone = request.getParameter("phone");
+//			String email = request.getParameter("email");
+//			String content = request.getParameter("content");
 			System.out.println("555555 :" + email);
 			System.out.println("電話 :" + phone);
+			System.out.println("會員編號 :" + custId);
 			System.out.println("留言 :" + content);
+			System.out.println("訂單編號 :" + ordId);
+
 			
 			
 			return "_02_contactUs";
