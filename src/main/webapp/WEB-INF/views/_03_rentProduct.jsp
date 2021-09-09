@@ -165,7 +165,7 @@
 									<div class="col-4">
 									目前等待人數:</div>
 									<div class="col-4">
-									${reservation.waitNum}位
+									${reservations[0].waitNum}位
 									</div>
 								</div> 
 								
@@ -347,7 +347,7 @@
                 
                 <div class="col-6 justify-content-evenly p-1  d-flex align-items-center ">
                     <label style=font-size:22px; for="inputAccount" class="form-label">您的預約序號為:</label>
-                    <label style=font-size:22px;  for="inputAccount" class="form-label ">${reservation.waitNum+1}位假的抓資料庫</label>
+                    <label style=font-size:22px;  for="inputAccount" class="form-label ">${reservations[0].waitNum+1}位假的抓資料庫</label>
                 </div>
                 <div class="col-8 justify-content-evenly p-1  d-flex align-items-center ">
                     <label style=font-size:18px; for="inputAccount" class="form-label">您的預約編號為:</label>

@@ -28,7 +28,7 @@ public interface RentProductService {
 	public RentProductBean getProductById(int prodId);
 	
 	//抓取該商品目前預約資料
-	public ReservationBean getReservationBeanByprodId(int prodId) ;
+	public List<ReservationBean> getReservationBeanByprodId(int prodId) ;
 	
 	//抓取該商品目前租賃評論資料
 	public List<CommentBean> getCommentBeanByprodId(int prodId) ;

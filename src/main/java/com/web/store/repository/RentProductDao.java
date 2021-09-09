@@ -32,7 +32,7 @@ public interface RentProductDao {
 	public RentProductBean getProductById(int prodId);
 
 	// 依porId(與serialNumber)讀取單筆預約設備資料 抓現在幾人預約
-	public ReservationBean getReservationBeanByprodId(int prodId);
+	public  List<ReservationBean> getReservationBeanByprodId(int prodId);
 	
 	//抓取該商品目前租賃評論資料
 	public List<CommentBean> getCommentBeanByprodId(int prodId);

@@ -57,7 +57,7 @@ public class RentProductServiceImpl implements RentProductService {
 
 	//抓取該商品目前預約資料
 	@Override
-	public ReservationBean getReservationBeanByprodId(int prodId) {
+	public List<ReservationBean> getReservationBeanByprodId(int prodId) {
 		
 		return rentProductDao.getReservationBeanByprodId(prodId);
 	}
