@@ -59,7 +59,7 @@
                     <!-- account&orderno start -->
                     <div class="col-6">
                         <label for="inputAccount" class="form-label">會員編號:</label>
-                        <input type="text" class="form-control" name="custId" id="custId" path='custId'>
+                        <input type="text" class="form-control" name="account" id="custId" path='account'>
                     </div>
                     <div class="col-6">
                         <label for="inputOrderno" class="form-label">訂單編號:</label>
