@@ -389,15 +389,15 @@ public class EDMTableResetHibernate {
 
 		
 			
-			// 12更新. problem表格
-			// 由"data/problem.dat"逐筆讀入problem表格內的初始資料，
-						// 然後依序新增到problem表格中
+//			 12. problem表格
+//						 由"data/problem.dat"逐筆讀入problem表格內的初始資料，
+//						 然後依序新增到problem表格中
 						count = 0;
 						try (FileInputStream fis = new FileInputStream("data/problem.dat");
 								InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
 								BufferedReader br = new BufferedReader(isr0);) {
 							while ((line = br.readLine()) != null) {
-
+			
 								String[] token = line.split("\\|");
 								ProblemBean pb = new ProblemBean();
 								pb.setusId(Integer.parseInt(token[0]));
@@ -414,7 +414,7 @@ public class EDMTableResetHibernate {
 								pb.setReplyDate(Timestamp.valueOf(token[10]));
 								pb.setFileName(token[11]);
 								pb.setAccount(token[12]);
-
+			
 								session.merge(pb);
 								count++;
 								System.out.println("新增problem紀錄成功，共新增" + count + "筆記錄");
@@ -422,6 +422,10 @@ public class EDMTableResetHibernate {
 							session.flush();
 							System.out.println("problem表格資料新增成功");
 						}
+								
+								
+
+							
 			
 
 			// 13. favorite表格
