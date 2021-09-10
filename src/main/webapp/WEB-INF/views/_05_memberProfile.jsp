@@ -199,7 +199,7 @@ function handleFiles(e){
 								<button type="submit" class="btn">上傳圖片</button>
 								<button type="submit" class="btn">清除</button>
 							</div>
-							<img src="" id="showImage" alt="" width="150" height="150">
+							<img src="<c:url value='/getMemberImg?custId=${customer.custId}'/>" id="showImage" alt="" width="150" height="150">
 						</div>
 					</div>
 					<!--  按鈕end  按鈕end -->
