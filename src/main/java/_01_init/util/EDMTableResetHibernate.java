@@ -387,37 +387,42 @@ public class EDMTableResetHibernate {
 				System.out.println("comment表格資料新增成功");
 			}
 
-			// 12. problem表格
+		
+			
+			// 12更新. problem表格
 			// 由"data/problem.dat"逐筆讀入problem表格內的初始資料，
-			// 然後依序新增到problem表格中
-			count = 0;
-			try (FileInputStream fis = new FileInputStream("data/problem.dat");
-					InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
-					BufferedReader br = new BufferedReader(isr0);) {
-				while ((line = br.readLine()) != null) {
+						// 然後依序新增到problem表格中
+						count = 0;
+						try (FileInputStream fis = new FileInputStream("data/problem.dat");
+								InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
+								BufferedReader br = new BufferedReader(isr0);) {
+							while ((line = br.readLine()) != null) {
 
-					String[] token = line.split("\\|");
-					ProblemBean pb = new ProblemBean();
-					pb.setCustId(Integer.parseInt(token[0]));
-					Blob blob = SystemUtils2018.fileToBlob("data/product/A0001.jpg");
-					pb.setAttachFile(blob);
-					pb.setContent(token[2]);
-					pb.setEmail(token[3]);
-					pb.setFormDate(Timestamp.valueOf(token[4]));
-					pb.setOrdId(Integer.parseInt(token[5]));
-					pb.setPhone(token[6]);
-					pb.setProblemType(token[7]);
-					pb.setProcessState(token[8]);
-					pb.setReplyContent(token[9]);
-					pb.setReplyDate(Timestamp.valueOf(token[10]));
+								String[] token = line.split("\\|");
+								ProblemBean pb = new ProblemBean();
+								pb.setusId(Integer.parseInt(token[0]));
+								Blob blob = SystemUtils2018.fileToBlob("data/product/A0001.jpg");
+								pb.setAttachFile(blob);
+								pb.setContent(token[2]);
+								pb.setEmail(token[3]);
+								pb.setFormDate(Timestamp.valueOf(token[4]));
+								pb.setOrdId(token[5]);
+								pb.setPhone(token[6]);
+								pb.setProblemType(token[7]);
+								pb.setProcessState(token[8]);
+								pb.setReplyContent(token[9]);
+								pb.setReplyDate(Timestamp.valueOf(token[10]));
+								pb.setFileName(token[11]);
+								pb.setAccount(token[12]);
 
-					session.merge(pb);
-					count++;
-					System.out.println("新增problem紀錄成功，共新增" + count + "筆記錄");
-				}
-				session.flush();
-				System.out.println("problem表格資料新增成功");
-			}
+								session.merge(pb);
+								count++;
+								System.out.println("新增problem紀錄成功，共新增" + count + "筆記錄");
+							}
+							session.flush();
+							System.out.println("problem表格資料新增成功");
+						}
+			
 
 			// 13. favorite表格
 			// 由"data/favorite.dat"逐筆讀入favorite表格內的初始資料，

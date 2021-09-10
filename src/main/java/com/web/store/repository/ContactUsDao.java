@@ -10,7 +10,7 @@ public interface ContactUsDao {
 	
 	List<ProblemBean> getProblems();
 	Object save(ProblemBean bean);  //新增一筆聯絡我們記錄
-	ProblemBean get(Integer id);
+//	ProblemBean get(Integer id);
 	
 	
 	

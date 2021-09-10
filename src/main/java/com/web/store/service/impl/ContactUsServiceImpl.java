@@ -35,11 +35,11 @@ public class ContactUsServiceImpl implements ContactUsService {
 		return contactUsDao.save(bean);
 	}
 
-	@Override
-	public ProblemBean get(Integer id) {
-
-		return contactUsDao.get(id);
-	}
+//	@Override
+//	public ProblemBean get(Integer id) {
+//
+//		return contactUsDao.get(id);
+//	}
 
 
 	

@@ -114,7 +114,7 @@
                     送出表單
                 </button>
                   <button type="submit" class="btn btn-secondary me-3">上傳檔案</button>
-                  <input type="file" id="theFile" multiple>
+                  <input type="file" id="fileName"  name="fileName" >
                 </div>
                   <!-- submit&upload end-->
                

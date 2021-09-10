@@ -44,10 +44,10 @@ public class ContactUsDaoImpl implements ContactUsDao {
 		return session.save(bean);
 	}
 
-	@Override
-	public ProblemBean get(Integer id) {
-		return factory.getCurrentSession().get(ProblemBean.class,id);
-	}
+//	@Override
+//	public ProblemBean get(Integer id) {
+//		return factory.getCurrentSession().get(ProblemBean.class,id);
+//	}
 
 	
 

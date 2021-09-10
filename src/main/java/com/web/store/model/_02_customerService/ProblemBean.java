@@ -14,6 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.model._06_order.OrdBean;
@@ -27,8 +30,10 @@ public class ProblemBean implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer custId;
-	private Integer ordId;
+	private Integer usId;
+//	private Integer custId;
+	private String ordId;
+//	private Integer ordId;
 	private String email;
 	private String phone;
 	private String problemType;
@@ -40,6 +45,10 @@ public class ProblemBean implements Serializable {
 	private Timestamp replyDate;
 	private String replyContent;
 	private Blob attachFile;
+	String fileName; // 圖片名稱
+	String account;  //帳號
+	@Transient
+	MultipartFile ImageUs;
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "PROBLEM_CUSTID_FK")
@@ -52,9 +61,10 @@ public class ProblemBean implements Serializable {
 		})
 	private OrdBean ordBean;
 
-	public ProblemBean(Integer custId, Integer ordId, String email, String phone, String problemType, String content,
-			Timestamp formDate, String processState, Timestamp replyDate, String replyContent, Blob attachFile) {
-		this.custId = custId; // 會員編號
+
+	public ProblemBean(Integer usId, String ordId, String email, String phone, String problemType, String content,
+			Timestamp formDate, String processState, Timestamp replyDate, String replyContent, Blob attachFile,String fileName,String account) {
+		this.usId = usId; // 會員編號
 		this.ordId = ordId; // 訂單編號
 		this.email = email; // 信箱
 		this.phone = phone; // 連絡電話
@@ -65,24 +75,26 @@ public class ProblemBean implements Serializable {
 		this.replyDate = replyDate;// 客服回應時間
 		this.replyContent = replyContent;// 客服回應內容
 		this.attachFile = attachFile;// 附加檔案
+		this.fileName = fileName;
+		this.account = account;
 	}
 
 	public ProblemBean() {
 	}
 
-	public Integer getCustId() {
-		return custId;
+	public Integer getusId() {
+		return usId;
 	}
 
-	public void setCustId(Integer custId) {
-		this.custId = custId;
+	public void setusId(Integer usId) {
+		this.usId = usId;
 	}
 
-	public Integer getOrdId() {
+	public String getOrdId() {
 		return ordId;
 	}
 
-	public void setOrdId(Integer ordId) {
+	public void setOrdId(String ordId) {
 		this.ordId = ordId;
 	}
 
@@ -177,5 +189,34 @@ public class ProblemBean implements Serializable {
 	public void setOrdBean(OrdBean ordBean) {
 		this.ordBean = ordBean;
 	}
+	
+	public MultipartFile getImageUs() {
+		return ImageUs;
+	}
+
+	public void setImage(MultipartFile imageUs) {
+		ImageUs = imageUs;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
+	}
+
+	public void setImageUs(MultipartFile imageUs) {
+		ImageUs = imageUs;
+	}
+
 	
 }
