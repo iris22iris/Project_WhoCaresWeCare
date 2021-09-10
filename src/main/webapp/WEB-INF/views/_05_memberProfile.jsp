@@ -65,70 +65,54 @@ function upData() {
 	var gender = $('#male').val();
 	var city = $('#city').val();
 	
-// 	var xhr1 = new XMLHttpRequest();
-// 		xhr1.open("PUT", "<c:url value='/_05_EditmemberProfile/' />" + ${id}, true);
-
-		var formData = new FormData($('#updateForm')[0]);
-		 $.ajax({
-			 url: "<c:url value='/_05_EditmemberProfile' />",
-			 type: 'POST',
-			 data: formData,                    
-			 dataType: 'JSON',
-			 cache: false,                      
-			 processData: false,                
-			 contentType: false,                
-			 success:function (data) {  
-		
-			 console.log(data);
-			 }
-			 });
-		
-// 		var jsonCustomer = {
-// 				custId:${id},
-// 				custName:$('#custName').val(),	
-// 				password:$('#passWord').val(),	
-// 				idNumber:$('#inputID').val(),
-// 				phone:$('#phone').val(),	
-// 				email:$('#email').val(),
-// 				birthday:$('#birthday').val(),
-// 				gender:$('input[type=radio][name="gender"]:checked').val(),
-// 				city:$('#city').val(),
-// 				nickName:$('#nickName').val(),
-// 				address:$('#address').val(),
-// 				Image:$('#showImage').attr("src"),
-// 		   		}
-// 	   		xhr1.setRequestHeader("Content-Type", "application/json");
-// 	   		xhr1.send(JSON.stringify(formData));
+	var xhr1 = new XMLHttpRequest();
+		xhr1.open("PUT", "<c:url value='/_05_EditmemberProfile/' />" + ${id}, true);
+		var jsonCustomer = {
+				custId:${id},
+				custName:$('#custName').val(),	
+				password:$('#passWord').val(),	
+				idNumber:$('#inputID').val(),
+				phone:$('#phone').val(),	
+				email:$('#email').val(),
+				birthday:$('#birthday').val(),
+				gender:$('input[type=radio][name="gender"]:checked').val(),
+				city:$('#city').val(),
+				nickName:$('#nickName').val(),
+				address:$('#address').val(),
+// 				image:$('#showImage').attr("src")
+		   		}
+	   		xhr1.setRequestHeader("Content-Type", "application/json");
+	   		xhr1.send(JSON.stringify(jsonCustomer));
 
 
-// 	   		xhr1.onreadystatechange = function() {
-// 				// 伺服器請求完成
-//    		if (xhr1.readyState == 4 && (xhr1.status == 200 || xhr1.status == 201) ) {
-//       		result = JSON.parse(xhr1.responseText);
-//       		if (result.fail) {
-// 		 		divResult.innerHTML = "<font color='red' >"
-// 					+ result.fail + "</font>";
-// 	  		} 
+	   		xhr1.onreadystatechange = function() {
+				// 伺服器請求完成
+   		if (xhr1.readyState == 4 && (xhr1.status == 200 || xhr1.status == 201) ) {
+      		result = JSON.parse(xhr1.responseText);
+      		if (result.fail) {
+		 		divResult.innerHTML = "<font color='red' >"
+					+ result.fail + "</font>";
+	  		} 
 
-// 	  		if (result.custNameError) {
-// 	  			custNameResult.innerHTML = "<font color='RED'>"
-// 					+ result.custNameError + "</font>";
-// 					$('#custNameResult').show();
-// 	 		} 
+	  		if (result.custNameError) {
+	  			custNameResult.innerHTML = "<font color='RED'>"
+					+ result.custNameError + "</font>";
+					$('#custNameResult').show();
+	 		} 
 
-// 	  		if (result.passWordError) {
-// 	  			passWordResult.innerHTML = "<font color='RED'>"
-// 					+ result.passWordError + "</font>";
-// 					$('#passWordResult').show();
-// 	 		} 
+	  		if (result.passWordError) {
+	  			passWordResult.innerHTML = "<font color='RED'>"
+					+ result.passWordError + "</font>";
+					$('#passWordResult').show();
+	 		} 
 
-// 	  		if (result.idNumberError) {
-// 	  			inputIDResult.innerHTML = "<font color='RED'>"
-// 					+ result.idNumberError + "</font>";
-// 					$('#inputIDResult').show();
-// 	 		} 
-// 		} 
-//     }
+	  		if (result.idNumberError) {
+	  			inputIDResult.innerHTML = "<font color='RED'>"
+					+ result.idNumberError + "</font>";
+					$('#inputIDResult').show();
+	 		} 
+		} 
+    }
 }
 
 function handleFiles(e){
@@ -139,7 +123,7 @@ function handleFiles(e){
     var reader = new FileReader();
     reader.onload = (function (file) {
         return function (e) {
-//            console.info(this.result); //這個就是base64的數據了
+           console.info(this.result); //這個就是base64的數據了
             var sss=$("#showImage");
             $("#showImage")[0].src=this.result;
         };
@@ -172,21 +156,18 @@ function handleFiles(e){
 
 			<div
 				class="main container p-3 col-12 justify-content-center text-center ">
-
-					<!--  按鈕star  按鈕star -->
+				<!-- main containerfile star  修改會員資料的表單圖片上傳區star -->
+				<div class=" col-3 p-3  ">
+					<!--  圖片star  圖片star -->
 					<div class="button  col-12 p-3 ">
-
-						<div class="col-6">
-
-							<input type="file" id="imgTest" data-multiple="true"
-								onchange="handleFiles(event)">
+						<div class="col-6" style="margin-left: 40px">
+							<input id="custImage" type="file" onchange="handleFiles(event)">
 						</div>
 						<div class="col-12">
+							<img src="" id="showImage" alt="" width="150" height="150">
 							<div class="col-12 p-3">
-								<button type="submit" class="btn">上傳圖片</button>
 								<button type="submit" class="btn">清除</button>
 							</div>
-							<img src="<c:url value='/getMemberImg?custId=${customer.custId}'/>" id="showImage" alt="" width="150" height="150">
 						</div>
 					</div>
 					<!--  按鈕end  按鈕end -->
@@ -198,7 +179,7 @@ function handleFiles(e){
 					<div
 						class="col-9  p-3 d-flex justify-content-center align-items-center">
 						<!-- 輸入資料區表格star -->
-						<form class="row g-3" id="updateForm" action="POST" enctype='multipart/form-data'>
+						<form class="row g-3">
 							<div id='resultMsg' style="height: 18px; display: none;"></div>
 
 							<div class="col-3 ">
@@ -300,23 +281,6 @@ function handleFiles(e){
 									type="text" id="birthday" value="${customer.birthday}"></label>
 							</div>
 
-				<!-- main containerfile star  修改會員資料的表單圖片上傳區star -->
-				<div class=" col-3 p-3  ">
-					<!--  圖片star  圖片star -->
-					<div class="button  col-12 p-3 ">
-						<div class="col-6" style="margin-left: 40px">
-							<input id="custImage" type="file" onchange="handleFiles(event)">
-						</div>
-						<div class="col-12">
-							<img src="" id="showImage" alt="" width="150" height="150">
-							<div class="col-12 p-3">
-								<button type="submit" class="btn">清除</button>
-							</div>
-						</div>
-					</div>
-					<!--  按鈕end  按鈕end -->
-				</div>
-				<!-- main containerfile end  修改會員資料的表單圖片上傳區end -->
 						</form>
 						<!-- 輸入資料區表格end -->
 					</div>
@@ -344,7 +308,7 @@ function handleFiles(e){
 									</div>
 									<div class="modal-body">確定要保存變更資料嗎?</div>
 									<div class="modal-footer">
-										<button type="submit" class="btn btn-primary" data-bs-dismiss="modal"
+										<button type="button" class="btn btn-primary" data-bs-dismiss="modal"
 											onclick="upData()">確認修改</button>
 										<button type="button" class="btn btn-secondary"
 											data-bs-dismiss="modal">Close</button>
