@@ -53,8 +53,8 @@
             
 
             <!-- form start -->
-            <div class="container p-3 ">
-                <form class="row g-3 form" method="POST" modelAttribute="Problem" >
+            <div class="container p-3 ">												
+                <form class="row g-3 form" method="POST" modelAttribute="problem" enctype='multipart/form-data'>
 <!-- 功能:登入會員會自動顯示會員帳號/email/電話，未登入的話可以自己key -->
                     <!-- account&orderno start -->
                     <div class="col-6">
@@ -114,7 +114,7 @@
                     送出表單
                 </button>
                   <button type="submit" class="btn btn-secondary me-3">上傳檔案</button>
-                  <input type="file" id="fileName"  name="fileName" >
+                  <input type="file" id="ImageUs"  name="ImageUs" >
                 </div>
                   <!-- submit&upload end-->
                

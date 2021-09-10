@@ -29,91 +29,63 @@ public class ContactUsController {
 	ServletContext context;
 	@Autowired
 	ContactUsService contactUsService;
-	
-	
 
-	
 	// 進入聯絡我們頁/WhoCares/src/main/webapp/WEB-INF/views/_02_contactUs.jsp
 //		@GetMapping(value ="/_02_contactUs")
 //		public String toContactUs(Model model) {
 //			return "_02_contactUs";
 //		}
-	
-		//
-	
-	
-	
-		@PostMapping(value ="/_02_contactUs")
-		public
-		String insertContactUs(@ModelAttribute("problem") /* @Valid */ @RequestBody  ProblemBean pb, BindingResult result,
-				Model model,HttpServletRequest request) {
-			
-			
-			Integer usId = pb.getusId();
-			String ordId = pb.getOrdId();
-			String phone = pb.getPhone();
-			String email = pb.getEmail();
-			String content = pb.getContent();
-			String fileName = pb.getFileName();
-			
-			System.out.println("555555 :" + email);
-			System.out.println("電話 :" + phone);
-			System.out.println("會員編號 :" + usId);
-			System.out.println("留言 :" + content);
-			System.out.println("訂單編號 :" + ordId);
-			System.out.println("圖片名稱 :" + fileName);
-			
-////			MultipartFile picture = pb.getImageUs();
-////			String originalFilename = picture.getOriginalFilename();
-////			if (originalFilename.length() > 0 && originalFilename.lastIndexOf(".") > -1 ) {
-////				pb.setFileName(originalFilename);
-////			}
-//////			 
-////			if (picture != null && !picture.isEmpty()) {
-////				try {
-////					byte[] b = picture.getBytes();
-////					Blob blob = new SerialBlob(b);
-////					pb.setAttachFile(blob);
-////				}catch (Exception e) {
-////					e.printStackTrace();
-////					throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
-////			}
-//				}
+
+	//
+
+	@PostMapping(value = "/_02_contactUs")
+	public String insertContactUs(@ModelAttribute("problem") /* @Valid */ @RequestBody ProblemBean pb,
+			BindingResult result, Model model, HttpServletRequest request) {
+
+		Integer usId = pb.getusId();
+		String ordId = pb.getOrdId();
+		String phone = pb.getPhone();
+		String email = pb.getEmail();
+		String content = pb.getContent();
+		String fileName = pb.getFileName();
+
+			MultipartFile picture = pb.getImageUs();
+			String originalFilename = picture.getOriginalFilename();
+			if (originalFilename.length() > 0 && originalFilename.lastIndexOf(".") > -1 ) {
+				pb.setFileName(originalFilename);
+			}
+			 
+			if (picture != null && !picture.isEmpty()) {
+				try {
+					byte[] b = picture.getBytes();
+					Blob blob = new SerialBlob(b);
+					pb.setAttachFile(blob);
+				}catch (Exception e) {
+					e.printStackTrace();
+					throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+			}
+				}
 //			String phone = request.getParameter("phone");
 //			String email = request.getParameter("email");
 //			String content = request.getParameter("content");
-			
-			
+
 //			try {
 //				ProblemBean pb;
 //				contactUsService.save(pb);
 //			}catch (Exception ex) {
 //				return "_02_contactUs";
 //			}
-			
-		
-			
-			try {
-				contactUsService.save(pb);
-			}catch(Exception ex) {
-				System.out.println(ex.getClass().getName() + ", ex.getMessage()=" + ex.getMessage());
-				
-				return "_02_contactUs";
-			}
-			
-			
-			
-			
 
-			
-			
+		try {
+			contactUsService.save(pb);
+		} catch (Exception ex) {
+			System.out.println(ex.getClass().getName() + ", ex.getMessage()=" + ex.getMessage());
+
 			return "_02_contactUs";
-
-		}
-		
-		
-		
-		
-		
 		}
 
+		return "_02_contactUs";
+
+	}
+
+}

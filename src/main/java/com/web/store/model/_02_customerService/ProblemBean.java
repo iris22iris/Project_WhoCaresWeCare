@@ -194,9 +194,9 @@ public class ProblemBean implements Serializable {
 		return ImageUs;
 	}
 
-	public void setImage(MultipartFile imageUs) {
-		ImageUs = imageUs;
-	}
+//	public void setImage(MultipartFile imageUs) {
+//		ImageUs = imageUs;
+//	}
 
 	public String getFileName() {
 		return fileName;
