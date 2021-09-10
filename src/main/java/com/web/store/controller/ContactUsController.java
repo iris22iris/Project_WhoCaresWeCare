@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.web.store.model._02_customerService.ProblemBean;
+import com.web.store.service.ContactUsService;
 
 @Controller
 public class ContactUsController {
@@ -22,7 +23,8 @@ public class ContactUsController {
 	HttpServletResponse response;
 	@Autowired
 	ServletContext context;
-	
+	@Autowired
+	ContactUsService contactUsService;
 	
 	
 
@@ -39,7 +41,7 @@ public class ContactUsController {
 	
 		@PostMapping(value ="/_02_contactUs")
 		public
-		String insertContactUs(@ModelAttribute("Problem") /* @Valid */ @RequestBody  ProblemBean pb, BindingResult result,
+		String insertContactUs(@ModelAttribute("problem") /* @Valid */ @RequestBody  ProblemBean pb, BindingResult result,
 				Model model,HttpServletRequest request) {
 			
 			Integer custId = pb.getCustId();

@@ -1,5 +1,7 @@
 package com.web.store.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +25,10 @@ public class ContactUsServiceImpl implements ContactUsService {
 		this.contactUsDao = contactUsDao;
 	}
 	
+	@Override
+	public List<ProblemBean> getProblems() {
+		return contactUsDao.getProblems();
+	}
 	
 	@Override
 	public Object save(ProblemBean bean) {
@@ -34,5 +40,8 @@ public class ContactUsServiceImpl implements ContactUsService {
 
 		return contactUsDao.get(id);
 	}
+
+
+	
 
 }
