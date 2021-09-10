@@ -254,8 +254,7 @@
 					<c:forEach items="${comments}" var="comment">
 						<div class="comment row">
 						  <div class="memberImg no-gutters col-2">
-<%-- 						  	<img src="<c:url value='/images/member.jpg'/>" alt="..."> --%>
-						  	<img src="<c:url value='/_04_productPage/getMemberImg?custId=${comment.customerBean.custId}'/>" alt="...">
+						  	<img src="<c:url value='/getMemberImg?custId=${comment.customerBean.custId}'/>" alt="...">
 						  </div>
              			  <div class="col-1"> ${comment.customerBean.custName}</div>
              			  <div class="col-1"> ${comment.rate}分</div>                                         
