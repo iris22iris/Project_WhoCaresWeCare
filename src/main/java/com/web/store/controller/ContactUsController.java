@@ -51,20 +51,46 @@ public class ContactUsController {
 			String content = pb.getContent();
 			
 			
+			
+			
 //			String phone = request.getParameter("phone");
 //			String email = request.getParameter("email");
 //			String content = request.getParameter("content");
+			
+			
+//			try {
+//				ProblemBean pb;
+//				contactUsService.save(pb);
+//			}catch (Exception ex) {
+//				return "_02_contactUs";
+//			}
 			System.out.println("555555 :" + email);
 			System.out.println("電話 :" + phone);
 			System.out.println("會員編號 :" + custId);
 			System.out.println("留言 :" + content);
 			System.out.println("訂單編號 :" + ordId);
+			
+			try {
+				contactUsService.save(pb);
+			}catch(Exception ex) {
+				System.out.println(ex.getClass().getName() + ", ex.getMessage()=" + ex.getMessage());
+				
+				return "_02_contactUs";
+			}
+			
+			
+			
+			
 
 			
 			
 			return "_02_contactUs";
-	
-}
+
+		}
 		
-}
+		
+		
+		
+		
+		}
 

@@ -31,7 +31,7 @@ public class ContactUsDaoImpl implements ContactUsDao {
 	@Override
 	public List<ProblemBean> getProblems() {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM ProblemBean";
+		String hql = "FROM problemBean";
 		List<ProblemBean> list = new ArrayList<>();
 		list = session.createQuery(hql).getResultList();
 		return list;
