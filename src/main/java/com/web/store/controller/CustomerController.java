@@ -336,7 +336,7 @@ public class CustomerController {
 
 
 	// 修改單筆會員資料
-	@PutMapping(value = "/_05_EditmemberProfile/{key}", consumes = { "application/json" }, produces = {
+	@RequestMapping(value = "/_05_EditmemberProfile/{key}", consumes = { "application/json" }, produces = {
 			"application/json" })
 	public @ResponseBody Map<String, String> updateCustomer(@RequestBody CustomerBean customer,
 			@PathVariable Integer key) {

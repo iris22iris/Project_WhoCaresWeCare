@@ -11,9 +11,9 @@
 <script>
 function clicka(obj){
 	if('<%= session.getAttribute("LoginOK") %>' != 'null'){
-		obj.href="<c:url value='_05_member_management' />";
+		obj.href='${pageContext.request.contextPath}/_05_member_management';
 		} else if(confirm('請先登入')) {
-			obj.href="<c:url value='_05_login' />";
+			obj.href='${pageContext.request.contextPath}/_05_login';
 		}
 }
 
@@ -78,7 +78,7 @@ function clicka(obj){
 						href="<c:url value='_05_login' />" style="color: rgb(34, 4, 4);">
 							登入</a>  </c:if></li>
 					<li class="nav-item"><a class="nav-link textSize"
-						href="_05_member_management" style="color: rgb(34, 4, 4);">
+						style="color: rgb(34, 4, 4);" onclick="clicka(this)">
 							會員中心</a></li>
 					<li class="nav-item"><a class="nav-link textSize"
 						href="_05_member_management.html" style="color: rgb(34, 4, 4);">
