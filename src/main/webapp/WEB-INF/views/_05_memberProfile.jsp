@@ -164,7 +164,7 @@ function handleFiles(e){
 							<input id="custImage" type="file" onchange="handleFiles(event)">
 						</div>
 						<div class="col-12">
-							<img src="" id="showImage" alt="" width="150" height="150">
+							<img src="<c:url value='/getMemberImg?custId=${customer.custId}'/>" id="showImage" alt="" width="150" height="150">
 							<div class="col-12 p-3">
 								<button type="submit" class="btn">清除</button>
 							</div>
