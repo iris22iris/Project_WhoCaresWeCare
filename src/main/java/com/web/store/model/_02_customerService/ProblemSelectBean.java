@@ -14,6 +14,8 @@ public class ProblemSelectBean {
 
 	Integer id;
 	String problemType;
+	String qroupPb;
+	String sortPb;
 	
 	public ProblemSelectBean() {
 		super();
@@ -35,6 +37,23 @@ public class ProblemSelectBean {
 		this.problemType = problemType;
 	}
 	
+	
+	public String getQroupPb() {
+		return qroupPb;
+	}
+
+	public void setQroupPb(String qroupPb) {
+		this.qroupPb = qroupPb;
+	}
+
+	public String getSortPb() {
+		return sortPb;
+	}
+
+	public void setSortPb(String sortPb) {
+		this.sortPb = sortPb;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -42,6 +61,10 @@ public class ProblemSelectBean {
 		builder.append(id);
 		builder.append(", problemType=");
 		builder.append(problemType);
+		builder.append(", qroupPb=");
+		builder.append(qroupPb);
+		builder.append(", sortPb=");
+		builder.append(sortPb);
 		builder.append("]");
 		return builder.toString();
 	}

@@ -7,7 +7,9 @@ import com.web.store.model._02_customerService.ProblemSelectBean;
 
 public interface ProblemSelectService {
 
+//	List<ProblemSelectBean> getAllProblemTypes(String problemType);
 	List<ProblemSelectBean> getAllProblemTypes(String problemType);
+	
 	ProblemSelectBean getAllProblemType(Integer id);
 
 }

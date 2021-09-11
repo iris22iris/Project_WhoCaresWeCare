@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.web.store.model._02_customerService.ProblemBean;
+import com.web.store.model._02_customerService.ProblemSelectBean;
+import com.web.store.model._05_customer.CitySelectBean;
 import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.repository.ContactUsDao;
 
@@ -43,6 +45,28 @@ public class ContactUsDaoImpl implements ContactUsDao {
 		Session session = factory.getCurrentSession();
 		return session.save(bean);
 	}
+	
+	@Override
+	public List<ProblemSelectBean> queryProblemSelect(String problemType){
+		String hql = "";
+		if (problemType.indexOf(",") != -1) {
+			String[] problemTypes = problemType.split(",");
+			problemType  = "";
+			for (String string : problemTypes) {
+				problemType += ",'" + string + "'";
+			}
+			hql = "FROM ProblemSelectBean WHERE problemType IN(" + problemType.substring(1) + ") ORDER BY problemType, sortPb";
+
+		}else {
+			hql = "FROM ProblemSelectBean WHERE problemType = " + problemType + "ORDER BY sortPb";
+
+		}
+		Session session = factory.getCurrentSession();
+		List<ProblemSelectBean> dataList = session.createQuery(hql, ProblemSelectBean.class).getResultList();
+		return dataList;
+	}
+	
+	
 
 //	@Override
 //	public ProblemBean get(Integer id) {

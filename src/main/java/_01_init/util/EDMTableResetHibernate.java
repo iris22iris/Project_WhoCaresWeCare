@@ -435,6 +435,8 @@ public class EDMTableResetHibernate {
 								ProblemSelectBean psb = new ProblemSelectBean();
 								psb.setId(Integer.parseInt((token[0])));
 								psb.setProblemType(token[1]);
+								psb.setQroupPb(token[2]);
+								psb.setSortPb(token[3]);
 								session.merge(psb);
 								count++;
 								System.out.println("新增cityselect紀錄成功，共新增" + count + "筆記錄:" + token[1]);
