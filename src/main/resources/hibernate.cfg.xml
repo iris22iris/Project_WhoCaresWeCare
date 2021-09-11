@@ -42,7 +42,7 @@
 		<mapping class="com.web.store.model._07_productType.ProductTypeBean" />
 		<mapping class="com.web.store.model._05_customer.CitySelectBean" />
 		<mapping class="com.web.store.model._04_shop.FavoriteBean" />
-		
+		<mapping class="com.web.store.model._02_customerService.ProblemSelectBean" />
 
 	</session-factory>
 </hibernate-configuration>
