@@ -46,6 +46,7 @@ import com.web.store.service.CustomerService;
 import com.web.store.validators.CustomerValidator;
 
 
+
 @Controller
 public class CustomerController {
 	@Autowired
@@ -85,6 +86,7 @@ public class CustomerController {
 				model.addAttribute("LoginOK", customerBean);
 				HttpSession session = request.getSession();
 				session.setAttribute("LoginOK", customerBean.getCustId());
+
 			} else {
 				errorMsgMap.put("Error", "帳號或密碼有誤，密碼至少含有一個大寫字母、小寫字母、數字與!@#$%!^'\"");
 			}
@@ -513,6 +515,5 @@ public class CustomerController {
 			}
 			return responseEntity;
 		}
-	
-
+		
 }
