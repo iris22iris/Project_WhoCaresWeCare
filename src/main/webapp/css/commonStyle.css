@@ -55,8 +55,10 @@ html, body{
 .textSize{
     font-size: 18px;
     display: inline-block;
-
+    text-decoration: none;
+    color: rgb(34, 4, 4);
 }
+
 .navbar-nav{
     display: flex;
     justify-content:space-around;
@@ -73,7 +75,11 @@ html, body{
     padding: auto 0px;
 }
 
-
+.custImg img{
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+}
 
 /* --------footer------ */
 .footer{

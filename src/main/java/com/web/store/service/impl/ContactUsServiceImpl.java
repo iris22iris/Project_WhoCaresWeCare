@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.web.store.model._02_customerService.ProblemBean;
+import com.web.store.model._02_customerService.ProblemSelectBean;
 import com.web.store.repository.ContactUsDao;
 import com.web.store.service.ContactUsService;
 
@@ -33,6 +34,11 @@ public class ContactUsServiceImpl implements ContactUsService {
 	@Override
 	public Object save(ProblemBean bean) {
 		return contactUsDao.save(bean);
+	}
+
+	@Override
+	public List<ProblemSelectBean> queryProblemSelect(String problemType) {
+		return contactUsDao.queryProblemSelect(problemType) ;
 	}
 
 //	@Override
