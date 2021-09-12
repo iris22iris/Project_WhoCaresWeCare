@@ -40,20 +40,19 @@ public class CustomerValidator implements Validator {
 		if (cb.getAccount().length() < 5 && cb.getAccount().length() > 0) {
 			errors.rejectValue("account", "", "帳號欄不能小於五個字元");
 		}
+		
 
 		pattern = Pattern.compile(PASSWORD_PATTERN);
 		matcher = pattern.matcher(cb.getPassword());
-		if (!matcher.matches() && cb.getPassword().length() < 12) {
+		if (!matcher.matches() && cb.getPassword().length() > 0) {
 			errors.rejectValue("password", "", "密碼至少含各一個大小寫字母、數字與!@#$%!^'\\\"，且長度不能小於八個");
-		}else {
-			if(!matcher.matches() && cb.getPassword().length() > 8) {
-				errors.rejectValue("password", "", "密碼至少含各一個大小寫字母、數字與!@#$%!^'\\\"，且長度不可大於十二個");
-			}
 		}
+	
+		
 		
 		pattern = Pattern.compile(PHONE_PATTERN);
 		matcher = pattern.matcher(cb.getPhone());
-		if ((!matcher.matches() && cb.getPhone().length() > 0) || cb.getPhone().length() < 10) {
+		if (!matcher.matches() && cb.getPhone().length() > 0)  {
 			errors.rejectValue("phone", "", "手機輸入有誤，請重新輸入");
 		}
 		

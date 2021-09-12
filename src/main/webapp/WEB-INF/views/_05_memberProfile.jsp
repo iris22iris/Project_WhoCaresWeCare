@@ -46,10 +46,12 @@ window.onload = function() {
 }
 
 function upData() {
+	
 	var divResult = document.getElementById('resultMsg');
 	var custNameResult = document.getElementById('custNameResult');
 	var passWordResult = document.getElementById('passWordResult');
 	var inputIDResult = document.getElementById('inputIDResult');
+	var sub = document.getElementById('sub');
 // 	var custImage = document.getElementById('custImage');
 
 	
@@ -206,7 +208,7 @@ function handleFiles(e){
 								<label for="passWord" class="form-label">密碼:</label>
 							</div>
 							<div class="col-9">
-								<input type="text" class="form-control" name="passWord"
+								<input type="text" class="form-control" name="passWord" maxlength="12"
 									id="passWord" value="${customer.password}">
 							</div>
 							<div id='passWordResult' style="height: 18px; display: none;"></div>
@@ -334,7 +336,23 @@ function handleFiles(e){
 		<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
 
 	</div>
+<script>
 
+function track() {
+alert("註冊成功");
+Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: '表單送出成功',
+      showConfirmButton: false,
+      timer: 1000
+    
+  } 
+  
+ )
+ }
+    
+  </script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 

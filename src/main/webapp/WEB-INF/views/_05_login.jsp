@@ -50,6 +50,8 @@
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
 	rel="stylesheet">
+	<!-- sweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>  
 <script type="text/javascript"></script>
 
 <style type="text/css">
@@ -119,7 +121,7 @@
 							</c:if>
 						</c:otherwise>
 					</c:choose>
-					<form:input class="form__input" id="password" type="password"  placeholder="密碼" path='password'/>
+					<form:input class="form__input" id="password" type="password" maxlength="12"   placeholder="密碼" path='password'/>
 					<form:errors path="password" cssClass="error" />
 					<form:input class="form__input" id="custName" type="text" placeholder="姓名" path='custName'/> 
 					<form:errors path="custName" cssClass="error" />
@@ -129,10 +131,10 @@
 					<form:errors path="email" cssClass="error" />
 					<form:input class="form__input" id="phone" type="text" placeholder="手機" maxlength="10" path='phone'/>
 					<form:errors path="phone" cssClass="error" />
-					<form:input path="Image" type='file'/>
+					<form:input  class="form__input" path="Image" type='file'/>
 	   	  	 		<form:errors path="Image"  cssClass="error" />
-	   	  	 		
-					<button type="submit" class="form__button button " id="button1">註冊</button>
+					<button type="submit" class="form__button button " onclick="track(this)"  id="button1">註冊</button>
+					
 				</form:form>
 				<!-- register form end -->
 				<!-- main end! -->
@@ -182,13 +184,19 @@
 		<!--拼圖認證+彈跳 End!-->
 		
 		</div>
+		   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" ></script>   
+		
+		
 		
 	<!-- 引入共同的頁尾 -->
 	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
 		
 	</div>
 
+
+
 	<!-- 註冊登入js參考網站:https://webdesignerwall.com/wdw-snippet/login-form-4 -->
+	<script type="text/javascript" src="./js/_05loginOk.js"></script>
 	<script type="text/javascript" src="./js/_05login.js"></script>
 	<!-- 彈跳視窗js參考網站:https://www.youtube.com/watch?v=c7kIL-bV8ac -->
 	<script type="text/javascript" src="./js/_05login_ven.js"></script>
