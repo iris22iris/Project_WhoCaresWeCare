@@ -5,6 +5,7 @@ import java.util.List;
 import com.web.store.model._02_customerService.CommentBean;
 import com.web.store.model._03_rent.RentProductBean;
 import com.web.store.model._03_rent.ReservationBean;
+import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.model._07_productType.ProductTypeBean;
 
 public interface RentProductDao {
@@ -41,4 +42,9 @@ public interface RentProductDao {
 	// 新增單筆租賃產品資料
 	void addProduct(RentProductBean product);
 
+	//新增單筆預約資料
+		void addReservation(ReservationBean reservation);
+	
+	// 依cookie中使用者帳號讀取目前使用者資料	
+	public List<CustomerBean> getCustomerInfoBycookieaccount(String account);
 }

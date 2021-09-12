@@ -5,6 +5,7 @@ import java.util.List;
 import com.web.store.model._02_customerService.CommentBean;
 import com.web.store.model._03_rent.RentProductBean;
 import com.web.store.model._03_rent.ReservationBean;
+import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.model._07_productType.ProductTypeBean;
 
 public interface RentProductService {
@@ -39,5 +40,11 @@ public interface RentProductService {
 
 	// 更新租賃設備庫存
 	void updateStock(int productId, int newQuantity);
+	
+	//新增單筆預約資料
+	void addReservation(ReservationBean reservation);
+	
+	// 依cookie中使用者帳號讀取目前使用者資料
+		public List<CustomerBean> getCustomerInfoBycookieaccount(String account);
 
 }
