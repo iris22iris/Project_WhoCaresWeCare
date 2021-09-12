@@ -48,7 +48,7 @@ public class EDMTableResetHibernate {
 		SessionFactory factory = HibernateUtils.getSessionFactory();
 		Session session = factory.getCurrentSession();
 		Transaction tx = null;
-		
+
 		try {
 			tx = session.beginTransaction();
 
@@ -66,7 +66,8 @@ public class EDMTableResetHibernate {
 					String[] token = line.split("\\|");
 					CustomerBean cb = new CustomerBean();
 //					Blob blob = SystemUtils2018.fileToBlob(token[6].trim());
-					cb.setAccount(token[0].trim());// 會員帳號
+					cb.setCustId(Integer.parseInt(token[0].trim()));// 會員編號
+					cb.setAccount(token[13].trim());// 會員帳號
 					cb.setPassword(token[1].trim());// 會員密碼
 					cb.setAddress(token[2].trim());// 地址
 					cb.setBirthday(Date.valueOf(token[3].toString().trim()));// 出生日期
@@ -80,7 +81,7 @@ public class EDMTableResetHibernate {
 					cb.setIdNumber(token[10].trim());// 會員身份證字號
 					cb.setMimeType(token[11].trim());// 圖片類型
 					cb.setNickName(token[12].trim());// 暱稱
-					cb.setPhone(token[13].trim());// 連絡電話
+					cb.setPhone(token[14].trim());// 連絡電話
 					session.merge(cb);
 					count++;
 					System.out.println("新增Customer紀錄成功，共新增" + count + "筆紀錄");
@@ -94,7 +95,7 @@ public class EDMTableResetHibernate {
 			// 由"data/Ord.txt"逐筆讀入Ord表格內的初始資料，
 			// 然後依序新增到Ord表格中
 			count = 0;
-			try (FileInputStream fis = new FileInputStream("data/Ord.dat");
+			try (FileInputStream fis = new FileInputStream("data/ord.dat");
 					InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
 					BufferedReader br = new BufferedReader(isr0);) {
 				while ((line = br.readLine()) != null) {
@@ -113,6 +114,7 @@ public class EDMTableResetHibernate {
 					ob.setReciName(token[9]);
 					ob.setReciPhone(token[10]);
 					ob.setShipDate(Timestamp.valueOf(token[11]));
+					ob.setCustomerBean(new CustomerBean(Integer.parseInt(token[12])));
 
 					session.merge(ob);
 					count++;
@@ -155,7 +157,7 @@ public class EDMTableResetHibernate {
 					ProductBean pb = new ProductBean();
 					pb.setProdId(Integer.parseInt(token[0]));
 					pb.setClassify(token[1]);
-					Blob blob1 = SystemUtils2018.fileToBlob("data/product/"+token[3]);
+					Blob blob1 = SystemUtils2018.fileToBlob("data/product/" + token[3]);
 					Blob blob2 = SystemUtils2018.fileToBlob("data/product/forProductPage_2.png");
 					Blob blob3 = SystemUtils2018.fileToBlob("data/product/forProductPage_3.png");
 					pb.setCoverImage1(blob1);
@@ -191,12 +193,13 @@ public class EDMTableResetHibernate {
 					String[] token = line.split("\\|");
 					PromotionBean ptb = new PromotionBean();
 					ptb.setPromoteId(Integer.parseInt(token[0]));
-					ptb.setDiscountCode(token[1]);
-					ptb.setPromoContent(token[2]);
-					ptb.setPromoEndDate(Timestamp.valueOf(token[3]));
-					ptb.setPromoStartDate(Timestamp.valueOf(token[4]));
-					ptb.setPromoTag(token[5]);
-					ptb.setPromotion(token[6]);
+					ptb.setDiscount(new BigDecimal(token[1]));
+					ptb.setDiscountCode(token[2]);
+					ptb.setPromoContent(token[3]);
+					ptb.setPromoEndDate(Timestamp.valueOf(token[4]));
+					ptb.setPromoStartDate(Timestamp.valueOf(token[5]));
+					ptb.setPromoTag(token[6]);
+					ptb.setPromotion(token[7]);
 
 					session.merge(ptb);
 					count++;
@@ -218,7 +221,7 @@ public class EDMTableResetHibernate {
 					RentProductBean rpb = new RentProductBean();
 					rpb.setProdId(Integer.parseInt(token[0]));
 					rpb.setClassify(token[1]);
-					Blob blob1 = SystemUtils2018.fileToBlob("data/product/"+token[3]);
+					Blob blob1 = SystemUtils2018.fileToBlob("data/product/" + token[3]);
 					Blob blob2 = SystemUtils2018.fileToBlob("data/product/forProductPage_2.png");
 					Blob blob3 = SystemUtils2018.fileToBlob("data/product/forProductPage_3.png");
 					rpb.setCoverImage1(blob1);
@@ -283,10 +286,11 @@ public class EDMTableResetHibernate {
 					bib.setDiscount(new BigDecimal(token[3]));
 					bib.setDiscountCode(token[4]);
 					bib.setItemSum(new BigDecimal(token[5]));
-					bib.setProdQTY(Integer.parseInt(token[6]));
-					bib.setProductBean(new ProductBean(Integer.parseInt(token[7])));
-					bib.setProductTypeBean(new ProductTypeBean(token[8]));
-//					bib.setPromotionBean(new PromotionBean(Integer.parseInt(token[9]),token[10]));
+					bib.setProdId(Integer.parseInt(token[6]));
+					bib.setProdQTY(Integer.parseInt(token[7]));
+					bib.setProductBean(new ProductBean(Integer.parseInt(token[8])));
+					bib.setProductTypeBean(new ProductTypeBean(token[9]));
+					bib.setPromotionBean(new PromotionBean(Integer.parseInt(token[10]), token[11]));
 
 					session.merge(bib);
 					count++;
@@ -373,12 +377,15 @@ public class EDMTableResetHibernate {
 					cb.setCommentDate(Timestamp.valueOf(token[3]));
 					cb.setRate(Integer.parseInt(token[4]));
 					cb.setVisits(Integer.parseInt(token[5]));
-					cb.setCustomerBean(new CustomerBean(Integer.parseInt(token[6]), null, null, null, null, null, null, null, null, null, null, null, null, null, null));
-					
-					cb.setProductBean(new ProductBean(null, Integer.parseInt(token[7]), null, null, null, null, null, null, null, null, null, null, null));
-					
-					cb.setRentProductBean(new RentProductBean(Integer.parseInt(token[8]), token[9], null, null, null, null, null, null, null, null, null, null, null, null, null, null));
-					
+					cb.setCustomerBean(new CustomerBean(Integer.parseInt(token[6]), null, null, null, null, null, null,
+							null, null, null, null, null, null, null, null));
+
+					cb.setProductBean(new ProductBean(null, Integer.parseInt(token[7]), null, null, null, null, null,
+							null, null, null, null, null, null));
+
+					cb.setRentProductBean(new RentProductBean(Integer.parseInt(token[8]), token[9], null, null, null,
+							null, null, null, null, null, null, null, null, null, null, null));
+
 					session.merge(cb);
 					count++;
 					System.out.println("新增comment紀錄成功，共新增" + count + "筆記錄");
@@ -387,66 +394,39 @@ public class EDMTableResetHibernate {
 				System.out.println("comment表格資料新增成功");
 			}
 
-		
-			
-//			 12. problem表格
-//						 由"data/problem.dat"逐筆讀入problem表格內的初始資料，
-//						 然後依序新增到problem表格中
-						count = 0;
-						try (FileInputStream fis = new FileInputStream("data/problem.dat");
-								InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
-								BufferedReader br = new BufferedReader(isr0);) {
-							while ((line = br.readLine()) != null) {
-			
-								String[] token = line.split("\\|");
-								ProblemBean pb = new ProblemBean();
-								pb.setusId(Integer.parseInt(token[0]));
-								Blob blob = SystemUtils2018.fileToBlob("data/product/A0001.jpg");
-								pb.setAttachFile(blob);
-								pb.setContent(token[2]);
-								pb.setEmail(token[3]);
-								pb.setFormDate(Timestamp.valueOf(token[4]));
-								pb.setOrdId(token[5]);
-								pb.setPhone(token[6]);
-								pb.setProblemType(token[7]);
-								pb.setProcessState(token[8]);
-								pb.setReplyContent(token[9]);
-								pb.setReplyDate(Timestamp.valueOf(token[10]));
-								pb.setFileName(token[11]);
-								pb.setAccount(token[12]);
-			
-								session.merge(pb);
-								count++;
-								System.out.println("新增problem紀錄成功，共新增" + count + "筆記錄");
-							}
-							session.flush();
-							System.out.println("problem表格資料新增成功");
-						}
-								
-						// 14.problemselect表格
-						// 由"data/problemselect.dat"逐筆讀入problemselect表格內的初始資料，
-						// 然後依序新增到problemselect表格中
-						count = 0;
-						try (FileInputStream fis = new FileInputStream("data/problemselect.dat");
-								InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
-								BufferedReader br = new BufferedReader(isr0);) {
-							while ((line = br.readLine()) != null) {
-								String[] token = line.split("\\|");
-								ProblemSelectBean psb = new ProblemSelectBean();
-								psb.setId(Integer.parseInt((token[0])));
-								psb.setProblemType(token[1]);
-								psb.setQroupPb(token[2]);
-								psb.setSortPb(token[3]);
-								session.merge(psb);
-								count++;
-								System.out.println("新增cityselect紀錄成功，共新增" + count + "筆記錄:" + token[1]);
-							}
-							session.flush();
-							System.out.println("problemselect表格資料新增成功");
-						}	
+			// 12. problem表格
+			//由"data/problem.dat"逐筆讀入problem表格內的初始資料，
+			//然後依序新增到problem表格中
+			count = 0;
+			try (FileInputStream fis = new FileInputStream("data/problem.dat");
+					InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
+					BufferedReader br = new BufferedReader(isr0);) {
+				while ((line = br.readLine()) != null) {
 
-							
-			
+					String[] token = line.split("\\|");
+					ProblemBean pb = new ProblemBean();
+					pb.setusId(Integer.parseInt(token[0]));
+					Blob blob = SystemUtils2018.fileToBlob("data/product/A0001.jpg");
+					pb.setAttachFile(blob);
+					pb.setContent(token[2]);
+					pb.setEmail(token[3]);
+					pb.setFormDate(Timestamp.valueOf(token[4]));
+					pb.setOrdId(token[5]);
+					pb.setPhone(token[6]);
+					pb.setProblemType(token[7]);
+					pb.setProcessState(token[8]);
+					pb.setReplyContent(token[9]);
+					pb.setReplyDate(Timestamp.valueOf(token[10]));
+					pb.setFileName(token[11]);
+					pb.setAccount(token[12]);
+
+					session.merge(pb);
+					count++;
+					System.out.println("新增problem紀錄成功，共新增" + count + "筆記錄");
+				}
+				session.flush();
+				System.out.println("problem表格資料新增成功");
+			}
 
 			// 13. favorite表格
 			// 由"data/favorite.dat"逐筆讀入favorite表格內的初始資料，
@@ -467,9 +447,28 @@ public class EDMTableResetHibernate {
 				session.flush();
 				System.out.println("favorite表格資料新增成功");
 			}
-			
-			
 
+			// 14.problemselect表格
+			// 由"data/problemselect.dat"逐筆讀入problemselect表格內的初始資料，
+			// 然後依序新增到problemselect表格中
+			count = 0;
+			try (FileInputStream fis = new FileInputStream("data/problemselect.dat");
+					InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
+					BufferedReader br = new BufferedReader(isr0);) {
+				while ((line = br.readLine()) != null) {
+					String[] token = line.split("\\|");
+					ProblemSelectBean psb = new ProblemSelectBean();
+					psb.setId(Integer.parseInt((token[0])));
+					psb.setProblemType(token[1]);
+					psb.setQroupPb(token[2]);
+					psb.setSortPb(token[3]);
+					session.merge(psb);
+					count++;
+					System.out.println("新增cityselect紀錄成功，共新增" + count + "筆記錄:" + token[1]);
+				}
+				session.flush();
+				System.out.println("problemselect表格資料新增成功");
+			}
 
 			catch (Exception ex) {
 				ex.printStackTrace();

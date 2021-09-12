@@ -2,11 +2,13 @@ package com.web.store.config;
 
 import java.util.ArrayList;
 
+
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.View;
@@ -18,13 +20,16 @@ import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+
 @Configuration
 @EnableWebMvc
+@EnableTransactionManagement  // 本註釋必須與@Configuration出現在同一個類別
 @ComponentScan({"com.web.store"})
 //@ComponentScan({ "com.web.store.controller", "com.web.store.model", "com.web.store.service.impl",
 //		"com.web.store.repository.impl", "com.web.store.config" })
 public class WebAppConfig implements WebMvcConfigurer {
 
+	
 	@Bean
 	public ViewResolver resolver() {
 		InternalResourceViewResolver irvr = new InternalResourceViewResolver();
@@ -83,4 +88,5 @@ public class WebAppConfig implements WebMvcConfigurer {
 //				.addResourceLocations("/WEB-INF/views/js/");
 //	}
 
+	
 }

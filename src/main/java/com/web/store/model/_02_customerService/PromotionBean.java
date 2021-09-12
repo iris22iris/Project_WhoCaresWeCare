@@ -1,6 +1,7 @@
 package com.web.store.model._02_customerService;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -37,6 +38,7 @@ public class PromotionBean implements Serializable {
 	@Column(columnDefinition = "datetime")
 	private Timestamp promoEndDate;
 	private String discountCode;
+	private BigDecimal discount;
 
 	@OneToMany(mappedBy = "promotionBean", cascade = CascadeType.ALL)
 	Set<RentItemBean> rentItems = new LinkedHashSet<>();
@@ -50,9 +52,12 @@ public class PromotionBean implements Serializable {
 	public PromotionBean() {
 	}
 
+	
+	
 	public PromotionBean(Integer promoteId, String promotion, String promoContent, String promoTag,
-			Timestamp promoStartDate, Timestamp promoEndDate, String discountCode, Set<RentItemBean> rentItems,
-			Set<RentProductBean> rentProducts, Set<ProductBean> product, Set<BuyItemBean> buyItems) {
+			Timestamp promoStartDate, Timestamp promoEndDate, String discountCode, BigDecimal discount,
+			Set<RentItemBean> rentItems, Set<RentProductBean> rentProducts, Set<ProductBean> product,
+			Set<BuyItemBean> buyItems) {
 		super();
 		this.promoteId = promoteId;
 		this.promotion = promotion;
@@ -61,10 +66,30 @@ public class PromotionBean implements Serializable {
 		this.promoStartDate = promoStartDate;
 		this.promoEndDate = promoEndDate;
 		this.discountCode = discountCode;
+		this.discount = discount;
 		this.rentItems = rentItems;
 		this.rentProducts = rentProducts;
 		this.product = product;
+		this.buyItems = buyItems;
 	}
+
+
+//
+//	public PromotionBean(Integer promoteId, String promotion, String promoContent, String promoTag,
+//			Timestamp promoStartDate, Timestamp promoEndDate, String discountCode, Set<RentItemBean> rentItems,
+//			Set<RentProductBean> rentProducts, Set<ProductBean> product, Set<BuyItemBean> buyItems) {
+//		super();
+//		this.promoteId = promoteId;
+//		this.promotion = promotion;
+//		this.promoContent = promoContent;
+//		this.promoTag = promoTag;
+//		this.promoStartDate = promoStartDate;
+//		this.promoEndDate = promoEndDate;
+//		this.discountCode = discountCode;
+//		this.rentItems = rentItems;
+//		this.rentProducts = rentProducts;
+//		this.product = product;
+//	}
 
 	public PromotionBean(Integer promoteId, String discountCode) {
 		this.promoteId = promoteId;
@@ -126,6 +151,18 @@ public class PromotionBean implements Serializable {
 	public void setDiscountCode(String discountCode) {
 		this.discountCode = discountCode;
 	}
+	
+	public BigDecimal getDiscount() {
+		return discount;
+	}
+
+
+
+	public void setDiscount(BigDecimal discount) {
+		this.discount = discount;
+	}
+
+
 
 	public Set<RentItemBean> getRentItems() {
 		return rentItems;

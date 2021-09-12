@@ -117,6 +117,10 @@ public class CustomerBean implements Serializable {
 		this.problem = problem;
 	}
 
+	public CustomerBean(Integer custId) {
+		this.custId = custId;
+	}
+
 	public Integer getCustId() {
 		return custId;
 	}
