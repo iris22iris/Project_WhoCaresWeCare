@@ -14,7 +14,7 @@ public interface CustomerDao {
 	void updateCustomer(CustomerBean bean); //更新一筆會員記錄
 	void deleteCustomerByPrimaryKey(int key);	 //刪除外鍵"會員購買"、"訂購記錄"
 	public CustomerBean checkIDPassword(String account,String password);	//依主鍵 檢查會員帳號密碼
-	boolean idExists(String id);				//檢查帳號是否存在
+	boolean idExists(String account);				//檢查帳號是否存在
 	CustomerBean get(Integer id);				//讀取一筆會員記錄
 	void evictMember(CustomerBean customer);
 	List<CitySelectBean> querySelect(String groupCity);

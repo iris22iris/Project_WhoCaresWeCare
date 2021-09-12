@@ -1,5 +1,6 @@
 package com.web.store.controller;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Map;
 
@@ -21,7 +22,6 @@ import com.web.store.model._04_shop.ProductBean;
 import com.web.store.model._04_shop.ShoppingCart;
 import com.web.store.model._05_customer.CustomerBean;
 
-//加入購物車
 @Controller
 @SessionAttributes({ "LoginOK", "products", "ShoppingCart"})
 public class ShoppingCartController {
@@ -33,13 +33,14 @@ public class ShoppingCartController {
 		this.httpSession = httpSession;
 	}
 	
+	//加入購物車
 	@SuppressWarnings("unchecked")
 	@PostMapping("/buyMenu/addCart/{prodId}")
 	public String addProductToCart(
 			@PathVariable("prodId") Integer prodId,
 			@RequestParam(name = "prodQTY", required = false) Integer prodQTY,
 			Model model, HttpServletRequest request, HttpServletResponse response
-	) throws ServletException {	
+	) throws ServletException , IOException{	
 		
 		CustomerBean customerBean = (CustomerBean) model.getAttribute("LoginOK");
 		if(customerBean == null) {
@@ -86,5 +87,9 @@ public class ShoppingCartController {
 		shoppingCart.addProductToCart(productId, buyItemBean);
 		return "redirect:/buyMenu";
 	}
+	
+	
+	//購物車內容
+	
 	
 }

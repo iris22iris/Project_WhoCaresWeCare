@@ -83,11 +83,11 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	@Override
-	public boolean idExists(String id) {
+	public boolean idExists(String account) {
 		boolean exist = false;
 		String hql = "From CustomerBean Where account = :account";
 		Session session = factory.getCurrentSession();
-		List<CustomerBean> list = session.createQuery(hql, CustomerBean.class).setParameter("account", id)
+		List<CustomerBean> list = session.createQuery(hql, CustomerBean.class).setParameter("account", account)
 				.getResultList();
 		exist = (list.isEmpty()) ? false : true;
 		return exist;
