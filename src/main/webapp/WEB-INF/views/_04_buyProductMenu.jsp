@@ -173,6 +173,8 @@
 														<option value="${amount}">${amount}</option>
 													</c:forEach>
 												</select>
+												<Input type='hidden' name='prodId' value='${product.prodId}'>
+												<Input type='hidden' name='prodQTY' value='${amount}'>
 												<input type="submit" class="btn btn-warning" value="加入購物車" />
 											</form>
 										</div>

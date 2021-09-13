@@ -16,7 +16,6 @@ import javax.persistence.Table;
 import com.web.store.model._02_customerService.PromotionBean;
 import com.web.store.model._04_shop.pkClass.BuyItemPK;
 import com.web.store.model._06_order.OrdBean;
-import com.web.store.model._06_order.pkClass.OrdPK;
 import com.web.store.model._07_productType.ProductTypeBean;
 
 @Entity
@@ -27,11 +26,9 @@ public class BuyItemBean implements Serializable {
 	@EmbeddedId
 	private BuyItemPK buyItemPK;
 	
-	private Integer			prodId;			//商品編號
+//	private Integer			prodId;			//商品編號
 	private Integer     	prodQTY;		//商品數量
 	private BigDecimal  	itemSum;		//單項總額
-	private String 			discountCode;	//折扣碼
-	private BigDecimal  	discount;		//折扣金額
 
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
@@ -47,10 +44,10 @@ public class BuyItemBean implements Serializable {
 	private OrdBean ordBean;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumns({
-			@JoinColumn(name="BUYTITEM_PROMOTEID_FK", referencedColumnName="promoteId"),
-			@JoinColumn(name="BUYTITEM_DISCOUNTCODE_FK", referencedColumnName="discountCode")
-	 			})
+//	@JoinColumns({
+	@JoinColumn(name="BUYTITEM_PROMOTEID_FK", referencedColumnName="promoteId")
+//			@JoinColumn(name="BUYTITEM_DISCOUNTCODE_FK", referencedColumnName="discountCode")
+//	 			})
 	private PromotionBean promotionBean;
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
@@ -60,13 +57,12 @@ public class BuyItemBean implements Serializable {
 	public BuyItemBean() {
 	}
 
-	public BuyItemBean(Integer prodId ,Integer prodQTY, BigDecimal itemSum, String discountCode,
-			BigDecimal discount) {
-		this.prodId = prodId;
+	public BuyItemBean(Integer prodQTY, BigDecimal itemSum ,
+						PromotionBean promotionBean ,ProductBean productBean) {
 		this.prodQTY = prodQTY;
 		this.itemSum = itemSum;
-		this.discountCode = discountCode;
-		this.discount = discount;
+		this.promotionBean = promotionBean;
+		this.productBean = productBean;
 
 	}
 	
@@ -76,14 +72,6 @@ public class BuyItemBean implements Serializable {
 
 	public void setBuyItemPK(BuyItemPK buyItemPK) {
 		this.buyItemPK = buyItemPK;
-	}
-	
-	public Integer getProdId() {
-		return prodId;
-	}
-
-	public void setProdId(Integer prodId) {
-		this.prodId = prodId;
 	}
 
 	public Integer getProdQTY() {
@@ -102,21 +90,21 @@ public class BuyItemBean implements Serializable {
 		this.itemSum = itemSum;
 	}
 	
-	public String getDiscountCode() {
-		return discountCode;
-	}
-
-	public void setDiscountCode(String discountCode) {
-		this.discountCode = discountCode;
-	}
-
-	public BigDecimal getDiscount() {
-		return discount;
-	}
-
-	public void setDiscount(BigDecimal discount) {
-		this.discount = discount;
-	}
+//	public String getDiscountCode() {
+//		return discountCode;
+//	}
+//
+//	public void setDiscountCode(String discountCode) {
+//		this.discountCode = discountCode;
+//	}
+//
+//	public BigDecimal getDiscount() {
+//		return discount;
+//	}
+//
+//	public void setDiscount(BigDecimal discount) {
+//		this.discount = discount;
+//	}
 
 
 //	雙向多對一productTypeBean之getter、setter 開始
@@ -158,10 +146,9 @@ public class BuyItemBean implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((buyItemPK == null) ? 0 : buyItemPK.hashCode());
-		result = prime * result + ((discount == null) ? 0 : discount.hashCode());
-		result = prime * result + ((discountCode == null) ? 0 : discountCode.hashCode());
+//		result = prime * result + ((discount == null) ? 0 : discount.hashCode());
+//		result = prime * result + ((discountCode == null) ? 0 : discountCode.hashCode());
 		result = prime * result + ((itemSum == null) ? 0 : itemSum.hashCode());
-		result = prime * result + ((prodId == null) ? 0 : prodId.hashCode());
 		result = prime * result + ((prodQTY == null) ? 0 : prodQTY.hashCode());
 		return result;
 	}
@@ -181,7 +168,7 @@ public class BuyItemBean implements Serializable {
 				return false;
 		} else if (!buyItemPK.equals(other.buyItemPK))
 			return false;
-		if (discount == null) {
+/*		if (discount == null) {
 			if (other.discount != null)
 				return false;
 		} else if (!discount.equals(other.discount))
@@ -190,16 +177,11 @@ public class BuyItemBean implements Serializable {
 			if (other.discountCode != null)
 				return false;
 		} else if (!discountCode.equals(other.discountCode))
-			return false;
+			return false;*/
 		if (itemSum == null) {
 			if (other.itemSum != null)
 				return false;
 		} else if (!itemSum.equals(other.itemSum))
-			return false;
-		if (prodId == null) {
-			if (other.prodId != null)
-				return false;
-		} else if (!prodId.equals(other.prodId))
 			return false;
 		if (prodQTY == null) {
 			if (other.prodQTY != null)

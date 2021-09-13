@@ -284,14 +284,14 @@ public class EDMTableResetHibernate {
 					BuyItemBean bib = new BuyItemBean();
 					bib.setBuyItemPK(
 							new BuyItemPK(new OrdPK(token[0], Integer.parseInt(token[1])), Integer.parseInt(token[2])));
-					bib.setDiscount(new BigDecimal(token[3]));
-					bib.setDiscountCode(token[4]);
-					bib.setItemSum(new BigDecimal(token[5]));
-					bib.setProdId(Integer.parseInt(token[6]));
-					bib.setProdQTY(Integer.parseInt(token[7]));
-					bib.setProductBean(new ProductBean(Integer.parseInt(token[8])));
-					bib.setProductTypeBean(new ProductTypeBean(token[9]));
-					bib.setPromotionBean(new PromotionBean(Integer.parseInt(token[10]), token[11]));
+//					bib.setDiscount(new BigDecimal(token[3]));
+//					bib.setDiscountCode(token[4]);
+					bib.setItemSum(new BigDecimal(token[3]));
+//					bib.setProdId(Integer.parseInt(token[6]));
+					bib.setProdQTY(Integer.parseInt(token[4]));
+					bib.setProductBean(new ProductBean(Integer.parseInt(token[5])));
+					bib.setProductTypeBean(new ProductTypeBean(token[6]));
+//					bib.setPromotionBean(new PromotionBean(Integer.parseInt(token[7])));
 
 					session.merge(bib);
 					count++;

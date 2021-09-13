@@ -1,14 +1,16 @@
 package com.web.store.controller;
 
-import java.io.IOException;
+
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,76 +22,58 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.web.store.model._04_shop.BuyItemBean;
 import com.web.store.model._04_shop.ProductBean;
 import com.web.store.model._04_shop.ShoppingCart;
-import com.web.store.model._05_customer.CustomerBean;
+import com.web.store.service.ProductService;
+import com.web.store.service.impl.ProductServiceImpl;
+
 
 @Controller
-@SessionAttributes({ "LoginOK", "products", "ShoppingCart"})
+@SessionAttributes({ "LoginOK", "products", "ShoppingCart" })
 public class ShoppingCartController {
+
+	private static Logger log = LoggerFactory.getLogger(ShoppingCartController.class);
+	
+	ProductService productService;
 	
 	HttpSession httpSession;
-	
+
 	@Autowired
-	public ShoppingCartController(HttpSession httpSession) {
+	public ShoppingCartController(HttpSession httpSession , ProductService productService) {
 		this.httpSession = httpSession;
+		this.productService = productService;
 	}
-	
-	//加入購物車
-	@SuppressWarnings("unchecked")
+
+	// 加入購物車
 	@PostMapping("/buyMenu/addCart/{prodId}")
-	public String addProductToCart(
-			@PathVariable("prodId") Integer prodId,
-			@RequestParam(name = "prodQTY", required = false) Integer prodQTY,
-			Model model, HttpServletRequest request, HttpServletResponse response
-	) throws ServletException , IOException{	
+	public String addProductToCart(@PathVariable("prodId") Integer prodId,
+			@RequestParam(name = "prodQTY", required = false) Integer prodQTY, Model model, HttpServletRequest request,
+			HttpServletResponse response) {
 		
-		CustomerBean customerBean = (CustomerBean) model.getAttribute("LoginOK");
-		if(customerBean == null) {
-			return "redirect:/_05_login";
-		}
-		
-		HttpSession session = request.getSession(false); 
-		if (session == null) {
-			return "redirect:/_05_login";
-		}
 		
 		// 取出存放在session物件內的ShoppingCart物件
-		ShoppingCart shoppingCart = (ShoppingCart) model.getAttribute("ShoppingCart");
+		ShoppingCart shoppingCart = (ShoppingCart) httpSession.getAttribute("ShoppingCart");
 		if (shoppingCart == null) {
 			shoppingCart = new ShoppingCart();
-			model.addAttribute("ShoppingCart", shoppingCart);
+			httpSession.setAttribute("ShoppingCart", shoppingCart);
+			log.info("建立新的shoppingCart放進session");
 		}
 		
-		String prodIdString = request.getParameter("prodId");
-		int productId = Integer.parseInt(prodIdString.trim());
+
+		String prodIdStr = request.getParameter("prodId");
+		int prodcuctId    = Integer.parseInt(prodIdStr.trim());
 		
-		String qryString = request.getParameter("prodQTY");
-		Integer qty = 0;
+		ProductBean productBean  = new ProductBean();
+		productBean = productService.getProductById(prodcuctId);
 		
-		Map<Integer,ProductBean> productMap = (Map<Integer,ProductBean>)session.getAttribute("products");
-		ProductBean bean = productMap.get(productId);
+		BigDecimal productQTY = new BigDecimal(request.getParameter("prodQTY"));
+		BigDecimal itemSum = productQTY.multiply(productBean.getPrice());
 		
-		try{
-			// 進行資料型態的轉換
-			qty = Integer.parseInt(qryString.trim());
-		} catch(NumberFormatException e){
-			throw new ServletException(e); 
-		}
+		// 將資料封裝到buyItemBean
+		BuyItemBean buyItemBean = new BuyItemBean(prodQTY,itemSum,
+												productBean.getPromotionBean(),productBean);
+		shoppingCart.addProductToCart(prodId, buyItemBean);
+		log.info("將buyItem資料封裝放進session");
 		
-		
-		BigDecimal qty0 = new BigDecimal(qty.toString());
-		BigDecimal itemSum = qty0.multiply(bean.getPrice());
-		//將資料封裝到buyItemBean
-		BuyItemBean buyItemBean = new BuyItemBean(productId,qty,itemSum,
-													bean.getPromotionBean().getDiscountCode(),
-													bean.getPromotionBean().getDiscount());
-//		buyItemBean.setProductBean(new ProductBean(prodId));
-//		buyItemBean.setProdQTY(prodQTY);
-		shoppingCart.addProductToCart(productId, buyItemBean);
 		return "redirect:/buyMenu";
 	}
-	
-	
-	//購物車內容
-	
-	
+
 }
