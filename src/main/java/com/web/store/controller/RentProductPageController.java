@@ -96,10 +96,10 @@ public class RentProductPageController {
 		//顯示我的預約結果
 		
 		
-		
-		List<ReservationBean> myReservation = rentProductService.getReservationBeanByprodId(id);
-		model.addAttribute("myreservation", myReservation);
-		
+//		
+//		List<ReservationBean> myReservation = rentProductService.getReservationBeanByprodId(id);
+//		model.addAttribute("myreservation", myReservation);
+//		
 		return null ;
 	}
 	
