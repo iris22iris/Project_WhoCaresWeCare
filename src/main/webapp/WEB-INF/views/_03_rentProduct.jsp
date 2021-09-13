@@ -3,6 +3,7 @@
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 數字格式化標籤 -->
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 
@@ -293,30 +294,78 @@
 	                <h2 class="modal-title p-3 col-12 d-flex justify-content-evenly " id="exampleModalLabel">登記預約</h2>  
 	            </div>
             	<div class="containerPOPUP p-3  ">
-	                <form class="row g-3 form">
-	                    <div class="col-3 justify-content-evenly p-1  d-flex align-items-center   ">
-	                        <label style=font-size:22px;  for="inputAccount" class="form-label " >商品名稱 :</label>
+            	
+	            <form:form method='POST' modelAttribute="reservation" class="row g-3 form">
+	            <fieldset>
+	              <%--  <div class="form-group">
+						<label class="control-label col-lg-2 col-lg-2" for='category'>
+						種類為:
+						</label>
+						<div class="col-lg-10">
+							<form:input id="category" path="category" type='text'
+						class='form:input-large' />
+						</div>
+					</div> --%>
+		                		                	                
+	                
+	                
+	                
+	                <!-- 預約人start -->
+	                <%--
+	                 	<div class="col-3 justify-content-evenly p-1  d-flex align-items-center   ">
+	                        <label style=font-size:22px;  for="inputAccount" class="form-label " >預約人 :${cookie['user'].value}</label>
 	                    </div>
-	                    <div class="col-7 justify-content-evenly p-1  d-flex align-items-center ">
-	                        <label style=font-size:21px; for="inputAccount" class="form-label">${rentProduct.prodName}</label>
-	                    </div>
-	                    <div class="col-5 justify-content-evenly p-1  d-flex align-items-center">
-	                        <label style=font-size:22px;  for="inputAccount" class="form-label">目前預約候補人數 :</label>
-	                    </div>
-	                    <div class="col-1 justify-content-evenly p-1  d-flex align-items-center">
-	                        <label style=font-size:22px; for="inputAccount" class="form-label">${reservation.waitNum}位</label>
-	                    </div>
-	                    <br>
-                   	                  
+	                    --%>
+	                 <!-- 預約人end -->
+	                 
+	                <div class="form-group d-flex align-items-center">
+	                  	<div class="col-4 justify-content-evenly p-1  d-flex align-items-center   ">
+							<label style=font-size:22px  for="prodName" class="form-label">商品名稱 :</label>
+						</div>
+						
+						<div class="col-8 justify-content-evenly p-1  d-flex align-items-center ">
+							 <label style=font-size:21px; for="prodName" class="form-label">${rentProduct.prodName}</label>
+						</div>
+	        		</div>
+					
+	            
+	                <div class="form-group">
+						<label class="control-label col-lg-2 col-lg-2" for='category'>
+						種類為:
+						</label>
+						<div class="col-lg-10">
+							<form:input id="category" path="category" type='text'
+						class='form:input-large' />
+						</div>
+					</div>
 	                    
-	                </form>
+	               <div class="form-group d-flex align-items-center">
+	                  	<div class="col-4 justify-content-evenly p-1  d-flex align-items-center   ">
+							<label style=font-size:22px  for="waitNum" class="form-label">目前候補人數 :</label>
+						</div>
+						
+						<div class="col-8 justify-content-evenly p-1  d-flex align-items-center ">
+							 <label style=font-size:21px; for="waitNum" class="form-label">${reservations[0].waitNum}位</label>
+						</div>
+	        		</div>
+	                 <br>   	                	                 
             	</div>
+            	
+            <div class="form-group">	
             <div class="hyperlink  col-12 d-flex justify-content-evenly align-items-center">
                 <div class="modal-footer">
-	                <button class="btn btn-warning" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">確認預約</button>
-	                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+	               <input id="btnAdd" type='submit' class='btn btn-warning' data-bs-target="#exampleModalToggle2" 
+	               data-bs-toggle="modal" data-bs-dismiss="modal"value="確認預約form" />
+	               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
                 </div>
             </div>
+            </div> 
+            
+            
+            </fieldset>       
+	            </form:form>
+            
+            
             <div class="col-12 justify-content-evenly p-1  d-flex align-items-center">
                 當商品到貨時,請於收到通知信48小時內完成預約
             </div>
@@ -325,6 +374,12 @@
             </div>
           </div>
         </div>
+        
+        
+        
+        
+         
+        
     </div>
     <!-- 預約表單畫面 end -->
     
@@ -342,11 +397,11 @@
                 
                 <div class="col-6 justify-content-evenly p-1  d-flex align-items-center ">
                     <label style=font-size:22px; for="inputAccount" class="form-label">您的預約序號為:</label>
-                    <label style=font-size:22px;  for="inputAccount" class="form-label ">${reservations[0].waitNum+1}位假的抓資料庫</label>
+                    <label style=font-size:22px;  for="inputAccount" class="form-label ">${reservations[0].waitNum}位假的抓資料庫</label>
                 </div>
                 <div class="col-8 justify-content-evenly p-1  d-flex align-items-center ">
                     <label style=font-size:18px; for="inputAccount" class="form-label">您的預約編號為:</label>
-                    <label style=font-size:18px; for="inputAccount" class="form-label ">抓資料庫A12312312311</label>
+                    <label style=font-size:18px; for="inputAccount" class="form-label ">${reservations[0].reservationId}</label>
                 </div>
                 <div class="modal-footer justify-content-evenly">                           
                     <button type="button" class="btn btn-warning" data-bs-dismiss="modal">繼續逛逛</button>

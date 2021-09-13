@@ -71,11 +71,11 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	@Override
-	public CustomerBean checkIDPassword(String custId, String password) {
+	public CustomerBean checkIDPassword(String account, String password) {
 		CustomerBean cp = null;
 		String hql = "FROM CustomerBean WHERE account = :account and password = :password";
 		Session session = factory.getCurrentSession();
-		List<CustomerBean> list = session.createQuery(hql, CustomerBean.class).setParameter("account", custId)
+		List<CustomerBean> list = session.createQuery(hql, CustomerBean.class).setParameter("account", account)
 				.setParameter("password", password).getResultList();
 		cp = (list.isEmpty() ? null : list.get(0));
 
@@ -83,11 +83,11 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	@Override
-	public boolean idExists(String id) {
+	public boolean idExists(String account) {
 		boolean exist = false;
 		String hql = "From CustomerBean Where account = :account";
 		Session session = factory.getCurrentSession();
-		List<CustomerBean> list = session.createQuery(hql, CustomerBean.class).setParameter("account", id)
+		List<CustomerBean> list = session.createQuery(hql, CustomerBean.class).setParameter("account", account)
 				.getResultList();
 		exist = (list.isEmpty()) ? false : true;
 		return exist;

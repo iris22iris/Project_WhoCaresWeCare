@@ -21,6 +21,38 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>  
     <!-- 引入共同的頁首 -->
 	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+	
+	<script>
+	window.onload = function() { 
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "<c:url value='/usquerySelect/A,B' />", true);
+		xhr.send();	
+		var message = "";
+		
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				   var usquerySelect = JSON.parse(xhr.responseText);
+
+				   $("#problemType").append("<option value='" + 0 + "'selected='selected' disabled>" + "請選擇" + "</option>");
+				   usquerySelect.forEach(function (item) {
+					   $("#problemType").append("<option value='" + item.id + "'>" + item.problemType + "</option>");
+		           });
+			}
+	     }
+	}
+
+	var city = $('#problemType').val();
+	
+	
+	</script>
+	
+	
+	
+	
+	
+	
+	
+	
 
     <title>聯絡我們</title>
       
@@ -85,8 +117,7 @@
                     <!-- problemtype start -->
                     <div class="col-12 w-50 ">
                         <label for="inputProblemtype" class="form-label">問題種類:</label>
-                        <select id="inputProblemtype" class="form-select">
-                            <option selected>Choose...</option>
+                        <select id="problemType" class="form-select" name="problemType">
                             <option value="rent">rent</option>
                             <option value="buy">buy</option>
                             <option value="payment">payment</option>

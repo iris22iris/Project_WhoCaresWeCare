@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.web.store.model._02_customerService.CommentBean;
 import com.web.store.model._03_rent.RentProductBean;
 import com.web.store.model._03_rent.ReservationBean;
+import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.model._07_productType.ProductTypeBean;
 import com.web.store.repository.RentProductDao;
 import com.web.store.service.RentProductService;
@@ -18,11 +19,18 @@ import com.web.store.service.RentProductService;
 public class RentProductServiceImpl implements RentProductService {
 
 	RentProductDao rentProductDao;
+//	ReservationDao reservationDao;
 	
 	@Autowired
 	public RentProductServiceImpl(RentProductDao rentProductDao) {
 		this.rentProductDao = rentProductDao;
 	}
+//	@Autowired
+//	public RentProductServiceImpl(RentProductDao rentProductDao, ReservationDao reservationDao) {
+//		super();
+//		this.rentProductDao = rentProductDao;
+//		this.reservationDao = reservationDao;
+//	}
 
 	@Override
 	public List<RentProductBean> getAllProducts() {
@@ -80,4 +88,19 @@ public class RentProductServiceImpl implements RentProductService {
 	public void updateStock(int productId, int newQuantity) {
 	}
 
+	
+
+	//新增單筆預約資料
+	@Override
+	public void addReservation(ReservationBean reservation) {
+		rentProductDao.addReservation(reservation);
+		
+	}
+	// 依cookie中使用者帳號讀取目前使用者資料
+	@Override
+	public List<CustomerBean> getCustomerInfoBycookieaccount(String account) {
+	
+		return rentProductDao.getCustomerInfoBycookieaccount(account);
+	}
+	
 }

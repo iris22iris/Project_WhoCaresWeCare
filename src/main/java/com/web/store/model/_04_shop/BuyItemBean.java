@@ -27,6 +27,7 @@ public class BuyItemBean implements Serializable {
 	@EmbeddedId
 	private BuyItemPK buyItemPK;
 	
+	private Integer			prodId;			//商品編號
 	private Integer     	prodQTY;		//商品數量
 	private BigDecimal  	itemSum;		//單項總額
 	private String 			discountCode;	//折扣碼
@@ -45,7 +46,7 @@ public class BuyItemBean implements Serializable {
 		})
 	private OrdBean ordBean;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumns({
 			@JoinColumn(name="BUYTITEM_PROMOTEID_FK", referencedColumnName="promoteId"),
 			@JoinColumn(name="BUYTITEM_DISCOUNTCODE_FK", referencedColumnName="discountCode")
@@ -59,8 +60,9 @@ public class BuyItemBean implements Serializable {
 	public BuyItemBean() {
 	}
 
-	public BuyItemBean(Integer prodQTY, BigDecimal itemSum, String discountCode,
+	public BuyItemBean(Integer prodId ,Integer prodQTY, BigDecimal itemSum, String discountCode,
 			BigDecimal discount) {
+		this.prodId = prodId;
 		this.prodQTY = prodQTY;
 		this.itemSum = itemSum;
 		this.discountCode = discountCode;
@@ -74,6 +76,14 @@ public class BuyItemBean implements Serializable {
 
 	public void setBuyItemPK(BuyItemPK buyItemPK) {
 		this.buyItemPK = buyItemPK;
+	}
+	
+	public Integer getProdId() {
+		return prodId;
+	}
+
+	public void setProdId(Integer prodId) {
+		this.prodId = prodId;
 	}
 
 	public Integer getProdQTY() {
@@ -151,10 +161,12 @@ public class BuyItemBean implements Serializable {
 		result = prime * result + ((discount == null) ? 0 : discount.hashCode());
 		result = prime * result + ((discountCode == null) ? 0 : discountCode.hashCode());
 		result = prime * result + ((itemSum == null) ? 0 : itemSum.hashCode());
+		result = prime * result + ((prodId == null) ? 0 : prodId.hashCode());
 		result = prime * result + ((prodQTY == null) ? 0 : prodQTY.hashCode());
 		return result;
 	}
 
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -183,6 +195,11 @@ public class BuyItemBean implements Serializable {
 			if (other.itemSum != null)
 				return false;
 		} else if (!itemSum.equals(other.itemSum))
+			return false;
+		if (prodId == null) {
+			if (other.prodId != null)
+				return false;
+		} else if (!prodId.equals(other.prodId))
 			return false;
 		if (prodQTY == null) {
 			if (other.prodQTY != null)

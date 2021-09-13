@@ -172,7 +172,8 @@
 													<c:forEach var="amount" begin="1" end="${product.stock}">
 														<option value="${amount}">${amount}</option>
 													</c:forEach>
-												</select> <input type="submit" class="btn btn-warning" value="加入購物車" />
+												</select>
+												<input type="submit" class="btn btn-warning" value="加入購物車" />
 											</form>
 										</div>
 									</div>

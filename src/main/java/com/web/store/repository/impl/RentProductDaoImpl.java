@@ -11,6 +11,7 @@ import com.web.store.model._02_customerService.CommentBean;
 import com.web.store.model._03_rent.RentProductBean;
 import com.web.store.model._03_rent.ReservationBean;
 import com.web.store.model._03_rent.pkClass.RentProductPK;
+import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.model._07_productType.ProductTypeBean;
 import com.web.store.repository.RentProductDao;
 
@@ -177,6 +178,31 @@ public class RentProductDaoImpl implements RentProductDao {
 	@Override
 	public void addProduct(RentProductBean product) {
 	}
+
+	@Override
+	public void addReservation(ReservationBean reservation) {
+		Session session = factory.getCurrentSession();
+//	    ReservationBean rb = getCompanyById(product.getCompanyId());
+//	    reservation.setCompanyBean(cb);
+		session.save(reservation);   // NG
+		
+	}
+
+	@Override
+	public  List<CustomerBean> getCustomerInfoBycookieaccount(String account) {
+		Session session = factory.getCurrentSession();
+		
+		String hql =" SELECT c FROM CustomerBean c"
+//				+" WHERE c.productBean.prodId = :pid ";
+				+" WHERE c.account = :account ";
+		return session.createQuery(hql,CustomerBean.class)
+					.setParameter("account", account)
+					.getResultList();
+			
+		
+	}
+	
+	
 
 	
 

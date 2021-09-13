@@ -20,6 +20,11 @@ public class ProblemSelectServiceImpl implements ProblemSelectService {
 	
 	
 
+//	@Override
+//	public List<ProblemSelectBean> getAllProblemTypes(String problemType){
+//		return problemSelectDao.getAllProblemTypes(problemType);
+//		}
+	
 	@Override
 	public List<ProblemSelectBean> getAllProblemTypes(String problemType){
 		return problemSelectDao.getAllProblemTypes(problemType);
