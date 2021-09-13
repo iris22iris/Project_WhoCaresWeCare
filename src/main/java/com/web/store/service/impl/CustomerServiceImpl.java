@@ -49,14 +49,14 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public CustomerBean checkIDPassword(String custId, String password) {
-		return custDao.checkIDPassword(custId, password);
+	public CustomerBean checkIDPassword(String account, String password) {
+		return custDao.checkIDPassword(account, password);
 
 	}
 
 	@Override
-	public boolean idExists(String id) {
-		return custDao.idExists(id);
+	public boolean idExists(String account) {
+		return custDao.idExists(account);
 	}
 
 	@Override

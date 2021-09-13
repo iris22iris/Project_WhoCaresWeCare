@@ -385,10 +385,10 @@ public class CustomerController {
 
 			Pattern passWordp = Pattern.compile(PASSWORD_PATTERN);
 			Matcher pm = passWordp.matcher(password);
-			if (!pm.matches() && password.length() > 0 && password.length() < 12) {
+			if (! pm.matches()&& password.length()> 0 && password.length()< 12) {
 				errorMsgColumn.put("passWordError", "密碼至少含各一個大小寫字母、數字與!@#$%!^'\\\"，且長度至少等於八個字元");
 			} else {
-				if (!pm.matches() && password.length() > 0 && password.length() > 8) {
+				if ( ! pm.matches()&& password.length()> 0 && password.length()>8) {
 					errorMsgColumn.put("passWordError", "密碼至少含各一個大小寫字母、數字與!@#$%!^'\\\"，且長度不能大於十二個字元");
 				} else {
 					if (pm.matches()) {
