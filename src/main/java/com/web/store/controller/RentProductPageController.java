@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.web.store.model._02_customerService.CommentBean;
 import com.web.store.model._03_rent.RentProductBean;
@@ -36,7 +37,7 @@ public class RentProductPageController {
 		this.servletContext = servletContext;
 	}
 	
-	
+
 	@RequestMapping("/_03_rentProduct")
 	public String getProductById(@RequestParam("id") Integer id ,Model model) {
 		List<RentProductBean> rentProducts = rentProductService.getAllProducts();
@@ -58,6 +59,7 @@ public class RentProductPageController {
 	
 	
 	//預約popout點擊預約畫面把資料送到資料庫
+	
 	@PostMapping("/_03_rentProduct")
 	public String processAddNewProductForm	(@RequestParam("id") Integer id ,@CookieValue(value = "user") String user
 			,@ModelAttribute("reservation") ReservationBean rb,Model model) {
@@ -91,10 +93,12 @@ public class RentProductPageController {
 		
 		rentProductService.addReservation(rb);	
 		
-		//顯示結果
+		//顯示我的預約結果
 		
 		
 		
+		List<ReservationBean> myReservation = rentProductService.getReservationBeanByprodId(id);
+		model.addAttribute("myreservation", myReservation);
 		
 		return null ;
 	}

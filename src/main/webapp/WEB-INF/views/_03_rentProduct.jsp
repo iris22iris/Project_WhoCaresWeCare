@@ -3,17 +3,19 @@
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 數字格式化標籤 -->
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!-- 計算文字處理標籤 -->
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
-
+		
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="<c:url value='/css/_03rentProduct.css' />">
 <link rel="stylesheet" href="<c:url value='/css/commonStyle.css' />"
 	type="text/css">
 
-<title>租賃設備頁面: ${rentProduct.prodName}</title>
+<title>租賃設備頁面: ${rentProduct.prodName}o${fn:length(productTypes)}k</title>
 
 <!-- bootstrap -->
 <link
@@ -297,19 +299,7 @@
             	
 	            <form:form method='POST' modelAttribute="reservation" class="row g-3 form">
 	            <fieldset>
-	              <%--  <div class="form-group">
-						<label class="control-label col-lg-2 col-lg-2" for='category'>
-						種類為:
-						</label>
-						<div class="col-lg-10">
-							<form:input id="category" path="category" type='text'
-						class='form:input-large' />
-						</div>
-					</div> --%>
-		                		                	                
-	                
-	                
-	                
+	      	                	                
 	                <!-- 預約人start -->
 	                <%--
 	                 	<div class="col-3 justify-content-evenly p-1  d-flex align-items-center   ">
@@ -328,7 +318,7 @@
 						</div>
 	        		</div>
 					
-	            
+	            <%--
 	                <div class="form-group">
 						<label class="control-label col-lg-2 col-lg-2" for='category'>
 						種類為:
@@ -338,8 +328,9 @@
 						class='form:input-large' />
 						</div>
 					</div>
+					--%>
 	                    
-	               <div class="form-group d-flex align-items-center">
+	                <div class="form-group d-flex align-items-center">
 	                  	<div class="col-4 justify-content-evenly p-1  d-flex align-items-center   ">
 							<label style=font-size:22px  for="waitNum" class="form-label">目前候補人數 :</label>
 						</div>
@@ -348,7 +339,8 @@
 							 <label style=font-size:21px; for="waitNum" class="form-label">${reservations[0].waitNum}位</label>
 						</div>
 	        		</div>
-	                 <br>   	                	                 
+	                 <br>  
+	                  	                	                 
             	</div>
             	
             <div class="form-group">	
