@@ -25,6 +25,14 @@
 	function favoriteList(obj){
 		obj.href="/Whocares/_04_favoriteList/"+'<%=session.getAttribute("LoginOK")%>';
 	}
+
+	function rentOrderQuery(obj){
+		obj.href="<c:url value='/rentOrderQuery/' />"+'<%=session.getAttribute("LoginOK")%>';
+	}
+	
+	function orderQuery(obj){
+		obj.href="<c:url value='/orderQuery/' />"+'<%=session.getAttribute("LoginOK")%>';
+	}
 </script>
 <title>會員專區</title>
 
@@ -85,13 +93,15 @@
 
 						<div class="col-12 bcglightgray">
 							<div class="mt-5 ">
-								<h1 class="bcglightgray">
-									<i class="fas fa-caret-right bcglightgray"></i> 租賃記錄查詢
+								<h1>
+									<a style="text-decoration: none; color: black; cursor:pointer;"
+										class="fas fa-caret-right" onclick="rentOrderQuery(this)"><i>租賃記錄查詢</i></a>
 								</h1>
 							</div>
 							<div class="mt-5 ">
-								<h1 class="bcglightgray">
-									<i class="fas fa-caret-right bcglightgray"></i> 購買記錄查詢
+								<h1>
+									<a style="text-decoration: none; color: black; cursor:pointer;"
+										class="fas fa-caret-right" onclick="orderQuery(this)"><i>購買記錄查詢</i></a>
 								</h1>
 							</div>
 							<div class="mt-5 ">

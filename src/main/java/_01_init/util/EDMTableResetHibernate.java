@@ -109,6 +109,7 @@ public class EDMTableResetHibernate {
 					java.sql.Clob clob = SystemUtils2018.fileToClob("data/orderMark.txt");
 					ob.setOrderMark(clob);
 					ob.setPayment(token[6]);
+					ob.setOrderStatus(token[13]);
 					ob.setReciAddress(token[7]);
 					ob.setReciCity(token[8]);
 					ob.setReciName(token[9]);
@@ -428,25 +429,25 @@ public class EDMTableResetHibernate {
 				System.out.println("problem表格資料新增成功");
 			}
 
-			// 13. favorite表格
-			// 由"data/favorite.dat"逐筆讀入favorite表格內的初始資料，
-			// 然後依序新增到favorite表格中
-			try (FileInputStream fis = new FileInputStream("data/favorite.dat");
-					InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
-					BufferedReader br = new BufferedReader(isr0);) {
-				while ((line = br.readLine()) != null) {
-
-					String[] token = line.split("\\|");
-					FavoriteBean fb = new FavoriteBean();
-					fb.setFK_Customer_ID(Integer.parseInt(token[1]));
-					fb.setFK_Product_ID(Integer.parseInt(token[2]));
-
-					session.merge(fb);
-					count++;
-				}
-				session.flush();
-				System.out.println("favorite表格資料新增成功");
-			}
+//			// 13. favorite表格
+//			// 由"data/favorite.dat"逐筆讀入favorite表格內的初始資料，
+//			// 然後依序新增到favorite表格中
+//			try (FileInputStream fis = new FileInputStream("data/favorite.dat");
+//					InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
+//					BufferedReader br = new BufferedReader(isr0);) {
+//				while ((line = br.readLine()) != null) {
+//
+//					String[] token = line.split("\\|");
+//					FavoriteBean fb = new FavoriteBean();
+//					fb.setFK_Customer_ID(Integer.parseInt(token[1]));
+//					fb.setFK_Product_ID(Integer.parseInt(token[2]));
+//
+//					session.merge(fb);
+//					count++;
+//				}
+//				session.flush();
+//				System.out.println("favorite表格資料新增成功");
+//			}
 
 			// 14.problemselect表格
 			// 由"data/problemselect.dat"逐筆讀入problemselect表格內的初始資料，
