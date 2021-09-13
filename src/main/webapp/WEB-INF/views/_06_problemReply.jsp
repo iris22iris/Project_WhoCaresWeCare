@@ -19,7 +19,17 @@
     <link rel="stylesheet"
     href="<c:url value='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'/>" />
 	<title>客服紀錄查詢</title>
+	<script src="<c:url value='/js/ContactUs.js' />"></script>
 </head>
+
+
+
+
+
+
+
+
+
 
 <body>
   <!-- main start -->
@@ -40,30 +50,30 @@
         <div class="container search pb-3">
           <form class="row align-items-center">
             <div class="col-3  d-flex justify-content-end">
-            <label>${訪客}您好，請輸入客服編號查詢：</label></div>
+            <label>${customerBean.custName}您好，請輸入客服編號查詢：</label></div>
             <div class="col-3">
             <input type="search" class="form-control" id="enter"></div>
             <div class="col-1">
-            <button type="button" class="btn btn-warning">搜尋</button></div>
+            <button type="button" class="btn btn-warning" onclick="usSearch()">搜尋</button></div>
           </form>
         </div>
         <!-- 搜尋end -->
       </div>      
       <!-- title end -->
 
-    <!-- recordForm start 尚未查詢以前這個區塊隱藏-->
+    <!-- recordForm start 尚未查詢以前這個區塊隱藏problem-->
     <div class="container recordForm">
         
          <!-- account&orderno start -->
        <div class="row formRow">
           <div class="col-5">
             <label for="account" class="form-label">會員帳號:</label>
-            <input type="text" class="form-control" id="account" disabled="disabled" value="">
+            <input type="text" class="form-control"  id="account" disabled="disabled" value=""> ${problemBean.account}
           </div>
           <div class="col-1"></div>
           <div class="col-5">
             <label for="orderNo" class="form-label">訂單編號:</label>
-            <input type="text" class="form-control" id="orderNo" disabled="disabled" value="">
+            <input type="text" class="form-control" id="orderNo" disabled="disabled" value=""> ${problemBean.ordId}
           </div>
           <div class="col-1"></div>
         </div>
@@ -73,12 +83,12 @@
         <div class="row formRow">
           <div class="col-5">
               <label for="Email" class="form-label">Email:</label>
-              <input type="email" class="form-control" id="inputEmail" disabled="disabled" value="" >
+              <input type="email" class="form-control" id="inputEmail" disabled="disabled" value="" >${problemBean.email}
           </div>
           <div class="col-1"></div>
           <div class="col-5">
               <label for="phone" class="form-label">連絡電話:</label>
-              <input type="tel" class="form-control" id="inputPhone" disabled="disabled" value="">
+              <input type="tel" class="form-control" id="inputPhone" disabled="disabled" value="">${problemBean.phone}
           </div>
           <div class="col-1"></div>
         </div>
@@ -88,12 +98,12 @@
         <div class="row formRow">
           <div class="col-5">
             <label for="recordNum" class="form-label">客服編號:</label>
-            <input type="num" class="form-control" id="recordNum" disabled="disabled" value="">
+            <input type="num" class="form-control" id="recordNum" disabled="disabled" value="">${problemBean.usId}
           </div>
           <div class="col-1"></div>
           <div class="col-5">
             <label for="recordDate" class="form-label">表單時間:</label>
-            <input type="date" class="form-control" id="recordDate" disabled="disabled" value="">
+            <input type="date" class="form-control" id="recordDate" disabled="disabled" value="">${problemBean.replyDate}
           </div>
           <div class="col-1"></div>
         </div>
@@ -105,7 +115,7 @@
         <div class="row formRow">
           <div class="col-3">
               <label for="problemType" class="form-label">問題種類:</label>
-              <input type="problemType" class="form-control" id="problemType" disabled="disabled" value="">
+              <input type="problemType" class="form-control" id="problemType" disabled="disabled" value="">${problemBean.problemType}
           </div>
         </div>     
         <!-- problemtypee&replytime end -->
@@ -115,12 +125,12 @@
           <div class="col-6">
             <label for="record" class="form-label" >意見內容:</label>
             <br>
-            <textarea name="description" id="record" cols="70" rows="10" disabled="disabled" ></textarea>
+            <textarea name="description" id="record" cols="70" rows="10" disabled="disabled" >${problemBean.replyContent}</textarea>
           </div>
           <div class="col-6">
             <label for="inputDescription" class="form-label">客服回覆:</label>
             <br>
-            <textarea name="description" id="inputDescription" cols="73" rows="10" disabled="disabled" ></textarea>
+            <textarea name="description" id="inputDescription" cols="73" rows="10" disabled="disabled" >${problemBean.replyContent}</textarea>
           </div>
         </div>
         <!-- description & reply end -->

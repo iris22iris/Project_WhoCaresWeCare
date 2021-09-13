@@ -10,8 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.web.store.model._02_customerService.ProblemBean;
 import com.web.store.model._02_customerService.ProblemSelectBean;
-import com.web.store.model._05_customer.CitySelectBean;
-import com.web.store.model._05_customer.CustomerBean;
+import com.web.store.model._02_customerService.usPKClass.ProblemBeanPK;
 import com.web.store.repository.ContactUsDao;
 
 @Repository
@@ -64,6 +63,30 @@ public class ContactUsDaoImpl implements ContactUsDao {
 		Session session = factory.getCurrentSession();
 		List<ProblemSelectBean> dataList = session.createQuery(hql, ProblemSelectBean.class).getResultList();
 		return dataList;
+	}
+
+//	@Override
+//	public ProblemBean getProblemById(int usId) {
+//		
+//		ProblemBean pb = null;
+//		Session session = factory.getCurrentSession();
+//		String hql = "FROM ProblemBean pb WHERE pb.usId = :id" ;
+//		try {
+//			pb = (ProblemBean) session.createQuery(hql).setParameter("id",usId).getSingleResult();
+//		} catch (NoResultException e) {
+//			; // 表示查無紀錄
+//		}
+//		
+//		
+//		
+//		return pb;
+//	}
+
+	@Override
+	public ProblemBean findProblemById(Integer usId) {
+		Session session = factory.getCurrentSession();
+		ProblemBean problemBean = session.get(ProblemBean.class, new ProblemBeanPK(usId));
+		return problemBean;
 	}
 	
 	

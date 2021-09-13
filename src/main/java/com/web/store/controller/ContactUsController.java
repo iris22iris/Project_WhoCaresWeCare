@@ -1,11 +1,11 @@
 package com.web.store.controller;
 
 import java.sql.Blob;
-import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +17,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.web.store.model._02_customerService.ProblemBean;
-import com.web.store.model._02_customerService.ProblemSelectBean;
+import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.service.ContactUsService;
-import com.web.store.service.ProblemSelectService;
+import com.web.store.service.CustomerService;
 
 @Controller
 public class ContactUsController {
+	CustomerService customerService;
+	HttpSession httpSession;
+	
 	@Autowired
 	HttpServletRequest request;
 	@Autowired
@@ -35,6 +38,16 @@ public class ContactUsController {
 	ServletContext context;
 	@Autowired
 	ContactUsService contactUsService;
+	
+	@Autowired
+	public ContactUsController(CustomerService customerService,ContactUsService contactUsService,
+			HttpSession httpSession) {
+		this.customerService = customerService;
+		this.contactUsService =  contactUsService;
+		this.httpSession = httpSession;
+		
+	}
+	
 //	@Autowired
 //	ProblemSelectService problemSelectService;
 
@@ -76,7 +89,42 @@ public class ContactUsController {
 			}
 				}
 			
+			try {
+				contactUsService.save(pb);
+			} catch (Exception ex) {
+				System.out.println(ex.getClass().getName() + ", ex.getMessage()=" + ex.getMessage());
+			}
+			return "_02_contactUs";
+		}
+	
+	@GetMapping("/_06_problemReply/{custId}")
+	public String insertproblemReplyQuery(
+			@PathVariable Integer custId,
+			@RequestParam(name = "usId", required = false) Integer usId,
+			Model model) {
+		
+		CustomerBean customerBean = customerService.getCustomerById(custId);
+		model.addAttribute(customerBean);
+		if (usId != 0 ) {
+			ProblemBean pb =  contactUsService.getProblemById(usId);
 			
+			model.addAttribute(pb);
+		}
+		
+		return "_06_problemReply";
+	}
+	
+	
+	
+	
+	
+	
+	
+		
+		
+		
+		}
+
 			
 			
 //			ProblemSelectBean problemBean = problemSelectService.getAllProblemType(pb.getProblemType().getId());
@@ -98,18 +146,5 @@ public class ContactUsController {
 //			public @ResponseBody List<ProblemSelectBean> querySelect(Model model,@PathVariable String problemType) {
 //				List<ProblemSelectBean> queyrselect = problemSelectService.getAllProblemTypes(problemType);
 //				return queyrselect;
-			
-				
-		try {
-			contactUsService.save(pb);
-		} catch (Exception ex) {
-			System.out.println(ex.getClass().getName() + ", ex.getMessage()=" + ex.getMessage());
-			
-		}
-
-		return "_02_contactUs";
-
-	}
 	
-	}
 
