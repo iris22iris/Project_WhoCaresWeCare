@@ -440,7 +440,6 @@ public class EDMTableResetHibernate {
 					FavoriteBean fb = new FavoriteBean();
 					fb.setFK_Customer_ID(Integer.parseInt(token[1]));
 					fb.setFK_Product_ID(Integer.parseInt(token[2]));
-
 					session.merge(fb);
 					count++;
 				}
