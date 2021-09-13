@@ -128,7 +128,8 @@
 						<div class="col-12 ">
 							<div class="mt-5">
 								<h1>
-									<i class="fas fa-caret-right"></i> 客服記錄查詢
+								<a style="text-decoration: none; color: black;"
+									class="fas fa-caret-right" href="_06_problemReply"><i>客服紀錄查詢</i></a>
 								</h1>
 								<div class="mt-5 ">
 									<h1>
