@@ -31,7 +31,8 @@ public class OrderQueryController {
 		this.orderQueryService = orderQueryService;
 		this.httpSession = httpSession;
 	}
-
+	
+//	進入商城訂單查詢頁(含查詢字串)
 	@GetMapping("/orderQuery/{custId}")
 	public String orderQuery (
 			@PathVariable Integer custId,

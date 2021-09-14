@@ -40,14 +40,16 @@ public class ProductDaoImpl implements ProductDao {
 	public Session getSession() {
 		return factory.getCurrentSession();
 	}
-
+	
+//	取得所有商品
 	@Override
 	public List<ProductBean> getAllProducts() {
 		Session session = factory.getCurrentSession();
 		String hql = " FROM ProductBean p ";
 		return session.createQuery(hql, ProductBean.class).getResultList();
 	}
-
+	
+//	透過頁碼取得商品
 	@Override
 	public List<ProductBean> getAllProductsByPage(int pageNo) {
 		Session session = factory.getCurrentSession();
@@ -56,19 +58,21 @@ public class ProductDaoImpl implements ProductDao {
 		return session.createQuery(hql, ProductBean.class).setFirstResult(startRecordNo).setMaxResults(recordsPerPage)
 				.getResultList();
 	}
-
+	
+//	透過頁碼取得商品並排序
 	@Override
 	public List<ProductBean> getAllProductsByPageSort(int pageNo, String sortType) {
 		Session session = factory.getCurrentSession();
 		String hql = " FROM ProductBean p ";
-		if (sortType != null && sortType != "") {
+		if (sortType != null) {
 			hql += " ORDER BY " + sortType + " ";
 		}
 		int startRecordNo = (pageNo - 1) * recordsPerPage;
 		return session.createQuery(hql, ProductBean.class).setFirstResult(startRecordNo).setMaxResults(recordsPerPage)
 				.getResultList();
 	}
-
+	
+//	取得總頁數
 	@Override
 	public int getTotalPages() {
 		Session session = factory.getCurrentSession();
@@ -82,17 +86,8 @@ public class ProductDaoImpl implements ProductDao {
 		totalPages = (int) (Math.ceil(count / (double) recordsPerPage));
 		return totalPages;
 	}
-
-//	@Override
-//	public List<ProductBean> getProductsByProdType(ProductTypeBean prodTypeBean) {
-//		Session session = factory.getCurrentSession();
-//		String hql = " FROM ProductBean p WHERE p.productTypeBean = :ptb ";
-//		List<ProductBean> list = session.createQuery(hql, ProductBean.class)
-//										.setParameter("ptb", prodTypeBean)
-//										.getResultList();
-//		return list;
-//	}
-
+	
+//	透過頁碼以及產品類別取得商品
 	@Override
 	public List<ProductBean> getProductsByProdTypeAndPage(ProductTypeBean prodTypeBean, int pageNo) {
 		Session session = factory.getCurrentSession();
@@ -102,13 +97,14 @@ public class ProductDaoImpl implements ProductDao {
 				.setFirstResult(startRecordNo).setMaxResults(recordsPerPage).getResultList();
 		return list;
 	}
-
+	
+//	透過頁碼以及產品類別取得商品並排序
 	@Override
 	public List<ProductBean> getProductsByProdTypeAndPageSort(ProductTypeBean prodTypeBean, int pageNo,
 			String sortType) {
 		Session session = factory.getCurrentSession();
 		String hql = " FROM ProductBean p WHERE p.productTypeBean = :ptb ";
-		if (sortType != null && sortType != "") {
+		if (sortType != null) {
 			hql += " ORDER BY " + sortType + " ";
 		}
 		int startRecordNo = (pageNo - 1) * recordsPerPage;
@@ -116,7 +112,8 @@ public class ProductDaoImpl implements ProductDao {
 				.setFirstResult(startRecordNo).setMaxResults(recordsPerPage).getResultList();
 		return list;
 	}
-
+	
+//	透過產品類別取得總頁數
 	@Override
 	public int getTotalPagesByProdType(ProductTypeBean prodTypeBean) {
 		Session session = factory.getCurrentSession();
@@ -130,7 +127,8 @@ public class ProductDaoImpl implements ProductDao {
 		totalPages = (int) (Math.ceil(count / (double) recordsPerPage));
 		return totalPages;
 	}
-
+	
+//	取得所有產品類別
 	@Override
 	public List<ProductTypeBean> getAllProdTypes() {
 		Session session = factory.getCurrentSession();
