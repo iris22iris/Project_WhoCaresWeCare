@@ -68,7 +68,7 @@ function upData() {
 	var city = $('#city').val();
 	
 	var xhr1 = new XMLHttpRequest();
-		xhr1.open("PUT", "<c:url value='/_05_EditmemberProfile/' />" + ${id}, true);
+		xhr1.open("PUT", "<c:url value='/_05_EditmemberProfile/' />", true);
 		var jsonCustomer = {
 				custId:${id},
 				custName:$('#custName').val(),	

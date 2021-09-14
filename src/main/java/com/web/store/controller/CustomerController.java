@@ -83,7 +83,7 @@ public class CustomerController {
 				errorMsgMap.put("accountError", "帳號與密碼欄必須輸入，密碼長度大於八個字元");
 
 			} else if (customerBean != null) {
-				model.addAttribute("LoginOK", customerBean);
+//				model.addAttribute("LoginOK", customerBean);
 				HttpSession session = request.getSession();
 				session.setAttribute("LoginOK", customerBean.getCustId());
 

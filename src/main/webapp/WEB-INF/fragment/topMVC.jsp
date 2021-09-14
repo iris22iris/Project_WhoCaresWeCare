@@ -9,16 +9,16 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-function clicka(obj){
-	if('<%= session.getAttribute("LoginOK") %>' == 'null'){
-		confirm('請先登入');
-		obj.href='${pageContext.request.contextPath}/_05_login';
-		}
-<%-- 		 if('<%= session.getAttribute("LoginOK") %>' != 'null'){ --%>
-		// obj.href='${pageContext.request.contextPath}/_05_member_management';
-		// } else if(confirm('請先登入')) {
-		// 	obj.href='${pageContext.request.contextPath}/_05_login';
-		// }
+function clicka(obj,objUrl){
+	if(<%=session.getAttribute("LoginOK")%> == 'null' || <%=session.getAttribute("LoginOK")%> == null || <%=session.getAttribute("LoginOK")%> == ''){
+		if(confirm('請先登入')) {
+			obj.href='${pageContext.request.contextPath}/_05_login';
+			} else {
+				obj.href='${pageContext.request.contextPath}/index';
+				}
+	} else {
+		obj.href='${pageContext.request.contextPath}/' + objUrl;	
+	}
 }
 
 </script>
@@ -48,7 +48,8 @@ function clicka(obj){
 			<!-- left Menu -->
 			<ul class="navbar-nav  me-auto mb-lg-0 left-menu">
 				<li class="nav-item "><a class="nav-link textSize "
-					href="<c:url value='/_02_onlineDM' />" style="color: white;"> 關於我們</a></li>
+					href="<c:url value='/_02_onlineDM' />" style="color: white;">
+						關於我們</a></li>
 				<li class="nav-item"><a class="nav-link textSize "
 					href="<c:url value='/rentMenu' />" style="color: white;"> 租賃設備</a></li>
 				<li class="nav-item"><a class="nav-link textSize "
@@ -56,12 +57,12 @@ function clicka(obj){
 				<li class="nav-item"><a class="nav-link textSize "
 					href="<c:url value='' />" style="color: white;"> 客服中心</a></li>
 				<!-- 可以增加功能為登入才會顯示會員中心這個連結 -->
-				<li class="nav-item"><a class="nav-link textSize" id="cb"
-					style="color: white;" onclick="clicka(this)">會員中心</a></li>
+				<li class="nav-item"><a class="nav-link textSize " id="cb"
+					href="<c:url value='/_05_member_management'/>"
+					style="color: white;" onclick='clicka(this,"_05_member_management")'> 會員中心</a></li>
 			</ul>
 
 
-			
 			<!-- right menu -->
 			<!-- <div class="nav-item">
 				<a class="nav-link" href="<c:url value='#購物車' />"
@@ -70,23 +71,20 @@ function clicka(obj){
 				</a>
 			</div> -->
 			<div class="dropdown">
-				<ul class="nav-item  navbar-nav  me-auto mb-lg-0 left-menu dropdown-toggle"
-				id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
-				<a class="nav-link " href="" style="padding: 0px;"> <img
-					src="<c:url value='/images/cartIcon.png' />" alt="購物車"></a>
+				<ul
+					class="nav-item  navbar-nav  me-auto mb-lg-0 left-menu dropdown-toggle"
+					id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
+					<a class="nav-link" style="padding: 0px;"> 
+					<img src="<c:url value='/images/cartIcon.png' />" alt="購物車">
+					</a>
 				</ul>
 				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-					<li class="nav-item">
-						<a class="nav-link textSize" href="<c:url value='/_03_rentItemList'/>" 
-							onclick="clicka(this)">
-							租賃設備清單
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link textSize" href="<c:url value='/_04_shoppingCart'/>" 
-							onclick="clicka(this)">
-							商品購物車</a>
-					</li>
+					<li class="nav-item"><a class="nav-link textSize"
+						href="<c:url value='/_03_rentItemList'/>" onclick='clicka(this,"_05_member_management")'>
+							租賃設備清單 </a></li>
+					<li class="nav-item"><a class="nav-link textSize"
+						href="<c:url value='/_04_shoppingCart'/>" onclick='clicka(this,"_05_member_management")'>
+							商品購物車</a></li>
 				</ul>
 			</div>
 
@@ -97,42 +95,34 @@ function clicka(obj){
 					id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
 					<c:choose>
 						<c:when test="${empty LoginOK}">
-							<a class="nav-link " href="" style="padding: 0px;"> 
-								<img src="<c:url value='/images/memberIcon.png' />" alt="會員">
+							<a class="nav-link " href="" style="padding: 0px;"> <img
+								src="<c:url value='/images/memberIcon.png' />" alt="會員">
 							</a>
 						</c:when>
 						<c:otherwise>
-							<a class="nav-link custImg" href="" style="padding: 0px;"> 
-								<img src=" <c:url value='/getMemberImg?custId=${LoginOK}'/>">
+							<a class="nav-link custImg" href="" style="padding: 0px;"> <img
+								src=" <c:url value='/getMemberImg?custId=${sessionScope.LoginOK}'/>">
 							</a>
 						</c:otherwise>
 					</c:choose>
 				</ul>
 				<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-					<li class="nav-item">
-					 <c:if test="${ empty LoginOK}">
-						<a class="nav-link textSize" href="<c:url value='_05_login'/>">登入</a>  
-					</c:if>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link textSize" href="<c:url value='/_05_member_management'/>" 
-							onclick="clicka(this)">
-							會員中心
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link textSize" href="<c:url value='/_02_contactUs'/>" 
-							onclick="clicka(this)">
-							聯絡我們</a>
-						</li>
+					<li class="nav-item"><c:if test="${ empty LoginOK}">
+							<a class="nav-link textSize" href="<c:url value='_05_login'/>">登入</a>
+						</c:if></li>
+					<li class="nav-item"><a class="nav-link textSize"
+						href="<c:url value='/_05_member_management'/>"
+						onclick='clicka(this,"_05_member_management")'> 會員中心 </a></li>
+					<li class="nav-item"><a class="nav-link textSize"
+						href="<c:url value='/_02_contactUs'/>" onclick='clicka(this,"_02_contactUs")'>
+							聯絡我們</a></li>
 					<c:if test="${! empty LoginOK}">
-						<a class="nav-link textSize" href="<c:url value='_05_logout'/>"> 
-							登出
-						</a>
+						<a class="nav-link textSize" href="<c:url value='_05_logout'/>">
+							登出 </a>
 					</c:if>
 				</ul>
 			</div>
-		
+
 
 			<!-- Search -->
 			<form class="d-flex">
@@ -145,4 +135,4 @@ function clicka(obj){
 		</div>
 	</div>
 </nav>
-	<!-- Main-header End -->
+<!-- Main-header End -->
