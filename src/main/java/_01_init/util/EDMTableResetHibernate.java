@@ -201,7 +201,8 @@ public class EDMTableResetHibernate {
 					pb.setDescription(clob);
 					pb.setStock(Integer.parseInt(token[7]));
 					pb.setProductTypeBean(new ProductTypeBean(token[8]));
-					if(token[9] == "1" ) {
+					int n = 1;
+					if(Integer.parseInt(token[9]) == n ) {
 				        ;
 					}else {
 					pb.setPromotionBean(new PromotionBean(Integer.parseInt(token[9])));
