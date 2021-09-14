@@ -24,6 +24,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	public CustomerDaoImpl() {
 	}
 
+	// 抓取該會員資料
 	@Override
 	public CustomerBean getCustomerById(int id) {
 		CustomerBean bean = null;
@@ -39,6 +40,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	}
 
+	// 抓取多筆會員資料
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<CustomerBean> getCustomers() {
@@ -49,12 +51,14 @@ public class CustomerDaoImpl implements CustomerDao {
 		return list;
 	}
 
+	
 	@Override
 	public Object save(CustomerBean bean) {
 		Session session = factory.getCurrentSession();
 		return session.save(bean);
 	}
 
+	
 	@Override
 	public void updateCustomer(CustomerBean bean) {
 		Session session = factory.getCurrentSession();
@@ -70,6 +74,7 @@ public class CustomerDaoImpl implements CustomerDao {
 		session.delete(customer);
 	}
 
+	// 以帳號跟密碼去查有無此會員
 	@Override
 	public CustomerBean checkIDPassword(String account, String password) {
 		CustomerBean cp = null;
@@ -82,6 +87,7 @@ public class CustomerDaoImpl implements CustomerDao {
 		return cp;
 	}
 
+	// 以帳號查有無此會員
 	@Override
 	public boolean idExists(String account) {
 		boolean exist = false;
@@ -104,6 +110,7 @@ public class CustomerDaoImpl implements CustomerDao {
 		session.evict(customer);
 	}
 
+	// 查詢下拉式選單資料
 	@Override
 	public List<CitySelectBean> querySelect(String groupCity) {
 		String hql = "";
