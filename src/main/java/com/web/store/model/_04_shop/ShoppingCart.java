@@ -44,18 +44,18 @@ public class ShoppingCart {
 	}
 
 	// 修改購物車內商品數量
-	public boolean modifyQty(int prodId, int newQty) {
-		if (cart.get(prodId) != null) {
-			BuyItemBean bean = cart.get(prodId);
-			bean.setProdQTY(newQty);
-			return true;
-		} else {
-			return false;
-		}
-	}
+//	public boolean modifyQty(int prodId, int newQty) {
+//		if (cart.get(prodId) != null) {
+//			BuyItemBean bean = cart.get(prodId);
+//			bean.setProdQTY(newQty);
+//			return true;
+//		} else {
+//			return false;
+//		}
+//	}
 
 	// 刪除某項商品
-	public int deleteBook(int prodId) {
+	public int deleteProduct(int prodId) {
 		if (cart.get(prodId) != null) {
 			cart.remove(prodId); // Map介面的remove()方法
 			return 1;
