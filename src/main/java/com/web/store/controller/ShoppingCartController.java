@@ -2,7 +2,6 @@ package com.web.store.controller;
 
 import java.math.BigDecimal;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -20,13 +19,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.store.model._04_shop.BuyItemBean;
 import com.web.store.model._04_shop.ProductBean;
 import com.web.store.model._04_shop.ShoppingCart;
 import com.web.store.service.ProductService;
+
 
 @Controller
 @SessionAttributes({ "LoginOK", "ShoppingCart" })
@@ -75,7 +73,7 @@ public class ShoppingCartController {
 	}
 
 	//購物車頁面
-	@GetMapping("/shoppingCart")
+	@GetMapping("/_04_shoppingCart")
 	public String shoppingCart(Model model) 
 	{
 		ShoppingCart cart = (ShoppingCart) httpSession.getAttribute("ShoppingCart");
@@ -93,13 +91,12 @@ public class ShoppingCartController {
 		}
 		model.addAttribute("buyItems",buyItems);
 
-		return "shoppingCart";
+		return "_04_shoppingCart";
 	}
 	
 	//移除購物車商品
-	@PostMapping("/UpdateItem.do")
-	protected String UpdateItem(@RequestParam("cmd") String cmd,
-			@RequestParam(value = "prodId", required = false) Integer prodId,
+	@GetMapping("/UpdateItem.do")
+	protected String updateItem(@RequestParam(value = "prodId", required = false) String prodId,
 			 Model model) {
 			
 		ShoppingCart cart = (ShoppingCart) httpSession.getAttribute("ShoppingCart");
@@ -107,17 +104,26 @@ public class ShoppingCartController {
 			// 如果購物車內沒有商品就導回商品menu
 			return "redirect:/buyMenu";
 		}
-		log.info("cmd=" + cmd);
-		if (cmd.equalsIgnoreCase("DEL")) {
-			cart.deleteProduct(prodId); // 刪除購物車內的某項商品
-			return "shoppingCart";
+		
+		String ids = (String) model.getAttribute("prodId");
+		String[] productId = ids.split("\\,");
+		int itemsNum = productId.length;
+		
+		for(int i=0 ; i < itemsNum ; i++) {
+			cart.deleteProducts(Integer.parseInt(productId[i]));
+		}
+		log.info("總共刪除了購物車內"+ itemsNum +"項商品。");
+//		log.info("cmd=" + cmd);
+//		if (cmd.equalsIgnoreCase("DEL")) {
+//			cart.deleteProduct(prodId); // 刪除購物車內的某項商品
+//			return "shoppingCart";
 //		} else if (cmd.equalsIgnoreCase("MOD")) {
 //			sc.modifyQty(bookId, newQty); // 修改某項商品的數項
 //			return SHOW_CART_CONTENT;
-		} else {
-			return "shoppingCart";
-		}
-
+//		} else {
+//			return "shoppingCart";
+//		}
+		return "_04_shoppingCart";
 	}
 
 }

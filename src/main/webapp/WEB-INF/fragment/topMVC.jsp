@@ -76,7 +76,7 @@ function clicka(obj,objUrl){
 						href="<c:url value='/_03_rentItemList'/>">
 							租賃設備清單 </a></li>
 					<li class="nav-item"><a class="nav-link textSize"
-						href="<c:url value='/shoppingCart'/>">
+						href="<c:url value='/_04_shoppingCart'/>">
 							商品購物車</a></li>
 				</ul>
 			</div>

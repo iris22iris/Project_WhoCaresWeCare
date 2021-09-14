@@ -55,13 +55,20 @@ public class ShoppingCart {
 //	}
 
 	// 刪除某項商品
-	public int deleteProduct(int prodId) {
-		if (cart.get(prodId) != null) {
-			cart.remove(prodId); // Map介面的remove()方法
-			return 1;
-		} else {
-			return 0;
-		}
+//	public int deleteProduct(int prodId) {
+//		if (cart.get(prodId) != null) {
+//			cart.remove(prodId); // Map介面的remove()方法
+//			return 1;
+//		} else {
+//			return 0;
+//		}
+//	}
+	
+	// 刪除勾選商品
+	public void deleteProducts(int productId) {
+		if ( cart.get(productId) != null ) {
+		       cart.remove(productId);  // Map介面的remove()方法
+			} 
 	}
 
 

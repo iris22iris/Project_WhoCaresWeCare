@@ -170,9 +170,9 @@ public class EDMTableResetHibernate {
 					pb.setProdName(token[6]);
 					java.sql.Clob clob = SystemUtils2018.fileToClob("data/productDescription.txt");
 					pb.setDescription(clob);
-//					pb.setPromoteId(null);
-					pb.setStock(Integer.parseInt(token[8]));
-					pb.setProductTypeBean(new ProductTypeBean(token[9]));
+					pb.setStock(Integer.parseInt(token[7]));
+					pb.setProductTypeBean(new ProductTypeBean(token[8]));
+//					pb.setPromotionBean(new PromotionBean(Integer.parseInt(token[9])));
 
 					session.merge(pb);
 					count++;

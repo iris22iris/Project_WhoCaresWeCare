@@ -23,14 +23,25 @@
     <title>購物車清單</title>
     
     <script>
-    function confirmDelete(n) {
+    function confirmDelete() {
 		if (confirm("確認移除勾選之商品? ") ) {
-			document.forms[0].action="<c:url value='/shoppingCart/UpdateItem.do?cmd=DEL&prodId=" + n +"' />" ;
+			var checkObj = [];
+
+			for(var i=0 ; i < $(".checkPid").length; i++ ){
+				if($(".checkPid")[i].checked){
+					checkObj.push($(".checkPid")[i]);
+					}
+			}
+			var prodId = "";
+			for(var i=0 ; i <checkObj.length;i++){
+				prodId += checkObj[i].getAttribute("value")+",";
+			}
+			console.log(prodId);
+			document.forms[0].action="<c:url value='/_04_shoppingCart/UpdateItem.do' />" ;
 			document.forms[0].method="POST";
 			document.forms[0].submit();
-		} else {
-		
-		}
+		} 
+
 	}
     </script>
 </head>
@@ -66,7 +77,7 @@
             <c:forEach var='buyItems' items='${buyItems}'>
              <div class="cartList">
                 <div class="col-2">
-                    <input type="checkbox" id="deleteCart">
+                    <input type="checkbox" name="prodId" value="${buyItems.productBean.prodId}" class="checkPid">
                 </div>
                 <div class="col-3">
                     <img class="productImg" 
@@ -131,7 +142,7 @@
             </c:forEach>
             
              <div class="deleteBtn">
-                 <button type="submit">刪除</button>
+                 <button type="submit" onclick="confirmDelete()">刪除</button>
              </div>
          </div>
          <!--Left CartList End -->
