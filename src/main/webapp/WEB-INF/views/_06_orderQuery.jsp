@@ -35,7 +35,7 @@
 
 			<!--title start 標題開始-->
 			<div class="title ">
-				<div class="rentitemtitle p-3">
+				<div class="buyitemtitle p-3">
 					<i class="fas fa-th-large pe-2" aria-hidden="true"></i> 購買商城訂單紀錄
 				</div>
 				<!-- header-search start 查詢訂單功能開始-->

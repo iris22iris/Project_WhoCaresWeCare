@@ -317,11 +317,12 @@ public class EDMTableResetHibernate {
 					rib.setDiscount(new BigDecimal(token[3]));
 					rib.setDiscountCode(token[4]);
 					rib.setProdTotal(new BigDecimal(token[3]));
-					rib.setProdId(Integer.parseInt(token[5]));
-					rib.setProdQty(Integer.parseInt(token[6]));
-					rib.setRentPeriod(Integer.parseInt(token[7]));
-					rib.setReturnDate(Timestamp.valueOf(token[8]));
-					rib.setStartDate(Timestamp.valueOf(token[9]));
+//					rib.setProdId(Integer.parseInt(token[5]));
+					rib.setProdQty(Integer.parseInt(token[5]));
+					rib.setRentPeriod(Integer.parseInt(token[6]));
+					rib.setReturnDate(Timestamp.valueOf(token[7]));
+					rib.setStartDate(Timestamp.valueOf(token[8]));
+					rib.setRentProductBean(new RentProductBean(Integer.parseInt(token[12]), token[13]));
 
 					session.merge(rib);
 					count++;

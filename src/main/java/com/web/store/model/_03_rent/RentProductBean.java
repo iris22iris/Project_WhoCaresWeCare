@@ -59,6 +59,11 @@ public class RentProductBean implements Serializable {
 
 	public RentProductBean() {
 	}
+	
+	public RentProductBean(Integer prodId, String serialNumber) {
+		this.prodId = prodId;
+		this.serialNumber = serialNumber;
+	}
 
 	public RentProductBean(Integer prodId, String serialNumber, String classify, String prodName, BigDecimal price,
 			Blob coverImage1, Blob coverImage2, Blob coverImage3, String mimeType, Integer stock, String prodType,
