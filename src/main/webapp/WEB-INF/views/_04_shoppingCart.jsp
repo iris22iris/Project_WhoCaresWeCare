@@ -53,11 +53,13 @@
 			},
 
 			success: function() { 
-	
 				if(prodId.indexOf(",") != -1){
-					var prodid = prodId.replace(',', '');
+					var prodIdList = prodId.split(',');
+					for (var x = 0; x < prodIdList.length; x++) {
+						$('#productItem' + prodIdList[x]).remove();
+						}
 					}
-				$('#productItem' + prodid).remove();
+				$('#productItem' + prodIdList).remove();
 			}
 		});
 	  }

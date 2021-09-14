@@ -100,7 +100,7 @@ function clicka(obj,objUrl){
 				</ul>
 				<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
 					<li class="nav-item"><c:if test="${ empty LoginOK}">
-							<a class="nav-link textSize" href="<c:url value='_05_login'/>">登入</a>
+							<a class="nav-link textSize" href="${pageContext.request.contextPath}/_05_login" >登入</a>
 						</c:if></li>
 					<li class="nav-item"><a class="nav-link textSize"
 						href="<c:url value='/_05_member_management'/>"
