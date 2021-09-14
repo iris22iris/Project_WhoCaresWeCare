@@ -95,7 +95,7 @@ public class ShoppingCartController {
 	}
 	
 	//移除購物車商品
-	@GetMapping("/UpdateItem.do")
+	@PostMapping("_04_shoppingCart/updateItem.do")
 	protected String updateItem(@RequestParam(value = "prodId", required = false) String prodId,
 			 Model model) {
 			
@@ -105,8 +105,8 @@ public class ShoppingCartController {
 			return "redirect:/buyMenu";
 		}
 		
-		String ids = (String) model.getAttribute("prodId");
-		String[] productId = ids.split("\\,");
+//		String ids = (String) model.getAttribute("prodId");
+		String[] productId = prodId.split("\\,");
 		int itemsNum = productId.length;
 		
 		for(int i=0 ; i < itemsNum ; i++) {

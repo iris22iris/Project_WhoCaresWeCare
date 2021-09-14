@@ -23,6 +23,12 @@
     <title>購物車清單</title>
     
     <script>
+    window.onload = function() {
+    	
+
+    }
+
+    
     function confirmDelete() {
 		if (confirm("確認移除勾選之商品? ") ) {
 			var checkObj = [];
@@ -36,12 +42,25 @@
 			for(var i=0 ; i <checkObj.length;i++){
 				prodId += checkObj[i].getAttribute("value")+",";
 			}
-			console.log(prodId);
-			document.forms[0].action="<c:url value='/_04_shoppingCart/UpdateItem.do' />" ;
-			document.forms[0].method="POST";
-			document.forms[0].submit();
-		} 
+		
 
+		$.ajax({
+			url : "<c:url value='/_04_shoppingCart/updateItem.do' />",
+			type : "POST",
+			async: false,
+			data : {
+				prodId : prodId,
+			},
+
+			success: function() { 
+	
+				if(prodId.indexOf(",") != -1){
+					var prodid = prodId.replace(',', '');
+					}
+				$('#productItem' + prodid).remove();
+			}
+		});
+	  }
 	}
     </script>
 </head>
@@ -75,7 +94,7 @@
              </div>
 
             <c:forEach var='buyItems' items='${buyItems}'>
-             <div class="cartList">
+             <div class="cartList" id="productItem${buyItems.productBean.prodId}">
                 <div class="col-2">
                     <input type="checkbox" name="prodId" value="${buyItems.productBean.prodId}" class="checkPid">
                 </div>
@@ -84,7 +103,6 @@
                     src="<c:url value='/images/product/${buyItems.productBean.fileName}' />">
                 </div>
                 <div class="col-5 cartContent">
-                    <div></div>
                     <div class="col-12 productId">商品編號${buyItems.productBean.prodId}</div>
                     <div class="col-12 productName">
                         ${buyItems.productBean.prodName} 
