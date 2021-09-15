@@ -146,7 +146,36 @@ public class EDMTableResetHibernate {
 				System.out.println("protype表格資料新增成功");
 			}
 
-			// 4. product表格
+			// 4. promotion表格
+						// 由"data/promotion.dat"逐筆讀入promotion表格內的初始資料，
+						// 然後依序新增到promotion表格中
+						count = 0;
+						try (FileInputStream fis = new FileInputStream("data/promotion.dat");
+								InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
+								BufferedReader br = new BufferedReader(isr0);) {
+							while ((line = br.readLine()) != null) {
+
+								String[] token = line.split("\\|");
+								PromotionBean ptb = new PromotionBean();
+								ptb.setPromoteId(Integer.parseInt(token[0]));
+								ptb.setDiscount(new BigDecimal(token[1]));
+								ptb.setDiscountCode(token[2]);
+								ptb.setPromoContent(token[3]);
+								ptb.setPromoEndDate(Timestamp.valueOf(token[4]));
+								ptb.setPromoStartDate(Timestamp.valueOf(token[5]));
+								ptb.setPromoTag(token[6]);
+								ptb.setPromotion(token[7]);
+
+								session.merge(ptb);
+								count++;
+								System.out.println("新增promotion紀錄成功，共新增" + count + "筆記錄:" + token[1]);
+							}
+							session.flush();
+							System.out.println("promotion表格資料新增成功");
+						}
+			
+			
+			// 5. product表格
 			// 由"data/product.dat"逐筆讀入product表格內的初始資料，
 			// 然後依序新增到product表格中
 			count = 0;
@@ -170,9 +199,15 @@ public class EDMTableResetHibernate {
 					pb.setProdName(token[6]);
 					java.sql.Clob clob = SystemUtils2018.fileToClob("data/productDescription.txt");
 					pb.setDescription(clob);
-//					pb.setPromoteId(null);
-					pb.setStock(Integer.parseInt(token[8]));
-					pb.setProductTypeBean(new ProductTypeBean(token[9]));
+					pb.setStock(Integer.parseInt(token[7]));
+					pb.setProductTypeBean(new ProductTypeBean(token[8]));
+					int n = 1;
+					if(Integer.parseInt(token[9]) == n ) {
+				        ;
+					}else {
+					pb.setPromotionBean(new PromotionBean(Integer.parseInt(token[9])));
+					}
+					
 
 					session.merge(pb);
 					count++;
@@ -182,33 +217,7 @@ public class EDMTableResetHibernate {
 				System.out.println("product表格資料新增成功");
 			}
 
-			// 5. promotion表格
-			// 由"data/promotion.dat"逐筆讀入promotion表格內的初始資料，
-			// 然後依序新增到promotion表格中
-			count = 0;
-			try (FileInputStream fis = new FileInputStream("data/promotion.dat");
-					InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
-					BufferedReader br = new BufferedReader(isr0);) {
-				while ((line = br.readLine()) != null) {
-
-					String[] token = line.split("\\|");
-					PromotionBean ptb = new PromotionBean();
-					ptb.setPromoteId(Integer.parseInt(token[0]));
-					ptb.setDiscount(new BigDecimal(token[1]));
-					ptb.setDiscountCode(token[2]);
-					ptb.setPromoContent(token[3]);
-					ptb.setPromoEndDate(Timestamp.valueOf(token[4]));
-					ptb.setPromoStartDate(Timestamp.valueOf(token[5]));
-					ptb.setPromoTag(token[6]);
-					ptb.setPromotion(token[7]);
-
-					session.merge(ptb);
-					count++;
-					System.out.println("新增promotion紀錄成功，共新增" + count + "筆記錄:" + token[1]);
-				}
-				session.flush();
-				System.out.println("promotion表格資料新增成功");
-			}
+			
 
 			// 6. rentproduct表格
 			// 由"data/rentproduct.dat"逐筆讀入rentproduct表格內的初始資料，
@@ -317,11 +326,12 @@ public class EDMTableResetHibernate {
 					rib.setDiscount(new BigDecimal(token[3]));
 					rib.setDiscountCode(token[4]);
 					rib.setProdTotal(new BigDecimal(token[3]));
-					rib.setProdId(Integer.parseInt(token[5]));
-					rib.setProdQty(Integer.parseInt(token[6]));
-					rib.setRentPeriod(Integer.parseInt(token[7]));
-					rib.setReturnDate(Timestamp.valueOf(token[8]));
-					rib.setStartDate(Timestamp.valueOf(token[9]));
+//					rib.setProdId(Integer.parseInt(token[5]));
+					rib.setProdQty(Integer.parseInt(token[5]));
+					rib.setRentPeriod(Integer.parseInt(token[6]));
+					rib.setReturnDate(Timestamp.valueOf(token[7]));
+					rib.setStartDate(Timestamp.valueOf(token[8]));
+					rib.setRentProductBean(new RentProductBean(Integer.parseInt(token[12]), token[13]));
 
 					session.merge(rib);
 					count++;

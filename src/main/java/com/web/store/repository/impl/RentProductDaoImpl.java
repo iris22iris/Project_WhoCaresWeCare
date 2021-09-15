@@ -29,7 +29,8 @@ public class RentProductDaoImpl implements RentProductDao {
 	public RentProductDaoImpl(SessionFactory factory) {
 		this.factory = factory;
 	}
-
+	
+//	取得所有租賃設備
 	@Override
 	public List<RentProductBean> getAllProducts() {
 		Session session = factory.getCurrentSession();
@@ -38,13 +39,14 @@ public class RentProductDaoImpl implements RentProductDao {
 		return session.createQuery(hql, RentProductBean.class)
 				      .getResultList();
 	}
-
+	
+//	取得所有租賃設備並群組同產品不同項次之設備(含頁碼及排序判斷)
 	@Override
 	public List<RentProductBean> getGroupedProducts(ProductTypeBean prodTypeBean, int pageNo,
 			String sortType) {
 		Session session = factory.getCurrentSession();
 		String hql = "";
-		if (prodTypeBean.getProdType() != null && prodTypeBean.getProdType() != "" ) {
+		if (prodTypeBean.getProdType() != null) {
 			hql = " FROM RentProductBean rp "
 				+ " WHERE rp.productTypeBean = :ptb "
 				+ " GROUP BY rp.prodId ";
@@ -52,12 +54,12 @@ public class RentProductDaoImpl implements RentProductDao {
 			hql = " FROM RentProductBean rp "
 				+ " GROUP BY rp.prodId ";
 		}
-		if (sortType != null && sortType != "") {
+		if (sortType != null) {
 			String[] token = sortType.split(" ");
 			hql += " ORDER BY SUM(" + token[0] + ") " + token[1] + " ";
 		}
 		int startRecordNo = (pageNo - 1) * recordsPerPage;
-		if (prodTypeBean.getProdType() != null && prodTypeBean.getProdType() != "" ) {
+		if (prodTypeBean.getProdType() != null) {
 		return session.createQuery(hql, RentProductBean.class)
 					  .setParameter("ptb", prodTypeBean)
 			      	  .setFirstResult(startRecordNo)
@@ -70,12 +72,13 @@ public class RentProductDaoImpl implements RentProductDao {
 					  .getResultList();
 		}
 	}
-
+	
+//	取得所有租賃設備的總庫存
 	@Override
 	public List<Long> getGroupedStockSum(ProductTypeBean prodTypeBean, int pageNo, String sortType) {
 		Session session = factory.getCurrentSession();
 		String hql = "";
-		if (prodTypeBean.getProdType() != null && prodTypeBean.getProdType() != "" ) {
+		if (prodTypeBean.getProdType() != null) {
 			hql = " SELECT SUM(rp.stock) FROM RentProductBean rp "
 				+ " WHERE rp.productTypeBean = :ptb "
 				+ " GROUP BY rp.prodId ";
@@ -83,13 +86,13 @@ public class RentProductDaoImpl implements RentProductDao {
 			hql = " SELECT SUM(rp.stock) FROM RentProductBean rp "
 				+ " GROUP BY rp.prodId ";
 		}
-		if (sortType != null && sortType != "") {
+		if (sortType != null) {
 			String[] token = sortType.split(" ");
 			hql += " ORDER BY SUM(" + token[0] + ") " + token[1] + " ";
 		}
 		int startRecordNo = (pageNo - 1) * recordsPerPage;
 		
-		if (prodTypeBean.getProdType() != null && prodTypeBean.getProdType() != "" ) {
+		if (prodTypeBean.getProdType() != null) {
 			return session.createQuery(hql, Long.class)
 					  	  .setParameter("ptb", prodTypeBean)
 					  	  .setFirstResult(startRecordNo)
@@ -104,13 +107,14 @@ public class RentProductDaoImpl implements RentProductDao {
 		
 	}
 	
+//	取得租賃設備群組後的總頁數
 	@Override
 	public int getGroupedPages(ProductTypeBean prodTypeBean) {
 		Session session = factory.getCurrentSession();
 		String hql = "";
 		List<Long> list = null;
 		long count = 0; // 必須使用 long 型態
-		if (prodTypeBean.getProdType() != null && prodTypeBean.getProdType() != "" ) {
+		if (prodTypeBean.getProdType() != null) {
 			hql = " SELECT count(DISTINCT prodId) FROM RentProductBean rp WHERE rp.productTypeBean = :ptb ";
 			list = session.createQuery(hql, Long.class)
 					 	  .setParameter("ptb", prodTypeBean)

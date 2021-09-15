@@ -30,6 +30,7 @@ public class RentMenuController {
 		this.httpSession = httpSession;
 	}
 	
+//	原租賃目錄(同商品獨立顯示)
 	@GetMapping("/rentMenuO")
 	public String rentProductMenu(Model model) {
 		List<RentProductBean> rentProducts = rentProductService.getAllProducts();
@@ -39,7 +40,8 @@ public class RentMenuController {
 		
 		return "_03_rentProductMenu";
 	}
-
+	
+//	進入租賃目錄頁(含分頁及排序)
 	@GetMapping({ "/rentMenu", "/rentMenu/{prodType}" })
 	public String rentProductMenu (
 			@PathVariable(name = "prodType", required = false) String prodType,

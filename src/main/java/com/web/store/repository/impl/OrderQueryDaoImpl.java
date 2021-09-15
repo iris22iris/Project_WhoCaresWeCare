@@ -23,6 +23,7 @@ public class OrderQueryDaoImpl implements OrderQueryDao {
 		this.factory = factory;
 	}
 	
+//	使用複合主鍵查詢訂單
 	@Override
 	public OrdBean findOrdBeanById(String category, Integer ordId) {
 		Session session = factory.getCurrentSession();
@@ -30,6 +31,7 @@ public class OrderQueryDaoImpl implements OrderQueryDao {
 		return ordBean;
 	}
 	
+//	使用訂單編號查詢購買細項
 	@Override
 	public List<BuyItemBean> findBuyItemByOrdId(Integer ordId) {
 		Session session = factory.getCurrentSession();
@@ -40,6 +42,7 @@ public class OrderQueryDaoImpl implements OrderQueryDao {
 				   	  .getResultList();
 	}
 	
+//	使用訂單編號查詢租賃細項
 	@Override
 	public List<RentItemBean> findRentItemByOrdId(Integer ordId) {
 		Session session = factory.getCurrentSession();

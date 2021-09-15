@@ -47,10 +47,6 @@ public class PagesController {
 	return "_04_favoriteList";
 	}
 	
-	@GetMapping("/_04_shoppingCart")
-	public String shoppingCart(Model model) {
-	return "_04_shoppingCart";
-	}
 
 	@GetMapping("/_05_loginPopup")
 	public String loginPopup(Model model) {

@@ -63,13 +63,6 @@ function clicka(obj,objUrl){
 			</ul>
 
 
-			<!-- right menu -->
-			<!-- <div class="nav-item">
-				<a class="nav-link" href="<c:url value='#購物車' />"
-					style="padding: 0px;"> 
-					<img src="<c:url value='/images/cartIcon.png' />" alt="購物車">
-				</a>
-			</div> -->
 			<div class="dropdown">
 				<ul
 					class="nav-item  navbar-nav  me-auto mb-lg-0 left-menu dropdown-toggle"
@@ -80,15 +73,14 @@ function clicka(obj,objUrl){
 				</ul>
 				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 					<li class="nav-item"><a class="nav-link textSize"
-						href="<c:url value='/_03_rentItemList'/>" onclick='clicka(this,"_05_member_management")'>
+						href="<c:url value='/_03_rentItemList'/>">
 							租賃設備清單 </a></li>
 					<li class="nav-item"><a class="nav-link textSize"
-						href="<c:url value='/_04_shoppingCart'/>" onclick='clicka(this,"_05_member_management")'>
+						href="<c:url value='/_04_shoppingCart'/>">
 							商品購物車</a></li>
 				</ul>
 			</div>
 
-			<!-- 可以寫登入後換成會員圖片的功能 -->
 			<div class="dropdown">
 				<ul
 					class="nav-item  navbar-nav  me-auto mb-lg-0 left-menu  dropdown-toggle"
@@ -108,7 +100,7 @@ function clicka(obj,objUrl){
 				</ul>
 				<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
 					<li class="nav-item"><c:if test="${ empty LoginOK}">
-							<a class="nav-link textSize" href="<c:url value='_05_login'/>">登入</a>
+							<a class="nav-link textSize" href="${pageContext.request.contextPath}/_05_login" >登入</a>
 						</c:if></li>
 					<li class="nav-item"><a class="nav-link textSize"
 						href="<c:url value='/_05_member_management'/>"

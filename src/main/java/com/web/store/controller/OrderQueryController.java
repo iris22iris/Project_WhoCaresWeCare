@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.web.store.model._03_rent.RentItemBean;
 import com.web.store.model._04_shop.BuyItemBean;
 import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.model._06_order.OrdBean;
@@ -31,7 +32,8 @@ public class OrderQueryController {
 		this.orderQueryService = orderQueryService;
 		this.httpSession = httpSession;
 	}
-
+	
+//	進入商城訂單查詢頁(含查詢字串)
 	@GetMapping("/orderQuery/{custId}")
 	public String orderQuery (
 			@PathVariable Integer custId,
@@ -49,6 +51,26 @@ public class OrderQueryController {
 		}
 
 		return "_06_orderQuery";
+	}
+
+//	進入租賃訂單查詢頁(含查詢字串)
+	@GetMapping("/rentOrderQuery/{custId}")
+	public String rentOrderQuery (
+			@PathVariable Integer custId,
+			@RequestParam(name = "category", required = false) String category,
+			@RequestParam(name = "ordId", required = false) Integer ordId,
+			Model model
+			) {
+		CustomerBean customerBean = customerService.getCustomerById(custId);
+		model.addAttribute(customerBean);
+		if (category != null && ordId != 0) {
+			OrdBean ordBean = orderQueryService.findOrdBeanById(category, ordId);
+			List<RentItemBean> rentItems = orderQueryService.findRentItemByOrdId(ordId);
+			model.addAttribute(ordBean);
+			model.addAttribute("rentItems", rentItems);
+		}
+		
+		return "_06_rentOrderQuery";
 	}
 
 }

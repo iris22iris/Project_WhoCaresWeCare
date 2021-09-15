@@ -28,8 +28,8 @@ public class RentItemBean implements Serializable {
 	@EmbeddedId
 	private RentItemPK rentItemPK;
 	
-	private Integer prodId;
-	private String serialNumber;
+//	private Integer prodId;
+//	private String serialNumber;
 	private Integer rentPeriod;
 	private Integer prodQty;
 	private String discountCode;
@@ -51,24 +51,26 @@ public class RentItemBean implements Serializable {
 		@JoinColumn(name = "ordId", referencedColumnName="ordId"),
 		})
 	private OrdBean ordBean;
+	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "RENTITEM_PROMOTEID_FK")
 	private PromotionBean promotionBean;
+	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumns({
-		@JoinColumn(name = "RENTITEM_PRODCID_FK"),
-		@JoinColumn(name = "RENTITEM_PRODID_FK"),
+		@JoinColumn(name = "RENTITEM_RENTPRODID_FK"),
+		@JoinColumn(name = "RENTITEM_RENTPRODSN_FK"),
 		})
 	private RentProductBean rentProductBean;
 	
 	public RentItemBean() {
 	}
 
-	public RentItemBean(Integer prodId, String serialNumber,Integer rentPeriod, 
+	public RentItemBean(/*Integer prodId, String serialNumber, */Integer rentPeriod, 
 			Integer prodQty, String discountCode, Timestamp startDate,
 			Timestamp returnDate, BigDecimal discount, BigDecimal prodTotal) {
-		this.prodId = prodId;
-		this.serialNumber = serialNumber;
+//		this.prodId = prodId;
+//		this.serialNumber = serialNumber;
 		this.rentPeriod = rentPeriod;
 		this.prodQty = prodQty;
 		this.discountCode = discountCode;
@@ -86,21 +88,21 @@ public class RentItemBean implements Serializable {
 		this.rentItemPK = rentItemPK;
 	}
 
-	public Integer getProdId() {
-		return prodId;
-	}
-
-	public void setProdId(Integer prodId) {
-		this.prodId = prodId;
-	}
-
-	public String getSerialNumber() {
-		return serialNumber;
-	}
-
-	public void setSerialNumber(String serialNumber) {
-		this.serialNumber = serialNumber;
-	}
+//	public Integer getProdId() {
+//		return prodId;
+//	}
+//
+//	public void setProdId(Integer prodId) {
+//		this.prodId = prodId;
+//	}
+//
+//	public String getSerialNumber() {
+//		return serialNumber;
+//	}
+//
+//	public void setSerialNumber(String serialNumber) {
+//		this.serialNumber = serialNumber;
+//	}
 
 	public Integer getRentPeriod() {
 		return rentPeriod;
@@ -198,12 +200,12 @@ public class RentItemBean implements Serializable {
 		int result = 1;
 		result = prime * result + ((discount == null) ? 0 : discount.hashCode());
 		result = prime * result + ((discountCode == null) ? 0 : discountCode.hashCode());
-		result = prime * result + ((prodId == null) ? 0 : prodId.hashCode());
+//		result = prime * result + ((prodId == null) ? 0 : prodId.hashCode());
 		result = prime * result + ((prodQty == null) ? 0 : prodQty.hashCode());
 		result = prime * result + ((prodTotal == null) ? 0 : prodTotal.hashCode());
 		result = prime * result + ((rentItemPK == null) ? 0 : rentItemPK.hashCode());
 		result = prime * result + ((rentPeriod == null) ? 0 : rentPeriod.hashCode());
-		result = prime * result + ((serialNumber == null) ? 0 : serialNumber.hashCode());
+//		result = prime * result + ((serialNumber == null) ? 0 : serialNumber.hashCode());
 		return result;
 	}
 
@@ -226,11 +228,11 @@ public class RentItemBean implements Serializable {
 				return false;
 		} else if (!discountCode.equals(other.discountCode))
 			return false;
-		if (prodId == null) {
-			if (other.prodId != null)
-				return false;
-		} else if (!prodId.equals(other.prodId))
-			return false;
+//		if (prodId == null) {
+//			if (other.prodId != null)
+//				return false;
+//		} else if (!prodId.equals(other.prodId))
+//			return false;
 		if (prodQty == null) {
 			if (other.prodQty != null)
 				return false;
@@ -251,11 +253,11 @@ public class RentItemBean implements Serializable {
 				return false;
 		} else if (!rentPeriod.equals(other.rentPeriod))
 			return false;
-		if (serialNumber == null) {
-			if (other.serialNumber != null)
-				return false;
-		} else if (!serialNumber.equals(other.serialNumber))
-			return false;
+//		if (serialNumber == null) {
+//			if (other.serialNumber != null)
+//				return false;
+//		} else if (!serialNumber.equals(other.serialNumber))
+//			return false;
 		return true;
 	}
 	

@@ -49,7 +49,8 @@ public class BuyMenuController {
 		this.productService = productService;
 		this.httpSession = httpSession;
 	}
-
+	
+//	進入商城目錄頁(含分頁及排序)
 	@GetMapping({ "/buyMenu", "/buyMenu/{prodType}" })
 	public String buyProductMenu(@PathVariable(name = "prodType", required = false) String prodType,
 			@RequestParam(name = "sortType", required = false) String sortType,
