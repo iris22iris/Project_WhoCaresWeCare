@@ -32,27 +32,32 @@ public class RentProductServiceImpl implements RentProductService {
 //		this.reservationDao = reservationDao;
 //	}
 
+//	取得所有租賃設備
 	@Override
 	public List<RentProductBean> getAllProducts() {
 		return rentProductDao.getAllProducts();
 	}
 
+//	取得所有租賃設備並群組同產品不同項次之設備(含頁碼及排序判斷)
 	@Override
 	public List<RentProductBean> getGroupedProducts(ProductTypeBean prodTypeBean, int pageNo,
 																	 String sortType) {
 		return rentProductDao.getGroupedProducts(prodTypeBean, pageNo, sortType);
 	}
 	
+//	取得所有租賃設備的總庫存
 	@Override
 	public List<Long> getGroupedStockSum(ProductTypeBean prodTypeBean, int pageNo, String sortType) {
 		return rentProductDao.getGroupedStockSum(prodTypeBean, pageNo, sortType);
 	}
 
+//	取得租賃設備群組後的總頁數
 	@Override
 	public int getGroupedPages(ProductTypeBean prodTypeBean) {
 		return rentProductDao.getGroupedPages(prodTypeBean);
 	}
 
+//	取得所有產品類別
 	@Override
 	public List<ProductTypeBean> getAllProdTypes() {
 		return rentProductDao.getAllProdTypes();

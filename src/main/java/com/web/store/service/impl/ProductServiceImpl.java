@@ -25,47 +25,50 @@ public class ProductServiceImpl implements ProductService {
 		this.productDao = productDao;
 	}
 
+//	取得所有商品
 	@Override
 	public List<ProductBean> getAllProducts() {
 		return productDao.getAllProducts();
 	}
 
+//	透過頁碼取得商品
 	@Override
 	public List<ProductBean> getAllProductsByPage(int pageNo) {
 		return productDao.getAllProductsByPage(pageNo);
 	}
-
+	
+//	透過頁碼取得商品並排序
 	@Override
 	public List<ProductBean> getAllProductsByPageSort(int pageNo, String sortType) {
 		return productDao.getAllProductsByPageSort(pageNo, sortType);
 	}
 
+//	取得所有商品的總頁數
 	@Override
 	public int getTotalPages() {
 		return productDao.getTotalPages();
 	}
-
-//	@Override
-//	public List<ProductBean> getProductsByProdType(ProductTypeBean prodTypeBean) {
-//		return productDao.getProductsByProdType(prodTypeBean);
-//	}
-
+	
+//	透過頁碼以及產品類別取得商品
 	@Override
 	public List<ProductBean> getProductsByProdTypeAndPage(ProductTypeBean prodTypeBean, int pageNo) {
 		return productDao.getProductsByProdTypeAndPage(prodTypeBean, pageNo);
 	}
 
+//	透過頁碼以及產品類別取得商品並排序
 	@Override
 	public List<ProductBean> getProductsByProdTypeAndPageSort(ProductTypeBean prodTypeBean, int pageNo,
 			String sortType) {
 		return productDao.getProductsByProdTypeAndPageSort(prodTypeBean, pageNo, sortType);
 	}
 
+//	透過產品類別取得總頁數
 	@Override
 	public int getTotalPagesByProdType(ProductTypeBean prodTypeBean) {
 		return productDao.getTotalPagesByProdType(prodTypeBean);
 	}
 
+//	取得所有產品類別
 	@Override
 	public List<ProductTypeBean> getAllProdTypes() {
 		return productDao.getAllProdTypes();

@@ -72,7 +72,7 @@ public class ProductDaoImpl implements ProductDao {
 				.getResultList();
 	}
 	
-//	取得總頁數
+//	取得所有商品的總頁數
 	@Override
 	public int getTotalPages() {
 		Session session = factory.getCurrentSession();

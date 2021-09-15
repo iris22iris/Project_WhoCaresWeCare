@@ -133,6 +133,7 @@ public class RentProductDaoImpl implements RentProductDao {
 		return totalPages;
 	}
 	
+//	取得所有產品類別
 	@Override
 	public List<ProductTypeBean> getAllProdTypes() {
 		Session session = factory.getCurrentSession();
