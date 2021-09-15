@@ -152,7 +152,7 @@
 							<c:forEach var='product' items='${products}'>
 								<div class="col-3 mt-3 " id="cardWidth">
 									<div class="card text-center">
-										<a href="#"><img
+										<a href="<c:url value='/_04_productPage?id=${product.prodId}' />"><img
 											src="<c:url value='/images/product/${product.fileName}' />"
 											class="card-img-top" id="productImg" alt="..."></a>
 										<div class="card-body">

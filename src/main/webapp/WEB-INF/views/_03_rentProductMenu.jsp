@@ -75,7 +75,7 @@
 							<c:forEach var='rentProductMap' items='${rentProductsMap}'>
 								<div class="col-3 mt-3 " id="cardWidth">
 									<div class="card text-center">
-										<a href="#"><img
+										<a href="<c:url value='/_03_rentProduct?id=${rentProductMap.key.prodId}' />"><img
 											src="<c:url value='/images/product/${rentProductMap.key.fileName}' />"
 											class="card-img-top" id="productImg" alt="..."></a>
 										<div class="card-body">
@@ -96,10 +96,10 @@
 												<c:when test="${rentProductMap.value != null}">
 													<c:choose>
 														<c:when test="${rentProductMap.value > 0}">
-															<a href="#" class="btn btn-warning">前往租賃</a>
+															<a href="<c:url value='/_03_rentProduct?id=${rentProductMap.key.prodId}' />" class="btn btn-warning">前往租賃</a>
 														</c:when>
 														<c:otherwise>
-															<a href="#" class="btn btn-warning">前往預約</a>
+															<a href="<c:url value='/_03_rentProduct?id=${rentProductMap.key.prodId}' />" class="btn btn-warning">前往預約</a>
 														</c:otherwise>
 													</c:choose>
 												</c:when>
@@ -107,10 +107,10 @@
 												<c:otherwise>
 													<c:choose>
 														<c:when test="${rentProduct.stock > 0}">
-															<a href="#" class="btn btn-warning">前往租賃</a>
+															<a href="<c:url value='/_03_rentProduct?id=${rentProductMap.key.prodId}' />" class="btn btn-warning">前往租賃</a>
 														</c:when>
 														<c:otherwise>
-															<a href="#" class="btn btn-warning">前往預約</a>
+															<a href="<c:url value='/_03_rentProduct?id=${rentProductMap.key.prodId}' />" class="btn btn-warning">前往預約</a>
 														</c:otherwise>
 													</c:choose>
 												</c:otherwise>
