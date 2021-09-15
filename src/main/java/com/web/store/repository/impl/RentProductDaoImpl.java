@@ -147,17 +147,15 @@ public class RentProductDaoImpl implements RentProductDao {
 		return rpb;
 	}
 		
-	// 依porId(與serialNumber)讀取單筆預約設備資料 抓現在幾人預約
+	// 依porId(與serialNumber)讀取該設備被預約的情況
 	@Override
 	public List<ReservationBean> getReservationBeanByprodId(int prodId) {
 		
 		Session session = factory.getCurrentSession();
-		String hql = "SELECT r FROM ReservationBean  r"
+		String hql = " FROM ReservationBean  r"
 				
-				  + " WHERE r.prodId = :pid AND r.waitNum = (SELECT MAX(r.waitNum)"
-				   + "FROM ReservationBean r "
-				   + "GROUP BY r.prodId "
-				   + "HAVING r.prodId = :pid ) ";
+				  + " WHERE r.prodId = :pid ";
+		
 		return session.createQuery(hql, ReservationBean.class)
 				.setParameter("pid", prodId)
 				.getResultList();
@@ -200,6 +198,18 @@ public class RentProductDaoImpl implements RentProductDao {
 					.getResultList();
 			
 		
+	}
+
+	@Override
+	public List<ReservationBean> getMyReservationByCustId(int mycustId) {
+		Session session = factory.getCurrentSession();
+		
+		String hql =" SELECT rb FROM ReservationBean rb"
+//				+" WHERE c.productBean.prodId = :pid ";
+				+" WHERE rb.customerBean.custId = :cid ";
+		return session.createQuery(hql,ReservationBean.class)
+				.setParameter("cid",  mycustId)
+				.getResultList();
 	}
 	
 	

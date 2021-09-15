@@ -43,8 +43,11 @@ public interface RentProductDao {
 	void addProduct(RentProductBean product);
 
 	//新增單筆預約資料
-		void addReservation(ReservationBean reservation);
+	void addReservation(ReservationBean reservation);
 	
 	// 依cookie中使用者帳號讀取目前使用者資料	
 	public List<CustomerBean> getCustomerInfoBycookieaccount(String account);
+	
+	// 依會員編號取出該會員所有預約的設備資料
+	public List<ReservationBean> getMyReservationByCustId(int mycustId); 
 }

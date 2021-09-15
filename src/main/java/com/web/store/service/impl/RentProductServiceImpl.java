@@ -102,5 +102,12 @@ public class RentProductServiceImpl implements RentProductService {
 	
 		return rentProductDao.getCustomerInfoBycookieaccount(account);
 	}
+
+	// 依會員編號取出該會員所有預約的設備資料
+	@Override
+	public List<ReservationBean> getMyReservationByCustId(int mycustId) {
+		
+		return rentProductDao.getMyReservationByCustId(mycustId);
+	}
 	
 }

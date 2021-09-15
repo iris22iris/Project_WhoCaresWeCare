@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="<c:url value='/css/commonStyle.css' />"
 	type="text/css">
 
-<title>租賃設備頁面: ${rentProduct.prodName}o${fn:length(productTypes)}k</title>
+<title>租賃設備頁面: ${rentProduct.prodName}</title>
 
 <!-- bootstrap -->
 <link
@@ -152,9 +152,24 @@
 									<div class="col-4">
 									租賃天數:</div>
 									<div class="col-4">
-									<input type="number" min="1" max="90" value="1">
+									<input type="number" min="1" max="90" value="1" id="days">
 									</div>
 								</div>
+		<script type="text/javascript"> 
+int a = document.getElementById('days').value
+;</script> 
+${a}
+								<div class="normalStyle">
+									<div class="col-4">
+									預計租賃期間:</div>
+									<div class="col-4">
+									
+									<jsp:useBean id="date" class="java.util.Date"></jsp:useBean>
+									${date}
+									<c:set value="${date}" var="shipdate"/> 
+									<fmt:formatDate value="${shipdate}" pattern="yyyy-MM-dd"/> 																		
+									</div>
+								</div> 
 
 								<div class="normalStyle">
 									<div class="col-4">
@@ -167,8 +182,8 @@
 								<div class="normalStyle">
 									<div class="col-4">
 									目前等待人數:</div>
-									<div class="col-4">
-									${reservations[0].waitNum}位
+									<div class="col-4">									
+									${fn:length(reservations)}位
 									</div>
 								</div> 
 								
@@ -336,7 +351,7 @@
 						</div>
 						
 						<div class="col-8 justify-content-evenly p-1  d-flex align-items-center ">
-							 <label style=font-size:21px; for="waitNum" class="form-label">${reservations[0].waitNum}位</label>
+							 <label style=font-size:21px; for="waitNum" class="form-label">${fn:length(reservations)}位</label>
 						</div>
 	        		</div>
 	                 <br>  
@@ -347,7 +362,7 @@
             <div class="hyperlink  col-12 d-flex justify-content-evenly align-items-center">
                 <div class="modal-footer">
 	               <input id="btnAdd" type='submit' class='btn btn-warning' data-bs-target="#exampleModalToggle2" 
-	               data-bs-toggle="modal" data-bs-dismiss="modal"value="確認預約form" />
+	               data-bs-toggle="modal" data-bs-dismiss="modal"value="確認預約" />
 	               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
                 </div>
             </div>
@@ -376,37 +391,7 @@
     <!-- 預約表單畫面 end -->
     
     <!-- 預約完成結果畫面 start -->
-      <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-        <div class="modal-dialog ">
-          <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title2 p-3 col-12 d-flex justify-content-evenly  " id="exampleModalLabel">成功預約通知</h1>
-                
-                </div>
-                <div class="col-12 justify-content-evenly p-1  d-flex align-items-center ">
-                    <h3 class="modal-title p-3 col-12 d-flex justify-content-evenly " id="exampleModalLabel">恭喜您成功加入預約候補!!!</h3> 
-                </div>
-                
-                <div class="col-6 justify-content-evenly p-1  d-flex align-items-center ">
-                    <label style=font-size:22px; for="inputAccount" class="form-label">您的預約序號為:</label>
-                    <label style=font-size:22px;  for="inputAccount" class="form-label ">${reservations[0].waitNum}位假的抓資料庫</label>
-                </div>
-                <div class="col-8 justify-content-evenly p-1  d-flex align-items-center ">
-                    <label style=font-size:18px; for="inputAccount" class="form-label">您的預約編號為:</label>
-                    <label style=font-size:18px; for="inputAccount" class="form-label ">${reservations[0].reservationId}</label>
-                </div>
-                <div class="modal-footer justify-content-evenly">                           
-                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">繼續逛逛</button>
-                </div>
-                <div class="col-12 justify-content-evenly p-1  d-flex align-items-center">
-                    當商品到貨時,請於收到通知信48小時內完成預約
-                </div>
-                <div class="col-12 justify-content-evenly p-1  d-flex align-items-center">
-                	若逾期需重新預約候補
-                </div>
-          </div>
-        </div>
-      </div>
+      
 		<!-- 預約完成結果畫面 end -->
 	</div>
 		

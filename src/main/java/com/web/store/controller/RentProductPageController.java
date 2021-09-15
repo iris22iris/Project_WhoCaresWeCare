@@ -2,6 +2,7 @@ package com.web.store.controller;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 
@@ -64,16 +65,16 @@ public class RentProductPageController {
 	public String processAddNewProductForm	(@RequestParam("id") Integer id ,@CookieValue(value = "user") String user
 			,@ModelAttribute("reservation") ReservationBean rb,Model model) {
 		
-		List<RentProductBean> rentProducts = rentProductService.getAllProducts();
-		List<ProductTypeBean> productTypes = rentProductService.getAllProdTypes();
-		List<CommentBean> comments = rentProductService.getCommentBeanByprodId(id);
+//		List<RentProductBean> rentProducts = rentProductService.getAllProducts();
+//		List<ProductTypeBean> productTypes = rentProductService.getAllProdTypes();
+//		List<CommentBean> comments = rentProductService.getCommentBeanByprodId(id);
 		List<ReservationBean> reservations = rentProductService.getReservationBeanByprodId(id);
-		model.addAttribute("rentProducts", rentProducts);
-		model.addAttribute("productTypes", productTypes);
+//		model.addAttribute("rentProducts", rentProducts);
+//		model.addAttribute("productTypes", productTypes);
 		model.addAttribute("rentProduct", rentProductService.getProductById(id));
 //		model.addAttribute("reservation", rentProductService.getReservationBeanByprodId(id));
-		model.addAttribute("comments", comments);
-		model.addAttribute("reservations", reservations);
+//		model.addAttribute("comments", comments);
+//		model.addAttribute("reservations", reservations);
 								
 		rb.setCategory("RES");
 		rb.setClassify("R");
@@ -81,7 +82,7 @@ public class RentProductPageController {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		rb.setReserveDate(timestamp);
 		
-		rb.setWaitNum(reservations.get(0).getWaitNum()+1);
+		rb.setWaitNum(reservations.get(reservations.size()-1).getWaitNum()+1);
 		rb.setProdId(id);
 		rb.setSerialNumber("1");
 		
@@ -93,19 +94,22 @@ public class RentProductPageController {
 		
 		rentProductService.addReservation(rb);	
 		
-		//顯示我的預約結果
 		
 		
-//		
-//		List<ReservationBean> myReservation = rentProductService.getReservationBeanByprodId(id);
-//		model.addAttribute("myreservation", myReservation);
-//		
-		return null ;
+		return "redirect:/_03_reservationSuccess" ;
+	}
+	
+	@GetMapping("/_03_reservationSuccess")
+		public String showAddedReservationdata(Model model,@CookieValue(value = "user") String user){
+		List<CustomerBean> customerinfo = rentProductService.getCustomerInfoBycookieaccount(user);
+		model.addAttribute("customerinfo", customerinfo);
+		int mycustId = customerinfo.get(0).getCustId();
+		List<ReservationBean> myreservations = rentProductService.getMyReservationByCustId(mycustId);
+		model.addAttribute("myreservations", myreservations);
+		return "_03_reservationSuccess"  ;
 	}
 	
 	
-	
-
 
 
 	
