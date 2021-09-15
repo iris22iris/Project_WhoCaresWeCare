@@ -109,7 +109,7 @@ function clicka(obj,objUrl){
 						href="<c:url value='/_02_contactUs'/>" onclick='clicka(this,"_02_contactUs")'>
 							聯絡我們</a></li>
 					<c:if test="${! empty LoginOK}">
-						<a class="nav-link textSize" href="<c:url value='_05_logout'/>">
+						<a class="nav-link textSize" href="${pageContext.request.contextPath}/_05_logout">
 							登出 </a>
 					</c:if>
 				</ul>

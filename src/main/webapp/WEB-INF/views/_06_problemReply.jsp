@@ -23,12 +23,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
-
-
-
 <script>
-
-
 	function usSearch() {
 		$.ajax({
 			url : '/Whocares/_06_problemReply/${sessionScope.LoginOK}',
@@ -37,19 +32,20 @@
 			data : {
 				usId : document.getElementById("enter").value
 			},
-
-			success : function(response) {
-				if(response){
-					console.log(response)
-					}
-				
+	success : function(response) {
+				if (response) {
+					$('#orderNo').val(response.ordId);
+					$('#inputEmail').val(response.email);
+					$('#inputPhone').val(response.phone);
+					$('#recordNum').val(response.phone);
+					$('#recordDate').val(response.replyDate);
+					$('#problemType').val(response.problemType);
+					$('#record').val(response.replyContent);
+					$('#inputDescription').val(response.replyContent);
+				}
 			}
 		});
 	}
-
-
-
-	
 </script>
 
 
@@ -99,7 +95,7 @@
           <div class="col-1"></div>
           <div class="col-5">
             <label for="orderNo" class="form-label">訂單編號:</label>
-            <input type="text" class="form-control" id="orderNo" disabled="disabled" value="${problemBean.ordId}">
+            <input type="text" class="form-control" id="orderNo" disabled="disabled">
           </div>
           <div class="col-1"></div>
         </div>
@@ -109,12 +105,12 @@
         <div class="row formRow">
           <div class="col-5">
               <label for="Email" class="form-label">Email:</label>
-              <input type="email" class="form-control" id="inputEmail" disabled="disabled" value="" >${problemBean.email}
+              <input type="email" class="form-control" id="inputEmail" disabled="disabled">
           </div>
           <div class="col-1"></div>
           <div class="col-5">
               <label for="phone" class="form-label">連絡電話:</label>
-              <input type="tel" class="form-control" id="inputPhone" disabled="disabled" value="">${problemBean.phone}
+              <input type="tel" class="form-control" id="inputPhone" disabled="disabled">
           </div>
           <div class="col-1"></div>
         </div>
@@ -124,12 +120,12 @@
         <div class="row formRow">
           <div class="col-5">
             <label for="recordNum" class="form-label">客服編號:</label>
-            <input type="num" class="form-control" id="recordNum" disabled="disabled" value="${problemBean.usId}">
+            <input type="number" class="form-control" id="recordNum" disabled="disabled">
           </div>
           <div class="col-1"></div>
           <div class="col-5">
             <label for="recordDate" class="form-label">表單時間:</label>
-            <input type="date" class="form-control" id="recordDate" disabled="disabled" value="">${problemBean.replyDate}
+            <input type="date" class="form-control" id="recordDate" disabled="disabled">
           </div>
           <div class="col-1"></div>
         </div>
@@ -141,7 +137,7 @@
         <div class="row formRow">
           <div class="col-3">
               <label for="problemType" class="form-label">問題種類:</label>
-              <input type="problemType" class="form-control" id="problemType" disabled="disabled" value="${problemBean.problemType}">
+              <input type="problemType" class="form-control" id="problemType" disabled="disabled">
           </div>
         </div>     
         <!-- problemtypee&replytime end -->
@@ -151,12 +147,12 @@
           <div class="col-6">
             <label for="record" class="form-label" >意見內容:</label>
             <br>
-            <textarea name="description" id="record" cols="70" rows="10" disabled="disabled" >${problemBean.replyContent}</textarea>
+            <textarea name="description" id="record" cols="70" rows="10" disabled="disabled" ></textarea>
           </div>
           <div class="col-6">
             <label for="inputDescription" class="form-label">客服回覆:</label>
             <br>
-            <textarea name="description" id="inputDescription" cols="73" rows="10" disabled="disabled" >${problemBean.replyContent}</textarea>
+            <textarea name="description" id="inputDescription" cols="73" rows="10" disabled="disabled" ></textarea>
           </div>
         </div>
         <!-- description & reply end -->

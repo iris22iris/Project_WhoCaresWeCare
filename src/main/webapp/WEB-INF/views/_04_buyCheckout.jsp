@@ -88,7 +88,7 @@
               <i class="fas fa-crutches"></i>
               訂單備註:
             </h4>
-            <textarea id="" cols="60" rows="5"></textarea>       
+            <textarea id="orderMark" cols="60" rows="5"></textarea>       
         </div>
         <div class="col-3 checkoutTitle">
             <div class="checkoutTop">
