@@ -41,14 +41,19 @@ public class ContactUsServiceImpl implements ContactUsService {
 		return contactUsDao.queryProblemSelect(problemType) ;
 	}
 
-	@Override
-	public ProblemBean getProblemById(int usId) {
-		return contactUsDao.findProblemById(usId);   
-	}
+//	@Override
+//	public ProblemBean getProblemById(int usId) {
+//		return contactUsDao.findProblemById(usId);   
+//	}
 
 	@Override
 	public ProblemBean getProblemById(Integer usId) {
-		return contactUsDao.findProblemById(usId);   
+		return contactUsDao.getProblemById(usId);   
+	}
+
+	@Override
+	public List<ProblemBean> getProblemsById(Integer usId) {
+		return contactUsDao.getProblemsById(usId);   
 	}
 
 //	@Override

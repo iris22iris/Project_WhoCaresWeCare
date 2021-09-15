@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +19,7 @@ import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.web.store.model._02_customerService.usPKClass.ProblemBeanPK;
 import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.model._06_order.OrdBean;
 
@@ -27,6 +29,9 @@ import com.web.store.model._06_order.OrdBean;
 @Table(name = "Problem")
 public class ProblemBean implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+//	@EmbeddedId
+//	private ProblemBeanPK problemBeanPK;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -217,6 +222,78 @@ public class ProblemBean implements Serializable {
 	public void setImageUs(MultipartFile imageUs) {
 		ImageUs = imageUs;
 	}
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = 1;
+//		result = prime * result + ((problemBeanPK == null) ? 0 : problemBeanPK.hashCode());
+//		result = prime * result + ((account == null) ? 0 : account.hashCode());
+//		result = prime * result + ((content == null) ? 0 : content.hashCode());
+//		result = prime * result + ((email == null) ? 0 : email.hashCode());
+//		result = prime * result + ((ordId == null) ? 0 : ordId.hashCode());
+//		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
+//		result = prime * result + ((problemType == null) ? 0 : problemType.hashCode());
+//		result = prime * result + ((replyContent == null) ? 0 : replyContent.hashCode());
+//		result = prime * result + ((replyDate == null) ? 0 : replyDate.hashCode());
+//		return result;
+//	}
+	
 
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		ProblemBean other = (ProblemBean) obj;
+//		if(problemBeanPK == null) {
+//			if (other.problemBeanPK != null)
+//				return false;
+//		}else if (!problemBeanPK.equals(other.problemBeanPK))
+//			return false;
+//		if (account == null) {
+//			if (other.account != null)
+//				return false;
+//		}else if (!account.equals(other.account))
+//			return false;
+//		if (content == null) {
+//			if (other.content != null)
+//				return false;
+//		}else if (!content.equals(other.content))
+//			return false;
+//		if (email == null) {
+//			if (other.email != null)
+//				return false;
+//		}else if (!email.equals(other.email))
+//			return false;
+//		if (ordId == null) {
+//			if (other.ordId != null)
+//				return false;
+//		}else if (!ordId.equals(other.ordId))
+//			return false;
+//		if (phone == null) {
+//			if (other.phone != null)
+//				return false;
+//		}else if (!phone.equals(other.phone))
+//			return false;
+//		if (problemType == null) {
+//			if (other.problemType != null)
+//				return false;
+//		}else if (!problemType.equals(other.problemType))
+//			return false;
+//		if (replyContent == null) {
+//			if (other.replyContent != null)
+//				return false;
+//		}else if (!replyContent.equals(other.replyContent))
+//			return false;
+//		if (replyDate == null) {
+//			if (other.replyDate != null)
+//				return false;
+//		}else if (!replyDate.equals(other.replyDate))
+//			return false;
+//		return true;
+//	}
 	
 }

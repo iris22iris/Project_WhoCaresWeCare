@@ -3,11 +3,11 @@ package com.web.store.model._02_customerService.usPKClass;
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
+import javax.persistence.EmbeddedId;
 
 @Embeddable
 public class ProblemBeanPK implements Serializable {
 	private static final long serialVersionUID = 1L;
-
 	private Integer usId;
 
 	public ProblemBeanPK() {

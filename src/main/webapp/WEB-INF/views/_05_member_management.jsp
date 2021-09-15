@@ -18,26 +18,24 @@
 
 
 <script>
-// 	function memberProfile(obj){
-<%-- 		obj.href="/Whocares/_05_memberProfile/"+'<%=session.getAttribute("LoginOK")%>'; --%>
-// 	}
+	function memberProfile(obj){
+		obj.href="/Whocares/_05_memberProfile/"+'<%=session.getAttribute("LoginOK")%>';
+	}
 
-// 	function favoriteList(obj){
-<%-- 		obj.href="<c:url value='/_04_favoriteList/' />"+'<%=session.getAttribute("LoginOK")%>'; --%>
-// 	}
+	function favoriteList(obj){
+		obj.href="/Whocares/_04_favoriteList/"+'<%=session.getAttribute("LoginOK")%>';
+	}
+
+	function rentOrderQuery(obj){
+		obj.href="<c:url value='/rentOrderQuery/' />"+'<%=session.getAttribute("LoginOK")%>';
+	}
 	
-// 	function rentOrderQuery(obj){
-<%-- 		obj.href="<c:url value='/rentOrderQuery/' />"+'<%=session.getAttribute("LoginOK")%>'; --%>
-// 	}
-	
-// 	function orderQuery(obj){
-<%-- 		obj.href="<c:url value='/orderQuery/' />"+'<%=session.getAttribute("LoginOK")%>'; --%>
-// 	}
-
-	function redirect(obj,objRedirect){
-		obj.href= "<c:url value='/" + objRedirect + "/' />" + '<%=session.getAttribute("LoginOK")%>';
-		}
-
+	function orderQuery(obj){
+		obj.href="<c:url value='/orderQuery/' />"+'<%=session.getAttribute("LoginOK")%>';
+	}
+	function qaQuery(obj){
+		obj.href="<c:url value='/_06_problemReply/' />"+'<%=session.getAttribute("LoginOK")%>';
+	}
 	
 </script>
 <title>會員專區</title>
@@ -68,13 +66,13 @@
 							<div class="mt-5">
 								<h1>
 									<a style="text-decoration: none; color: black; cursor:pointer;"
-										class="fas fa-caret-right" onclick='redirect(this,"_05_memberProfile")'><i>會員資料修改</i></a>
+										class="fas fa-caret-right" onclick="memberProfile(this)"><i>會員資料修改</i></a>
 								</h1>
 							</div>
 							<div class="mt-5">
 								<h1>
 									<a style="text-decoration: none; color: black; cursor:pointer;"
-										class="fas fa-caret-right" onclick='redirect(this,"_04_favoriteList")'><i>商品追蹤清單</i></a>
+										class="fas fa-caret-right" onclick="favoriteList(this)"><i>商品追蹤清單</i></a>
 								</h1>
 							</div>
 							<div class="mt-5">
@@ -101,13 +99,13 @@
 							<div class="mt-5 ">
 								<h1>
 									<a style="text-decoration: none; color: black; cursor:pointer;"
-										class="fas fa-caret-right" onclick='redirect(this,"rentOrderQuery")'><i>租賃記錄查詢</i></a>
+										class="fas fa-caret-right" onclick="rentOrderQuery(this)"><i>租賃記錄查詢</i></a>
 								</h1>
 							</div>
 							<div class="mt-5 ">
 								<h1>
 									<a style="text-decoration: none; color: black; cursor:pointer;"
-										class="fas fa-caret-right" onclick='redirect(this,"orderQuery")'><i>購買記錄查詢</i></a>
+										class="fas fa-caret-right" onclick="orderQuery(this)"><i>購買記錄查詢</i></a>
 								</h1>
 							</div>
 							<div class="mt-5 ">
@@ -135,7 +133,7 @@
 							<div class="mt-5">
 								<h1>
 								<a style="text-decoration: none; color: black;"
-									class="fas fa-caret-right" href="_06_problemReply"><i>客服紀錄查詢</i></a>
+									class="fas fa-caret-right" onclick="qaQuery(this)"><i>客服紀錄查詢</i></a>
 								</h1>
 								<div class="mt-5 ">
 									<h1>

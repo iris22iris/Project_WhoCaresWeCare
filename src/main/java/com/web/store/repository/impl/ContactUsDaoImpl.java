@@ -3,6 +3,8 @@ package com.web.store.repository.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,8 @@ import org.springframework.stereotype.Repository;
 import com.web.store.model._02_customerService.ProblemBean;
 import com.web.store.model._02_customerService.ProblemSelectBean;
 import com.web.store.model._02_customerService.usPKClass.ProblemBeanPK;
+import com.web.store.model._04_shop.BuyItemBean;
+import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.repository.ContactUsDao;
 
 @Repository
@@ -82,11 +86,32 @@ public class ContactUsDaoImpl implements ContactUsDao {
 //		return pb;
 //	}
 
-	@Override
-	public ProblemBean findProblemById(Integer usId) {
+	public ProblemBean getProblemById(Integer usId) {
+		ProblemBean bean = null;
 		Session session = factory.getCurrentSession();
-		ProblemBean problemBean = session.get(ProblemBean.class, new ProblemBeanPK(usId));
-		return problemBean;
+		String hql = "FROM ProblemBean cb WHERE cb.usId = :usId";
+		try {
+			bean = (ProblemBean) session.createQuery(hql).setParameter("usId", usId).getSingleResult();
+		} catch (NoResultException e) {
+			; // 表示查無紀錄
+		}
+		return bean;
+	}
+
+	
+	
+	
+
+
+	@Override
+	public List<ProblemBean> getProblemsById(Integer usId) {
+		Session session = factory.getCurrentSession();
+		String hql = " FROM ProblemBean WHERE usId ";
+		
+		return session.createQuery(hql, ProblemBean.class)
+				 .setParameter("usId",(new ProblemBeanPK(usId)))
+				 .getResultList();
+				
 	}
 	
 	

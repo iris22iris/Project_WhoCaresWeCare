@@ -16,7 +16,10 @@ public interface ContactUsDao {
 	
 	List<ProblemSelectBean> queryProblemSelect(String problemType);
 //	ProblemBean findProblemById(int usId);
-	ProblemBean findProblemById(Integer usId);
+//	ProblemBean findProblemById(Integer usId);
+	
+	ProblemBean getProblemById(Integer usId);
+	List<ProblemBean> getProblemsById(Integer usId);
 	
 	
 }
