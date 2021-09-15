@@ -23,12 +23,36 @@
     <title>購物車清單</title>
     
     <script>
-    window.onload = function() {
-    	
 
-    }
+	window.onload = function(){
+		count();
+	}
+	
+	//計算結帳明細(商品金額/優惠折抵/合計)
+	function count(){
+		//商品金額
+		var showTotal = 0;
+		$(".itemTotal").each(function(){
+			var total = parseInt($(this).text());
+			showTotal += total
+		})
+		$("#itemSum").text(showTotal);
 
-    
+		//優惠折抵
+		var showSum = 0;
+		$(".discount").each(function(){
+			var total = parseInt($(this).text());
+			showSum += total
+		})
+		$("#discountSum").text(showSum);
+
+		//合計金額
+		var showOrder = showTotal + showSum;
+		$("#order").text(showOrder); 
+
+	}
+	
+    //刪除勾選商品
     function confirmDelete() {
 		if (confirm("確認移除勾選之商品? ") ) {
 			var checkObj = [];
@@ -53,6 +77,7 @@
 			},
 
 			success: function() { 
+				
 				if(prodId.indexOf(",") != -1){
 					var prodIdList = prodId.split(',');
 					for (var x = 0; x < prodIdList.length; x++) {
@@ -60,6 +85,7 @@
 						}
 					}
 				$('#productItem' + prodIdList).remove();
+				
 			}
 		});
 	  }
@@ -150,13 +176,15 @@
                     <!-- 折抵金額 -->
                     <c:choose>
                    <c:when test="${!empty buyItems.productBean.promotionBean.promoteId}">
-                    <div class="col-12" style="color:crimson;">-${buyItems.productBean.promotionBean.discount}元</div>
+                    <div class="col-12 discount" style="color:crimson;">-${buyItems.productBean.promotionBean.discount}元</div>
                     </c:when>
                    <c:otherwise>
                      <div class="col-12">無</div>
                    </c:otherwise>
                     </c:choose>
-                    <div class="col-12">${buyItems.itemSum - buyItems.productBean.promotionBean.discount}元</div>
+                    <div class="col-12 itemTotal">
+                    ${buyItems.itemSum - buyItems.productBean.promotionBean.discount}元
+                    </div>
                 </div>
              </div>
             </c:forEach>
@@ -171,10 +199,14 @@
          <div class="col-3 cartRight">
              <div class="amountTitle">結帳明細</div>
              <div class="amount">
-                <div class="col-6 amountItem">商品金額：</div>
-                <div class="col-6 price">3000元</div>
-                <div class="col-6 amountItem">優惠折抵：</div>
-                <div class="col-6 price">-150元</div>
+                <div class="col-6 amountItem">商品總金額：</div>
+                <div class="col-6 price">
+                <span id="itemSum"></span>元
+                </div>
+                <div class="col-6 amountItem">優惠合計：</div>
+                <div class="col-6 price">
+                <span id="discountSum" style="color:crimson;"></span>元
+                </div>
                 <div class="col-4 amountItem">折扣碼：</div>
                 <div class="col-8 price">
                     <input type="text" placeholder="尚未輸入折扣代碼" id="discountCode">
@@ -184,7 +216,9 @@
                 <div class="col-12"><hr style="size:5px;"></div>
                 
                 <div class="col-6 amountItem">合計金額：</div>
-                <div class="col-6 price">2850元</div>
+                <div class="col-6 price">
+                <span id="order"></span>元
+                </div>
             </div>
                 <div class="checkoutBtn col-12 mt-3">
                     <button >繼續逛逛</button>
