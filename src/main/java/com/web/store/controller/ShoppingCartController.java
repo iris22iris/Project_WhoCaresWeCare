@@ -45,8 +45,7 @@ public class ShoppingCartController {
 	// 加入購物車
 	@PostMapping("/buyMenu/addCart/{prodId}")
 	public String addProductToCart(@PathVariable("prodId") Integer prodId,
-			@RequestParam(name = "prodQTY", required = false) Integer prodQTY, Model model, HttpServletRequest request,
-			HttpServletResponse response) {
+			@RequestParam(name = "prodQTY", required = false) Integer prodQTY, Model model) {
 
 		// 取出存放在session物件內的ShoppingCart物件
 		ShoppingCart shoppingCart = (ShoppingCart) httpSession.getAttribute("ShoppingCart");
@@ -56,13 +55,12 @@ public class ShoppingCartController {
 			log.info("建立新的shoppingCart放進session");
 		}
 
-		String prodIdStr = request.getParameter("prodId");
-		int prodcuctId = Integer.parseInt(prodIdStr.trim());
+		int prodcuctId = Integer.parseInt(prodId.toString().trim());
 
 		ProductBean productBean = new ProductBean();
 		productBean = productService.getProductById(prodcuctId);
 
-		BigDecimal productQTY = new BigDecimal(request.getParameter("prodQTY"));
+		BigDecimal productQTY = new BigDecimal(prodQTY);
 		BigDecimal itemSum = productQTY.multiply(productBean.getPrice());
 
 		// 將資料封裝到buyItemBean
