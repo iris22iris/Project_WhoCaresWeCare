@@ -75,6 +75,9 @@
 							<c:forEach var='rentProductMap' items='${rentProductsMap}'>
 								<div class="col-3 mt-3 " id="cardWidth">
 									<div class="card text-center">
+										<c:if test="${!empty rentProductMap.key.promotionBean}">
+											<div class="card-promotion">${rentProductMap.key.promotionBean.promoTag}</div>
+										</c:if>
 										<a href="<c:url value='/_03_rentProduct?id=${rentProductMap.key.prodId}' />"><img
 											src="<c:url value='/images/product/${rentProductMap.key.fileName}' />"
 											class="card-img-top" id="productImg" alt="..."></a>

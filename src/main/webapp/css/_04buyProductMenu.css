@@ -74,6 +74,15 @@ select {
 	border: none;
 }
 
+.card-promotion {
+	position: absolute;
+    top: 5px;
+    right : 5px;
+    color: white;
+    display: block;
+    background: red;
+    text-align: center;
+}
 
 .card-body {
 	border-top: 4px dotted #ccc;
