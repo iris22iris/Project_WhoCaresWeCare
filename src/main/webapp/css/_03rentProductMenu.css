@@ -71,8 +71,9 @@ select {
 
 .card-promotion {
 	position: absolute;
-    top: 5px;
-    right : 5px;
+    top: 15px;
+	padding: 3px;
+    right: 0px;
     color: white;
     display: block;
     background: red;

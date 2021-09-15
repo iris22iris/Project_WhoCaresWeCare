@@ -102,7 +102,7 @@
 															<a href="<c:url value='/_03_rentProduct?id=${rentProductMap.key.prodId}' />" class="btn btn-warning">前往租賃</a>
 														</c:when>
 														<c:otherwise>
-															<a href="<c:url value='/_03_rentProduct?id=${rentProductMap.key.prodId}' />" class="btn btn-warning">前往預約</a>
+															<a href="<c:url value='/_03_rentProduct?id=${rentProductMap.key.prodId}' />" class="btn btn-success">預約候補</a>
 														</c:otherwise>
 													</c:choose>
 												</c:when>
@@ -113,7 +113,7 @@
 															<a href="<c:url value='/_03_rentProduct?id=${rentProductMap.key.prodId}' />" class="btn btn-warning">前往租賃</a>
 														</c:when>
 														<c:otherwise>
-															<a href="<c:url value='/_03_rentProduct?id=${rentProductMap.key.prodId}' />" class="btn btn-warning">前往預約</a>
+															<a href="<c:url value='/_03_rentProduct?id=${rentProductMap.key.prodId}' />" class="btn btn-success">預約候補</a>
 														</c:otherwise>
 													</c:choose>
 												</c:otherwise>
