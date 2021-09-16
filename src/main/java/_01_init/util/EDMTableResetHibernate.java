@@ -19,6 +19,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import com.web.store.model._02_customerService.CommentBean;
+import com.web.store.model._02_customerService.DmBean;
 import com.web.store.model._02_customerService.ProblemBean;
 import com.web.store.model._02_customerService.ProblemSelectBean;
 import com.web.store.model._02_customerService.PromotionBean;
@@ -27,7 +28,6 @@ import com.web.store.model._03_rent.RentProductBean;
 import com.web.store.model._03_rent.ReservationBean;
 import com.web.store.model._03_rent.pkClass.RentItemPK;
 import com.web.store.model._04_shop.BuyItemBean;
-import com.web.store.model._04_shop.FavoriteBean;
 import com.web.store.model._04_shop.ProductBean;
 import com.web.store.model._04_shop.pkClass.BuyItemPK;
 import com.web.store.model._05_customer.CitySelectBean;
@@ -494,7 +494,36 @@ public class EDMTableResetHibernate {
 				session.flush();
 				System.out.println("problemselect表格資料新增成功");
 			}
+			
+			// 12. dm表格
+						//由"data/dm.dat"逐筆讀入dm表格內的初始資料，
+						//然後依序新增到dm表格中
+			count = 0;
+			try (FileInputStream fis = new FileInputStream("data/dm.dat");
+					InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
+					BufferedReader br = new BufferedReader(isr0);) {
+				while ((line = br.readLine()) != null) {
 
+					String[] token = line.split("\\|");
+					DmBean db = new DmBean();
+					db.setDmId(Integer.parseInt(token[0]));
+					db.setAddDate(Timestamp.valueOf(token[1]));
+					db.setCategory(token[2]);
+					Blob blob = SystemUtils2018.fileToBlob("src/main/webapp/images/DM/" + token[3]);
+					db.setDmImage(blob);
+					db.setDmName(token[4]);
+					db.setDmdate(token[5]);
+					db.setMimeType(token[6]);
+
+					session.merge(db);
+					count++;
+					System.out.println("新增reservation紀錄成功，共新增" + count + "筆記錄:" + token[1]);
+				}
+				session.flush();
+				System.out.println("reservation表格資料新增成功");
+			}
+			
+			
 			catch (Exception ex) {
 				ex.printStackTrace();
 			}

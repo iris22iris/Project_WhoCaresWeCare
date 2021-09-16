@@ -48,7 +48,7 @@ function clicka(obj,objUrl){
 			<!-- left Menu -->
 			<ul class="navbar-nav  me-auto mb-lg-0 left-menu">
 				<li class="nav-item "><a class="nav-link textSize "
-					href="<c:url value='/_02_onlineDM' />" style="color: white;">
+					href="<c:url value='/dmMenu' />" style="color: white;">
 						關於我們</a></li>
 				<li class="nav-item"><a class="nav-link textSize "
 					href="<c:url value='/rentMenu' />" style="color: white;"> 租賃設備</a></li>

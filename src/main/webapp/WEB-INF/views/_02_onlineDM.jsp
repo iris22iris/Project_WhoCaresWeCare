@@ -30,8 +30,6 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js">
 	</script>
 	
-  
-	
 </head>
 
 <body>
@@ -51,58 +49,26 @@
 
             <!-- 各月份DM start -->
             <div class="accordion accordion-flush dmDate" id="accordionFlushExample ">
-                
                 <div class="accordion-item">
+                 <c:forEach var="dms" items="${dms}" varStatus="vs">
                   <h2 class="accordion-header" id="flush-headingOne">
                     <button class="accordion-button collapsed" 
                         type="button" data-bs-toggle="collapse" 
                         data-bs-target="#flush-collapseOne" 
                         aria-expanded="false" aria-controls="flush-collapseOne">
-                      <span>{2020年八月}</span>
+                      <span>${dms.dmdate}</span>
                     </button>
                   </h2>
                   <div id="flush-collapseOne" class="accordion-collapse collapse" 
                     aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                     <div class="accordion-body">
-                        <a href="">暑期DM</a>
+                        <a href="<c:url value='/dmMenu/${dms.dmId}' />">${dms.dmName}</a>
                         <br>
-                        <a href="">週年慶DM</a>
                     </div>
                   </div>
+                </c:forEach>
                 </div>
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingTwo">
-                    <button class="accordion-button collapsed" 
-                    type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" 
-                    aria-expanded="false" aria-controls="flush-collapseTwo">
-                    <span>{2020年九月}</span>
-                    </button>
-                  </h2>
-                  <div id="flush-collapseTwo" class="accordion-collapse collapse" 
-                  aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body">
-                        <a href="">中秋節DM</a>
-                    </div>
-                  </div>
                 </div>
-                
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingThree">
-                    <button class="accordion-button collapsed" type="button" 
-                    data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" 
-                    aria-expanded="false" aria-controls="flush-collapseThree">
-                    <span>{2020年十月}</span>
-                    </button>
-                  </h2>
-                  <div id="flush-collapseThree" class="accordion-collapse collapse" 
-                  aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body">
-                        <a href="">國慶日DM</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
             <!-- 各月份DM End -->
         </nav>
         <!-- side-menu end -->
@@ -118,28 +84,32 @@
                 </h1>
             </div>
             <!-- title end -->
-            
             <!-- dmImage start -->
+            
             <div id="image" class="dmImage pt-3 ">
-                    <img id="myimage" src="<c:url value='/images/DM/DM1.jpg'/>"  alt="dm">         
+                 <img id="myimage" src="<c:url value='/images/DM/DM3.jpg' />"  alt="dm">
+            	<c:forEach var='dm' items='${dmo}'>  
+                    <img id="myimage" src="<c:url value='/images/DM/DM${dm.dmId}.jpg' />"  alt="dm">
+				</c:forEach>
             </div>
             <!-- dmImage end -->
-
             <!-- fileBtnContainer start -->
-            <div class="filebuttoncontainer d-flex p-2 ">
-                <div class="col-5 d-flex justify-content-end">
-                    <button type="submit" class="btn-warning downloadBtn">DM檔案下載</button>
-                </div>
+<!--             <div class="filebuttoncontainer d-flex p-2 "> -->
+<!--                 <div class="col-5 d-flex justify-content-end"> -->
+<!--                     <button type="submit" class="btn-warning downloadBtn" >  -->
+<!--                     DM檔案下載 -->
+<!--                     </button> -->
+<!--                 </div> -->
+<!--         </div> -->
 
-                <div class="backnext col-7 d-flex align-items-center p-2">
-                    <i class="fas fa-chevron-circle-left"></i>
-                    <div>目前頁次/總頁次</div>
-                    <i class="fas fa-chevron-circle-right"></i>
-                </div>
-            </div>
+<!--                 <div class="backnext col-7 d-flex align-items-center p-2"> -->
+<!--                     <i class="fas fa-chevron-circle-left"></i> -->
+<!--                     <div>目前頁次/總頁次</div> -->
+<!--                     <i class="fas fa-chevron-circle-right"></i> -->
+<!--                 </div> -->
+<!--             </div> -->
             <!-- fileBtnContainer end -->
 
-        </div>
         <!-- dmcontainer end -->
 
 

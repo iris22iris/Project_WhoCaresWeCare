@@ -77,6 +77,7 @@
     justify-content: center;
 	width: inherit;
     overflow: hidden;
+    justify-content:flex-end;
   }
 
 #image img {
