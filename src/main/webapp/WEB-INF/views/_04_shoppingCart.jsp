@@ -32,7 +32,7 @@
 	function count(){
 		//商品金額
 		var showTotal = 0;
-		$(".itemTotal").each(function(){
+		$(".productPrice").each(function(){
 			var total = parseInt($(this).text());
 			showTotal += total
 		})
@@ -64,9 +64,11 @@
 			}
 			var prodId = "";
 			for(var i=0 ; i <checkObj.length;i++){
-				prodId += checkObj[i].getAttribute("value")+",";
+				if(i != checkObj.length-1)
+					prodId += checkObj[i].getAttribute("value")+",";
+				else
+					prodId += checkObj[i].getAttribute("value");
 			}
-		
 
 		$.ajax({
 			url : "<c:url value='/_04_shoppingCart/updateItem.do' />",
@@ -82,10 +84,11 @@
 					var prodIdList = prodId.split(',');
 					for (var x = 0; x < prodIdList.length; x++) {
 						$('#productItem' + prodIdList[x]).remove();
-						}
 					}
-				$('#productItem' + prodIdList).remove();
-				
+					count();
+				}
+				$('#productItem' + prodId).remove();
+				count();
 			}
 		});
 	  }
@@ -155,7 +158,7 @@
                 <div class="col-2 cartSum">
                     <div></div>
                     <div class="col-12 hidden"></div>
-                    <div class="col-12">
+                    <div class="col-12 productPrice">
                         ${buyItems.productBean.price}元
                     </div>
 					<!-- 有符合活動才會顯示標籤 -->
