@@ -38,8 +38,12 @@ public class RentProductBean implements Serializable {
 	private Blob coverImage2;
 	private Blob coverImage3;
 	private String mimeType;
+	private String mimeType2;
+	private String mimeType3;
 	private Integer stock;
 	private String fileName;
+	private String fileName2;
+	private String fileName3;
 	private Clob description;
 
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -174,6 +178,38 @@ public class RentProductBean implements Serializable {
 		this.fileName = fileName;
 	}
 
+	public String getMimeType2() {
+		return mimeType2;
+	}
+
+	public void setMimeType2(String mimeType2) {
+		this.mimeType2 = mimeType2;
+	}
+
+	public String getMimeType3() {
+		return mimeType3;
+	}
+
+	public void setMimeType3(String mimeType3) {
+		this.mimeType3 = mimeType3;
+	}
+
+	public String getFileName2() {
+		return fileName2;
+	}
+
+	public void setFileName2(String fileName2) {
+		this.fileName2 = fileName2;
+	}
+
+	public String getFileName3() {
+		return fileName3;
+	}
+
+	public void setFileName3(String fileName3) {
+		this.fileName3 = fileName3;
+	}
+
 	public Clob getDescription() {
 		return description;
 	}
@@ -224,6 +260,8 @@ public class RentProductBean implements Serializable {
 		this.comments = comments;
 	}
 
+	
+	// 新增的fileName2&3 mimeType2&3沒加入equals hashCode 如有需要再補上	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -244,6 +282,7 @@ public class RentProductBean implements Serializable {
 		result = prime * result + ((stock == null) ? 0 : stock.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {

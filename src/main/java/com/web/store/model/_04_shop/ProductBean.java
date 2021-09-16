@@ -38,9 +38,13 @@ public class ProductBean implements Serializable {
 	private Blob coverImage2;// 圖片2
 	private Blob coverImage3;// 圖片3
 	private String mimeType;// 圖片類型
+	private String mimeType2;// 圖片類型
+	private String mimeType3;// 圖片類型
 	private Integer stock;// 庫存數量
 //	private String prodType;// 商品分類代碼 --ProductTypeBean取代此建構子--
 	private String fileName;// 圖片名稱
+	private String fileName2;// 圖片名稱
+	private String fileName3;// 圖片名稱
 	private Clob description;// 商品敘述
 //	private Integer promoteId;// 活動編號
 
@@ -240,6 +244,38 @@ public class ProductBean implements Serializable {
 		this.comments = comments;
 	}
 
+	public String getMimeType2() {
+		return mimeType2;
+	}
+
+	public void setMimeType2(String mimeType2) {
+		this.mimeType2 = mimeType2;
+	}
+
+	public String getMimeType3() {
+		return mimeType3;
+	}
+
+	public void setMimeType3(String mimeType3) {
+		this.mimeType3 = mimeType3;
+	}
+
+	public String getFileName2() {
+		return fileName2;
+	}
+
+	public void setFileName2(String fileName2) {
+		this.fileName2 = fileName2;
+	}
+
+	public String getFileName3() {
+		return fileName3;
+	}
+
+	public void setFileName3(String fileName3) {
+		this.fileName3 = fileName3;
+	}
+
 //	public Set<CustomerBean> getCustmers() {
 //		return custmers;
 //	}
@@ -247,5 +283,7 @@ public class ProductBean implements Serializable {
 //	public void setCustmers(Set<CustomerBean> custmers) {
 //		this.custmers = custmers;
 //	}
+	
+	
 
 }

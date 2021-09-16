@@ -187,26 +187,30 @@ public class EDMTableResetHibernate {
 					ProductBean pb = new ProductBean();
 					pb.setProdId(Integer.parseInt(token[0]));
 					pb.setClassify(token[1]);
-					Blob blob1 = SystemUtils2018.fileToBlob("data/product/" + token[3]);
+					Blob blob1 = SystemUtils2018.fileToBlob("data/product/" + token[2]);
 					Blob blob2 = SystemUtils2018.fileToBlob("data/product/forProductPage_2.png");
 					Blob blob3 = SystemUtils2018.fileToBlob("data/product/forProductPage_3.png");
 					pb.setCoverImage1(blob1);
 					pb.setCoverImage2(blob2);
 					pb.setCoverImage3(blob3);
-					pb.setFileName(token[3]);
-					pb.setMimeType(token[4]);
-					pb.setPrice(new BigDecimal(token[5]));
-					pb.setProdName(token[6]);
+					pb.setFileName(token[2]);
+					pb.setMimeType(token[3]);
+					pb.setPrice(new BigDecimal(token[4]));
+					pb.setProdName(token[5]);
 					java.sql.Clob clob = SystemUtils2018.fileToClob("data/productDescription.txt");
 					pb.setDescription(clob);
-					pb.setStock(Integer.parseInt(token[7]));
-					pb.setProductTypeBean(new ProductTypeBean(token[8]));
-					int n = 1;
-					if(Integer.parseInt(token[9]) == n ) {
-				        ;
+					pb.setStock(Integer.parseInt(token[6]));
+					pb.setProductTypeBean(new ProductTypeBean(token[7]));
+					int n = 0;
+					if(Integer.parseInt(token[8]) == n ) {
+						;
 					}else {
-					pb.setPromotionBean(new PromotionBean(Integer.parseInt(token[9])));
+						pb.setPromotionBean(new PromotionBean(Integer.parseInt(token[8])));
 					}
+					pb.setFileName2(token[9]);
+					pb.setFileName3(token[10]);
+					pb.setMimeType2(token[11]);
+					pb.setMimeType3(token[12]);
 					
 
 					session.merge(pb);
@@ -230,7 +234,8 @@ public class EDMTableResetHibernate {
 					String[] token = line.split("\\|");
 					RentProductBean rpb = new RentProductBean();
 					rpb.setProdId(Integer.parseInt(token[0]));
-					rpb.setClassify(token[1]);
+					rpb.setSerialNumber(token[1]);
+					rpb.setClassify(token[2]);
 					Blob blob1 = SystemUtils2018.fileToBlob("data/product/" + token[3]);
 					Blob blob2 = SystemUtils2018.fileToBlob("data/product/forProductPage_2.png");
 					Blob blob3 = SystemUtils2018.fileToBlob("data/product/forProductPage_3.png");
@@ -241,12 +246,21 @@ public class EDMTableResetHibernate {
 					rpb.setMimeType(token[4]);
 					rpb.setPrice(new BigDecimal(token[5]));
 					rpb.setProdName(token[6]);
-					rpb.setSerialNumber(token[8]);
-					rpb.setStock(Integer.parseInt(token[9]));
+					rpb.setStock(Integer.parseInt(token[7]));
 					java.sql.Clob clob = SystemUtils2018.fileToClob("data/productDescription.txt");
 					rpb.setDescription(clob);
-					rpb.setProductTypeBean(new ProductTypeBean(token[10]));
-
+					rpb.setProductTypeBean(new ProductTypeBean(token[8]));
+					int n = 0;
+					if(Integer.parseInt(token[9]) == 0 ) {
+						;
+					}else {
+						rpb.setPromotionBean(new PromotionBean(Integer.parseInt(token[9])));
+					}
+					rpb.setFileName2(token[10]);
+					rpb.setFileName3(token[11]);
+					rpb.setMimeType2(token[12]);
+					rpb.setMimeType3(token[13]);
+					
 					session.merge(rpb);
 					count++;
 					System.out.println("新增rentproduct紀錄成功，共新增" + count + "筆記錄:" + token[1]);
