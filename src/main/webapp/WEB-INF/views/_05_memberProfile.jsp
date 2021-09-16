@@ -27,20 +27,17 @@ window.onload = function() {
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", "<c:url value='/querySelect/A,B' />", true);
 	xhr.send();	
-	var message = "";
 	
 	xhr.onreadystatechange = function() {
 	 // 伺服器請求完成
 	 
 	    if (xhr.readyState == 4 && xhr.status == 200) {
 		   var querySelect = JSON.parse(xhr.responseText);
-		   
 			$("#city").append("<option value='" + 0 + "'selected='selected' disabled>" + "請選擇" + "</option>");
-// 			$("#city").append("<option value='0'>請選擇</option>"); 
 		   querySelect.forEach(function (item) {
-			   $("#city").append("<option value='" + item.id + "'>" + item.city + "</option>");
+			   $("#city").append("<option value='" + item.city + "'>" + item.city + "</option>");
            });
-		   
+		   $("#city").val('${customer.city}')
 	    }
      }
 }
@@ -51,70 +48,83 @@ function upData() {
 	var custNameResult = document.getElementById('custNameResult');
 	var passWordResult = document.getElementById('passWordResult');
 	var inputIDResult = document.getElementById('inputIDResult');
-	var sub = document.getElementById('sub');
-// 	var custImage = document.getElementById('custImage');
 
+			let formData = new FormData();
+			formData.append('custId', ${sessionScope.LoginOK});
+			formData.append('custName', $('#custName').val());
+			formData.append('password', $('#password').val());
+			formData.append('idNumber', $('#inputID').val());
+			formData.append('phone', $('#phone').val());
+			formData.append('email', $('#email').val());
+			formData.append('birthday', $('#birthday').val());
+			formData.append('gender', $('input[type=radio][name="gender"]:checked').val());
+			formData.append('city', $('#city').find("option:selected").text());
+			formData.append('nickName', $('#nickName').val());
+			formData.append('address', $('#address').val());
+			formData.append('image', $('#custImage')[0].files[0] == undefined ? null : $('#custImage')[0].files[0]);
+	$.ajax({
+			url : '${pageContext.request.contextPath}/_05_EditmemberProfile',
+			type : "POST",
+		    processData: false,
+			contentType: false,
+    		mimeType: 'multipart/form-data',
+    		data :formData,		
+			success: function(){
+		        //跳訊息提示
+		        alert('修改會員成功!');
+		    },
+		});
 	
-// 	var showImage = $('#showImage').val();
-	var custName = $('#custName').val();
-	var nickName = $('#nickName').val();
-	var password = $('#passWord').val();
-	var inputID = $('#inputID').val();
-	var phone = $('#phone').val();
-	var email = $('#email').val();
-	var address = $('#address').val();
-	var birthday = $('#birthday').val();
-	var gender = $('#male').val();
-	var city = $('#city').val();
-	
-	var xhr1 = new XMLHttpRequest();
-		xhr1.open("PUT", "<c:url value='/_05_EditmemberProfile/' />", true);
-		var jsonCustomer = {
-				custId:${id},
-				custName:$('#custName').val(),	
-				password:$('#passWord').val(),	
-				idNumber:$('#inputID').val(),
-				phone:$('#phone').val(),	
-				email:$('#email').val(),
-				birthday:$('#birthday').val(),
-				gender:$('input[type=radio][name="gender"]:checked').val(),
-				city:$('#city').val(),
-				nickName:$('#nickName').val(),
-				address:$('#address').val(),
-// 				image:$('#showImage').attr("src")
-		   		}
-	   		xhr1.setRequestHeader("Content-Type", "application/json");
-	   		xhr1.send(JSON.stringify(jsonCustomer));
+// 	var xhr1 = new XMLHttpRequest();
+// 		xhr1.open("PUT", "<c:url value='/_05_EditmemberProfile/' />", true);
+// // 		var jsonCustomer = {
+// 				custId:${id},
+// 				custName:$('#custName').val(),	
+// 				password:$('#passWord').val(),	
+// 				idNumber:$('#inputID').val(),
+// 				phone:$('#phone').val(),	
+// 				email:$('#email').val(),
+// 				birthday:$('#birthday').val(),
+// 				
+// 				city:$('#city').val(),
+// 				nickName:$('#nickName').val(),
+// 				address:$('#address').val(),
+// // 				image:$('#showImage').attr("src")
+// 		   		}
+// 	   		xhr1.setRequestHeader("Content-Type", "application/json");
+// 	   		xhr1.send(
+				
+// 		   		);
 
 
-	   		xhr1.onreadystatechange = function() {
+// 	   		xhr1.onreadystatechange = function() {
 				// 伺服器請求完成
-   		if (xhr1.readyState == 4 && (xhr1.status == 200 || xhr1.status == 201) ) {
-      		result = JSON.parse(xhr1.responseText);
-      		if (result.fail) {
-		 		divResult.innerHTML = "<font color='red' >"
-					+ result.fail + "</font>";
-	  		} 
+//    		if (xhr1.readyState == 4 && (xhr1.status == 200 || xhr1.status == 201) ) {
+//       		result = JSON.parse(xhr1.responseText);
+//       		if (result.fail) {
+// 		 		divResult.innerHTML = "<font color='red' >"
+// 					+ result.fail + "</font>";
+// 	  		} 
 
-	  		if (result.custNameError) {
-	  			custNameResult.innerHTML = "<font color='RED'>"
-					+ result.custNameError + "</font>";
-					$('#custNameResult').show();
-	 		} 
+// 	  		if (result.custNameError) {
+// 	  			custNameResult.innerHTML = "<font color='RED'>"
+// 					+ result.custNameError + "</font>";
+// 					$('#custNameResult').show();
+// 	 		} 
 
-	  		if (result.passWordError) {
-	  			passWordResult.innerHTML = "<font color='RED'>"
-					+ result.passWordError + "</font>";
-					$('#passWordResult').show();
-	 		} 
+// 	  		if (result.passWordError) {
+// 	  			passWordResult.innerHTML = "<font color='RED'>"
+// 					+ result.passWordError + "</font>";
+// 					$('#passWordResult').show();
+// 	 		} 
 
-	  		if (result.idNumberError) {
-	  			inputIDResult.innerHTML = "<font color='RED'>"
-					+ result.idNumberError + "</font>";
-					$('#inputIDResult').show();
-	 		} 
-		} 
-    }
+// 	  		if (result.idNumberError) {
+// 	  			inputIDResult.innerHTML = "<font color='RED'>"
+// 					+ result.idNumberError + "</font>";
+// 					$('#inputIDResult').show();
+// 	 		} 
+// 		} 
+//     }
 }
 
 function handleFiles(e){
@@ -163,10 +173,10 @@ function handleFiles(e){
 					<!--  圖片star  圖片star -->
 					<div class="button  col-12 p-3 ">
 						<div class="col-6" style="margin-left: 40px">
-							<input id="custImage" type="file" onchange="handleFiles(event)">
+							<input id="custImage" type="file" onchange="handleFiles(event)"">
 						</div>
 						<div class="col-12">
-							<img src="<c:url value='/getMemberImg?custId=${customer.custId}'/>" id="showImage" alt="" width="150" height="150">
+							<img src='${pageContext.request.contextPath}/getMemberImg?custId=${customer.custId}' id="showImage" alt="" width="150" height="150">
 							<div class="col-12 p-3">
 								<button type="submit" class="btn">清除</button>
 							</div>
@@ -181,7 +191,7 @@ function handleFiles(e){
 					<div
 						class="col-9  p-3 d-flex justify-content-center align-items-center">
 						<!-- 輸入資料區表格star -->
-						<form class="row g-3">
+						<form class="row g-3" id="form1">
 							<div id='resultMsg' style="height: 18px; display: none;"></div>
 
 							<div class="col-3 ">

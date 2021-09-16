@@ -1,23 +1,27 @@
 package com.web.store.controller;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.Blob;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.servlet.ServletException;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
+
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.CacheControl;
@@ -34,18 +38,16 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.web.store.model._05_customer.CitySelectBean;
 import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.service.CityService;
 import com.web.store.service.CustomerService;
 import com.web.store.validators.CustomerValidator;
-
-
 
 @Controller
 public class CustomerController {
@@ -336,37 +338,60 @@ public class CustomerController {
 		return "_05_memberProfile";
 	}
 
-
 	// 修改單筆會員資料
-	@RequestMapping(value = "/_05_EditmemberProfile/{key}", consumes = { "application/json" }, produces = {
-			"application/json" })
-	public @ResponseBody Map<String, String> updateCustomer(@RequestBody CustomerBean customer,
-			@PathVariable Integer key) {
+	@PostMapping(value = "/_05_EditmemberProfile")
+	public @ResponseBody Map<String, String> updateCustomer(@RequestParam Integer custId, @RequestParam String password,
+			@RequestParam String custName, @RequestParam String nickName, @RequestParam String idNumber,
+			@RequestParam String email, @RequestParam Date birthday, @RequestParam String gender,
+			@RequestParam String city, @RequestParam String phone, @RequestParam String address,
+			@RequestParam(required = false) MultipartFile image
+
+	) {
 
 		Map<String, String> errorMsgColumn = new HashMap<String, String>();
+		final String CUSTNAME_PATTERN = "\\pP|\\pS|\\s+";
+		final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%!^'\"]).{8,12})";
+		CustomerBean customer = null;
+
 		try {
-			CustomerBean member0 = null;
-			final String CUSTNAME_PATTERN = "\\pP|\\pS|\\s+";
-			final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%!^'\"]).{8,12})";
-			String custName = customer.getCustName();
-			String nickName = customer.getNickName();
-			String idNumber = customer.getIdNumber();
-			String email = customer.getEmail();
-			String account = customer.getAccount();
-			Date birthday = customer.getBirthday();
-			String password = customer.getPassword();
-			if (key != null) {
-				member0 = customerService.getCustomerById(key);
-				if (member0 == null) {
-					throw new RuntimeException("鍵值不存在, key=" + key);
+			if (custId != null) {
+				customer = customerService.getCustomerById(custId);
+				if (customer == null) {
+					throw new RuntimeException("鍵值不存在, custId=" + custId);
 				}
 			} else {
-				throw new RuntimeException("鍵值不存在, key=" + key);
+				throw new RuntimeException("鍵值不存在, custId=" + custId);
 			}
+			
+			if (image != null) {
+				byte[] b = image.getBytes();
+				Blob imageBlob = new SerialBlob(b);
+				String fileName = image.getOriginalFilename();
+				String[] extension = new String[] { ".jpg", ".png", ".gif", ".jpeg" };
+				String fn = null;
+				String fl = null;
+				if (fileName.lastIndexOf(".") != -1) {
+					fn = fileName.substring(0, fileName.lastIndexOf("."));
+					fl = fileName.substring(fileName.lastIndexOf("."));
 
-			customer.setAccount(member0.getAccount());
-//			cityService.getAllCitys(groupCity);
+					for (String ex : extension) {
+						if (fl.contains(ex)) {
+							break;
+						} else {
+							throw new RuntimeException("圖片類型不符, custId=" + custId);
+						}
+					}
+				}
 
+				File file = new File("E:/Fork/Project_WhoCaresWeCare/src/main/webapp/images",
+						fn + customer.getAccount() + fl);
+				try (OutputStream os = new FileOutputStream(file)) {
+					os.write(image.getBytes());
+				}
+				customer.setCustomerImage(imageBlob);
+				customer.setMimeType(fl.substring(1));
+				customer.setFileName(fn + customer.getAccount() + fl);
+			}
 			// 姓名檢核
 			if (custName == null || custName.trim().length() == 0) {
 				errorMsgColumn.put("custNameError", "會員姓名不能為空");
@@ -385,10 +410,10 @@ public class CustomerController {
 
 			Pattern passWordp = Pattern.compile(PASSWORD_PATTERN);
 			Matcher pm = passWordp.matcher(password);
-			if (! pm.matches()&& password.length()> 0 && password.length()< 12) {
+			if (!pm.matches() && password.length() > 0 && password.length() < 12) {
 				errorMsgColumn.put("passWordError", "密碼至少含各一個大小寫字母、數字與!@#$%!^'\\\"，且長度至少等於八個字元");
 			} else {
-				if ( ! pm.matches()&& password.length()> 0 && password.length()>8) {
+				if (!pm.matches() && password.length() > 0 && password.length() > 8) {
 					errorMsgColumn.put("passWordError", "密碼至少含各一個大小寫字母、數字與!@#$%!^'\\\"，且長度不能大於十二個字元");
 				} else {
 					if (pm.matches()) {
@@ -431,6 +456,16 @@ public class CustomerController {
 					}
 				}
 			}
+			customer.setCustName(custName);
+			customer.setAddress(address);
+			customer.setNickName(nickName);
+			customer.setIdNumber(idNumber);
+			customer.setEmail(email);
+			customer.setBirthday(birthday);
+			customer.setGender(gender);
+			customer.setCity(city);
+			customer.setPhone(phone);
+
 			customerService.updateCustomer(customer);
 			errorMsgColumn.put("success", "更新成功");
 		} catch (Exception e) {
@@ -447,73 +482,73 @@ public class CustomerController {
 //		genderMap.put("F", "Female");
 //		model.addAttribute("genderMap", genderMap);
 //	}
-	
-	//傳回會員圖片
-		@GetMapping("/getMemberImg")
-		public ResponseEntity<byte[]> getMemberImg(@RequestParam("custId") Integer custId) {
-			InputStream is = null;
-			OutputStream os = null;
-			String fileName = null;
-			String mimeType = null;
-			byte[] media = null;
-			ResponseEntity<byte[]> responseEntity = null;
-			HttpHeaders headers = new HttpHeaders();
-			MediaType mediaType = null;
-			Blob blob = null;
-			try {
-				CustomerBean bean = customerService.getCustomerById(custId);
-				if (bean != null) {
-					blob = bean.getCustomerImage();
-					if (blob != null) {
-						is = blob.getBinaryStream();
-					}
-					fileName = bean.getFileName();
-				}
-				// 如果圖片的來源有問題，就送回預設圖片(/images/NoImage.png)
-				if (is == null) {
-					fileName = "member.jpg";
-					is = context.getResourceAsStream("/images/" + fileName);
-				}
 
-				// 由圖片檔的檔名來得到檔案的MIME型態
-				mimeType = context.getMimeType(fileName);
-				if (mimeType == null) {
-					if (fileName.endsWith("jfif")) {
-						mimeType = "image/jfif";
-					}
+	// 傳回會員圖片
+	@GetMapping("/getMemberImg")
+	public ResponseEntity<byte[]> getMemberImg(@RequestParam("custId") Integer custId) {
+		InputStream is = null;
+		OutputStream os = null;
+		String fileName = null;
+		String mimeType = null;
+		byte[] media = null;
+		ResponseEntity<byte[]> responseEntity = null;
+		HttpHeaders headers = new HttpHeaders();
+		MediaType mediaType = null;
+		Blob blob = null;
+		try {
+			CustomerBean bean = customerService.getCustomerById(custId);
+			if (bean != null) {
+				blob = bean.getCustomerImage();
+				if (blob != null) {
+					is = blob.getBinaryStream();
 				}
-				ByteArrayOutputStream baos = new ByteArrayOutputStream();
-				// 由InputStream讀取位元組，然後由OutputStream寫出
-				int len = 0;
-				byte[] bytes = new byte[8192];
+				fileName = bean.getFileName();
+			}
+			// 如果圖片的來源有問題，就送回預設圖片(/images/NoImage.png)
+			if (is == null) {
+				fileName = "member.jpg";
+				is = context.getResourceAsStream("/images/" + fileName);
+			}
 
-				while ((len = is.read(bytes)) != -1) {
-					baos.write(bytes, 0, len);
-				}
-				media = baos.toByteArray();
-				mediaType = MediaType.valueOf(mimeType);
-				headers.setCacheControl(CacheControl.noCache().getHeaderValue());
-				headers.setContentType(mediaType);
-				responseEntity = new ResponseEntity<>(media, headers, HttpStatus.OK);
-
-			} catch (Exception ex) {
-				ex.printStackTrace();
-				throw new RuntimeException("/getMemberImg#doGet()發生Exception: " + ex.getMessage());
-			} finally {
-				try {
-					if (is != null)
-						is.close();
-				} catch (IOException e) {
-					;
-				}
-				try {
-					if (os != null)
-						os.close();
-				} catch (IOException e) {
-					;
+			// 由圖片檔的檔名來得到檔案的MIME型態
+			mimeType = context.getMimeType(fileName);
+			if (mimeType == null) {
+				if (fileName.endsWith("jfif")) {
+					mimeType = "image/jfif";
 				}
 			}
-			return responseEntity;
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			// 由InputStream讀取位元組，然後由OutputStream寫出
+			int len = 0;
+			byte[] bytes = new byte[8192];
+
+			while ((len = is.read(bytes)) != -1) {
+				baos.write(bytes, 0, len);
+			}
+			media = baos.toByteArray();
+			mediaType = MediaType.valueOf(mimeType);
+			headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+			headers.setContentType(mediaType);
+			responseEntity = new ResponseEntity<>(media, headers, HttpStatus.OK);
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			throw new RuntimeException("/getMemberImg#doGet()發生Exception: " + ex.getMessage());
+		} finally {
+			try {
+				if (is != null)
+					is.close();
+			} catch (IOException e) {
+				;
+			}
+			try {
+				if (os != null)
+					os.close();
+			} catch (IOException e) {
+				;
+			}
 		}
-		
+		return responseEntity;
+	}
+
 }

@@ -68,15 +68,15 @@ function clicka(obj,objUrl){
 					class="nav-item  navbar-nav  me-auto mb-lg-0 left-menu dropdown-toggle"
 					id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
 					<a class="nav-link" style="padding: 0px;"> 
-					<img src="<c:url value='/images/cartIcon.png' />" alt="購物車">
+					<img src="${pageContext.request.contextPath}/images/cartIcon.png" alt="購物車">
 					</a>
 				</ul>
 				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 					<li class="nav-item"><a class="nav-link textSize"
-						href="<c:url value='/_03_rentItemList'/>">
+						href="${pageContext.request.contextPath}/_03_rentItemList">
 							租賃設備清單 </a></li>
 					<li class="nav-item"><a class="nav-link textSize"
-						href="<c:url value='/_04_shoppingCart'/>">
+						href="${pageContext.request.contextPath}/_04_shoppingCart">
 							商品購物車</a></li>
 				</ul>
 			</div>
@@ -88,12 +88,12 @@ function clicka(obj,objUrl){
 					<c:choose>
 						<c:when test="${empty LoginOK}">
 							<a class="nav-link " href="" style="padding: 0px;"> <img
-								src="<c:url value='/images/memberIcon.png' />" alt="會員">
+								src="${pageContext.request.contextPath}/images/memberIcon.png" alt="會員">
 							</a>
 						</c:when>
 						<c:otherwise>
 							<a class="nav-link custImg" href="" style="padding: 0px;"> <img
-								src=" <c:url value='/getMemberImg?custId=${sessionScope.LoginOK}'/>">
+								src="${pageContext.request.contextPath}/getMemberImg?custId=${sessionScope.LoginOK}">
 							</a>
 						</c:otherwise>
 					</c:choose>
