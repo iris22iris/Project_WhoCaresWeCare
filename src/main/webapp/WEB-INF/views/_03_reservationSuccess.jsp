@@ -39,12 +39,12 @@
 </head>
 
 <body>
-	<!-- 頁面顯示十秒跳轉至首頁 start -->
+	<!-- 頁面顯示30秒跳轉至首頁 start -->
  <script type="text/javascript">  
 	function countDown(){
-		//五秒之後跳轉至首頁
-		setTimeout("location.href='http://localhost:8080/Whocares/'",1000000);
-                //setTimeout("location.href='index.html'",3000);
+		//30秒之後跳轉至首頁
+		setTimeout("location.href='${pageContext.request.contextPath}/index'",30000);
+                
 	}
 	//執行跳轉頁面函式
 	countDown();

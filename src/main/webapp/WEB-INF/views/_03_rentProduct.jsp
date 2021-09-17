@@ -134,7 +134,7 @@
 								
 								<div>
 								<span id="commodityname" >
-									{活動標籤}
+									${rentProduct.promotionBean.promoTag} 
 								</span>
 								</div>
 

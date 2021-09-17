@@ -83,13 +83,13 @@
 									</div>
 
 									<div class="carousel-item" data-bs-interval="2000">
-										<img src="<c:url value='/images/forProductPage_2.png' />"
+										<img src="<c:url value='/images/${product.fileName2}' />"
 											class="img2" alt="...">
 										<div class="carousel-caption d-none d-md-block"></div>
 									</div>
 
 									<div class="carousel-item">
-										<img src="<c:url value='/images/forProductPage_3.png' />"
+										<img src="<c:url value='/images/${product.fileName3}' />"
 											class="img3" alt="...">
 										<div class="carousel-caption d-none d-md-block"></div>
 									</div>
@@ -131,7 +131,7 @@
 								
 								<div>
 									<span id="commodityname" >
-										{活動標籤}
+										${product.promotionBean.promoTag}
 									</span>
 								</div>
 
@@ -161,29 +161,7 @@
 									</div>
 								</div> 
 
-								<div class="normalStyle">
-									<div class="col-4">
-									運送方式:</div>
-									<div class="col-4 ">
-									
-									<div class=" d-flex">
-								  		<input type="radio" id="homedelivery" name="delivery" value="homedelivery"
-								        	style="height: 15px; margin-right: -15px;" >
-								  		<label for="homedelivery">宅配</label>
-									</div>
-									
-									<div class=" d-flex">
-								  		<input type="radio" id="Pickupatstore" name="delivery" value="Pickupatstore"
-								  			style="height: 15px; margin-right: -15px;">
-								  		<label for="Pickupatstore">自取</label>
-									</div>
-									
-									</div>
-									
-									
-								
-								
-								</div>
+							
 								
 								
 								<c:choose> 
@@ -216,7 +194,7 @@
 				<!-- 商品詳情 start -->
 				<div class="productContent col-11">
 					<div class="contentTitle">
-						商品詳情
+						商品詳情${product.description}
 					</div>
 					<p>1. 此產品符合長照2.0/身心障礙者輔具補助項目【EC02輪椅-B款(輕量化
 						量產型)、EC04輪椅附加功能-A款(具利於移位功能)】 2. 如欲了解長照2.0補助申請資訊，請撥打1966長照服務專線諮詢。
