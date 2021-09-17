@@ -34,6 +34,8 @@
 		var showTotal = 0;
 		$(".productPrice").each(function(){
 			var total = parseInt($(this).text());
+			var QTY = parseInt($(".num").text());
+			total *= QTY
 			showTotal += total
 		})
 		$("#itemSum").text(showTotal);
@@ -152,7 +154,6 @@
                     </c:choose>
                     <div class="col-12">數量</div>
                     <div class="col-12">折抵</div>
-						<%-- itemSum應為 扣減${折抵}的小計 尚未完成 --%>
                     <div class="col-12">小計</div>
                 </div>
                 <div class="col-2 cartSum">
