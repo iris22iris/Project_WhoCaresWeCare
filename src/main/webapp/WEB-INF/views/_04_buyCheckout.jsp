@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
      <meta charset="UTF-8">
-     <title>租賃設備結帳</title>   
+     <title>購物車結帳</title>   
      <!-- CSS -->
      <link rel="stylesheet" href="<c:url value='/css/_04buyCheckout.css' />"
     type="text/css">
