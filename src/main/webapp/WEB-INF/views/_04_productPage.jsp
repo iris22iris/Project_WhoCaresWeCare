@@ -164,11 +164,25 @@
 								<div class="normalStyle">
 									<div class="col-4">
 									運送方式:</div>
-									<div class="col-4">
-									<input type="checkbox"
-									style="height: 15px; margin-right: -15px;">物流宅配
-									<input type="checkbox" style="height: 15px; margin-right: -15px;">自取
+									<div class="col-4 ">
+									
+									<div class=" d-flex">
+								  		<input type="radio" id="homedelivery" name="delivery" value="homedelivery"
+								        	style="height: 15px; margin-right: -15px;" >
+								  		<label for="homedelivery">宅配</label>
 									</div>
+									
+									<div class=" d-flex">
+								  		<input type="radio" id="Pickupatstore" name="delivery" value="Pickupatstore"
+								  			style="height: 15px; margin-right: -15px;">
+								  		<label for="Pickupatstore">自取</label>
+									</div>
+									
+									</div>
+									
+									
+								
+								
 								</div>
 								
 								
