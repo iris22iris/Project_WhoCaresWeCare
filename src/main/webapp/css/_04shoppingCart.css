@@ -150,11 +150,21 @@
     padding-left: 10px;
 }
 
+
 .price{
     color: gray;
     display: flex;
     justify-content: flex-end;
     padding-right: 10px;
+}
+
+.discountForm{
+	display: flex;
+    justify-content: flex-end;
+}
+
+.discountForm input:first-child{
+	width:160px;
 }
 
 .submitMsg{
@@ -165,9 +175,14 @@
     font-size: 12px;
     line-height: 20px;
 }
-.amount div input{
-    width: 180px;
+
+#showDiscount{
+	  display:none;
 }
+
+/* .amount div input{ */
+/*     width: 180px; */
+/* } */
 
 .checkoutBtn{
     display: flex;

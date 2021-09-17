@@ -19,7 +19,7 @@
     <!-- icon -->
     <link rel="stylesheet"
     href="<c:url value='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'/>" />
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>購物車清單</title>
     
     <script>
@@ -34,6 +34,8 @@
 		var showTotal = 0;
 		$(".productPrice").each(function(){
 			var total = parseInt($(this).text());
+			var QTY = parseInt($(".num").text());
+			total *= QTY
 			showTotal += total
 		})
 		$("#itemSum").text(showTotal);
@@ -92,6 +94,34 @@
 			}
 		});
 	  }
+	}
+
+	//輸入折扣碼
+	function findDiscount(){
+		$.ajax({
+			url: "<c:url value='/_04_shoppingCart/discountCalc.do' />",
+			type: "POST",
+			async : false,
+			data: {
+				discountCode : document.getElementById('discountCode').value,
+			},
+			dataType : "text"
+			,
+				
+			success: function(response) {
+				alert("成功")
+				if(response){
+				$("#showDiscount")[0].style.display="block";
+				alert(response.discount);
+				$("#showDiscount").val(response.discount);
+				}
+			},
+
+			error: function() {
+				alert("輸入的折扣碼有誤")
+			},
+			
+		});
 	}
     </script>
 </head>
@@ -152,7 +182,6 @@
                     </c:choose>
                     <div class="col-12">數量</div>
                     <div class="col-12">折抵</div>
-						<%-- itemSum應為 扣減${折抵}的小計 尚未完成 --%>
                     <div class="col-12">小計</div>
                 </div>
                 <div class="col-2 cartSum">
@@ -202,20 +231,26 @@
          <div class="col-3 cartRight">
              <div class="amountTitle">結帳明細</div>
              <div class="amount">
+             
                 <div class="col-6 amountItem">商品總金額：</div>
                 <div class="col-6 price">
                 <span id="itemSum"></span>元
                 </div>
+                
                 <div class="col-6 amountItem">優惠合計：</div>
                 <div class="col-6 price">
                 <span id="discountSum" style="color:crimson;"></span>元
                 </div>
+                
                 <div class="col-4 amountItem">折扣碼：</div>
                 <div class="col-8 price">
-                    <input type="text" placeholder="尚未輸入折扣代碼" id="discountCode">
+                	<form class="discountForm">
+                    	<input type="text" placeholder="尚未輸入折扣代碼" id="discountCode">
+                   		<input type="submit" value="送出" accesskey="enter" onclick="findDiscount()"/>
+                    </form>
                 </div>
                 <!-- enter submit以後從hidden改為顯示 -->
-                <div class="col-12 submitMsg" hidden="true">您輸入的折扣碼有誤/歡慶88節:折抵100元</div>
+                <div class="col-12 submitMsg" id="showDiscount">優惠${response.discount}元</div>
                 <div class="col-12"><hr style="size:5px;"></div>
                 
                 <div class="col-6 amountItem">合計金額：</div>

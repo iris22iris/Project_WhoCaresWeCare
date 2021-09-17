@@ -1,6 +1,7 @@
 package com.web.store.controller;
 
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -18,21 +19,23 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.web.store.model._02_customerService.ProblemBean;
 import com.web.store.model._05_customer.CustomerBean;
+import com.web.store.model._06_order.OrdBean;
+import com.web.store.service.ContactUsOrdService;
 import com.web.store.service.ContactUsService;
 import com.web.store.service.CustomerService;
 
 @Controller
 public class ContactUsController {
 	CustomerService customerService;
+	@Autowired
+	ContactUsOrdService contactUsOrdService;
 	HttpSession httpSession;
-
 	@Autowired
 	HttpServletRequest request;
 	@Autowired
@@ -44,10 +47,12 @@ public class ContactUsController {
 
 	@Autowired
 	public ContactUsController(CustomerService customerService, ContactUsService contactUsService,
+			ContactUsOrdService contactUsOrdService,
 			HttpSession httpSession) {
 		this.customerService = customerService;
 		this.contactUsService = contactUsService;
 		this.httpSession = httpSession;
+		this.contactUsOrdService = contactUsOrdService;
 
 	}
 
@@ -63,10 +68,20 @@ public class ContactUsController {
 	//
 
 	@GetMapping(value = "/_02_contactUs/{custId}", produces = { "text/html" })
-	public String editUsFindView(@PathVariable Integer custId, Model model) {
+	public String editUsFindView(@PathVariable Integer custId,Integer ordId, Model model) {
 		CustomerBean customer = customerService.getCustomerById(custId);
 		model.addAttribute("customer", customer);
 		model.addAttribute("id", custId);
+		
+		
+		List<OrdBean> list = new  ArrayList<OrdBean>(); 
+		list = contactUsOrdService.findOrdBeanById(00000001);
+
+//		return "_02_contactUs";
+//		return contactUsOrdDao.findOrdBeanById(ordId);
+//		list.add("ord");
+//		list.add("ooder");
+		model.addAttribute("judyList", list);
 		return "_02_contactUs";
 	}
 

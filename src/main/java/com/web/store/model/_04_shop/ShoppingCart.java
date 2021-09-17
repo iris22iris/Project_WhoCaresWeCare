@@ -1,7 +1,9 @@
 package com.web.store.model._04_shop;
 
+import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -54,15 +56,6 @@ public class ShoppingCart {
 //		}
 //	}
 
-	// 刪除某項商品
-//	public int deleteProduct(int prodId) {
-//		if (cart.get(prodId) != null) {
-//			cart.remove(prodId); // Map介面的remove()方法
-//			return 1;
-//		} else {
-//			return 0;
-//		}
-//	}
 	
 	// 刪除勾選商品
 	public void deleteProducts(int productId) {
@@ -70,6 +63,20 @@ public class ShoppingCart {
 		       cart.remove(productId);  // Map介面的remove()方法
 			} 
 	}
+	
+//	public BigDecimal getSuntotal() {
+//		BigDecimal subTotal = 0;
+//		Set<Integer> set = cart.keySet();
+//		for(int n : set) {
+//			BuyItemBean bib = cart.get(n);
+//			BigDecimal price = bib.getProductBean().getPrice();
+//			BigDecimal qty = new BigDecimal(bib.getProdQTY());
+//			subTotal = price.multiply(qty);
+//		}
+//		
+//		
+//		return subTotal;
+//	}
 
 
 

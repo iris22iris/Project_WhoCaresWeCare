@@ -2,11 +2,10 @@ package com.web.store.controller;
 
 import java.math.BigDecimal;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -15,14 +14,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.web.store.model._02_customerService.ProblemBean;
+import com.web.store.model._02_customerService.PromotionBean;
 import com.web.store.model._04_shop.BuyItemBean;
 import com.web.store.model._04_shop.ProductBean;
 import com.web.store.model._04_shop.ShoppingCart;
+import com.web.store.model._06_order.OrdBean;
+import com.web.store.service.OrderService;
 import com.web.store.service.ProductService;
 
 
@@ -33,13 +38,15 @@ public class ShoppingCartController {
 	private static Logger log = LoggerFactory.getLogger(ShoppingCartController.class);
 	
 	ProductService productService;
-
+	OrderService orderService;
 	HttpSession httpSession;
 
 	@Autowired
-	public ShoppingCartController(HttpSession httpSession, ProductService productService) {
+	public ShoppingCartController(HttpSession httpSession, ProductService productService,
+			OrderService orderService) {
 		this.httpSession = httpSession;
 		this.productService = productService;
+		this.orderService = orderService;
 	}
 
 	// 加入購物車
@@ -98,12 +105,7 @@ public class ShoppingCartController {
 			 Model model) {
 			
 		ShoppingCart cart = (ShoppingCart) httpSession.getAttribute("ShoppingCart");
-		if (cart == null) {
-			// 如果購物車內沒有商品就導回商品menu
-			return "redirect:/buyMenu";
-		}
-		
-//		String ids = (String) model.getAttribute("prodId");
+
 		String[] productId = prodId.split("\\,");
 		int itemsNum = productId.length;
 		
@@ -111,17 +113,24 @@ public class ShoppingCartController {
 			cart.deleteProducts(Integer.parseInt(productId[i]));
 		}
 		log.info("總共刪除了購物車內"+ itemsNum +"項商品。");
-//		log.info("cmd=" + cmd);
-//		if (cmd.equalsIgnoreCase("DEL")) {
-//			cart.deleteProduct(prodId); // 刪除購物車內的某項商品
-//			return "shoppingCart";
-//		} else if (cmd.equalsIgnoreCase("MOD")) {
-//			sc.modifyQty(bookId, newQty); // 修改某項商品的數項
-//			return SHOW_CART_CONTENT;
-//		} else {
-//			return "shoppingCart";
-//		}
 		return "_04_shoppingCart";
+	}
+	
+	//輸入折扣代碼
+	@PostMapping("/_04_shoppingCart/discountCalc.do")
+	@ResponseBody
+	protected PromotionBean discountCode(
+			@RequestParam(value = "discountCode", required = false) 
+			 String discountCode,
+			 Model model){
+		
+		PromotionBean promotion = new PromotionBean();
+		promotion = orderService.findbyDiscountCode(discountCode);
+		model.addAttribute("promotion",promotion);
+		log.info("折扣碼:"+discountCode+"可使用，可折抵:"+promotion.getDiscount());
+		
+		return promotion;
+		
 	}
 
 }
