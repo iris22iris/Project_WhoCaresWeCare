@@ -66,6 +66,10 @@ public class OrdBean implements Serializable {
 	public OrdBean() {
 	}
 	
+	public OrdBean(CustomerBean customerBean) {
+		this.customerBean = customerBean;
+	}
+	
 	public OrdBean(OrdPK ordPK) {
 		this.ordPK = ordPK;
 	}

@@ -22,29 +22,7 @@
     <!-- 引入共同的頁首 -->
 	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 	
-	<script>
-	window.onload = function() { 
-		var xhr = new XMLHttpRequest();
-		xhr.open("GET", "<c:url value='/usquerySelect/A,B' />", true);
-		xhr.send();	
-		var message = "";
-		
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				   var usquerySelect = JSON.parse(xhr.responseText);
-
-				   $("#problemType").append("<option value='" + 0 + "'selected='selected' disabled>" + "請選擇" + "</option>");
-				   usquerySelect.forEach(function (item) {
-					   $("#problemType").append("<option value='" + item.id + "'>" + item.problemType + "</option>");
-		           });
-			}
-	     }
-	}
-
-	var city = $('#problemType').val();
-	
-	
-	</script>
+<script>
 	
 	
 	
@@ -52,7 +30,7 @@
 	
 	
 	
-	
+</script>
 
     <title>聯絡我們</title>
       
@@ -86,27 +64,31 @@
 
             <!-- form start -->
             <div class="container p-3 ">												
-                <form class="row g-3 form" method="POST" modelAttribute="problem" enctype='multipart/form-data'>
+                <form class="row g-3 form" method="POST" modelAttribute="problem" enctype='multipart/form-data' action="/Whocares/_02_contactUs/">
 <!-- 功能:登入會員會自動顯示會員帳號/email/電話，未登入的話可以自己key -->
                     <!-- account&orderno start -->
                     <div class="col-6">
                         <label for="inputAccount" class="form-label">會員編號:</label>
-                        <input type="text" class="form-control" name="account" id="custId" path='account'>
+                        <input type="text" class="form-control" name="account" id="custId" path='account' value='${customer.account}'>
                     </div>
                     <div class="col-6">
                         <label for="inputOrderno" class="form-label">訂單編號:</label>
-                        <input type="text" class="form-control" id="inputOrderno" name="ordId">
+                        <select type="text" class="form-select" id="inputOrderno" name="ordId" value=''> 
+                         <c:forEach items="${judyList}" var="jj">
+						        <option value="${jj.ordPK.category}${jj.ordPK.ordId}">${jj.ordPK.category}${jj.ordPK.ordId}</option>
+						    </c:forEach>
+                        </select>
                     </div>
                     <!-- account&orderno end -->
                     
                     <!-- email&phone start -->
                     <div class="col-6">
                         <label for="inputEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control" name='email' id="email" path='email' >
+                        <input type="email" class="form-control" name='email' id="email" path='email' value='${customer.email}'>
                     </div>
                     <div class="col-6">
                         <label for="inputPhone" class="form-label">連絡電話</label>
-                        <input type="tel" class="form-control" name='phone'  id="inputPhone" >
+                        <input type="tel" class="form-control" name='phone'  id="inputPhone" value='${customer.phone}' >
                     </div>
                     <!-- email&phone end phone-->
 

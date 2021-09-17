@@ -34,6 +34,7 @@
 			},
 	success : function(response) {
 				if (response) {
+					$('#accountNo').val(response.account);
 					$('#orderNo').val(response.ordId);
 					$('#inputEmail').val(response.email);
 					$('#inputPhone').val(response.phone);
@@ -42,6 +43,8 @@
 					$('#problemType').val(response.problemType);
 					$('#record').val(response.replyContent);
 					$('#inputDescription').val(response.replyContent);
+					$('#inputusId').val(response.usId);
+					$('#inputContent').val(response.content);
 				}
 			}
 		});
@@ -90,7 +93,7 @@
        <div class="row formRow">
           <div class="col-5">
             <label for="account" class="form-label">會員帳號:</label>
-            <input type="text" class="form-control"  id="account" disabled="disabled" value="${customerBean.account}"> 
+            <input type="text" class="form-control"  id="accountNo" disabled="disabled" > 
           </div>
           <div class="col-1"></div>
           <div class="col-5">
@@ -120,7 +123,7 @@
         <div class="row formRow">
           <div class="col-5">
             <label for="recordNum" class="form-label">客服編號:</label>
-            <input type="number" class="form-control" id="recordNum" disabled="disabled">
+            <input type="number" class="form-control" id="inputusId" disabled="disabled">
           </div>
           <div class="col-1"></div>
           <div class="col-5">
@@ -147,7 +150,7 @@
           <div class="col-6">
             <label for="record" class="form-label" >意見內容:</label>
             <br>
-            <textarea name="description" id="record" cols="70" rows="10" disabled="disabled" ></textarea>
+            <textarea name="description" id="inputContent" cols="70" rows="10" disabled="disabled" ></textarea>
           </div>
           <div class="col-6">
             <label for="inputDescription" class="form-label">客服回覆:</label>

@@ -36,6 +36,9 @@
 	function qaQuery(obj){
 		obj.href="<c:url value='/_06_problemReply/' />"+'<%=session.getAttribute("LoginOK")%>';
 	}
+	function contacUs(obj){
+		obj.href="/Whocares/_02_contactUs/"+'<%=session.getAttribute("LoginOK")%>';
+	}
 	
 </script>
 <title>會員專區</title>
@@ -138,7 +141,7 @@
 								<div class="mt-5 ">
 									<h1>
 										<a style="text-decoration: none; color: black;"
-											class="fas fa-caret-right" href="_02_contactUs"><i>聯絡我們</i></a>
+											class="fas fa-caret-right" onclick="contacUs(this)" ><i>聯絡我們</i></a>
 									</h1>
 								</div>
 							</div>
