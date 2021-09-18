@@ -33,7 +33,7 @@ public class ProductBean implements Serializable {
 	private Integer prodId;// 商品編號
 	private String classify;// 租買分類
 	private String prodName;// 商品名稱
-	private BigDecimal price;// 商品售價
+	private Double price;// 商品售價
 	private Blob coverImage1;// 圖片1
 	private Blob coverImage2;// 圖片2
 	private Blob coverImage3;// 圖片3
@@ -82,7 +82,7 @@ public class ProductBean implements Serializable {
 		this.prodId = prodId;
 	}
 
-	public ProductBean(String classify, Integer prodId, String prodName, BigDecimal price, Blob coverImage1,
+	public ProductBean(String classify, Integer prodId, String prodName, Double price, Blob coverImage1,
 			 Blob coverImage2,  Blob coverImage3, String mimeType, Integer stock, String fileName,
 			 Clob description, Set<BuyItemBean> buyItems,Set<CommentBean> comments) {
 		this.classify = classify;
@@ -126,11 +126,11 @@ public class ProductBean implements Serializable {
 		this.prodName = prodName;
 	}
 
-	public BigDecimal getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 

@@ -38,11 +38,11 @@ public class OrdBean implements Serializable {
 	private String reciCity;
 	private String reciAddress;
 	private String reciPhone;
-	private BigDecimal ordTotal;
+	private Double ordTotal;
 	private String delivery;
 	private String payment;
 	private String discountCode;		//折扣碼
-	private BigDecimal discount;		//折扣金額
+	private Double discount;		//折扣金額
 	private String orderStatus;
 	@Column(columnDefinition = "datetime")
 	private Timestamp shipDate;
@@ -75,8 +75,8 @@ public class OrdBean implements Serializable {
 	}
 
 	public OrdBean(Timestamp orderDate, String reciName, String reciCity,
-			String reciAddress, String reciPhone, BigDecimal ordTotal, String delivery, String payment,
-			String discountCode, BigDecimal discount, String orderStatus, Timestamp shipDate,
+			String reciAddress, String reciPhone, Double ordTotal, String delivery, String payment,
+			String discountCode, Double discount, String orderStatus, Timestamp shipDate,
 			Clob orderMark, Set<RentItemBean> rentItems, Set<ProblemBean> problem, Set<BuyItemBean> buyItems) {
 		this.orderDate = orderDate;
 		this.reciName = reciName;
@@ -144,11 +144,11 @@ public class OrdBean implements Serializable {
 		this.reciPhone = reciPhone;
 	}
 
-	public BigDecimal getOrdTotal() {
+	public Double getOrdTotal() {
 		return ordTotal;
 	}
 
-	public void setOrdTotal(BigDecimal ordTotal) {
+	public void setOrdTotal(Double ordTotal) {
 		this.ordTotal = ordTotal;
 	}
 
@@ -172,7 +172,15 @@ public class OrdBean implements Serializable {
 		this.discountCode = discountCode;
 	}
 
-	public BigDecimal getDiscount() {
+	public String getDiscountCode() {
+		return discountCode;
+	}
+
+	public void setDiscount(Double discount) {
+		this.discount = discount;
+	}
+
+	public Double getDiscount() {
 		return discount;
 	}
 	

@@ -67,8 +67,8 @@ public class ShoppingCartController {
 		ProductBean productBean = new ProductBean();
 		productBean = productService.getProductById(prodcuctId);
 
-		BigDecimal productQTY = new BigDecimal(prodQTY);
-		BigDecimal itemSum = productQTY.multiply(productBean.getPrice());
+	
+		Double itemSum = prodQTY* productBean.getPrice();
 
 		// 將資料封裝到buyItemBean
 		BuyItemBean buyItemBean = new BuyItemBean(prodQTY, itemSum, productBean.getPromotionBean(), productBean);

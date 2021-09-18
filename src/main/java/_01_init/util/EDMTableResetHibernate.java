@@ -104,7 +104,7 @@ public class EDMTableResetHibernate {
 					OrdBean ob = new OrdBean();
 					ob.setOrdPK(new OrdPK(token[0], Integer.parseInt(token[1])));
 					ob.setDelivery(token[2]);
-					ob.setOrdTotal(new BigDecimal(token[3]));
+					ob.setOrdTotal(Double.parseDouble((token[3])));
 					ob.setOrderDate(Timestamp.valueOf(token[4]));
 					java.sql.Clob clob = SystemUtils2018.fileToClob("data/orderMark.txt");
 					ob.setOrderMark(clob);
@@ -158,7 +158,7 @@ public class EDMTableResetHibernate {
 								String[] token = line.split("\\|");
 								PromotionBean ptb = new PromotionBean();
 								ptb.setPromoteId(Integer.parseInt(token[0]));
-								ptb.setDiscount(new BigDecimal(token[1]));
+								ptb.setDiscount(Double.parseDouble(token[1]));
 								ptb.setDiscountCode(token[2]);
 								ptb.setPromoContent(token[3]);
 								ptb.setPromoEndDate(Timestamp.valueOf(token[4]));
@@ -195,7 +195,7 @@ public class EDMTableResetHibernate {
 					pb.setCoverImage3(blob3);
 					pb.setFileName(token[2]);
 					pb.setMimeType(token[3]);
-					pb.setPrice(new BigDecimal(token[4]));
+					pb.setPrice(Double.parseDouble(token[4]));
 					pb.setProdName(token[5]);
 					java.sql.Clob clob = SystemUtils2018.fileToClob("data/productDescription.txt");
 					pb.setDescription(clob);
@@ -244,7 +244,7 @@ public class EDMTableResetHibernate {
 					rpb.setCoverImage3(blob3);
 					rpb.setFileName(token[3]);
 					rpb.setMimeType(token[4]);
-					rpb.setPrice(new BigDecimal(token[5]));
+					rpb.setPrice(Double.parseDouble(token[5]));
 					rpb.setProdName(token[6]);
 					rpb.setStock(Integer.parseInt(token[7]));
 					java.sql.Clob clob = SystemUtils2018.fileToClob("data/productDescription.txt");
@@ -309,7 +309,7 @@ public class EDMTableResetHibernate {
 							new BuyItemPK(new OrdPK(token[0], Integer.parseInt(token[1])), Integer.parseInt(token[2])));
 //					bib.setDiscount(new BigDecimal(token[3]));
 //					bib.setDiscountCode(token[4]);
-					bib.setItemSum(new BigDecimal(token[3]));
+					bib.setItemSum(Double.parseDouble(token[3]));
 //					bib.setProdId(Integer.parseInt(token[6]));
 					bib.setProdQTY(Integer.parseInt(token[4]));
 					bib.setProductBean(new ProductBean(Integer.parseInt(token[5])));
@@ -337,9 +337,9 @@ public class EDMTableResetHibernate {
 					RentItemBean rib = new RentItemBean();
 					rib.setRentItemPK(new RentItemPK(new OrdPK(token[0], Integer.parseInt(token[1])),
 							Integer.parseInt(token[2])));
-					rib.setDiscount(new BigDecimal(token[3]));
+					rib.setDiscount(Double.parseDouble(token[3]));
 					rib.setDiscountCode(token[4]);
-					rib.setProdTotal(new BigDecimal(token[3]));
+//					rib.setProdTotal(new BigDecimal(token[3]));
 //					rib.setProdId(Integer.parseInt(token[5]));
 					rib.setProdQty(Integer.parseInt(token[5]));
 					rib.setRentPeriod(Integer.parseInt(token[6]));

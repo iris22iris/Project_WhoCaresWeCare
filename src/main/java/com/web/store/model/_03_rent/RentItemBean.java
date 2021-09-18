@@ -37,8 +37,8 @@ public class RentItemBean implements Serializable {
 	private Timestamp startDate;
 	@Column(columnDefinition = "datetime")
 	private Timestamp returnDate;
-	private BigDecimal discount;
-	private BigDecimal prodTotal;
+	private Double discount;
+	private Double prodTotal;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "RENTITEM_PRODTYPE_FK")
@@ -68,7 +68,7 @@ public class RentItemBean implements Serializable {
 
 	public RentItemBean(/*Integer prodId, String serialNumber, */Integer rentPeriod, 
 			Integer prodQty, String discountCode, Timestamp startDate,
-			Timestamp returnDate, BigDecimal discount, BigDecimal prodTotal) {
+			Timestamp returnDate, Double discount, Double prodTotal) {
 //		this.prodId = prodId;
 //		this.serialNumber = serialNumber;
 		this.rentPeriod = rentPeriod;
@@ -144,19 +144,19 @@ public class RentItemBean implements Serializable {
 		this.returnDate = returnDate;
 	}
 
-	public BigDecimal getDiscount() {
+	public Double getDiscount() {
 		return discount;
 	}
 
-	public void setDiscount(BigDecimal discount) {
+	public void setDiscount(Double discount) {
 		this.discount = discount;
 	}
 
-	public BigDecimal getProdTotal() {
+	public Double getProdTotal() {
 		return prodTotal;
 	}
 
-	public void setProdTotal(BigDecimal prodTotal) {
+	public void setProdTotal(Double prodTotal) {
 		this.prodTotal = prodTotal;
 	}
 
@@ -198,14 +198,15 @@ public class RentItemBean implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((discount == null) ? 0 : discount.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(discount);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((discountCode == null) ? 0 : discountCode.hashCode());
-//		result = prime * result + ((prodId == null) ? 0 : prodId.hashCode());
 		result = prime * result + ((prodQty == null) ? 0 : prodQty.hashCode());
-		result = prime * result + ((prodTotal == null) ? 0 : prodTotal.hashCode());
+		temp = Double.doubleToLongBits(prodTotal);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((rentItemPK == null) ? 0 : rentItemPK.hashCode());
 		result = prime * result + ((rentPeriod == null) ? 0 : rentPeriod.hashCode());
-//		result = prime * result + ((serialNumber == null) ? 0 : serialNumber.hashCode());
 		return result;
 	}
 
@@ -218,30 +219,19 @@ public class RentItemBean implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		RentItemBean other = (RentItemBean) obj;
-		if (discount == null) {
-			if (other.discount != null)
-				return false;
-		} else if (!discount.equals(other.discount))
+		if (Double.doubleToLongBits(discount) != Double.doubleToLongBits(other.discount))
 			return false;
 		if (discountCode == null) {
 			if (other.discountCode != null)
 				return false;
 		} else if (!discountCode.equals(other.discountCode))
 			return false;
-//		if (prodId == null) {
-//			if (other.prodId != null)
-//				return false;
-//		} else if (!prodId.equals(other.prodId))
-//			return false;
 		if (prodQty == null) {
 			if (other.prodQty != null)
 				return false;
 		} else if (!prodQty.equals(other.prodQty))
 			return false;
-		if (prodTotal == null) {
-			if (other.prodTotal != null)
-				return false;
-		} else if (!prodTotal.equals(other.prodTotal))
+		if (Double.doubleToLongBits(prodTotal) != Double.doubleToLongBits(other.prodTotal))
 			return false;
 		if (rentItemPK == null) {
 			if (other.rentItemPK != null)
@@ -253,11 +243,6 @@ public class RentItemBean implements Serializable {
 				return false;
 		} else if (!rentPeriod.equals(other.rentPeriod))
 			return false;
-//		if (serialNumber == null) {
-//			if (other.serialNumber != null)
-//				return false;
-//		} else if (!serialNumber.equals(other.serialNumber))
-//			return false;
 		return true;
 	}
 	

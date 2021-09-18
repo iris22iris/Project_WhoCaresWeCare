@@ -28,7 +28,7 @@ public class BuyItemBean implements Serializable {
 	
 //	private Integer			prodId;			//商品編號
 	private Integer     	prodQTY;		//商品數量
-	private BigDecimal  	itemSum;		//單項總額
+	private Double  	itemSum;		//單項總額
 
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
@@ -57,7 +57,7 @@ public class BuyItemBean implements Serializable {
 	public BuyItemBean() {
 	}
 
-	public BuyItemBean(Integer prodQTY, BigDecimal itemSum ,
+	public BuyItemBean(Integer prodQTY, Double itemSum ,
 						PromotionBean promotionBean ,ProductBean productBean) {
 		this.prodQTY = prodQTY;
 		this.itemSum = itemSum;
@@ -82,11 +82,11 @@ public class BuyItemBean implements Serializable {
 		this.prodQTY = prodQTY;
 	}
 
-	public BigDecimal getItemSum() {
+	public Double getItemSum() {
 		return itemSum;
 	}
 
-	public void setItemSum(BigDecimal itemSum) {
+	public void setItemSum(Double itemSum) {
 		this.itemSum = itemSum;
 	}
 	
