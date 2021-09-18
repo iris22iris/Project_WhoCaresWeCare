@@ -20,11 +20,13 @@ public class BuyItemServiceImpl implements BuyItemService {
 		this.buyItemDao = buyItemDao;
 	}
 
+//	使用複合主鍵查詢購買細項
 	@Override
 	public BuyItemBean findBuyItemByPK(BuyItemPK buyItemPK) {
 		return buyItemDao.findBuyItemByPK(buyItemPK);
 	}
-	
+
+//	更新購買細項
 	@Override
 	public void updateBuyItem(BuyItemBean buyItemBean) {
 		buyItemDao.updateBuyItem(buyItemBean);

@@ -20,11 +20,13 @@ public class RentItemServiceImpl implements RentItemService {
 		this.rentItemDao = rentItemDao;
 	}
 
+//	使用複合主鍵查詢租賃細項
 	@Override
 	public RentItemBean findRentItemByPK(RentItemPK rentItemPK) {
 		return rentItemDao.findRentItemByPK(rentItemPK);
 	}
 	
+//	更新租賃細項
 	@Override
 	public void updateRentItem(RentItemBean rentItemBean) {
 		rentItemDao.updateRentItem(rentItemBean);

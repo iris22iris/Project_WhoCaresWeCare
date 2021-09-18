@@ -19,12 +19,14 @@ public class BuyItemDaoImpl implements BuyItemDao {
 		this.factory = factory;
 	}
 	
+//	使用複合主鍵查詢購買細項
 	@Override
 	public BuyItemBean findBuyItemByPK(BuyItemPK buyItemPK) {
 		Session session = factory.getCurrentSession();
 		return session.get(BuyItemBean.class , buyItemPK);
 	}
 	
+//	更新購買細項
 	@Override
 	public void updateBuyItem(BuyItemBean buyItemBean) {
 		Session session = factory.getCurrentSession();

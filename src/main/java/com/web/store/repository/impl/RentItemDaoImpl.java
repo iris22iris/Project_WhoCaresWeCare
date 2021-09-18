@@ -19,12 +19,14 @@ public class RentItemDaoImpl implements RentItemDao {
 		this.factory = factory;
 	}
 	
+//	使用複合主鍵查詢租賃細項
 	@Override
 	public RentItemBean findRentItemByPK(RentItemPK rentItemPK) {
 		Session session = factory.getCurrentSession();
 		return session.get(RentItemBean.class , rentItemPK);
 	}
 	
+//	更新租賃細項
 	@Override
 	public void updateRentItem(RentItemBean rentItemBean) {
 		Session session = factory.getCurrentSession();
