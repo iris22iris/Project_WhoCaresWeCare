@@ -1,7 +1,6 @@
 package com.web.store.model._02_customerService;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.sql.Clob;
 import java.sql.Timestamp;
 
@@ -35,24 +34,23 @@ public class CommentBean implements Serializable {
 	private Integer visits;
 	private Timestamp commentDate;
 	private Clob comment;
-
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumns({
-		@JoinColumn(name = "RENTPRODUCT_PRODCID_FK"),
-		@JoinColumn(name = "RENTPRODUCT_PRODID_FK"),
+		@JoinColumn(name = "COMMENT_RENTPRODID_FK"),
+		@JoinColumn(name = "COMMENT_RENTPRODSN_FK"),
 		})
 	private RentProductBean rentProductBean;
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "COMMENT_CUSTID_FK")
 	private CustomerBean customerBean;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "PRODUCT_PRODID_FK")
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "COMMENT_PRODID_FK")
 	private ProductBean productBean;
 
 	public CommentBean(Integer commentId, String classify, Integer rate, Integer visits, Timestamp commentDate,
 			Clob comment) {
-		super();
 		this.commentId = commentId;
 		this.classify = classify;
 		this.rate = rate;
