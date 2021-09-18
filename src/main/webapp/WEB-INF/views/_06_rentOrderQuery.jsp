@@ -150,7 +150,7 @@
 														<div class="col-1">${rentItem.rentProductBean.price}元/日</div>
 														<div class="col-2">${rentItem.startDate}</div>
 														<div class="col-2">${rentItem.returnDate}</div>
-														<div class="col-1">租賃狀態</div>
+														<div class="col-1">${rentItem.rentStatus}</div>
 														<!-- 留下評價按鈕會跳出一個小視窗 -->
 														<c:choose>
 															<c:when test="${empty rentItem.commentBean}">

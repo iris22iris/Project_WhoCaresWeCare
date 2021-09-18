@@ -37,6 +37,7 @@ public class RentItemBean implements Serializable {
 	@Column(columnDefinition = "datetime")
 	private Timestamp returnDate;
 	private Double prodTotal;
+	private String rentStatus;
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "RENTITEM_PRODTYPE_FK")
@@ -63,8 +64,8 @@ public class RentItemBean implements Serializable {
 	public RentItemBean() {
 	}
 
-	public RentItemBean(Integer rentPeriod, Integer prodQty, Timestamp startDate,
-			Timestamp returnDate, Double prodTotal) {
+	public RentItemBean(Integer rentPeriod, Integer prodQty, Timestamp startDate, Timestamp returnDate,
+			Double prodTotal, String rentStatus) {
 //		this.prodId = prodId;
 //		this.serialNumber = serialNumber;
 		this.rentPeriod = rentPeriod;
@@ -72,6 +73,7 @@ public class RentItemBean implements Serializable {
 		this.startDate = startDate;
 		this.returnDate = returnDate;
 		this.prodTotal = prodTotal;
+		this.rentStatus = rentStatus;
 	}
 
 	public RentItemPK getRentItemPK() {
@@ -122,7 +124,15 @@ public class RentItemBean implements Serializable {
 		this.prodTotal = prodTotal;
 	}
 
-//	雙向多對一productTypeBean之getter、setter 開始
+	public String getRentStatus() {
+		return rentStatus;
+	}
+
+	public void setRentStatus(String rentStatus) {
+		this.rentStatus = rentStatus;
+	}
+
+	// 雙向多對一productTypeBean之getter、setter 開始
 	public ProductTypeBean getProductTypeBean() {
 		return productTypeBean;
 	}
@@ -172,6 +182,7 @@ public class RentItemBean implements Serializable {
 		result = prime * result + ((prodTotal == null) ? 0 : prodTotal.hashCode());
 		result = prime * result + ((rentItemPK == null) ? 0 : rentItemPK.hashCode());
 		result = prime * result + ((rentPeriod == null) ? 0 : rentPeriod.hashCode());
+		result = prime * result + ((rentStatus == null) ? 0 : rentStatus.hashCode());
 		result = prime * result + ((returnDate == null) ? 0 : returnDate.hashCode());
 		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
 		return result;
@@ -205,6 +216,11 @@ public class RentItemBean implements Serializable {
 			if (other.rentPeriod != null)
 				return false;
 		} else if (!rentPeriod.equals(other.rentPeriod))
+			return false;
+		if (rentStatus == null) {
+			if (other.rentStatus != null)
+				return false;
+		} else if (!rentStatus.equals(other.rentStatus))
 			return false;
 		if (returnDate == null) {
 			if (other.returnDate != null)
