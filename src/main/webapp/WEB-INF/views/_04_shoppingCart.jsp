@@ -99,7 +99,7 @@
 	//輸入折扣碼
 	function findDiscount(){
 		$.ajax({
-			url: "<c:url value='/_04_shoppingCart/discountCalc.do' />",
+			url: "<c:url value='/_04_shoppingCart/inputCode.do' />",
 			type: "POST",
 			async : false,
 			data: {
@@ -108,13 +108,8 @@
 			dataType : "text"
 			,
 				
-			success: function(response) {
-				alert("成功")
-				if(response){
+			success: function() {
 				$("#showDiscount")[0].style.display="block";
-				alert(response.discount);
-				$("#showDiscount").val(response.discount);
-				}
 			},
 
 			error: function() {
@@ -250,7 +245,7 @@
                     </form>
                 </div>
                 <!-- enter submit以後從hidden改為顯示 -->
-                <div class="col-12 submitMsg" id="showDiscount">優惠${response.discount}元</div>
+                <div class="col-12 submitMsg" id="showDiscount">優惠${ordBean.discount}元</div>
                 <div class="col-12"><hr style="size:5px;"></div>
                 
                 <div class="col-6 amountItem">合計金額：</div>

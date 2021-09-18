@@ -1,8 +1,6 @@
 package com.web.store.controller;
 
-import java.math.BigDecimal;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -14,14 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.web.store.model._02_customerService.ProblemBean;
 import com.web.store.model._02_customerService.PromotionBean;
 import com.web.store.model._04_shop.BuyItemBean;
 import com.web.store.model._04_shop.ProductBean;
@@ -32,7 +28,7 @@ import com.web.store.service.ProductService;
 
 
 @Controller
-@SessionAttributes({ "LoginOK", "ShoppingCart" })
+@SessionAttributes({ "LoginOK", "ShoppingCart","OrdBean" })
 public class ShoppingCartController {
 
 	private static Logger log = LoggerFactory.getLogger(ShoppingCartController.class);
@@ -66,8 +62,6 @@ public class ShoppingCartController {
 
 		ProductBean productBean = new ProductBean();
 		productBean = productService.getProductById(prodcuctId);
-
-	
 		Double itemSum = prodQTY* productBean.getPrice();
 
 		// 將資料封裝到buyItemBean
@@ -77,7 +71,7 @@ public class ShoppingCartController {
 		return "redirect:/buyMenu";
 	}
 
-	//購物車頁面
+	//顯示購物車內容
 	@GetMapping("/_04_shoppingCart")
 	public String shoppingCart(Model model) 
 	{
@@ -87,14 +81,29 @@ public class ShoppingCartController {
 			return "redirect:/buyMenu";
 		}
 		
-		Map<Integer, BuyItemBean> cartContent = cart.getContent();
+		OrdBean ordBean = (OrdBean) httpSession.getAttribute("OrdBean");
+		if(ordBean == null) {
+			ordBean = new OrdBean();
+			httpSession.setAttribute("OrdBean", ordBean);
+		}
+		log.info("建立OrdBean:"+ordBean);
+		
+		
+		//取出存在購物車的商品放入Map物件
+		Map<Integer, BuyItemBean> cartContent = cart.getContent();	
+		//存成Set物件轉換為OrdBean
 		Set<BuyItemBean> buyItems = new LinkedHashSet<>();
 		Set<Integer> set = cartContent.keySet();
 		for(Integer i : set) {
 			BuyItemBean bib = cartContent.get(i);
+			bib.setOrdBean(ordBean);
 			buyItems.add(bib);
 		}
+		
+		ordBean.setBuyItems(buyItems);
+		
 		model.addAttribute("buyItems",buyItems);
+		model.addAttribute("ordBean",ordBean);
 
 		return "_04_shoppingCart";
 	}
@@ -116,21 +125,48 @@ public class ShoppingCartController {
 		return "_04_shoppingCart";
 	}
 	
+//	@PostMapping("/_04_shoppingCart/discountCalc.do")
+//	@ResponseBody
+//	protected PromotionBean discountCode(
+//			@RequestParam(value = "discountCode", required = false) 
+//			 String discountCode,
+//			 @RequestParam(value = "BuyItemBean", required = false) Set<BuyItemBean> BuyItemBean){
+//		
+//		PromotionBean promotion = new PromotionBean();
+//		promotion = orderService.findbyDiscountCode(discountCode);
+//		model.addAttribute("promotion",promotion);
+//		log.info("折扣碼:"+discountCode+"可使用，可折抵:"+promotion.getDiscount());
+//		
+//		OrdBean ordBean = (OrdBean) httpSession.getAttribute("OrdBean");
+//		if(ordBean == null) {
+//			ordBean = new OrdBean(null, null, null,
+//					null, null, null, null,null,
+//				discountCode, promotion.getDiscount() , null,null,
+//					null,null, null, BuyItemBean);
+//		}
+//		
+//		return promotion;
+//		
+//	}
+	
+	
 	//輸入折扣代碼
-	@PostMapping("/_04_shoppingCart/discountCalc.do")
+	@PostMapping("/_04_shoppingCart/inputCode.do")
 	@ResponseBody
-	protected PromotionBean discountCode(
-			@RequestParam(value = "discountCode", required = false) 
-			 String discountCode,
-			 Model model){
-		
+	protected OrdBean inputDiscountCode(
+			@RequestParam(value = "discountCode", required = false) String discountCode){
+		ShoppingCart cart = (ShoppingCart) httpSession.getAttribute("ShoppingCart");
+		OrdBean ordBean = (OrdBean) httpSession.getAttribute("OrdBean");
+
 		PromotionBean promotion = new PromotionBean();
 		promotion = orderService.findbyDiscountCode(discountCode);
-		model.addAttribute("promotion",promotion);
 		log.info("折扣碼:"+discountCode+"可使用，可折抵:"+promotion.getDiscount());
 		
-		return promotion;
-		
-	}
+		ordBean.setDiscountCode(discountCode);
+		ordBean.setDiscount(promotion.getDiscount());
 
+		log.info("把discountCode & discode資訊放進orderBean");
+		return ordBean;
+		}
+		
 }
