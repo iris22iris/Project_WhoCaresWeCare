@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,7 +23,6 @@
 <script defer
 	src="https://use.fontawesome.com/releases/v5.0.10/js/all.js"></script>
 <script defer src="https://use.fontawesome.com/4e44561671.js"></script>
-<script src="<c:url value='/js/orderQuery.js' />"></script>
 </head>
 
 <body>
@@ -46,7 +45,8 @@
 							<label class="enter ">${customerBean.custName}您好，請輸入訂單編號查詢:</label>
 						</div>
 						<div class="col-3">
-							<input type="search" class="form-control " id="enter">
+							<input type="search" class="form-control " id="enter"
+								onkeyup="value=value.replace(/[^\d]/g,'') ">
 						</div>
 						<div class="col-1">
 							<button type="button" class="btn btn-warning "
@@ -57,7 +57,7 @@
 				<!-- header-search end 查詢訂單功能結束-->
 			</div>
 			<!-- title end 標題結束 -->
-
+			<div id="searchResult" class="my-3 text-center">${orderNotFound}</div>
 			<c:choose>
 				<c:when test="${!empty ordBean}">
 
@@ -108,7 +108,7 @@
 									<div class="col-2">${ordBean.orderDate}</div>
 									<div class="col-2">${ordBean.ordTotal}</div>
 									<div class="col-2">${ordBean.payment}</div>
-									<div class="col-3">${ordBean.orderMark}</div>
+									<div class="col-3">${orderMark}</div>
 									<!-- accordion-header-button  end  訂單資訊結束-->
 								</div>
 							</div>
@@ -135,10 +135,11 @@
 											<div class="col-1">單價</div>
 											<div class="col-2">租賃起始日</div>
 											<div class="col-2">租賃到期日</div>
-											<div class="col-3">評價</div>
+											<div class="col-1">租賃狀態</div>
+											<div class="col-2">評價</div>
 										</div>
 										<!-- order detail title end 表格表頭 結束-->
-										<c:forEach var="rentItem" items="${rentItems}">
+										<c:forEach var="rentItem" items="${rentItems}" varStatus="vs">
 											<c:choose>
 												<c:when test="${!empty rentItem}">
 													<!-- order detail start 表格內容開始-->
@@ -149,81 +150,97 @@
 														<div class="col-1">${rentItem.rentProductBean.price}元/日</div>
 														<div class="col-2">${rentItem.startDate}</div>
 														<div class="col-2">${rentItem.returnDate}</div>
+														<div class="col-1">${rentItem.rentStatus}</div>
 														<!-- 留下評價按鈕會跳出一個小視窗 -->
 														<c:choose>
-															<c:when test="${empty commentBean}">
+															<c:when test="${empty rentItem.commentBean}">
 
 																<div
-																	class="col-3 d-flex justify-content-evenly align-items-center">
+																	class="col-2 d-flex justify-content-evenly align-items-center">
 																	<button type="button" class="btn btn-warning"
-																		data-bs-toggle="modal" data-bs-target="#exampleModal">
+																		data-bs-toggle="modal"
+																		data-bs-target="#exampleModal${vs.index}">
 																		留下評價</button>
 																</div>
 															</c:when>
 															<c:otherwise>
 																<div
-																	class="col-3 d-flex justify-content-evenly align-items-center">
+																	class="col-2 d-flex justify-content-evenly align-items-center">
 																	<!-- 功能：留下評價以後，留下評價的btn就不能按了，然後修改評價的btn才可以按，裡面顯示已寫的評價，按下編輯按鈕才可以修改，另外需有取消按鈕跟確認修改按鈕 -->
 																	<button type="button" class="btn btn-warning"
-																		data-bs-toggle="modal" data-bs-target="#exampleModal">
+																		data-bs-toggle="modal"
+																		data-bs-target="#exampleModal${vs.index}">
 																		修改評價</button>
 																</div>
 															</c:otherwise>
 														</c:choose>
 													</div>
 													<!-- order detail end 表格內容結束-->
+
+													<!-- modal fade  star  使用心得/評分小視窗 開始-->
+													<div class="modal fade " id="exampleModal${vs.index}"
+														tabindex="-1"
+														aria-labelledby="exampleModalLabel${vs.index}"
+														aria-hidden="true">
+														<div class="modal-dialog">
+															<div class="modal-content ">
+																<form method="POST"
+																	action="<c:url value='/rentOrderQuery/addComment' />"
+																	enctype='multipart/form-data'>
+																	<div class="modalTitle modal-body ">
+																		<h2 class="titleWord col-11"
+																			id="exampleModalLabel${vs.index}">使用心得/評分</h2>
+																		<button type="button" class="btn-close col-1"
+																			data-bs-dismiss="modal" aria-label="Close"></button>
+																	</div>
+																	<div class="modal-body">
+																		<div class="productName col-12">${rentItem.rentProductBean.prodName}</div>
+																	</div>
+																	<div class="modal-body">
+																		<div class="rateForm col-12 ">
+																			<i class="fa fa-certificate fa-1x "
+																				aria-hidden="true"></i> <label>評分:</label><br>
+																			<div>
+																				<input type="radio" name="rate" value="5">5分
+																				<input type="radio" name="rate" value="4">4分
+																				<input type="radio" name="rate" value="3">3分
+																				<input type="radio" name="rate" value="2">2分
+																				<input type="radio" name="rate" value="1">1分
+																				<br> <input type="hidden" name="custId"
+																					value="${customerBean.custId}" /> <input
+																					type="hidden" name="category"
+																					value="${ordBean.ordPK.category}" /> <input
+																					type="hidden" name="ordId"
+																					value="${ordBean.ordPK.ordId}" /> <input
+																					type="hidden" name="prodSerialNum"
+																					value="${rentItem.rentItemPK.prodSerialNum}" />
+																			</div>
+																		</div>
+																	</div>
+																	<div class="modal-body">
+																		<i class="fa fa-edit fa-1x " aria-hidden="true"></i> <label>評價:</label>
+																		<div class="col-12 comment">
+																			<textarea name="comment" cols="30" rows="5">${commentList[vs.index]}</textarea>
+																		</div>
+																	</div>
+																	<div class="modalBtn modal-footer">
+																		<input type="submit" class="btn btn-warning"
+																			value="送出評價" onClick="timedMsg()">
+																		<button type="button" class="btn btn-secondary"
+																			data-bs-toggle="modal"
+																			data-bs-target="#exampleModal${vs.index}">
+																			取消</button>
+																	</div>
+																</form>
+															</div>
+														</div>
+													</div>
+													<!-- modal fade  end  使用心得/評分小視窗 結束-->
 												</c:when>
 											</c:choose>
 										</c:forEach>
 									</div>
 									<!-- accordion-body  end  表格 結束-->
-
-									<!-- modal fade  star  使用心得/評分小視窗 開始-->
-									<div class="modal fade " id="exampleModal" tabindex="-1"
-										aria-labelledby="exampleModalLabel" aria-hidden="true">
-										<div class="modal-dialog">
-											<div class="modal-content ">
-												<div class="modalTitle modal-body ">
-													<h2 class="titleWord col-11" id="exampleModalLabel">使用心得/評分</h2>
-													<button type="button" class="btn-close col-1"
-														data-bs-dismiss="modal" aria-label="Close"></button>
-												</div>
-												<div class="modal-body">
-													<div class="productName col-12">${buyItem.productBean.prodName}</div>
-												</div>
-												<div class="modal-body">
-													<form class="rateForm col-12 ">
-														<i class="fa fa-certificate fa-1x " aria-hidden="true"></i>
-														<label>評分:</label><br>
-														<div>
-															<input type="radio" name="rate" value="5"> 5分 <input
-																type="radio" name="rate" value="4"> 4分 <input
-																type="radio" name="rate" value="3"> 3分 <input
-																type="radio" name="rate" value="2"> 2分 <input
-																type="radio" name="rate" value="1"> 1分<br>
-														</div>
-													</form>
-												</div>
-												<div class="modal-body">
-													<i class="fa fa-edit fa-1x " aria-hidden="true"></i> <label>評價:</label>
-													<div class="col-12 comment">
-														<textarea name="description" id="inputDescription"
-															cols="30" rows="5"></textarea>
-													</div>
-												</div>
-												<div class="modalBtn modal-footer">
-													<form>
-														<input type="button" class="btn btn-warning" value="送出評價"
-															onClick="timedMsg(this)">
-														<button type="button" class="btn btn-secondary"
-															data-bs-toggle="modal" data-bs-target="#exampleModal">
-															取消</button>
-													</form>
-												</div>
-											</div>
-										</div>
-									</div>
-									<!-- modal fade  end  使用心得/評分小視窗 結束-->
 								</div>
 							</div>
 						</div>
@@ -235,7 +252,7 @@
 			<!-- btn start 返回-->
 			<div
 				class=" button col-12 pb-3 d-flex justify-content-center align-items-center">
-				<button type="submit" class="btn btn-secondary">返回</button>
+				<button type="button" class="btn btn-secondary" onClick="back()">返回</button>
 			</div>
 			<!-- btn end 返回-->
 		</div>
@@ -250,8 +267,10 @@
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="<c:url value='/js/orderQuery.js' />"></script>
 	<script type="text/javascript">
 		function timedMsg() {
+
 			Swal.fire({
 				position : 'center',
 				icon : 'success',
@@ -261,7 +280,21 @@
 			})
 		}
 
-		window.addEventListener('load', orderStatus(`${ordBean.orderStatus}`));
+		function rentOrderSearch() {
+			let ordId = document.getElementById("enter").value;
+			if (ordId != null && ordId != "") {
+				location.href = "?category=R" + "&ordId="
+						+ document.getElementById("enter").value;
+			} else {
+				document.getElementById("searchResult").innerHTML = "請輸入合法的訂單編號";
+			}
+		}
+
+		function back() {
+			location = "<c:url value='/_05_member_management/' />";
+		}
+		
+		window.addEventListener('load', orderStatus("${ordBean.orderStatus}"));
 	</script>
 
 </body>

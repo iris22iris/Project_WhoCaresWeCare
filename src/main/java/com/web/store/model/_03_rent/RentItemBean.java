@@ -1,7 +1,6 @@
 package com.web.store.model._03_rent;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
@@ -12,13 +11,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.web.store.model._02_customerService.CommentBean;
 import com.web.store.model._02_customerService.PromotionBean;
 import com.web.store.model._03_rent.pkClass.RentItemPK;
 import com.web.store.model._06_order.OrdBean;
 import com.web.store.model._07_productType.ProductTypeBean;
-
 
 @Entity
 @Table(name = "RentItem")
@@ -27,57 +27,53 @@ public class RentItemBean implements Serializable {
 
 	@EmbeddedId
 	private RentItemPK rentItemPK;
-	
+
 //	private Integer prodId;
 //	private String serialNumber;
 	private Integer rentPeriod;
 	private Integer prodQty;
-	private String discountCode;
 	@Column(columnDefinition = "datetime")
 	private Timestamp startDate;
 	@Column(columnDefinition = "datetime")
 	private Timestamp returnDate;
-	private BigDecimal discount;
-	private BigDecimal prodTotal;
-	
+	private Double prodTotal;
+	private String rentStatus;
+
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "RENTITEM_PRODTYPE_FK")
 	private ProductTypeBean productTypeBean;
-	
+
 	@MapsId("OrdPK")
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumns({
-		@JoinColumn(name = "category", referencedColumnName="category"),
-		@JoinColumn(name = "ordId", referencedColumnName="ordId"),
-		})
+	@JoinColumns({ @JoinColumn(name = "category", referencedColumnName = "category"),
+			@JoinColumn(name = "ordId", referencedColumnName = "ordId"), })
 	private OrdBean ordBean;
-	
+
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "RENTITEM_PROMOTEID_FK")
 	private PromotionBean promotionBean;
-	
+
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumns({
-		@JoinColumn(name = "RENTITEM_RENTPRODID_FK"),
-		@JoinColumn(name = "RENTITEM_RENTPRODSN_FK"),
-		})
+	@JoinColumns({ @JoinColumn(name = "RENTITEM_RENTPRODID_FK"), @JoinColumn(name = "RENTITEM_RENTPRODSN_FK"), })
 	private RentProductBean rentProductBean;
-	
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "RENTITEM_COMMENTID_FK")
+	private CommentBean commentBean;
+
 	public RentItemBean() {
 	}
 
-	public RentItemBean(/*Integer prodId, String serialNumber, */Integer rentPeriod, 
-			Integer prodQty, String discountCode, Timestamp startDate,
-			Timestamp returnDate, BigDecimal discount, BigDecimal prodTotal) {
+	public RentItemBean(Integer rentPeriod, Integer prodQty, Timestamp startDate, Timestamp returnDate,
+			Double prodTotal, String rentStatus) {
 //		this.prodId = prodId;
 //		this.serialNumber = serialNumber;
 		this.rentPeriod = rentPeriod;
 		this.prodQty = prodQty;
-		this.discountCode = discountCode;
 		this.startDate = startDate;
 		this.returnDate = returnDate;
-		this.discount = discount;
 		this.prodTotal = prodTotal;
+		this.rentStatus = rentStatus;
 	}
 
 	public RentItemPK getRentItemPK() {
@@ -87,22 +83,6 @@ public class RentItemBean implements Serializable {
 	public void setRentItemPK(RentItemPK rentItemPK) {
 		this.rentItemPK = rentItemPK;
 	}
-
-//	public Integer getProdId() {
-//		return prodId;
-//	}
-//
-//	public void setProdId(Integer prodId) {
-//		this.prodId = prodId;
-//	}
-//
-//	public String getSerialNumber() {
-//		return serialNumber;
-//	}
-//
-//	public void setSerialNumber(String serialNumber) {
-//		this.serialNumber = serialNumber;
-//	}
 
 	public Integer getRentPeriod() {
 		return rentPeriod;
@@ -118,14 +98,6 @@ public class RentItemBean implements Serializable {
 
 	public void setProdQty(Integer prodQty) {
 		this.prodQty = prodQty;
-	}
-
-	public String getDiscountCode() {
-		return discountCode;
-	}
-
-	public void setDiscountCode(String discountCode) {
-		this.discountCode = discountCode;
 	}
 
 	public Timestamp getStartDate() {
@@ -144,23 +116,23 @@ public class RentItemBean implements Serializable {
 		this.returnDate = returnDate;
 	}
 
-	public BigDecimal getDiscount() {
-		return discount;
-	}
-
-	public void setDiscount(BigDecimal discount) {
-		this.discount = discount;
-	}
-
-	public BigDecimal getProdTotal() {
+	public Double getProdTotal() {
 		return prodTotal;
 	}
 
-	public void setProdTotal(BigDecimal prodTotal) {
+	public void setProdTotal(Double prodTotal) {
 		this.prodTotal = prodTotal;
 	}
 
-//	雙向多對一productTypeBean之getter、setter 開始
+	public String getRentStatus() {
+		return rentStatus;
+	}
+
+	public void setRentStatus(String rentStatus) {
+		this.rentStatus = rentStatus;
+	}
+
+	// 雙向多對一productTypeBean之getter、setter 開始
 	public ProductTypeBean getProductTypeBean() {
 		return productTypeBean;
 	}
@@ -169,7 +141,7 @@ public class RentItemBean implements Serializable {
 		this.productTypeBean = productTypeBean;
 	}
 //	雙向多對一productTypeBean之getter、setter 結束
-	
+
 	public OrdBean getOrdBean() {
 		return ordBean;
 	}
@@ -194,18 +166,25 @@ public class RentItemBean implements Serializable {
 		this.rentProductBean = rentProductBean;
 	}
 
+	public CommentBean getCommentBean() {
+		return commentBean;
+	}
+
+	public void setCommentBean(CommentBean commentBean) {
+		this.commentBean = commentBean;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((discount == null) ? 0 : discount.hashCode());
-		result = prime * result + ((discountCode == null) ? 0 : discountCode.hashCode());
-//		result = prime * result + ((prodId == null) ? 0 : prodId.hashCode());
 		result = prime * result + ((prodQty == null) ? 0 : prodQty.hashCode());
 		result = prime * result + ((prodTotal == null) ? 0 : prodTotal.hashCode());
 		result = prime * result + ((rentItemPK == null) ? 0 : rentItemPK.hashCode());
 		result = prime * result + ((rentPeriod == null) ? 0 : rentPeriod.hashCode());
-//		result = prime * result + ((serialNumber == null) ? 0 : serialNumber.hashCode());
+		result = prime * result + ((rentStatus == null) ? 0 : rentStatus.hashCode());
+		result = prime * result + ((returnDate == null) ? 0 : returnDate.hashCode());
+		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
 		return result;
 	}
 
@@ -218,21 +197,6 @@ public class RentItemBean implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		RentItemBean other = (RentItemBean) obj;
-		if (discount == null) {
-			if (other.discount != null)
-				return false;
-		} else if (!discount.equals(other.discount))
-			return false;
-		if (discountCode == null) {
-			if (other.discountCode != null)
-				return false;
-		} else if (!discountCode.equals(other.discountCode))
-			return false;
-//		if (prodId == null) {
-//			if (other.prodId != null)
-//				return false;
-//		} else if (!prodId.equals(other.prodId))
-//			return false;
 		if (prodQty == null) {
 			if (other.prodQty != null)
 				return false;
@@ -253,12 +217,22 @@ public class RentItemBean implements Serializable {
 				return false;
 		} else if (!rentPeriod.equals(other.rentPeriod))
 			return false;
-//		if (serialNumber == null) {
-//			if (other.serialNumber != null)
-//				return false;
-//		} else if (!serialNumber.equals(other.serialNumber))
-//			return false;
+		if (rentStatus == null) {
+			if (other.rentStatus != null)
+				return false;
+		} else if (!rentStatus.equals(other.rentStatus))
+			return false;
+		if (returnDate == null) {
+			if (other.returnDate != null)
+				return false;
+		} else if (!returnDate.equals(other.returnDate))
+			return false;
+		if (startDate == null) {
+			if (other.startDate != null)
+				return false;
+		} else if (!startDate.equals(other.startDate))
+			return false;
 		return true;
 	}
-	
+
 }

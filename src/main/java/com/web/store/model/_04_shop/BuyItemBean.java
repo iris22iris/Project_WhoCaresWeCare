@@ -1,7 +1,6 @@
 package com.web.store.model._04_shop;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
@@ -11,8 +10,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.web.store.model._02_customerService.CommentBean;
 import com.web.store.model._02_customerService.PromotionBean;
 import com.web.store.model._04_shop.pkClass.BuyItemPK;
 import com.web.store.model._06_order.OrdBean;
@@ -28,7 +29,7 @@ public class BuyItemBean implements Serializable {
 	
 //	private Integer			prodId;			//商品編號
 	private Integer     	prodQTY;		//商品數量
-	private BigDecimal  	itemSum;		//單項總額
+	private Double  	itemSum;		//單項總額
 
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
@@ -53,11 +54,15 @@ public class BuyItemBean implements Serializable {
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "BUYTITEM_PRODID_FK")
 	private ProductBean productBean;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "BUYITEM_COMMENTID_FK")
+	private CommentBean commentBean;
 	
 	public BuyItemBean() {
 	}
 
-	public BuyItemBean(Integer prodQTY, BigDecimal itemSum ,
+	public BuyItemBean(Integer prodQTY, Double itemSum ,
 						PromotionBean promotionBean ,ProductBean productBean) {
 		this.prodQTY = prodQTY;
 		this.itemSum = itemSum;
@@ -82,11 +87,11 @@ public class BuyItemBean implements Serializable {
 		this.prodQTY = prodQTY;
 	}
 
-	public BigDecimal getItemSum() {
+	public Double getItemSum() {
 		return itemSum;
 	}
 
-	public void setItemSum(BigDecimal itemSum) {
+	public void setItemSum(Double itemSum) {
 		this.itemSum = itemSum;
 	}
 	
@@ -139,6 +144,14 @@ public class BuyItemBean implements Serializable {
 
 	public void setProductBean(ProductBean productBean) {
 		this.productBean = productBean;
+	}
+
+	public CommentBean getCommentBean() {
+		return commentBean;
+	}
+
+	public void setCommentBean(CommentBean commentBean) {
+		this.commentBean = commentBean;
 	}
 
 	@Override

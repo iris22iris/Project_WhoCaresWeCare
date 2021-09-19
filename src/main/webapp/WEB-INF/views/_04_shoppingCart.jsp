@@ -48,8 +48,15 @@
 		})
 		$("#discountSum").text(showSum);
 
+		//折扣碼優惠
+		var showDiscountCode = 0;
+		if($("#showDiscount")[0].style.display == "block"){
+		 showDiscountCode = parseInt($(".showDiscountSum").text());
+		}
+
+		
 		//合計金額
-		var showOrder = showTotal + showSum;
+		var showOrder = showTotal + showSum - showDiscountCode;
 		$("#order").text(showOrder); 
 
 	}
@@ -99,7 +106,7 @@
 	//輸入折扣碼
 	function findDiscount(){
 		$.ajax({
-			url: "<c:url value='/_04_shoppingCart/discountCalc.do' />",
+			url: "<c:url value='/inputCode.do' />",
 			type: "POST",
 			async : false,
 			data: {
@@ -108,19 +115,29 @@
 			dataType : "text"
 			,
 				
-			success: function(response) {
-				alert("成功")
-				if(response){
+			success: function() {
 				$("#showDiscount")[0].style.display="block";
-				alert(response.discount);
-				$("#showDiscount").val(response.discount);
-				}
+				count();
 			},
 
 			error: function() {
 				alert("輸入的折扣碼有誤")
 			},
 			
+		});
+	}
+
+
+	//連結結帳
+	function checkout(){
+
+		$.ajax({
+			url : "<c:url value='/BuyCheckout' />",
+			type : "GET",
+			async: false,
+			data : {
+				discountCode : document.getElementById('discountCode').value,
+			},
 		});
 	}
     </script>
@@ -160,13 +177,17 @@
                     <input type="checkbox" name="prodId" value="${buyItems.productBean.prodId}" class="checkPid">
                 </div>
                 <div class="col-3">
-                    <img class="productImg" 
+                    <a href="<c:url value='/_04_productPage?id=${buyItems.productBean.prodId}' />"><img class="productImg" 
                     src="<c:url value='/images/product/${buyItems.productBean.fileName}' />">
+                    </a>
                 </div>
                 <div class="col-5 cartContent">
+                	<div></div>
                     <div class="col-12 productId">商品編號${buyItems.productBean.prodId}</div>
                     <div class="col-12 productName">
-                        ${buyItems.productBean.prodName} 
+                        <a href="<c:url value='/_04_productPage?id=${buyItems.productBean.prodId}' />">
+                        ${buyItems.productBean.prodName}
+                        </a>
                    </div>
                    <c:choose>
                    <c:when test="${empty buyItems.productBean.promotionBean.promoteId}">
@@ -246,11 +267,14 @@
                 <div class="col-8 price">
                 	<form class="discountForm">
                     	<input type="text" placeholder="尚未輸入折扣代碼" id="discountCode">
-                   		<input type="submit" value="送出" accesskey="enter" onclick="findDiscount()"/>
+                   		<input type="button" value="送出" onclick="findDiscount()"/>
                     </form>
                 </div>
                 <!-- enter submit以後從hidden改為顯示 -->
-                <div class="col-12 submitMsg" id="showDiscount">優惠${response.discount}元</div>
+                <div class="col-12 submitMsg" id="showDiscount">
+                折扣碼優惠
+                <span class="showDiscountSum">${ordBean.discount}<span>元
+                </div>
                 <div class="col-12"><hr style="size:5px;"></div>
                 
                 <div class="col-6 amountItem">合計金額：</div>
@@ -260,7 +284,7 @@
             </div>
                 <div class="checkoutBtn col-12 mt-3">
                     <button >繼續逛逛</button>
-                    <button type="submit">結帳去</button>
+                    <button type="submit" onclick="checkout()">結帳去</button>
                 </div>
          </div>
          <!--Right Count End -->

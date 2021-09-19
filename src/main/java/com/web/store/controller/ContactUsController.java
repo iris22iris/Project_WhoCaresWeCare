@@ -69,18 +69,15 @@ public class ContactUsController {
 
 	@GetMapping(value = "/_02_contactUs/{custId}", produces = { "text/html" })
 	public String editUsFindView(@PathVariable Integer custId,Integer ordId, Model model) {
+		HttpSession session = request.getSession();
+		if(session.getAttribute("LoginOK") == null) {
+			return "index";
+		} 
 		CustomerBean customer = customerService.getCustomerById(custId);
 		model.addAttribute("customer", customer);
 		model.addAttribute("id", custId);
-		
-		
 		List<OrdBean> list = new  ArrayList<OrdBean>(); 
 		list = contactUsOrdService.findOrdBeanById(00000001);
-
-//		return "_02_contactUs";
-//		return contactUsOrdDao.findOrdBeanById(ordId);
-//		list.add("ord");
-//		list.add("ooder");
 		model.addAttribute("judyList", list);
 		return "_02_contactUs";
 	}
@@ -88,7 +85,10 @@ public class ContactUsController {
 	@PostMapping(value = "/_02_contactUs")
 	public String insertContactUs(@ModelAttribute("problem") /* @Valid */ @RequestBody ProblemBean pb,
 			BindingResult result, Model model, HttpServletRequest request) {
-
+		HttpSession session = request.getSession();
+		if(session.getAttribute("LoginOK") == null) {
+			return "index";
+		}
 		Integer usId = pb.getusId();
 		String ordId = pb.getOrdId();
 		String phone = pb.getPhone();

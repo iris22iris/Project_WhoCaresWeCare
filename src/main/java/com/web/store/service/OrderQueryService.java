@@ -13,5 +13,5 @@ public interface OrderQueryService {
 	List<BuyItemBean> findBuyItemByOrdId(Integer ordId);
 
 	List<RentItemBean> findRentItemByOrdId(Integer ordId);
-
+	
 }

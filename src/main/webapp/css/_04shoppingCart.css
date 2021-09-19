@@ -88,6 +88,11 @@
     font-size: 20px;
 }
 
+.productName a{
+	text-decoration: none;
+	color: rgb(56, 49, 43);
+}
+
 .hidden{
     height: 30px;
 }
@@ -164,25 +169,34 @@
 }
 
 .discountForm input:first-child{
-	width:160px;
+	width:140px;
+    font-size:16px;
+}
+
+.discountForm input:nth-child(2){
+	border:none;
+	border-radius:10px;
+	font-family: mainfont-light;
+	background-color: rgb(235, 159, 19);
+	margin-left: 5px;
+	padding: 0px 3px;
+	font-size:16px;
+	color:white;
 }
 
 .submitMsg{
     color: red;
-    display: flex;
-    justify-content: flex-end;
     padding-right: 10px;
-    font-size: 12px;
+    padding-top:5px;
+    font-size: 14px;
     line-height: 20px;
 }
 
 #showDiscount{
-	  display:none;
+	display:none;
+	text-align: right;
 }
 
-/* .amount div input{ */
-/*     width: 180px; */
-/* } */
 
 .checkoutBtn{
     display: flex;
