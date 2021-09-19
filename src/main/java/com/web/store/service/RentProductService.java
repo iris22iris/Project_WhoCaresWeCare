@@ -52,4 +52,6 @@ public interface RentProductService {
 
 	// 依傳入大分類代號取出該分類代號之名稱	
 		public List<ProductTypeBean> getProductTypeBeanBymaincategory(String maincategory);
+	//用商品編號取得該產品及其項次庫存資料
+		public	List<RentProductBean> getAllSerialStocksByprodId(int prodId);
 }

@@ -44,13 +44,20 @@ public class RentProductPageController {
 		List<RentProductBean> rentProducts = rentProductService.getAllProducts();
 		List<ProductTypeBean> productTypes = rentProductService.getAllProdTypes();
 		
+		//用商品編號取得該產品及其項次庫存資料
+		List<RentProductBean> AllSerialStocks = rentProductService.getAllSerialStocksByprodId(id);
+		//用商品編號取得該產品評論資料
 		List<CommentBean> comments = rentProductService.getCommentBeanByprodId(id);
+		//用商品編號取得該產品預約資料
 		List<ReservationBean> reservations = rentProductService.getReservationBeanByprodId(id);
 		model.addAttribute("rentProducts", rentProducts);
 		model.addAttribute("productTypes", productTypes);
 		model.addAttribute("rentProduct", rentProductService.getProductById(id));
+		model.addAttribute("allserialstocks", AllSerialStocks);
 
 		
+		
+		//用商品小分類取得該產品大分類
 		String productType = rentProductService.getProductById(id).getProductTypeBean().getProdType();
 		String maincategory = productType.substring(0,1);
 		List<ProductTypeBean> maincategorys = rentProductService.getProductTypeBeanBymaincategory(maincategory);

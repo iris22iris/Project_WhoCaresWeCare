@@ -121,5 +121,11 @@ public class RentProductServiceImpl implements RentProductService {
 		
 		return rentProductDao.getProductTypeBeanBymaincategory(maincategory);
 	}
+
+	@Override
+	public List<RentProductBean> getAllSerialStocksByprodId(int prodId) {
+		
+		return rentProductDao.getAllSerialStocksByprodId(prodId);
+	}
 	
 }

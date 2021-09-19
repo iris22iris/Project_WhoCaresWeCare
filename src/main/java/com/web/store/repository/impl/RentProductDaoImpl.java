@@ -229,6 +229,18 @@ public class RentProductDaoImpl implements RentProductDao {
 					.getResultList();
 		
 	}
+
+	@Override
+	public List<RentProductBean> getAllSerialStocksByprodId(int prodId) {
+		Session session = factory.getCurrentSession();
+		
+		String hql ="  FROM RentProductBean rpb"	
+					+" WHERE rpb.prodId = :id ";
+		return session.createQuery(hql,RentProductBean.class)
+					.setParameter("id",  prodId)					
+					.getResultList();
+		
+	}
 	
 	
 

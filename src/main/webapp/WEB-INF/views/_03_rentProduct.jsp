@@ -177,7 +177,13 @@ ${a}
 									<div class="col-4">
 									庫存數量:</div>
 									<div class="col-4">
-									${rentProduct.stock}個
+									<!-- 取其stock -->									 
+									<c:set value="0" var="stocksum"/>					         
+									<c:forEach items="${allserialstocks}" var="serialstock">  				            
+									<c:set value="${stocksum+serialstock.stock}" var="stocksum"/> 								
+									</c:forEach>
+									${stocksum}個
+																		
 									</div>
 								</div> 
 
@@ -190,7 +196,7 @@ ${a}
 								</div> 
 								
 								<c:choose> 
-						  		  <c:when test="${rentProduct.stock >0 }">   
+						  		  <c:when test="${stocksum >0 }">   
 									<div class="submitBtn col-8">	
 									<a href="<c:url value='/_03_rentItemList' />">
 									<button class="btn btn-outline-warning " 
@@ -317,14 +323,7 @@ ${a}
 	            <form:form method='POST' modelAttribute="reservation" class="row g-3 form">
 	            <fieldset>
 	      	                	                
-	                <!-- 預約人start -->
-	                <%--
-	                 	<div class="col-3 justify-content-evenly p-1  d-flex align-items-center   ">
-	                        <label style=font-size:22px;  for="inputAccount" class="form-label " >預約人 :${cookie['user'].value}</label>
-	                    </div>
-	                    --%>
-	                 <!-- 預約人end -->
-	                 
+	           
 	                <div class="form-group d-flex align-items-center">
 	                  	<div class="col-4 justify-content-evenly p-1  d-flex align-items-center   ">
 							<label style=font-size:22px  for="prodName" class="form-label">商品名稱 :</label>
@@ -335,17 +334,7 @@ ${a}
 						</div>
 	        		</div>
 					
-	            <%--
-	                <div class="form-group">
-						<label class="control-label col-lg-2 col-lg-2" for='category'>
-						種類為:
-						</label>
-						<div class="col-lg-10">
-							<form:input id="category" path="category" type='text'
-						class='form:input-large' />
-						</div>
-					</div>
-					--%>
+	          
 	                    
 	                <div class="form-group d-flex align-items-center">
 	                  	<div class="col-4 justify-content-evenly p-1  d-flex align-items-center   ">
