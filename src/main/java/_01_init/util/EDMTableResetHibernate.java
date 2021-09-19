@@ -336,11 +336,7 @@ public class EDMTableResetHibernate {
 					String[] token = line.split("\\|");
 					RentItemBean rib = new RentItemBean();
 					rib.setRentItemPK(new RentItemPK(new OrdPK(token[0], Integer.parseInt(token[1])),
-							Integer.parseInt(token[2])));
-					rib.setDiscount(Double.parseDouble(token[3]));
-					rib.setDiscountCode(token[4]);
-//					rib.setProdTotal(new BigDecimal(token[3]));
-//					rib.setProdId(Integer.parseInt(token[5]));
+													Integer.parseInt(token[2])));
 					rib.setProdQty(Integer.parseInt(token[5]));
 					rib.setRentPeriod(Integer.parseInt(token[6]));
 					rib.setReturnDate(Timestamp.valueOf(token[7]));

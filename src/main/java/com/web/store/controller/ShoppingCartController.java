@@ -125,37 +125,11 @@ public class ShoppingCartController {
 		return "_04_shoppingCart";
 	}
 	
-//	@PostMapping("/_04_shoppingCart/discountCalc.do")
-//	@ResponseBody
-//	protected PromotionBean discountCode(
-//			@RequestParam(value = "discountCode", required = false) 
-//			 String discountCode,
-//			 @RequestParam(value = "BuyItemBean", required = false) Set<BuyItemBean> BuyItemBean){
-//		
-//		PromotionBean promotion = new PromotionBean();
-//		promotion = orderService.findbyDiscountCode(discountCode);
-//		model.addAttribute("promotion",promotion);
-//		log.info("折扣碼:"+discountCode+"可使用，可折抵:"+promotion.getDiscount());
-//		
-//		OrdBean ordBean = (OrdBean) httpSession.getAttribute("OrdBean");
-//		if(ordBean == null) {
-//			ordBean = new OrdBean(null, null, null,
-//					null, null, null, null,null,
-//				discountCode, promotion.getDiscount() , null,null,
-//					null,null, null, BuyItemBean);
-//		}
-//		
-//		return promotion;
-//		
-//	}
-	
-	
 	//輸入折扣代碼
-	@PostMapping("/_04_shoppingCart/inputCode.do")
+	@PostMapping("/inputCode.do")
 	@ResponseBody
 	protected OrdBean inputDiscountCode(
 			@RequestParam(value = "discountCode", required = false) String discountCode){
-		ShoppingCart cart = (ShoppingCart) httpSession.getAttribute("ShoppingCart");
 		OrdBean ordBean = (OrdBean) httpSession.getAttribute("OrdBean");
 
 		PromotionBean promotion = new PromotionBean();
