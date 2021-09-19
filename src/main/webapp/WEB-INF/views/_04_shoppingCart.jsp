@@ -122,6 +122,7 @@
 
 			error: function() {
 				alert("輸入的折扣碼有誤")
+				$("#showDiscount")[0].style.display="none";
 			},
 			
 		});
@@ -130,15 +131,7 @@
 
 	//連結結帳
 	function checkout(){
-
-		$.ajax({
-			url : "<c:url value='/BuyCheckout' />",
-			type : "GET",
-			async: false,
-			data : {
-				discountCode : document.getElementById('discountCode').value,
-			},
-		});
+		location.href="${pageContext.request.contextPath}/BuyCheckout/"+'<%=session.getAttribute("LoginOK")%>';
 	}
     </script>
 </head>
@@ -273,7 +266,7 @@
                 <!-- enter submit以後從hidden改為顯示 -->
                 <div class="col-12 submitMsg" id="showDiscount">
                 折扣碼優惠
-                <span class="showDiscountSum">${ordBean.discount}<span>元
+                <span class="showDiscountSum">${ordBean.discount}</span>元
                 </div>
                 <div class="col-12"><hr style="size:5px;"></div>
                 
@@ -284,7 +277,7 @@
             </div>
                 <div class="checkoutBtn col-12 mt-3">
                     <button >繼續逛逛</button>
-                    <button type="submit" onclick="checkout()">結帳去</button>
+                    <button type="button" onclick="checkout()">結帳去</button>
                 </div>
          </div>
          <!--Right Count End -->

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -88,7 +89,6 @@ public class ShoppingCartController {
 		}
 		log.info("建立OrdBean:"+ordBean);
 		
-		
 		//取出存在購物車的商品放入Map物件
 		Map<Integer, BuyItemBean> cartContent = cart.getContent();	
 		//存成Set物件轉換為OrdBean
@@ -129,17 +129,19 @@ public class ShoppingCartController {
 	@PostMapping("/inputCode.do")
 	@ResponseBody
 	protected OrdBean inputDiscountCode(
-			@RequestParam(value = "discountCode", required = false) String discountCode){
+			@ModelAttribute("promotion") PromotionBean promotion,
+			@RequestParam(value = "discountCode", required = false) String discountCode,Model model){		
 		OrdBean ordBean = (OrdBean) httpSession.getAttribute("OrdBean");
 
-		PromotionBean promotion = new PromotionBean();
-		promotion = orderService.findbyDiscountCode(discountCode);
+		promotion = orderService.findByDiscountCode(discountCode);
 		log.info("折扣碼:"+discountCode+"可使用，可折抵:"+promotion.getDiscount());
 		
 		ordBean.setDiscountCode(discountCode);
 		ordBean.setDiscount(promotion.getDiscount());
-
+		
 		log.info("把discountCode & discode資訊放進orderBean");
+		
+		
 		return ordBean;
 		}
 		

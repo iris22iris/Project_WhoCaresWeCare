@@ -1,7 +1,5 @@
 package com.web.store.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,10 +18,14 @@ public class OrderServiceImpl implements OrderService {
 	public OrderServiceImpl(OrderDao orderDao) {
 		this.orderDao = orderDao;
 	}
-
+	
 	@Override
-	public PromotionBean findbyDiscountCode(String discountCode) {
-		return orderDao.findbyDiscountCode(discountCode);
+	public PromotionBean findByDiscountCode(String discountCode) {
+		return orderDao.findByDiscountCode(discountCode);
 	}
+
+
+
+
 
 }

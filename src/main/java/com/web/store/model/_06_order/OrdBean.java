@@ -1,7 +1,6 @@
 package com.web.store.model._06_order;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.sql.Clob;
 import java.sql.Timestamp;
 import java.util.LinkedHashSet;
@@ -17,13 +16,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.web.store.model._02_customerService.ProblemBean;
 import com.web.store.model._03_rent.RentItemBean;
 import com.web.store.model._04_shop.BuyItemBean;
 import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.model._06_order.pkClass.OrdPK;
 
-
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer" })
 @Entity
 @Table(name = "Ord")
 public class OrdBean implements Serializable {

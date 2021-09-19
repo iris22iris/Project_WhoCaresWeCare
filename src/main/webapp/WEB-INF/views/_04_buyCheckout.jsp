@@ -43,38 +43,30 @@
                   <th class="col-1">項次</th>
                   <th class="col-2">圖片</th>
                   <th class="col-2">商品名稱</th>
-                  <th class="col-1">租賃天數</th>
                   <th class="col-1">單價</th>
+                  <th class="col-1">數量</th>
                   <th class="col-1">折抵</th>
                   <th class="col-2">合計</th>
               </tr>
+              <c:forEach var="buyItems" items='${buyItems}'>
               <tr class="detailList">
                   <td>1</td>
-                  <td><img src="<c:url value='/images/product/A0003.jpg'/>"></td>
-                  <td>A100002<br>手動輪椅</td>
-                  <td>40</td>
-                  <td>50</td>
-                  <td>20</td>
-                  <td>1950</td>
+                  <td><img src="<c:url value='/images/product/${buyItems.productBean.fileName}'/>"></td>
+                  <td>${buyItems.productBean.prodId}<br>${buyItems.productBean.prodName}</td>
+                  <td>${buyItems.productBean.price}元</td>
+                  <td>${buyItems.prodQTY}</td>
+                  <c:choose>
+                  <c:when test="${!empty buyItems.productBean.promotionBean.discount}">
+                 	 <td>-${buyItems.productBean.promotionBean.discount}元</td>
+                  </c:when>
+                  <c:otherwise>
+                  	 <td>無</td>
+                  </c:otherwise>
+                  </c:choose>
+                  <td>${buyItems.itemSum - buyItems.productBean.promotionBean.discount}元</td>
               </tr>
-              <tr class="detailList">
-                  <td>2</td>
-                  <td><img src="<c:url value='/images/product/A0002.jpg' />"></td>
-                  <td>A100002<br>手動輪椅</td>
-                  <td>40</td>
-                  <td>50</td>
-                  <td>20</td>
-                  <td>1950</td>
-              </tr>
-              <tr class="detailList">
-                  <td>3</td>
-                  <td><img src="<c:url value='/images/product/A0001.jpg' />"></td>
-                  <td>A100002<br>手動輪椅</td>
-                  <td>40</td>
-                  <td>50</td>
-                  <td>20</td>
-                  <td>1950</td>
-                </tr>
+            </c:forEach>
+
           </table>
       </div>
       <!--商品清單 end-->
@@ -101,6 +93,7 @@
             <div class="checkoutBottom">
               <h4>折扣碼:</h4>
               <input type="text" id="discountCode">
+              <input type="button" value="輸入" onclick="findDiscount()">
             </div>
         </div>
         <div class="col-4 checkoutTitle">
@@ -202,6 +195,6 @@
 
 
    <!-- bootstrap -->
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>   
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>   
 </body>
 </html>
