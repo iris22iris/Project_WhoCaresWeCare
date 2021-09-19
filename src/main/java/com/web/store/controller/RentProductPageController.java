@@ -89,8 +89,13 @@ public class RentProductPageController {
 		
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		rb.setReserveDate(timestamp);
-		
-		rb.setWaitNum(reservations.get(reservations.size()-1).getWaitNum()+1);
+		//先前沒有被人預約的情況要排除掉
+		 boolean ans = reservations.isEmpty();
+	        if (ans == true)
+	        	rb.setWaitNum(1);
+	        else
+	        	rb.setWaitNum(reservations.get(reservations.size()-1).getWaitNum()+1);
+	        
 		rb.setProdId(id);
 		rb.setSerialNumber("1");
 		
