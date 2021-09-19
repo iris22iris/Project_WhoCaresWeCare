@@ -6,21 +6,78 @@
 <!--   type="text/css" /> -->
 <link rel="stylesheet" href="<c:url value='/css/commonStyle.css' />"
 	type="text/css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-function clicka(obj,objUrl){
-	if(<%=session.getAttribute("LoginOK")%> == 'null' || <%=session.getAttribute("LoginOK")%> == null || <%=session.getAttribute("LoginOK")%> == ''){
-		if(confirm('請先登入')) {
-			obj.href='${pageContext.request.contextPath}/_05_login';
-			} else {
-				obj.href='${pageContext.request.contextPath}/index';
-				}
-	} else {
-		obj.href='${pageContext.request.contextPath}/' + objUrl;	
-	}
-}
 
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+<!-- <script -->
+<!-- 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+<script>
+	function clicka(obj, objUrl) {
+		if ('${sessionScope.LoginOK}' == 'null' || '${sessionScope.LoginOK}' == null || '${sessionScope.LoginOK}' == '') {
+			if (confirm('請先登入')) {
+				obj.href = '${pageContext.request.contextPath}/_05_login';
+			} else {
+				obj.href = '${pageContext.request.contextPath}/index';
+			}
+		} else {
+			obj.href = '${pageContext.request.contextPath}/' + objUrl;
+		}
+	}
+	
+	window.onload = function() {
+		if('${sessionScope.searchProduct}'){		
+			$('#searchProduct').autocomplete({
+				select : function(event, ui) {
+					"use strict";
+					console.log('select event called');
+				},
+				source : '${sessionScope.searchProduct}'.substring(1,'${sessionScope.searchProduct}'.length-1).split(', '),
+				minLength : 1,
+				change : function(event, ui) {
+					if (ui.item) {
+						console.log("ui.item.value: " + ui.item.value);
+					} else {
+						console.log("ui.item.value is null");
+					}
+					console.log("this.value: " + this.value);
+				}
+			});
+		} else {
+			$.ajax({
+				url : '${pageContext.request.contextPath}/searchProduct',
+				type : "GET",
+				success: function(data) { 
+					if(data){
+						$('#searchProduct').autocomplete({
+							select : function(event, ui) {
+								"use strict";
+								console.log('select event called');
+							},
+							source : data,
+							minLength : 1,
+							change : function(event, ui) {
+								if (ui.item) {
+									console.log("ui.item.value: " + ui.item.value);
+								} else {
+									console.log("ui.item.value is null");
+								}
+								console.log("this.value: " + this.value);
+							}
+						});
+					}
+				},
+			});
+		}
+	}
+
+	function searchProductMenu(obj, objUrl) {
+		if ($('#searchProduct').val()) {
+			window.location.href = '_01_searchResult/' + $('#searchProduct').val();
+		}
+	}
 </script>
 
 
@@ -48,8 +105,7 @@ function clicka(obj,objUrl){
 			<!-- left Menu -->
 			<ul class="navbar-nav  me-auto mb-lg-0 left-menu">
 				<li class="nav-item "><a class="nav-link textSize "
-					href="<c:url value='/dmMenu' />" style="color: white;">
-						關於我們</a></li>
+					href="<c:url value='/dmMenu' />" style="color: white;"> 關於我們</a></li>
 				<li class="nav-item"><a class="nav-link textSize "
 					href="<c:url value='/rentMenu' />" style="color: white;"> 租賃設備</a></li>
 				<li class="nav-item"><a class="nav-link textSize "
@@ -58,8 +114,9 @@ function clicka(obj,objUrl){
 					href="<c:url value='' />" style="color: white;"> 客服中心</a></li>
 				<!-- 可以增加功能為登入才會顯示會員中心這個連結 -->
 				<li class="nav-item"><a class="nav-link textSize " id="cb"
-					href="<c:url value='/_05_member_management'/>"
-					style="color: white;" onclick='clicka(this,"_05_member_management")'> 會員中心</a></li>
+					href=""
+					style="color: white;"
+					onclick='clicka(this,"_05_member_management")'> 會員中心</a></li>
 			</ul>
 
 
@@ -67,17 +124,18 @@ function clicka(obj,objUrl){
 				<ul
 					class="nav-item  navbar-nav  me-auto mb-lg-0 left-menu dropdown-toggle"
 					id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
-					<a class="nav-link" style="padding: 0px;"> 
-					<img src="${pageContext.request.contextPath}/images/cartIcon.png" alt="購物車">
-					</a>
+					<li><a class="nav-link" style="padding: 0px;"> <img
+							src="${pageContext.request.contextPath}/images/cartIcon.png"
+							alt="購物車">
+					</a></li>
 				</ul>
 				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 					<li class="nav-item"><a class="nav-link textSize"
-						href="${pageContext.request.contextPath}/_03_rentItemList">
-							租賃設備清單 </a></li>
+						href="${pageContext.request.contextPath}/_03_rentItemList">租賃設備清單</a>
+					</li>
 					<li class="nav-item"><a class="nav-link textSize"
-						href="${pageContext.request.contextPath}/_04_shoppingCart">
-							商品購物車</a></li>
+						href="${pageContext.request.contextPath}/_04_shoppingCart">商品購物車</a>
+					</li>
 				</ul>
 			</div>
 
@@ -88,7 +146,8 @@ function clicka(obj,objUrl){
 					<c:choose>
 						<c:when test="${empty LoginOK}">
 							<a class="nav-link " href="" style="padding: 0px;"> <img
-								src="${pageContext.request.contextPath}/images/memberIcon.png" alt="會員">
+								src="${pageContext.request.contextPath}/images/memberIcon.png"
+								alt="會員">
 							</a>
 						</c:when>
 						<c:otherwise>
@@ -100,17 +159,18 @@ function clicka(obj,objUrl){
 				</ul>
 				<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
 					<li class="nav-item"><c:if test="${ empty LoginOK}">
-							<a class="nav-link textSize" href="${pageContext.request.contextPath}/_05_login" >登入</a>
+							<a class="nav-link textSize"
+								href="${pageContext.request.contextPath}/_05_login">登入</a>
 						</c:if></li>
 					<li class="nav-item"><a class="nav-link textSize"
 						href="<c:url value='/_05_member_management'/>"
 						onclick='clicka(this,"_05_member_management")'> 會員中心 </a></li>
 					<li class="nav-item"><a class="nav-link textSize"
-						href="<c:url value='/_02_contactUs'/>" onclick='clicka(this,"_02_contactUs")'>
-							聯絡我們</a></li>
+						href="<c:url value='/_02_contactUs'/>"
+						onclick='clicka(this,"_02_contactUs")'> 聯絡我們</a></li>
 					<c:if test="${! empty LoginOK}">
-						<a class="nav-link textSize" href="${pageContext.request.contextPath}/_05_logout">
-							登出 </a>
+						<a class="nav-link textSize"
+							href="${pageContext.request.contextPath}/_05_logout"> 登出 </a>
 					</c:if>
 				</ul>
 			</div>
@@ -118,12 +178,14 @@ function clicka(obj,objUrl){
 
 			<!-- Search -->
 			<form class="d-flex">
-				<input class="form-control me-2" type="search"
+				<input id="searchProduct" class="form-control me-2" type="text"
 					placeholder="Search Product" aria-label="Search">
-				<button class="btn btn-outline-warning" type="submit">
+				<button id="searchSumbit" type="button" class="btn btn-outline-warning"
+					onclick='searchProductMenu(this,"_01_searchResult")'>
 					<i class="fas fa-search"></i>
 				</button>
 			</form>
+
 		</div>
 	</div>
 </nav>

@@ -11,7 +11,7 @@
 	href="<c:url value='/css/_04buyProductMenu.css' />">
 	<link rel="stylesheet" href="<c:url value='/css/_01searchResult.css' />"
 	type="text/css">
-	<script src="<c:url value='/js/addFavorite.js' />"></script>
+<%-- 	<script src="<c:url value='/js/addFavorite.js' />"></script> --%>
 	<!-- bootstrap -->
 	<link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -34,7 +34,7 @@
 			<div class="container">
 				<div class="searchResultTitle">
 					<h3>
-						<i class="fas fa-th-large pe-3"></i>關於 {搜尋關鍵字} 的相關商品:
+						<i class="fas fa-th-large pe-3"></i>關於 ${searchProduct} 的相關商品:
 					</h3>
 					<select class="sequence" name="sequence">
 						<option>搜尋結果排序</option>
@@ -52,44 +52,34 @@
 			<div class="container">
 				<!-- foreach要跑兩個:rent/buy -->
 				<div class="row searchResultContent">
+<!-- 					<div class="col-3 mt-3"> -->
+<!-- 						<div class="card text-center"> -->
+<%-- 							<a href="#"><img src="<c:url value='/images/product/A0001.jpg' />" --%>
+<!-- 								id="productImg" class="card-img-top" alt="..."></a> -->
+<!-- 							<div class="card-body"> -->
+<!-- 								<h5 class="card-title">可攜式摺疊輪椅</h5> -->
+<!-- 								<div class="card-text mb-2"> -->
+<!-- 									150 元/日<br> 庫存: 1個 -->
+<!-- 								</div> -->
+<!-- 								如果庫存為零會改成顯示前往預約候補 -->
+<!-- 								<a href="#" class="btn btn-warning">前往租賃</a> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+				<c:forEach var='productList' items='${productList}'>
+		
 					<div class="col-3 mt-3">
 						<div class="card text-center">
-							<a href="#"><img src="<c:url value='/images/product/A0001.jpg' />"
+							<a href="<c:url value='/_04_productPage?id=${productList.prodId}' />">
+							<img src="<c:url value='/images/product/${productList.fileName}' />"
 								id="productImg" class="card-img-top" alt="..."></a>
-							<div class="card-body">
-								<h5 class="card-title">可攜式摺疊輪椅</h5>
-								<div class="card-text mb-2">
-									150 元/日<br> 庫存: 1個
-								</div>
-								<!-- 如果庫存為零會改成顯示前往預約候補 -->
-								<a href="#" class="btn btn-warning">前往租賃</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-3 mt-3">
-						<div class="card text-center">
-							<a href="#"><img src="<c:url value='/images/product/A0001.jpg' />"
-								id="productImg" class="card-img-top" alt="..."></a>
-							<div class="card-body">
-								<h5 class="card-title">可攜式摺疊輪椅</h5>
-								<div class="card-text mb-2">
-									150 元/日<br> 庫存: 1個
-								</div>
-								<!-- 如果庫存為零會改成顯示前往預約候補 -->
-								<a href="#" class="btn btn-warning">前往租賃</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-3 mt-3">
-						<div class="card text-center">
-							<a href="#"><img src="<c:url value='/images/product/A0001.jpg' />"
-								id="productImg" class="card-img-top" alt="..."></a>
+								
 							<div class="card-body ">
 								<h5 class="card-title productName">
-									可攜式摺疊輪椅<i class="far fa-heart ps-4" onclick="track(this)"></i>
+									${productList.prodName}<i class="far fa-heart ps-4" onclick="track(this)"></i>
 								</h5>
 								<div class="card-text mb-2">
-									價格: 15000元<br>庫存:5台
+									價格: ${productList.price}元<br>庫存:${productList.stock}台
 								</div>
 								<div class="row-3">
 									<select class="form-select" style="width: 45%;">
@@ -102,50 +92,9 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-3 mt-3">
-						<div class="card text-center">
-							<a href="#"><img src="<c:url value='/images/product/A0001.jpg' />"
-								id="productImg" class="card-img-top" alt="..."></a>
-							<div class="card-body ">
-								<h5 class="card-title productName">
-									可攜式摺疊輪椅<i class="far fa-heart ps-4" onclick="track(this)"></i>
-								</h5>
-								<div class="card-text mb-2">
-									價格: 15000元<br>庫存:5台
-								</div>
-								<div class="row-3">
-									<select class="form-select" style="width: 45%;">
-										<option selected>數量</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-									</select> <a href="#" class="btn btn-warning">加入購物車</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-3 mt-3">
-						<div class="card text-center">
-							<a href="#"><img src="<c:url value='/images/product/A0001.jpg' />"
-								id="productImg" class="card-img-top" alt="..."></a>
-							<div class="card-body ">
-								<h5 class="card-title productName">
-									可攜式摺疊輪椅<i class="far fa-heart ps-4" onclick="track(this)"></i>
-								</h5>
-								<div class="card-text mb-2">
-									價格: 15000元<br>庫存:5台
-								</div>
-								<div class="row-3">
-									<select class="form-select" style="width: 45%;">
-										<option selected>數量</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-									</select> <a href="#" class="btn btn-warning">加入購物車</a>
-								</div>
-							</div>
-						</div>
-					</div>
+					
+				</c:forEach>	
+					
 				</div>
 			</div>
 			<!-- Search Result Content End -->
