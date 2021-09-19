@@ -1,33 +1,18 @@
 package com.web.store.controller;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.sql.Blob;
 import java.util.List;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.CacheControl;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.store.model._02_customerService.CommentBean;
 import com.web.store.model._04_shop.ProductBean;
-import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.model._07_productType.ProductTypeBean;
-import com.web.store.service.CustomerService;
 import com.web.store.service.ProductService;
 
 @Controller
@@ -54,6 +39,12 @@ public class BuyProductPageController {
 		model.addAttribute("productTypes", productTypes);
 		model.addAttribute("product", productService.getProductById(id));
 		model.addAttribute("comments", comments);
+		
+		String productType = productService.getProductById(id).getProductTypeBean().getProdType();
+		String maincategory = productType.substring(0,1);
+		List<ProductTypeBean> maincategorys = productService.getProductTypeBeanBymaincategory(maincategory);
+		model.addAttribute("maincategorys", maincategorys);
+		
 		return "_04_productPage";
 	};
 

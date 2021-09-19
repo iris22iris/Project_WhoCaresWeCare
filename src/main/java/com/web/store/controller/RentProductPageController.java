@@ -43,13 +43,19 @@ public class RentProductPageController {
 	public String getProductById(@RequestParam("id") Integer id ,Model model) {
 		List<RentProductBean> rentProducts = rentProductService.getAllProducts();
 		List<ProductTypeBean> productTypes = rentProductService.getAllProdTypes();
+		
 		List<CommentBean> comments = rentProductService.getCommentBeanByprodId(id);
 		List<ReservationBean> reservations = rentProductService.getReservationBeanByprodId(id);
 		model.addAttribute("rentProducts", rentProducts);
 		model.addAttribute("productTypes", productTypes);
 		model.addAttribute("rentProduct", rentProductService.getProductById(id));
 
-//		model.addAttribute("reservation", rentProductService.getReservationBeanByprodId(id));
+		
+		String productType = rentProductService.getProductById(id).getProductTypeBean().getProdType();
+		String maincategory = productType.substring(0,1);
+		List<ProductTypeBean> maincategorys = rentProductService.getProductTypeBeanBymaincategory(maincategory);
+		model.addAttribute("maincategorys", maincategorys);
+		
 		model.addAttribute("comments", comments);
 		model.addAttribute("reservations", reservations);
 		
@@ -65,16 +71,11 @@ public class RentProductPageController {
 	public String processAddNewProductForm	(@RequestParam("id") Integer id ,@CookieValue(value = "user") String user
 			,@ModelAttribute("reservation") ReservationBean rb,Model model) {
 		
-//		List<RentProductBean> rentProducts = rentProductService.getAllProducts();
-//		List<ProductTypeBean> productTypes = rentProductService.getAllProdTypes();
-//		List<CommentBean> comments = rentProductService.getCommentBeanByprodId(id);
+
 		List<ReservationBean> reservations = rentProductService.getReservationBeanByprodId(id);
-//		model.addAttribute("rentProducts", rentProducts);
-//		model.addAttribute("productTypes", productTypes);
+
 		model.addAttribute("rentProduct", rentProductService.getProductById(id));
-//		model.addAttribute("reservation", rentProductService.getReservationBeanByprodId(id));
-//		model.addAttribute("comments", comments);
-//		model.addAttribute("reservations", reservations);
+
 								
 		rb.setCategory("RES");
 		rb.setClassify("R");
