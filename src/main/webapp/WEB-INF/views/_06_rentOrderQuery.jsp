@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,7 +57,7 @@
 				<!-- header-search end 查詢訂單功能結束-->
 			</div>
 			<!-- title end 標題結束 -->
-
+			<div id="searchResult" class="my-3 text-center">${orderNotFound}</div>
 			<c:choose>
 				<c:when test="${!empty ordBean}">
 
@@ -184,7 +184,9 @@
 														aria-hidden="true">
 														<div class="modal-dialog">
 															<div class="modal-content ">
-																<form method="POST" action="<c:url value='/rentOrderQuery/addComment' />" enctype='multipart/form-data'>
+																<form method="POST"
+																	action="<c:url value='/rentOrderQuery/addComment' />"
+																	enctype='multipart/form-data'>
 																	<div class="modalTitle modal-body ">
 																		<h2 class="titleWord col-11"
 																			id="exampleModalLabel${vs.index}">使用心得/評分</h2>
@@ -204,28 +206,30 @@
 																				<input type="radio" name="rate" value="3">3分
 																				<input type="radio" name="rate" value="2">2分
 																				<input type="radio" name="rate" value="1">1分
-																				<br>
-																				<input type="hidden" name="custId" value="${customerBean.custId}" />
-																				<input type="hidden" name="category" value="${ordBean.ordPK.category}" />
-																				<input type="hidden" name="ordId" value="${ordBean.ordPK.ordId}" />
-																				<input type="hidden" name="prodSerialNum" value="${rentItem.rentItemPK.prodSerialNum}" />
+																				<br> <input type="hidden" name="custId"
+																					value="${customerBean.custId}" /> <input
+																					type="hidden" name="category"
+																					value="${ordBean.ordPK.category}" /> <input
+																					type="hidden" name="ordId"
+																					value="${ordBean.ordPK.ordId}" /> <input
+																					type="hidden" name="prodSerialNum"
+																					value="${rentItem.rentItemPK.prodSerialNum}" />
 																			</div>
 																		</div>
 																	</div>
 																	<div class="modal-body">
 																		<i class="fa fa-edit fa-1x " aria-hidden="true"></i> <label>評價:</label>
 																		<div class="col-12 comment">
-																			<textarea name="comment"
-																				cols="30" rows="5">${commentList[vs.index]}</textarea>
+																			<textarea name="comment" cols="30" rows="5">${commentList[vs.index]}</textarea>
 																		</div>
 																	</div>
 																	<div class="modalBtn modal-footer">
-																			<input type="submit" class="btn btn-warning"
-																				value="送出評價" onClick="timedMsg()">
-																			<button type="button" class="btn btn-secondary"
-																				data-bs-toggle="modal"
-																				data-bs-target="#exampleModal${vs.index}">
-																				取消</button>
+																		<input type="submit" class="btn btn-warning"
+																			value="送出評價" onClick="timedMsg()">
+																		<button type="button" class="btn btn-secondary"
+																			data-bs-toggle="modal"
+																			data-bs-target="#exampleModal${vs.index}">
+																			取消</button>
 																	</div>
 																</form>
 															</div>
@@ -244,14 +248,11 @@
 					</div>
 					<!-- queryForm end  訂單區塊結束-->
 				</c:when>
-				<c:otherwise>
-					<div id="searchResult" class="my-3 text-center">${orderNotFound}</div>
-				</c:otherwise>
 			</c:choose>
 			<!-- btn start 返回-->
 			<div
 				class=" button col-12 pb-3 d-flex justify-content-center align-items-center">
-				<button type="submit" class="btn btn-secondary">返回</button>
+				<button type="button" class="btn btn-secondary" onClick="back()">返回</button>
 			</div>
 			<!-- btn end 返回-->
 		</div>
@@ -282,14 +283,18 @@
 		function rentOrderSearch() {
 			let ordId = document.getElementById("enter").value;
 			if (ordId != null && ordId != "") {
-				location.href = "?category=R" + "&ordId=" + document.getElementById("enter").value;
+				location.href = "?category=R" + "&ordId="
+						+ document.getElementById("enter").value;
 			} else {
 				document.getElementById("searchResult").innerHTML = "請輸入合法的訂單編號";
 			}
 		}
+
+		function back() {
+			location = "<c:url value='/_05_member_management/' />";
+		}
 		
 		window.addEventListener('load', orderStatus("${ordBean.orderStatus}"));
-		
 	</script>
 
 </body>

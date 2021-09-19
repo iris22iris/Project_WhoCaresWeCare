@@ -216,6 +216,31 @@ public class RentProductDaoImpl implements RentProductDao {
 				.setParameter("cid",  mycustId)
 				.getResultList();
 	}
+
+	@Override
+	public List<ProductTypeBean> getProductTypeBeanBymaincategory(String maincategory) {
+		
+		Session session = factory.getCurrentSession();
+			
+		String hql =" SELECT ptb FROM ProductTypeBean ptb"	
+					+" WHERE ptb.prodType = :mc ";
+		return session.createQuery(hql,ProductTypeBean.class)
+					.setParameter("mc",  maincategory)					
+					.getResultList();
+		
+	}
+
+	@Override
+	public List<RentProductBean> getAllSerialStocksByprodId(int prodId) {
+		Session session = factory.getCurrentSession();
+		
+		String hql ="  FROM RentProductBean rpb"	
+					+" WHERE rpb.prodId = :id ";
+		return session.createQuery(hql,RentProductBean.class)
+					.setParameter("id",  prodId)					
+					.getResultList();
+		
+	}
 	
 	
 

@@ -114,5 +114,18 @@ public class RentProductServiceImpl implements RentProductService {
 		
 		return rentProductDao.getMyReservationByCustId(mycustId);
 	}
+
+	// 依傳入大分類代號取出該分類代號之名稱	
+	@Override
+	public List<ProductTypeBean> getProductTypeBeanBymaincategory(String maincategory) {
+		
+		return rentProductDao.getProductTypeBeanBymaincategory(maincategory);
+	}
+
+	@Override
+	public List<RentProductBean> getAllSerialStocksByprodId(int prodId) {
+		
+		return rentProductDao.getAllSerialStocksByprodId(prodId);
+	}
 	
 }

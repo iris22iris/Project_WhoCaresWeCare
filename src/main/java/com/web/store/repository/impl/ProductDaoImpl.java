@@ -214,4 +214,16 @@ public class ProductDaoImpl implements ProductDao {
 		return dataList;
 	}
 
+	@Override
+	public List<ProductTypeBean> getProductTypeBeanBymaincategory(String maincategory) {
+		
+		Session session = factory.getCurrentSession();
+			
+		String hql =" SELECT ptb FROM ProductTypeBean ptb"	
+					+" WHERE ptb.prodType = :mc ";
+		return session.createQuery(hql,ProductTypeBean.class)
+					.setParameter("mc",  maincategory)					
+					.getResultList();
+		
+	}
 }

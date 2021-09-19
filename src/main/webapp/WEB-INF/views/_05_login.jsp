@@ -1,15 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>CodePen - Login Form - Diprella</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="_09login.css">
-
-</head> -->
-
-<!-- <body> -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix='c' %>
@@ -78,9 +66,9 @@
 				<!-- login form start -->
 				<form class="form" id="a-form" method="POST" action="login">
 					<h2 class="form_title title  px-3">登入會員</h2>
-					<input class="form__input" type="text" name="account" id="account"
+					<input class="form__input" type="text" name="account"
 						placeholder="帳號" value="${requestScope.user}">
-					<input class="form__input" type="password" name="password" id="password" 
+					<input class="form__input" type="password" name="password" 
 						placeholder="密碼" maxlength="12" value="${requestScope.password}">
 					<div class="form__group">
 
@@ -119,7 +107,7 @@
 							</c:if>
 						</c:otherwise>
 					</c:choose>
-					<form:input class="form__input" id="password" type="password" maxlength="12"   placeholder="密碼" path='password'/>
+					<form:input class="form__input" id="password" type="password" maxlength="12"  placeholder="密碼" path='password'/>
 					<form:errors path="password" cssClass="error" />
 					<form:input class="form__input" id="custName" type="text" placeholder="姓名" path='custName'/> 
 					<form:errors path="custName" cssClass="error" />
@@ -194,7 +182,6 @@
 
 
 	<!-- 註冊登入js參考網站:https://webdesignerwall.com/wdw-snippet/login-form-4 -->
-	<script type="text/javascript" src="./js/_05loginOk.js"></script>
 	<script type="text/javascript" src="./js/_05login.js"></script>
 	<!-- 彈跳視窗js參考網站:https://www.youtube.com/watch?v=c7kIL-bV8ac -->
 	<script type="text/javascript" src="./js/_05login_ven.js"></script>

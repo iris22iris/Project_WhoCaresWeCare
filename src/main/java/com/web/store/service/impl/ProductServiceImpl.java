@@ -125,4 +125,10 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.queryFavoriteProduct(FK_Customer_ID);
 	}
 	
+	// 依傳入大分類代號取出該分類代號之名稱	
+		@Override
+		public List<ProductTypeBean> getProductTypeBeanBymaincategory(String maincategory) {
+			
+			return productDao.getProductTypeBeanBymaincategory(maincategory);
+		}
 }

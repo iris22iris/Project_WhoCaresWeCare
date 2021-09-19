@@ -50,4 +50,8 @@ public interface RentProductService {
 	// 依會員編號取出該會員所有預約的設備資料
 		public List<ReservationBean> getMyReservationByCustId(int mycustId); 
 
+	// 依傳入大分類代號取出該分類代號之名稱	
+		public List<ProductTypeBean> getProductTypeBeanBymaincategory(String maincategory);
+	//用商品編號取得該產品及其項次庫存資料
+		public	List<RentProductBean> getAllSerialStocksByprodId(int prodId);
 }

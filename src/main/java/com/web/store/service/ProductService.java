@@ -62,4 +62,7 @@ public interface ProductService {
 	@SuppressWarnings("rawtypes")
 	List<Query> queryFavoriteProduct(Integer FK_Customer_ID);
 	
+	// 依傳入大分類代號取出該分類代號之名稱	
+		public List<ProductTypeBean> getProductTypeBeanBymaincategory(String maincategory);
+	
 }

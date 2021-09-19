@@ -43,13 +43,26 @@ public class RentProductPageController {
 	public String getProductById(@RequestParam("id") Integer id ,Model model) {
 		List<RentProductBean> rentProducts = rentProductService.getAllProducts();
 		List<ProductTypeBean> productTypes = rentProductService.getAllProdTypes();
+		
+		//用商品編號取得該產品及其項次庫存資料
+		List<RentProductBean> AllSerialStocks = rentProductService.getAllSerialStocksByprodId(id);
+		//用商品編號取得該產品評論資料
 		List<CommentBean> comments = rentProductService.getCommentBeanByprodId(id);
+		//用商品編號取得該產品預約資料
 		List<ReservationBean> reservations = rentProductService.getReservationBeanByprodId(id);
 		model.addAttribute("rentProducts", rentProducts);
 		model.addAttribute("productTypes", productTypes);
 		model.addAttribute("rentProduct", rentProductService.getProductById(id));
+		model.addAttribute("allserialstocks", AllSerialStocks);
 
-//		model.addAttribute("reservation", rentProductService.getReservationBeanByprodId(id));
+		
+		
+		//用商品小分類取得該產品大分類
+		String productType = rentProductService.getProductById(id).getProductTypeBean().getProdType();
+		String maincategory = productType.substring(0,1);
+		List<ProductTypeBean> maincategorys = rentProductService.getProductTypeBeanBymaincategory(maincategory);
+		model.addAttribute("maincategorys", maincategorys);
+		
 		model.addAttribute("comments", comments);
 		model.addAttribute("reservations", reservations);
 		
@@ -65,24 +78,24 @@ public class RentProductPageController {
 	public String processAddNewProductForm	(@RequestParam("id") Integer id ,@CookieValue(value = "user") String user
 			,@ModelAttribute("reservation") ReservationBean rb,Model model) {
 		
-//		List<RentProductBean> rentProducts = rentProductService.getAllProducts();
-//		List<ProductTypeBean> productTypes = rentProductService.getAllProdTypes();
-//		List<CommentBean> comments = rentProductService.getCommentBeanByprodId(id);
+
 		List<ReservationBean> reservations = rentProductService.getReservationBeanByprodId(id);
-//		model.addAttribute("rentProducts", rentProducts);
-//		model.addAttribute("productTypes", productTypes);
+
 		model.addAttribute("rentProduct", rentProductService.getProductById(id));
-//		model.addAttribute("reservation", rentProductService.getReservationBeanByprodId(id));
-//		model.addAttribute("comments", comments);
-//		model.addAttribute("reservations", reservations);
+
 								
 		rb.setCategory("RES");
 		rb.setClassify("R");
 		
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		rb.setReserveDate(timestamp);
-		
-		rb.setWaitNum(reservations.get(reservations.size()-1).getWaitNum()+1);
+		//先前沒有被人預約的情況要排除掉
+		 boolean ans = reservations.isEmpty();
+	        if (ans == true)
+	        	rb.setWaitNum(1);
+	        else
+	        	rb.setWaitNum(reservations.get(reservations.size()-1).getWaitNum()+1);
+	        
 		rb.setProdId(id);
 		rb.setSerialNumber("1");
 		

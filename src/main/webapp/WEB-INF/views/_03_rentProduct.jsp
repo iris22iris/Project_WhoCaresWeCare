@@ -39,6 +39,18 @@
 </head>
 
 <body>
+			<!-- 取其stock -->									 
+			<c:set value="0" var="stocksum"/>					         
+			<c:forEach items="${allserialstocks}" var="serialstock">  				            
+			<c:set value="${stocksum+serialstock.stock}" var="stocksum"/> 								
+			</c:forEach>
+			<!-- 計算評價相關資料 -->	
+			<c:set value="0" var="sum"/>
+			<c:set value="0" var="commentscount"/>            
+			<c:forEach items="${comments}" var="comment">                 
+			<c:set value="${sum+comment.rate}" var="sum"/> 
+			<c:set value="${commentscount+1}" var="commentscount"/> 
+			</c:forEach>
  <div id="contentpopup">
             
 
@@ -63,9 +75,11 @@
 				<!-- 商品分類title start -->
 				<div class="catagory">
 					<i class="fas fa-th-large px-2"></i>
-					<a href="#大分類">商品大分類</a>
-					<i class="fas fa-angle-right"></i>
-					<a href="#小分類">商品小分類:${rentProduct.productTypeBean.prodName}</a>
+					<a href="#大分類">${maincategorys[0].prodName}類</a>
+					
+					<i class="fas fa-angle-right"></i>			
+					<a href="<c:url value='/rentMenu/${rentProduct.productTypeBean.prodType}' />">					
+						${rentProduct.productTypeBean.prodName}</a>
 				</div>
 				<!-- 商品分類title end -->
 
@@ -148,34 +162,57 @@
 									</div>
 								</div>
 
+							<c:choose> 
+						  		  <c:when test="${stocksum >0 }">   
 								<div class="normalStyle">
 									<div class="col-4">
 									租賃天數:</div>
 									<div class="col-4">
-									<input type="number" min="1" max="90" value="1" id="days">
+									<input type="number" onkeydown="if(event.keyCode==13){return false;}"  min="1" max="90" value="1" id="days"
+									 onchange="ShowDays(this.id)">
 									</div>
-								</div>
-		<script type="text/javascript"> 
-int a = document.getElementById('days').value
-;</script> 
-${a}
+								</div>																						
 								<div class="normalStyle">
 									<div class="col-4">
 									預計租賃期間:</div>
-									<div class="col-4">
+									<div class="col-4" id = "expectedrentperiod">
 									
-									<jsp:useBean id="date" class="java.util.Date"></jsp:useBean>
-									${date}
-									<c:set value="${date}" var="shipdate"/> 
-									<fmt:formatDate value="${shipdate}" pattern="yyyy-MM-dd"/> 																		
+									<script type="text/javascript">
+									 let t = new Date();//今天時間
+									 let t_s = t.getTime();//轉化為時間戳毫秒數
+									
+									 function ShowDays(x){
+										　let Days=document.getElementById(x).value;
+										
+										//t.setTime(t_s + 1000 * 60 * 60 * 24 *(日期) );設定預約起始日
+										 let begin = new Date();
+									 let end = new Date();
+										begin.setTime  (t_s + 1000 * 60 * 60 * 24 * 7);
+										
+										end.setTime (begin.getTime()+ 1000 * 60 * 60 * 24 * (Days));
+																										
+										document.getElementById("expectedrentperiod").innerText="開始: "+(formatDate(begin))+"\r"+"結束: "+(formatDate(end));
+									 }
+									 const formatDate = (date)=>{
+											let formatted_date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() 
+											 return formatted_date;										 
+											}
+														
+									</script>
+									
+											
+																									
 									</div>
 								</div> 
-
+							</c:when>
+						</c:choose>
 								<div class="normalStyle">
 									<div class="col-4">
 									庫存數量:</div>
 									<div class="col-4">
-									${rentProduct.stock}個
+									
+									${stocksum}個
+																		
 									</div>
 								</div> 
 
@@ -186,31 +223,34 @@ ${a}
 									${fn:length(reservations)}位
 									</div>
 								</div> 
-								
+								<div class="col-12 d-flex align-items-start">
 								<c:choose> 
-						  		  <c:when test="${rentProduct.stock >0 }">   
-									<div class="submitBtn col-8">	
+						  		  <c:when test="${stocksum >0 }">   
+									<div class="submitBtn col-4 d-flex justify-content-center">	
 									<a href="<c:url value='/_03_rentItemList' />">
 									<button class="btn btn-outline-warning " 
 									 role="button" type="button">
 									直接租賃</button>
-						 			</a>	
+						 			</a>
+						 			</div>	
 						  		  </c:when> 
 
 						  		  <c:otherwise>
-									<div class="submitBtn col-8">  
+								<div class="submitBtn col-4 d-flex justify-content-center">  
 									<button class="btn btn-outline-warning " 
 									data-bs-toggle="modal" href="#exampleModalToggle" 
 									role="button"  type="button" data-bs-dismiss="modal">
 										預約候補
 									</button>
+								</div>
 					   	 		  </c:otherwise> 
 								</c:choose> 
-								
+								<div class="submitBtn col-4 d-flex justify-content-center ">  
 									<button type="button" class="btn btn-outline-warning ms-3" data-bs-toggle="modal" data-bs-target="#exampleModal" >
 										加入購物車
 									</button>
 								</div>
+								</div> 
 							</form>
 						</div>
 						<!-- 商品基本資訊 end -->
@@ -258,12 +298,7 @@ ${a}
 					</div>
 					<div class="score col-5">
 					評分
-					<c:set value="0" var="sum"/>
-					<c:set value="0" var="commentscount"/>            
-					<c:forEach items="${comments}" var="comment">                 
-					<c:set value="${sum+comment.rate}" var="sum"/> 
-					<c:set value="${commentscount+1}" var="commentscount"/> 
-					</c:forEach>
+		
 					<fmt:formatNumber value="${sum/commentscount}" pattern=".0" type="number"/>
 					/ ${commentscount}人評價</div>
 				</div>
@@ -312,17 +347,10 @@ ${a}
 	            </div>
             	<div class="containerPOPUP p-3  ">
             	
-	            <form:form method='POST' modelAttribute="reservation" class="row g-3 form">
-	            <fieldset>
+			<form:form method='POST' modelAttribute="reservation" class="row g-3 form">
+	         <fieldset>
 	      	                	                
-	                <!-- 預約人start -->
-	                <%--
-	                 	<div class="col-3 justify-content-evenly p-1  d-flex align-items-center   ">
-	                        <label style=font-size:22px;  for="inputAccount" class="form-label " >預約人 :${cookie['user'].value}</label>
-	                    </div>
-	                    --%>
-	                 <!-- 預約人end -->
-	                 
+	           
 	                <div class="form-group d-flex align-items-center">
 	                  	<div class="col-4 justify-content-evenly p-1  d-flex align-items-center   ">
 							<label style=font-size:22px  for="prodName" class="form-label">商品名稱 :</label>
@@ -333,17 +361,7 @@ ${a}
 						</div>
 	        		</div>
 					
-	            <%--
-	                <div class="form-group">
-						<label class="control-label col-lg-2 col-lg-2" for='category'>
-						種類為:
-						</label>
-						<div class="col-lg-10">
-							<form:input id="category" path="category" type='text'
-						class='form:input-large' />
-						</div>
-					</div>
-					--%>
+	          
 	                    
 	                <div class="form-group d-flex align-items-center">
 	                  	<div class="col-4 justify-content-evenly p-1  d-flex align-items-center   ">
@@ -369,8 +387,8 @@ ${a}
             </div> 
             
             
-            </fieldset>       
-	            </form:form>
+			</fieldset>       
+	</form:form>
             
             
             <div class="col-12 justify-content-evenly p-1  d-flex align-items-center">
