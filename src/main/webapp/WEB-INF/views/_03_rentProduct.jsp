@@ -39,6 +39,18 @@
 </head>
 
 <body>
+			<!-- 取其stock -->									 
+			<c:set value="0" var="stocksum"/>					         
+			<c:forEach items="${allserialstocks}" var="serialstock">  				            
+			<c:set value="${stocksum+serialstock.stock}" var="stocksum"/> 								
+			</c:forEach>
+			<!-- 計算評價相關資料 -->	
+			<c:set value="0" var="sum"/>
+			<c:set value="0" var="commentscount"/>            
+			<c:forEach items="${comments}" var="comment">                 
+			<c:set value="${sum+comment.rate}" var="sum"/> 
+			<c:set value="${commentscount+1}" var="commentscount"/> 
+			</c:forEach>
  <div id="contentpopup">
             
 
@@ -150,6 +162,8 @@
 									</div>
 								</div>
 
+							<c:choose> 
+						  		  <c:when test="${stocksum >0 }">   
 								<div class="normalStyle">
 									<div class="col-4">
 									租賃天數:</div>
@@ -172,16 +186,13 @@ ${a}
 									<fmt:formatDate value="${shipdate}" pattern="yyyy-MM-dd"/> 																		
 									</div>
 								</div> 
-
+							</c:when>
+						</c:choose>
 								<div class="normalStyle">
 									<div class="col-4">
 									庫存數量:</div>
 									<div class="col-4">
-									<!-- 取其stock -->									 
-									<c:set value="0" var="stocksum"/>					         
-									<c:forEach items="${allserialstocks}" var="serialstock">  				            
-									<c:set value="${stocksum+serialstock.stock}" var="stocksum"/> 								
-									</c:forEach>
+									
 									${stocksum}個
 																		
 									</div>
@@ -266,12 +277,7 @@ ${a}
 					</div>
 					<div class="score col-5">
 					評分
-					<c:set value="0" var="sum"/>
-					<c:set value="0" var="commentscount"/>            
-					<c:forEach items="${comments}" var="comment">                 
-					<c:set value="${sum+comment.rate}" var="sum"/> 
-					<c:set value="${commentscount+1}" var="commentscount"/> 
-					</c:forEach>
+		
 					<fmt:formatNumber value="${sum/commentscount}" pattern=".0" type="number"/>
 					/ ${commentscount}人評價</div>
 				</div>
