@@ -168,22 +168,40 @@
 									<div class="col-4">
 									租賃天數:</div>
 									<div class="col-4">
-									<input type="number" min="1" max="90" value="1" id="days">
+									<input type="number" onkeydown="if(event.keyCode==13){return false;}"  min="1" max="90" value="1" id="days"
+									 onchange="ShowDays(this.id)">
 									</div>
-								</div>
-		<script type="text/javascript"> 
-int a = document.getElementById('days').value
-;</script> 
-${a}
+								</div>																						
 								<div class="normalStyle">
 									<div class="col-4">
 									預計租賃期間:</div>
-									<div class="col-4">
+									<div class="col-4" id = "expectedrentperiod">
 									
-									<jsp:useBean id="date" class="java.util.Date"></jsp:useBean>
-									${date}
-									<c:set value="${date}" var="shipdate"/> 
-									<fmt:formatDate value="${shipdate}" pattern="yyyy-MM-dd"/> 																		
+									<script type="text/javascript">
+									 let t = new Date();//今天時間
+									 let t_s = t.getTime();//轉化為時間戳毫秒數
+									
+									 function ShowDays(x){
+										　let Days=document.getElementById(x).value;
+										
+										//t.setTime(t_s + 1000 * 60 * 60 * 24 *(日期) );設定預約起始日
+										 let begin = new Date();
+									 let end = new Date();
+										begin.setTime  (t_s + 1000 * 60 * 60 * 24 * 7);
+										
+										end.setTime (begin.getTime()+ 1000 * 60 * 60 * 24 * (Days));
+																										
+										document.getElementById("expectedrentperiod").innerText="開始: "+(formatDate(begin))+"\r"+"結束: "+(formatDate(end));
+									 }
+									 const formatDate = (date)=>{
+											let formatted_date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() 
+											 return formatted_date;										 
+											}
+														
+									</script>
+									
+											
+																									
 									</div>
 								</div> 
 							</c:when>
@@ -205,31 +223,34 @@ ${a}
 									${fn:length(reservations)}位
 									</div>
 								</div> 
-								
+								<div class="col-12 d-flex align-items-start">
 								<c:choose> 
 						  		  <c:when test="${stocksum >0 }">   
-									<div class="submitBtn col-8">	
+									<div class="submitBtn col-4 d-flex justify-content-center">	
 									<a href="<c:url value='/_03_rentItemList' />">
 									<button class="btn btn-outline-warning " 
 									 role="button" type="button">
 									直接租賃</button>
-						 			</a>	
+						 			</a>
+						 			</div>	
 						  		  </c:when> 
 
 						  		  <c:otherwise>
-									<div class="submitBtn col-8">  
+								<div class="submitBtn col-4 d-flex justify-content-center">  
 									<button class="btn btn-outline-warning " 
 									data-bs-toggle="modal" href="#exampleModalToggle" 
 									role="button"  type="button" data-bs-dismiss="modal">
 										預約候補
 									</button>
+								</div>
 					   	 		  </c:otherwise> 
 								</c:choose> 
-								
+								<div class="submitBtn col-4 d-flex justify-content-center ">  
 									<button type="button" class="btn btn-outline-warning ms-3" data-bs-toggle="modal" data-bs-target="#exampleModal" >
 										加入購物車
 									</button>
 								</div>
+								</div> 
 							</form>
 						</div>
 						<!-- 商品基本資訊 end -->
@@ -326,8 +347,8 @@ ${a}
 	            </div>
             	<div class="containerPOPUP p-3  ">
             	
-	            <form:form method='POST' modelAttribute="reservation" class="row g-3 form">
-	            <fieldset>
+			<form:form method='POST' modelAttribute="reservation" class="row g-3 form">
+	         <fieldset>
 	      	                	                
 	           
 	                <div class="form-group d-flex align-items-center">
@@ -366,8 +387,8 @@ ${a}
             </div> 
             
             
-            </fieldset>       
-	            </form:form>
+			</fieldset>       
+	</form:form>
             
             
             <div class="col-12 justify-content-evenly p-1  d-flex align-items-center">
