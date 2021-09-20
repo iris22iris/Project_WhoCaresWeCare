@@ -75,7 +75,8 @@
 
 	function searchProductMenu(obj, objUrl) {
 		if ($('#searchProduct').val()) {
-			window.location.href = '_01_searchResult/' + $('#searchProduct').val();
+			window.location.href = '${pageContext.request.contextPath}/_01_searchResult/' + $('#searchProduct').val();
+			
 		}
 	}
 </script>
