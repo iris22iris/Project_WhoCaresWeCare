@@ -29,7 +29,17 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js">
 	</script>
-	
+	 <script>
+	function Download_Img(){ //圖片下載
+		var img = document.getElementById('myimage');
+		var url = img.src;
+		var a = document.createElement('a');
+		var event = new MouseEvent('click')
+		a.download = 'image' //圖片下載名稱
+		a.href = url;
+		a.dispatchEvent(event)
+		}
+ </script>
 </head>
 
 <body>
@@ -87,20 +97,28 @@
             <!-- dmImage start -->
             
             <div id="image" class="dmImage pt-3 ">
-                 <img id="myimage" src="<c:url value='/images/DM/DM3.jpg' />"  alt="dm">
-            	<c:forEach var='dm' items='${dmo}'>  
-                    <img id="myimage" src="<c:url value='/images/DM/DM${dm.dmId}.jpg' />"  alt="dm">
-				</c:forEach>
+            <c:choose>
+            <c:when test="${empty dmId}">
+            <img id="myimage" src="<c:url value='/images/DM/DM3.jpg' />"  alt="dm">
+            </c:when>
+            <c:otherwise>
+             <img id="myimage" src="<c:url value='/images/DM/DM${dmId}.jpg' />"  alt="dm">
+            </c:otherwise>
+            </c:choose>
+					
+					
+                   
+
             </div>
             <!-- dmImage end -->
             <!-- fileBtnContainer start -->
-<!--             <div class="filebuttoncontainer d-flex p-2 "> -->
-<!--                 <div class="col-5 d-flex justify-content-end"> -->
-<!--                     <button type="submit" class="btn-warning downloadBtn" >  -->
-<!--                     DM檔案下載 -->
-<!--                     </button> -->
-<!--                 </div> -->
-<!--         </div> -->
+            <div class="filebuttoncontainer d-flex p-2 ">
+                <div class="col-5 d-flex justify-content-end">
+                    <button type="button" class="btn-warning downloadBtn" onclick="Download_Img()">  
+                    DM檔案下載 
+                    </button>
+                </div>
+        </div>
 
 <!--                 <div class="backnext col-7 d-flex align-items-center p-2"> -->
 <!--                     <i class="fas fa-chevron-circle-left"></i> -->
