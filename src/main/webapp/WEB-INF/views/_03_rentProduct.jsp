@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="<c:url value='/css/commonStyle.css' />"
 	type="text/css">
 
-<title>租賃設備頁面: ${rentProduct.prodName}12</title>
+<title>租賃設備頁面: ${rentProduct.prodName}</title>
 
 <!-- bootstrap -->
 <link
@@ -168,7 +168,7 @@
 									<div class="col-4">
 									租賃天數:</div>
 									<div class="col-4">
-									<input type="number" onkeydown="if(event.keyCode==13){return false;}"  min="1" max="90" value="1" id="days"
+									<input type="number" onkeydown="if(event.keyCode==13){return false;}"  min="0" max="365" value="0" id="days"
 									 onchange="ShowDays(this.id)">
 									</div>
 								</div>																						
@@ -215,7 +215,8 @@
 																		
 									</div>
 								</div> 
-
+								<c:choose> 
+						  		  <c:when test="${stocksum == 0 }">  
 								<div class="normalStyle">
 									<div class="col-4">
 									目前等待人數:</div>
@@ -223,6 +224,8 @@
 									${fn:length(reservations)}位
 									</div>
 								</div> 
+								 </c:when> 
+								 </c:choose> 
 								<div class="col-12 d-flex align-items-start">
 								<c:choose> 
 						  		  <c:when test="${stocksum >0 }">   
