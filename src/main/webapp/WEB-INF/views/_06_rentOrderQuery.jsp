@@ -291,7 +291,7 @@
 		}
 
 		function back() {
-			location = "<c:url value='/_05_member_management/' />";
+			location = "<c:url value='/_05_member_management' />";
 		}
 		
 		window.addEventListener('load', orderStatus("${ordBean.orderStatus}"));
