@@ -131,11 +131,14 @@
 
 								<div class="smallStyle">衛部醫器製壹字第000936號</div> 
 								
-								<div>
-									<span id="commodityname" >
-										${product.promotionBean.promoTag}
-									</span>
-								</div>
+								<c:if test="${!empty product.promotionBean}">
+									<div>
+										<span id="commodityname" >
+											${product.promotionBean.promoTag}
+										</span>
+									</div>
+								</c:if>
+								
 
 								<div class="col-12 hidden"></div>
 
