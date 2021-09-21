@@ -91,10 +91,10 @@ public class RentProductPageController {
 				for (int i = 0; i < comments.size(); i++) {
 					Clob rentProductCommentClob = comments.get(i).getComment();
 					rentProductComment += (rentProductCommentClob.getSubString(1L, (int) rentProductCommentClob.length())
-											+",");										
+											+"|");										
 				}
 				
-			    List<String> rentProductComments = java.util.Arrays.asList(rentProductComment.split(",")); 			  
+			    List<String> rentProductComments = java.util.Arrays.asList(rentProductComment.split("\\|")); 			  
 				model.addAttribute("rentProductComments", rentProductComments);				
 				} catch (SQLException e) {
 				e.printStackTrace();	  

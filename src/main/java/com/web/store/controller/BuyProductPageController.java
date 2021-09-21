@@ -68,10 +68,10 @@ public class BuyProductPageController {
 						for (int i = 0; i < comments.size(); i++) {
 							Clob productCommentClob = comments.get(i).getComment();
 							productComment += (productCommentClob.getSubString(1L, (int) productCommentClob.length())
-													+",");										
+													+"|");										
 						}
 						
-					    List<String> productComments = java.util.Arrays.asList(productComment.split(",")); 			  
+					    List<String> productComments = java.util.Arrays.asList(productComment.split("\\|")); 			  
 						model.addAttribute("productComments", productComments);				
 						} catch (SQLException e) {
 						e.printStackTrace();	  
