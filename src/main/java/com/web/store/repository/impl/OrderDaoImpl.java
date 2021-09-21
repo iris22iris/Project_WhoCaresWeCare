@@ -5,7 +5,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
 import com.web.store.model._02_customerService.PromotionBean;
-
+import com.web.store.model._06_order.OrdBean;
 import com.web.store.repository.OrderDao;
 
 @Repository
@@ -26,6 +26,13 @@ public class OrderDaoImpl implements OrderDao {
 		return session.createQuery(hql,PromotionBean.class)
 					  .setParameter("dc", discountCode)
 					  .getSingleResult();
+	}
+
+
+	@Override
+	public void save(OrdBean ordBean) {
+		Session session = factory.getCurrentSession();
+		session.save(ordBean);
 	}
 
 

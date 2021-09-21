@@ -42,7 +42,7 @@ public class ShoppingCartController {
 	public ShoppingCartController(HttpSession httpSession, ProductService productService,
 			OrderService orderService) {
 		this.httpSession = httpSession;
-		this.productService = productService;
+		this.productService = productService; 
 		this.orderService = orderService;
 	}
 

@@ -225,7 +225,7 @@
                     <div class="col-12 discount" style="color:crimson;">-${buyItems.productBean.promotionBean.discount}元</div>
                     </c:when>
                    <c:otherwise>
-                     <div class="col-12">無</div>
+                     <div class="col-12"></div>
                    </c:otherwise>
                     </c:choose>
                     <div class="col-12 itemTotal">
@@ -277,7 +277,7 @@
             </div>
                 <div class="checkoutBtn col-12 mt-3">
                     <button >繼續逛逛</button>
-                    <button type="button" onclick="checkout()">結帳去</button>
+                    <button type="submit" onclick="checkout()">結帳去</button>
                 </div>
          </div>
          <!--Right Count End -->

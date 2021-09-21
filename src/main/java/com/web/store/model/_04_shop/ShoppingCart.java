@@ -2,6 +2,7 @@ package com.web.store.model._04_shop;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -62,19 +63,24 @@ public class ShoppingCart {
 			} 
 	}
 	
-//	public BigDecimal getSuntotal() {
-//		BigDecimal subTotal = 0;
-//		Set<Integer> set = cart.keySet();
-//		for(int n : set) {
-//			BuyItemBean bib = cart.get(n);
-//			BigDecimal price = bib.getProductBean().getPrice();
-//			BigDecimal qty = new BigDecimal(bib.getProdQTY());
-//			subTotal = price.multiply(qty);
-//		}
-//		
-//		
-//		return subTotal;
-//	}
+	//計算購物車內所有商品的合計金額
+	public double getSubtotal() {
+		double subTotal = 0;
+		Set<Integer> set = cart.keySet();
+		for(int n : set) {
+			BuyItemBean bib = cart.get(n);
+			double price = bib.getProductBean().getPrice();
+			int qty = bib.getProdQTY();
+			double discount = 0;
+			if( bib.getProductBean().getPromotionBean() != null ) {
+			discount = bib.getProductBean().getPromotionBean().getDiscount();
+			
+			}
+			subTotal += price * qty - discount ;
+		}
+		
+		return subTotal;
+	}
 
 
 

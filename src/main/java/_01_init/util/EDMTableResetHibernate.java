@@ -398,14 +398,14 @@ public class EDMTableResetHibernate {
 					cb.setCommentDate(Timestamp.valueOf(token[3]));
 					cb.setRate(Integer.parseInt(token[4]));
 					cb.setVisits(Integer.parseInt(token[5]));
-					cb.setCustomerBean(new CustomerBean(Integer.parseInt(token[6]), null, null, null, null, null, null,
-							null, null, null, null, null, null, null, null));
-
-					cb.setProductBean(new ProductBean(null, Integer.parseInt(token[7]), null, null, null, null, null,
-							null, null, null, null, null, null));
-
-					cb.setRentProductBean(new RentProductBean(Integer.parseInt(token[8]), token[9], null, null, null,
-							null, null, null, null, null, null, null, null, null, null, null));
+//					cb.setCustomerBean(new CustomerBean(Integer.parseInt(token[6]), null, null, null, null, null, null,
+//							null, null, null, null, null, null, null, null));
+//
+//					cb.setProductBean(new ProductBean(null, Integer.parseInt(token[7]), null, null, null, null, null,
+//							null, null, null, null, null, null));
+//
+//					cb.setRentProductBean(new RentProductBean(Integer.parseInt(token[8]), token[9], null, null, null,
+//							null, null, null, null, null, null, null, null, null, null, null));
 
 					session.merge(cb);
 					count++;

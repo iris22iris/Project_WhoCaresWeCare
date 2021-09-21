@@ -66,7 +66,7 @@ public class PagesController {
 	public String member_management(Model model) {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("LoginOK") == null) {
-			return "index";
+			return "/_05_login";
 		}
 		return "_05_member_management";
 	}

@@ -29,24 +29,26 @@ import com.web.store.model._06_order.pkClass.OrdPK;
 public class OrdBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private OrdPK ordPK;
+	@EmbeddedId	
+	private OrdPK ordPK;			//訂單編號(種類/編號)
 	
 	@Column(columnDefinition = "datetime")
-	private Timestamp orderDate;
-	private String reciName;
-	private String reciCity;
-	private String reciAddress;
-	private String reciPhone;
-	private Double ordTotal;
-	private String delivery;
-	private String payment;
-	private String discountCode;		//折扣碼
+	private Timestamp orderDate;	//訂單日期
+	private String reciName;		//收件人姓名
+	private String reciCity;		//收件人城市
+	private String reciAddress;		//收件人地址
+	private String reciPhone;		//收件人電話
+	private Double ordTotal;		//訂單金額
+	private String delivery;		//宅配方式
+	private String payment;			//付款方式
+	private String discountCode;	//折扣碼
 	private Double discount;		//折扣金額
-	private String orderStatus;
+	private String orderStatus;		//訂單處理狀態
 	@Column(columnDefinition = "datetime")
-	private Timestamp shipDate;
-	private Clob orderMark;
+	private Timestamp shipDate;		//宅配到貨日
+	private Clob orderMark;			//備註
+	private String payPayment;		//金流串接Html
+	
 
 	@OneToMany(mappedBy = "ordBean", cascade = CascadeType.ALL)
 	Set<RentItemBean> rentItems = new LinkedHashSet<>();
@@ -77,7 +79,7 @@ public class OrdBean implements Serializable {
 	public OrdBean(Timestamp orderDate, String reciName, String reciCity,
 			String reciAddress, String reciPhone, Double ordTotal, String delivery, String payment,
 			String discountCode, Double discount, String orderStatus, Timestamp shipDate,
-			Clob orderMark, Set<RentItemBean> rentItems, Set<ProblemBean> problem, Set<BuyItemBean> buyItems) {
+			Clob orderMark, Set<RentItemBean> rentItems, CustomerBean customerBean, Set<BuyItemBean> buyItems) {
 		this.orderDate = orderDate;
 		this.reciName = reciName;
 		this.reciCity = reciCity;
@@ -92,7 +94,7 @@ public class OrdBean implements Serializable {
 		this.shipDate = shipDate;
 		this.orderMark = orderMark;
 		this.rentItems = rentItems;
-		this.problem = problem;
+		this.customerBean = customerBean;
 		this.buyItems = buyItems;
 	}
 	
@@ -208,6 +210,14 @@ public class OrdBean implements Serializable {
 		this.orderMark = orderMark;
 	}
 
+	public String getPayPayment() {
+		return payPayment;
+	}
+
+	public void setPayPayment(String payPayment) {
+		this.payPayment = payPayment;
+	}
+	
 	public Set<RentItemBean> getRentItems() {
 		return rentItems;
 	}
@@ -336,5 +346,7 @@ public class OrdBean implements Serializable {
 			return false;
 		return true;
 	}
+
+
 
 }

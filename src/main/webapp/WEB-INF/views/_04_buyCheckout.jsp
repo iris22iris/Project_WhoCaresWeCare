@@ -18,7 +18,31 @@
     <!-- icon -->
     <link rel="stylesheet"
     href="<c:url value='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'/>" />
-	</head>
+	
+	<script>
+	function changeDiscount(){
+	
+	}
+
+// 	選擇宅配方式
+	function delivery() {
+		deliveryType = Number(document.getElementById("deliveryType").value);
+		switch(deliveryType){
+		case 0:
+			document.getElementById("shippingFee").innerHTML='<c:set var="shippingFee" value="${0}"/>${shippingFee}元';
+			document.getElementById("subtotal").innerHTML='<c:set var="subtotal" value="${OrdBean.ordTotal-OrdBean.discount}"/>${subtotal+shippingFee}元';
+			break;
+		case 270:
+			document.getElementById("shippingFee").innerHTML='<c:set var="shippingFee" value="${270}"/>${shippingFee}元';
+			document.getElementById("subtotal").innerHTML='<c:set var="subtotal" value="${OrdBean.ordTotal-OrdBean.discount}"/>${subtotal+shippingFee}元';
+			break;
+		}
+		shippingFee = document.getElementById("shippingFee").innerHTML;
+		subtotal = document.getElementById("subtotal").innerHTML;
+	}
+	</script>
+
+</head>
 <body>
     <!-- main start -->
     <div id="body">
@@ -50,20 +74,29 @@
               </tr>
               <c:forEach var="buyItems" items='${buyItems}'>
               <tr class="detailList">
-                  <td>1</td>
+				  <!-- 項次 -->
+                  <c:set var="no" value="${no+1}"/>
+                  <td><c:out value="${no}"/></td>
+                  <!-- 圖片 -->
                   <td><img src="<c:url value='/images/product/${buyItems.productBean.fileName}'/>"></td>
+ 				  <!-- 商品編號/名稱 -->
                   <td>${buyItems.productBean.prodId}<br>${buyItems.productBean.prodName}</td>
+                  <!-- 商品價格 -->
                   <td>${buyItems.productBean.price}元</td>
+                  <!-- 商品數量 -->
                   <td>${buyItems.prodQTY}</td>
+                  <!-- 商品優惠標籤 -->
                   <c:choose>
                   <c:when test="${!empty buyItems.productBean.promotionBean.discount}">
-                 	 <td>-${buyItems.productBean.promotionBean.discount}元</td>
+                 	 <td style="color: red;">-${buyItems.productBean.promotionBean.discount}元</td>
                   </c:when>
                   <c:otherwise>
                   	 <td>無</td>
                   </c:otherwise>
                   </c:choose>
-                  <td>${buyItems.itemSum - buyItems.productBean.promotionBean.discount}元</td>
+                  <!-- 單項商品小計 -->
+                  <c:set var="itemSum" value="${buyItems.itemSum - buyItems.productBean.promotionBean.discount}"/>
+                  <td><c:out value="${itemSum}"/>元</td>
               </tr>
             </c:forEach>
 
@@ -85,37 +118,63 @@
         <div class="col-3 checkoutTitle">
             <div class="checkoutTop">
               <h4>運送方式:</h4>
-              <select name="deliveryType" id="deliveryType">
-                 <option value="0">自取</option> 
-                 <option value="1">物流宅配 270元</option>      
+              <select name="deliveryType" id="deliveryType" onchange="delivery()">
+                 <option value="0">自取-運費0元</option>
+                 <option value="270">物流宅配-270元</option>      
               </select>
             </div>
             <div class="checkoutBottom">
               <h4>折扣碼:</h4>
-              <input type="text" id="discountCode">
-              <input type="button" value="輸入" onclick="findDiscount()">
+              <input type="text" 
+              		 value="${OrdBean.discountCode}" readonly="readonly" id="discountCode">
+              <input type="button" value="輸入" onclick="changeDiscount()">
+              <c:if test="${!empty OrdBean.discountCode}">
+              <div style="color: red;">折扣碼優惠-${OrdBean.discount}元</div>
+              </c:if>
             </div>
         </div>
         <div class="col-4 checkoutTitle">
-            <h4>結帳金額:</h4>
+            <h4>結帳明細:</h4>
             <div class="row count">
-                <div class="col-4">商品金額:</div>
-                <div class="col-4 price">6000元</div>
+                <div class="col-4">商品小計:</div>
+                <div class="col-4 price"> ${OrdBean.ordTotal}元</div>
                 <div class="col-4 "></div>
+                
                 <div class="col-4">運費:</div>
-                <div class="col-4 price">0元</div>
+                <div class="col-4 price" id="shippingFee">
+                <c:set var="shippingFee" value="${0}"/>${shippingFee}元
+                </div>
                 <div class="col-4 "></div>
-                <div class="col-4">優惠折抵:</div>
-                <div class="col-4 price">-150元</div>
+                
+                <div class="col-4">折扣碼優惠:</div>
+                <c:choose>
+                <c:when test="${!empty OrdBean.discount}">
+                <div class="col-4 price" style="color: red;">-${OrdBean.discount}元</div>
                 <div class="col-4 "></div>
                 <div class="col-4">合計金額:</div>
-                <div class="col-4 price">5850元</div>
+                <c:set var="subtotal" value="${OrdBean.ordTotal-OrdBean.discount}"/>
+                <div class="col-4 price" id="subtotal">
+                ${subtotal-shippingFee}元
+                </div>
                 <div class="col-4 "></div>
+                </c:when>
+                
+                <c:otherwise>
+                <c:set var="zero" value="${0}"/>
+                <div class="col-4 price"><c:out value="${zero}"/>元</div>
+                <div class="col-4 "></div>
+                <div class="col-4">合計金額:</div>
+                <c:set var="subtotal" value="${OrdBean.ordTotal}"/>
+                <div class="col-4 price" id="subtotal">
+                ${subtotal-shippingFee}元
+                </div>
+                <div class="col-4 "></div>
+                </c:otherwise>
+                </c:choose>
 
             </div>
         </div>
        </div>
-        <!-- <div style='clear:both;'></div> -->
       <!-- 結帳資訊 end -->
 
       <hr style="margin:20px;">
@@ -130,9 +189,9 @@
             <form class="deliveryInfo">
                 <p>
                     收件人:
-                    <input type="text" class="memberName me-3" value="預設會員名字">
+                    <input type="text" class="memberName me-3" value="${OrdBean.customerBean.custName}">
                     連絡電話:
-                    <input type="tel" value="預設會員電話"></p>
+                    <input type="tel" value="${OrdBean.customerBean.phone}"></p>
                 <p>
                     地址(城市): 
                     <select name="city" class="select me-3" id="city">
@@ -149,7 +208,7 @@
                 </p>        
                 <p>
                     地址(路名):
-                    <input type="text" class="addressInput" value="預設會員地址">
+                    <input type="text" class="addressInput" value="${OrdBean.customerBean.address}">
                 </p>
             </form>
         </div>
@@ -160,11 +219,11 @@
                 <h4>來店自取:</h4>
               </div>
               <div class="deliveryInfo">
-                <select class="city select">
-                <option value="TPE">台北總店</option>
-                <option value="NEW-TPE">三重分店</option>
-                </select>
-                <p>請於 {} 營業時間來店自取</p>
+<!--                 <select class="city select"> -->
+<!--                 <option value="TPE">台北總店</option> -->
+<!--                 <option value="NEW-TPE">三重分店</option> -->
+<!--                 </select> -->
+                <p>請於營業時間來店自取</p>
                 <p>逾期未取仍收取租賃費用</p>
               </div>    
           </div>
