@@ -1,5 +1,7 @@
 package com.web.store.controller;
 
+import java.sql.Clob;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +23,7 @@ import com.web.store.model._02_customerService.CommentBean;
 import com.web.store.model._03_rent.RentProductBean;
 import com.web.store.model._03_rent.ReservationBean;
 import com.web.store.model._05_customer.CustomerBean;
+import com.web.store.model._06_order.OrdBean;
 import com.web.store.model._07_productType.ProductTypeBean;
 import com.web.store.service.RentProductService;
 
@@ -68,6 +71,35 @@ public class RentProductPageController {
 		
 		ReservationBean rb = new ReservationBean();		
 		model.addAttribute("reservation", rb);
+		
+		//商品詳細clob轉文字
+		RentProductBean rentProductBean = rentProductService.getProductById(id);
+		if (rentProductBean != null) {
+			model.addAttribute(rentProductBean);
+			try {
+				Clob rentProductDescriptionClob = rentProductBean.getDescription();
+				String rentProductDescription = rentProductDescriptionClob.getSubString(1L, (int) rentProductDescriptionClob.length());
+				model.addAttribute("rentProductDescription", rentProductDescription);
+				} catch (SQLException e) {
+				e.printStackTrace();	  
+					}
+		}
+		//評論內容clob轉文字
+		if (comments != null) {			
+			try {
+				String rentProductComment = "";
+				for (int i = 0; i < comments.size(); i++) {
+					Clob rentProductCommentClob = comments.get(i).getComment();
+					rentProductComment += (rentProductCommentClob.getSubString(1L, (int) rentProductCommentClob.length())
+											+",");										
+				}
+				
+			    List<String> rentProductComments = java.util.Arrays.asList(rentProductComment.split(",")); 			  
+				model.addAttribute("rentProductComments", rentProductComments);				
+				} catch (SQLException e) {
+				e.printStackTrace();	  
+					}
+		}
 		return "_03_rentProduct";
 	};
 	
@@ -107,7 +139,7 @@ public class RentProductPageController {
 		
 		rentProductService.addReservation(rb);	
 		
-		
+	
 		
 		return "redirect:/_03_reservationSuccess" ;
 	}

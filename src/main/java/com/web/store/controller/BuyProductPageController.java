@@ -1,5 +1,7 @@
 package com.web.store.controller;
 
+import java.sql.Clob;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.store.model._02_customerService.CommentBean;
+import com.web.store.model._03_rent.RentProductBean;
 import com.web.store.model._04_shop.ProductBean;
 import com.web.store.model._07_productType.ProductTypeBean;
 import com.web.store.service.ProductService;
@@ -44,6 +47,36 @@ public class BuyProductPageController {
 		String maincategory = productType.substring(0,1);
 		List<ProductTypeBean> maincategorys = productService.getProductTypeBeanBymaincategory(maincategory);
 		model.addAttribute("maincategorys", maincategorys);
+		
+		//商品詳細clob轉文字
+		ProductBean productBean = productService.getProductById(id);
+		if (productBean != null) {
+			model.addAttribute(productBean);
+			try {
+				Clob productDescriptionClob = productBean.getDescription();
+				String productDescription = productDescriptionClob.getSubString(1L, (int) productDescriptionClob.length());
+				model.addAttribute("productDescription", productDescription);
+				} catch (SQLException e) {
+				e.printStackTrace();	  
+					}
+		}
+		
+		//評論內容clob轉文字
+				if (comments != null) {			
+					try {
+						String productComment = "";
+						for (int i = 0; i < comments.size(); i++) {
+							Clob productCommentClob = comments.get(i).getComment();
+							productComment += (productCommentClob.getSubString(1L, (int) productCommentClob.length())
+													+",");										
+						}
+						
+					    List<String> productComments = java.util.Arrays.asList(productComment.split(",")); 			  
+						model.addAttribute("productComments", productComments);				
+						} catch (SQLException e) {
+						e.printStackTrace();	  
+							}
+				}
 		
 		return "_04_productPage";
 	};
