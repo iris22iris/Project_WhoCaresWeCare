@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,26 +21,32 @@
     href="<c:url value='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'/>" />
 	
 	<script>
+
+	
 	function changeDiscount(){
 	
 	}
-
-// 	選擇宅配方式
+	//到貨方式選擇
 	function delivery() {
-		deliveryType = Number(document.getElementById("deliveryType").value);
+		deliveryType = String(document.getElementById("deliveryType").value);
 		switch(deliveryType){
-		case 0:
-			document.getElementById("shippingFee").innerHTML='<c:set var="shippingFee" value="${0}"/>${shippingFee}元';
-			document.getElementById("subtotal").innerHTML='<c:set var="subtotal" value="${OrdBean.ordTotal-OrdBean.discount}"/>${subtotal+shippingFee}元';
+		case "自取":
+			document.getElementById("shippingFee").innerHTML=
+				'<c:set var="shippingFee" value="${0}"/>${shippingFee}元';
+			document.getElementById("subtotal").innerHTML=
+				'<c:set var="subtotal" value="${OrdBean.ordTotal-OrdBean.discount}"/>${subtotal+shippingFee}元';
 			break;
-		case 270:
-			document.getElementById("shippingFee").innerHTML='<c:set var="shippingFee" value="${270}"/>${shippingFee}元';
-			document.getElementById("subtotal").innerHTML='<c:set var="subtotal" value="${OrdBean.ordTotal-OrdBean.discount}"/>${subtotal+shippingFee}元';
+		case "宅配":
+			document.getElementById("shippingFee").innerHTML=
+				'<c:set var="shippingFee" value="${270}"/>${shippingFee}元';
+			document.getElementById("subtotal").innerHTML=
+				'<c:set var="subtotal" value="${OrdBean.ordTotal-OrdBean.discount}"/>${subtotal+shippingFee}元';
 			break;
 		}
 		shippingFee = document.getElementById("shippingFee").innerHTML;
 		subtotal = document.getElementById("subtotal").innerHTML;
 	}
+
 	</script>
 
 </head>
@@ -105,7 +112,10 @@
       <!--商品清單 end-->
 
       <hr style="margin:20px;">
-
+		
+	<form:form method='POST' modelAttribute="OrdBean" 
+				enctype="multipart/form-data"
+				action="${pageContext.request.contextPath}/orderSubmit/${LoginOK}">
       <!-- 結帳資訊 start -->
       <div id="checkoutInfo">
         <div class="col-5 checkoutTitle">
@@ -118,15 +128,19 @@
         <div class="col-3 checkoutTitle">
             <div class="checkoutTop">
               <h4>運送方式:</h4>
-              <select name="deliveryType" id="deliveryType" onchange="delivery()">
-                 <option value="0">自取-運費0元</option>
-                 <option value="270">物流宅配-270元</option>      
+<%--               <form:select path="delivery" name="deliveryType" id="deliveryType" onchange="delivery()"> --%>
+<%--                  <form:option value="0">自取-運費0元</form:option> --%>
+<%--                  <form:option value="270">物流宅配-270元</form:option>       --%>
+<%--               </form:select> --%>
+              <select path="delivery" name="deliveryType" id="deliveryType" onchange="delivery()">
+                 <option value="自取">自取-運費0元</option>
+                 <option value="宅配">物流宅配-270元</option>      
               </select>
             </div>
             <div class="checkoutBottom">
               <h4>折扣碼:</h4>
-              <input type="text" 
-              		 value="${OrdBean.discountCode}" readonly="readonly" id="discountCode">
+              <form:input type="text" path="discountCode"
+              		 value="${OrdBean.discountCode}" readonly="readonly" id="discountCode"/>
               <input type="button" value="輸入" onclick="changeDiscount()">
               <c:if test="${!empty OrdBean.discountCode}">
               <div style="color: red;">折扣碼優惠-${OrdBean.discount}元</div>
@@ -186,31 +200,31 @@
             <div class="addressTitle ">
                 <h4>宅配資訊:</h4>
             </div>
-            <form class="deliveryInfo">
+            <div class="deliveryInfo">
                 <p>
                     收件人:
-                    <input type="text" class="memberName me-3" value="${OrdBean.customerBean.custName}">
+                    <form:input path="reciName" type="text" class="memberName me-3" value="${OrdBean.customerBean.custName}"/>
                     連絡電話:
-                    <input type="tel" value="${OrdBean.customerBean.phone}"></p>
+                    <form:input path="reciPhone" type="text" value="${OrdBean.customerBean.phone}"/></p>
                 <p>
-                    地址(城市): 
-                    <select name="city" class="select me-3" id="city">
-                        <option value="0">台北市</option> 
-                        <option value="1">新北市</option> 
-                        <option value="2">桃園市</option> 
-                    </select>
-                    收件時段:
-                    <select name="checktime" class="select" id="time">
-                        <option value="0">早上(9:00-12:00)</option> 
-                        <option value="1">中午(12:00-13:30)</option> 
-                        <option value="2">下午(13:30-17:00)</option>     
-                     </select>
+<!--                     地址(城市):  -->
+<%--                     <form:select path="reciCity" name="city" id="city" class="select me-3"> --%>
+<%--                         <form:option value="TPE">台北市</form:option>  --%>
+<%--                         <form:option value="New">新北市</form:option>  --%>
+<%--                         <form:option value="TAO">桃園市</form:option>  --%>
+<%--                     </form:select> --%>
+<!--                     收件時段: -->
+<%--                     <form:select path="reciTime" name="checktime" class="select" id="time"> --%>
+<%--                        <form:option value="0">早上(9:00-12:00)</form:option>  --%>
+<%--                        <form:option value="1">中午(12:00-13:30)</form:option>  --%>
+<%--                        <form:option value="2">下午(13:30-17:00)</form:option>  --%>
+<%--                      </form:select> --%>
                 </p>        
                 <p>
                     地址(路名):
-                    <input type="text" class="addressInput" value="${OrdBean.customerBean.address}">
+                    <form:input path="reciAddress" type="text" class="addressInput" value="${OrdBean.customerBean.address}"/>
                 </p>
-            </form>
+            </div>
         </div>
       
         <div class="col-5 ">
@@ -240,10 +254,10 @@
             </div>
             <div class="btn checkOutBtn w-100" >
             <button class="me-3">繼續購買</button>
-            <button type="submit" id="checkout" >確認結帳</button>
+            <button type="submit" id="checkout">確認結帳</button>
             </div>
       </div>
-  
+  		</form:form>
      
 
       </div>

@@ -38,6 +38,22 @@ public class ExampleAllInOne {
 		all = new AllInOne("");
 	}
 	
+	//付款方式
+	public static String genAioCheckOutALL(String ordPK,String ordTotal,Integer custId){
+//		  UUID uid = UUID.randomUUID();
+		  AioCheckOutALL obj = new AioCheckOutALL();
+		  obj.setMerchantTradeNo(ordPK);
+		  obj.setMerchantTradeDate("2017/01/01 08:05:23");
+		  obj.setTotalAmount(ordTotal);
+		  obj.setTradeDesc("test Description");
+		  obj.setItemName("訂單總金額");
+		  obj.setReturnURL("http://211.23.128.214:5000");
+		  obj.setOrderResultURL("http://localhost:8080/Whocares/checkout/" +custId); //付款完，跳轉到哪個頁面
+		  obj.setNeedExtraPaidInfo("N");
+		  String form = all.aioCheckOut(obj, null);
+		  return form;
+		 }
+	
 	public static boolean cmprChkMacValue(){
 		Hashtable<String, String> dict = new Hashtable<String, String>();
 		dict.put("MerchantID", "2000132");
@@ -123,21 +139,7 @@ public class ExampleAllInOne {
 		return form;
 	}
 	
-	//付款方式
-	public static String genAioCheckOutALL(String ordPK,String ordTotal,Integer custId){
-		  UUID uid = UUID.randomUUID();
-		  AioCheckOutALL obj = new AioCheckOutALL();
-		  obj.setMerchantTradeNo(ordPK);
-		  obj.setMerchantTradeDate("2017/01/01 08:05:23");
-		  obj.setTotalAmount(ordTotal);
-		  obj.setTradeDesc("test Description");
-		  obj.setItemName("訂單總金額");
-		  obj.setReturnURL("http://211.23.128.214:5000");
-		  obj.setOrderResultURL("http://localhost:8080Whocares/Checkout/" +custId); //付款完，跳轉到哪個頁面
-		  obj.setNeedExtraPaidInfo("N");
-		  String form = all.aioCheckOut(obj, null);
-		  return form;
-		 }
+
 	
 	public static String genAioCheckOutATM(){
 		AioCheckOutATM obj = new AioCheckOutATM();

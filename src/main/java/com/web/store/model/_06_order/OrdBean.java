@@ -77,7 +77,7 @@ public class OrdBean implements Serializable {
 	}
 
 	public OrdBean(Timestamp orderDate, String reciName, String reciCity,
-			String reciAddress, String reciPhone, Double ordTotal, String delivery, String payment,
+			String reciAddress, String reciPhone, Double ordTotal, String delivery,
 			String discountCode, Double discount, String orderStatus, Timestamp shipDate,
 			Clob orderMark, Set<RentItemBean> rentItems, CustomerBean customerBean, Set<BuyItemBean> buyItems) {
 		this.orderDate = orderDate;
@@ -87,7 +87,7 @@ public class OrdBean implements Serializable {
 		this.reciPhone = reciPhone;
 		this.ordTotal = ordTotal;
 		this.delivery = delivery;
-		this.payment = payment;
+//		this.payment = payment;
 		this.discountCode = discountCode;
 		this.discount = discount;
 		this.orderStatus = orderStatus;

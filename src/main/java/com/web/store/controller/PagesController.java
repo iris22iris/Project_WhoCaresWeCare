@@ -115,5 +115,25 @@ public class PagesController {
 		}
 		return "_06_reservationQuery";
 	}
+	
+	
+	@GetMapping("/_04_payPayment")
+	public String PayPayment(Model model) {
+		HttpSession session = request.getSession();
+		if (session.getAttribute("LoginOK") == null) {
+			return "index";
+		}
+		return "_04_payPayment";
+	}
+	
+	@GetMapping("/_04_orderConfirm")
+	public String OrderConfirm(Model model) {
+		HttpSession session = request.getSession();
+		if (session.getAttribute("LoginOK") == null) {
+			return "index";
+		}
+		return "_04_orderConfirm";
+	}
+	
 
 }

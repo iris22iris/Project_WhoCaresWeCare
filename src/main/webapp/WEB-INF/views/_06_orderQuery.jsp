@@ -89,7 +89,7 @@
 									<div class="col-2">訂單號碼</div>
 									<div class="col-2">訂單日期</div>
 									<div class="col-2">訂單金額</div>
-									<div class="col-2">付款方式</div>
+									<div class="col-2">到貨方式</div>
 									<div class="col-3">訂單備註</div>
 								</div>
 
@@ -105,7 +105,7 @@
 									<div class="col-2">${ordBean.ordPK.category}${ordBean.ordPK.ordId}</div>
 									<div class="col-2">${ordBean.orderDate}</div>
 									<div class="col-2">${ordBean.ordTotal}</div>
-									<div class="col-2">${ordBean.payment}</div>
+									<div class="col-2">${ordBean.delivery}</div>
 									<div class="col-3">${orderMark}</div>
 									<!-- accordion-header-button  end  訂單資訊結束-->
 								</div>

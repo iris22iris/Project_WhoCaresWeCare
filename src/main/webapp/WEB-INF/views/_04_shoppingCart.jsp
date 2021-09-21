@@ -24,7 +24,7 @@
     
     <script>
 
-	window.onload = function(){
+    window.onload = function() {
 		count();
 	}
 	
@@ -43,8 +43,8 @@
 		//優惠折抵
 		var showSum = 0;
 		$(".discount").each(function(){
-			var total = parseInt($(this).text());
-			showSum += total
+			var total2 = parseInt($(this).text());
+			showSum += total2
 		})
 		$("#discountSum").text(showSum);
 
@@ -53,10 +53,10 @@
 		if($("#showDiscount")[0].style.display == "block"){
 		 showDiscountCode = parseInt($(".showDiscountSum").text());
 		}
-
 		
 		//合計金額
-		var showOrder = showTotal + showSum - showDiscountCode;
+		var showOrder = 0;
+		showOrder = showTotal + showSum - showDiscountCode;
 		$("#order").text(showOrder); 
 
 	}
@@ -201,9 +201,12 @@
                 <div class="col-2 cartSum">
                     <div></div>
                     <div class="col-12 hidden"></div>
+                    
+					<!--商品單價 -->
                     <div class="col-12 productPrice">
                         ${buyItems.productBean.price}元
                     </div>
+                    
 					<!-- 有符合活動才會顯示標籤 -->
                     <c:choose>
                    <c:when test="${empty buyItems.productBean.promotionBean.promoteId}">
@@ -213,21 +216,26 @@
                      <div class="col-12 hidden"></div>
                    </c:otherwise>
                     </c:choose>
+                    
+                    <!--商品數量 -->
                     <div class="col-12 num">
 <!--                     調整數量功能待完成 -->
 <!--                         <i class="far fa-plus-square pe-2 mb-1"></i> -->
                         ${buyItems.prodQTY}
 <!--                         <i class="far fa-minus-square ps-2 mb-1"></i> -->
                     </div>
-                    <!-- 折抵金額 -->
+                    
+                    <!-- 單品折抵金額 -->
                     <c:choose>
                    <c:when test="${!empty buyItems.productBean.promotionBean.promoteId}">
                     <div class="col-12 discount" style="color:crimson;">-${buyItems.productBean.promotionBean.discount}元</div>
                     </c:when>
                    <c:otherwise>
-                     <div class="col-12"></div>
+                     <div class="col-12">無</div>
                    </c:otherwise>
                     </c:choose>
+                    
+                    <!--商品小計 -->
                     <div class="col-12 itemTotal">
                     ${buyItems.itemSum - buyItems.productBean.promotionBean.discount}元
                     </div>
