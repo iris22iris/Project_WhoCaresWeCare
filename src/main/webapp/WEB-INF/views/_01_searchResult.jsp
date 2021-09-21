@@ -20,7 +20,8 @@
 	<link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
-<title>搜尋結果{搜尋關鍵字}</title>
+<title>搜尋結果 ${searchProduct}</title>
+
 </head>
 <body>
 	<!-- main start -->
@@ -66,9 +67,8 @@
 <!-- 							</div> -->
 <!-- 						</div> -->
 <!-- 					</div> -->
-				<c:forEach var='productList' items='${productList}'>
-		
-					<div class="col-3 mt-3">
+				<c:forEach var='productList' items='${productList}' >
+					<div class="col-3 mt-3" >
 						<div class="card text-center">
 							<a href="<c:url value='/_04_productPage?id=${productList.prodId}' />">
 							<img src="<c:url value='/images/product/${productList.fileName}' />"
@@ -81,15 +81,21 @@
 								<div class="card-text mb-2">
 									價格: ${productList.price}元<br>庫存:${productList.stock}台
 								</div>
-								<div class="row-3">
-									<select class="form-select" style="width: 45%;">
-										<option selected>數量</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-									</select> <a href="#" class="btn btn-warning">加入購物車</a>
+									<form class="row-3 pt-2">
+										<select id="prodQTY${productList.prodId}" name="prodQTY" class="form-select prodQTY" style="width: 45%;"
+											aria-label="Default select example">
+											<option selected disabled>數量</option>
+											<c:forEach var="amount" begin="1" end="${productList.stock}" >
+												<option id="optionID" value="${productList.prodId}" >${amount}</option>
+											</c:forEach>
+										</select> 
+										<Input type='hidden' name='prodId' value='${productList.prodId}'>
+										<Input type='hidden' name='prodQTY' value='${amount}'>
+										<Input type='hidden' name='flag' value= 1>
+										<Input type='hidden' name='searchProduct' value='${searchProduct}'>
+										<input type="submit" id="cart${productList.prodId}" class="btn btn-warning" value="加入購物車" onclick='addProduct(${productList.prodId})' disabled="disabled"/>
+									</form>
 								</div>
-							</div>
 						</div>
 					</div>
 					
@@ -106,8 +112,10 @@
 		
 	</div>
 	<!-- main end -->
-
+8
 	<script>
+	
+		let cartButton = '${cartButton}';
 		function track(heart) {
 			if (heart.className == "far fa-heart ps-4") {
 				heart.className = "fas fa-heart ps-4";
@@ -129,10 +137,37 @@
 				})
 			}
 		}
+
+		cartButton = JSON.parse(cartButton);
+		cartButton.forEach(function(part, index) {
+			$("#prodQTY" + this[index]).change(function(){
+				  if ($("#prodQTY" + cartButton[index]).val() != undefined) {
+						$("#cart" + cartButton[index]).attr('disabled', false);
+					} 
+			  });
+			  
+			}, cartButton);
+
+	  
+		function addProduct(prodId){
+
+			$.ajax({
+				url : '${pageContext.request.contextPath}/_01_searchResult/cart',
+				type : "POST",
+				async: false,
+				data : {
+					prodId : prodId,
+					prodQTY: $('#prodQTY'+prodId).find("option:selected").text(),			
+				},
+				success: function(success) {
+					 
+				}
+			});
+		}
+
 	</script>
 	<!-- bootstrap -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

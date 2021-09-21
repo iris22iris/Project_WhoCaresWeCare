@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialClob;
 
@@ -44,6 +45,8 @@ public class OrderQueryController {
 	RentProductService rentProductService;
 	RentItemService rentItemService;
 	HttpSession httpSession;
+	@Autowired
+	HttpServletRequest request;
 	
 	@Autowired
 	public OrderQueryController(CustomerService customerService, OrderQueryService orderQueryService,
@@ -142,6 +145,10 @@ public class OrderQueryController {
 	public String rentOrderQuery(@PathVariable Integer custId,
 			@RequestParam(name = "category", required = false) String category,
 			@RequestParam(name = "ordId", defaultValue = "0", required = false) Integer ordId, Model model) {
+		HttpSession session = request.getSession();
+		if (session.getAttribute("LoginOK") == null) {
+			return "index";
+		}
 		CustomerBean customerBean = customerService.getCustomerById(custId);
 		model.addAttribute(customerBean);
 		if (category != null && ordId != null) {

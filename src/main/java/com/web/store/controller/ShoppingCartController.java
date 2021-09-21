@@ -48,7 +48,8 @@ public class ShoppingCartController {
 
 	// 加入購物車
 	@PostMapping("/buyMenu/addCart/{prodId}")
-	public String addProductToCart(@PathVariable("prodId") Integer prodId,
+	public String addProductToCart(
+			@PathVariable("prodId") Integer prodId,
 			@RequestParam(name = "prodQTY", required = false) Integer prodQTY, Model model) {
 
 		// 取出存放在session物件內的ShoppingCart物件

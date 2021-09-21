@@ -100,7 +100,7 @@ errorMsgMap.put("accountError", "帳號與密碼欄必須輸入，密碼長度�
 					<div class="col-12 col-sm-6 col-md-3 mt-2">
 						<div class="card" style="width: 105%;">
 							<a href="#商品網址"> <img
-								src="<c:url value='./images/product/A0002.jpg' />"
+								src="${pageContext.request.contextPath}/images/product/A0002.jpg"
 								class="card-img-top" alt="...">
 							</a>
 							<div class="card-body">
@@ -124,7 +124,7 @@ errorMsgMap.put("accountError", "帳號與密碼欄必須輸入，密碼長度�
 					<div class="col-12 col-sm-6 col-md-3 mt-2">
 						<div class="card" style="width: 105%;">
 							<a href="#商品網址"> <img
-								src="<c:url value='./images/product/A0001.jpg' />"
+								src="${pageContext.request.contextPath}/images/product/A0001.jpg"
 								class="card-img-top" alt="...">
 							</a>
 							<div class="card-body">
@@ -147,7 +147,7 @@ errorMsgMap.put("accountError", "帳號與密碼欄必須輸入，密碼長度�
 					<div class="col-12 col-sm-6 col-md-3 mt-2">
 						<div class="card" style="width: 105%;">
 							<a href="#商品網址"> <img
-								src="<c:url value='./images/product/A0003.jpg' />"
+								src="${pageContext.request.contextPath}/images/product/A0003.jpg"
 								class="card-img-top" alt="...">
 							</a>
 							<div class="card-body">
@@ -170,7 +170,7 @@ errorMsgMap.put("accountError", "帳號與密碼欄必須輸入，密碼長度�
 					<div class="col-12 col-sm-6 col-md-3 mt-2">
 						<div class="card" style="width: 105%;">
 							<a href="#商品網址"> <img
-								src="<c:url value='./images/product/A0004.jpg' />"
+								src="${pageContext.request.contextPath}/images/product/A0004.jpg"
 								class="card-img-top" alt="...">
 							</a>
 							<div class="card-body">
@@ -193,7 +193,7 @@ errorMsgMap.put("accountError", "帳號與密碼欄必須輸入，密碼長度�
 					<div class="col-12 col-sm-6 col-md-3 mt-2">
 						<div class="card" style="width: 105%;">
 							<a href="#商品網址"> <img
-								src="<c:url value='./images/product/A0005.jpg' />"
+								src="${pageContext.request.contextPath}/images/product/A0005.jpg"
 								class="card-img-top" alt="...">
 							</a>
 							<div class="card-body">
@@ -216,7 +216,7 @@ errorMsgMap.put("accountError", "帳號與密碼欄必須輸入，密碼長度�
 					<div class="col-12 col-sm-6 col-md-3 mt-2">
 						<div class="card" style="width: 105%;">
 							<a href="#商品網址"> <img
-								src="<c:url value='./images/product/B0001.png' />"
+								src="${pageContext.request.contextPath}/images/product/B0001.png"
 								class="card-img-top" alt="...">
 							</a>
 							<div class="card-body">
@@ -239,7 +239,7 @@ errorMsgMap.put("accountError", "帳號與密碼欄必須輸入，密碼長度�
 					<div class="col-12 col-sm-6 col-md-3 mt-2">
 						<div class="card" style="width: 105%;">
 							<a href="#商品網址"> <img
-								src="<c:url value='./images/product/A0003.jpg' />"
+								src="${pageContext.request.contextPath}/images/product/A0003.jpg"
 								class="card-img-top" alt="...">
 							</a>
 							<div class="card-body">
@@ -262,7 +262,7 @@ errorMsgMap.put("accountError", "帳號與密碼欄必須輸入，密碼長度�
 					<div class="col-12 col-sm-6 col-md-3 mt-2">
 						<div class="card" style="width: 105%;">
 							<a href="#商品網址"> <img
-								src="<c:url value='./images/product/A0004.jpg' />"
+								src="${pageContext.request.contextPath}/images/product/A0004.jpg"
 								class="card-img-top" alt="...">
 							</a>
 							<div class="card-body">
@@ -298,6 +298,6 @@ errorMsgMap.put("accountError", "帳號與密碼欄必須輸入，密碼長度�
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js">
 	</script>
-<script type="text/javascript" src="./js/_05loginPopup3.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/_05loginPopup3.js"></script>
 </body>
 </html>

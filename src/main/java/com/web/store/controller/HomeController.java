@@ -6,16 +6,25 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
 import com.web.store.model._02_customerService.ProblemSelectBean;
+import com.web.store.model._04_shop.BuyItemBean;
 import com.web.store.model._04_shop.ProductBean;
+import com.web.store.model._04_shop.ShoppingCart;
 import com.web.store.model._05_customer.CitySelectBean;
 import com.web.store.service.CityService;
+import com.web.store.service.OrderService;
 import com.web.store.service.ProblemSelectService;
 import com.web.store.service.ProductService;
 
@@ -30,6 +39,10 @@ public class HomeController {
 	ProductService productService;
 	@Autowired
 	ProblemSelectService problemSelectService;
+	@Autowired
+	OrderService orderService;
+	@Autowired
+	HttpSession httpSession;
 
 	@GetMapping({ "/", "/index", "/index.html" })
 	public String home(Model model, Map<String, Object> map) {
@@ -76,12 +89,43 @@ public class HomeController {
 				}
 			}
 		}
-		model.addAttribute(searchProduct);
-		model.addAttribute("productList", productBeanList);
-		for(ProductBean test:productBeanList) {
-			System.out.println(test.getProdName());
+		Gson gson = new Gson();
+		String[] arr = new String[productBeanList.size()];
+		for(int i=0;i<productBeanList.size();i++) {
+			arr[i] = String.valueOf(productBeanList.get(i).getProdId());
 		}
+		model.addAttribute(searchProduct);
+		model.addAttribute("cartButton", gson.toJson(arr));
+		model.addAttribute("productList", productBeanList);
+//		for(ProductBean test:productBeanList) {
+//			System.out.println(test.getProdName());
+//		}
 		return "_01_searchResult";
+	}
+	
+
+	
+	@PostMapping("/_01_searchResult/cart")
+	@ResponseBody
+	public void quereyFavorite(
+			@RequestParam("prodId") Integer prodId,
+			@RequestParam(name = "prodQTY", required = false) Integer prodQTY, Model model) {
+		// 取出存放在session物件內的ShoppingCart物件
+				ShoppingCart shoppingCart = (ShoppingCart) httpSession.getAttribute("ShoppingCart");
+				if (shoppingCart == null) {
+					shoppingCart = new ShoppingCart();
+					httpSession.setAttribute("ShoppingCart", shoppingCart);
+				}
+
+				int prodcuctId = Integer.parseInt(prodId.toString().trim());
+
+				ProductBean productBean = new ProductBean();
+				productBean = productService.getProductById(prodcuctId);
+				Double itemSum = prodQTY* productBean.getPrice();
+
+				// 將資料封裝到buyItemBean
+				BuyItemBean buyItemBean = new BuyItemBean(prodQTY, itemSum, productBean.getPromotionBean(), productBean);
+				shoppingCart.addProductToCart(prodId, buyItemBean);
 	}
 
 }

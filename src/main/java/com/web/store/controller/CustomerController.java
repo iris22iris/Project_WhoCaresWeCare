@@ -332,6 +332,10 @@ public class CustomerController {
 	// 傳回能夠編輯單筆會員資料之視圖的邏輯名稱
 	@GetMapping(value = "/_05_memberProfile/{id}", produces = { "text/html" })
 	public String editMemberFindView(@PathVariable Integer id, Model model) {
+		HttpSession session = request.getSession();
+		if (session.getAttribute("LoginOK") == null) {
+			return "index";
+		}
 		CustomerBean customer = customerService.getCustomerById(id);
 		model.addAttribute("customer", customer);
 		model.addAttribute("id", id);
