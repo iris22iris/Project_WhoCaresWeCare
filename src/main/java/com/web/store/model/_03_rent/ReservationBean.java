@@ -37,8 +37,8 @@ public class ReservationBean implements Serializable {
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumns({
-		@JoinColumn(name = "RESERVE_PRODCID_FK"),
 		@JoinColumn(name = "RESERVE_PRODID_FK"),
+		@JoinColumn(name = "RESERVE_PRODSN_FK"),
 		})
 	private RentProductBean rentProductBean;
 	@ManyToOne(cascade = CascadeType.PERSIST)

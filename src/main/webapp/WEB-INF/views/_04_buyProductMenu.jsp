@@ -171,7 +171,7 @@
 												method="POST">
 												<select name="prodQTY" class="form-select"
 													style="width: 45%;" aria-label="Default select example">
-													<option selected disabled>數量</option>
+													<option selected value="1">數量</option>
 													<c:forEach var="amount" begin="1" end="${product.stock}">
 														<option value="${amount}">${amount}</option>
 													</c:forEach>

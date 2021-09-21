@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.store.model._02_customerService.CommentBean;
 import com.web.store.model._03_rent.RentItemBean;
+import com.web.store.model._03_rent.ReservationBean;
 import com.web.store.model._03_rent.pkClass.RentItemPK;
-import com.web.store.model._03_rent.pkClass.RentProductPK;
 import com.web.store.model._04_shop.BuyItemBean;
 import com.web.store.model._04_shop.pkClass.BuyItemPK;
 import com.web.store.model._05_customer.CustomerBean;
@@ -33,12 +33,14 @@ import com.web.store.service.OrderQueryService;
 import com.web.store.service.ProductService;
 import com.web.store.service.RentItemService;
 import com.web.store.service.RentProductService;
+import com.web.store.service.ReservationService;
 
 @Controller
 public class OrderQueryController {
 
 	CustomerService customerService;
 	OrderQueryService orderQueryService;
+	ReservationService reservationService;
 	CommentService commentService;
 	ProductService productService;
 	BuyItemService buyItemService;
@@ -50,10 +52,12 @@ public class OrderQueryController {
 	
 	@Autowired
 	public OrderQueryController(CustomerService customerService, OrderQueryService orderQueryService,
-			CommentService commentService, ProductService productService, BuyItemService buyItemService,
-			RentProductService rentProductService, RentItemService rentItemService, HttpSession httpSession) {
+			ReservationService reservationService, CommentService commentService, ProductService productService,
+			BuyItemService buyItemService, RentProductService rentProductService, RentItemService rentItemService,
+			HttpSession httpSession) {
 		this.customerService = customerService;
 		this.orderQueryService = orderQueryService;
+		this.reservationService = reservationService;
 		this.commentService = commentService;
 		this.productService = productService;
 		this.buyItemService = buyItemService;
@@ -104,6 +108,7 @@ public class OrderQueryController {
 		return "_06_orderQuery";
 	}
 	
+
 //	輸入購買商品評價
 	@PostMapping("/orderQuery/addComment")
 	public String orderQueryComment(@RequestParam("custId") Integer custId,
@@ -222,4 +227,27 @@ public class OrderQueryController {
 		return "redirect:/rentOrderQuery/" + custId + "/?category=" + category + "&ordId=" + ordId;
 	}
 
+//	進入租賃訂單查詢頁(含查詢字串)
+	@GetMapping("/reservationQuery/{custId}")
+	public String reservationQuery(@PathVariable Integer custId,
+			@RequestParam(name = "reservationId", required = false) Integer reservationId,
+			Model model
+	) {
+		CustomerBean customerBean = customerService.getCustomerById(custId);
+		model.addAttribute(customerBean);
+		if (reservationId != null) {
+			ReservationBean reservationBean = reservationService.findReservationBeanById(reservationId);
+			if (reservationBean != null) {
+				int totalStock = rentProductService.getTotalStockByProdId(reservationBean.getRentProductBean().getProdId());
+				model.addAttribute("reservation", reservationBean);
+				model.addAttribute("totalStock", totalStock);
+			
+			} else {
+				model.addAttribute("reservationNotFound", "查無此訂單，請重新輸入正確的訂單編號");
+			}
+		}
+
+		return "_06_reservationQuery";
+	}
+	
 }

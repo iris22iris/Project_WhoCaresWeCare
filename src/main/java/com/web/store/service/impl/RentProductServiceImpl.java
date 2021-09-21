@@ -63,6 +63,14 @@ public class RentProductServiceImpl implements RentProductService {
 		return rentProductDao.getAllProdTypes();
 	}
 
+	// 依主鍵讀取租賃設備總庫存
+	@Override
+	public int getTotalStockByProdId(int prodId) {
+		return rentProductDao.getTotalStockByProdId(prodId);
+	}
+	
+	
+	
 	@Override
 	public RentProductBean getProductById(int prodId) {
 		return rentProductDao.getProductById(prodId);
@@ -127,5 +135,6 @@ public class RentProductServiceImpl implements RentProductService {
 		
 		return rentProductDao.getAllSerialStocksByprodId(prodId);
 	}
+
 	
 }

@@ -48,7 +48,7 @@
 						</div>
 						<div class="col-1">
 							<button type="button" class="btn btn-warning "
-								onClick="orderSearch()">確認</button>
+								onClick="orderSearch()">查詢</button>
 						</div>
 					</form>
 				</div>

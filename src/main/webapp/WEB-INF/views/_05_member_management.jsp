@@ -33,6 +33,10 @@
 	function orderQuery(obj){
 		obj.href="<c:url value='/orderQuery/' />"+'<%=session.getAttribute("LoginOK")%>';
 	}
+	
+	function reservationQuery(obj){
+		obj.href="<c:url value='/reservationQuery/' />"+'<%=session.getAttribute("LoginOK")%>';
+	}
 	function qaQuery(obj){
 		obj.href="<c:url value='/_06_problemReply/' />"+'<%=session.getAttribute("LoginOK")%>';
 	}
@@ -112,8 +116,9 @@
 								</h1>
 							</div>
 							<div class="mt-5 ">
-								<h1 class="bcglightgray">
-									<i class="fas fa-caret-right bcglightgray"></i> 預約記錄查詢
+								<h1>
+									<a style="text-decoration: none; color: black; cursor:pointer;"
+										class="fas fa-caret-right" onclick="reservationQuery(this)"><i>預約記錄查詢</i></a>
 								</h1>
 							</div>
 

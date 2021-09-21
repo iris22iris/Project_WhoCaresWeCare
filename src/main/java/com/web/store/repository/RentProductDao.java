@@ -31,7 +31,10 @@ public interface RentProductDao {
 
 	// 依主鍵讀取單筆租賃產品資料
 	public RentProductBean getProductById(int prodId);
-
+	
+	// 依主鍵讀取租賃設備總庫存
+	public int getTotalStockByProdId(int prodId);
+	
 	// 依porId(與serialNumber)讀取單筆預約設備資料 抓現在幾人預約
 	public  List<ReservationBean> getReservationBeanByprodId(int prodId);
 	

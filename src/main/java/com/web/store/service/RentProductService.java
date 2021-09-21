@@ -28,12 +28,14 @@ public interface RentProductService {
 	// 依主鍵讀取單筆租賃設備資料
 	public RentProductBean getProductById(int prodId);
 	
+	// 依主鍵讀取租賃設備總庫存
+	public int getTotalStockByProdId(int prodId);
+	
 	//抓取該商品目前預約資料
 	public List<ReservationBean> getReservationBeanByprodId(int prodId) ;
 	
 	//抓取該商品目前租賃評論資料
 	public List<CommentBean> getCommentBeanByprodId(int prodId) ;
-	
 
 	// 新增單筆租賃設備資料
 	void addProduct(RentProductBean product);

@@ -138,7 +138,21 @@ public class RentProductDaoImpl implements RentProductDao {
 	public List<ProductTypeBean> getAllProdTypes() {
 		Session session = factory.getCurrentSession();
 		String hql = " FROM ProductTypeBean ";
+		
 		return session.createQuery(hql, ProductTypeBean.class).getResultList();
+	}
+	
+	// 依主鍵讀取租賃設備總庫存
+	@Override
+	public int getTotalStockByProdId(int prodId) {
+		Session session = factory.getCurrentSession();
+		String 	hql = " SELECT SUM(rp.stock) FROM RentProductBean rp "
+					+ " WHERE rp.prodId = :pid ";
+		
+		return session.createQuery(hql, Long.class)
+					  .setParameter("pid", prodId)
+					  .getSingleResult()
+					  .intValue();
 	}
 
 	@Override
@@ -241,9 +255,5 @@ public class RentProductDaoImpl implements RentProductDao {
 					.getResultList();
 		
 	}
-	
-	
-
-	
 
 }

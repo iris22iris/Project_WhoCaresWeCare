@@ -46,11 +46,11 @@
 						</div>
 						<div class="col-3">
 							<input type="search" class="form-control " id="enter"
-								onkeyup="value=value.replace(/[^\d]/g,'') ">
+								onkeyup="value=value.replace(/[^\d]/g,'')">
 						</div>
 						<div class="col-1">
 							<button type="button" class="btn btn-warning "
-								onclick="rentOrderSearch()">確認</button>
+								onclick="rentOrderSearch()">查詢</button>
 						</div>
 					</form>
 				</div>
