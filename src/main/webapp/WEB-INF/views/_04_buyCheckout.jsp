@@ -113,9 +113,11 @@
 
       <hr style="margin:20px;">
 		
-	<form:form method='POST' modelAttribute="OrdBean" 
-				enctype="multipart/form-data"
-				action="${pageContext.request.contextPath}/orderSubmit/${LoginOK}">
+<%-- 	<form:form method='POST' modelAttribute="OrdBean"  --%>
+<%-- 				enctype="multipart/form-data" --%>
+<%-- 				action="${pageContext.request.contextPath}/orderSubmit"> --%>
+	<form method='POST'
+				action="${pageContext.request.contextPath}/orderSubmit">
       <!-- 結帳資訊 start -->
       <div id="checkoutInfo">
         <div class="col-5 checkoutTitle">
@@ -132,14 +134,14 @@
 <%--                  <form:option value="0">自取-運費0元</form:option> --%>
 <%--                  <form:option value="270">物流宅配-270元</form:option>       --%>
 <%--               </form:select> --%>
-              <select path="delivery" name="deliveryType" id="deliveryType" onchange="delivery()">
+              <select name="delivery" id="deliveryType" onchange="delivery()">
                  <option value="自取">自取-運費0元</option>
                  <option value="宅配">物流宅配-270元</option>      
               </select>
             </div>
             <div class="checkoutBottom">
               <h4>折扣碼:</h4>
-              <form:input type="text" path="discountCode"
+              <input name="discountCode" type="text"
               		 value="${OrdBean.discountCode}" readonly="readonly" id="discountCode"/>
               <input type="button" value="輸入" onclick="changeDiscount()">
               <c:if test="${!empty OrdBean.discountCode}">
@@ -203,9 +205,9 @@
             <div class="deliveryInfo">
                 <p>
                     收件人:
-                    <form:input path="reciName" type="text" class="memberName me-3" value="${OrdBean.customerBean.custName}"/>
+                    <input name="reciName" type="text" class="memberName me-3" value="${OrdBean.customerBean.custName}"/>
                     連絡電話:
-                    <form:input path="reciPhone" type="text" value="${OrdBean.customerBean.phone}"/></p>
+                    <input name="reciPhone" type="text" value="${OrdBean.customerBean.phone}"/></p>
                 <p>
 <!--                     地址(城市):  -->
 <%--                     <form:select path="reciCity" name="city" id="city" class="select me-3"> --%>
@@ -222,7 +224,7 @@
                 </p>        
                 <p>
                     地址(路名):
-                    <form:input path="reciAddress" type="text" class="addressInput" value="${OrdBean.customerBean.address}"/>
+                    <input name="reciAddress" type="text" class="addressInput" value="${OrdBean.customerBean.address}"/>
                 </p>
             </div>
         </div>
@@ -253,12 +255,14 @@
              我已閱讀購買須知並同意
             </div>
             <div class="btn checkOutBtn w-100" >
+            <input name="custId" type="hidden"  value="${OrdBean.customerBean.custId}"/>
             <button class="me-3">繼續購買</button>
-            <button type="submit" id="checkout">確認結帳</button>
+            <button type="submit" id="checkout" onclick="">確認結帳</button>
             </div>
+            
       </div>
-  		</form:form>
-     
+  		</form>
+     	
 
       </div>
       	<!-- 引入共同的頁尾 -->

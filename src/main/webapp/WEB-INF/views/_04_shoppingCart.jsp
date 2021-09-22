@@ -114,8 +114,9 @@
 			},
 			dataType : "text"
 			,
-				
-			success: function() {
+			//因為使用dataType所以返回值res.discount -> undefined 需再解決
+			success: function(res) {
+				$(".showDiscountSum").val(res.discount);
 				$("#showDiscount")[0].style.display="block";
 				count();
 			},
