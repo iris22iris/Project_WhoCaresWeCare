@@ -1,6 +1,8 @@
 package com.web.store.controller;
 
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.query.Query;
@@ -30,6 +32,8 @@ public class BuyMenuController {
 
 	@Autowired
 	CustomerService customerService;
+	@Autowired
+	HttpServletRequest request;
 
 	@Autowired
 	public FavoriteBean getFavoriteBean() {
@@ -119,6 +123,10 @@ public class BuyMenuController {
 	// 追蹤清單頁面查詢
 	@GetMapping(value = "/_04_favoriteList/{id}", produces = { "text/html" })
 	public String checkFavoriteFindView(@PathVariable Integer id, Model model) {
+		HttpSession session = request.getSession();
+		if (session.getAttribute("LoginOK") == null) {
+			return "index";
+		}
 		CustomerBean customer = customerService.getCustomerById(id);
 		model.addAttribute("customer", customer);
 		model.addAttribute("id", id);

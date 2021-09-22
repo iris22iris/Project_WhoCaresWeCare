@@ -123,6 +123,10 @@ public class ContactUsController {
 
 	@GetMapping("/_06_problemReply/{custId}")
 	public String problemReplyQueryViews(@PathVariable Integer custId, Model model) {
+		HttpSession session = request.getSession();
+		if (session.getAttribute("LoginOK") == null) {
+			return "index";
+		}
 		CustomerBean customerBean = customerService.getCustomerById(custId);
 		model.addAttribute("customerBean", customerBean);
 		return "_06_problemReply";
