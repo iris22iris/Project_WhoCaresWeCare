@@ -398,14 +398,9 @@ public class EDMTableResetHibernate {
 					cb.setCommentDate(Timestamp.valueOf(token[3]));
 					cb.setRate(Integer.parseInt(token[4]));
 					cb.setVisits(Integer.parseInt(token[5]));
-//					cb.setCustomerBean(new CustomerBean(Integer.parseInt(token[6]), null, null, null, null, null, null,
-//							null, null, null, null, null, null, null, null));
-//
-//					cb.setProductBean(new ProductBean(null, Integer.parseInt(token[7]), null, null, null, null, null,
-//							null, null, null, null, null, null));
-//
-//					cb.setRentProductBean(new RentProductBean(Integer.parseInt(token[8]), token[9], null, null, null,
-//							null, null, null, null, null, null, null, null, null, null, null));
+//					cb.setCustomerBean(new CustomerBean(Integer.parseInt(token[6])));
+//					cb.setProductBean(new ProductBean(Integer.parseInt(token[7])));
+//					cb.setRentProductBean(new RentProductBean(Integer.parseInt(token[8]), token[9]));
 
 					session.merge(cb);
 					count++;
@@ -505,7 +500,7 @@ public class EDMTableResetHibernate {
 					db.setDmId(Integer.parseInt(token[0]));
 					db.setAddDate(Timestamp.valueOf(token[1]));
 					db.setCategory(token[2]);
-					Blob blob = SystemUtils2018.fileToBlob("src/main/webapp/images/DM/" + token[3]);
+					Blob blob = SystemUtils2018.fileToBlob("data/DM/" + token[3]);
 					db.setDmImage(blob);
 					db.setDmName(token[4]);
 					db.setDmdate(token[5]);
