@@ -427,7 +427,7 @@ public class EDMTableResetHibernate {
 
 					String[] token = line.split("\\|");
 					ProblemBean pb = new ProblemBean();
-					pb.setusId(Integer.parseInt(token[0]));
+					pb.setreplyId(Integer.parseInt(token[0]));
 					Blob blob = SystemUtils2018.fileToBlob("data/product/A0001.jpg");
 					pb.setAttachFile(blob);
 					pb.setContent(token[2]);

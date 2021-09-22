@@ -126,7 +126,6 @@
                   <button type="submit" class="btn btn-warning me-2" onclick="track(this)" id=buttonus>
                     送出表單
                 </button>
-                  <button type="submit" class="btn btn-secondary me-3">上傳檔案</button>
                   <input type="file" id="ImageUs"  name="ImageUs" >
                 </div>
                   <!-- submit&upload end-->

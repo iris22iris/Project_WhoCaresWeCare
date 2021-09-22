@@ -35,7 +35,7 @@ public class ProblemBean implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer usId;
+	private Integer replyId;
 //	private Integer custId;
 	private String ordId;
 //	private Integer ordId;
@@ -67,9 +67,9 @@ public class ProblemBean implements Serializable {
 	private OrdBean ordBean;
 
 
-	public ProblemBean(Integer usId, String ordId, String email, String phone, String problemType, String content,
+	public ProblemBean(Integer replyId, String ordId, String email, String phone, String problemType, String content,
 			Timestamp formDate, String processState, Timestamp replyDate, String replyContent, Blob attachFile,String fileName,String account) {
-		this.usId = usId; // 會員編號
+		this.replyId = replyId; // 會員編號
 		this.ordId = ordId; // 訂單編號
 		this.email = email; // 信箱
 		this.phone = phone; // 連絡電話
@@ -87,12 +87,12 @@ public class ProblemBean implements Serializable {
 	public ProblemBean() {
 	}
 
-	public Integer getusId() {
-		return usId;
+	public Integer getreplyId() {
+		return replyId;
 	}
 
-	public void setusId(Integer usId) {
-		this.usId = usId;
+	public void setreplyId(Integer replyId) {
+		this.replyId = replyId;
 	}
 
 	public String getOrdId() {
