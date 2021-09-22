@@ -29,8 +29,6 @@ public class ReservationBean implements Serializable {
 	private String category;
 	private Integer waitNum;
 	private String classify;
-	private Integer prodId;
-	private String serialNumber;
 	private Integer waitType;
 	@Column(columnDefinition = "datetime")
 	private Timestamp reserveDate;
@@ -45,15 +43,11 @@ public class ReservationBean implements Serializable {
 	@JoinColumn(name = "RESERVE_CUSTID_FK")
 	private CustomerBean customerBean;
 
-	public ReservationBean(Integer reservationId, String category, Integer waitNum, String classify, Integer prodId,
-			String serialNumber, Integer waitType, Timestamp reserveDate) {
-		super();
+	public ReservationBean(Integer reservationId, String category, Integer waitNum, String classify, Integer waitType, Timestamp reserveDate) {
 		this.reservationId = reservationId;
 		this.category = category;
 		this.waitNum = waitNum;
 		this.classify = classify;
-		this.prodId = prodId;
-		this.serialNumber = serialNumber;
 		this.waitType = waitType;
 		this.reserveDate = reserveDate;
 	}	
@@ -91,22 +85,6 @@ public class ReservationBean implements Serializable {
 
 	public void setClassify(String classify) {
 		this.classify = classify;
-	}
-
-	public Integer getProdId() {
-		return prodId;
-	}
-
-	public void setProdId(Integer prodId) {
-		this.prodId = prodId;
-	}
-
-	public String getSerialNumber() {
-		return serialNumber;
-	}
-
-	public void setSerialNumber(String serialNumber) {
-		this.serialNumber = serialNumber;
 	}
 
 	public Integer getWaitType() {

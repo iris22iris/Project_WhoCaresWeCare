@@ -173,7 +173,7 @@ public class RentProductDaoImpl implements RentProductDao {
 		Session session = factory.getCurrentSession();
 		String hql = " FROM ReservationBean  r"
 				
-				  + " WHERE r.prodId = :pid ";
+				  + " WHERE r.rentProductBean.prodId = :pid ";
 		
 		return session.createQuery(hql, ReservationBean.class)
 				.setParameter("pid", prodId)

@@ -35,10 +35,14 @@ import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.model._06_order.OrdBean;
 import com.web.store.model._06_order.pkClass.OrdPK;
 import com.web.store.model._07_productType.ProductTypeBean;
+import com.web.store.repository.RentProductDao;
+import com.web.store.repository.impl.RentProductDaoImpl;
+import com.web.store.service.RentProductService;
+import com.web.store.service.impl.RentProductServiceImpl;
 
 public class EDMTableResetHibernate {
 	public static final String UTF8_BOM = "\uFEFF"; // 定義 UTF-8的BOM字元
-
+	
 	public static void main(String args[]) {
 
 		String line = "";
@@ -46,6 +50,8 @@ public class EDMTableResetHibernate {
 		int count = 0;
 		System.out.println("==================刪除表格=====================");
 		SessionFactory factory = HibernateUtils.getSessionFactory();
+		RentProductDao rentProductDao = new RentProductDaoImpl(factory);
+		RentProductService rentProductService = new RentProductServiceImpl(rentProductDao);
 		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 
@@ -365,13 +371,13 @@ public class EDMTableResetHibernate {
 					rb.setReservationId(Integer.parseInt(token[0]));
 					rb.setCategory(token[1]);
 					rb.setClassify(token[2]);
-					rb.setProdId(Integer.parseInt(token[3]));
+//					rb.setProdId(Integer.parseInt(token[3]));
 					rb.setReserveDate(Timestamp.valueOf(token[4]));
-					rb.setSerialNumber(token[5]);
+//					rb.setSerialNumber(token[5]);
 					rb.setWaitNum(Integer.parseInt(token[6]));
 					rb.setWaitType(null);
 //					rb.setCustomerBean(Integer.parseUnsignedInt(new CustomerBean(token[8])));
-
+					rb.setRentProductBean(rentProductService.getProductById(Integer.parseInt(token[3])));;
 					session.merge(rb);
 					count++;
 					System.out.println("新增reservation紀錄成功，共新增" + count + "筆記錄:" + token[1]);
@@ -505,7 +511,6 @@ public class EDMTableResetHibernate {
 					db.setDmName(token[4]);
 					db.setDmdate(token[5]);
 					db.setMimeType(token[6]);
-
 					session.merge(db);
 					count++;
 					System.out.println("新增reservation紀錄成功，共新增" + count + "筆記錄:" + token[1]);

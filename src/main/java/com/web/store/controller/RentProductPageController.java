@@ -128,8 +128,6 @@ public class RentProductPageController {
 	        else
 	        	rb.setWaitNum(reservations.get(reservations.size()-1).getWaitNum()+1);
 	        
-		rb.setProdId(id);
-		rb.setSerialNumber("1");
 		
 		
 		List<CustomerBean> customerinfo = rentProductService.getCustomerInfoBycookieaccount(user);
