@@ -86,12 +86,12 @@ public class ContactUsDaoImpl implements ContactUsDao {
 //		return pb;
 //	}
 
-	public ProblemBean getProblemById(Integer usId) {
+	public ProblemBean getProblemById(Integer replyId) {
 		ProblemBean bean = null;
 		Session session = factory.getCurrentSession();
-		String hql = "FROM ProblemBean cb WHERE cb.usId = :usId";
+		String hql = "FROM ProblemBean cb WHERE cb.replyId = :replyId";
 		try {
-			bean = (ProblemBean) session.createQuery(hql).setParameter("usId", usId).getSingleResult();
+			bean = (ProblemBean) session.createQuery(hql).setParameter("replyId", replyId).getSingleResult();
 		} catch (NoResultException e) {
 			; // 表示查無紀錄
 		}
@@ -104,12 +104,12 @@ public class ContactUsDaoImpl implements ContactUsDao {
 
 
 	@Override
-	public List<ProblemBean> getProblemsById(Integer usId) {
+	public List<ProblemBean> getProblemsById(Integer replyId) {
 		Session session = factory.getCurrentSession();
 		String hql = " FROM ProblemBean WHERE usId ";
 		
 		return session.createQuery(hql, ProblemBean.class)
-				 .setParameter("usId",(new ProblemBeanPK(usId)))
+				 .setParameter("usId",(new ProblemBeanPK(replyId)))
 				 .getResultList();
 				
 	}
