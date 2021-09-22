@@ -19,8 +19,8 @@ for (var i = 0, l = cookieAry.length; i < l; ++i) {
 	const list = cookieAry[i].trim().split('=');
 	cookieObj[list[0]] = list[1];
 }
-$("#account").val(cookieObj.user);
-$("#password").val(cookieObj.password);
+$("#rmAccount").val(cookieObj.user);
+$("#rmPassword").val(cookieObj.password);
 $('input[name="rememberMe"]').prop("checked", cookieObj.rm == "true");
 
 let getButtons = (e) => e.preventDefault()

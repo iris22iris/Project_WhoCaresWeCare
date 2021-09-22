@@ -38,7 +38,7 @@
 	rel="stylesheet">
 	<!-- sweetAlert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>  
-<script type="text/javascript"></script>
+	
 
 <style type="text/css">
    span.error {
@@ -59,16 +59,15 @@
 		<!-- 引入共同的頁首 -->
 		<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 
-
 		<!-- main start! -->
 		<div class="loginMain">
 			<div class="container a-container" id="a-container">
 				<!-- login form start -->
 				<form class="form" id="a-form" method="POST" action="login">
 					<h2 class="form_title title  px-3">登入會員</h2>
-					<input class="form__input" type="text" name="account"
+					<input class="form__input" type="text" name="account" id="rmAccount"
 						placeholder="帳號" value="${requestScope.user}">
-					<input class="form__input" type="password" name="password" 
+					<input class="form__input" type="password" name="password" id="rmPassword"
 						placeholder="密碼" maxlength="12" value="${requestScope.password}">
 					<div class="form__group">
 
@@ -181,10 +180,11 @@
 
 
 
-	<!-- 註冊登入js參考網站:https://webdesignerwall.com/wdw-snippet/login-form-4 -->
-	<script type="text/javascript" src="./js/_05login.js"></script>
+	
 	<!-- 彈跳視窗js參考網站:https://www.youtube.com/watch?v=c7kIL-bV8ac -->
 	<script type="text/javascript" src="./js/_05login_ven.js"></script>
+	<!-- 註冊登入js參考網站:https://webdesignerwall.com/wdw-snippet/login-form-4 -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/_05login.js"></script>
 </body>
 
 </html>
