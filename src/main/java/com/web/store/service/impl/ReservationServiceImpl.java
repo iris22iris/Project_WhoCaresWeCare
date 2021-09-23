@@ -21,8 +21,8 @@ public class ReservationServiceImpl implements ReservationService {
 
 //	使用預約編號查詢預約紀錄
 	@Override
-	public ReservationBean findReservationBeanById(Integer reservationId) {
-		return reservationDao.findReservationBeanById(reservationId);
+	public ReservationBean findReservationBeanById(Integer custId, Integer reservationId) {
+		return reservationDao.findReservationBeanById(custId, reservationId);
 	}
 
 }

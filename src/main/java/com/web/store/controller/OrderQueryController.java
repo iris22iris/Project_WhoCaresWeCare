@@ -73,8 +73,8 @@ public class OrderQueryController {
 			@RequestParam(name = "ordId", defaultValue = "0", required = false) Integer ordId, Model model) {
 		CustomerBean customerBean = customerService.getCustomerById(custId);
 		model.addAttribute(customerBean);
-		if (category != null && ordId != null) {
-			OrdBean ordBean = orderQueryService.findOrdBeanById(category, ordId);
+		if (custId != null && category != null && ordId != null) {
+			OrdBean ordBean = orderQueryService.findOrdBeanById(custId, category, ordId);
 			List<BuyItemBean> buyItems = orderQueryService.findBuyItemByOrdId(ordId);
 			if (ordBean != null) {
 				model.addAttribute(ordBean);
@@ -156,8 +156,8 @@ public class OrderQueryController {
 		}
 		CustomerBean customerBean = customerService.getCustomerById(custId);
 		model.addAttribute(customerBean);
-		if (category != null && ordId != null) {
-			OrdBean ordBean = orderQueryService.findOrdBeanById(category, ordId);
+		if (custId != null && category != null && ordId != null) {
+			OrdBean ordBean = orderQueryService.findOrdBeanById(custId, category, ordId);
 			List<RentItemBean> rentItems = orderQueryService.findRentItemByOrdId(ordId);
 			if (ordBean != null) {
 				model.addAttribute(ordBean);
@@ -236,7 +236,7 @@ public class OrderQueryController {
 		CustomerBean customerBean = customerService.getCustomerById(custId);
 		model.addAttribute(customerBean);
 		if (reservationId != null) {
-			ReservationBean reservationBean = reservationService.findReservationBeanById(reservationId);
+			ReservationBean reservationBean = reservationService.findReservationBeanById(custId, reservationId);
 			if (reservationBean != null) {
 				int totalStock = rentProductService.getTotalStockByProdId(reservationBean.getRentProductBean().getProdId());
 				model.addAttribute("reservation", reservationBean);
