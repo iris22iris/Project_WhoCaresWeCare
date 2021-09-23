@@ -23,10 +23,10 @@
 	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 	
 <script>
-	
-	
-	
-	
+function qaQuery(obj){
+	obj.href="<c:url value='/_06_problemReply/' />"+'<%=session.getAttribute("LoginOK")%>';
+}		
+			
 	
 	
 	
@@ -44,7 +44,7 @@
         <nav class="side-menu col-2 ">
           <div class="sideSpace"></div>
           <div class="button   d-flex justify-content-center align-items-center ">
-              <a href="" class="sideBtn">客服Q＆A</a>
+              <a href="" class="sideBtn" onclick="qaQuery(this)">客服紀錄查詢</a>
           </div>
           <div class="button d-flex justify-content-center align-items-center ">
              <a href="" class="sideBtn">聯絡我們</a>

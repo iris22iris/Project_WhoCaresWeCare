@@ -11,7 +11,7 @@
 		
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="<c:url value='/css/_03rentProduct.css' />">
+<link rel="stylesheet" href="<c:url value='/css/_03rentProduct.css' />"type="text/css">
 <link rel="stylesheet" href="<c:url value='/css/commonStyle.css' />"
 	type="text/css">
 
@@ -72,18 +72,18 @@
                     <h3 class="modal-title p-3 col-12 d-flex justify-content-evenly " id="exampleModalLabel">恭喜您成功加入預約候補!!!</h3> 
                 </div>
                 <div class="col-12 justify-content-evenly p-1  d-flex align-items-center row">
-                    <label style=font-size:22px; for="inputAccount" class="form-label col-6">申請人:</label>
+                    <label style=font-size:22px; for="inputAccount" class="form-label col-6">申請人 :</label>
                     <label style=font-size:22px;  for="inputAccount" class="form-label col-6">${customerinfo[0].custName}</label>
                 </div>
                 <!-- 計算預約筆數 start -->
                 <c:set value="${fn:length(myreservations)}" var="reservationlenth"/>
                 <!-- 計算預約筆數 end -->
                 <div class="col-12 justify-content-evenly p-1  d-flex align-items-center row">
-                    <label style=font-size:22px; for="inputAccount" class="form-label col-6">您的預約序號為:</label>
+                    <label style=font-size:22px; for="inputAccount" class="form-label col-6">預約序號 :</label>
                     <label style=font-size:22px;  for="inputAccount" class="form-label col-6 ">${myreservations[reservationlenth-1].waitNum}</label>
                 </div>
                 <div class="col-12 justify-content-evenly p-1  d-flex align-items-center row">
-                    <label style=font-size:18px; for="inputAccount" class="form-label col-6">您的預約編號為:</label>                                                    
+                    <label style=font-size:18px; for="inputAccount" class="form-label col-6">預約編號 :</label>                                                    
                                         
                     <label style=font-size:18px; for="inputAccount" class="form-label col-6"><fmt:formatNumber 
                     value="${myreservations[reservationlenth-1].reservationId}" pattern="00000000"/></label>                                    

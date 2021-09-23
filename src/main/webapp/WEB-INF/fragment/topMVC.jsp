@@ -106,18 +106,21 @@
 			<!-- left Menu -->
 			<ul class="navbar-nav  me-auto mb-lg-0 left-menu">
 				<li class="nav-item "><a class="nav-link textSize "
-					href="<c:url value='/dmMenu' />" style="color: white;"> 關於我們</a></li>
+					href="<c:url value='/dmMenu' />" style="color: white;"> 最新消息</a></li>
 				<li class="nav-item"><a class="nav-link textSize "
 					href="<c:url value='/rentMenu' />" style="color: white;"> 租賃設備</a></li>
 				<li class="nav-item"><a class="nav-link textSize "
 					href="<c:url value='/buyMenu' />" style="color: white;"> 購物商城</a></li>
-				<li class="nav-item"><a class="nav-link textSize "
-					href="<c:url value='' />" style="color: white;"> 客服中心</a></li>
-				<!-- 可以增加功能為登入才會顯示會員中心這個連結 -->
 				<li class="nav-item"><a class="nav-link textSize " id="cb"
 					href=""
 					style="color: white;"
 					onclick='clicka(this,"_05_member_management")'> 會員中心</a></li>
+				<!-- 可以增加功能為登入才會顯示會員中心這個連結 -->
+				<%-- <li class="nav-item"><a class="nav-link textSize " id="cb"
+					href=""
+					style="color: white;"
+					onclick='clicka(this,"_05_member_management")'> 會員中心</a></li>
+					--%>
 			</ul>
 
 

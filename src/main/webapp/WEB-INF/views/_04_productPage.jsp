@@ -61,7 +61,7 @@
 				<!-- 商品分類title start -->
 				<div class="catagory">
 					<i class="fas fa-th-large px-2"></i>
-					<a href="#大分類">${maincategorys[0].prodName}類</a>
+					${maincategorys[0].prodName}類
 					<i class="fas fa-angle-right"></i>
 					
 					<a href="<c:url value='/buyMenu/${product.productTypeBean.prodType}' />">					

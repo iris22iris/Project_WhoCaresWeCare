@@ -11,7 +11,8 @@
 		
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="<c:url value='/css/_03rentProduct.css' />">
+<link rel="stylesheet" href="<c:url value='/css/_03rentProduct.css' />"
+	type="text/css">
 <link rel="stylesheet" href="<c:url value='/css/commonStyle.css' />"
 	type="text/css">
 
@@ -75,7 +76,7 @@
 				<!-- 商品分類title start -->
 				<div class="catagory">
 					<i class="fas fa-th-large px-2"></i>
-					<a href="#大分類">${maincategorys[0].prodName}類</a>
+					${maincategorys[0].prodName}類
 					
 					<i class="fas fa-angle-right"></i>			
 					<a href="<c:url value='/rentMenu/${rentProduct.productTypeBean.prodType}' />">					
@@ -370,10 +371,10 @@
             	
             <div class="form-group">	
             <div class="hyperlink  col-12 d-flex justify-content-evenly align-items-center">
-                <div class="modal-footer">
-	               <input id="btnAdd" type='submit' class='btn btn-warning' data-bs-target="#exampleModalToggle2" 
-	               data-bs-toggle="modal" data-bs-dismiss="modal"value="確認預約" />
-	               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <div >
+	               <input  type='submit' class='reservationbtn btn  btn-warning' data-bs-target="#exampleModalToggle2" 
+	               data-bs-toggle="modal" data-bs-dismiss="modal"value="確認" />
+	               <button type="button" class=" reservationbtn btn btn-secondary"  data-bs-dismiss="modal">取消</button>
                 </div>
             </div>
             </div> 

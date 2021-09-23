@@ -124,7 +124,7 @@ input[type="number"] {
     flex-wrap: nowrap;
     justify-content: flex-end;
     padding: 15px 0px;
-
+    
 }
 
 
@@ -231,7 +231,12 @@ input {
 .comment div:nth-child(5){
     justify-content: start;
 }
-
+/* ------預約POPOUT----- */
+/* 按鈕大小 */
+.reservationbtn{
+	width: 80px;
+	height: 40px;
+}
 
 /* .word {
     word-break: break-all;
