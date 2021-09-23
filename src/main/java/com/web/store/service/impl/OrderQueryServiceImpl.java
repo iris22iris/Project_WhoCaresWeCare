@@ -24,8 +24,8 @@ public class OrderQueryServiceImpl implements OrderQueryService {
 	}
 
 	@Override
-	public OrdBean findOrdBeanById(String category, Integer ordId) {
-		return orderQueryDao.findOrdBeanById(category, ordId);
+	public OrdBean findOrdBeanById(Integer custId, String category, Integer ordId) {
+		return orderQueryDao.findOrdBeanById(custId, category, ordId);
 	}
 
 	@Override
