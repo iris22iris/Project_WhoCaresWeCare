@@ -1,11 +1,11 @@
 package com.web.store.controller;
 
 import java.sql.Clob;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialClob;
@@ -102,46 +102,50 @@ public class BuyCheckoutController {
 	}
 	
 	//送出訂單
-	@PostMapping("/orderSubmit/{custId}")
+	@PostMapping("/orderSubmit")
 	protected String orderComfirm(
-			@PathVariable Integer custId,
 			@ModelAttribute("OrdBean") OrdBean ordBean,
+			@RequestParam(value = "custId", required = false) Integer custId,
 			@RequestParam(value = "reciName", required = false) String reciName,
 //			@RequestParam(value = "reciName", required = false) String reciCity,
 			@RequestParam(value = "reciAddress", required = false) String reciAddress,
 			@RequestParam(value = "reciPhone", required = false) String reciPhone,
 			@RequestParam(value = "delivery", required = false) String delivery,
-//			@RequestParam(name = "orderMark", required = false) Clob orderMark,
 			@RequestParam(value = "discountCode", required = false) String discountCode,
 			Model model,SessionStatus status) {
+		
+//		@RequestParam(name = "orderMark", required = false) String orderMark,
+		log.info("準備開始處理訂單");
 		CustomerBean customerBean = customerService.getCustomerById(custId);
 		model.addAttribute(customerBean);
-		log.info("訂單完成前，會員登入確認。");
-		if (customerBean == null) {
-			return "redirect:/_05_login";
-		}
-
-
+		log.info("會員編號:" + custId);
 		//訂單備註
 //		Clob omark = null;
 //		try {
 //			omark = new SerialClob(orderMark.toCharArray());
 //
 //		} catch (Exception e) {
-//			e.printStackTrace();
+//			System.out.println("clob寫入異常:"+ e);
 //		}
 		//訂單狀態:預設訂單成立
 		String orderStatus = "orderStatus1";
 		//訂單時間
 		Timestamp time = new Timestamp(System.currentTimeMillis());  
-		//訂單總金額
+		//訂單金額計算
 		Double discount = ordBean.getDiscount();
+		if(ordBean.getDiscount() == null) {
+			discount = 0.0;
+		}
+		log.info("優惠折抵:" + discount);
 		Double total = ordBean.getOrdTotal();
+		log.info("商品金額:" + total);
 		Double shippingFee = 0.00;
 		if(delivery == "宅配") {
 			shippingFee += 270;
 		}
+		log.info("運費:" + shippingFee);
 		Double orderSum = total - discount + shippingFee;
+		log.info("訂單總金額:" + orderSum);
 		
 //		OrdBean(Timestamp orderDate, String reciName, String reciCity,String reciAddress,
 //		String reciPhone, Double ordTotal, String delivery,
@@ -150,17 +154,23 @@ public class BuyCheckoutController {
 		OrdBean order = new OrdBean(time,reciName,null,reciAddress,
 									reciPhone,orderSum,delivery,
 									discountCode,discount,orderStatus,null,
-									null,null,customerBean,ordBean.getBuyItems());
-		//設定訂單種類
+									null,customerBean,ordBean.getBuyItems());
+		log.info("準備訂單物件order");
+		
+		//設定訂單pk
 		OrdPK pk = new OrdPK();
+		Integer id = orderService.findCurrentOrdId() + 1;
+		log.info("訂單id"+ id);
 		pk.setCategory("B");
+		pk.setOrdId(id);
 		order.setOrdPK(pk);
+		log.info("設定訂單編號:B"+id);
 		
 		model.addAttribute("OrdBean",order);
 		try {
 			orderService.save(order);
 			log.info("訂單已經成功寫入表格");
-			return "forward:" + "/_04_payPayment";
+			
 		}catch (RuntimeException ex) {
 			String message = ex.getMessage();
 			String shortMsg = "" ;   
@@ -170,6 +180,6 @@ public class BuyCheckoutController {
 			return "redirect:/BuyCheckout/{custId}";
 		}
 		
-		
+		return "_04_payPayment";
 	}
 }

@@ -8,24 +8,24 @@ import javax.persistence.EmbeddedId;
 @Embeddable
 public class ProblemBeanPK implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private Integer usId;
+	private Integer replyId;
 
 	public ProblemBeanPK() {
 	}
 
-	public ProblemBeanPK(Integer usId) {
-	this.usId = usId;
+	public ProblemBeanPK(Integer replyId) {
+	this.replyId = replyId;
 	}
 	
 	
 	
 
-	public Integer getUsId() {
-		return usId;
+	public Integer getReplyId() {
+		return replyId;
 	}
 
-	public void setUsId(Integer usId) {
-		this.usId = usId;
+	public void setReplyId(Integer replyId) {
+		this.replyId = replyId;
 	}
 
 	
@@ -35,7 +35,7 @@ public class ProblemBeanPK implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((usId == null) ? 0 : usId.hashCode());
+		result = prime * result + ((replyId == null) ? 0 : replyId.hashCode());
 		return result;
 	}
 
@@ -48,10 +48,10 @@ public class ProblemBeanPK implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		ProblemBeanPK other = (ProblemBeanPK) obj;
-		if (usId == null) {
-			if (other.usId != null)
+		if (replyId == null) {
+			if (other.replyId != null)
 				return false;
-		} else if (!usId.equals(other.usId))
+		} else if (!replyId.equals(other.replyId))
 			return false;
 		return true;
 	}

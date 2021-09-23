@@ -30,7 +30,7 @@
 			type : "POST",
 			async : false,
 			data : {
-				usId : document.getElementById("enter").value
+				replyId : document.getElementById("enter").value
 			},
 	success : function(response) {
 				if (response) {
@@ -43,8 +43,9 @@
 					$('#problemType').val(response.problemType);
 					$('#record').val(response.replyContent);
 					$('#inputDescription').val(response.replyContent);
-					$('#inputusId').val(response.usId);
+					$('#inputreplyId').val(response.replyId);
 					$('#inputContent').val(response.content);
+					$('#inputformDate').val(response.formDate);
 				}
 			}
 		});
@@ -123,12 +124,12 @@
         <div class="row formRow">
           <div class="col-5">
             <label for="recordNum" class="form-label">客服編號:</label>
-            <input type="number" class="form-control" id="inputusId" disabled="disabled">
+            <input type="number" class="form-control" id="inputreplyId" disabled="disabled">
           </div>
           <div class="col-1"></div>
           <div class="col-5">
             <label for="recordDate" class="form-label">表單時間:</label>
-            <input type="date" class="form-control" id="recordDate" disabled="disabled">
+            <input type="datetime-local" class="form-control" id="inputformDate" disabled="disabled">
           </div>
           <div class="col-1"></div>
         </div>

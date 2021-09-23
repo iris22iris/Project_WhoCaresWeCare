@@ -98,6 +98,28 @@ public class OrdBean implements Serializable {
 		this.buyItems = buyItems;
 	}
 	
+	public OrdBean(Timestamp orderDate, String reciName, String reciCity,
+			String reciAddress, String reciPhone, Double ordTotal, String delivery,
+			String discountCode, Double discount, String orderStatus, Timestamp shipDate,
+			 Set<RentItemBean> rentItems, CustomerBean customerBean, Set<BuyItemBean> buyItems) {
+		this.orderDate = orderDate;
+		this.reciName = reciName;
+		this.reciCity = reciCity;
+		this.reciAddress = reciAddress;
+		this.reciPhone = reciPhone;
+		this.ordTotal = ordTotal;
+		this.delivery = delivery;
+//		this.payment = payment;
+		this.discountCode = discountCode;
+		this.discount = discount;
+		this.orderStatus = orderStatus;
+		this.shipDate = shipDate;
+//		this.orderMark = orderMark;
+		this.rentItems = rentItems;
+		this.customerBean = customerBean;
+		this.buyItems = buyItems;
+	}
+	
 	public OrdPK getOrdPK() {
 		return ordPK;
 	}

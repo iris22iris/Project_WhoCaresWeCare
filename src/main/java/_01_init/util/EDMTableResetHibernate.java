@@ -427,20 +427,21 @@ public class EDMTableResetHibernate {
 
 					String[] token = line.split("\\|");
 					ProblemBean pb = new ProblemBean();
-					pb.setusId(Integer.parseInt(token[0]));
+					pb.setreplyId(Integer.parseInt(token[0]));
+					pb.setAccount(token[1]);
 					Blob blob = SystemUtils2018.fileToBlob("data/product/A0001.jpg");
 					pb.setAttachFile(blob);
-					pb.setContent(token[2]);
-					pb.setEmail(token[3]);
-					pb.setFormDate(Timestamp.valueOf(token[4]));
-					pb.setOrdId(token[5]);
-					pb.setPhone(token[6]);
-					pb.setProblemType(token[7]);
-					pb.setProcessState(token[8]);
-					pb.setReplyContent(token[9]);
-					pb.setReplyDate(Timestamp.valueOf(token[10]));
-					pb.setFileName(token[11]);
-					pb.setAccount(token[12]);
+					pb.setContent(token[3]);
+					pb.setEmail(token[4]);
+					pb.setFileName(token[5]);
+					pb.setFormDate(Timestamp.valueOf(token[6]));
+					pb.setOrdId(token[7]);
+					pb.setPhone(token[8]);
+					pb.setProblemType(token[9]);
+					pb.setProcessState(token[10]);
+					pb.setReplyContent(token[11]);
+					pb.setReplyDate(Timestamp.valueOf(token[12]));
+
 
 					session.merge(pb);
 					count++;
