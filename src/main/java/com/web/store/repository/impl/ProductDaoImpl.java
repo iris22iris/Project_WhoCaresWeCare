@@ -127,14 +127,6 @@ public class ProductDaoImpl implements ProductDao {
 		totalPages = (int) (Math.ceil(count / (double) recordsPerPage));
 		return totalPages;
 	}
-	
-//	取得所有產品類別
-	@Override
-	public List<ProductTypeBean> getAllProdTypes() {
-		Session session = factory.getCurrentSession();
-		String hql = "FROM ProductTypeBean";
-		return session.createQuery(hql, ProductTypeBean.class).getResultList();
-	}
 
 	@Override
 	public void updateStock(int productId, int newQuantity) {

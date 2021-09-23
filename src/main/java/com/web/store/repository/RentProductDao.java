@@ -23,9 +23,6 @@ public interface RentProductDao {
 	// 計算群組設備總共有幾頁
 	int getGroupedPages(ProductTypeBean prodTypeBean);
 	
-	// 讀取全部租賃產品分類
-	List<ProductTypeBean> getAllProdTypes();
-
 	// 更新租賃產品庫存
 	void updateStock(int productId, int newQuantity);
 

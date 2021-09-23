@@ -1,3 +1,3 @@
 function usSearch() {
-	location.href = "?usId=" + document.getElementById("enter").value;
+	location.href = "?replyId=" + document.getElementById("enter").value;
 }

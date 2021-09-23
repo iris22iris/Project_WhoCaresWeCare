@@ -52,7 +52,17 @@
 
 
 </head>
-
+<script>
+	function check(obj, objUrl) {
+		if ('${sessionScope.LoginOK}' == 'null' || '${sessionScope.LoginOK}' == null || '${sessionScope.LoginOK}' == '') {
+			if (confirm('註冊失敗請注意錯誤訊息')) {
+				obj.href = '${pageContext.request.contextPath}/_05_login';
+			
+		
+		}
+	}
+	}
+	</script>
 <body id="loginBody">
 	<div id="body">
 		<div id="content">
@@ -118,7 +128,7 @@
 					<form:errors path="phone" cssClass="error" />
 					<form:input  class="form__input" path="Image" type='file'/>
 	   	  	 		<form:errors path="Image"  cssClass="error" />
-					<button type="submit" class="form__button button " onclick="track(this)"  id="button1">註冊</button>
+					<button type="submit" class="form__button button " onclick="check(this)"  id="button1">註冊</button>
 					
 				</form:form>
 				<!-- register form end -->

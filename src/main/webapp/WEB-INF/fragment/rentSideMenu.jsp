@@ -28,10 +28,12 @@
 					</c:forEach>
 				</div>
 
-				<div class="text-center">
+				<div class="text-center mb-4">
 					<div class="sideList-title mt-4 discount-title">優惠活動</div>
 					<div class="sideList">
-						<a href="#">特價專區</a><br>
+						<c:forEach var="promotion" items="${promotions}">
+							<a href="<c:url value='/rentMenu/promote${promotion.promoteId}' />">${promotion.promoTag}</a><br>
+						</c:forEach>
 					</div>
 				</div>
 			</div>

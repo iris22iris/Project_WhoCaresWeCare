@@ -18,8 +18,8 @@ public interface ContactUsDao {
 //	ProblemBean findProblemById(int usId);
 //	ProblemBean findProblemById(Integer usId);
 	
-	ProblemBean getProblemById(Integer usId);
-	List<ProblemBean> getProblemsById(Integer usId);
+	ProblemBean getProblemById(Integer replyId);
+	List<ProblemBean> getProblemsById(Integer replyId);
 	
 	
 }

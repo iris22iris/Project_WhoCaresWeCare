@@ -47,13 +47,13 @@ public class ContactUsServiceImpl implements ContactUsService {
 //	}
 
 	@Override
-	public ProblemBean getProblemById(Integer usId) {
-		return contactUsDao.getProblemById(usId);   
+	public ProblemBean getProblemById(Integer replyId) {
+		return contactUsDao.getProblemById(replyId);   
 	}
 
 	@Override
-	public List<ProblemBean> getProblemsById(Integer usId) {
-		return contactUsDao.getProblemsById(usId);   
+	public List<ProblemBean> getProblemsById(Integer replyId) {
+		return contactUsDao.getProblemsById(replyId);   
 	}
 
 //	@Override

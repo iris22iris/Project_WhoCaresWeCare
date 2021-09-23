@@ -10,9 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.web.store.model._03_rent.RentItemBean;
 import com.web.store.model._03_rent.RentProductBean;
-import com.web.store.model._04_shop.BuyItemBean;
 import com.web.store.model._04_shop.ProductBean;
 
 
@@ -25,26 +23,26 @@ public class ProductTypeBean implements Serializable {
 	private String prodName; // 分類名稱
 
 	// 雙向一對多
-	@OneToMany(mappedBy = "productTypeBean", cascade = { CascadeType.ALL })
-	private Set<RentItemBean> rentItems = new LinkedHashSet<>();
+//	@OneToMany(mappedBy = "productTypeBean", cascade = { CascadeType.ALL })
+//	private Set<RentItemBean> rentItems = new LinkedHashSet<>();
 	@OneToMany(mappedBy = "productTypeBean", cascade = { CascadeType.ALL })
 	private Set<RentProductBean> rentProducts = new LinkedHashSet<>();
-	@OneToMany(mappedBy = "productTypeBean", cascade = { CascadeType.ALL })
-	private Set<BuyItemBean> buyItems = new LinkedHashSet<>();
+//	@OneToMany(mappedBy = "productTypeBean", cascade = { CascadeType.ALL })
+//	private Set<BuyItemBean> buyItems = new LinkedHashSet<>();
 	@OneToMany(mappedBy = "productTypeBean", cascade = { CascadeType.ALL })
 	private Set<ProductBean> product = new LinkedHashSet<>();
 
 	public ProductTypeBean() {
 	}
 
-	public ProductTypeBean(String prodType, String prodName, Set<RentItemBean> rentItems,
-			Set<RentProductBean> rentProducts, Set<BuyItemBean> buyItems, Set<ProductBean> product) {
+	public ProductTypeBean(String prodType, String prodName,/* Set<RentItemBean> rentItems,*/
+			Set<RentProductBean> rentProducts,/* Set<BuyItemBean> buyItems,*/ Set<ProductBean> product) {
 		super();
 		this.prodType = prodType;
 		this.prodName = prodName;
-		this.rentItems = rentItems;
+//		this.rentItems = rentItems;
 		this.rentProducts = rentProducts;
-		this.buyItems = buyItems;
+//		this.buyItems = buyItems;
 		this.product = product;
 	}
 
@@ -68,13 +66,13 @@ public class ProductTypeBean implements Serializable {
 		this.prodName = prodName;
 	}
 
-	public Set<RentItemBean> getRentitems() {
-		return rentItems;
-	}
-
-	public void setRentitems(Set<RentItemBean> rentitems) {
-		this.rentItems = rentitems;
-	}
+//	public Set<RentItemBean> getRentitems() {
+//		return rentItems;
+//	}
+//
+//	public void setRentitems(Set<RentItemBean> rentitems) {
+//		this.rentItems = rentitems;
+//	}
 
 	public Set<RentProductBean> getRentproducts() {
 		return rentProducts;
@@ -84,13 +82,13 @@ public class ProductTypeBean implements Serializable {
 		this.rentProducts = rentproducts;
 	}
 
-	public Set<BuyItemBean> getBuyitems() {
-		return buyItems;
-	}
-
-	public void setBuyitems(Set<BuyItemBean> buyitems) {
-		this.buyItems = buyitems;
-	}
+//	public Set<BuyItemBean> getBuyitems() {
+//		return buyItems;
+//	}
+//
+//	public void setBuyitems(Set<BuyItemBean> buyitems) {
+//		this.buyItems = buyitems;
+//	}
 
 	public Set<ProductBean> getProducts() {
 		return product;

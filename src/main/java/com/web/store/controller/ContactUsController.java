@@ -89,7 +89,7 @@ public class ContactUsController {
 		if(session.getAttribute("LoginOK") == null) {
 			return "index";
 		}
-		Integer usId = pb.getusId();
+		Integer replyId = pb.getreplyId();
 		String ordId = pb.getOrdId();
 		String phone = pb.getPhone();
 		String email = pb.getEmail();
@@ -134,9 +134,9 @@ public class ContactUsController {
 
 	@PostMapping(value = "/_06_problemReply/{custId}")
 	public @ResponseBody ProblemBean insertproblemReplyQuery(@PathVariable Integer custId, Model model,
-			@RequestParam(value = "usId", required = false) Integer usId) {
+			@RequestParam(value = "replyId", required = false) Integer replyId) {
 
-		ProblemBean problemBean = contactUsService.getProblemById(usId);
+		ProblemBean problemBean = contactUsService.getProblemById(replyId);
 
 		model.addAttribute("problemBean", problemBean);
 

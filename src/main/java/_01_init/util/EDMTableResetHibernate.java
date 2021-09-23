@@ -9,7 +9,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.math.BigDecimal;
 import java.sql.Blob;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -256,7 +255,6 @@ public class EDMTableResetHibernate {
 					java.sql.Clob clob = SystemUtils2018.fileToClob("data/productDescription.txt");
 					rpb.setDescription(clob);
 					rpb.setProductTypeBean(new ProductTypeBean(token[8]));
-					int n = 0;
 					if(Integer.parseInt(token[9]) == 0 ) {
 						;
 					}else {
@@ -319,7 +317,7 @@ public class EDMTableResetHibernate {
 //					bib.setProdId(Integer.parseInt(token[6]));
 					bib.setProdQTY(Integer.parseInt(token[4]));
 					bib.setProductBean(new ProductBean(Integer.parseInt(token[5])));
-					bib.setProductTypeBean(new ProductTypeBean(token[6]));
+//					bib.setProductTypeBean(new ProductTypeBean(token[6]));
 //					bib.setPromotionBean(new PromotionBean(Integer.parseInt(token[7])));
 
 					session.merge(bib);
@@ -342,7 +340,7 @@ public class EDMTableResetHibernate {
 					String[] token = line.split("\\|");
 					RentItemBean rib = new RentItemBean();
 					rib.setRentItemPK(new RentItemPK(new OrdPK(token[0], Integer.parseInt(token[1])),
-													Integer.parseInt(token[2])));
+													 Integer.parseInt(token[2])));
 					rib.setProdQty(Integer.parseInt(token[5]));
 					rib.setRentPeriod(Integer.parseInt(token[6]));
 					rib.setReturnDate(Timestamp.valueOf(token[7]));
@@ -371,9 +369,7 @@ public class EDMTableResetHibernate {
 					rb.setReservationId(Integer.parseInt(token[0]));
 					rb.setCategory(token[1]);
 					rb.setClassify(token[2]);
-//					rb.setProdId(Integer.parseInt(token[3]));
 					rb.setReserveDate(Timestamp.valueOf(token[4]));
-//					rb.setSerialNumber(token[5]);
 					rb.setWaitNum(Integer.parseInt(token[6]));
 					rb.setWaitType(null);
 //					rb.setCustomerBean(Integer.parseUnsignedInt(new CustomerBean(token[8])));
@@ -427,20 +423,21 @@ public class EDMTableResetHibernate {
 
 					String[] token = line.split("\\|");
 					ProblemBean pb = new ProblemBean();
-					pb.setusId(Integer.parseInt(token[0]));
+					pb.setreplyId(Integer.parseInt(token[0]));
+					pb.setAccount(token[1]);
 					Blob blob = SystemUtils2018.fileToBlob("data/product/A0001.jpg");
 					pb.setAttachFile(blob);
-					pb.setContent(token[2]);
-					pb.setEmail(token[3]);
-					pb.setFormDate(Timestamp.valueOf(token[4]));
-					pb.setOrdId(token[5]);
-					pb.setPhone(token[6]);
-					pb.setProblemType(token[7]);
-					pb.setProcessState(token[8]);
-					pb.setReplyContent(token[9]);
-					pb.setReplyDate(Timestamp.valueOf(token[10]));
-					pb.setFileName(token[11]);
-					pb.setAccount(token[12]);
+					pb.setContent(token[3]);
+					pb.setEmail(token[4]);
+					pb.setFileName(token[5]);
+					pb.setFormDate(Timestamp.valueOf(token[6]));
+					pb.setOrdId(token[7]);
+					pb.setPhone(token[8]);
+					pb.setProblemType(token[9]);
+					pb.setProcessState(token[10]);
+					pb.setReplyContent(token[11]);
+					pb.setReplyDate(Timestamp.valueOf(token[12]));
+
 
 					session.merge(pb);
 					count++;

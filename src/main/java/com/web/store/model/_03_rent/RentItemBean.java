@@ -18,7 +18,6 @@ import com.web.store.model._02_customerService.CommentBean;
 import com.web.store.model._02_customerService.PromotionBean;
 import com.web.store.model._03_rent.pkClass.RentItemPK;
 import com.web.store.model._06_order.OrdBean;
-import com.web.store.model._07_productType.ProductTypeBean;
 
 @Entity
 @Table(name = "RentItem")
@@ -39,9 +38,9 @@ public class RentItemBean implements Serializable {
 	private Double prodTotal;
 	private String rentStatus;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "RENTITEM_PRODTYPE_FK")
-	private ProductTypeBean productTypeBean;
+//	@ManyToOne(cascade = CascadeType.PERSIST)
+//	@JoinColumn(name = "RENTITEM_PRODTYPE_FK")
+//	private ProductTypeBean productTypeBean;
 
 	@MapsId("OrdPK")
 	@ManyToOne(cascade = CascadeType.PERSIST)
@@ -132,15 +131,15 @@ public class RentItemBean implements Serializable {
 		this.rentStatus = rentStatus;
 	}
 
-	// 雙向多對一productTypeBean之getter、setter 開始
-	public ProductTypeBean getProductTypeBean() {
-		return productTypeBean;
-	}
-
-	public void setProductTypeBean(ProductTypeBean productTypeBean) {
-		this.productTypeBean = productTypeBean;
-	}
-//	雙向多對一productTypeBean之getter、setter 結束
+//	// 雙向多對一productTypeBean之getter、setter 開始
+//	public ProductTypeBean getProductTypeBean() {
+//		return productTypeBean;
+//	}
+//
+//	public void setProductTypeBean(ProductTypeBean productTypeBean) {
+//		this.productTypeBean = productTypeBean;
+//	}
+////	雙向多對一productTypeBean之getter、setter 結束
 
 	public OrdBean getOrdBean() {
 		return ordBean;

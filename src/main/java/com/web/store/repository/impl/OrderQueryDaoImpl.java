@@ -25,10 +25,20 @@ public class OrderQueryDaoImpl implements OrderQueryDao {
 	
 //	使用複合主鍵查詢訂單
 	@Override
-	public OrdBean findOrdBeanById(String category, Integer ordId) {
+	public OrdBean findOrdBeanById(Integer custId, String category, Integer ordId) {
 		Session session = factory.getCurrentSession();
-		OrdBean ordBean = session.get(OrdBean.class, new OrdPK(category, ordId)); 
-		return ordBean;
+		String hql = " FROM OrdBean ob WHERE ob.ordPK = :pk AND ob.customerBean.custId = :cid ";
+//		OrdBean ordBean = session.get(OrdBean.class, new OrdPK(category, ordId)); 
+		if (session.createQuery(hql, OrdBean.class).setParameter("pk", new OrdPK(category, ordId))
+				  .setParameter("cid", custId).getResultList().size() > 0) {
+			return session.createQuery(hql, OrdBean.class)
+						  .setParameter("pk", new OrdPK(category, ordId))
+						  .setParameter("cid", custId)
+						  .getSingleResult();
+		} else {
+			return null;
+		}
+		
 	}
 	
 //	使用訂單編號查詢購買細項

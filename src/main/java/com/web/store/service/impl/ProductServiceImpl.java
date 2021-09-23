@@ -68,12 +68,6 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.getTotalPagesByProdType(prodTypeBean);
 	}
 
-//	取得所有產品類別
-	@Override
-	public List<ProductTypeBean> getAllProdTypes() {
-		return productDao.getAllProdTypes();
-	}
-
 	@Override
 	public void updateStock(int productId, int newQuantity) {
 	}

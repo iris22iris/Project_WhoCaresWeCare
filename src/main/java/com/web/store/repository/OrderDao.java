@@ -10,6 +10,8 @@ public interface OrderDao {
 	
 	//儲存訂單
 	public void save(OrdBean ordBean);
-
+	
+	//找尋目前訂單編號
+	public Integer findCurrentOrdId();
 	
 }

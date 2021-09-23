@@ -8,7 +8,7 @@ import com.web.store.model._06_order.OrdBean;
 
 public interface OrderQueryService {
 
-	OrdBean findOrdBeanById(String category, Integer ordId);
+	OrdBean findOrdBeanById(Integer custId, String category, Integer ordId);
 
 	List<BuyItemBean> findBuyItemByOrdId(Integer ordId);
 
