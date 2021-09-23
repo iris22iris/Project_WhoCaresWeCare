@@ -22,9 +22,6 @@ public interface RentProductService {
 	// 計算群組租賃設備總共有幾頁
 	int getGroupedPages(ProductTypeBean prodTypeBean);
 	
-	// 讀取全部租賃設備分類
-	List<ProductTypeBean> getAllProdTypes();
-
 	// 依主鍵讀取單筆租賃設備資料
 	public RentProductBean getProductById(int prodId);
 	

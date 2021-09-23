@@ -46,7 +46,7 @@ public class RentProductDaoImpl implements RentProductDao {
 			String sortType) {
 		Session session = factory.getCurrentSession();
 		String hql = "";
-		if (prodTypeBean.getProdType() != null) {
+		if (prodTypeBean != null) {
 			hql = " FROM RentProductBean rp "
 				+ " WHERE rp.productTypeBean = :ptb "
 				+ " GROUP BY rp.prodId ";
@@ -59,7 +59,7 @@ public class RentProductDaoImpl implements RentProductDao {
 			hql += " ORDER BY SUM(" + token[0] + ") " + token[1] + " ";
 		}
 		int startRecordNo = (pageNo - 1) * recordsPerPage;
-		if (prodTypeBean.getProdType() != null) {
+		if (prodTypeBean != null) {
 		return session.createQuery(hql, RentProductBean.class)
 					  .setParameter("ptb", prodTypeBean)
 			      	  .setFirstResult(startRecordNo)
@@ -78,7 +78,7 @@ public class RentProductDaoImpl implements RentProductDao {
 	public List<Long> getGroupedStockSum(ProductTypeBean prodTypeBean, int pageNo, String sortType) {
 		Session session = factory.getCurrentSession();
 		String hql = "";
-		if (prodTypeBean.getProdType() != null) {
+		if (prodTypeBean != null) {
 			hql = " SELECT SUM(rp.stock) FROM RentProductBean rp "
 				+ " WHERE rp.productTypeBean = :ptb "
 				+ " GROUP BY rp.prodId ";
@@ -92,7 +92,7 @@ public class RentProductDaoImpl implements RentProductDao {
 		}
 		int startRecordNo = (pageNo - 1) * recordsPerPage;
 		
-		if (prodTypeBean.getProdType() != null) {
+		if (prodTypeBean != null) {
 			return session.createQuery(hql, Long.class)
 					  	  .setParameter("ptb", prodTypeBean)
 					  	  .setFirstResult(startRecordNo)
@@ -114,7 +114,7 @@ public class RentProductDaoImpl implements RentProductDao {
 		String hql = "";
 		List<Long> list = null;
 		long count = 0; // 必須使用 long 型態
-		if (prodTypeBean.getProdType() != null) {
+		if (prodTypeBean != null) {
 			hql = " SELECT count(DISTINCT prodId) FROM RentProductBean rp WHERE rp.productTypeBean = :ptb ";
 			list = session.createQuery(hql, Long.class)
 					 	  .setParameter("ptb", prodTypeBean)
@@ -131,15 +131,6 @@ public class RentProductDaoImpl implements RentProductDao {
 
 		totalPages = (int) (Math.ceil(count / (double) recordsPerPage));
 		return totalPages;
-	}
-	
-//	取得所有產品類別
-	@Override
-	public List<ProductTypeBean> getAllProdTypes() {
-		Session session = factory.getCurrentSession();
-		String hql = " FROM ProductTypeBean ";
-		
-		return session.createQuery(hql, ProductTypeBean.class).getResultList();
 	}
 	
 	// 依主鍵讀取租賃設備總庫存

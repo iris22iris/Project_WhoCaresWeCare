@@ -4,7 +4,6 @@ import java.sql.Clob;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletContext;
 
@@ -17,14 +16,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.web.store.model._02_customerService.CommentBean;
 import com.web.store.model._03_rent.RentProductBean;
 import com.web.store.model._03_rent.ReservationBean;
 import com.web.store.model._05_customer.CustomerBean;
-import com.web.store.model._06_order.OrdBean;
 import com.web.store.model._07_productType.ProductTypeBean;
+import com.web.store.service.ProductTypeService;
 import com.web.store.service.RentProductService;
 
 
@@ -32,20 +30,21 @@ import com.web.store.service.RentProductService;
 public class RentProductPageController {
 
 	RentProductService rentProductService;
+	ProductTypeService productTypeService;
 	ServletContext servletContext;
 	
 	@Autowired
-	public RentProductPageController(RentProductService rentProductService, ServletContext servletContext) {
+	public RentProductPageController(RentProductService rentProductService, ProductTypeService productTypeService,
+			ServletContext servletContext) {
 		this.rentProductService = rentProductService;
-		
+		this.productTypeService = productTypeService;
 		this.servletContext = servletContext;
 	}
-	
 
 	@RequestMapping("/_03_rentProduct")
 	public String getProductById(@RequestParam("id") Integer id ,Model model) {
 		List<RentProductBean> rentProducts = rentProductService.getAllProducts();
-		List<ProductTypeBean> productTypes = rentProductService.getAllProdTypes();
+		List<ProductTypeBean> productTypes = productTypeService.getAllProdTypes();
 		
 		//用商品編號取得該產品及其項次庫存資料
 		List<RentProductBean> AllSerialStocks = rentProductService.getAllSerialStocksByprodId(id);

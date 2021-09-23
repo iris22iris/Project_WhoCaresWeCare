@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.store.model._02_customerService.CommentBean;
-import com.web.store.model._03_rent.RentProductBean;
 import com.web.store.model._04_shop.ProductBean;
 import com.web.store.model._07_productType.ProductTypeBean;
 import com.web.store.service.ProductService;
+import com.web.store.service.ProductTypeService;
 
 @Controller
 public class BuyProductPageController {
@@ -24,11 +24,14 @@ public class BuyProductPageController {
 
 
 	ProductService productService;
+	ProductTypeService productTypeService;
 	ServletContext servletContext;
 
 	@Autowired
-	public BuyProductPageController(ProductService productService, ServletContext servletContext) {
+	public BuyProductPageController(ProductService productService, ProductTypeService productTypeService,
+			ServletContext servletContext) {
 		this.productService = productService;
+		this.productTypeService = productTypeService;
 		this.servletContext = servletContext;
 	}
 
@@ -36,7 +39,7 @@ public class BuyProductPageController {
 	public String getProductById(@RequestParam("id") Integer id, Model model) {
 
 		List<ProductBean> products = productService.getAllProducts();
-		List<ProductTypeBean> productTypes = productService.getAllProdTypes();
+		List<ProductTypeBean> productTypes = productTypeService.getAllProdTypes();
 		List<CommentBean> comments = productService.getCommentBeanByprodId(id);
 		model.addAttribute("products", products);
 		model.addAttribute("productTypes", productTypes);

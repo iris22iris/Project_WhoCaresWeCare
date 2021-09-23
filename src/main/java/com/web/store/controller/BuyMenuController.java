@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.web.store.model._02_customerService.PromotionBean;
 import com.web.store.model._04_shop.FavoriteBean;
 import com.web.store.model._04_shop.ProductBean;
 import com.web.store.model._04_shop.ShoppingCart;
@@ -22,11 +24,15 @@ import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.model._07_productType.ProductTypeBean;
 import com.web.store.service.CustomerService;
 import com.web.store.service.ProductService;
+import com.web.store.service.ProductTypeService;
+import com.web.store.service.PromotionService;
 
 @Controller
 public class BuyMenuController {
 
 	ProductService productService;
+	ProductTypeService productTypeService;
+	PromotionService promotionService;
 	HttpSession httpSession;
 	FavoriteBean favoriteBean;
 
@@ -45,14 +51,18 @@ public class BuyMenuController {
 	}
 
 	@Autowired
-	public BuyMenuController(ProductService productService, HttpSession httpSession) {
+	public BuyMenuController(ProductService productService, ProductTypeService productTypeService,
+			PromotionService promotionService, HttpSession httpSession) {
 		this.productService = productService;
+		this.productTypeService = productTypeService;
+		this.promotionService = promotionService;
 		this.httpSession = httpSession;
 	}
-	
+
 //	進入商城目錄頁(含分頁及排序)
-	@GetMapping({ "/buyMenu", "/buyMenu/{prodType}" })
+	@GetMapping({ "/buyMenu", "/buyMenu/{prodType}", "/buyMenu/promote{promoteId}" })
 	public String buyProductMenu(@PathVariable(name = "prodType", required = false) String prodType,
+			@PathVariable(name = "promoteId", required = false) Integer promoteId,
 			@RequestParam(name = "sortType", required = false) String sortType,
 			@RequestParam(name = "pageNo", defaultValue = "1", required = false) int pageNo, Model model) {
 
@@ -67,15 +77,16 @@ public class BuyMenuController {
 
 		if (prodType != null) {
 			if (sortType != null) {
-				products = productService.getProductsByProdTypeAndPageSort(new ProductTypeBean(prodType), pageNo,
-						sortType);
+				products = productService.getProductsByProdTypeAndPageSort(
+						productTypeService.findProductTypeBeanById(prodType), pageNo, sortType);
 				String[] token = sortType.split(" ");
 				model.addAttribute("sortType", token[0] + "+" + token[1]);
 			} else {
-				products = productService.getProductsByProdTypeAndPage(new ProductTypeBean(prodType), pageNo);
+				products = productService
+						.getProductsByProdTypeAndPage(productTypeService.findProductTypeBeanById(prodType), pageNo);
 				model.addAttribute("sortType", null);
 			}
-			totalPages = productService.getTotalPagesByProdType(new ProductTypeBean(prodType));
+			totalPages = productService.getTotalPagesByProdType(productTypeService.findProductTypeBeanById(prodType));
 		} else {
 			if (sortType != null) {
 				products = productService.getAllProductsByPageSort(pageNo, sortType);
@@ -87,9 +98,12 @@ public class BuyMenuController {
 			totalPages = productService.getTotalPages();
 		}
 
-		List<ProductTypeBean> productTypes = productService.getAllProdTypes();
+		List<ProductTypeBean> productTypes = productTypeService.getAllProdTypes();
+		List<PromotionBean> promotions = promotionService.getAllPromotions();
+
 		model.addAttribute("products", products);
 		model.addAttribute("productTypes", productTypes);
+		model.addAttribute("promotions", promotions);
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("totalPages", totalPages);
 
@@ -141,6 +155,5 @@ public class BuyMenuController {
 		List<Query> fb = productService.queryFavoriteProduct(FK_Customer_ID);
 		return fb;
 	}
-
 
 }

@@ -32,9 +32,6 @@ public interface ProductService {
 	// 計算分類的商品總共有幾頁
 	int getTotalPagesByProdType(ProductTypeBean prodTypeBean);
 
-	// 讀取全部產品分類
-	List<ProductTypeBean> getAllProdTypes();
-
 	// 更新庫存
 	void updateStock(int productId, int newQuantity);
 
