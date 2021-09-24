@@ -125,7 +125,8 @@
 
 					<!-- 商品基本資訊 start -->
 						<div class="productInfo col-7">
-							<form id="form1" name="form1" method="GET" action="">
+							<form action="<c:url value='/buyMenu/addCart/${product.prodId}' />"
+								  method="POST">
 								<div class="smallStyle col-12">
 									編號${product.prodId}
 								</div>
@@ -159,7 +160,7 @@
 									<div class="col-4">
 									選購數量:</div>
 									<div class="col-4">
-									<input type="number" min="1" max="10" value="1">
+									<input name="prodQTY" type="number" min="1" max="10" value="1">
 									</div>
 								</div>
 
@@ -172,10 +173,7 @@
 								</div> 	
 																																					
 									<div class="submitBtn col-8">	   															 														  		
-							
-									<button class="btn btn-outline-warning ms-3">
-										加入購物車
-									</button>
+									<input type="submit" class="btn btn-warning col-3" value="加入購物車" />
 									</div>
 								
 							</form>
