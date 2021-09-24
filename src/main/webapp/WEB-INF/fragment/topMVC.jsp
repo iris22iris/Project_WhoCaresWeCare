@@ -28,55 +28,60 @@
 	}
 	
 // 	window.onload = function() {
-// 		if('${sessionScope.searchProduct}'){		
-// 			$('#searchProduct').autocomplete({
-// 				select : function(event, ui) {
-// 					"use strict";
-// 					console.log('select event called');
-// 				},
-// 				source : '${sessionScope.searchProduct}'.substring(1,'${sessionScope.searchProduct}'.length-1).split(', '),
-// 				minLength : 1,
-// 				change : function(event, ui) {
-// 					if (ui.item) {
-// 						console.log("ui.item.value: " + ui.item.value);
-// 					} else {
-// 						console.log("ui.item.value is null");
-// 					}
-// 					console.log("this.value: " + this.value);
-// 				}
-// 			});
-// 		} else {
-// 			$.ajax({
-// 				url : '${pageContext.request.contextPath}/searchProduct',
-// 				type : "GET",
-// 				success: function(data) { 
-// 					if(data){
-// 						$('#searchProduct').autocomplete({
-// 							select : function(event, ui) {
-// 								"use strict";
-// 								console.log('select event called');
-// 							},
-// 							source : data,
-// 							minLength : 1,
-// 							change : function(event, ui) {
-// 								if (ui.item) {
-// 									console.log("ui.item.value: " + ui.item.value);
-// 								} else {
-// 									console.log("ui.item.value is null");
-// 								}
-// 								console.log("this.value: " + this.value);
-// 							}
-// 						});
-// 					}
-// 				},
-// 			});
-// 		}
-// 	}
+	function searchBox(){
+		if('${sessionScope.searchProduct}'){		
+			$('#searchProduct').autocomplete({
+				select : function(event, ui) {
+					"use strict";
+					console.log('select event called');
+				},
+				source : '${sessionScope.searchProduct}'.substring(1,'${sessionScope.searchProduct}'.length-1).split(', '),
+				minLength : 1,
+				change : function(event, ui) {
+					if (ui.item) {
+						console.log("ui.item.value: " + ui.item.value);
+					} else {
+						console.log("ui.item.value is null");
+					}
+					console.log("this.value: " + this.value);
+				}
+			});
+		} else {
+			$.ajax({
+				url : '${pageContext.request.contextPath}/searchProduct',
+				type : "GET",
+				success: function(data) { 
+					if(data){
+						$('#searchProduct').autocomplete({
+							select : function(event, ui) {
+								"use strict";
+								console.log('select event called');
+							},
+							source : data,
+							minLength : 1,
+							change : function(event, ui) {
+								if (ui.item) {
+									console.log("ui.item.value: " + ui.item.value);
+								} else {
+									console.log("ui.item.value is null");
+								}
+								console.log("this.value: " + this.value);
+							}
+						});
+					}
+				},
+			});
+		}
+	}
+// }
+
+	
 
 	function searchProductMenu(obj, objUrl) {
 		if ($('#searchProduct').val()) {
-			window.location.href = '${pageContext.request.contextPath}/_01_searchResult/' + $('#searchProduct').val();
-			
+			window.location.href = '${pageContext.request.contextPath}/_01_searchResult/'
+					+ $('#searchProduct').val();
+
 		}
 	}
 </script>

@@ -30,16 +30,21 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js">
 	</script>
 	 <script>
-	function Download_Img(){ //圖片下載
-		var img = document.getElementById('myimage');
-		var url = img.src;
-		var a = document.createElement('a');
-		var event = new MouseEvent('click')
-		a.download = 'image' //圖片下載名稱
-		a.href = url;
-		a.dispatchEvent(event)
+
+		window.onload = function() {
+			searchBox();
 		}
- </script>
+	function Download_Img(){ //圖片下載
+		
+			var img = document.getElementById('myimage');
+				var url = img.src;
+				var a = document.createElement('a');
+				var event = new MouseEvent('click')
+				a.download = 'image' //圖片下載名稱
+				a.href = url;
+				a.dispatchEvent(event)
+			}
+		</script>
 </head>
 
 <body>

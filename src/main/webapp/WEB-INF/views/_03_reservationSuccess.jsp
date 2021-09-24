@@ -36,11 +36,22 @@
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
+	<!-- 引入共同的頁尾 -->
+		<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
+		
+		<script>
+		window.onload = function() {
+			searchBox();
+		}
+		</script>
+		
 </head>
 
 <body>
 	<!-- 頁面顯示30秒跳轉至首頁 start -->
  <script type="text/javascript">  
+	
 	function countDown(){
 		//30秒之後跳轉至首頁
 		setTimeout("location.href='${pageContext.request.contextPath}/index'",30000);
@@ -104,8 +115,7 @@
 		
 		</div>
 		<!-- main end -->
-		<!-- 引入共同的頁尾 -->
-		<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
+		
 		</div>
 	<script type="text/javascript" src="./js/_05loginPopup3.js"></script>
 	</div>

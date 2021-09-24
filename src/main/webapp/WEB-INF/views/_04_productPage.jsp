@@ -35,7 +35,13 @@
 
 <!-- 引入script -->
 <script src="<c:url value='/js/_04productPage.js' />"></script>
-
+		<!-- 引入共同的頁首 -->
+		<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+<script>
+	window.onload = function() {
+		searchBox();
+	}
+</script>
 </head>
 
 <body>
@@ -43,8 +49,7 @@
 		<div id="content">
 	
 		<!-- header start -->
-		<!-- 引入共同的頁首 -->
-		<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+		
 		<!-- header end -->
 
 		<!-- main start -->

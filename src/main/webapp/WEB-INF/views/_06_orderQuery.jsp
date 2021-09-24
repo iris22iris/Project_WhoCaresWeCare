@@ -21,6 +21,14 @@
 <script defer
 	src="https://use.fontawesome.com/releases/v5.0.10/js/all.js"></script>
 <script defer src="https://use.fontawesome.com/4e44561671.js"></script>
+			<!-- 引入共同的頁首 -->
+			<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+
+<script>
+window.onload = function() {
+	searchBox();
+}
+</script>
 </head>
 
 <body>
@@ -28,9 +36,7 @@
 	<div id="body">
 		<div id="content">
 
-			<!-- 引入共同的頁首 -->
-			<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
-
+			
 			<!--title start 標題開始-->
 			<div class="title ">
 				<div class="buyitemtitle p-3">

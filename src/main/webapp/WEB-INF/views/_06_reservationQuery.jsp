@@ -18,7 +18,14 @@
 <!-- icon -->
 <link rel="stylesheet"
 	href="<c:url value='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'/>" />
-
+			<!-- 引入共同的頁首 -->
+			<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+<script>
+	window.onload = function() {
+		searchBox();
+	}
+	</script>
+</head>
 <title>預約序號查詢</title>
 </head>
 <body>
@@ -26,8 +33,7 @@
 	<div id="body">
 		<div id="content">
 
-			<!-- 引入共同的頁首 -->
-			<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+			
 
 			<!-- title start-->
 			<div class="title">

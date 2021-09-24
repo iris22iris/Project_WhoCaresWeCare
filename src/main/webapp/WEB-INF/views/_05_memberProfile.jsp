@@ -16,12 +16,14 @@
 <!-- icon -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-
+			<!-- 引入共同的頁首 -->
+			<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
 window.onload = function() { 
+		searchBox();
 	$("input[type=radio][name='gender'][value='${customer.gender}']").prop("checked", true);
 	
 	var xhr = new XMLHttpRequest();
@@ -151,8 +153,7 @@ function handleFiles(e){
 <body>
 	<div id="body">
 		<div id="content">
-			<!-- 引入共同的頁首 -->
-			<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+			
 
 
 			<!-- changmtitle star  會員修改資料標題star -->

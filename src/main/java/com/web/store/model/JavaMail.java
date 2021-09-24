@@ -14,7 +14,7 @@ import javax.mail.internet.MimeMessage.RecipientType;
 public class JavaMail {
 	// --------------- 基本資料
 	private String userName = "jk00242004@gmail.com"; // 寄件者email
-	private String passWord = "pighcmqzsipsvujd"; // 寄件者密碼
+	private String passWord = ""; // 寄件者密碼 到自己的google帳號去設定2階段驗證
 	private String customer = "iris22iris@gmail.com "; // 收件者email
 	private String subject = "測試信件"; // 信件標題
 	private String txt = "嗨華晏 請問您您您有看到嘛! This is a test Mail!"; // 內容

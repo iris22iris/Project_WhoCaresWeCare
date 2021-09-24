@@ -16,25 +16,18 @@
     <!-- icon -->
     <link rel="stylesheet"
     href="<c:url value='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'/>" />
-
+<!-- 引入共同的頁首 -->
+	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 	
 	<title>Who Cares? We Care!</title>
 </head>
 <body >
- <div id="contentpopup">
-            
-account == null || account.trim().length() == 0) {}
-errorMsgMap.put("accountError", "帳號與密碼欄必須輸入，密碼長度不能小於八個字元");
- cascade = CasccadeType.presist persit 
- cascade = CascadeType.Principal 
-        </div>
+	<script>
 
-	<div id="body">
-	<div id="content">
-	
-	<!-- 引入共同的頁首 -->
-	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
-	
+    window.onload = function() {
+    	searchBox();
+	}
+    </script>
 	<!-- 廣告圖片大小&button顏色 還須調整 -->
 	<!-- Slider-img Start! -->
 	<div id="carouselExampleInterval" class="carousel slide"

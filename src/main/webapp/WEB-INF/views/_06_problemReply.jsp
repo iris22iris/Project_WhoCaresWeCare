@@ -21,6 +21,13 @@
 	<title>客服紀錄查詢</title>
 	<script src="<c:url value='/js/ContactUs.js' />"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	 <!-- 引入共同的頁首 -->
+	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+	<script>
+	window.onload = function() {
+		searchBox();
+	}
+	</script>
 </head>
 
 <script>
@@ -60,8 +67,7 @@
   <!-- main start -->
   <div id="body">
     <div id="content">
-   <!-- 引入共同的頁首 -->
-	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+  
 
       <!-- title start-->
       <div class="title">

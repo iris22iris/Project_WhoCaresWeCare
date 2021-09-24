@@ -47,9 +47,14 @@
 	font-size: 5pt;
 }
 </style>
-
+		<!-- 引入共同的頁首 -->
+		<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 <title>會員登入/註冊</title>
-
+ 	<script>
+	window.onload = function() {
+		searchBox();
+	}
+	</script>
 
 </head>
 <script>
@@ -66,8 +71,7 @@
 <body id="loginBody">
 	<div id="body">
 		<div id="content">
-		<!-- 引入共同的頁首 -->
-		<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+		
 
 		<!-- main start! -->
 		<div class="loginMain">

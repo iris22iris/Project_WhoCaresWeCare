@@ -23,12 +23,15 @@
 	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 	
 <script>
+
+window.onload = function() {
+	searchBox();
+}
+
 function qaQuery(obj){
 	obj.href="<c:url value='/_06_problemReply/' />"+'<%=session.getAttribute("LoginOK")%>';
 }		
 			
-	
-	
 	
 </script>
 

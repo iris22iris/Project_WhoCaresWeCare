@@ -32,11 +32,17 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
 <!-- 圖片切換 -->
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<!-- 引入共同的頁首 -->
+		<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+
+<script>
+	window.onload = function() {
+		searchBox();
+	}
+</script>
 </head>
 
 <body>
@@ -59,8 +65,7 @@
 	<div id="body">
 	 <div id="content">
 		<!-- header start -->
-		<!-- 引入共同的頁首 -->
-		<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+		
 		<!-- header end -->
 
 		<!-- main start -->

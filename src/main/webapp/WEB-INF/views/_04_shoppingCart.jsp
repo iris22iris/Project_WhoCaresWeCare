@@ -20,11 +20,14 @@
     <link rel="stylesheet"
     href="<c:url value='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'/>" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- 引入共同的頁首 -->
+	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
     <title>購物車清單</title>
     
     <script>
 
     window.onload = function() {
+    	searchBox();
 		count();
 	}
 	
@@ -141,8 +144,7 @@
   <div id="body">
     <div id="content">
 
-	<!-- 引入共同的頁首 -->
-	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+	
         
      <!-- title Start -->
      <div class="title container">

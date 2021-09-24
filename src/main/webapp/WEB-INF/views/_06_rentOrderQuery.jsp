@@ -19,10 +19,16 @@
 	href="<c:url value='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'/>" />
 <!-- sweetAlert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-
+			<!-- 引入共同的頁首 -->
+			<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 <script defer
 	src="https://use.fontawesome.com/releases/v5.0.10/js/all.js"></script>
 <script defer src="https://use.fontawesome.com/4e44561671.js"></script>
+<script>
+	window.onload = function() {
+		searchBox();
+	}
+	</script>
 </head>
 
 <body>
@@ -30,8 +36,7 @@
 	<div id="body">
 		<div id="content">
 
-			<!-- 引入共同的頁首 -->
-			<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+			
 
 			<!--title start 標題開始-->
 			<div class="title ">

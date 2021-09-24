@@ -19,9 +19,12 @@
     <!-- icon -->
     <link rel="stylesheet"
     href="<c:url value='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'/>" />
-	
+	  <!-- 引入共同的頁首 -->
+		<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 	<script>
-
+	window.onload = function() {
+		searchBox();
+	}
 	
 	function changeDiscount(){
 	
@@ -55,8 +58,7 @@
     <div id="body">
       <div id="content">
   
-       <!-- 引入共同的頁首 -->
-		<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+     
        
 
       <!--商品結帳頁面-->

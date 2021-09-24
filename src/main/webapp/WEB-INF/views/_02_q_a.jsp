@@ -21,6 +21,12 @@
     <!-- 引入共同的頁首 -->
 	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 	
+	<script>
+	window.onload = function() {
+		searchBox();
+	}
+	</script>
+	
 </head>
 
 

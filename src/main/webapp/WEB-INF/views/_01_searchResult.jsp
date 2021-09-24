@@ -20,7 +20,14 @@
 	<link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
-<title>搜尋結果 ${searchProduct}</title>
+	<title>搜尋結果 ${searchProduct}</title>
+				<!-- 引入共同的頁首 -->
+				<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+	<script>
+	window.onload = function() {
+		searchBox();
+	}
+	</script>
 
 </head>
 <body>
@@ -28,8 +35,7 @@
 	<div id="body">
 		<div id="content">
 
-			<!-- 引入共同的頁首 -->
-			<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+			
 
 			<!-- Search Result Title Start -->
 			<div class="container">
