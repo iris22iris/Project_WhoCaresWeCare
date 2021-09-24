@@ -22,6 +22,7 @@
 	<title>Who Cares? We Care!</title>
 	<script>
 	window.onload = function() {
+// 		drawPic();
     	searchBox();
 	}
 
@@ -300,6 +301,7 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js">
 	</script>
+	
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/_05loginPopup3.js"></script>
 </body>
 </html>
