@@ -6,6 +6,8 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +34,8 @@ public class RentProductPageController {
 	RentProductService rentProductService;
 	ProductTypeService productTypeService;
 	ServletContext servletContext;
+	@Autowired
+	HttpServletRequest request;
 	
 	@Autowired
 	public RentProductPageController(RentProductService rentProductService, ProductTypeService productTypeService,
@@ -41,7 +45,7 @@ public class RentProductPageController {
 		this.servletContext = servletContext;
 	}
 
-	@RequestMapping("/_03_rentProduct")
+	@GetMapping("/_03_rentProduct")
 	public String getProductById(@RequestParam("id") Integer id ,Model model) {
 		List<RentProductBean> rentProducts = rentProductService.getAllProducts();
 		List<ProductTypeBean> productTypes = productTypeService.getAllProdTypes();
@@ -106,7 +110,7 @@ public class RentProductPageController {
 	//預約popout點擊預約畫面把資料送到資料庫
 	
 	@PostMapping("/_03_rentProduct")
-	public String processAddNewProductForm	(@RequestParam("id") Integer id ,@CookieValue(value = "user") String user
+	public String processAddNewProductForm	(@RequestParam("id") Integer id 
 			,@ModelAttribute("reservation") ReservationBean rb,Model model) {
 		
 
@@ -128,8 +132,11 @@ public class RentProductPageController {
 	        	rb.setWaitNum(reservations.get(reservations.size()-1).getWaitNum()+1);
 	        
 		
-		
-		List<CustomerBean> customerinfo = rentProductService.getCustomerInfoBycookieaccount(user);
+	        HttpSession session = request.getSession();
+
+			
+		List<CustomerBean> customerinfo = rentProductService.getCustomerInfoBycookieaccount((String) session.getAttribute("LoginAccount"));
+
 		model.addAttribute("customerinfo", customerinfo);
 		rb.setCustomerBean(new CustomerBean(customerinfo.get(0).getCustId(), null, null, null, null, null, null, null, null, null, null, null, null, null, null));
 		rb.setRentProductBean(new RentProductBean(id,"1", null, null, null, null, null, null, null, null, null, null, null, null, null, null));
@@ -142,8 +149,11 @@ public class RentProductPageController {
 	}
 	
 	@GetMapping("/_03_reservationSuccess")
-		public String showAddedReservationdata(Model model,@CookieValue(value = "user") String user){
-		List<CustomerBean> customerinfo = rentProductService.getCustomerInfoBycookieaccount(user);
+		public String showAddedReservationdata(Model model){
+		HttpSession session = request.getSession();
+
+		
+		List<CustomerBean> customerinfo = rentProductService.getCustomerInfoBycookieaccount((String) session.getAttribute("LoginAccount"));
 		model.addAttribute("customerinfo", customerinfo);
 		int mycustId = customerinfo.get(0).getCustId();
 		List<ReservationBean> myreservations = rentProductService.getMyReservationByCustId(mycustId);
