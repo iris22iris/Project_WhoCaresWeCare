@@ -34,9 +34,13 @@ import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.model._06_order.OrdBean;
 import com.web.store.model._06_order.pkClass.OrdPK;
 import com.web.store.model._07_productType.ProductTypeBean;
+import com.web.store.repository.ProductDao;
 import com.web.store.repository.RentProductDao;
+import com.web.store.repository.impl.ProductDaoImpl;
 import com.web.store.repository.impl.RentProductDaoImpl;
+import com.web.store.service.ProductService;
 import com.web.store.service.RentProductService;
+import com.web.store.service.impl.ProductServiceImpl;
 import com.web.store.service.impl.RentProductServiceImpl;
 
 public class EDMTableResetHibernate {
@@ -49,8 +53,13 @@ public class EDMTableResetHibernate {
 		int count = 0;
 		System.out.println("==================刪除表格=====================");
 		SessionFactory factory = HibernateUtils.getSessionFactory();
+		//引入租賃service
 		RentProductDao rentProductDao = new RentProductDaoImpl(factory);
 		RentProductService rentProductService = new RentProductServiceImpl(rentProductDao);
+		//引入購物service
+		ProductDao productDao = new ProductDaoImpl(factory);
+		ProductService productService = new ProductServiceImpl(productDao);
+		
 		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 
@@ -372,8 +381,8 @@ public class EDMTableResetHibernate {
 					rb.setReserveDate(Timestamp.valueOf(token[4]));
 					rb.setWaitNum(Integer.parseInt(token[6]));
 					rb.setWaitType(null);
-//					rb.setCustomerBean(Integer.parseUnsignedInt(new CustomerBean(token[8])));
-					rb.setRentProductBean(rentProductService.getProductById(Integer.parseInt(token[3])));;
+					rb.setCustomerBean(rentProductService.getCustomerInfoByLoginAccount(token[8]).get(0));					
+					rb.setRentProductBean(rentProductService.getProductById(Integer.parseInt(token[3])));
 					session.merge(rb);
 					count++;
 					System.out.println("新增reservation紀錄成功，共新增" + count + "筆記錄:" + token[1]);
@@ -400,9 +409,9 @@ public class EDMTableResetHibernate {
 					cb.setCommentDate(Timestamp.valueOf(token[3]));
 					cb.setRate(Integer.parseInt(token[4]));
 					cb.setVisits(Integer.parseInt(token[5]));
-//					cb.setCustomerBean(new CustomerBean(Integer.parseInt(token[6])));
-//					cb.setProductBean(new ProductBean(Integer.parseInt(token[7])));
-//					cb.setRentProductBean(new RentProductBean(Integer.parseInt(token[8]), token[9]));
+					cb.setCustomerBean(rentProductService.getCustomerInfoByLoginAccount(token[6]).get(0));
+					cb.setProductBean(productService.getProductById(Integer.parseInt(token[7])));
+					cb.setRentProductBean(rentProductService.getProductById(Integer.parseInt(token[8])));
 
 					session.merge(cb);
 					count++;
