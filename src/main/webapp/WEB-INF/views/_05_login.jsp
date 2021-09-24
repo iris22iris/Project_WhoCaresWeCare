@@ -31,8 +31,6 @@
 <!-- 生日引用  -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.zh-CN.min.js"></script>
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
 	rel="stylesheet">
@@ -47,8 +45,7 @@
 	font-size: 5pt;
 }
 </style>
-		<!-- 引入共同的頁首 -->
-		<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+
 <title>會員登入/註冊</title>
  	<script>
 	window.onload = function() {
@@ -72,7 +69,8 @@
 <body id="loginBody">
 	<div id="body">
 		<div id="content">
-		
+		<!-- 引入共同的頁首 -->
+		<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 
 		<!-- main start! -->
 		<div class="loginMain">

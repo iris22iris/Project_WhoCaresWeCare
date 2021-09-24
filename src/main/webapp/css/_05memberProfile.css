@@ -1,24 +1,56 @@
-
-.button{
-    margin-right: 50px;
-    
-}
-
-.changmtitle{
-
+/* -----title----- */
+.pageTitle{
+    text-align: center;
     font-size: 30px;
-    margin-left: 30px;
+    margin-top: 30px;
     color: rgb(117,76,36);
-    
 }
 
-.container{
-   
-    border:black solid ;
-   /* background-color: #474747;*/
-   border-radius: 30px;
+/* -----profileForm----- */
+.profileForm{
+    display: flex;
+    flex-wrap: nowrap;
+    border:1px rgb(117,76,36) solid;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 30px;
+    margin: 30px;
    
 }
 
+/* -----member image----- */
+.memberImgUpload{
+    padding: 30px;
+}
 
+.memberImg{
+    display: flex;
+    justify-content: flex-start;
+}
+.memberImg img{
+    border: 0.5px #ccc solid;
+    border-radius: 15px;
+    box-shadow: 3px 3px 3px 2px #ccc;
+}
+
+.uploadBtn{
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 20px 0px;
+}
+
+/* ---------formData------ */
+.gender{
+    letter-spacing: 2px;
+}
+
+.gender input{
+    padding-right: 10px;
+}
+
+/* -------submitBtn-------- */
+.submitBtn{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+}
 

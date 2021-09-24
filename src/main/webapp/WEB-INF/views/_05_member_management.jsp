@@ -15,8 +15,7 @@
 	href="<c:url value='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'/>" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-			<!-- 引入共同的頁尾 -->
-			<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
+		
 
 <script>
 	window.onload = function() {
@@ -59,110 +58,82 @@
 			<!-- 引入共同的頁首 -->
 			<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 
-			<div
-				class="main col-12 m-5 d-flex justify-content-center  p-3 rounded">
-
+			<!-- conatiner start -->
+			<div class="container main-div">
 				<!-- member profile start -->
-				<div class="row ">
-
-					<div class="col-12  col-sm-12 col-md-4">
-						<div class="col-12 ">
-							<div
-								class="title border rounded-circle d-flex justify-content-center align-items-center ">
-								<h1>會員資料</h1>
-							</div>
-						</div>
-
-						<div class="col-12 ">
-							<div class="mt-5">
-								<h1>
-									<a style="text-decoration: none; color: black; cursor:pointer;"
-										class="fas fa-caret-right" onclick="memberProfile(this)"><i>會員資料修改</i></a>
-								</h1>
-							</div>
-							<div class="mt-5">
-								<h1>
-									<a style="text-decoration: none; color: black; cursor:pointer;"
-										class="fas fa-caret-right" onclick="favoriteList(this)"><i>商品追蹤清單</i></a>
-								</h1>
-							</div>
-							<div class="mt-5">
-								<h1>
-									<i class="fas fa-caret-right"></i>修改密碼
-								</h1>
-							</div>
+				<div class="row block">
+					<div class="col-12 title">
+						<div class="circleTitle rounded-circle" id="memberProfile">
+							會員資料
 						</div>
 					</div>
-					<!-- member profile end -->
-
-					<!-- order status start -->
-					<div
-						class="
-                col-12 col-md-4 col-sm-12 bcglightgray text-dark p-3 rounded">
-						<div class="col-12 bcglightgray">
-							<div
-								class="title border border rounded-circle d-flex justify-content-center align-items-center ">
-								<h1>訂單查詢</h1>
-							</div>
+					<div class="col-12 mt-4">
+						<div class="contentLink">
+							<a onclick="memberProfile(this)">
+								會員資料修改</a>
 						</div>
-
-						<div class="col-12 bcglightgray">
-							<div class="mt-5 ">
-								<h1>
-									<a style="text-decoration: none; color: black; cursor:pointer;"
-										class="fas fa-caret-right" onclick="rentOrderQuery(this)"><i>租賃記錄查詢</i></a>
-								</h1>
-							</div>
-							<div class="mt-5 ">
-								<h1>
-									<a style="text-decoration: none; color: black; cursor:pointer;"
-										class="fas fa-caret-right" onclick="orderQuery(this)"><i>購買記錄查詢</i></a>
-								</h1>
-							</div>
-							<div class="mt-5 ">
-								<h1>
-									<a style="text-decoration: none; color: black; cursor:pointer;"
-										class="fas fa-caret-right" onclick="reservationQuery(this)"><i>預約記錄查詢</i></a>
-								</h1>
-							</div>
-
+						<div class="contentLink">
+							<a onclick="favoriteList(this)">
+								商品追蹤清單</a>
+						</div>
+						<div class="contentLink">
+							<a>修改密碼</a>
 						</div>
 					</div>
-					<!-- order status end -->
-
-					<!-- customer service reply start -->
-					<div
-						class="
-                col-12 col-md-4 col-sm-12  p-3 rounded">
-						<div class="col-12 ">
-							<div
-								class="title  border rounded-circle d-flex justify-content-center align-items-center ">
-								<h1>客服回覆</h1>
-							</div>
-						</div>
-
-						<div class="col-12 ">
-							<div class="mt-5">
-								<h1>
-								<a style="text-decoration: none; color: black;"
-									class="fas fa-caret-right" onclick="qaQuery(this)"><i>客服紀錄查詢</i></a>
-								</h1>
-								<div class="mt-5 ">
-									<h1>
-										<a style="text-decoration: none; color: black;"
-											class="fas fa-caret-right" onclick="contacUs(this)" ><i>聯絡我們</i></a>
-									</h1>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- customer service reply end -->
-
 				</div>
+				<!-- member profile end -->
+
+				<!-- orderQuery start -->
+				<div class="row block">
+					<div class="col-12 title">
+						<div class="circleTitle rounded-circle" id="orderQuery">
+							訂單查詢
+						</div>
+					</div>
+					<div class="col-12 mt-4">
+						<div class="contentLink">
+							<a onclick="rentOrderQuery(this)">
+								租賃記錄查詢</a>
+						</div>
+						<div class="contentLink">
+							<a  onclick="orderQuery(this)">
+								購買記錄查詢</a>
+						</div>
+						<div class="contentLink">
+							<a onclick="reservationQuery(this)">
+								預約記錄查詢</a>
+						</div>
+					</div>
+				</div>
+				<!-- orderQuery end -->
+
+				<!-- customer service start -->
+				<div class="row block">
+					<div class="col-12 title">
+						<div class="circleTitle rounded-circle" id="customerService">
+							客戶服務
+						</div>
+					</div>
+
+					<div class="col-12 mt-4">
+						<div class="contentLink">
+							<a onclick="qaQuery(this)">
+								客服紀錄查詢</a>
+						</div>
+						<div class="contentLink">
+							<a onclick="contacUs(this)" >
+							聯絡我們</a>
+						</div>
+					</div>
+				</div>
+				<!-- customer service  end -->
 			</div>
-			
+			<!-- conatiner end -->
 
 		</div>
+		<!-- 引入共同的頁尾 -->
+		<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
+	
 	</div>
 	<!-- main end -->
 

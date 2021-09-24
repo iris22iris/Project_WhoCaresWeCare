@@ -162,15 +162,15 @@ public class BuyCheckoutController {
 		Set<Integer> set = cartContent.keySet();
 //		Iterator it = set.iterator();
 		BuyItemPK bpk = new BuyItemPK();
-//		int num = 1;
+		int num = 1;
 //		int num = set.size();
 		for(Integer i : set) {
 			BuyItemBean bib = cartContent.get(i);
-			//設定buyItems pk
-			bpk.setOrdPK(newPk);
-			//設定商品項次
-			bpk.setProdSerialNum(i);
-//			num++;
+			
+			bpk.setOrdPK(newPk);//設定buyItems pk
+			
+			bpk.setProdSerialNum(num);//設定商品項次
+			num++;
 			bib.setBuyItemPK(bpk);
 			buyItems.add(bib);
 		}

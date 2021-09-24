@@ -6,8 +6,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="<c:url value='/css/_05memberProfile.css' />" type="text/css">
-<link rel="stylesheet" href="<c:url value='/css/commonStyle.css' />"
-	type="text/css">
+<link rel="stylesheet" href="<c:url value='/css/commonStyle.css' />" type="text/css">
 <!-- bootstrap -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -16,8 +15,7 @@
 <!-- icon -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-			<!-- 引入共同的頁首 -->
-			<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+			
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -144,8 +142,6 @@ function handleFiles(e){
     })(e.target.files[0]);
     reader.readAsDataURL(e.target.files[0]);
 }
-
-
 </script>
 
 <title>會員資料修改</title>
@@ -153,42 +149,30 @@ function handleFiles(e){
 <body>
 	<div id="body">
 		<div id="content">
-			
+			<!-- 引入共同的頁首 -->
+			<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 
+			<!-- title start  -->
+			<div class="pageTitle">會員資料修改</div>
+			<!-- title end -->
 
-			<!-- changmtitle star  會員修改資料標題star -->
-			<div class="changmtitle col-3 text-center p-3  ">
-				<ol>
-					<li><i class="fas fa-th-large" aria-hidden="true"></i>會員資料修改</li>
-				</ol>
-			</div>
-
-			<!-- changmtitle 會員修改資料標題end -->
-
-			<!-- main container star  修改會員資料的表單star -->
-
-			<div
-				class="main container p-3 col-12 justify-content-center text-center ">
-				<!-- main containerfile star  修改會員資料的表單圖片上傳區star -->
-				<div class=" col-3 p-3  ">
-					<!--  圖片star  圖片star -->
-					<div class="button  col-12 p-3 ">
-						<div class="col-6" style="margin-left: 40px">
-							<input id="custImage" type="file" onchange="handleFiles(event)"">
-						</div>
-						<div class="col-12">
-							<img src='${pageContext.request.contextPath}/getMemberImg?custId=${customer.custId}' id="showImage" alt="" width="150" height="150">
-							<div class="col-12 p-3">
-								<button type="submit" class="btn">清除</button>
-							</div>
-						</div>
+			<!-- form start -->
+			<div class="container profileForm">
+				<!-- memberImg start -->
+				<div class="col-3 memberImgUpload">
+					<div class="col-12 memberImg">
+						<img src='${pageContext.request.contextPath}/getMemberImg?custId=${customer.custId}' 
+							 id="showImage" alt="" width="200" height="200">
 					</div>
-					<!--  按鈕end  按鈕end -->
+					<div class="col-12 uploadBtn">
+						<input id="custImage" type="file" onchange="handleFiles(event)"">
+					</div>
+					<button type="submit" class="btn btn-secondary">清除</button>
 				</div>
-				<!-- main containerfile end  修改會員資料的表單圖片上傳區end -->
+				<!-- memberImg end  -->
 
-				<!-- 輸入資料區star  輸入資料區star -->
-				<div class=" col-9 p-3">
+				<!-- inputProfile start -->
+				<div class="col-9 inputProfile">
 					<div
 						class="col-9  p-3 d-flex justify-content-center align-items-center">
 						<!-- 輸入資料區表格star -->
@@ -238,15 +222,15 @@ function handleFiles(e){
 							<div class="col-3">
 								<label>性別:</label>
 							</div>
-							<div class=" choco col-9 ">
-								<div class="col-4">
-									<label><input type="radio" name="gender" id="male"
-										value="male">男</label> <label><input type="radio"
-										name="gender" id="female" value="female">女</label> <label><input
-										type="radio" name="gender" id="multiple" value="multiple">多元</label>
-									<label><input type="radio" name="gender" id="no"
-										value="no">無</label><br>
-								</div>
+							<div class=" gender col-9 ">
+								<input type="radio" name="gender" id="male"
+									value="male"> 男
+								<input type="radio" name="gender" id="female" 
+									value="female"> 女
+								<input type="radio" name="gender" id="multiple" 
+									value="multiple"> 多元
+								<input type="radio" name="gender" id="no"
+									value="no"> 無
 							</div>
 
 
@@ -289,59 +273,56 @@ function handleFiles(e){
 							<div class="col-3">
 								<label for="birthday" class="form-label">出生(西元):</label>
 							</div>
-							<div class="col-3">
-								<label><input data-for="birthday" class="form-label"
-									type="text" id="birthday" value="${customer.birthday}"></label>
+							<div class="col-9">
+								<input data-for="birthday" class="form-control"
+									type="text" id="birthday" value="${customer.birthday}">
 							</div>
 
-						</form>
-						<!-- 輸入資料區表格end -->
-					</div>
-					<!-- 輸入資料區end  輸入資料區end -->
-					<!-- 輸入資料區按鈕star   -->
-					<!-- Button trigger modal -->
-					<!-- Modal -->
-
-					<div
-						class="col-7 p-1  d-flex justify-content-center align-items-center">
-
-						<div class="col-4  ">
-							<button type="button" class="btn btn-primary"
-								data-bs-toggle="modal" data-bs-target="#exampleModal">
-								送出</button>
-						</div>
-						<div class="modal fade" id="exampleModal" tabindex="-1"
-							aria-labelledby="exampleModalLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLabel">會員資料修改</h5>
-										<button type="button" class="btn-close"
-											data-bs-dismiss="modal" aria-label="Close"></button>
-									</div>
-									<div class="modal-body">確定要保存變更資料嗎?</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-											onclick="upData()">確認修改</button>
-										<button type="button" class="btn btn-secondary"
-											data-bs-dismiss="modal">Close</button>
+							<!-- submit btn start   -->
+							<div class="col-3"></div>
+							<div class="col-9 submitBtn">
+								<div class="col-2  ">
+									<button type="button" class="btn btn-warning"
+										data-bs-toggle="modal" data-bs-target="#exampleModal">
+										送出</button>
+								</div>
+								<div class="modal fade" id="exampleModal" tabindex="-1"
+									aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">會員資料修改</h5>
+												<button type="button" class="btn-close"
+													data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">確定要保存變更資料嗎?</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-warning" data-bs-dismiss="modal"
+													onclick="upData()">確認修改</button>
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">Close</button>
+											</div>
+										</div>
 									</div>
 								</div>
+								<div class="col-2">
+									<a href="<c:url value='/_05_member_management' />"><button
+											class="btn btn-secondary" data-bs-toggle="modal"
+											data-bs-target="#exampleModal">取消</button></a>
+								</div>
 							</div>
-						</div>
+					<!--submit btn end   -->
 
-						<div class="col-3">
-							<a href="<c:url value='/_05_member_management' />"><button
-									class="btn btn-primary" data-bs-toggle="modal"
-									data-bs-target="#exampleModal">取消</button></a>
-						</div>
-
+						</form>
 					</div>
-					<!-- 輸入資料區按鈕end   -->
+					<!-- 輸入資料區表格end -->
+
+
 
 				</div>
-				<!-- main container end  修改會員資料的表單end -->
+				<!-- inputProfile end -->
 			</div>
+			<!-- form end -->
 		</div>
 		<!-- 引入共同的頁尾 -->
 		<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />

@@ -1,21 +1,58 @@
 @charset "UTF-8";
 
-/* div背景設定 */
-
-.bcglightgray{
-    background: lightgray;
-}
-/* --------全域設定------ */
-
-.main{
-    /* margin: 0 auto; */
-    width: 100%;
+/* -----main----- */
+.main-div{
     display: flex;
-   
+    justify-content: center;
+    margin: 50px 100px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px saddlebrown solid;
+    border-radius: 50px;
+    padding: 50px; 
 }
-.title{
     
-    height: 300px;
-    width: 300px;
+.block{
+    text-align: center;
+    color:rgb(63, 56, 53);  
 }
 
+/* ------title------ */
+.title{
+    display: flex;
+    justify-content: center;
+}
+
+.circleTitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 5px 5px 2px #ccc;
+    height: 250px;
+    width: 250px;
+    font-size: 30px;
+    color: white;
+}
+
+/* -----title bg-color----- */
+#memberProfile{
+    background-color: rgba(253, 166, 108, 0.863);
+}
+
+#orderQuery{
+    background-color: rgb(245, 221, 116);
+}
+
+#customerService{
+    background-color: rgb(230, 161, 161);
+}
+
+/*-----bottomContent----- */
+.contentLink{
+    line-height: 75px;
+}
+
+.contentLink a{
+    text-decoration: none;
+    font-size: 28px;
+    border-bottom: silver dotted 2px;
+}

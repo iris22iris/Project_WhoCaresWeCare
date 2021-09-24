@@ -141,8 +141,7 @@ public class ShoppingCartController {
 		ordBean.setDiscount(promotion.getDiscount());
 		
 		log.info("把discountCode & discode資訊放進orderBean");
-		
-		
+	
 		return ordBean;
 		}
 		
