@@ -24,12 +24,13 @@
 	window.onload = function() {
     	searchBox();
 	}
-    </script>
+
+	</script>
 </head>
 <body >
  <div id="contentpopup">
             
-        </div>
+ </div>
 
 	<div id="body">
 	<div id="content">

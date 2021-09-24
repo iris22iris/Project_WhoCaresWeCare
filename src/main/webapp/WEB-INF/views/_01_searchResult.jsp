@@ -38,20 +38,20 @@
 			
 
 			<!-- Search Result Title Start -->
-			<div class="container">
-				<div class="searchResultTitle">
-					<h3>
-						<i class="fas fa-th-large pe-3"></i>關於 ${searchProduct} 的相關商品:
-					</h3>
-					<select class="sequence" name="sequence">
-						<option>搜尋結果排序</option>
-						<option value="傳送值">價格↓由高至低</option>
-						<option value="傳送值">價格↑由低至高</option>
-						<option value="傳送值">數量↓由高至低</option>
-						<option value="傳送值">數量↑由低至高</option>
-					</select>
-				</div>
-			</div>
+<!-- 			<div class="container"> -->
+<!-- 				<div class="searchResultTitle"> -->
+<!-- 					<h3> -->
+<%-- 						<i class="fas fa-th-large pe-3"></i>關於 ${searchProduct} 的相關商品: --%>
+<!-- 					</h3> -->
+<!-- 					<select class="sequence" name="sequence"> -->
+<!-- 						<option>搜尋結果排序</option> -->
+<!-- 						<option value="傳送值">價格↓由高至低</option> -->
+<!-- 						<option value="傳送值">價格↑由低至高</option> -->
+<!-- 						<option value="傳送值">數量↓由高至低</option> -->
+<!-- 						<option value="傳送值">數量↑由低至高</option> -->
+<!-- 					</select> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 			<!-- Search Result Title End -->
 
 

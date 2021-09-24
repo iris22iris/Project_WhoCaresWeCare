@@ -68,40 +68,8 @@ public class CustomerController {
 		return "_05_login";
 	}
 
-	// 進行登入
-	@PostMapping("/login")
-	public String login(Model model) {
-
-		String account = request.getParameter("account");
-		String password = request.getParameter("password");
-		String rememberMe = request.getParameter("rememberMe");
-		Map<String, String> errorMsgMap = new HashMap<String, String>();
-		try {
-			CustomerBean customerBean = customerService.checkIDPassword(account, password);
-
-			if (account == null || account.trim().length() == 0) {
-				errorMsgMap.put("accountError", "帳號與密碼欄必須輸入，密碼長度至少八個字元且小於十二個字元");
-			} else if (password == null || password.trim().length() == 0 || password.length() < 8) {
-				errorMsgMap.put("accountError", "帳號與密碼欄必須輸入，密碼長度大於八個字元");
-
-			} else if (customerBean != null) {
-//				model.addAttribute("LoginOK", customerBean);
-				HttpSession session = request.getSession();
-				session.setAttribute("LoginOK", customerBean.getCustId());
-
-			} else {
-				errorMsgMap.put("Error", "帳號或密碼有誤，密碼至少含有一個大寫字母、小寫字母、數字與!@#$%!^'\"");
-			}
-		} catch (RuntimeException e) {
-			errorMsgMap.put("LoginErrorMsg", e.getMessage());
-		}
-
-		if (!errorMsgMap.isEmpty()) {
-			model.addAttribute("ErrorMsgKey", errorMsgMap);
-			return "_05_login";
-		}
-
-		errorMsgMap.put("noError", "index");
+	public void rememberMe(String rememberMe, String account, String password) {
+		
 
 		// **********Remember Me****************************
 		Cookie cookieUser = null;
@@ -138,6 +106,45 @@ public class CustomerController {
 		response.addCookie(cookieRememberMe);
 
 		// ********************************************
+	}
+	
+	
+	// 進行登入
+	@PostMapping("/login")
+	public String login(Model model) {
+
+		String account = request.getParameter("account");
+		String password = request.getParameter("password");
+		String rememberMe = request.getParameter("rememberMe");
+		Map<String, String> errorMsgMap = new HashMap<String, String>();
+		try {
+			CustomerBean customerBean = customerService.checkIDPassword(account, password);
+
+			if (account == null || account.trim().length() == 0) {
+				errorMsgMap.put("accountError", "帳號與密碼欄必須輸入，密碼長度至少八個字元且小於十二個字元");
+			} else if (password == null || password.trim().length() == 0 || password.length() < 8) {
+				errorMsgMap.put("accountError", "帳號與密碼欄必須輸入，密碼長度大於八個字元");
+
+			} else if (customerBean != null) {
+				HttpSession session = request.getSession();
+				session.setAttribute("LoginOK", customerBean.getCustId());
+
+			} else {
+				errorMsgMap.put("Error", "帳號或密碼有誤，密碼至少含有一個大寫字母、小寫字母、數字與!@#$%!^'\"");
+			}
+		} catch (RuntimeException e) {
+			errorMsgMap.put("LoginErrorMsg", e.getMessage());
+		}
+
+		if (!errorMsgMap.isEmpty()) {
+			model.addAttribute("ErrorMsgKey", errorMsgMap);
+			return "_05_login";
+		}
+
+		errorMsgMap.put("noError", "index");
+		
+		rememberMe(rememberMe, account, password);
+		
 		return "index";
 	}
 
