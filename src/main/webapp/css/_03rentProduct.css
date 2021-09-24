@@ -232,6 +232,12 @@ input {
     justify-content: start;
 }
 /* ------預約POPOUT----- */
+/* 視窗標題字與背景的顏色 */
+.reservationtittle{
+	background: #412e11;
+	color: white;
+}
+
 /* 按鈕大小 */
 .reservationbtn{
 	width: 80px;
