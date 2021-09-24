@@ -1,14 +1,12 @@
 package com.web.store.controller;
 
-import java.sql.Clob;
 import java.sql.Timestamp;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
-import javax.sql.rowset.serial.SerialClob;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,11 +22,14 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import com.web.store.model._04_shop.BuyItemBean;
 import com.web.store.model._04_shop.ShoppingCart;
+import com.web.store.model._04_shop.pkClass.BuyItemPK;
 import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.model._06_order.OrdBean;
 import com.web.store.model._06_order.pkClass.OrdPK;
 import com.web.store.service.CustomerService;
 import com.web.store.service.OrderService;
+
+import ecpay.payment.integration.example.ExampleAllInOne;
 
 @Controller
 @SessionAttributes({ "LoginOK", "ShoppingCart","OrdBean" })
@@ -127,6 +128,7 @@ public class BuyCheckoutController {
 //		} catch (Exception e) {
 //			System.out.println("clob寫入異常:"+ e);
 //		}
+		
 		//訂單狀態:預設訂單成立
 		String orderStatus = "orderStatus1";
 		//訂單時間
@@ -147,6 +149,33 @@ public class BuyCheckoutController {
 		Double orderSum = total - discount + shippingFee;
 		log.info("訂單總金額:" + orderSum);
 		
+		//設定訂單pk
+		OrdPK lastPk = orderService.getCurrentOrdId();
+		int id = lastPk.getOrdId() + 1;
+		OrdPK newPk = new OrdPK("B",id);
+		log.info("設定訂單編號:"+newPk);
+		
+		//商品明細
+		ShoppingCart cart = (ShoppingCart) httpSession.getAttribute("ShoppingCart");
+		Map<Integer, BuyItemBean> cartContent = cart.getContent(); 
+		Set<BuyItemBean> buyItems = new LinkedHashSet<>();
+		Set<Integer> set = cartContent.keySet();
+//		Iterator it = set.iterator();
+		BuyItemPK bpk = new BuyItemPK();
+//		int num = 1;
+//		int num = set.size();
+		for(Integer i : set) {
+			BuyItemBean bib = cartContent.get(i);
+			//設定buyItems pk
+			bpk.setOrdPK(newPk);
+			//設定商品項次
+			bpk.setProdSerialNum(i);
+//			num++;
+			bib.setBuyItemPK(bpk);
+			buyItems.add(bib);
+		}
+		log.info("設定buyItems主鍵編號");
+
 //		OrdBean(Timestamp orderDate, String reciName, String reciCity,String reciAddress,
 //		String reciPhone, Double ordTotal, String delivery,
 //		String discountCode, Double discount, String orderStatus, Timestamp shipDate,
@@ -154,18 +183,9 @@ public class BuyCheckoutController {
 		OrdBean order = new OrdBean(time,reciName,null,reciAddress,
 									reciPhone,orderSum,delivery,
 									discountCode,discount,orderStatus,null,
-									null,customerBean,ordBean.getBuyItems());
+									null,customerBean,null);
+		order.setOrdPK(newPk);
 		log.info("準備訂單物件order");
-		
-		//設定訂單pk
-		OrdPK pk = new OrdPK();
-		Integer id = orderService.findCurrentOrdId() + 1;
-		log.info("訂單id"+ id);
-		pk.setCategory("B");
-		pk.setOrdId(id);
-		order.setOrdPK(pk);
-		log.info("設定訂單編號:B"+id);
-		
 		model.addAttribute("OrdBean",order);
 		try {
 			orderService.save(order);
@@ -177,9 +197,28 @@ public class BuyCheckoutController {
 			System.out.println("message=" + message);
 			shortMsg =  message.substring(message.indexOf(":") + 1);
 			log.info("處理訂單時發生異常: " + shortMsg);
-			return "redirect:/BuyCheckout/{custId}";
+			return "redirect:/_04_shoppingCart";
 		}
 		
+		return "_04_orderSuccess";
+	}
+	
+	
+	@PostMapping("/payPayment")
+	@SuppressWarnings("static-access")
+	public String pay(Model model,
+			@RequestParam("custId") Integer custId,
+			@RequestParam("ordTotal") String value) { //接收所需的參數
+		
+		OrdBean ordBean = new OrdBean(); 
+		//綠界套件的類別
+		ExampleAllInOne exampleAllInOne = new ExampleAllInOne(); //產生物件實例
+		ExampleAllInOne.initial(); //一定要呼叫initial()	
+		Integer val = Integer.parseInt(value); //參數型別轉換
+		String paymentValue =exampleAllInOne.genAioCheckOutALL(val.toString(),custId);//呼叫方法並代入參數
+		ordBean.setPayPayment(paymentValue);//用PayPayment去裝Html Form
+		model.addAttribute("ordBean", ordBean);
 		return "_04_payPayment";
+	
 	}
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class PagesController {
@@ -116,14 +117,19 @@ public class PagesController {
 		return "_06_reservationQuery";
 	}
 	
-	
 	@GetMapping("/_04_payPayment")
-	public String PayPayment(Model model) {
+	public String payPayment(Model model) {
+		return "_04_payPayment";
+	}
+	
+	
+	@GetMapping("/_04_orderSuccess")
+	public String orderSuccess(Model model) {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("LoginOK") == null) {
 			return "index";
 		}
-		return "_04_payPayment";
+		return "_04_orderSuccess";
 	}
 	
 	@GetMapping("/_04_orderConfirm")
@@ -133,6 +139,11 @@ public class PagesController {
 			return "index";
 		}
 		return "_04_orderConfirm";
+	}
+	
+	@PostMapping("/thankU")
+	public String thankU(Model model) {
+		return "_04_thankU";
 	}
 	
 
