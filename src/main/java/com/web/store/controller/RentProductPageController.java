@@ -135,7 +135,7 @@ public class RentProductPageController {
 	        HttpSession session = request.getSession();
 
 			
-		List<CustomerBean> customerinfo = rentProductService.getCustomerInfoBycookieaccount((String) session.getAttribute("LoginAccount"));
+		List<CustomerBean> customerinfo = rentProductService.getCustomerInfoByLoginAccount((String) session.getAttribute("LoginAccount"));
 
 		model.addAttribute("customerinfo", customerinfo);
 		rb.setCustomerBean(new CustomerBean(customerinfo.get(0).getCustId(), null, null, null, null, null, null, null, null, null, null, null, null, null, null));
@@ -153,7 +153,7 @@ public class RentProductPageController {
 		HttpSession session = request.getSession();
 
 		
-		List<CustomerBean> customerinfo = rentProductService.getCustomerInfoBycookieaccount((String) session.getAttribute("LoginAccount"));
+		List<CustomerBean> customerinfo = rentProductService.getCustomerInfoByLoginAccount((String) session.getAttribute("LoginAccount"));
 		model.addAttribute("customerinfo", customerinfo);
 		int mycustId = customerinfo.get(0).getCustId();
 		List<ReservationBean> myreservations = rentProductService.getMyReservationByCustId(mycustId);

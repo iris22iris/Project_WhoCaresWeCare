@@ -89,11 +89,11 @@ public class RentProductServiceImpl implements RentProductService {
 
 	}
 
-	// 依cookie中使用者帳號讀取目前使用者資料
+	// 依session中使用者帳號讀取目前使用者資料
 	@Override
-	public List<CustomerBean> getCustomerInfoBycookieaccount(String account) {
+	public List<CustomerBean> getCustomerInfoByLoginAccount(String account) {
 
-		return rentProductDao.getCustomerInfoBycookieaccount(account);
+		return rentProductDao.getCustomerInfoByLoginAccount(account);
 	}
 
 	// 依會員編號取出該會員所有預約的設備資料

@@ -195,9 +195,9 @@ public class RentProductDaoImpl implements RentProductDao {
 		session.save(reservation);   // NG
 		
 	}
-
+	// 依session中使用者帳號讀取目前使用者資料
 	@Override
-	public  List<CustomerBean> getCustomerInfoBycookieaccount(String account) {
+	public  List<CustomerBean> getCustomerInfoByLoginAccount(String account) {
 		Session session = factory.getCurrentSession();
 		
 		String hql =" SELECT c FROM CustomerBean c"
