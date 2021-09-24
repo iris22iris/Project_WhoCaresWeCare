@@ -128,6 +128,7 @@ public class CustomerController {
 			} else if (customerBean != null) {
 				HttpSession session = request.getSession();
 				session.setAttribute("LoginOK", customerBean.getCustId());
+				session.setAttribute("LoginAccount", customerBean.getAccount());
 
 			} else {
 				errorMsgMap.put("Error", "帳號或密碼有誤，密碼至少含有一個大寫字母、小寫字母、數字與!@#$%!^'\"");
