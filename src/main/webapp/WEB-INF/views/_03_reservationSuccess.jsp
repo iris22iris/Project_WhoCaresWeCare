@@ -75,7 +75,7 @@
     
         <div class="modal-dialog ">
           <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header reservationtittle">
                     <h1 class="modal-title2 p-3 col-12 d-flex justify-content-evenly  " id="exampleModalLabel">成功預約通知</h1>
                 
                 </div>

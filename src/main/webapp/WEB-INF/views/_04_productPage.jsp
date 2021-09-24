@@ -169,39 +169,22 @@
 									<div class="col-4">
 									${product.stock}個 
 									</div>
-								</div> 
-
+								</div> 	
+																																					
+									<div class="submitBtn col-8">	   															 														  		
 							
-								
-								
-								<c:choose> 
-								  <c:when test="${product.stock >0 }">
-									<div class="submitBtn col-8">	   
-									<a href="<c:url value='/_04_buyCheckout' />">
-									<button class="btn btn-outline-warning " 
-									 role="button" type="button" >
-									 直接購買</button>
-								 	</a>	
-						 		  </c:when> 
-						
-						  		  <c:otherwise>   
-								  	<button class="btn btn-secondary" data-bs-toggle="modal" href="#exampleModalToggle" 
-								  	role="button"  type="button"data-bs-dismiss="modal">已售完
-								  	</button>
-					   	  		  </c:otherwise> 
-								</c:choose>
-
 									<button class="btn btn-outline-warning ms-3">
 										加入購物車
 									</button>
-								</div>
+									</div>
+								
 							</form>
+							</div>
 						</div>
 						<!-- 商品基本資訊 end -->
 					</div>
-				</div>
-
-				<!-- 商品詳情 start -->
+					
+						<!-- 商品詳情 start -->
 				<div class="productContent col-11">
 					<div class="contentTitle">
 						商品詳情
@@ -214,6 +197,10 @@
 					
 				</div>
 				<!-- 商品詳情 end -->
+					
+				
+
+			
 
 
 
@@ -262,7 +249,7 @@
 				<!-- 評價顯示 end -->
 			</div>
 		</div>
-
+</div>
 		<!-- footer Start! -->
 		<!-- 引入共同的頁尾 -->
 		<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />

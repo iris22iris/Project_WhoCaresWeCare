@@ -238,11 +238,7 @@
 								<c:choose> 
 						  		  <c:when test="${stocksum >0 }">   
 									<div class="submitBtn col-4 d-flex justify-content-center">	
-									<a href="<c:url value='/_03_rentItemList' />">
-									<button class="btn btn-outline-warning " 
-									 role="button" type="button">
-									直接租賃</button>
-						 			</a>
+									
 						 			</div>	
 						  		  </c:when> 
 
@@ -340,13 +336,14 @@
 		<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
         <div class="modal-dialog ">
           <div class="modal-content">
-	            <div class="modal-header">
+	            <div class="modal-header reservationtittle">
 	                <h2 class="modal-title p-3 col-12 d-flex justify-content-evenly " id="exampleModalLabel">登記預約</h2>  
 	            </div>
-            	<div class="containerPOPUP p-3  ">
-            	
-			<form:form method='POST' modelAttribute="reservation" class="row g-3 form">
-	         <fieldset>
+	            
+	            
+           	<div class="containerPOPUP p-3  ">            	
+				<form:form method='POST' modelAttribute="reservation" class="row g-3 form">
+	         		<fieldset>
 	      	                	                
 	           
 	                <div class="form-group d-flex align-items-center">
@@ -372,22 +369,25 @@
 	        		</div>
 	                 <br>  
 	                  	                	                 
-            	</div>
             	
-            <div class="form-group">	
-            <div class="hyperlink  col-12 d-flex justify-content-evenly align-items-center">
-                <div >
-	               <input  type='submit' class='reservationbtn btn  btn-warning' data-bs-target="#exampleModalToggle2" 
-	               data-bs-toggle="modal" data-bs-dismiss="modal"value="確認" />
-	               <button type="button" class=" reservationbtn btn btn-secondary"  data-bs-dismiss="modal">取消</button>
-                </div>
-            </div>
-            </div> 
+            	
+            	
+            	
+            	
+				            <div class="form-group">	
+				            <div class="hyperlink  col-12 d-flex justify-content-evenly align-items-center">
+				                <div >
+					               <input  type='submit' class='reservationbtn btn  btn-warning' data-bs-target="#exampleModalToggle2" 
+					               data-bs-toggle="modal" data-bs-dismiss="modal"value="確認" />
+					               <button type="button" class=" reservationbtn btn btn-secondary"  data-bs-dismiss="modal">取消</button>
+				                </div>
+				            </div>
+				            </div> 
+				            
             
-            
-			</fieldset>       
-	</form:form>
-            
+					</fieldset>       
+				</form:form>
+          </div>  
             
             <div class="col-12 justify-content-evenly p-1  d-flex align-items-center">
                 當商品到貨時,請於收到通知信48小時內完成預約
