@@ -136,11 +136,11 @@ public class RentProductPageController {
 
 			
 		List<CustomerBean> customerinfo = rentProductService.getCustomerInfoByLoginAccount((String) session.getAttribute("LoginAccount"));
+		
 
 		model.addAttribute("customerinfo", customerinfo);
-		rb.setCustomerBean(new CustomerBean(customerinfo.get(0).getCustId(), null, null, null, null, null, null, null, null, null, null, null, null, null, null));
-		rb.setRentProductBean(new RentProductBean(id,"1", null, null, null, null, null, null, null, null, null, null, null, null, null, null));
-		
+		rb.setCustomerBean(customerinfo.get(0));
+		rb.setRentProductBean(rentProductService.getProductById(id));
 		rentProductService.addReservation(rb);	
 		
 	
