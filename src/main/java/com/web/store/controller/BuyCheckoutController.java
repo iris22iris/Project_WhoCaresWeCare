@@ -30,6 +30,8 @@ import com.web.store.model._04_shop.pkClass.BuyItemPK;
 import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.model._06_order.OrdBean;
 import com.web.store.model._06_order.pkClass.OrdPK;
+import com.web.store.repository.OrderDao;
+import com.web.store.repository.OrderQueryDao;
 import com.web.store.service.BuyItemService;
 import com.web.store.service.CustomerService;
 import com.web.store.service.OrderService;
@@ -46,15 +48,18 @@ public class BuyCheckoutController {
 	HttpSession httpSession;
 	CustomerService customerService;
 	BuyItemService buyItemService;
+	OrderQueryDao orderQueryDao;
 
 	
 	@Autowired
 	public BuyCheckoutController(OrderService orderService, HttpSession httpSession, 
-								CustomerService customerService,BuyItemService buyItemService) {
+								CustomerService customerService,BuyItemService buyItemService,
+								OrderQueryDao orderQueryDao) {
 		this.orderService = orderService;
 		this.httpSession = httpSession;
 		this.customerService = customerService;
 		this.buyItemService=buyItemService;
+		this.orderQueryDao=orderQueryDao;
 	}
 
 
@@ -138,7 +143,7 @@ public class BuyCheckoutController {
 		}
 		
 		//訂單狀態:預設訂單成立
-		String orderStatus = "orderStatus1";
+		String orderStatus = "confirmed";
 		
 		//訂單時間
 		Timestamp time = new Timestamp(System.currentTimeMillis());
@@ -206,22 +211,43 @@ public class BuyCheckoutController {
 		return "_04_orderSuccess";
 	}
 	
-	
+	//綠界金流頁面
 	@PostMapping("/payPayment")
 	@SuppressWarnings("static-access")
 	public String pay(Model model,
+			@ModelAttribute("OrdBean") OrdBean ordBean,
 			@RequestParam("custId") Integer custId,
 			@RequestParam("ordTotal") String value) { //接收所需的參數
 		
-		OrdBean ordBean = new OrdBean(); 
+		OrdBean ord = new OrdBean(); 
 		//綠界套件的類別
 		ExampleAllInOne exampleAllInOne = new ExampleAllInOne(); //產生物件實例
-		ExampleAllInOne.initial(); //一定要呼叫initial()	
+		ExampleAllInOne.initial(); //一定要呼叫inidtial()
+		
+		int n = value.lastIndexOf(".");
+		value = value.substring(0, n);
 		Integer val = Integer.parseInt(value); //參數型別轉換
 		String paymentValue =exampleAllInOne.genAioCheckOutALL(val.toString(),custId);//呼叫方法並代入參數
-		ordBean.setPayPayment(paymentValue);//用PayPayment去裝Html Form
-		model.addAttribute("ordBean", ordBean);
+		ord.setPayPayment(paymentValue);//用PayPayment去裝Html Form
+		model.addAttribute("ordBean", ord);
+		String orderStatus = "paid";
+		orderService.updateOrderStatus(ordBean.getOrdPK().getCategory(),
+									   ordBean.getOrdPK().getOrdId(),
+									   orderStatus);
 		return "_04_payPayment";
 	
 	}
+	
+	//綠界金流頁面
+	@GetMapping("/_04_payPayment")
+	public String payPayment(Model model) {
+		return "_04_payPayment";
+	}
+	
+	//結帳完成頁面
+	@PostMapping("/thankU")
+	public String thankU(Model model) {
+		return "_04_thankU";
+	}
+	
 }

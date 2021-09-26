@@ -48,6 +48,7 @@ public class ExampleAllInOne {
 		  obj.setTradeDesc("test Description");
 		  obj.setItemName("訂單總金額");
 		  obj.setReturnURL("http://211.23.128.214:5000");
+//		  obj.setOrderResultURL("http://localhost:8080/Whocares/thankU"); //付款完，跳轉到哪個頁面
 		  obj.setOrderResultURL("http://localhost:8080/Whocares/thankU"); //付款完，跳轉到哪個頁面
 		  obj.setNeedExtraPaidInfo("N");
 		  String form = all.aioCheckOut(obj, null);

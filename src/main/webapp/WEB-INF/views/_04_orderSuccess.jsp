@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-    <link rel="stylesheet" href="<c:url value='' />"
+    <link rel="stylesheet" href="<c:url value='/css/_04orderSucess.css' />"
     type="text/css">
     <link rel="stylesheet" href="<c:url value='/css/commonStyle.css' />"
 	type="text/css">
@@ -16,8 +16,6 @@
     <!-- icon -->
     <link rel="stylesheet"
     href="<c:url value='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'/>" />
-    <!-- 引入共同的頁尾 -->
-	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
 <title>訂購完成</title>
 <script>
 	window.onload = function() {
@@ -33,20 +31,20 @@
 
 	<!-- title start! -->
 	<div class="title container">
-  		<i class="fas fa-shopping-cart pe-2"></i>謝謝您的訂購
+		訂單已確認，謝謝您的訂購，請點選前往付款完成訂單。
 	</div>
 	<!-- title end! -->
-
-	您的訂單已成立，請前往付款：
+	<div class="payFrom">
 	<form method="POST" action="${pageContext.request.contextPath}/payPayment">
 	<input type="text" name="custId" value="${OrdBean.customerBean.custId}" hidden="true"/>
-	<input type="number" name="ordTotal"  step="1" value="${OrdBean.ordTotal}"/>
-	<button type="submit" id="checkout">付款</button>
+	<input type="number" name="ordTotal"  step="1" value="${OrdBean.ordTotal}" hidden="true"/>
+	<button class="submitBtn" type="submit" id="checkout">線上刷卡</button>
 	</form>
-
+	</div>
 	</div>
 	
-
+    <!-- 引入共同的頁尾 -->
+	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
 </div>
   
  <!-- bootstrap -->

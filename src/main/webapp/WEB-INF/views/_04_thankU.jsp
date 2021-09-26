@@ -19,22 +19,43 @@
     <link rel="stylesheet"
     href="<c:url value='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'/>" />
     <title>完成訂購</title>
-     <!-- 引入共同的頁首 -->
-	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+
     <script>
 	window.onload = function() {
 		searchBox();
 	}
+
+    countDown();
+
+    function countDown(){
+		//30秒之後跳轉至首頁
+		setTimeout("location.href='${pageContext.request.contextPath}/index'",5000);
+                
+	}
 	</script>
+    <style>
+    .title{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30vh;
+        font-family: mainfont-medium;
+        color:rgb(58, 53, 50);
+        text-shadow: 3px 3px 3px 3px silver;
+        font-size: 40px;
+    }
+    </style>    
 </head>
 <body>
 <div id="body">
 	<div id="content">
 	
-
+     <!-- 引入共同的頁首 -->
+     <jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+     
 	<!-- title start! -->
 	<div class="title container">
-  		<i class="fas fa-shopping-cart pe-2"></i>謝謝您的訂購
+        <span>付款成功，我們會盡快為您準備訂單。</span>
 	</div>
 	<!-- title end! -->
 	</div>

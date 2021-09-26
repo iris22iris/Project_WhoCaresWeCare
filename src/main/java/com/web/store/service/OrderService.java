@@ -18,4 +18,7 @@ public interface OrderService {
 	
 	//確認庫存
 	public void checkStock(OrdBean ordBean);
+	
+	//更改訂單狀態
+	public void updateOrderStatus(String category, Integer ordId,String orderStatus);
 }

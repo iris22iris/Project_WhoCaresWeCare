@@ -15,9 +15,11 @@ import com.web.store.repository.OrderDao;
 
 @Repository
 public class OrderDaoImpl implements OrderDao {
+	
 	public static final int orderOffset = 0;
 	public static final int lastOrder = 1;
 	private static Logger log = LoggerFactory.getLogger(BuyCheckoutController.class);
+	
 	SessionFactory factory;
 	
 	@Autowired
@@ -47,14 +49,26 @@ public class OrderDaoImpl implements OrderDao {
 	@Override
 	public OrdPK getCurrentOrdId() {
 		Session session = factory.getCurrentSession();
-		log.info("準備HQL查詢id:");
 		String hql = "SELECT ob.ordPK FROM OrdBean ob ORDER BY ob.orderDate DESC "; 
 		OrdPK ord = session.createQuery(hql,OrdPK.class)
 							 .setFirstResult(orderOffset)
 							 .setMaxResults(lastOrder)
 							 .getSingleResult();
-		log.info("HQL查詢id:"+ ord);
+		log.info("HQL查詢目前資料庫最新一筆訂單:"+ ord);
 		return  ord;
+	}
+
+	//更新訂單狀態
+	@Override
+	public void updateOrderStatus(String category, Integer ordId,String orderStatus) {
+		Session session = factory.getCurrentSession();
+		log.info("更新訂單狀態");
+		String hql = "UPDATE OrdBean SET orderStatus = :status WHERE ordPK = :pk";
+		
+		session.createQuery(hql)
+			   .setParameter("status",orderStatus)
+			   .setParameter("pk", new OrdPK(category, ordId))
+			   .executeUpdate();
 	}
 
 

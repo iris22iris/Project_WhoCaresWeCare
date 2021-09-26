@@ -116,11 +116,7 @@ public class PagesController {
 		}
 		return "_06_reservationQuery";
 	}
-	
-	@GetMapping("/_04_payPayment")
-	public String payPayment(Model model) {
-		return "_04_payPayment";
-	}
+
 	
 	
 	@GetMapping("/_04_orderSuccess")
@@ -141,10 +137,6 @@ public class PagesController {
 		return "_04_orderConfirm";
 	}
 	
-	@PostMapping("/thankU")
-	public String thankU(Model model) {
-		return "_04_thankU";
-	}
-	
+
 
 }

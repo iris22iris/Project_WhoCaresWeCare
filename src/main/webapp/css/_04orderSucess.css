@@ -1,0 +1,28 @@
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30vh;
+    font-family: mainfont-medium;
+    color:rgb(58, 53, 50);
+    text-shadow: 3px 3px 3px 3px silver;
+    font-size: 40px;
+}
+.payFrom{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+}
+
+.submitBtn{
+    color: white;
+    background-color: orange;
+    padding: 10px;
+    font-size: 20px;
+    width: 100px;
+    height: 60px;
+    border-radius: 15px;
+    border: none;
+    box-shadow:3px 3px 3px 3px #ccc;
+}

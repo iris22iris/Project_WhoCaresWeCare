@@ -71,6 +71,11 @@ public class OrderServiceImpl implements OrderService {
 		}
 	}
 
+	@Override
+	public void updateOrderStatus(String category, Integer ordId, String orderStatus) {
+		orderDao.updateOrderStatus(category, ordId, orderStatus);
+	}
+
 
 
 

@@ -15,4 +15,6 @@ public interface OrderDao {
 	//找尋目前訂單編號
 	public OrdPK getCurrentOrdId();
 	
+	//更新訂單狀態
+	public void updateOrderStatus(String category, Integer ordId,String orderStatus);
 }
