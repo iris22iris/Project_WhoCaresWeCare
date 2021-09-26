@@ -115,7 +115,7 @@ public class BuyCheckoutController {
 			@ModelAttribute("OrdBean") OrdBean ordBean,
 			@RequestParam(value = "custId") Integer custId,
 			@RequestParam(value = "reciName", required = false) String reciName,
-//			@RequestParam(value = "reciName", required = false) String reciCity,
+//			@RequestParam(value = "reciCity", required = false) String reciCity,
 			@RequestParam(value = "reciAddress", required = false) String reciAddress,
 			@RequestParam(value = "reciPhone", required = false) String reciPhone,
 			@RequestParam(value = "delivery") String delivery,
@@ -124,7 +124,6 @@ public class BuyCheckoutController {
 			@RequestParam(value = "oMark" , defaultValue = "") String oMark,
 			Model model,SessionStatus status) {
 		
-//		@RequestParam(name = "orderMark", required = false) String orderMark,
 		log.info("準備開始處理訂單");
 		CustomerBean customerBean = customerService.getCustomerById(custId);
 		model.addAttribute(customerBean);
@@ -140,8 +139,10 @@ public class BuyCheckoutController {
 		
 		//訂單狀態:預設訂單成立
 		String orderStatus = "orderStatus1";
+		
 		//訂單時間
-		Timestamp time = new Timestamp(System.currentTimeMillis());  
+		Timestamp time = new Timestamp(System.currentTimeMillis());
+		
 		//訂單金額計算
 		Double discount = ordBean.getDiscount();
 		if(ordBean.getDiscount() == null) {
@@ -170,14 +171,11 @@ public class BuyCheckoutController {
 		Map<Integer, BuyItemBean> cartContent = cart.getContent(); 
 		Set<BuyItemBean> buyItems = new LinkedHashSet<>();
 		Set<Integer> set = cartContent.keySet();
-		BuyItemPK bpk = new BuyItemPK();
 		int num = 1;
 		for(Integer i : set) {
 			BuyItemBean bib = cartContent.get(i);
-			bpk.setOrdPK(newPk);//設定buyItems pk
-			bpk.setProdSerialNum(num);//設定商品項次
+			bib.setBuyItemPK(new BuyItemPK(newPk,num));
 			num++;
-			bib.setBuyItemPK(bpk);
 			buyItems.add(bib);
 		}
 		log.info("設定buyItems主鍵編號");
@@ -189,10 +187,6 @@ public class BuyCheckoutController {
 		ordBean.setOrdTotal(orderSum);
 		ordBean.setOrderMark(omark);
 		ordBean.setBuyItems(buyItems);
-//		OrdBean order = new OrdBean(time,reciName,null,reciAddress,
-//									reciPhone,orderSum,delivery,payment,
-//									discountCode,discount,orderStatus,null,
-//									null,customerBean,buyItems);
 
 		log.info("準備訂單物件order");
 		model.addAttribute("OrdBean",ordBean);
