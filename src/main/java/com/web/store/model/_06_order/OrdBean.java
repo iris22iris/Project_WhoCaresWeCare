@@ -50,7 +50,7 @@ public class OrdBean implements Serializable {
 	private String payPayment;		//金流串接Html
 	
 
-	@OneToMany(mappedBy = "ordBean", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "ordBean", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	Set<RentItemBean> rentItems = new LinkedHashSet<>();
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
@@ -60,7 +60,7 @@ public class OrdBean implements Serializable {
 	@OneToMany(mappedBy = "ordBean", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	Set<ProblemBean> problem = new LinkedHashSet<>();
 
-	@OneToMany(mappedBy = "ordBean", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "ordBean", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	Set<BuyItemBean> buyItems = new LinkedHashSet<>();
 	
 	
@@ -77,7 +77,7 @@ public class OrdBean implements Serializable {
 	}
 
 	public OrdBean(Timestamp orderDate, String reciName, String reciCity,
-			String reciAddress, String reciPhone, Double ordTotal, String delivery,
+			String reciAddress, String reciPhone, Double ordTotal, String delivery,String payment,
 			String discountCode, Double discount, String orderStatus, Timestamp shipDate,
 			Clob orderMark, Set<RentItemBean> rentItems, CustomerBean customerBean, Set<BuyItemBean> buyItems) {
 		this.orderDate = orderDate;
@@ -87,7 +87,7 @@ public class OrdBean implements Serializable {
 		this.reciPhone = reciPhone;
 		this.ordTotal = ordTotal;
 		this.delivery = delivery;
-//		this.payment = payment;
+		this.payment = payment;
 		this.discountCode = discountCode;
 		this.discount = discount;
 		this.orderStatus = orderStatus;
@@ -99,7 +99,7 @@ public class OrdBean implements Serializable {
 	}
 	
 	public OrdBean(Timestamp orderDate, String reciName, String reciCity,
-			String reciAddress, String reciPhone, Double ordTotal, String delivery,
+			String reciAddress, String reciPhone, Double ordTotal, String delivery,String payment,
 			String discountCode, Double discount, String orderStatus, Timestamp shipDate,
 			 Set<RentItemBean> rentItems, CustomerBean customerBean, Set<BuyItemBean> buyItems) {
 		this.orderDate = orderDate;
@@ -109,7 +109,7 @@ public class OrdBean implements Serializable {
 		this.reciPhone = reciPhone;
 		this.ordTotal = ordTotal;
 		this.delivery = delivery;
-//		this.payment = payment;
+		this.payment = payment;
 		this.discountCode = discountCode;
 		this.discount = discount;
 		this.orderStatus = orderStatus;

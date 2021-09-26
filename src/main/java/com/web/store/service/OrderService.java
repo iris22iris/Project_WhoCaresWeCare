@@ -15,5 +15,7 @@ public interface OrderService {
 	
 	//找尋目前訂單編號
 	public OrdPK getCurrentOrdId();
-		
+	
+	//確認庫存
+	public void checkStock(OrdBean ordBean);
 }

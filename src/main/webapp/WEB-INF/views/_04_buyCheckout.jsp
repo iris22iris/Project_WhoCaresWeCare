@@ -127,7 +127,7 @@
               <i class="fas fa-crutches"></i>
               訂單備註:
             </h4>
-            <textarea id="orderMark" cols="60" rows="5"></textarea>       
+            <textarea name="oMark" id="orderMark" cols="50" rows="5"></textarea>       
         </div>
         <div class="col-3 checkoutTitle">
             <div class="checkoutTop">
@@ -258,6 +258,7 @@
             </div>
             <div class="btn checkOutBtn w-100" >
             <input name="custId" type="hidden"  value="${OrdBean.customerBean.custId}"/>
+            <input name="payment" type="hidden"  value="線上刷卡"/>
             <button class="me-3">繼續購買</button>
             <button type="submit" id="checkout" onclick="">確認結帳</button>
             </div>
