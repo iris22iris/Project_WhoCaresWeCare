@@ -355,6 +355,7 @@ public class EDMTableResetHibernate {
 					rib.setReturnDate(Timestamp.valueOf(token[7]));
 					rib.setStartDate(Timestamp.valueOf(token[8]));
 					rib.setRentProductBean(new RentProductBean(Integer.parseInt(token[12]), token[13]));
+					rib.setRentStatus(token[14]);
 
 					session.merge(rib);
 					count++;

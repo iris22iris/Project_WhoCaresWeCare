@@ -146,9 +146,13 @@ public class RentProductDaoImpl implements RentProductDao {
 					  .intValue();
 	}
 
+//	更新租賃設備
 	@Override
-	public void updateStock(int productId, int newQuantity) {
+	public void updateRentProduct(RentProductBean rentProductBean) {
+		Session session = factory.getCurrentSession();
+		session.update(rentProductBean);
 	}
+	
 	//讀取 單筆租賃設備頁面資料  利用prodId
 	@Override
 	public RentProductBean getProductById(int prodId) {

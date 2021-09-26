@@ -27,8 +27,6 @@ public class RentItemBean implements Serializable {
 	@EmbeddedId
 	private RentItemPK rentItemPK;
 
-//	private Integer prodId;
-//	private String serialNumber;
 	private Integer rentPeriod;
 	private Integer prodQty;
 	@Column(columnDefinition = "datetime")

@@ -23,8 +23,8 @@ public interface RentProductDao {
 	// 計算群組設備總共有幾頁
 	int getGroupedPages(ProductTypeBean prodTypeBean);
 	
-	// 更新租賃產品庫存
-	void updateStock(int productId, int newQuantity);
+	// 更新租賃設備
+	void updateRentProduct(RentProductBean rentProductBean);
 
 	// 依主鍵讀取單筆租賃產品資料
 	public RentProductBean getProductById(int prodId);

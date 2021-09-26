@@ -37,8 +37,8 @@ public interface RentProductService {
 	// 新增單筆租賃設備資料
 	void addProduct(RentProductBean product);
 
-	// 更新租賃設備庫存
-	void updateStock(int productId, int newQuantity);
+	// 更新租賃設備
+	void updateRentProduct(RentProductBean rentProductBean);
 	
 	//新增單筆預約資料
 	void addReservation(ReservationBean reservation);

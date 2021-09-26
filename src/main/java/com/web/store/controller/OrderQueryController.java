@@ -71,6 +71,10 @@ public class OrderQueryController {
 	public String orderQuery(@PathVariable Integer custId,
 			@RequestParam(name = "category", required = false) String category,
 			@RequestParam(name = "ordId", defaultValue = "0", required = false) Integer ordId, Model model) {
+		HttpSession session = request.getSession();
+		if (session.getAttribute("LoginOK") == null) {
+			return "index";
+		}
 		CustomerBean customerBean = customerService.getCustomerById(custId);
 		model.addAttribute(customerBean);
 		if (custId != null && category != null && ordId != null) {

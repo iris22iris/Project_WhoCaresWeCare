@@ -78,8 +78,10 @@ public class RentProductServiceImpl implements RentProductService {
 	public void addProduct(RentProductBean product) {
 	}
 
+	// 更新租賃設備
 	@Override
-	public void updateStock(int productId, int newQuantity) {
+	public void updateRentProduct(RentProductBean rentProductBean) {
+		rentProductDao.updateRentProduct(rentProductBean);
 	}
 
 	// 新增單筆預約資料
