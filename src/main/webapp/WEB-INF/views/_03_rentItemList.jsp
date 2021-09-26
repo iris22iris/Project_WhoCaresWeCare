@@ -18,14 +18,32 @@
     <!-- icon -->
     <link rel="stylesheet"
     href="<c:url value='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'/>" />
- 
-     <!-- 引入共同的頁首 -->
-	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+
     <title>租賃設備清單</title>
     
     <script>
 	window.onload = function() {
+		countDate();
 		searchBox();
+	}
+
+	function countDate(){
+		var startDate = document.getElementById("startDate").value;
+		var endDate = document.getElementById("returnDate").value;
+
+		var start = new Date();
+		start.setTime(startDate);
+		
+		var end = new Date();
+		end.setTime(endDate);
+		
+		document.getElementById("startDate").innerText=formatDate(start);
+		document.getElementById("returnDate").innerText=formatDate(end);
+	
+	}
+	const formatDate = (date)=>{
+		const formatted_date = date.getFullYear()+ "-" + (date.getMonth() + 1) + "-" + date.getDate();
+		return formatted_date;	
 	}
 	</script>
 	
@@ -33,7 +51,9 @@
 <body>
 <div id="body">
 	<div id="content">
-	
+	 
+     <!-- 引入共同的頁首 -->
+	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 
 	<!-- title start! -->
 	<div class="title container">
@@ -54,36 +74,68 @@
         <div class="col">新品價格</div>
         <div class="col"><i class="far fa-trash-alt" id="deleteIcon"></i></div>
     </div>
+    <c:forEach var='cart' items='${RentCart.content}'>
     <div class="row list-item">
+		<!--商品圖片 -->
         <div class="col">
-          <img src="./images/product/A0001.jpg" alt="">
+           <a href="<c:url value='/_03_rentProduct?id=${cart.value.rentProductBean.prodId}' />">
+<!--            <img  -->
+<%--               src="<c:url value='/images/product/${cart.value.rentProductBean.fileName}' />" id="prodImg" > --%>
+           </a>
         </div>
+        <!--商品名稱 -->
         <div class="col-2" class="productName">
-          <dl>
-            <li class="productId">A122222222</li>
-            <li> <a href="#商品網址" class="itemNameLink">多功能型摺疊輪椅</a></li>
-<!-- 沒有符合活動或折扣的時候不會出現 -->
-            <!-- <lable class="promoteTag">滿千折百</lable> -->
+          <dl class="productNameList">
+            <li class="productId">${cart.value.rentProductBean.prodId}</li>
+            <li> <a href="<c:url value='/_03_rentProduct?id=${cart.value.rentProductBean.prodId}' />" 
+            		class="itemNameLink">${cart.value.rentProductBean.prodName}</a></li>
+		    <!--商品活動標籤 -->
+			<!-- 沒有符合活動或折扣的時候不會出現 -->
+			<c:choose>
+            <c:when test="${empty cart.value.promotionBean.promoteId}">
+            	<lable class="promoteTag" hidden="true"></lable>
+            </c:when>
+            <c:otherwise>
+              	<lable class="promoteTag">${cart.value.promotionBean.promoTag}</lable>
+             </c:otherwise>
+             </c:choose>
           </dl>
         </div>
-        <div class="col">50元</div>
-        <div class="col">30天</div>
-        <div class="col">-</div>
-        <div class="col">
-          <dl>
-<!-- 沒有折扣的時候不用刪除線(對照CSS檔) -->
-            <li class="total">1500元</li>
-            <li class="discountTotal">
-<!-- 如果有折扣會顯示折扣後金額 --> 
-            </li>
-           </dl>
-        </div>
+        <!--單日租金 -->
+        <div class="col">${cart.value.rentProductBean.price}</div>
+        <!--租賃天數 -->
+        <div class="col">${cart.value.rentPeriod}</div>
+        <!--折價金額 -->
+        <c:choose>
+          <c:when test="${empty cart.value.promotionBean.promoteId}">
+        	<div class="col">無</div>
+        	<!--商品小計 -->
+	        <div class="col">
+			${cart.value.prodTotal}元
+	        </div>
+          </c:when>
+          <c:otherwise>
+            <div class="col" style="color:red;">-${cart.value.promotionBean.discount}</div>
+            <!--商品小計 -->
+	        <div class="col">
+	          <dl>
+	            <li class="total">${cart.value.prodTotal}元</li>
+	            <li class="discountTotal">
+	            ${cart.value.prodTotal - cart.value.promotionBean.discount}元
+	            </li>
+	           </dl>
+	        </div>
+          </c:otherwise>
+         </c:choose>
+        
+        <!--租賃起訖日期 -->
         <div class="col-2">
           <dl>
-            <li>起租日: 2021-08-31</li>
-            <li>退租日: 2021-09-29</li>
+            <li>起租日:<sapn id="startDate">${cart.value.startDate}</sapn></li>
+            <li>退租日:<sapn id="returnDate">${cart.value.returnDate}</sapn></li>
           </dl>
         </div>
+        <!--新品價格 -->
         <div class="col">
           <dl>
             <li class="productPrice">999元</li>
@@ -96,89 +148,7 @@
           <input type="checkbox" name="delete" id="delete">
         </div>
     </div>
-    <div class="row list-item">
-      <div class="col">
-        <img src="./images/product/A0001.jpg" alt="">
-      </div>
-      <div class="col-2" class="productName">
-        <dl>
-          <li class="productId">A122222222</li>
-          <li> <a href="#商品網址" class="itemNameLink">多功能型摺疊輪椅</a></li>
-          <lable class="promoteTag">滿千折百</lable>
-        </dl>
-      </div>
-      <div class="col">50元</div>
-      <div class="col">30天</div>
-      <div class="col">100元</div>
-      <div class="col">
-        <dl>
-          <li class="total">1500元</li>
-          <li class="discountTotal">
-            <!-- 如果有折扣會顯示折扣後 -->
-            1400元
-          </li>
-         </dl>
-      </div>
-      <div class="col-2">
-        <dl>
-          <li>起租日: 2021-08-31</li>
-          <li>退租日: 2021-09-29</li>
-        </dl>
-      </div>
-      <div class="col">
-        <dl>
-          <li class="productPrice">999元</li>
-            <button  type="button" class="recommandBtn" href="#">
-            前往購買
-            </button>          
-        </dl>
-      </div>
-      <div class="col">
-        <input type="checkbox" name="delete" id="delete">
-      </div>
-    </div>
-    <div class="row list-item">
-      <div class="col">
-        <img src="./images/product/A0001.jpg" alt="">
-      </div>
-      <div class="col-2" class="productName">
-        <dl>
-          <li class="productId">A122222222</li>
-          <li> <a href="#商品網址" class="itemNameLink">多功能型摺疊輪椅</a></li>
-          <lable class="promoteTag">滿千折百</lable>
-        </dl>
-      </div>
-      <div class="col">50元</div>
-      <div class="col">30天</div>
-      <div class="col">100元</div>
-      <div class="col">
-        <dl>
-          <li class="total">1500元</li>
-          <li class="discountTotal">
-            <!-- 如果有折扣會顯示折扣後 -->
-            1400元
-          </li>
-        </dl>
-      </div>
-      <div class="col-2">
-        <dl>
-          <li>起租日: 2021-08-31</li>
-          <li>退租日: 2021-09-29</li>
-        </dl>
-      </div>
-      <div class="col">
-        <dl>
-          <li class="productPrice">999元</li>
-            <button  type="button" class="recommandBtn" href="#">
-            前往購買
-            </button>          
-        </dl>
-      </div>
-      <div class="col">
-        <input type="checkbox" name="delete" id="delete">
-      </div>
-    </div>
-    
+    </c:forEach>
 </div>
 	<!-- List end! -->
 

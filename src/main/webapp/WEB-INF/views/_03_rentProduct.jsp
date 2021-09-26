@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="<c:url value='/css/commonStyle.css' />"
 	type="text/css">
 
-<title>租賃設備頁面: ${rentProduct.prodName}</title>
+<title>租賃設備: ${rentProduct.prodName}</title>
 
 <!-- bootstrap -->
 <link
@@ -141,7 +141,7 @@
 
 						<!-- 商品基本資訊 start -->
 						<div class="productInfo col-7">
-							<form id="form1" name="form1" method="GET" action="">
+							<form id="form1" name="form1" method="POST" action="<c:url value='/rentMenu/addCart/${rentProduct.prodId}' />">
 								<div class="smallStyle col-12">
 									編號${rentProduct.prodId} 
 								</div>
@@ -176,7 +176,7 @@
 									<div class="col-4">
 									租賃天數:</div>
 									<div class="col-4">
-									<input type="number" onkeydown="if(event.keyCode==13){return false;}"  min="0" max="365" value="0" id="days"
+									<input name="rentPeriod" type="number" onkeydown="if(event.keyCode==13){return false;}"  min="0" max="365" value="0" id="days"
 									 onchange="ShowDays(this.id)">
 									</div>
 								</div>																						
@@ -194,12 +194,12 @@
 										
 										//t.setTime(t_s + 1000 * 60 * 60 * 24 *(日期) );設定預約起始日
 										 let begin = new Date();
-									 let end = new Date();
+										 let end = new Date();
 										begin.setTime  (t_s + 1000 * 60 * 60 * 24 * 7);
 										
 										end.setTime (begin.getTime()+ 1000 * 60 * 60 * 24 * (Days));
 																										
-										document.getElementById("expectedrentperiod").innerText="開始: "+(formatDate(begin))+"\r"+"結束: "+(formatDate(end));
+										document.getElementById("expectedrentperiod").innerText="租賃起始日: "+(formatDate(begin))+"\r"+"租賃歸還日: "+(formatDate(end));
 									 }
 									 const formatDate = (date)=>{
 											let formatted_date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() 
@@ -252,8 +252,10 @@
 								</div>
 					   	 		  </c:otherwise> 
 								</c:choose> 
-								<div class="submitBtn col-4 d-flex justify-content-center ">  
-									<button type="button" class="btn btn-outline-warning ms-3" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+								<div class="submitBtn col-4 d-flex justify-content-center ">
+									<Input type='hidden' name='prodQty' value='1'>  
+<!-- 									<button type="submit" class="btn btn-outline-warning ms-3" data-bs-toggle="modal" data-bs-target="#exampleModal" > -->
+									<button type="submit" class="btn btn-outline-warning ms-3" >
 										加入購物車
 									</button>
 								</div>

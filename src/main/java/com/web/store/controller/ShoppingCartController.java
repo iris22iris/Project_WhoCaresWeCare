@@ -50,7 +50,7 @@ public class ShoppingCartController {
 	@PostMapping("/buyMenu/addCart/{prodId}")
 	public String addProductToCart(
 			@PathVariable("prodId") Integer prodId,
-			@RequestParam(name = "prodQTY", required = false) Integer prodQTY, Model model) {
+			@RequestParam(name = "prodQTY") Integer prodQTY, Model model) {
 
 		// 取出存放在session物件內的ShoppingCart物件
 		ShoppingCart shoppingCart = (ShoppingCart) httpSession.getAttribute("ShoppingCart");
@@ -75,7 +75,7 @@ public class ShoppingCartController {
 
 	//顯示購物車內容
 	@GetMapping("/_04_shoppingCart")
-	public String shoppingCart(Model model) 
+	public String ShoppingCart(Model model) 
 	{
 		ShoppingCart cart = (ShoppingCart) httpSession.getAttribute("ShoppingCart");
 		if (cart == null) {

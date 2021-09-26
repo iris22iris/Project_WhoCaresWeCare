@@ -39,10 +39,6 @@ public class PagesController {
 		return "_03_rentCheckout";
 	}
 
-	@GetMapping("/_03_rentItemList")
-	public String rentItemList(Model model) {
-		return "_03_rentItemList";
-	}
 
 	@GetMapping("/_04_buyCheckout")
 	public String buyCheckout(Model model) {

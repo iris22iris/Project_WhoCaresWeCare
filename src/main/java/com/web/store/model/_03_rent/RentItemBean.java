@@ -1,12 +1,13 @@
 package com.web.store.model._03_rent;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
@@ -27,14 +28,14 @@ public class RentItemBean implements Serializable {
 	@EmbeddedId
 	private RentItemPK rentItemPK;
 
-	private Integer rentPeriod;
-	private Integer prodQty;
+	private Integer rentPeriod;				//租賃天數
+	private Integer prodQty;				//租賃數量(預設1)
+	@Column(columnDefinition = "datetime")	
+	private Date startDate;			//租賃起始日
 	@Column(columnDefinition = "datetime")
-	private Timestamp startDate;
-	@Column(columnDefinition = "datetime")
-	private Timestamp returnDate;
-	private Double prodTotal;
-	private String rentStatus;
+	private Date returnDate;			//租賃結束日
+	private Double prodTotal;				//金額小計
+	private String rentStatus;				//租賃設備的狀態(可出租/租賃中)
 
 	@MapsId("OrdPK")
 	@ManyToOne(cascade = CascadeType.PERSIST)
@@ -42,7 +43,7 @@ public class RentItemBean implements Serializable {
 			@JoinColumn(name = "ordId", referencedColumnName = "ordId"), })
 	private OrdBean ordBean;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
 	@JoinColumn(name = "RENTITEM_PROMOTEID_FK")
 	private PromotionBean promotionBean;
 
@@ -57,14 +58,16 @@ public class RentItemBean implements Serializable {
 	public RentItemBean() {
 	}
 
-	public RentItemBean(Integer rentPeriod, Integer prodQty, Timestamp startDate, Timestamp returnDate,
-			Double prodTotal, String rentStatus) {
+	public RentItemBean(Integer rentPeriod, Integer prodQty, Date startDate, Date returnDate,
+			Double prodTotal, String rentStatus,PromotionBean promotionBean, RentProductBean rentProductBean) {
 		this.rentPeriod = rentPeriod;
 		this.prodQty = prodQty;
 		this.startDate = startDate;
 		this.returnDate = returnDate;
 		this.prodTotal = prodTotal;
 		this.rentStatus = rentStatus;
+		this.promotionBean =promotionBean;
+		this.rentProductBean =rentProductBean;
 	}
 
 	public RentItemPK getRentItemPK() {
@@ -91,19 +94,19 @@ public class RentItemBean implements Serializable {
 		this.prodQty = prodQty;
 	}
 
-	public Timestamp getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Timestamp startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
-	public Timestamp getReturnDate() {
+	public Date getReturnDate() {
 		return returnDate;
 	}
 
-	public void setReturnDate(Timestamp returnDate) {
+	public void setReturnDate(Date returnDate) {
 		this.returnDate = returnDate;
 	}
 

@@ -49,6 +49,16 @@
 		});
 	}
 
+	function addCart(){
+		Swal.fire({
+			position : 'center',
+			icon : 'success',
+			title : '商品已加入購物車',
+			showConfirmButton : false,
+			timer : 3000
+		})
+	}
+	
 	function track(heart, prodId) {
 		if(<%=session.getAttribute("LoginOK")%> != null) {
 			if (heart.className == "far fa-heart") {
@@ -179,7 +189,7 @@
 													</c:forEach>
 												</select>
 												<Input type='hidden' name='prodId' value='${product.prodId}'>
-												<input type="submit" class="btn btn-warning" value="加入購物車" />
+												<input type="submit" class="btn btn-warning" value="加入購物車" onclick="addCart()" />
 											</form>
 										</div>
 									</div>

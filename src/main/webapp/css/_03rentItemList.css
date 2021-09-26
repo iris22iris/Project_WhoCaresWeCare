@@ -37,8 +37,17 @@
 
 
 /* ------- List-content 商品資料------- */
-div>img{
-    width: 100%;
+/* div>img{ */
+/*     width: 100%; */
+/* } */
+
+.productNameList{
+	text-align: center;
+}
+
+#prodImg{
+	width:20px;
+	height:20px;
 }
 
 .itemNameLink{
