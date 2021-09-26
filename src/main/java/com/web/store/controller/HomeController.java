@@ -1,9 +1,12 @@
 package com.web.store.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -46,6 +49,14 @@ public class HomeController {
 
 	@GetMapping({ "/", "/index", "/index.html" })
 	public String home(Model model, Map<String, Object> map) {
+		List<ProductBean> indexProducts = productService.getAllProducts();
+		List<ProductBean> lowProductsList = new ArrayList<>();;
+		for (ProductBean lowStock : indexProducts) {
+			if (lowStock.getStock() < 10) {
+				lowProductsList.add(lowStock);
+			}
+		}
+		model.addAttribute("lowProductsList", lowProductsList);
 		return "index"; // \WEB-INF\views\index.jsp
 	}
 
@@ -81,9 +92,9 @@ public class HomeController {
 		for (int i = 0; i < searchProduct.length(); i++) {
 			String name = searchProduct.substring(0, searchProduct.length() - i);
 			Iterator<ProductBean> iterator = allProducts.iterator();
-			while(iterator.hasNext()){
+			while (iterator.hasNext()) {
 				ProductBean productBean = iterator.next();
-				if(productBean.getProdName().indexOf(name) != -1) {
+				if (productBean.getProdName().indexOf(name) != -1) {
 					productBeanList.add(productBean);
 					iterator.remove();
 				}
@@ -91,7 +102,7 @@ public class HomeController {
 		}
 		Gson gson = new Gson();
 		String[] arr = new String[productBeanList.size()];
-		for(int i=0;i<productBeanList.size();i++) {
+		for (int i = 0; i < productBeanList.size(); i++) {
 			arr[i] = String.valueOf(productBeanList.get(i).getProdId());
 		}
 		model.addAttribute(searchProduct);
@@ -102,30 +113,27 @@ public class HomeController {
 //		}
 		return "_01_searchResult";
 	}
-	
 
-	
 	@PostMapping("/_01_searchResult/cart")
 	@ResponseBody
-	public void quereyFavorite(
-			@RequestParam("prodId") Integer prodId,
+	public void quereyFavorite(@RequestParam("prodId") Integer prodId,
 			@RequestParam(name = "prodQTY", required = false) Integer prodQTY, Model model) {
 		// 取出存放在session物件內的ShoppingCart物件
-				ShoppingCart shoppingCart = (ShoppingCart) httpSession.getAttribute("ShoppingCart");
-				if (shoppingCart == null) {
-					shoppingCart = new ShoppingCart();
-					httpSession.setAttribute("ShoppingCart", shoppingCart);
-				}
+		ShoppingCart shoppingCart = (ShoppingCart) httpSession.getAttribute("ShoppingCart");
+		if (shoppingCart == null) {
+			shoppingCart = new ShoppingCart();
+			httpSession.setAttribute("ShoppingCart", shoppingCart);
+		}
 
-				int prodcuctId = Integer.parseInt(prodId.toString().trim());
+		int prodcuctId = Integer.parseInt(prodId.toString().trim());
 
-				ProductBean productBean = new ProductBean();
-				productBean = productService.getProductById(prodcuctId);
-				Double itemSum = prodQTY* productBean.getPrice();
+		ProductBean productBean = new ProductBean();
+		productBean = productService.getProductById(prodcuctId);
+		Double itemSum = prodQTY * productBean.getPrice();
 
-				// 將資料封裝到buyItemBean
-				BuyItemBean buyItemBean = new BuyItemBean(prodQTY, itemSum, productBean.getPromotionBean(), productBean);
-				shoppingCart.addProductToCart(prodId, buyItemBean);
+		// 將資料封裝到buyItemBean
+		BuyItemBean buyItemBean = new BuyItemBean(prodQTY, itemSum, productBean.getPromotionBean(), productBean);
+		shoppingCart.addProductToCart(prodId, buyItemBean);
 	}
 
 }
