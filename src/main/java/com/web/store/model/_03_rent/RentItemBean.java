@@ -36,10 +36,6 @@ public class RentItemBean implements Serializable {
 	private Double prodTotal;
 	private String rentStatus;
 
-//	@ManyToOne(cascade = CascadeType.PERSIST)
-//	@JoinColumn(name = "RENTITEM_PRODTYPE_FK")
-//	private ProductTypeBean productTypeBean;
-
 	@MapsId("OrdPK")
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumns({ @JoinColumn(name = "category", referencedColumnName = "category"),
@@ -63,8 +59,6 @@ public class RentItemBean implements Serializable {
 
 	public RentItemBean(Integer rentPeriod, Integer prodQty, Timestamp startDate, Timestamp returnDate,
 			Double prodTotal, String rentStatus) {
-//		this.prodId = prodId;
-//		this.serialNumber = serialNumber;
 		this.rentPeriod = rentPeriod;
 		this.prodQty = prodQty;
 		this.startDate = startDate;
@@ -128,16 +122,6 @@ public class RentItemBean implements Serializable {
 	public void setRentStatus(String rentStatus) {
 		this.rentStatus = rentStatus;
 	}
-
-//	// 雙向多對一productTypeBean之getter、setter 開始
-//	public ProductTypeBean getProductTypeBean() {
-//		return productTypeBean;
-//	}
-//
-//	public void setProductTypeBean(ProductTypeBean productTypeBean) {
-//		this.productTypeBean = productTypeBean;
-//	}
-////	雙向多對一productTypeBean之getter、setter 結束
 
 	public OrdBean getOrdBean() {
 		return ordBean;

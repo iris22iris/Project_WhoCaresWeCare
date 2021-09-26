@@ -74,15 +74,15 @@
 							<!-- itemcontainer  star  訂單進度條開始-->
 							<div class="orderProgress">
 								<div class="list">
-									<li id="orderStatus1"><i
+									<li id="confirmed"><i
 										class="fa fa-solid fa-list fa-2x " aria-hidden="true"></i>訂單成立</li>
-									<li id="orderStatus2"><i
+									<li id="paid"><i
 										class='fas fa-money-bill-alt fa-2x' aria-hidden="true"></i>已收款</li>
-									<li id="orderStatus3"><i class="fa fa-archive fa-2x"
+									<li id="processing"><i class="fa fa-archive fa-2x"
 										aria-hidden="true"></i>出貨中</li>
-									<li id="orderStatus4"><i class="fa fa-truck fa-2x "
+									<li id="shipping"><i class="fa fa-truck fa-2x "
 										aria-hidden="true"></i>配送中</li>
-									<li id="orderStatus5"><i class="fa fa-check-circle fa-2x"
+									<li id="arrived"><i class="fa fa-check-circle fa-2x"
 										aria-hidden="true"></i>已送達</li>
 								</div>
 							</div>

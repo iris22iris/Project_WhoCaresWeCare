@@ -22,46 +22,31 @@ import com.web.store.model._03_rent.pkClass.RentItemPK;
 import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.model._06_order.OrdBean;
 import com.web.store.model._06_order.pkClass.OrdPK;
-import com.web.store.service.BuyItemService;
-import com.web.store.service.CommentService;
 import com.web.store.service.CustomerService;
 import com.web.store.service.OrderQueryService;
-import com.web.store.service.ProductService;
 import com.web.store.service.RentItemService;
 import com.web.store.service.RentProductService;
-import com.web.store.service.ReservationService;
 
 @Controller
 public class OrderManageController {
 
 	CustomerService customerService;
 	OrderQueryService orderQueryService;
-	ReservationService reservationService;
-	CommentService commentService;
-	ProductService productService;
-	BuyItemService buyItemService;
 	RentProductService rentProductService;
 	RentItemService rentItemService;
 	HttpSession httpSession;
 	@Autowired
 	HttpServletRequest request;
-	
+
 	@Autowired
 	public OrderManageController(CustomerService customerService, OrderQueryService orderQueryService,
-			ReservationService reservationService, CommentService commentService, ProductService productService,
-			BuyItemService buyItemService, RentProductService rentProductService, RentItemService rentItemService,
-			HttpSession httpSession) {
+			RentProductService rentProductService, RentItemService rentItemService, HttpSession httpSession) {
 		this.customerService = customerService;
 		this.orderQueryService = orderQueryService;
-		this.reservationService = reservationService;
-		this.commentService = commentService;
-		this.productService = productService;
-		this.buyItemService = buyItemService;
 		this.rentProductService = rentProductService;
 		this.rentItemService = rentItemService;
 		this.httpSession = httpSession;
 	}
-
 
 //	進入租賃訂單查詢頁(含查詢字串)
 	@GetMapping("/rentOrderManage/{custId}")
@@ -111,13 +96,10 @@ public class OrderManageController {
 
 //	歸還租賃設備
 	@PostMapping("/rentOrderManage/returnProduct")
-	public String rentOrderQueryComment(
-			@RequestParam("custId") Integer custId,
+	public String rentOrderQueryComment(@RequestParam("custId") Integer custId,
 			@RequestParam(name = "category", defaultValue = "R", required = false) String category,
 			@RequestParam(name = "ordId", required = false) Integer ordId,
-			@RequestParam(name = "prodSerialNum", required = false) Integer prodSerialNum,
-			Model model
-	) {
+			@RequestParam(name = "prodSerialNum", required = false) Integer prodSerialNum, Model model) {
 		RentItemBean rentItemBean = rentItemService
 				.findRentItemByPK(new RentItemPK(new OrdPK(category, ordId), prodSerialNum));
 		RentProductBean rentProductBean = rentItemBean.getRentProductBean();

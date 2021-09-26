@@ -1,7 +1,6 @@
 package com.web.store.model._03_rent;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.sql.Blob;
 import java.sql.Clob;
 import java.util.LinkedHashSet;
