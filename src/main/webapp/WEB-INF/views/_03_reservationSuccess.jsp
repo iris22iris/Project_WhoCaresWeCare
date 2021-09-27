@@ -100,10 +100,10 @@
                     value="${myreservations[reservationlenth-1].reservationId}" pattern="00000000"/></label>                                    
                 </div>
               
-                <div class="col-12 justify-content-evenly p-1  d-flex align-items-center">
+                <div class="col-12 note justify-content-evenly p-1  d-flex align-items-center">
                     當商品到貨時,請於收到通知信48小時內完成預約
                 </div>
-                <div class="col-12 justify-content-evenly p-1  d-flex align-items-center">
+                <div class="col-12 note justify-content-evenly p-1  d-flex align-items-center">
                 	若逾期需重新預約候補
                 </div>
           </div>

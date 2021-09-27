@@ -66,77 +66,17 @@
 			<c:choose>
 				<c:when test="${!empty ordBean}">
 
-					<!-- queryForm start  訂單區塊開始-->
-					<div class="queryForm container">
-
-						<!-- top Container start 上方訂單框格 -->
-						<div class=" col-12 topContainer p-3">
-							<!-- itemcontainer  star  訂單進度條開始-->
-							<div class="orderProgress">
-								<div class="list">
-									<li id="confirmed"><i
-										class="fa fa-solid fa-list fa-2x " aria-hidden="true"></i>訂單成立</li>
-									<li id="paid"><i
-										class='fas fa-money-bill-alt fa-2x' aria-hidden="true"></i>已收款</li>
-									<li id="processing"><i class="fa fa-archive fa-2x"
-										aria-hidden="true"></i>出貨中</li>
-									<li id="shipping"><i class="fa fa-truck fa-2x "
-										aria-hidden="true"></i>配送中</li>
-									<li id="arrived"><i class="fa fa-check-circle fa-2x"
-										aria-hidden="true"></i>已送達</li>
-								</div>
-							</div>
-							<!-- itemcontainer end  訂單進度條結束-->
-
-							<!-- itemform  start  訂單表格開始-->
-							<div class="itemForm row px-3">
-
-								<div class=" itemFormTitle col-12">
-									<div class="col-1"></div>
-									<div class="col-2">訂單號碼</div>
-									<div class="col-2">訂單日期</div>
-									<div class="col-2">訂單金額</div>
-									<div class="col-2">到貨方式</div>
-									<div class="col-3">訂單備註</div>
-								</div>
-
-								<div class=" itemFormDetail col-12">
-									<!-- accordion-header-button  start  訂單資訊 開始-->
-									<div
-										class="col-1 d-flex justify-content-center align-items-center">
-										<button class="accordion-button collapsed" id="flush-heading"
-											type="button" data-bs-toggle="collapse"
-											data-bs-target="#flush-collapseOne" aria-expanded="false"
-											aria-controls="flush-collapseOne"></button>
-									</div>
-									<div class="col-2">${ordBean.ordPK.category}${ordBean.ordPK.ordId}</div>
-									<div class="col-2">${ordBean.orderDate}</div>
-									<div class="col-2">${ordBean.ordTotal}</div>
-									<div class="col-2">${ordBean.delivery}</div>
-									<div class="col-3">${orderMark}</div>
-									<!-- accordion-header-button  end  訂單資訊結束-->
-								</div>
-							</div>
-							<!-- itemForm end -->
-
-						</div>
-						<!-- top Container end 上方訂單框格 -->
-
-
 						<!-- bottom container start 下拉式表格(訂單詳細資訊) 開始-->
-						<div class="col-12 accordion accordion-flush bottomContainer"
-							id="accordionFlushExample">
-							<div class="accordion-item">
-								<div id="flush-collapseOne" class="accordion-collapse collapse"
-									aria-labelledby="flush-headingOne"
-									data-bs-parent="#accordionFlushExample">
-									<!-- accordion-body  start  表格 開始-->
+							<div class="col-12 bottomContainer"
+										id="accordionFlushExample">
+							<div class="">
+								<div id="" class="">
 									<div class="accordion-body">
 										<!-- order detail title start 表格表頭 開始-->
 										<div class="row  orderDetailTitle">
 											<div class="col-2">商品編號</div>
 											<div class="col-2">商品名稱</div>
-											<div class="col-2">租賃顧客編號</div>
+											<div class="col-2">設備租賃日期</div>
 											<div class="col-2">設備歸還日期</div>
 											<div class="col-2">租賃狀態</div>
 											<div class="col-2">設備歸還</div>
@@ -149,7 +89,7 @@
 													<div class="row orderDetail">
 														<div class="col-2">${rentItem.rentProductBean.prodId}</div>
 														<div class="col-2">${rentItem.rentProductBean.prodName}</div>
-														<div class="col-2">${ordBean.customerBean.custId}</div>
+														<div class="col-2">${rentItem.startDate}</div>
 														<div class="col-2">${rentItem.returnDate}</div>
 														<div class="col-2">${rentItem.rentStatus}</div>
 														<div
@@ -181,13 +121,10 @@
 											</c:choose>
 										</c:forEach>
 									</div>
-									<!-- accordion-body  end  表格 結束-->
+									<!--end  表格 結束-->
 								</div>
 							</div>
 						</div>
-						<!-- bottom container end 下拉式表格(訂單詳細資訊) 結束-->
-					</div>
-					<!-- queryForm end  訂單區塊結束-->
 				</c:when>
 			</c:choose>
 			<!-- btn start 返回-->
