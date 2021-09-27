@@ -45,32 +45,44 @@ public class ShoppingCartController {
 		this.productService = productService; 
 		this.orderService = orderService;
 	}
+	
+	
+	public void shoppingCartFun(Integer prodId, Integer prodQTY) {
+		// 取出存放在session物件內的ShoppingCart物件
+				ShoppingCart shoppingCart = (ShoppingCart) httpSession.getAttribute("ShoppingCart");
+				if (shoppingCart == null) {
+					shoppingCart = new ShoppingCart();
+					httpSession.setAttribute("ShoppingCart", shoppingCart);
+					log.info("建立新的shoppingCart放進session");
+				}
+
+				int prodcuctId = Integer.parseInt(prodId.toString().trim());
+
+				ProductBean productBean = new ProductBean();
+				productBean = productService.getProductById(prodcuctId);
+				Double itemSum = prodQTY* productBean.getPrice();
+
+				// 將資料封裝到buyItemBean
+				BuyItemBean buyItemBean = new BuyItemBean(prodQTY, itemSum, productBean.getPromotionBean(), productBean);
+				shoppingCart.addProductToCart(prodId, buyItemBean);
+				log.info("將buyItemBean資料封裝放進shoppingCart");
+	}
 
 	// 加入購物車
 	@PostMapping("/buyMenu/addCart/{prodId}")
 	public String addProductToCart(
 			@PathVariable("prodId") Integer prodId,
-			@RequestParam(name = "prodQTY") Integer prodQTY, Model model) {
-
-		// 取出存放在session物件內的ShoppingCart物件
-		ShoppingCart shoppingCart = (ShoppingCart) httpSession.getAttribute("ShoppingCart");
-		if (shoppingCart == null) {
-			shoppingCart = new ShoppingCart();
-			httpSession.setAttribute("ShoppingCart", shoppingCart);
-			log.info("建立新的shoppingCart放進session");
+			@RequestParam(name = "prodQTY") Integer prodQTY, 
+			@RequestParam Integer flag, 
+			Model model) {
+		shoppingCartFun(prodId, prodQTY);
+		
+		if (flag == 1) {
+			return "redirect:/buyMenu";
+		} else {
+			return "index";
 		}
-
-		int prodcuctId = Integer.parseInt(prodId.toString().trim());
-
-		ProductBean productBean = new ProductBean();
-		productBean = productService.getProductById(prodcuctId);
-		Double itemSum = prodQTY* productBean.getPrice();
-
-		// 將資料封裝到buyItemBean
-		BuyItemBean buyItemBean = new BuyItemBean(prodQTY, itemSum, productBean.getPromotionBean(), productBean);
-		shoppingCart.addProductToCart(prodId, buyItemBean);
-		log.info("將buyItemBean資料封裝放進shoppingCart");
-		return "redirect:/buyMenu";
+		
 	}
 
 	//顯示購物車內容

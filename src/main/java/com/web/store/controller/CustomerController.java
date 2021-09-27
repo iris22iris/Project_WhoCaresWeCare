@@ -168,12 +168,13 @@ public class CustomerController {
 	@ResponseBody
 	public Map<String, Object> login_api(@RequestParam String account, @RequestParam String password,
 			@RequestParam String rememberMe, Model model) {
+		HttpSession session = request.getSession();
 		Map<String, Object> map = new HashMap<>();
 		Map<String, String> errorMsgMap = validLogin(account, password);
 		if (!errorMsgMap.isEmpty()) {
 			map.put("ErrorMsgKey", errorMsgMap);
 		} else {
-			map.put("noError", "index");
+			map.put("noError", "BuyCheckout/" + session.getAttribute("LoginOK"));
 			rememberMe(rememberMe, account, password);
 		}
 		return map;

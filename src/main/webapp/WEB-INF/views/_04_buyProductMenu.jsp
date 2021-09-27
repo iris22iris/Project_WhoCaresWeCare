@@ -189,6 +189,7 @@
 													</c:forEach>
 												</select>
 												<Input type='hidden' name='prodId' value='${product.prodId}'>
+												<Input type='hidden' name='flag' value='1'>
 												<input type="submit" class="btn btn-warning" value="加入購物車" onclick="addCart()" />
 											</form>
 										</div>
