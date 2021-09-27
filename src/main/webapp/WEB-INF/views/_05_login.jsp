@@ -49,7 +49,7 @@
 <title>會員登入/註冊</title>
  	<script>
 	window.onload = function() {
-		drawPic();
+// 		drawPic();
 		searchBox();
 	}
 	</script>
@@ -57,13 +57,12 @@
 </head>
 <script>
 	function check(obj, objUrl) {
-		if ('${sessionScope.LoginOK}' == 'null' || '${sessionScope.LoginOK}' == null || '${sessionScope.LoginOK}' == '') {
+		if ('${errorFlag}' == '1') {
 			if (confirm('註冊失敗請注意錯誤訊息')) {
 				obj.href = '${pageContext.request.contextPath}/_05_login';
-			
 		
+			}
 		}
-	}
 	}
 	</script>
 <body id="loginBody">
@@ -106,24 +105,11 @@
 				<!-- register form start -->
 				<form:form class="form" id="b-form" method="POST" modelAttribute="customer" enctype='multipart/form-data'>
 					<h2 class="form_title title">註冊會員</h2>
-<%-- 					<c:choose> --%>
-<%-- 						<c:when test='${customer.custId == null}'> --%>
-<%-- 							<form:input class="form__input" id="account" type="text"  --%>
-<%-- 								placeholder="帳號 " path='account'/> --%>
-<%-- 							<form:errors path="account" cssClass="error" /> --%>
-<%-- 							<Font color='red' size="-3">${columnErrorMsg.accountError}</Font>							 --%>
-<%-- 						</c:when> --%>
-<%-- 						<c:otherwise> --%>
-<%-- 							<c:if test='${customer.custId != null}'> --%>
-<%-- 								<form:hidden path='account' /> ${customer.account}<br> --%>
-<%-- 							</c:if> --%>
-<%-- 						</c:otherwise> --%>
-<%-- 					</c:choose> --%>
 					<form:input class="form__input" id="account" type="text" minlength="6" maxlength="12" placeholder="帳號 " path='account'/>
-					<form:errors path="account" cssClass="error" />
+					<form:errors id="accountError" path="account" cssClass="error" />
 					<Font color='red' size="-3">${columnErrorMsg.accountError}</Font>	
 					<form:input class="form__input" id="password" type="password" minlength="8" maxlength="12" placeholder="密碼" path='password'/>
-					<form:errors path="password" cssClass="error" />
+					<form:errors id="passwordError" path="password" cssClass="error" />
 					<form:input class="form__input" id="custName" type="text" placeholder="姓名" path='custName'/> 
 					<form:errors path="custName" cssClass="error" />
 					<form:input class="form__input" id="birthday" type="text" placeholder="生日" path='birthday'/>
@@ -135,7 +121,6 @@
 					<form:input  class="form__input" path="Image" type='file'/>
 	   	  	 		<form:errors path="Image"  cssClass="error" />
 					<button type="submit" class="form__button button " onclick="check(this)"  id="button1">註冊</button>
-					
 				</form:form>
 				<!-- register form end -->
 				<!-- main end! -->

@@ -47,8 +47,7 @@ public class ContactUsController {
 
 	@Autowired
 	public ContactUsController(CustomerService customerService, ContactUsService contactUsService,
-			ContactUsOrdService contactUsOrdService,
-			HttpSession httpSession) {
+			ContactUsOrdService contactUsOrdService, HttpSession httpSession) {
 		this.customerService = customerService;
 		this.contactUsService = contactUsService;
 		this.httpSession = httpSession;
@@ -68,57 +67,63 @@ public class ContactUsController {
 	//
 
 	@GetMapping(value = "/_02_contactUs/{custId}", produces = { "text/html" })
-	public String editUsFindView(@PathVariable Integer custId,Integer ordId, Model model) {
+	public String editUsFindView(@PathVariable Integer custId, Integer ordId, Model model) {
 		HttpSession session = request.getSession();
-		if(session.getAttribute("LoginOK") == null) {
+		if (session.getAttribute("LoginOK") == null) {
 			return "index";
-		} 
+		}
+
 		CustomerBean customer = customerService.getCustomerById(custId);
 		model.addAttribute("customer", customer);
 		model.addAttribute("id", custId);
-		List<OrdBean> list = new  ArrayList<OrdBean>(); 
+		List<OrdBean> list = new ArrayList<OrdBean>();
 		list = contactUsOrdService.findOrdBeanById(00000001);
 		model.addAttribute("judyList", list);
+
 		return "_02_contactUs";
 	}
 
+//	public String insertContactUs(@RequestBody ProblemBean pb,
+//			BindingResult result, Model model, HttpServletRequest request) {
 	@PostMapping(value = "/_02_contactUs")
-	public String insertContactUs(@ModelAttribute("problem") /* @Valid */ @RequestBody ProblemBean pb,
-			BindingResult result, Model model, HttpServletRequest request) {
+	@ResponseBody
+	public String insertContactUs(@RequestParam String account, @RequestParam String ordId, @RequestParam String email,
+			@RequestParam String phone, @RequestParam String problemType, @RequestParam String content,
+			Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		if(session.getAttribute("LoginOK") == null) {
+		if (session.getAttribute("LoginOK") == null) {
 			return "index";
 		}
-		Integer replyId = pb.getreplyId();
-		String ordId = pb.getOrdId();
-		String phone = pb.getPhone();
-		String email = pb.getEmail();
-		String content = pb.getContent();
-		String fileName = pb.getFileName();
-
-		MultipartFile picture = pb.getImageUs();
-		String originalFilename = picture.getOriginalFilename();
-		if (originalFilename.length() > 0 && originalFilename.lastIndexOf(".") > -1) {
-			pb.setFileName(originalFilename);
-		}
-
-		if (picture != null && !picture.isEmpty()) {
-			try {
-				byte[] b = picture.getBytes();
-				Blob blob = new SerialBlob(b);
-				pb.setAttachFile(blob);
-			} catch (Exception e) {
-				e.printStackTrace();
-				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
-			}
-		}
-
+		ProblemBean pb = new ProblemBean();
+		pb.setAccount(account);
+		pb.setOrdId(ordId);
+		pb.setEmail(email);
+		pb.setPhone(phone);
+		pb.setProblemType(problemType);
+		pb.setContent(content);
+//		MultipartFile picture = pb.getImageUs();
+//		String originalFilename = picture.getOriginalFilename();
+//		if (originalFilename.length() > 0 && originalFilename.lastIndexOf(".") > -1) {
+//			pb.setFileName(originalFilename);
+//		}
+//
+//		if (picture != null && !picture.isEmpty()) {
+//			try {
+//				byte[] b = picture.getBytes();
+//				Blob blob = new SerialBlob(b);
+//				pb.setAttachFile(blob);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+//			}
+//		}
 		try {
 			contactUsService.save(pb);
 		} catch (Exception ex) {
 			System.out.println(ex.getClass().getName() + ", ex.getMessage()=" + ex.getMessage());
+			return ex.getMessage();
 		}
-		return "_02_contactUs";
+		return "";
 	}
 
 	@GetMapping("/_06_problemReply/{custId}")
@@ -137,7 +142,6 @@ public class ContactUsController {
 			@RequestParam(value = "replyId", required = false) Integer replyId) {
 
 		ProblemBean problemBean = contactUsService.getProblemById(replyId);
-
 
 		model.addAttribute("problemBean", problemBean);
 
