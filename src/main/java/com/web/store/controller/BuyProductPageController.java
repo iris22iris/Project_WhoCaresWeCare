@@ -13,26 +13,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.store.model._02_customerService.CommentBean;
+import com.web.store.model._02_customerService.PromotionBean;
 import com.web.store.model._04_shop.ProductBean;
 import com.web.store.model._07_productType.ProductTypeBean;
 import com.web.store.service.ProductService;
 import com.web.store.service.ProductTypeService;
+import com.web.store.service.PromotionService;
 
 @Controller
 public class BuyProductPageController {
 
 
-
+	PromotionService promotionService;
 	ProductService productService;
 	ProductTypeService productTypeService;
 	ServletContext servletContext;
 
 	@Autowired
 	public BuyProductPageController(ProductService productService, ProductTypeService productTypeService,
-			ServletContext servletContext) {
+			PromotionService promotionService,ServletContext servletContext) {
 		this.productService = productService;
 		this.productTypeService = productTypeService;
 		this.servletContext = servletContext;
+		this.promotionService = promotionService;
 	}
 
 	@RequestMapping("/_04_productPage")
@@ -41,10 +44,12 @@ public class BuyProductPageController {
 		List<ProductBean> products = productService.getAllProducts();
 		List<ProductTypeBean> productTypes = productTypeService.getAllProdTypes();
 		List<CommentBean> comments = productService.getCommentBeanByprodId(id);
+		List<PromotionBean> promotions = promotionService.getAllPromotions();
 		model.addAttribute("products", products);
 		model.addAttribute("productTypes", productTypes);
 		model.addAttribute("product", productService.getProductById(id));
 		model.addAttribute("comments", comments);
+		model.addAttribute("promotions", promotions);
 		
 		String productType = productService.getProductById(id).getProductTypeBean().getProdType();
 		String maincategory = productType.substring(0,1);

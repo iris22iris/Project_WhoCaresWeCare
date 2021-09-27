@@ -110,6 +110,22 @@ public class RentCartController {
 		return "/_03_rentItemList";
 	}
 	
+	//移除購物車商品
+	@PostMapping("_03_rentCart/updateItem.do")
+	protected String updateItem(@RequestParam(value = "prodId", required = false) String prodId,
+			 Model model) {
+			
+		ShoppingCart cart = (ShoppingCart) httpSession.getAttribute("ShoppingCart");
+
+		String[] productId = prodId.split("\\,");
+		int itemsNum = productId.length;
+		
+		for(int i=0 ; i < itemsNum ; i++) {
+			cart.deleteProducts(Integer.parseInt(productId[i]));
+		}
+		log.info("總共刪除了購物車內"+ itemsNum +"項商品。");
+		return "_04_shoppingCart";
+	}
 	//新品推薦購買
 //	@PostMapping("/recommand")
 //	@ResponseBody

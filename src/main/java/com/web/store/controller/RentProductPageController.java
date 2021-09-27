@@ -20,17 +20,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.store.model._02_customerService.CommentBean;
+import com.web.store.model._02_customerService.PromotionBean;
 import com.web.store.model._03_rent.RentProductBean;
 import com.web.store.model._03_rent.ReservationBean;
 import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.model._07_productType.ProductTypeBean;
 import com.web.store.service.ProductTypeService;
+import com.web.store.service.PromotionService;
 import com.web.store.service.RentProductService;
 
 
 @Controller
 public class RentProductPageController {
-
+	
+	PromotionService promotionService;
 	RentProductService rentProductService;
 	ProductTypeService productTypeService;
 	ServletContext servletContext;
@@ -39,16 +42,18 @@ public class RentProductPageController {
 	
 	@Autowired
 	public RentProductPageController(RentProductService rentProductService, ProductTypeService productTypeService,
-			ServletContext servletContext) {
+			PromotionService promotionService,ServletContext servletContext) {
 		this.rentProductService = rentProductService;
 		this.productTypeService = productTypeService;
 		this.servletContext = servletContext;
+		this.promotionService = promotionService;
 	}
 
 	@GetMapping("/_03_rentProduct")
 	public String getProductById(@RequestParam("id") Integer id ,Model model) {
 		List<RentProductBean> rentProducts = rentProductService.getAllProducts();
 		List<ProductTypeBean> productTypes = productTypeService.getAllProdTypes();
+		List<PromotionBean> promotions = promotionService.getAllPromotions();
 		
 		//用商品編號取得該產品及其項次庫存資料
 		List<RentProductBean> AllSerialStocks = rentProductService.getAllSerialStocksByprodId(id);
@@ -60,6 +65,7 @@ public class RentProductPageController {
 		model.addAttribute("productTypes", productTypes);
 		model.addAttribute("rentProduct", rentProductService.getProductById(id));
 		model.addAttribute("allserialstocks", AllSerialStocks);
+		model.addAttribute("promotions", promotions);
 
 		
 		

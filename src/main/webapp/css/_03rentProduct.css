@@ -244,6 +244,9 @@ input {
 	height: 40px;
 }
 
+.note{
+	font-family: mainfont-light;
+}
 /* .word {
     word-break: break-all;
     font-size: 1.3rem;

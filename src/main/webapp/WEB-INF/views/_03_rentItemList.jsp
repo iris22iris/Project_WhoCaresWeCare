@@ -28,22 +28,25 @@
 	}
 
 	function countDate(){
-		var startDate = document.getElementById("startDate").value;
-		var endDate = document.getElementById("returnDate").value;
+			var startDate = null;
+			var startIndex = 0;
+			$(".startDate").each(function(){
+			var start=$(this).text();
+			startDate = start.substring(0,10)
+			$("#startDate"+startIndex).text(startDate);
+			startIndex++;
+		})
+			
+			var endDate = null;
+			var endIndex = 0;
+			$(".returnDate").each(function(){
+			var end=$(this).text();
+			endDate = end.substring(0,10)
+			$("#returnDate"+endIndex).text(endDate);
+			endIndex++;
+		})
+			
 
-		var start = new Date();
-		start.setTime(startDate);
-		
-		var end = new Date();
-		end.setTime(endDate);
-		
-		document.getElementById("startDate").innerText=formatDate(start);
-		document.getElementById("returnDate").innerText=formatDate(end);
-	
-	}
-	const formatDate = (date)=>{
-		const formatted_date = date.getFullYear()+ "-" + (date.getMonth() + 1) + "-" + date.getDate();
-		return formatted_date;	
 	}
 	</script>
 	
@@ -74,7 +77,7 @@
         <div class="col">新品價格</div>
         <div class="col"><i class="far fa-trash-alt" id="deleteIcon"></i></div>
     </div>
-    <c:forEach var='cart' items='${RentCart.content}'>
+    <c:forEach varStatus="vs" var='cart' items='${RentCart.content}'>
     <div class="row list-item">
 		<!--商品圖片 -->
         <div class="col">
@@ -131,8 +134,10 @@
         <!--租賃起訖日期 -->
         <div class="col-2">
           <dl>
-            <li>起租日:<sapn id="startDate">${cart.value.startDate}</sapn></li>
-            <li>退租日:<sapn id="returnDate">${cart.value.returnDate}</sapn></li>
+          <div class="startDate" hidden="true">${cart.value.startDate}</div>
+          <div class="returnDate"  hidden="true">${cart.value.returnDate}</div>
+            <li>起租日:<span id="startDate${vs.index}"></span></li>
+            <li>退租日:<span id="returnDate${vs.index}"></span></li>
           </dl>
         </div>
         <!--新品價格 -->
