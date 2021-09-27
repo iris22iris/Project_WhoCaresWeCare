@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,9 +42,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.web.store.model._04_shop.ProductBean;
 import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.service.CityService;
 import com.web.store.service.CustomerService;
+import com.web.store.service.ProductService;
 import com.web.store.validators.CustomerValidator;
 
 @Controller
@@ -58,6 +62,8 @@ public class CustomerController {
 	CustomerService customerService;
 	@Autowired
 	CityService cityService;
+	@Autowired
+	ProductService productService;
 
 	public Map<String, String> validLogin(String account, String password) {
 		Map<String, String> errorMsgMap = new HashMap<String, String>();
@@ -135,6 +141,15 @@ public class CustomerController {
 		String account = request.getParameter("account");
 		String password = request.getParameter("password");
 		String rememberMe = request.getParameter("rememberMe");
+		
+		List<ProductBean> indexProducts = productService.getAllProducts();
+		List<ProductBean> lowProductsList = new ArrayList<>();;
+		for (ProductBean lowStock : indexProducts) {
+			if (lowStock.getStock() < 10) {
+				lowProductsList.add(lowStock);
+			}
+		}
+		model.addAttribute("lowProductsList", lowProductsList);
 
 		Map<String, String> errorMsgMap = validLogin(account, password);
 
