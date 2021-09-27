@@ -69,7 +69,8 @@ function upData() {
 			contentType: false,
     		mimeType: 'multipart/form-data',
     		data :formData,		
-			success: function(){
+			success: function(response){
+				
 		        //跳訊息提示
 		        alert('修改會員成功!');
 		    },

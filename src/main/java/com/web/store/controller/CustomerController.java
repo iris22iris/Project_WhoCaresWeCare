@@ -32,6 +32,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -42,6 +43,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.web.store.model._04_shop.ProductBean;
 import com.web.store.model._05_customer.CustomerBean;
@@ -131,6 +133,7 @@ public class CustomerController {
 	// 進入登入頁
 	@GetMapping("/_05_login")
 	public String toLogin(Model model) {
+		model.addAttribute("errorFlag", "1");
 		return "_05_login";
 	}
 
@@ -141,9 +144,10 @@ public class CustomerController {
 		String account = request.getParameter("account");
 		String password = request.getParameter("password");
 		String rememberMe = request.getParameter("rememberMe");
-		
+
 		List<ProductBean> indexProducts = productService.getAllProducts();
-		List<ProductBean> lowProductsList = new ArrayList<>();;
+		List<ProductBean> lowProductsList = new ArrayList<>();
+		;
 		for (ProductBean lowStock : indexProducts) {
 			if (lowStock.getStock() < 10) {
 				lowProductsList.add(lowStock);
@@ -209,10 +213,10 @@ public class CustomerController {
 	// 當使用者填妥資料按下Submit按鈕後，本方法接收將瀏覽器送來的會員資料，新進行資料的檢查，
 	// 若資料有誤，轉向寫入錯誤訊息的網頁，若資料無誤，則呼叫Service元件寫入資料庫
 	@PostMapping(value = "/_05_login")
+	@ResponseBody
 	// BindingResult 參數必須與@ModelAttribute修飾的參數連續編寫，中間不能夾其他參數
-	public String insertCustomer(@ModelAttribute("customer") /* @Valid */ CustomerBean cb, BindingResult result,
+	public ModelAndView insertCustomer(@ModelAttribute("customer") /* @Valid */ CustomerBean cb, BindingResult result,
 			Model model, HttpServletRequest request, @RequestParam("account") String account) {
-//		String account = request.getParameter("account");
 		Map<String, String> columnErrorMsg = new HashMap<String, String>();
 
 		if (customerService.idExists(account)) {
@@ -220,18 +224,24 @@ public class CustomerController {
 		}
 		if (!columnErrorMsg.isEmpty()) {
 			model.addAttribute("columnErrorMsg", columnErrorMsg);
-			return "_05_login";
+			return new ModelAndView("_05_login");
 		}
 		CustomerValidator validator = new CustomerValidator();
 		// 呼叫Validate進行資料檢查
 		validator.validate(cb, result);
+
 		if (result.hasErrors()) {
+			model.addAttribute("errorFlag", "1");
+
 //	          下列敘述可以理解Spring MVC如何處理錯誤			
-//			List<ObjectError> list = result.getAllErrors();
-//			for (ObjectError error : list) {
-//				System.out.println("有錯誤：" + error);
-//			}
-			return "_05_login";
+			List<ObjectError> list = result.getAllErrors();
+			for (ObjectError error : list) {
+				System.out.println("有錯誤：" + error);
+			}
+			return new ModelAndView("_05_login");
+		} else {
+			model.addAttribute("errorFlag", "0");
+
 		}
 		MultipartFile picture = cb.getImage();
 		String originalFilename = picture.getOriginalFilename();
@@ -265,10 +275,10 @@ public class CustomerController {
 		} catch (Exception ex) {
 			System.out.println(ex.getClass().getName() + ", ex.getMessage()=" + ex.getMessage());
 			result.rejectValue("account", "", "註冊失敗，請通知系統人員...");
-			return "_05_login";
+			return new ModelAndView("_05_login");
 		}
 
-		return "index";
+		return new ModelAndView("index");
 	}
 
 	// 本方法可對WebDataBinder進行組態設定。除了表單資料外，絕大多數可以傳入控制器方法的
@@ -425,6 +435,9 @@ public class CustomerController {
 						errorMsgColumn.put("idNumberError", "不合法");
 					}
 				}
+			}
+			if (!errorMsgColumn.isEmpty()) {
+				return errorMsgColumn;
 			}
 			customer.setCustName(custName);
 			customer.setAddress(address);
