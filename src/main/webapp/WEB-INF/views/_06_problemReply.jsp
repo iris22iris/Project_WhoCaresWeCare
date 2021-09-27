@@ -60,6 +60,10 @@
 			}
 		});
 	}
+
+	function back() {
+		location = "<c:url value='/_05_member_management' />";
+	}
 </script>
 
 
@@ -185,9 +189,10 @@
     <!-- recordForm end -->
       
     <!-- btn start 返回-->
-    <div class=" button col-12 pb-3 d-flex justify-content-center align-items-center">
-      <button type="submit" class="btn btn-secondary">返回</button>
-    </div>
+    <div
+				class=" button col-12 pb-3 d-flex justify-content-center align-items-center">
+				<button type="button" class="btn btn-secondary" onClick="back()">返回</button>
+			</div>
     <!-- btn end 返回--> 
 
   </div>
