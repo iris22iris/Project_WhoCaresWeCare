@@ -7,18 +7,18 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<!-- CSS -->
-<link rel="stylesheet" href="<c:url value='/css/_04shoppingCart.css' />"
-	type="text/css">
-<link rel="stylesheet" href="<c:url value='/css/commonStyle.css' />"
-	type="text/css">
-<!-- bootstrap -->
-<link
-	href="<c:url value='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' />"
-	rel="stylesheet">
-<!-- icon -->
-<link rel="stylesheet"
-	href="<c:url value='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'/>" />
+	<!-- CSS -->
+	<link rel="stylesheet" href="<c:url value='/css/_04shoppingCart.css' />"
+		type="text/css">
+	<link rel="stylesheet" href="<c:url value='/css/commonStyle.css' />"
+		type="text/css">
+	<!-- bootstrap -->
+	<link
+		href="<c:url value='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' />"
+		rel="stylesheet">
+	<!-- icon -->
+	<link rel="stylesheet"
+		href="<c:url value='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'/>" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- 引入共同的頁首 -->
@@ -35,22 +35,22 @@
 	//計算結帳明細(商品金額/優惠折抵/合計)
 	function count(){
 		//商品金額
-		var showTotal = 0;
+		var showProdTotal = 0;
 		$(".productPrice").each(function(){
 			var total = parseInt($(this).text());
 			var QTY = parseInt($(".num").text());
 			total *= QTY
-			showTotal += total
+			showProdTotal += total
 		})
-		$("#itemSum").text(showTotal);
+		$("#itemSum").text(showProdTotal);
 
 		//優惠折抵
-		var showSum = 0;
+		var showDiscountSum = 0;
 		$(".discount").each(function(){
 			var total2 = parseInt($(this).text());
-			showSum += total2
+			showDiscountSum += total2
 		})
-		$("#discountSum").text(showSum);
+		$("#discountSum").text(showDiscountSum);
 
 		//折扣碼優惠
 		var showDiscountCode = 0;
@@ -60,7 +60,7 @@
 		
 		//合計金額
 		var showOrder = 0;
-		showOrder = showTotal + showSum - showDiscountCode;
+		showOrder = showProdTotal + showDiscountSum - showDiscountCode;
 		$("#order").text(showOrder); 
 
 	}

@@ -29,6 +29,7 @@ import com.web.store.model._04_shop.RentCart;
 import com.web.store.model._04_shop.ShoppingCart;
 import com.web.store.model._06_order.OrdBean;
 import com.web.store.service.OrderService;
+import com.web.store.service.ProductService;
 import com.web.store.service.RentProductService;
 
 import antlr.collections.List;
@@ -40,13 +41,15 @@ public class RentCartController {
 	private static Logger log = LoggerFactory.getLogger(ShoppingCartController.class);
 
 	RentProductService rentProductService;
+	ProductService productService;
 	OrderService orderService;
 	HttpSession httpSession;
 
 	@Autowired
 	public RentCartController(RentProductService rentProductService, OrderService orderService,
-			HttpSession httpSession) {
+			ProductService productService,HttpSession httpSession) {
 		this.rentProductService = rentProductService;
+		this.productService = productService;
 		this.orderService = orderService;
 		this.httpSession = httpSession;
 	}
@@ -86,10 +89,12 @@ public class RentCartController {
 		endDate.add(Calendar.DAY_OF_YEAR, (7 + rentPeriod));
 		Date returnDate = endDate.getTime();
 		log.info("租賃歸還日:" + returnDate);
-
+		
+		ProductBean productBean = productService.getProductById(prodId);
+		
 		// 將資料封裝到rentItemBean
 		RentItemBean rentItemBean = new RentItemBean(rentPeriod, prodQty, startDate, returnDate, itemSum, status,
-				rentProductBean.getPromotionBean(), rentProductBean);
+				rentProductBean.getPromotionBean(), rentProductBean,productBean);
 		rentCart.addProductToCart(prodId, rentItemBean);
 		log.info("將rentItemBean資料封裝放進rentCart");
 		return "redirect:/rentMenu";
@@ -106,25 +111,45 @@ public class RentCartController {
 			return "redirect:/rentMenu";
 		}
 		
+		OrdBean ordBean = (OrdBean) httpSession.getAttribute("OrdBean");
+		if(ordBean == null) {
+			ordBean = new OrdBean();
+			httpSession.setAttribute("OrdBean", ordBean);
+		}
+		log.info("建立OrdBean:"+ordBean);
+		
+		Map<Integer,RentItemBean> cartContent = rentCart.getContent();
+		//存成Set物件轉換為OrdBean
+		Set<RentItemBean> rentItems = new LinkedHashSet<>();
+		Set<Integer> set = cartContent.keySet();
+		for(Integer i : set) {
+			RentItemBean rib = cartContent.get(i);
+			rib.setOrdBean(ordBean);
+			rentItems.add(rib);
+		}
+		ordBean.setRentItems(rentItems);
+		
+		model.addAttribute("rentItems", rentItems);
+		model.addAttribute("ordBean",ordBean);
 		
 		return "/_03_rentItemList";
 	}
 	
 	//移除購物車商品
-	@PostMapping("_03_rentCart/updateItem.do")
+	@PostMapping("/_03_rentCart/updateItem.do")
 	protected String updateItem(@RequestParam(value = "prodId", required = false) String prodId,
 			 Model model) {
 			
-		ShoppingCart cart = (ShoppingCart) httpSession.getAttribute("ShoppingCart");
+		RentCart rentCart = (RentCart) httpSession.getAttribute("RentCart");
 
 		String[] productId = prodId.split("\\,");
 		int itemsNum = productId.length;
 		
 		for(int i=0 ; i < itemsNum ; i++) {
-			cart.deleteProducts(Integer.parseInt(productId[i]));
+			rentCart.deleteProducts(Integer.parseInt(productId[i]));
 		}
 		log.info("總共刪除了購物車內"+ itemsNum +"項商品。");
-		return "_04_shoppingCart";
+		return "_03_rentCart";
 	}
 	//新品推薦購買
 //	@PostMapping("/recommand")

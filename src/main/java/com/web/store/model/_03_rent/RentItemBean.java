@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import com.web.store.model._02_customerService.CommentBean;
 import com.web.store.model._02_customerService.PromotionBean;
 import com.web.store.model._03_rent.pkClass.RentItemPK;
+import com.web.store.model._04_shop.ProductBean;
 import com.web.store.model._06_order.OrdBean;
 
 @Entity
@@ -54,12 +55,16 @@ public class RentItemBean implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "RENTITEM_COMMENTID_FK")
 	private CommentBean commentBean;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "RENTITEM_PRODID_FK")
+	private ProductBean productBean;
 
 	public RentItemBean() {
 	}
 
 	public RentItemBean(Integer rentPeriod, Integer prodQty, Date startDate, Date returnDate,
-			Double prodTotal, String rentStatus,PromotionBean promotionBean, RentProductBean rentProductBean) {
+			Double prodTotal, String rentStatus,PromotionBean promotionBean, RentProductBean rentProductBean,ProductBean productBean) {
 		this.rentPeriod = rentPeriod;
 		this.prodQty = prodQty;
 		this.startDate = startDate;
@@ -68,6 +73,15 @@ public class RentItemBean implements Serializable {
 		this.rentStatus = rentStatus;
 		this.promotionBean =promotionBean;
 		this.rentProductBean =rentProductBean;
+		this.productBean = productBean;
+	}
+
+	public ProductBean getProductBean() {
+		return productBean;
+	}
+
+	public void setProductBean(ProductBean productBean) {
+		this.productBean = productBean;
 	}
 
 	public RentItemPK getRentItemPK() {
