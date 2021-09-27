@@ -26,7 +26,9 @@
 			obj.href = '${pageContext.request.contextPath}/' + objUrl;
 		}
 	}
-	
+	function contacUs(obj){
+		obj.href="/Whocares/_02_contactUs/"+'<%=session.getAttribute("LoginOK")%>';
+	}
 // 	window.onload = function() {
 	function searchBox(){
 		if('${sessionScope.searchProduct}'){		
@@ -176,7 +178,7 @@
 						onclick='clicka(this,"_05_member_management")'> 會員中心 </a></li>
 					<li class="nav-item"><a class="nav-link textSize"
 						href="<c:url value='/_02_contactUs'/>"
-						onclick='clicka(this,"_02_contactUs")'> 聯絡我們</a></li>
+						onclick="contacUs(this)"> 聯絡我們</a></li>
 					<c:if test="${! empty LoginOK}">
 						<a class="nav-link textSize"
 							href="${pageContext.request.contextPath}/_05_logout"> 登出 </a>

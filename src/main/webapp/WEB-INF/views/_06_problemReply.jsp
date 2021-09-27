@@ -52,7 +52,10 @@
 					$('#inputDescription').val(response.replyContent);
 					$('#inputreplyId').val(response.replyId);
 					$('#inputContent').val(response.content);
-					$('#inputformDate').val(response.formDate);
+					 var test = response.formDate;
+					 var date = eval(test.replace(/\/Date\((\d+)\)\//gi, "new Date($1)"));
+					 var time = date.toLocaleDateString();//or date.toString();
+					$('#inputformDate').val(time);
 				}
 			}
 		});
@@ -135,7 +138,7 @@
           <div class="col-1"></div>
           <div class="col-5">
             <label for="recordDate" class="form-label">表單時間:</label>
-            <input type="datetime-local" class="form-control" id="inputformDate" disabled="disabled">
+            <input type="datetime" class="form-control" id="inputformDate" disabled="disabled">
           </div>
           <div class="col-1"></div>
         </div>
