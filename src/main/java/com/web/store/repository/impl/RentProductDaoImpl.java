@@ -145,6 +145,20 @@ public class RentProductDaoImpl implements RentProductDao {
 					  .getSingleResult()
 					  .intValue();
 	}
+	
+	// 依主鍵+serianumber讀取租賃設備
+	@Override
+	public RentProductBean getRentProductBeanByProdIdAndSeriaNumber(int prodId , String serialNumber) {
+		Session session = factory.getCurrentSession();
+		String 	hql = " FROM RentProductBean rp "
+					+ " WHERE rp.prodId = :pid "
+					+ " AND rp.serialNumber = :sn";
+		
+		return session.createQuery(hql, RentProductBean.class)
+					  .setParameter("pid", prodId)
+					  .setParameter("sn", serialNumber)
+					  .getSingleResult();
+	}
 
 //	更新租賃設備
 	@Override
@@ -160,20 +174,22 @@ public class RentProductDaoImpl implements RentProductDao {
 		RentProductBean rpb = session.get(RentProductBean.class, new RentProductPK(prodId,"1"));
 		return rpb;
 	}
-		
-	// 依porId(與serialNumber)讀取該設備被預約的情況
-	@Override
-	public List<ReservationBean> getReservationBeanByprodId(int prodId) {
-		
-		Session session = factory.getCurrentSession();
-		String hql = " FROM ReservationBean  r"
-				
-				  + " WHERE r.rentProductBean.prodId = :pid ";
-		
-		return session.createQuery(hql, ReservationBean.class)
-				.setParameter("pid", prodId)
-				.getResultList();
-	}
+	
+	
+	// 依prodId取出所有該品項的List
+		@Override
+		public List<ReservationBean> getReservationBeanByprodId(int prodId) {
+			
+			Session session = factory.getCurrentSession();
+			String hql = " FROM ReservationBean  r"
+					
+					  + " WHERE r.rentProductBean.prodId = :pid ";
+			
+			return session.createQuery(hql, ReservationBean.class)
+					.setParameter("pid", prodId)
+					.getResultList();
+		}
+	
 
 	//抓取該商品目前租賃評論資料
 	@Override
@@ -237,7 +253,8 @@ public class RentProductDaoImpl implements RentProductDao {
 					.getResultList();
 		
 	}
-
+	
+	//用商品編號取得該產品及其項次庫存資料
 	@Override
 	public List<RentProductBean> getAllSerialStocksByprodId(int prodId) {
 		Session session = factory.getCurrentSession();

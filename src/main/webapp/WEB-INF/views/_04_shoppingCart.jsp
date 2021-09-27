@@ -294,7 +294,7 @@
 					</div>
 					<div class="checkoutBtn col-12 mt-3">
 						<div id="contentpopup"></div>
-						<button>繼續逛逛</button>
+						<button onclick="location.href=`${pageContext.request.contextPath}/buyMenu`">繼續逛逛</button>
 						<c:choose>
 							<c:when test="${ empty sessionScope.LoginOK}">
 								<button data-bs-toggle="modal" data-bs-target="#exampleModal">結帳去</button>

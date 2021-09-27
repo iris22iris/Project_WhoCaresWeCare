@@ -81,11 +81,10 @@
                   <th class="col-1">折抵</th>
                   <th class="col-2">合計</th>
               </tr>
-              <c:forEach var="buyItems" items='${buyItems}'>
+              <c:forEach varStatus="vs" var="buyItems" items='${buyItems}'>
               <tr class="detailList">
 				  <!-- 項次 -->
-                  <c:set var="no" value="${no+1}"/>
-                  <td><c:out value="${no}"/></td>
+                  <td>${vs.index+1}</td>
                   <!-- 圖片 -->
                   <td><img src="<c:url value='/images/product/${buyItems.productBean.fileName}'/>"></td>
  				  <!-- 商品編號/名稱 -->
@@ -160,7 +159,7 @@
                 
                 <div class="col-4">運費:</div>
                 <div class="col-4 price" id="shippingFee">
-                <c:set var="shippingFee" value="${0}"/>${shippingFee}元
+                	<c:set var="shippingFee" value="${0}"/>${shippingFee}元
                 </div>
                 <div class="col-4 "></div>
                 
@@ -259,12 +258,12 @@
             <div class="btn checkOutBtn w-100" >
             <input name="custId" type="hidden"  value="${OrdBean.customerBean.custId}"/>
             <input name="payment" type="hidden"  value="線上刷卡"/>
-            <button class="me-3">繼續購買</button>
+            <button class="me-3" onclick="location.href=`${pageContext.request.contextPath}/buyMenu`">繼續購買</button>
             <button type="submit" id="checkout" onclick="">確認結帳</button>
             </div>
             
-      </div>
-  		</form>
+      	</div>
+  	</form>
      	
 
       </div>

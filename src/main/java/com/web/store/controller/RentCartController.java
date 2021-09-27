@@ -3,6 +3,7 @@ package com.web.store.controller;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -28,18 +29,18 @@ import com.web.store.model._04_shop.ProductBean;
 import com.web.store.model._04_shop.RentCart;
 import com.web.store.model._04_shop.ShoppingCart;
 import com.web.store.model._06_order.OrdBean;
+import com.web.store.repository.RentProductDao;
 import com.web.store.service.OrderService;
 import com.web.store.service.ProductService;
 import com.web.store.service.RentProductService;
 
-import antlr.collections.List;
 
 @Controller
 @SessionAttributes({ "LoginOK", "RentCart", "OrdBean" })
 public class RentCartController {
 
 	private static Logger log = LoggerFactory.getLogger(ShoppingCartController.class);
-
+	
 	RentProductService rentProductService;
 	ProductService productService;
 	OrderService orderService;
@@ -67,11 +68,20 @@ public class RentCartController {
 			httpSession.setAttribute("RentCart", rentCart);
 			log.info("建立新的rentCart放進session");
 		}
-
+		
+		//指定商品序號
 		int prodcuctId = Integer.parseInt(prodId.toString().trim());
-
 		RentProductBean rentProductBean = new RentProductBean();// 商品資訊
 		rentProductBean = rentProductService.getProductById(prodcuctId);
+		List<RentProductBean> rpb =  rentProductService.getAllSerialStocksByprodId(prodcuctId);
+		int serialnumSize = rpb.size();
+		for(int n = 1; n <= serialnumSize ; n++) {
+			if(rpb.get(n-1).getStock() != 0) {
+				rentProductBean.setSerialNumber(rpb.get(n-1).getSerialNumber());
+				break;
+			}
+		}
+		
 		Double itemSum = rentPeriod * rentProductBean.getPrice(); // 商品小計
 		String status = "租賃中"; // 商品狀態
 
@@ -151,13 +161,5 @@ public class RentCartController {
 		log.info("總共刪除了購物車內"+ itemsNum +"項商品。");
 		return "_03_rentCart";
 	}
-	//新品推薦購買
-//	@PostMapping("/recommand")
-//	@ResponseBody
-//	public Map<Integer,ProductBean> RecommandBuyProduct(Model model) {
-//		Map<Integer,ProductBean> pbMap =null;
-//		RentProductBean rentProductBean;
-//		return pbMap;
-//	}
 
 }

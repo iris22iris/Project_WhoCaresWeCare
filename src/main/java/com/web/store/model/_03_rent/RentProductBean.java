@@ -45,7 +45,7 @@ public class RentProductBean implements Serializable {
 	private String fileName3;
 	private Clob description;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "RENTPROD_PROMOTEID_FK")
 	private PromotionBean promotionBean;
 

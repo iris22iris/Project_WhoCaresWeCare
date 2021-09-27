@@ -38,14 +38,16 @@ public interface RentProductDao {
 	//抓取該商品目前租賃評論資料
 	public List<CommentBean> getCommentBeanByprodId(int prodId);
 			
+	//依主鍵+serianumber讀取租賃設備
+	public RentProductBean getRentProductBeanByProdIdAndSeriaNumber(int prodId , String serialNumber);
 	
-	// 新增單筆租賃產品資料
+	//新增單筆租賃產品資料
 	void addProduct(RentProductBean product);
 
 	//新增單筆預約資料
 	void addReservation(ReservationBean reservation);
 	
-	// 依session中使用者帳號讀取目前使用者資料	
+	//依session中使用者帳號讀取目前使用者資料	
 	public List<CustomerBean> getCustomerInfoByLoginAccount(String account);
 	
 	// 依會員編號取出該會員所有預約的設備資料
@@ -54,5 +56,5 @@ public interface RentProductDao {
 	// 依傳入大分類代號取出該分類代號之名稱	
 	public List<ProductTypeBean> getProductTypeBeanBymaincategory(String maincategory);
 	//用商品編號取得該產品及其項次庫存資料
-			public	List<RentProductBean> getAllSerialStocksByprodId(int prodId);
+	public	List<RentProductBean> getAllSerialStocksByprodId(int prodId);
 }

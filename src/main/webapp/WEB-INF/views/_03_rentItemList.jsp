@@ -124,7 +124,11 @@
 	  }
 	}
 
+	//連結結帳
+	function checkout(){
+		location.href="${pageContext.request.contextPath}/RentCheckout/"+'<%=session.getAttribute("LoginOK")%>'
 	
+	}
 	
 	</script>
 	
@@ -275,8 +279,15 @@
       </div>
       <div class="row">
         <div class="col-12">
-          <button type="submit" class="btn btn-warning me-2 my-2">結帳</button>
-          <button type="button" class="btn btn-secondary my-2">繼續購物</button>
+        	<c:choose>
+			<c:when test="${ empty sessionScope.LoginOK}">
+				<button data-bs-toggle="modal" data-bs-target="#exampleModal">結帳去</button>
+			</c:when>
+			<c:otherwise>
+          		<button type="submit" onclick="checkout()" class="btn btn-warning me-2 my-2">結帳</button>
+          	</c:otherwise>
+         	</c:choose>
+          <button type="button" onclick="location.href=`${pageContext.request.contextPath}/rentMenu`" class="btn btn-secondary my-2">繼續逛逛</button>
         </div></div>
     </div>
 	</div>

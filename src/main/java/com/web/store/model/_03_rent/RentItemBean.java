@@ -34,7 +34,7 @@ public class RentItemBean implements Serializable {
 	@Column(columnDefinition = "datetime")	
 	private Date startDate;			//租賃起始日
 	@Column(columnDefinition = "datetime")
-	private Date returnDate;			//租賃結束日
+	private Date returnDate;				//租賃結束日
 	private Double prodTotal;				//金額小計
 	private String rentStatus;				//租賃設備的狀態(可出租/租賃中)
 
@@ -48,7 +48,7 @@ public class RentItemBean implements Serializable {
 	@JoinColumn(name = "RENTITEM_PROMOTEID_FK")
 	private PromotionBean promotionBean;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
 	@JoinColumns({ @JoinColumn(name = "RENTITEM_RENTPRODID_FK"), @JoinColumn(name = "RENTITEM_RENTPRODSN_FK"), })
 	private RentProductBean rentProductBean;
 

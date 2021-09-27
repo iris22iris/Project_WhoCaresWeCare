@@ -58,13 +58,13 @@ public class RentCart {
 		for (int n : set) {
 			RentItemBean rib = rentcart.get(n);
 			double price = rib.getRentProductBean().getPrice();
-			int qty = rib.getProdQty();
+			int days = rib.getRentPeriod();
 			double discount = 0;
 			if (rib.getRentProductBean().getPromotionBean() != null) {
 				discount = rib.getRentProductBean().getPromotionBean().getDiscount();
 
 			}
-			subTotal += price * qty - discount;
+			subTotal += price * days - discount;
 		}
 
 		return subTotal;

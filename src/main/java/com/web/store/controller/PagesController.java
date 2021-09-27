@@ -34,16 +34,6 @@ public class PagesController {
 		return "_02_onlineDM";
 	}
 
-	@GetMapping("/_03_rentCheckout")
-	public String rentCheckout(Model model) {
-		return "_03_rentCheckout";
-	}
-
-
-	@GetMapping("/_04_buyCheckout")
-	public String buyCheckout(Model model) {
-		return "_04_buyCheckout";
-	}
 
 	@GetMapping("/_04_favoriteList")
 	public String favoriteList(Model model) {

@@ -25,6 +25,28 @@
 	window.onload = function() {
 		searchBox();
 	}
+
+	//到貨方式選擇
+	function delivery(){
+		deliveryType = String(document.getElementById("deliveryType").value);
+		switch(deliveryType){
+		case "自取":
+			document.getElementById("shippingFee").innerHTML=
+				'<c:set var="shippingFee" value="${0}"/>${shippingFee}元';
+			document.getElementById("subtotal").innerHTML=
+				'<c:set var="subtotal" value="${OrdBean.ordTotal-OrdBean.discount}"/>${subtotal+shippingFee}元';
+			break;
+		case "宅配":
+			document.getElementById("shippingFee").innerHTML=
+				'<c:set var="shippingFee" value="${270}"/>${shippingFee}元';
+			document.getElementById("subtotal").innerHTML=
+				'<c:set var="subtotal" value="${OrdBean.ordTotal-OrdBean.discount}"/>${subtotal+shippingFee}元';
+			break;
+		}
+		shippingFee = document.getElementById("shippingFee").innerHTML;
+		subtotal = document.getElementById("subtotal").innerHTML;
+	}
+	
 	</script>
 	
 	</head>
@@ -51,48 +73,45 @@
                   <th class="col-1">項次</th>
                   <th class="col-2">圖片</th>
                   <th class="col-2">商品名稱</th>
-                  <th class="col-2">起訖日期</th>
+<!--              <th class="col-2">起訖日期</th> -->
                   <th class="col-1">租賃天數</th>
                   <th class="col-1">單價</th>
-                  <th class="col-1">折抵</th>
+                  <th class="col-1">優惠折扣</th>
                   <th class="col-2">合計</th>
               </tr>
+              
+            <c:forEach varStatus="vs" var="rent" items='${rentItems}'>
               <tr class="detailList">
-                  <td>1</td>
-                  <td><img src="<c:url value='/images/product/A0003.jpg'/>"></td>
-                  <td>A100002<br>手動輪椅</td>
-                  <td>到貨: 2020/05/20<br>歸還: 2020/06/20</td>
-                  <td>40</td>
-                  <td>50</td>
-                  <td>20</td>
-                  <td>1950</td>
+                  <td>${vs.index+1}</td>
+                  <!-- 圖片 -->
+                  <td><img src="<c:url value='/images/product/${rent.productBean.fileName}'/>"></td>
+                  <!-- 商品編號/名稱 -->
+                  <td>${rent.productBean.prodId}<br>${rent.productBean.prodName}</td>
+				  <!-- 租賃天數 -->
+                  <td>${rent.rentPeriod}</td>
+                  <!-- 商品單價 -->
+                  <td>${rent.rentProductBean.price}</td>
+                  <!-- 優惠折扣 -->
+                  <c:choose>
+	                  <c:when test="${!empty rent.rentProductBean.promotionBean.discount}">
+	                 	 <td style="color: red;">-${rent.rentProductBean.promotionBean.discount}元</td>
+	                  </c:when>
+	                  <c:otherwise>
+	                  	 <td>無</td>
+	                  </c:otherwise>
+                  </c:choose>
+                  <!-- 商品小計 -->
+                  <td>${rent.prodTotal-rent.rentProductBean.promotionBean.discount}</td>
               </tr>
-              <tr class="detailList">
-                  <td>2</td>
-                  <td><img src="<c:url value='/images/product/A0002.jpg' />"></td>
-                  <td>A100002<br>手動輪椅</td>
-                  <td>到貨: 2020/05/20<br>歸還: 2020/06/20</td>
-                  <td>40</td>
-                  <td>50</td>
-                  <td>20</td>
-                  <td>1950</td>
-              </tr>
-              <tr class="detailList">
-                  <td>3</td>
-                  <td><img src="<c:url value='/images/product/A0001.jpg' />"></td>
-                  <td>A100002<br>手動輪椅</td>
-                  <td>到貨: 2020/05/20<br>歸還: 2020/06/20</td>
-                  <td>40</td>
-                  <td>50</td>
-                  <td>20</td>
-                  <td>1950</td>
-                </tr>
+       		</c:forEach>
           </table>
       </div>
       <!--商品清單 end-->
 
       <hr style="margin:20px;">
 
+	<form method='POST'
+					action="${pageContext.request.contextPath}/rentOrderSubmit">
       <!-- 結帳資訊 start -->
       <div id="checkoutInfo">
         <div class="col-5 checkoutTitle">
@@ -100,37 +119,67 @@
               <i class="fas fa-crutches"></i>
               訂單備註:
             </h4>
-            <textarea id="" cols="60" rows="5"></textarea>       
+            <textarea name="oMark" id="orderMark" cols="50" rows="5"></textarea>       
         </div>
         <div class="col-3 checkoutTitle">
             <div class="checkoutTop">
               <h4>運送方式:</h4>
-              <select name="deliveryType" id="deliveryType">
-                 <option value="0">自取</option> 
-                 <option value="1">物流宅配 270元</option>      
+              <select name="delivery" id="deliveryType" onchange="delivery()">
+                 <option value="自取">自取-運費0元</option>
+                 <option value="宅配">物流宅配-270元</option>      
               </select>
             </div>
             <div class="checkoutBottom">
               <h4>折扣碼:</h4>
               <input type="text" id="discountCode">
+              <input type="button" value="輸入" onclick="changeDiscount()">
+              <c:if test="${!empty OrdBean.discountCode}">
+              <div style="color: red;">折扣碼優惠-${OrdBean.discount}元</div>
+              </c:if>
             </div>
         </div>
         <div class="col-4 checkoutTitle">
             <h4>結帳金額:</h4>
             <div class="row count">
-                <div class="col-4">商品金額:</div>
-                <div class="col-4 price">6000元</div>
+				<!--商品小計 -->
+                <div class="col-4">商品小計:</div>
+                <div class="col-4 price">${OrdBean.ordTotal}元</div>
                 <div class="col-4 "></div>
+                <!--運費 -->
                 <div class="col-4">運費:</div>
-                <div class="col-4 price">0元</div>
+                <div class="col-4 price" id="shippingFee">
+                	<c:set var="shippingFee" value="${0}"/>${shippingFee}元
+                </div>
                 <div class="col-4 "></div>
-                <div class="col-4">優惠折抵:</div>
-                <div class="col-4 price">-150元</div>
+                <!--折扣碼 -->
+                <div class="col-4">折扣碼優惠:</div>
+                <c:choose>
+                <c:when test="${!empty OrdBean.discount}">
+                <div class="col-4 price" style="color: red;">-${OrdBean.discount}元</div>
                 <div class="col-4 "></div>
+                <!--訂單金額 -->
                 <div class="col-4">合計金額:</div>
-                <div class="col-4 price">5850元</div>
+                <c:set var="subtotal" value="${OrdBean.ordTotal-OrdBean.discount}"/>
+                <div class="col-4 price" id="subtotal">
+                 ${subtotal-shippingFee}元
+                </div>
                 <div class="col-4 "></div>
-
+				</c:when>
+				
+				<c:otherwise>
+				<c:set var="zero" value="${0}"/>
+				<div class="col-4 price"><c:out value="${zero}"/>元</div>
+				<div class="col-4 "></div>
+                <!--訂單金額 -->
+                <div class="col-4">合計金額:</div>
+                <c:set var="subtotal" value="${OrdBean.ordTotal}"/>
+                <div class="col-4 price" id="subtotal">
+                 ${subtotal-shippingFee}元
+                </div>
+                <div class="col-4 "></div>
+                </c:otherwise>
+                </c:choose>
+                
             </div>
         </div>
        </div>
@@ -146,44 +195,43 @@
             <div class="addressTitle ">
                 <h4>宅配資訊:</h4>
             </div>
-            <form class="deliveryInfo">
+            <div class="deliveryInfo">
                 <p>
                     收件人:
-                    <input type="text" class="memberName me-3" value="預設會員名字">
+                    <input name="reciName" type="text" class="memberName me-3" value="${OrdBean.customerBean.custName}">
                     連絡電話:
-                    <input type="tel" value="預設會員電話"></p>
+                    <input name="reciPhone" type="tel" value="${OrdBean.customerBean.phone}"></p>
                 <p>
-                    地址(城市): 
-                    <select name="city" class="select me-3" id="city">
-                        <option value="0">台北市</option> 
-                        <option value="1">新北市</option> 
-                        <option value="2">桃園市</option> 
-                    </select>
-                    收件時段:
-                    <select name="checktime" class="select" id="time">
-                        <option value="0">早上(9:00-12:00)</option> 
-                        <option value="1">中午(12:00-13:30)</option> 
-                        <option value="2">下午(13:30-17:00)</option>     
-                     </select>
+<!--                     地址(城市):  -->
+<!--                     <select name="city" class="select me-3" id="city"> -->
+<!--                         <option value="0">台北市</option>  -->
+<!--                         <option value="1">新北市</option>  -->
+<!--                         <option value="2">桃園市</option>  -->
+<!--                     </select> -->
+<!--                     收件時段: -->
+<!--                     <select name="checktime" class="select" id="time"> -->
+<!--                         <option value="0">早上(9:00-12:00)</option>  -->
+<!--                         <option value="1">中午(12:00-13:30)</option>  -->
+<!--                         <option value="2">下午(13:30-17:00)</option>      -->
+<!--                      </select> -->
                 </p>        
                 <p>
                     地址(路名):
-                    <input type="text" class="addressInput" value="預設會員地址">
+                    <input name="reciAddress" type="text" class="addressInput" value="${OrdBean.customerBean.address}">
                 </p>
-            </form>
         </div>
-      
+       </div>
         <div class="col-5 ">
           <div class="address" >
               <div class="addressTitle ">
                 <h4>來店自取:</h4>
               </div>
               <div class="deliveryInfo">
-                <select class="city select">
-                <option value="TPE">台北總店</option>
-                <option value="NEW-TPE">三重分店</option>
-                </select>
-                <p>請於 {} 營業時間來店自取</p>
+<!--                 <select class="city select"> -->
+<!--                 <option value="TPE">台北總店</option> -->
+<!--                 <option value="NEW-TPE">三重分店</option> -->
+<!--                 </select> -->
+                <p>請於營業時間來店自取</p>
                 <p>逾期未取仍收取租賃費用</p>
               </div>    
           </div>
@@ -199,11 +247,13 @@
              我已閱讀購買須知並同意
             </div>
             <div class="btn checkOutBtn w-100" >
-            <button class="me-3">繼續購買</button>
+            <input name="custId" type="hidden"  value="${OrdBean.customerBean.custId}"/>
+            <input name="payment" type="hidden"  value="線上刷卡"/>
+            <button class="me-3" onclick="location.href=`${pageContext.request.contextPath}/rentMenu`">繼續購買</button>
             <button type="submit" id="checkout" >確認結帳</button>
             </div>
       </div>
-  
+  	</form>
      
 
       </div>
