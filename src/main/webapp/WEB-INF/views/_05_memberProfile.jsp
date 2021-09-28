@@ -43,89 +43,52 @@ window.onload = function() {
 }
 
 function upData() {
-	
 	var divResult = document.getElementById('resultMsg');
 	var custNameResult = document.getElementById('custNameResult');
 	var passWordResult = document.getElementById('passWordResult');
 	var inputIDResult = document.getElementById('inputIDResult');
+	
+	let formData = new FormData();
+	formData.append('custId', ${sessionScope.LoginOK});
+	formData.append('custName', $('#custName').val());
+	formData.append('passWord', $('#passWord').val());
+	formData.append('idNumber', $('#inputID').val());
+	formData.append('phone', $('#phone').val());
+	formData.append('email', $('#email').val());
+	formData.append('birthday', $('#birthday').val());
+	formData.append('gender', $('input[type=radio][name="gender"]:checked').val());
+	formData.append('city', $('#city').find("option:selected").text());
+	formData.append('nickName', $('#nickName').val());
+	formData.append('address', $('#address').val());
+	formData.append('image', $('#custImage')[0].files[0] == undefined ? null : $('#custImage')[0].files[0]);
 
-			let formData = new FormData();
-			formData.append('custId', ${sessionScope.LoginOK});
-			formData.append('custName', $('#custName').val());
-			formData.append('passWord', $('#passWord').val());
-			formData.append('idNumber', $('#inputID').val());
-			formData.append('phone', $('#phone').val());
-			formData.append('email', $('#email').val());
-			formData.append('birthday', $('#birthday').val());
-			formData.append('gender', $('input[type=radio][name="gender"]:checked').val());
-			formData.append('city', $('#city').find("option:selected").text());
-			formData.append('nickName', $('#nickName').val());
-			formData.append('address', $('#address').val());
-			formData.append('image', $('#custImage')[0].files[0] == undefined ? null : $('#custImage')[0].files[0]);
-	$.ajax({
+// 	if($("#form1").validate().form() == true) {
+		$.ajax({
 			url : '${pageContext.request.contextPath}/_05_EditmemberProfile',
 			type : "POST",
 		    processData: false,
 			contentType: false,
     		mimeType: 'multipart/form-data',
-    		data :formData,		
+    		data :formData,	
+    		datatype: 'json',	
 			success: function(response){
-				
-		        //跳訊息提示
-		        alert('修改會員成功!');
+				const responseData = JSON.parse(response);
+				console.log(Object.keys(responseData));
+				if(!responseData.success){
+					alert('修改會員失敗!');
+					$("#inputEmailResult").html(responseData.emailError);
+					$("#passWordResult").html(responseData.passWordError);
+					$("#inputIDResult").html(responseData.idNumberError);
+					$("#inputPhoneResult").html(responseData.phoneError);
+					$("#custNameResult").html(responseData.custNameError);
+				} else {
+					$('Font').html('&nbsp;');
+					//跳訊息提示
+			        alert('修改會員成功!');
+				}
 		    },
 		});
-	
-// 	var xhr1 = new XMLHttpRequest();
-// 		xhr1.open("PUT", "<c:url value='/_05_EditmemberProfile/' />", true);
-// // 		var jsonCustomer = {
-// 				custId:${id},
-// 				custName:$('#custName').val(),	
-// 				password:$('#passWord').val(),	
-// 				idNumber:$('#inputID').val(),
-// 				phone:$('#phone').val(),	
-// 				email:$('#email').val(),
-// 				birthday:$('#birthday').val(),
-// 				
-// 				city:$('#city').val(),
-// 				nickName:$('#nickName').val(),
-// 				address:$('#address').val(),
-// // 				image:$('#showImage').attr("src")
-// 		   		}
-// 	   		xhr1.setRequestHeader("Content-Type", "application/json");
-// 	   		xhr1.send(
-				
-// 		   		);
-
-
-// 	   		xhr1.onreadystatechange = function() {
-				// 伺服器請求完成
-//    		if (xhr1.readyState == 4 && (xhr1.status == 200 || xhr1.status == 201) ) {
-//       		result = JSON.parse(xhr1.responseText);
-//       		if (result.fail) {
-// 		 		divResult.innerHTML = "<font color='red' >"
-// 					+ result.fail + "</font>";
-// 	  		} 
-
-// 	  		if (result.custNameError) {
-// 	  			custNameResult.innerHTML = "<font color='RED'>"
-// 					+ result.custNameError + "</font>";
-// 					$('#custNameResult').show();
-// 	 		} 
-
-// 	  		if (result.passWordError) {
-// 	  			passWordResult.innerHTML = "<font color='RED'>"
-// 					+ result.passWordError + "</font>";
-// 					$('#passWordResult').show();
-// 	 		} 
-
-// 	  		if (result.idNumberError) {
-// 	  			inputIDResult.innerHTML = "<font color='RED'>"
-// 					+ result.idNumberError + "</font>";
-// 					$('#inputIDResult').show();
-// 	 		} 
-// 		} 
-//     }
+// 	}
 }
 
 function handleFiles(e){
@@ -168,7 +131,7 @@ function handleFiles(e){
 					<div class="col-12 uploadBtn">
 						<input id="custImage" type="file" onchange="handleFiles(event)"">
 					</div>
-					<button type="submit" class="btn btn-secondary">清除</button>
+<!-- 					<button type="submit" class="btn btn-secondary">清除</button> -->
 				</div>
 				<!-- memberImg end  -->
 
@@ -187,9 +150,13 @@ function handleFiles(e){
 								<input type="text" class="form-control" name="custName"
 									id="custName" value="${customer.custName}">
 							</div>
-							<div id='custNameResult' style="height: 18px; display: none;"></div>
-
-
+							<div class="container">
+								<div class="row justify-content-end">
+									<div class="col-9">
+										<Font color="red" size="-3" id="custNameResult">&nbsp;</Font>
+									</div>
+								</div>
+							</div>
 							<div class="col-3">
 								<label for="nickName" class="form-label">會員暱稱:</label>
 							</div>
@@ -197,8 +164,6 @@ function handleFiles(e){
 								<input type="text" class="form-control" id="nickName"
 									id="nickName" value="${customer.nickName}">
 							</div>
-							<div id='nickNameResult' style="height: 18px; display: none;"></div>
-
 
 							<div class="col-3">
 								<label for="passWord" class="form-label">密碼:</label>
@@ -207,9 +172,13 @@ function handleFiles(e){
 								<input type="text" class="form-control" name="passWord" maxlength="12"
 									id="passWord" value="${customer.password}">
 							</div>
-							<div id='passWordResult' style="height: 18px; display: none;"></div>
-
-
+							<div class="container">
+								<div class="row justify-content-end">
+									<div class="col-9">
+										<Font color="red" size="-3" id="passWordResult">&nbsp;</Font>
+									</div>
+								</div>
+							</div>
 							<div class="col-3">
 								<label for="inputID" class="form-label">身分證字號:</label>
 							</div>
@@ -217,9 +186,13 @@ function handleFiles(e){
 								<input type="text" class="form-control" id="inputID"
 									value="${customer.idNumber}">
 							</div>
-							<div id='inputIDResult' style="height: 18px; display: none;"></div>
-
-
+    						<div class="container">
+								<div class="row justify-content-end">
+									<div class="col-9">
+										<Font color="red" size="-3" id="inputIDResult">&nbsp;</Font>
+									</div>
+								</div>
+							</div>
 							<div class="col-3">
 								<label>性別:</label>
 							</div>
@@ -243,15 +216,28 @@ function handleFiles(e){
 								<input type="text" class="form-control" id="phone"
 									value="${customer.phone}">
 							</div>
+							<div class="container">
+								<div class="row justify-content-end">
+									<div class="col-9">
+										<Font color="red" size="-3" id="inputPhoneResult">&nbsp;</Font>
+									</div>
+								</div>
+							</div>
 
 							<div class="col-3">
-								<label for="email" class="form-label">EMAIL:</label>
+								<label for="email" class="form-label" >EMAIL:</label>
 							</div>
 							<div class="col-9">
-								<input type="text" class="form-control" size="50" id="email"
+								<input type="email" class="form-control" size="50" id="email"
 									value="${customer.email}">
 							</div>
-
+							<div class="container">
+								<div class="row justify-content-end">
+									<div class="col-9">
+										<Font color="red" size="-3" id="inputEmailResult">&nbsp;</Font>
+									</div>
+								</div>
+							</div>
 
 							<div class="col-3">
 								<label for="city" class="form-label">居住城市:</label>
@@ -307,9 +293,9 @@ function handleFiles(e){
 									</div>
 								</div>
 								<div class="col-2">
-									<a href="${pageContext.request.contextPath}/_05_member_management"><button
-											class="btn btn-secondary" data-bs-toggle="modal"
-											data-bs-target="#exampleModal">取消</button></a>
+<%-- 									<a href="${pageContext.request.contextPath}/_05_member_management"><button --%>
+<!-- 											class="btn btn-secondary" data-bs-toggle="modal" -->
+<!-- 											data-bs-target="#exampleModal">取消</button></a> -->
 								</div>
 							</div>
 					<!--submit btn end   -->

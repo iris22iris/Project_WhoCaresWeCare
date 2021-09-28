@@ -105,9 +105,9 @@ li[role="tab"].active {
 	<section class="info-box">
 		<ul role="tablist">
 			<li class="active" onclick="tab1(this)" role="tab" aria-selected="true" aria-setsize="3"
-				aria-posinset="1" tabindex="0">銷售報表</li>
+				aria-posinset="1" tabindex="0">會員管理</li>
 			<li onclick="tab2()" role="tab" aria-selected="false" aria-setsize="3"
-				aria-posinset="2" tabindex="0">員工管理</li>
+				aria-posinset="2" tabindex="0">銷售報表</li>
 			<li onclick="tab3()" role="tab" aria-selected="false" aria-setsize="3"
 				aria-posinset="3" tabindex="0">商品歸還明細</li>
 		</ul>
@@ -194,6 +194,7 @@ li[role="tab"].active {
 				url : '${pageContext.request.contextPath}/adminBoss01Mark1',
 				type : "POST",
 				success : function(response) {
+					console.log(response);
 				}
 			});
 		}	
@@ -203,6 +204,7 @@ li[role="tab"].active {
 				url : '${pageContext.request.contextPath}/adminBoss01Mark2',
 				type : "POST",
 				success : function(response) {
+					console.log(response);
 				}
 			});
 		}	
@@ -214,7 +216,7 @@ li[role="tab"].active {
 // 				success : function(response) {
 // 				}
 // 			});
-			obj.href="/Whocares/rentOrderManage/"+'<%=session.getAttribute("LoginOK")%>';
+			location.href ='${pageContext.request.contextPath}/rentOrderManage/${sessionScope.LoginOK}';
 		}
 	</script>
    <!-- 引入共同的頁尾 -->

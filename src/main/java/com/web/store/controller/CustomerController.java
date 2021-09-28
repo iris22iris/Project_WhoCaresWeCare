@@ -322,20 +322,28 @@ public class CustomerController {
 		model.addAttribute("id", id);
 		return "_05_memberProfile";
 	}
-
 	// 修改單筆會員資料
 	@PostMapping(value = "/_05_EditmemberProfile")
-	public @ResponseBody Map<String, String> updateCustomer(@RequestParam Integer custId, @RequestParam String passWord,
-			@RequestParam String custName, @RequestParam String nickName, @RequestParam String idNumber,
-			@RequestParam String email, @RequestParam Date birthday, @RequestParam String gender,
-			@RequestParam String city, @RequestParam String phone, @RequestParam String address,
+	public @ResponseBody Map<String, String> updateCustomer(
+			@RequestParam Integer custId, 
+			@RequestParam String passWord,
+			@RequestParam String custName,
+			@RequestParam String nickName, 
+			@RequestParam String idNumber,
+			@RequestParam String email, 
+			@RequestParam Date birthday, 
+			@RequestParam String gender,
+			@RequestParam String city, 
+			@RequestParam String phone, 
+			@RequestParam String address,
 			@RequestParam(required = false) MultipartFile image
 
 	) {
 
 		Map<String, String> errorMsgColumn = new HashMap<String, String>();
-		final String CUSTNAME_PATTERN = "\\pP|\\pS|\\s+";
 		final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%!^'\"]).{8,12})";
+		final String PHONE = "[0-9]{4}[0-9]{3}[0-9]{3}";//判斷電話號碼是否合法的正則表示式
+		final String EMAIL = "^\\w{1,63}@[a-zA-Z0-9]{2,63}\\.[a-zA-Z]{2,63}(\\.[a-zA-Z]{2,63})?$";
 		CustomerBean customer = null;
 
 		try {
@@ -346,6 +354,14 @@ public class CustomerController {
 				}
 			} else {
 				throw new RuntimeException("鍵值不存在, custId=" + custId);
+			}
+
+			if (!phone.matches(PHONE)) {
+				errorMsgColumn.put("phoneError", "這不是一個合法的電話號碼");
+			}
+			
+			if (!email.matches(EMAIL)) {
+				errorMsgColumn.put("emailError", "這不是一個合法的信箱");
 			}
 
 			if (image != null) {
@@ -381,12 +397,6 @@ public class CustomerController {
 			if (custName == null || custName.trim().length() == 0) {
 				errorMsgColumn.put("custNameError", "會員姓名不能為空");
 			}
-
-//			Pattern custNameP = Pattern.compile(CUSTNAME_PATTERN);
-//			Matcher cm = custNameP.matcher(custName);
-//			if (!cm.matches() && custName.length() > 0 && !custName.contains(CUSTNAME_PATTERN)) {
-//				errorMsgColumn.put("custNameError", "不允許有特殊字元");
-//			}
 
 			// 密碼檢核
 			if (passWord == null || passWord.trim().length() == 0) {
