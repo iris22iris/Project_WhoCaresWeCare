@@ -1,21 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
-<html lang="en-US">
-<!-- bootstrap -->
-<link
-	href="<c:url value='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' />"
-	rel="stylesheet">
-<!-- icon -->
-<link rel="stylesheet"
-	href="<c:url value='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'/>" />
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<!-- 引入共同的頁首 -->
-<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
-<title>Who Cares? We Care!</title>
-<style>
+    <meta charset="UTF-8">
+   
+   
+    <link rel="stylesheet" href="<c:url value='/css/_02onlinedm.css' />"
+    type="text/css">
+    <link rel="stylesheet" href="<c:url value='/css/commonStyle.css' />"
+	type="text/css">
+    <!-- bootstrap -->
+    <link
+    href="<c:url value='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' />"
+    rel="stylesheet">
+    <!-- icon -->
+    <link rel="stylesheet"
+    href="<c:url value='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'/>" />
+   <!-- jquery cnd -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <!-- 引入共同的頁首 -->
+	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+	
+		<!-- bootstrap -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js">
+	</script>
+	 <style>
 
 /* General setup */
 html {
@@ -86,15 +100,15 @@ li[role="tab"].active {
 }
 </style>
 </head>
-<body>
 
+<body>
 	<section class="info-box">
 		<ul role="tablist">
-			<li class="active" role="tab" aria-selected="true" aria-setsize="3"
-				aria-posinset="1" tabindex="0">Tab 1</li>
-			<li role="tab" aria-selected="false" aria-setsize="3"
-				aria-posinset="2" tabindex="0">Tab 2</li>
-			<li role="tab" aria-selected="false" aria-setsize="3"
+			<li class="active" onclick="tab1()" role="tab" aria-selected="true" aria-setsize="3"
+				aria-posinset="1" tabindex="0">銷售報表</li>
+			<li onclick="tab2()" role="tab" aria-selected="false" aria-setsize="3"
+				aria-posinset="2" tabindex="0">員工管理</li>
+			<li onclick="tab3()" role="tab" aria-selected="false" aria-setsize="3"
 				aria-posinset="3" tabindex="0">Tab 3</li>
 		</ul>
 		<div class="panels">
@@ -173,8 +187,36 @@ li[role="tab"].active {
 			tab.addEventListener('click', setTab);
 			tab.addEventListener('keypress', setTab);
 		}
+
+		
+		function tab1() {
+			$.ajax({
+				url : '${pageContext.request.contextPath}/adminBoss01Mark1',
+				type : "POST",
+				success : function(response) {
+				}
+			});
+		}	
+
+		function tab2() {
+			$.ajax({
+				url : '${pageContext.request.contextPath}/adminBoss01Mark2',
+				type : "POST",
+				success : function(response) {
+				}
+			});
+		}	
+
+		function tab3() {
+			$.ajax({
+				url : '${pageContext.request.contextPath}/adminBoss01Mark3',
+				type : "POST",
+				success : function(response) {
+				}
+			});
+		}
 	</script>
-		<!-- 引入共同的頁尾 -->
+   <!-- 引入共同的頁尾 -->
 		<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
 </body>
 </html>

@@ -52,7 +52,7 @@ function upData() {
 			let formData = new FormData();
 			formData.append('custId', ${sessionScope.LoginOK});
 			formData.append('custName', $('#custName').val());
-			formData.append('password', $('#password').val());
+			formData.append('passWord', $('#passWord').val());
 			formData.append('idNumber', $('#inputID').val());
 			formData.append('phone', $('#phone').val());
 			formData.append('email', $('#email').val());
@@ -307,7 +307,7 @@ function handleFiles(e){
 									</div>
 								</div>
 								<div class="col-2">
-									<a href="<c:url value='/_05_member_management' />"><button
+									<a href="${pageContext.request.contextPath}/_05_member_management"><button
 											class="btn btn-secondary" data-bs-toggle="modal"
 											data-bs-target="#exampleModal">取消</button></a>
 								</div>

@@ -26,7 +26,9 @@ import com.web.store.model._04_shop.BuyItemBean;
 import com.web.store.model._04_shop.ProductBean;
 import com.web.store.model._04_shop.ShoppingCart;
 import com.web.store.model._05_customer.CitySelectBean;
+import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.service.CityService;
+import com.web.store.service.CustomerService;
 import com.web.store.service.OrderService;
 import com.web.store.service.ProblemSelectService;
 import com.web.store.service.ProductService;
@@ -46,6 +48,8 @@ public class HomeController {
 	OrderService orderService;
 	@Autowired
 	HttpSession httpSession;
+	@Autowired
+	CustomerService customerService;
 
 	@GetMapping({ "/", "/index", "/index.html" })
 	public String home(Model model, Map<String, Object> map) {
@@ -134,6 +138,33 @@ public class HomeController {
 		// 將資料封裝到buyItemBean
 		BuyItemBean buyItemBean = new BuyItemBean(prodQTY, itemSum, productBean.getPromotionBean(), productBean);
 		shoppingCart.addProductToCart(prodId, buyItemBean);
+	}
+	
+	@PostMapping("/adminBoss01Mark1")
+	@ResponseBody
+	public List<CustomerBean> adminBoss01(Model model) {
+		List<CustomerBean> allCustomer = customerService.getCustomers();
+		
+		
+		return allCustomer;
+		
+		
+	}
+	
+	@PostMapping("/adminBoss01Mark2")
+	@ResponseBody
+	public void adminBoss02(Model model) {
+		
+		
+		
+	}
+	
+	@PostMapping("/adminBoss01Mark3")
+	@ResponseBody
+	public void adminBoss03(Model model) {
+		
+		
+		
 	}
 
 }
