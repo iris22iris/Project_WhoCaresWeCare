@@ -212,7 +212,7 @@ public class RentProductDaoImpl implements RentProductDao {
 		Session session = factory.getCurrentSession();
 //	    ReservationBean rb = getCompanyById(product.getCompanyId());
 //	    reservation.setCompanyBean(cb);
-		session.save(reservation);   // NG
+		session.save(reservation);   
 		
 	}
 	// 依session中使用者帳號讀取目前使用者資料
