@@ -77,8 +77,8 @@ public class ContactUsController {
 		model.addAttribute("customer", customer);
 		model.addAttribute("id", custId);
 		List<OrdBean> list = new ArrayList<OrdBean>();
-		list = contactUsOrdService.findOrdBeanById(00000001);
-		model.addAttribute("judyList", list);
+		list = contactUsOrdService.findOrdBeanById(custId);
+		model.addAttribute("ordList", list);
 
 		return "_02_contactUs";
 	}
