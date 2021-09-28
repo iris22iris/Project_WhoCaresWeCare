@@ -15,7 +15,10 @@
 	type="text/css">
 <link rel="stylesheet" href="<c:url value='/css/commonStyle.css' />"
 	type="text/css">
-
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 <title>租賃設備: ${rentProduct.prodName}</title>
 
 <!-- bootstrap -->
@@ -39,9 +42,21 @@
 		<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 
 <script>
+function clicka(obj, objUrl) {
+	if ('${sessionScope.LoginOK}' == 'null' || '${sessionScope.LoginOK}' == null || '${sessionScope.LoginOK}' == '') {
+		if (confirm('請先登入')) {
+			obj.href = '${pageContext.request.contextPath}/_05_login';
+		} else {
+			obj.href = '${pageContext.request.contextPath}/index';
+		}
+	
+}
+
 	window.onload = function() {
 		searchBox();
 	}
+
+
 </script>
 </head>
 
@@ -236,6 +251,7 @@
 								 </c:choose> 
 								<div class="col-12 d-flex align-items-start">
 								<c:choose> 
+								
 						  		  <c:when test="${stocksum >0 }">   
 									<div class="submitBtn col-4 d-flex justify-content-center">	
 									
@@ -243,13 +259,26 @@
 						  		  </c:when> 
 
 						  		  <c:otherwise>
-								<div class="submitBtn col-4 d-flex justify-content-center">  
-									<button class="btn btn-outline-warning " 
-									data-bs-toggle="modal" href="#exampleModalToggle" 
-									role="button"  type="button" data-bs-dismiss="modal">
+						  			  
+						  				<c:if test="${empty LoginOK}">
+										<div class="submitBtn col-4 d-flex justify-content-center">  									
+										<a class="btn btn-outline-warning " onclick='clicka(this)'
+										href="<c:url value='/_05_member_management'/>" >							
 										預約候補
-									</button>
-								</div>
+										</a>									
+										</div>
+										</c:if>
+								 	
+										<c:if test="${! empty LoginOK}">
+											<div class="submitBtn col-4 d-flex justify-content-center">  
+												<button class="btn btn-outline-warning " 
+												data-bs-toggle="modal" href="#exampleModalToggle" 
+												role="button"  type="button" data-bs-dismiss="modal">
+													預約候補
+												</button>
+											</div>
+										</c:if>
+								
 					   	 		  </c:otherwise> 
 								</c:choose> 
 								<div class="submitBtn col-4 d-flex justify-content-center ">
