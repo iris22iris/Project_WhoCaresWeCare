@@ -15,9 +15,58 @@ public class JavaMail {
 	// --------------- 基本資料
 	private String userName = "java016030924@gmail.com"; // 寄件者email
 	private String passWord = "odoayywtzmaexumf"; // 寄件者密碼 到自己的google帳號去設定2階段驗證
-	private String customer = "iris22iris@gmail.com "; // 收件者email
+	private String customer = "收件者名稱@gmail.com"; // 收件者email
 	private String subject = "測試信件"; // 信件標題
 	private String txt = "嗨華晏 請問您您您有看到嘛! This is a test Mail!"; // 內容
+
+	public JavaMail(String userName, String passWord, String customer, String subject, String txt) {
+		super();
+		this.userName = userName;
+		this.passWord = passWord;
+		this.customer = customer;
+		this.subject = subject;
+		this.txt = txt;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassWord() {
+		return passWord;
+	}
+
+	public void setPassWord(String passWord) {
+		this.passWord = passWord;
+	}
+
+	public String getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(String customer) {
+		this.customer = customer;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public String getTxt() {
+		return txt;
+	}
+
+	public void setTxt(String txt) {
+		this.txt = txt;
+	}
 
 	@SuppressWarnings("static-access")
 	public void sendMail() throws MessagingException {

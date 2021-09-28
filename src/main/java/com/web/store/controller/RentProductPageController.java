@@ -136,17 +136,12 @@ public class RentProductPageController {
 	        	rb.setWaitNum(1);
 	        else
 	        	rb.setWaitNum(reservations.get(reservations.size()-1).getWaitNum()+1);
-	        
-		
-	        HttpSession session = request.getSession();
-
-			
-		List<CustomerBean> customerinfo = rentProductService.getCustomerInfoByLoginAccount((String) session.getAttribute("LoginAccount"));
-		
-
+	        		
+	        HttpSession session = request.getSession();			
+		List<CustomerBean> customerinfo = rentProductService.getCustomerInfoByLoginAccount((String) session.getAttribute("LoginAccount"));		
 		model.addAttribute("customerinfo", customerinfo);
-		rb.setCustomerBean(customerinfo.get(0));
-		rb.setRentProductBean(rentProductService.getProductById(id));
+			rb.setCustomerBean(customerinfo.get(0));
+			rb.setRentProductBean(rentProductService.getProductById(id));
 		rentProductService.addReservation(rb);	
 		
 	
