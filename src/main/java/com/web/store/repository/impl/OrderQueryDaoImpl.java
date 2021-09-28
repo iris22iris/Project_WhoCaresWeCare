@@ -15,52 +15,59 @@ import com.web.store.repository.OrderQueryDao;
 
 @Repository
 public class OrderQueryDaoImpl implements OrderQueryDao {
-	
+
 	SessionFactory factory;
-	
+
 	@Autowired
 	public OrderQueryDaoImpl(SessionFactory factory) {
 		this.factory = factory;
 	}
-	
+
+//	使用顧客編號和訂單類別查詢訂單
+	@Override
+	public List<OrdBean> findOrdBeanByCustIdAndCategory(Integer custId, String category) {
+		Session session = factory.getCurrentSession();
+		String hql = " FROM OrdBean ob WHERE ob.ordPK.category = :category AND ob.customerBean.custId = :cid ";
+		if (session.createQuery(hql, OrdBean.class).setParameter("category", category).setParameter("cid", custId).getResultList().size() > 0) {
+			return session.createQuery(hql, OrdBean.class).setParameter("category", category).setParameter("cid", custId).getResultList();
+		} else {
+			return null;
+		}
+	}
+
 //	使用複合主鍵查詢訂單
 	@Override
 	public OrdBean findOrdBeanById(Integer custId, String category, Integer ordId) {
 		Session session = factory.getCurrentSession();
 		String hql = " FROM OrdBean ob WHERE ob.ordPK = :pk AND ob.customerBean.custId = :cid ";
-//		OrdBean ordBean = session.get(OrdBean.class, new OrdPK(category, ordId)); 
 		if (session.createQuery(hql, OrdBean.class).setParameter("pk", new OrdPK(category, ordId))
-				  .setParameter("cid", custId).getResultList().size() > 0) {
-			return session.createQuery(hql, OrdBean.class)
-						  .setParameter("pk", new OrdPK(category, ordId))
-						  .setParameter("cid", custId)
-						  .getSingleResult();
+				.setParameter("cid", custId).getResultList().size() > 0) {
+			return session.createQuery(hql, OrdBean.class).setParameter("pk", new OrdPK(category, ordId))
+					.setParameter("cid", custId).getSingleResult();
 		} else {
 			return null;
 		}
-		
+
 	}
-	
+
 //	使用訂單編號查詢購買細項
 	@Override
 	public List<BuyItemBean> findBuyItemByOrdId(Integer ordId) {
 		Session session = factory.getCurrentSession();
 		String hql = " FROM BuyItemBean WHERE ordBean = :ob ";
 
-		return session.createQuery(hql, BuyItemBean.class)
-					  .setParameter("ob", new OrdBean(new OrdPK("B", ordId)))
-				   	  .getResultList();
+		return session.createQuery(hql, BuyItemBean.class).setParameter("ob", new OrdBean(new OrdPK("B", ordId)))
+				.getResultList();
 	}
-	
+
 //	使用訂單編號查詢租賃細項
 	@Override
 	public List<RentItemBean> findRentItemByOrdId(Integer ordId) {
 		Session session = factory.getCurrentSession();
 		String hql = " FROM RentItemBean WHERE ordBean = :ob ";
 
-		return session.createQuery(hql, RentItemBean.class)
-					  .setParameter("ob", new OrdBean(new OrdPK("R", ordId)))
-				   	  .getResultList();
+		return session.createQuery(hql, RentItemBean.class).setParameter("ob", new OrdBean(new OrdPK("R", ordId)))
+				.getResultList();
 	}
-	
+
 }

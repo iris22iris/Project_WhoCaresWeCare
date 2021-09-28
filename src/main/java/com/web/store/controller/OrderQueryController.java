@@ -76,7 +76,11 @@ public class OrderQueryController {
 			return "index";
 		}
 		CustomerBean customerBean = customerService.getCustomerById(custId);
+		List<OrdBean> ordBeans = orderQueryService.findOrdBeanByCustIdAndCategory(custId, "B");
 		model.addAttribute(customerBean);
+		if (ordBeans != null) {
+			model.addAttribute(ordBeans);
+		}
 		if (custId != null && category != null && ordId != null) {
 			OrdBean ordBean = orderQueryService.findOrdBeanById(custId, category, ordId);
 			List<BuyItemBean> buyItems = orderQueryService.findBuyItemByOrdId(ordId);
@@ -159,7 +163,11 @@ public class OrderQueryController {
 			return "index";
 		}
 		CustomerBean customerBean = customerService.getCustomerById(custId);
+		List<OrdBean> ordBeans = orderQueryService.findOrdBeanByCustIdAndCategory(custId, "R");
 		model.addAttribute(customerBean);
+		if (ordBeans != null) {
+			model.addAttribute(ordBeans);
+		}
 		if (custId != null && category != null && ordId != null) {
 			OrdBean ordBean = orderQueryService.findOrdBeanById(custId, category, ordId);
 			List<RentItemBean> rentItems = orderQueryService.findRentItemByOrdId(ordId);
@@ -238,7 +246,11 @@ public class OrderQueryController {
 			Model model
 	) {
 		CustomerBean customerBean = customerService.getCustomerById(custId);
+		List<ReservationBean> reservationBeans = reservationService.findReservationBeanByCustId(custId);
 		model.addAttribute(customerBean);
+		if (reservationBeans != null) {
+			model.addAttribute(reservationBeans);
+		}
 		if (reservationId != null) {
 			ReservationBean reservationBean = reservationService.findReservationBeanById(custId, reservationId);
 			if (reservationBean != null) {

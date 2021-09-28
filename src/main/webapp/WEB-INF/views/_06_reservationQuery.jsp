@@ -18,8 +18,7 @@
 <!-- icon -->
 <link rel="stylesheet"
 	href="<c:url value='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'/>" />
-			<!-- 引入共同的頁首 -->
-			<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+
 <script>
 	window.onload = function() {
 		searchBox();
@@ -32,7 +31,8 @@
 	<!-- main start -->
 	<div id="body">
 		<div id="content">
-
+			<!-- 引入共同的頁首 -->
+			<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 			
 
 			<!-- title start-->
@@ -45,15 +45,15 @@
 				<div class="container search pb-3">
 					<form class="row align-items-center">
 						<div class="col-3  d-flex justify-content-end">
-							<label>${customerBean.custName}您好，請輸預約編號查詢：</label>
+							<label>${customerBean.custName}您好，請選擇欲查詢的記錄：</label>
 						</div>
 						<div class="col-3">
-							<input type="search" class="form-control" id="enter"
-								onkeyup="value=value.replace(/[^\d]/g,'')">
-						</div>
-						<div class="col-1">
-							<button type="button" class="btn btn-warning"
-								onClick="reservationSearch()">查詢</button>
+							<select name="sortType" onChange="reservationSearch(this.value)">
+								<option selected disabled>請選擇預約編號</option>
+								<c:forEach var="reservation" items="${reservationBeanList}">
+									<option value="${reservation.reservationId}">RES${reservation.reservationId}</option>
+								</c:forEach>
+							</select>
 						</div>
 					</form>
 				</div>
@@ -129,11 +129,9 @@
 	<script
 		src="<c:url value='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js' />"></script>
 	<script>
-		function reservationSearch() {
-			let reservationId = document.getElementById("enter").value;
+		function reservationSearch(reservationId) {
 			if (reservationId != null && reservationId != "") {
-				location.href = "?reservationId="
-						+ document.getElementById("enter").value;
+				location.href = "?reservationId=" + reservationId;
 			} else {
 				document.getElementById("searchResult").innerHTML = "請輸入合法的預約編號";
 			}

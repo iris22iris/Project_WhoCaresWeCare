@@ -25,8 +25,6 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 	
 <script src="<c:url value='/js/sortProducts.js' />"></script>
-			<!-- 引入共同的頁首 -->
-			<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
  <script>
 	window.onload = function() {
 		searchBox();
@@ -39,6 +37,9 @@
 	<div id="body">
 		<div id="content">
 			
+
+<!-- 引入共同的頁首 -->
+<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 
 			<!-- Main Start -->
 

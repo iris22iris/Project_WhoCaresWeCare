@@ -19,8 +19,8 @@
 	href="<c:url value='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'/>" />
 <!-- sweetAlert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-			<!-- 引入共同的頁首 -->
-			<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+<!-- 引入共同的頁首 -->
+<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 <script defer
 	src="https://use.fontawesome.com/releases/v5.0.10/js/all.js"></script>
 <script defer src="https://use.fontawesome.com/4e44561671.js"></script>
@@ -28,7 +28,7 @@
 	window.onload = function() {
 		searchBox();
 	}
-	</script>
+</script>
 </head>
 
 <body>
@@ -36,7 +36,7 @@
 	<div id="body">
 		<div id="content">
 
-			
+
 
 			<!--title start 標題開始-->
 			<div class="title ">
@@ -47,15 +47,15 @@
 				<div class=" header-search container">
 					<form class="row align-items-center">
 						<div class="col-3 d-flex justify-content-end">
-							<label class="enter ">${customerBean.custName}您好，請輸入訂單編號查詢:</label>
+							<label class="enter ">${customerBean.custName}您好，請選擇欲查詢的訂單:</label>
 						</div>
 						<div class="col-3">
-							<input type="search" class="form-control " id="enter"
-								onkeyup="value=value.replace(/[^\d]/g,'')">
-						</div>
-						<div class="col-1">
-							<button type="button" class="btn btn-warning "
-								onclick="rentOrderSearch()">查詢</button>
+							<select name="sortType" onChange="rentOrderSearch(this.value)">
+								<option selected disabled>請選擇訂單編號</option>
+								<c:forEach var="ord" items="${ordBeanList}">
+									<option value="${ord.ordPK.ordId}">R${ord.ordPK.ordId}</option>
+								</c:forEach>
+							</select>
 						</div>
 					</form>
 				</div>
@@ -74,10 +74,10 @@
 							<!-- itemcontainer  star  訂單進度條開始-->
 							<div class="orderProgress">
 								<div class="list">
-									<li id="confirmed"><i
-										class="fa fa-solid fa-list fa-2x " aria-hidden="true"></i>訂單成立</li>
-									<li id="paid"><i
-										class='fas fa-money-bill-alt fa-2x' aria-hidden="true"></i>已收款</li>
+									<li id="confirmed"><i class="fa fa-solid fa-list fa-2x "
+										aria-hidden="true"></i>訂單成立</li>
+									<li id="paid"><i class='fas fa-money-bill-alt fa-2x'
+										aria-hidden="true"></i>已收款</li>
 									<li id="processing"><i class="fa fa-archive fa-2x"
 										aria-hidden="true"></i>出貨中</li>
 									<li id="shipping"><i class="fa fa-truck fa-2x "
@@ -285,11 +285,9 @@
 			})
 		}
 
-		function rentOrderSearch() {
-			let ordId = document.getElementById("enter").value;
+		function rentOrderSearch(ordId) {
 			if (ordId != null && ordId != "") {
-				location.href = "?category=R" + "&ordId="
-						+ document.getElementById("enter").value;
+				location.href = "?category=R" + "&ordId=" + ordId;
 			} else {
 				document.getElementById("searchResult").innerHTML = "請輸入合法的訂單編號";
 			}
@@ -298,7 +296,7 @@
 		function back() {
 			location = "<c:url value='/_05_member_management' />";
 		}
-		
+
 		window.addEventListener('load', orderStatus("${ordBean.orderStatus}"));
 	</script>
 

@@ -23,6 +23,7 @@ import com.web.store.model._05_customer.CustomerBean;
 import com.web.store.model._06_order.OrdBean;
 import com.web.store.model._06_order.pkClass.OrdPK;
 import com.web.store.service.CustomerService;
+import com.web.store.service.OrderManageService;
 import com.web.store.service.OrderQueryService;
 import com.web.store.service.RentItemService;
 import com.web.store.service.RentProductService;
@@ -31,24 +32,29 @@ import com.web.store.service.RentProductService;
 public class OrderManageController {
 
 	CustomerService customerService;
+	OrderManageService orderManageService;
 	OrderQueryService orderQueryService;
 	RentProductService rentProductService;
 	RentItemService rentItemService;
 	HttpSession httpSession;
-	@Autowired
 	HttpServletRequest request;
-
+	
 	@Autowired
-	public OrderManageController(CustomerService customerService, OrderQueryService orderQueryService,
-			RentProductService rentProductService, RentItemService rentItemService, HttpSession httpSession) {
+	public OrderManageController(
+			CustomerService customerService, OrderManageService orderManageService,
+			OrderQueryService orderQueryService, RentProductService rentProductService,
+			RentItemService rentItemService, HttpSession httpSession, HttpServletRequest request
+	) {
 		this.customerService = customerService;
+		this.orderManageService = orderManageService;
 		this.orderQueryService = orderQueryService;
 		this.rentProductService = rentProductService;
 		this.rentItemService = rentItemService;
 		this.httpSession = httpSession;
+		this.request = request;
 	}
 
-//	進入租賃訂單查詢頁(含查詢字串)
+	// 進入租賃訂單查詢頁(含查詢字串)
 	@GetMapping("/rentOrderManage/{custId}")
 	public String rentOrderQuery(@PathVariable Integer custId,
 			@RequestParam(name = "category", required = false) String category,
@@ -58,9 +64,11 @@ public class OrderManageController {
 			return "index";
 		}
 		CustomerBean customerBean = customerService.getCustomerById(custId);
+		List<OrdBean> ordBeans = orderManageService.findOrdBeansByCategory("R");
 		model.addAttribute(customerBean);
+		model.addAttribute(ordBeans);
 		if (custId != null && category != null && ordId != null) {
-			OrdBean ordBean = orderQueryService.findOrdBeanById(custId, category, ordId);
+			OrdBean ordBean = orderManageService.findOrdBeanById(category, ordId);
 			List<RentItemBean> rentItems = orderQueryService.findRentItemByOrdId(ordId);
 			if (ordBean != null) {
 				model.addAttribute(ordBean);

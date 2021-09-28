@@ -47,15 +47,15 @@
 				<div class=" header-search container">
 					<form class="row align-items-center">
 						<div class="col-3 d-flex justify-content-end">
-							<label class="enter ">${customerBean.custName}您好，請輸入訂單編號查詢:</label>
+							<label class="enter ">${customerBean.custName}您好，請選擇欲管理的訂單:</label>
 						</div>
 						<div class="col-3">
-							<input type="search" class="form-control " id="enter"
-								onkeyup="value=value.replace(/[^\d]/g,'')">
-						</div>
-						<div class="col-1">
-							<button type="button" class="btn btn-warning "
-								onclick="rentOrderSearch()">查詢</button>
+							<select name="sortType" onChange="rentOrderSearch(this.value)">
+								<option selected disabled>請選擇訂單編號</option>
+								<c:forEach var="ord" items="${ordBeanList}">
+									<option value="${ord.ordPK.ordId}">R${ord.ordPK.ordId}</option>
+								</c:forEach>
+							</select>
 						</div>
 					</form>
 				</div>
@@ -157,11 +157,9 @@
 			})
 		}
 
-		function rentOrderSearch() {
-			let ordId = document.getElementById("enter").value;
+		function rentOrderSearch(ordId) {
 			if (ordId != null && ordId != "") {
-				location.href = "?category=R" + "&ordId="
-						+ document.getElementById("enter").value;
+				location.href = "?category=R" + "&ordId=" + ordId;
 			} else {
 				document.getElementById("searchResult").innerHTML = "請輸入合法的訂單編號";
 			}
