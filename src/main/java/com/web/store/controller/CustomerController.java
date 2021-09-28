@@ -154,9 +154,7 @@ public class CustomerController {
 		}
 		model.addAttribute("lowProductsList", lowProductsList);
 		
-		if (account.equals("adminBoss") && password.equals("Do!ng123")) {
-			return "adminBoss";
-		}
+		
 
 		Map<String, String> errorMsgMap = validLogin(account, password);
 
@@ -167,6 +165,10 @@ public class CustomerController {
 		errorMsgMap.put("noError", "index");
 		rememberMe(rememberMe, account, password);
 
+		if (account.equals("adminBoss01") && password.equals("Do!ng123")) {
+			return "adminBoss";
+		}
+		
 		return "index";
 	}
 
@@ -320,20 +322,28 @@ public class CustomerController {
 		model.addAttribute("id", id);
 		return "_05_memberProfile";
 	}
-
 	// 修改單筆會員資料
 	@PostMapping(value = "/_05_EditmemberProfile")
-	public @ResponseBody Map<String, String> updateCustomer(@RequestParam Integer custId, @RequestParam String password,
-			@RequestParam String custName, @RequestParam String nickName, @RequestParam String idNumber,
-			@RequestParam String email, @RequestParam Date birthday, @RequestParam String gender,
-			@RequestParam String city, @RequestParam String phone, @RequestParam String address,
+	public @ResponseBody Map<String, String> updateCustomer(
+			@RequestParam Integer custId, 
+			@RequestParam String passWord,
+			@RequestParam String custName,
+			@RequestParam String nickName, 
+			@RequestParam String idNumber,
+			@RequestParam String email, 
+			@RequestParam Date birthday, 
+			@RequestParam String gender,
+			@RequestParam String city, 
+			@RequestParam String phone, 
+			@RequestParam String address,
 			@RequestParam(required = false) MultipartFile image
 
 	) {
 
 		Map<String, String> errorMsgColumn = new HashMap<String, String>();
-		final String CUSTNAME_PATTERN = "\\pP|\\pS|\\s+";
 		final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%!^'\"]).{8,12})";
+		final String PHONE = "[0-9]{4}[0-9]{3}[0-9]{3}";//判斷電話號碼是否合法的正則表示式
+		final String EMAIL = "^\\w{1,63}@[a-zA-Z0-9]{2,63}\\.[a-zA-Z]{2,63}(\\.[a-zA-Z]{2,63})?$";
 		CustomerBean customer = null;
 
 		try {
@@ -344,6 +354,14 @@ public class CustomerController {
 				}
 			} else {
 				throw new RuntimeException("鍵值不存在, custId=" + custId);
+			}
+
+			if (!phone.matches(PHONE)) {
+				errorMsgColumn.put("phoneError", "這不是一個合法的電話號碼");
+			}
+			
+			if (!email.matches(EMAIL)) {
+				errorMsgColumn.put("emailError", "這不是一個合法的信箱");
 			}
 
 			if (image != null) {
@@ -380,40 +398,27 @@ public class CustomerController {
 				errorMsgColumn.put("custNameError", "會員姓名不能為空");
 			}
 
-//			Pattern custNameP = Pattern.compile(CUSTNAME_PATTERN);
-//			Matcher cm = custNameP.matcher(custName);
-//			if (!cm.matches() && custName.length() > 0 && !custName.contains(CUSTNAME_PATTERN)) {
-//				errorMsgColumn.put("custNameError", "不允許有特殊字元");
-//			}
-
 			// 密碼檢核
-			if (password == null || password.trim().length() == 0) {
+			if (passWord == null || passWord.trim().length() == 0) {
 				errorMsgColumn.put("passWordError", "密碼欄必須輸入");
 			}
 
 			Pattern passWordp = Pattern.compile(PASSWORD_PATTERN);
-			Matcher pm = passWordp.matcher(password);
-			if (!pm.matches() && password.length() > 0 && password.length() < 12) {
+			Matcher pm = passWordp.matcher(passWord);
+			if (!pm.matches() && passWord.length() > 0 && passWord.length() < 12) {
 				errorMsgColumn.put("passWordError", "密碼至少含各一個大小寫字母、數字與!@#$%!^'\\\"，且長度至少等於八個字元");
 			} else {
-				if (!pm.matches() && password.length() > 0 && password.length() > 8) {
+				if (!pm.matches() && passWord.length() > 0 && passWord.length() > 8) {
 					errorMsgColumn.put("passWordError", "密碼至少含各一個大小寫字母、數字與!@#$%!^'\\\"，且長度不能大於十二個字元");
-				} else {
-					if (pm.matches()) {
-						errorMsgColumn.put("passWordError", "密碼格式正確");
-					}
-				}
+				} 
 			}
 			// 身分證檢核
 			String checkHead = "ABCDEFGHJKLMNPQRSTUVWXYZIO"; // 字母代號對照表
 
 			if (idNumber == null || idNumber.length() != 10) {
 				errorMsgColumn.put("idNumberError", "長度不合法");
-			} else {
-				if (idNumber != null || idNumber.length() >= 10) {
-					errorMsgColumn.put("idNumberError", "長度合法");
-				}
-			}
+			} 
+			
 			if (idNumber.length() == 10 && idNumber != null) {
 				char[] c = idNumber.toUpperCase().toCharArray(); // 建立 c 陣列，同時將s字串轉大寫後，轉成字元陣列放入 c 陣列
 				int[] ID = new int[c.length]; // 建立一個運算用的整數陣列，空間為 c 的字元個數

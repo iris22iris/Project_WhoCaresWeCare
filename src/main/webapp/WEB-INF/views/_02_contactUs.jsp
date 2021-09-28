@@ -100,8 +100,8 @@
 							<label for="inputOrderno" class="form-label">訂單編號:</label> <select
 								type="text" class="form-select" id="inputOrderno" name="ordId"
 								value=''>
-								<c:forEach items="${judyList}" var="jj">
-									<option value="${jj.ordPK.category}${jj.ordPK.ordId}">${jj.ordPK.category}${jj.ordPK.ordId}</option>
+								<c:forEach items="${ordList}" var="ordList">
+									<option value="${ordList.ordPK.category}${ordList.ordPK.ordId}">${ordList.ordPK.category}${ordList.ordPK.ordId}</option>
 								</c:forEach>
 							</select>
 						</div>
