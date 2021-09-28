@@ -41,30 +41,26 @@ public class OrderManageController {
 	RentItemService rentItemService;
 	HttpSession httpSession;
 	HttpServletRequest request;
-	
-//	@Autowired
-//	MailService mailservice;
-//	@Autowired
-//	JavaMail mail;
 
+//	MailService mailservice;
+//	JavaMail mail;
+	
+	
 	@Autowired
-	public OrderManageController(CustomerService customerService, OrderQueryService orderQueryService,
-			RentProductService rentProductService, RentItemService rentItemService, HttpSession httpSession
-			
-//			,MailService mailservice
-//			,JavaMail mail
-			
-			) {
+	public OrderManageController(CustomerService customerService, OrderManageService orderManageService,
+			OrderQueryService orderQueryService, RentProductService rentProductService, RentItemService rentItemService,
+			HttpSession httpSession, HttpServletRequest request/*, MailService mailservice ,JavaMail mail*/
+	) {
 		this.customerService = customerService;
 		this.orderManageService = orderManageService;
 		this.orderQueryService = orderQueryService;
 		this.rentProductService = rentProductService;
 		this.rentItemService = rentItemService;
 		this.httpSession = httpSession;
+		this.request = request;
 		
 //		this.mailservice = mailservice;
 //		this.mail = mail;
-	
 	}
 
 	// 進入租賃訂單查詢頁(含查詢字串)
