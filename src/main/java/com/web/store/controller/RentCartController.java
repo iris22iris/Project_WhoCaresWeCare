@@ -147,8 +147,10 @@ public class RentCartController {
 	
 	//移除購物車商品
 	@PostMapping("/_03_rentCart/updateItem.do")
-	protected String updateItem(@RequestParam(value = "prodId", required = false) String prodId,
-			 Model model) {
+	@ResponseBody
+	protected String[] updateItem(
+			@RequestParam(value = "prodId", required = false) String prodId,
+			Model model) {
 			
 		RentCart rentCart = (RentCart) httpSession.getAttribute("RentCart");
 
@@ -159,7 +161,7 @@ public class RentCartController {
 			rentCart.deleteProducts(Integer.parseInt(productId[i]));
 		}
 		log.info("總共刪除了購物車內"+ itemsNum +"項商品。");
-		return "_03_rentCart";
+		return productId;
 	}
-
+	
 }

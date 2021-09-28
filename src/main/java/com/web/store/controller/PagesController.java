@@ -123,6 +123,15 @@ public class PagesController {
 		return "_04_orderConfirm";
 	}
 	
+	@GetMapping("/adminBoss")
+	public String adminBoss(Model model) {
+		HttpSession session = request.getSession();
+		if (session.getAttribute("LoginOK") == null) {
+			return "index";
+		}
+		return "adminBoss";
+	}
+	
 
 
 }

@@ -101,22 +101,26 @@
 			}
 
 		$.ajax({
-			url : "<c:url value='/_03_rentCart/updateItem.do'/>",
+			url : "${pageContext.request.contextPath}/_03_rentCart/updateItem.do",
 			type : "POST",
 			async: false,
 			data : {
 				prodId : prodId,
 			},
 
-			success: function() { 
-				alert("WHYYYY");
-				if(prodId.indexOf(",") != -1){
-					var prodIdList = prodId.split(',');
-					for (var x = 0; x < prodIdList.length; x++) {
-						$('#productItem' + prodIdList[x]).remove();
-					}
-					count();
-				}
+			success: function(response) { 
+// 				if(prodId.indexOf(",") != -1){
+// 					var prodIdList = prodId.split(',');
+// 					for (var x = 0; x < prodIdList.length; x++) {
+// 						$('#productItem' + prodIdList[x]).remove();
+// 					}
+// 					count();
+// 				}
+
+					response.forEach(function(val){
+						$('#productItem' + val).remove();
+						}); 
+					
 				$('#productItem' + prodId).remove();
 				count();
 			}
@@ -305,7 +309,5 @@
 	
  <!-- bootstrap -->
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>   
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/_05loginPopup3.js"></script>
 </body>
 </html>
