@@ -22,7 +22,6 @@
 	<script src="<c:url value='/js/ContactUs.js' />"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	 <!-- 引入共同的頁首 -->
-	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 	<script>
 	window.onload = function() {
 		searchBox();
@@ -75,6 +74,7 @@
   <div id="body">
     <div id="content">
   
+	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
 
       <!-- title start-->
       <div class="title">
@@ -177,9 +177,7 @@
         <!-- upload file start -->
         <div class="row formRow">
           <div class="col-12">              
-            <input type="file" id="input" multiple="true" onchange="handleFiles(this.files)" >
             <div  style="text-align:right;">
-              <span style="text-decoration:underline" style="vertical-align: text-top;">回覆日期:2021</span>
             </div>
           </div>  
         </div>

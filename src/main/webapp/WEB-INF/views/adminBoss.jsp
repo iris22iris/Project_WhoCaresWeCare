@@ -104,12 +104,12 @@ li[role="tab"].active {
 <body>
 	<section class="info-box">
 		<ul role="tablist">
-			<li class="active" onclick="tab1()" role="tab" aria-selected="true" aria-setsize="3"
+			<li class="active" onclick="tab1(this)" role="tab" aria-selected="true" aria-setsize="3"
 				aria-posinset="1" tabindex="0">銷售報表</li>
 			<li onclick="tab2()" role="tab" aria-selected="false" aria-setsize="3"
 				aria-posinset="2" tabindex="0">員工管理</li>
 			<li onclick="tab3()" role="tab" aria-selected="false" aria-setsize="3"
-				aria-posinset="3" tabindex="0">Tab 3</li>
+				aria-posinset="3" tabindex="0">商品歸還明細</li>
 		</ul>
 		<div class="panels">
 			<article class="active-panel" role="tabpanel" aria-hidden="false">
@@ -207,13 +207,14 @@ li[role="tab"].active {
 			});
 		}	
 
-		function tab3() {
-			$.ajax({
-				url : '${pageContext.request.contextPath}/adminBoss01Mark3',
-				type : "POST",
-				success : function(response) {
-				}
-			});
+		function tab3(obj) {
+// 			$.ajax({
+// 				url : '${pageContext.request.contextPath}/adminBoss01Mark3',
+// 				type : "POST",
+// 				success : function(response) {
+// 				}
+// 			});
+			obj.href="/Whocares/rentOrderManage/"+'<%=session.getAttribute("LoginOK")%>';
 		}
 	</script>
    <!-- 引入共同的頁尾 -->
