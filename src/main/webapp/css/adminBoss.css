@@ -1,0 +1,55 @@
+
+/* info-box setup */
+.info-box {
+	width: 450px;
+	height: 400px;
+	margin: 0 auto;
+}
+
+/* styling info-box tabs */
+ul[role="tablist"] {
+	padding-left: 0;
+	margin-top: 0;
+}
+
+li[role="tab"] {
+	float: left;
+	list-style-type: none;
+	width: 150px;
+	display: inline-block;
+	line-height: 3;
+	background-color: rgb(226, 168, 81);
+	color: black;
+	text-align: center;
+}
+
+li[role="tab"]:focus, li[role="tab"]:hover {
+	background-color: #42291b;
+	color: white;
+}
+
+li[role="tab"].active {
+	background-color: #86421a;
+	color: white;
+}
+
+/* styling info-box panels */
+.info-box .panels {
+	clear: both;
+	position: relative;
+	height: 352px;
+}
+
+.info-box article {
+	background-color: #e6cea3;
+	color: white;
+	position: absolute;
+	padding: 10px;
+	height: 352px;
+	top: 0;
+	left: 0;
+}
+
+.info-box .active-panel {
+	z-index: 1;
+}

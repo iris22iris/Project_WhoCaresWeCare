@@ -50,7 +50,7 @@
 							<label class="enter ">${customerBean.custName}您好，請選擇欲管理的訂單:</label>
 						</div>
 						<div class="col-3">
-							<select name="sortType" onChange="rentOrderSearch(this.value)">
+							<select name="sortType" class="orderSelect" onChange="rentOrderSearch(this.value)">
 								<option selected disabled>請選擇訂單編號</option>
 								<c:forEach var="ord" items="${ordBeanList}">
 									<option value="${ord.ordPK.ordId}">R${ord.ordPK.ordId}</option>

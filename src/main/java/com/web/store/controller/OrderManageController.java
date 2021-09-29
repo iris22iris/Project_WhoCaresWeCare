@@ -148,7 +148,7 @@ public class OrderManageController {
 							+"<br>"
 							+"已經準備好了。"
 							+"<br>"
-							+"請您到以下連結進行租賃感謝!"
+							+"請您於48小時內到以下連結進行租賃，48小時內無完成租賃則預約序號會往後遞補，謝謝您!"
 							+"<br>"
 							+"http://localhost:8080/Whocares/_03_rentProduct?id="
 							+reservations.get(0).getRentProductBean().getProdId());

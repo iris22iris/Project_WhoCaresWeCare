@@ -116,6 +116,7 @@ input[type="number"] {
     color: rgb(56, 48, 45);
     text-align: right;
     margin-left: 5px;
+    padding:3px;
 }
 
 /* 租賃候補按鈕 */
@@ -129,8 +130,8 @@ input[type="number"] {
 
 /* 租賃期間 */
 .expectedrentperiod{
-    font-size:24px;
-    color:rgb(65, 55, 48);
+    font-size:20px;
+    color:rgb(145, 119, 100);
 }
 
 

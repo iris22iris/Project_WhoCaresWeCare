@@ -214,7 +214,7 @@ function clicka(obj, objUrl) {
 										
 										end.setTime (begin.getTime()+ 1000 * 60 * 60 * 24 * (Days));
 																										
-										document.getElementById("expectedrentperiod").innerText="租賃起始日: "+(formatDate(begin))+"\r"+"租賃歸還日: "+(formatDate(end));
+										document.getElementById("expectedrentperiod").innerText="起始日:"+(formatDate(begin))+"\r"+"歸還日"+(formatDate(end));
 									 }
 									 const formatDate = (date)=>{
 											let formatted_date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() 

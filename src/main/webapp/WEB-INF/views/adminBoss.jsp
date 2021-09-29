@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
    
    
-    <link rel="stylesheet" href="<c:url value='/css/_02onlinedm.css' />"
+    <link rel="stylesheet" href="<c:url value='/css/adminBoss.css' />"
     type="text/css">
     <link rel="stylesheet" href="<c:url value='/css/commonStyle.css' />"
 	type="text/css">
@@ -22,86 +22,21 @@
    <!-- jquery cnd -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
-    <!-- 引入共同的頁首 -->
-	<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
-	
+  
 		<!-- bootstrap -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js">
 	</script>
-	 <style>
 
-/* General setup */
-html {
-	font-family: sans-serif;
-}
-
-* {
-	box-sizing: border-box;
-}
-
-body {
-	margin: 0;
-}
-
-/* info-box setup */
-.info-box {
-	width: 450px;
-	height: 400px;
-	margin: 0 auto;
-}
-
-/* styling info-box tabs */
-ul[role="tablist"] {
-	padding-left: 0;
-	margin-top: 0;
-}
-
-li[role="tab"] {
-	float: left;
-	list-style-type: none;
-	width: 150px;
-	display: inline-block;
-	line-height: 3;
-	background-color: red;
-	color: black;
-	text-align: center;
-}
-
-li[role="tab"]:focus, li[role="tab"]:hover {
-	background-color: #a60000;
-	color: white;
-}
-
-li[role="tab"].active {
-	background-color: #a60000;
-	color: white;
-}
-
-/* styling info-box panels */
-.info-box .panels {
-	clear: both;
-	position: relative;
-	height: 352px;
-}
-
-.info-box article {
-	background-color: #a60000;
-	color: white;
-	position: absolute;
-	padding: 10px;
-	height: 352px;
-	top: 0;
-	left: 0;
-}
-
-.info-box .active-panel {
-	z-index: 1;
-}
-</style>
 </head>
 
 <body>
+	<div id="body">
+		<div id="content">
+			<!-- 引入共同的頁首 -->
+			<jsp:include page="/WEB-INF/fragment/topMVC.jsp" />
+				
+
 	<section class="info-box">
 		<ul role="tablist">
 			<li class="active" onclick="tab1(this)" role="tab" aria-selected="true" aria-setsize="3"
@@ -113,38 +48,25 @@ li[role="tab"].active {
 		</ul>
 		<div class="panels">
 			<article class="active-panel" role="tabpanel" aria-hidden="false">
-				<h2>The first tab</h2>
+				<h2>會員列表</h2>
 
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Pellentesque turpis nibh, porttitor nec venenatis eu, pulvinar in
-					augue. Vestibulum et orci scelerisque, vulputate tellus quis,
-					lobortis dui. Vivamus varius libero at ipsum mattis efficitur ut
-					nec nisl. Nullam eget tincidunt metus. Donec ultrices, urna maximus
-					consequat aliquet, dui neque eleifend lorem, a auctor libero turpis
-					at sem. Aliquam ut porttitor urna. Nulla facilisi.</p>
 			</article>
 			<article role="tabpanel" aria-hidden="true">
-				<h2>The second tab</h2>
+				<h2>報表管理</h2>
 
 				<p>This tab hasn't got any Lorem Ipsum in it. But the content
 					isn't very exciting all the same.</p>
 			</article>
 			<article role="tabpanel" aria-hidden="true">
-				<h2>The third tab</h2>
+				<h2>設備歸還</h2>
 
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Pellentesque turpis nibh, porttitor nec venenatis eu, pulvinar in
-					augue. And now an ordered list: how exciting!</p>
-
-				<ol>
-					<li>dui neque eleifend lorem, a auctor libero turpis at sem.</li>
-					<li>Aliquam ut porttitor urna.</li>
-					<li>Nulla facilisi</li>
-				</ol>
 			</article>
 		</div>
 	</section>
-
+	</div>
+	<!-- 引入共同的頁尾 -->
+	<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
+	</div>
 	<script>
 		let tabs = document.querySelectorAll('.info-box li');
 		let panels = document.querySelectorAll('.info-box article');
@@ -219,7 +141,6 @@ li[role="tab"].active {
 			location.href ='${pageContext.request.contextPath}/rentOrderManage/${sessionScope.LoginOK}';
 		}
 	</script>
-   <!-- 引入共同的頁尾 -->
-		<jsp:include page="/WEB-INF/fragment/bottomMVC.jsp" />
+  
 </body>
 </html>
