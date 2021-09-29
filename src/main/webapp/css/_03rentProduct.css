@@ -127,6 +127,13 @@ input[type="number"] {
     
 }
 
+/* 租賃期間 */
+.expectedrentperiod{
+    font-size:24px;
+    color:rgb(65, 55, 48);
+}
+
+
 
 /* ----商品輪播圖片---- */
 
@@ -157,11 +164,11 @@ input[type="number"] {
 }
 
 /* 小圖片 */
-input {
-    width: 60px;
-    height: 60px;
-    margin: 10px;
-}
+/* input { */
+/*     width: 60px; */
+/*     height: 60px; */
+/*     margin: 10px; */
+/* } */
 
 
 /* -------- 商品詳情 -------*/

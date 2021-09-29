@@ -159,11 +159,11 @@ input[type="number"] {
 }
 
 /* 小圖片 */
-input {
+/* input {
     width: 60px;
     height: 60px;
     margin: 10px ;
-}
+} */
 
 /* -------- 商品詳情 -------*/
 .productContent {
@@ -232,77 +232,4 @@ input {
 .comment div:nth-child(5){
     justify-content: start;
 }
-
-/* .word {
-    word-break: break-all;
-    font-size: 1.3rem;
-} */
-
-
-/* 留言板start */
-/* li {
-    list-style: none;
-}
-
-#parent {
-    margin-top: 25px;
-}
-
-h4 {
-    line-height: 40px;
-    margin-bottom: 10px;
-    border-bottom: 1px solid #333;
-    color: #FF3300
-}
-
-p {
-    width: 100%;
-    background: #f1f1f1;
-    position: relative;
-    margin-bottom: 25px;
-}
-
-#box {
-    width: 580px;
-    padding: 25px 10px 0;
-    border: 1px solid #ddd;
-    margin-bottom: 10px;
-}
-
-span {
-    position: absolute;
-    top: -20px;
-    right: 0px;
-}
-
-em {
-    position: relative;
-    top: -13px;
-}
-
-#text {
-    width: 100%;
-    height: 90px;
-    overflow: auto;
-}
-
-#btn {
-    width: 15%;
-    height: 25px;
-} */
-/* 留言板end */
-
-
-/*大頭照 */
-/* .imgTop {
-    margin-left: 20px;
-    width: 250px;
-    height: 100px;
-}
-
-.imgMid {
-    margin: -5px 10px auto 100px;
-    width: 50px;
-    height: 50px;
-} */
 

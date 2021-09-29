@@ -46,6 +46,19 @@
 		shippingFee = document.getElementById("shippingFee").innerHTML;
 		subtotal = document.getElementById("subtotal").innerHTML;
 	}
+
+
+	//確認勾選同意
+	$("#checkout").click(function(){
+		if($("#memberRulesCheck").attr('checked')){
+			  alert("已確認同意會員守則");
+			  return true;
+		}else{
+			  alert("尚未同意會員守則")
+		 	 return false;
+		}
+	})
+		
 	
 	</script>
 	
@@ -250,7 +263,7 @@
             <input name="custId" type="hidden"  value="${OrdBean.customerBean.custId}"/>
             <input name="payment" type="hidden"  value="線上刷卡"/>
             <button class="me-3" onclick="location.href=`${pageContext.request.contextPath}/rentMenu`">繼續購買</button>
-            <button type="submit" id="checkout" >確認結帳</button>
+            <button type="submit" id="checkout">確認結帳</button>
             </div>
       </div>
   	</form>

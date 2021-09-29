@@ -106,18 +106,20 @@
 							<!-- 商品小圖片 start -->
 							<div  class="smallImage">
                                 <div>
-							<input type="image" data-bs-target="#carouselExampleDark"
-								data-bs-slide-to="0" name="submit_Btn" id="submit_Btn"
-								src="<c:url value='/images/product/${product.fileName}' />"
-								style="border-radius: 10px"> <input type="image"
-								data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
-								name="submit_Btn" id="submit_Btn"
-								src="<c:url value='/images/forProductPage_2.png' />"
-								style="border-radius: 10px"> <input type="image"
-								data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
-								name="submit_Btn" id="submit_Btn"
-								src="<c:url value='/images/forProductPage_3.png' />"
-								style="border-radius: 10px">
+									<input type="image" data-bs-target="#carouselExampleDark"
+											data-bs-slide-to="0" name="submit_Btn" id="submit_Btn"
+											src="<c:url value='/images/product/${product.fileName}' />"
+											style="border-radius: 10px"> 
+									<input type="image"
+											data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
+											name="submit_Btn" id="submit_Btn"
+											src="<c:url value='/images/forProductPage_2.png' />"
+											style="border-radius: 10px"> 
+									<input type="image"
+											data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
+											name="submit_Btn" id="submit_Btn"
+											src="<c:url value='/images/forProductPage_3.png' />"
+											style="border-radius: 10px">
 						</div>
 					</div>
 						<!-- 商品小圖片 end -->
